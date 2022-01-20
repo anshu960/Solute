@@ -1,0 +1,8 @@
+const ACTION_TYPE_CONF = {
+    BUSINESS_TYPES: 'BUSINESS_TYPES',
+    BUSINESS_ALL: 'BUSINESS_ALL',
+}
+
+export {
+    ACTION_TYPE_CONF,
+};
