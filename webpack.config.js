@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 const webpack = require("webpack");
-const environment = require("./../environment");
+const environment = require("./environment");
 module.exports = {
   // the output bundle won't be optimized for production but suitable for development
   // mode: 'production',

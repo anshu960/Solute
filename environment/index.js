@@ -1,6 +1,6 @@
 module.exports = Object.freeze({
     server:"gcp",
-    socket:"https://fuelme-20ef9.el.r.appspot.com:65080",
+    socket:"https://fuel-me-k8lps.ondigitalocean.app",
     mode:"production",
     PORT:1010
 });
