@@ -9,7 +9,10 @@ import { useHistory, Link as RouterLink } from 'react-router-dom';
 import Page from '../../components/Page';
 import AppLoader from '../../components/Loader';
 import { ToastContainer, toast } from 'react-toastify';
-import { BusinessProfilePersonal, BusinessProfileCover, BusinessQR} from '../../components/businessprofile';
+import BusinessProfilePersonal from './../../components/businessprofile/BusinessProfilePersonal';
+import BusinessProfileCover from './../../components/businessprofile/BusinessProfileCover';
+import BusinessQR from './../../components/businessprofile/BusinessQR';
+
 import { useSelector } from 'react-redux';
 import { getBusiness } from '../../services/authService';
   
