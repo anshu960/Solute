@@ -20,7 +20,7 @@ export const registerFields = [
     {
       id: 'GSTNumber',
       label: 'GST Number',
-      type: 'number',
+      type: 'text',
       placeholder: 'Select GST Number',
     },
     {
