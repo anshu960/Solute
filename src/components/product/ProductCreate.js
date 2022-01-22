@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 // @mui
-import { Box, Button, Grid, Stack, Typography,  } from '@mui/material';
+import { Box, Button, Collapse, Grid, Stack, Typography,  } from '@mui/material';
 import InputTextField from '../InputTextField';
 import { ProductImage } from '.';
 import CheckboxField from '../CheckboxField';
 import Select from 'react-select';
-import { productFields } from './FieldConfig';
+import { productFields, taxFields } from './FieldConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewProduct, setNewProductProperty } from '../../store/product';
 import { syncBusinessData } from '../../store/business';
@@ -14,6 +14,7 @@ export default function ProductCreate({handleAddProduct}) {
   const dispatch = useDispatch()
   const fields = useSelector(state => state.product.newProduct)
   const [files, setFiles] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const allHSN = useSelector(state => state.hsn.allHSN)
   const hsnList = (allHSN && allHSN.length) ? allHSN.map((hsn) => ({label: hsn.Name, value: hsn._id})): [];
   useEffect(()=>{
@@ -176,7 +177,7 @@ export default function ProductCreate({handleAddProduct}) {
       }
   }
 
-  const prepareInputFields = () => productFields.map((field) =>
+  const prepareInputFields = (fields) => fields.map((field) =>
   (
     <Grid item xs={12} md={12} lg={6} xl={6}>
       <Stack spacing={3}>
@@ -190,15 +191,32 @@ export default function ProductCreate({handleAddProduct}) {
   return (
     <React.Fragment>
     <Grid container spacing={3} py={2}>
-      {prepareInputFields()}
+      {prepareInputFields(productFields)}
       <Grid item xs={12} md={12} lg={12} xl={12}>
-      <Stack spacing={3}>
-        <Typography variant='subtitle2'>
-          Product Image
-        </Typography>
-        <ProductImage files={files} setFiles={setFiles}/>
+        <Stack spacing={3}>
+      <Box sx={{ mt: 3 }}>
+        <Button size="small" 
+        onClick={()=>setIsOpen(!isOpen)}>
+            Tax Details
+        </Button>
+      </Box>
       </Stack>
-    </Grid>
+      </Grid>
+      <Grid item xs={12} md={12} lg={12} xl={12}>
+        <Stack spacing={3}>
+      <Collapse in={isOpen}>
+        {prepareInputFields(taxFields)}
+        </Collapse>
+        </Stack>
+        </Grid>
+      <Grid item xs={12} md={12} lg={12} xl={12}>
+        <Stack spacing={3}>
+          <Typography variant='subtitle2'>
+            Product Image
+          </Typography>
+          <ProductImage files={files} setFiles={setFiles}/>
+        </Stack>
+      </Grid>
     </Grid>
     <Box py={3}
       sx={{textAlign: 'right'}}

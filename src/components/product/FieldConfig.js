@@ -37,6 +37,15 @@ export const productFields = [
       placeholder: 'Enter Price'
     },
     {
+      id: 'FinalPrice',
+      label: 'Final Price',
+      type: 'Number',
+      placeholder: 'Final Price'
+    },
+  ]
+
+  export const taxFields = [
+    {
       id: 'TaxIncluded',
       label: 'Tax Included',
       type: 'checkbox',
@@ -84,11 +93,5 @@ export const productFields = [
       label: 'Total Tax Amount',
       type: 'Number',
       placeholder: 'Enter Tax'
-    },
-    {
-      id: 'FinalPrice',
-      label: 'Final Price',
-      type: 'Number',
-      placeholder: 'Final Price'
     },
   ]
