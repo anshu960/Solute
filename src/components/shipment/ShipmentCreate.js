@@ -65,7 +65,7 @@ export default function ShipmentCreate() {
     </Grid>
     </Grid>
       <Stack spacing={3}>
-        <Button variant="contained" onClick={handleSave} >Create</Button>  
+        <Button variant="contained" onClick={handleSave} >Create Shipment</Button>  
       </Stack>
     </React.Fragment>
   );

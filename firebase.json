@@ -1,29 +1,30 @@
 {
-  "hosting": {
-    "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "headers": [
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          }
-        ]
-      }
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "hosting": [ {
+      "target": "integration", 
+      "public": "./public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "/node_modules/**"
+      ] 
+    },
+    {
+      "target": "staging", 
+      "public": "./public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "/node_modules/**"
+      ] 
+    },
+    {
+      "target": "production", 
+      "public": "./public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "/node_modules/**"
+      ] 
+    }
+  ]
 }
-
-

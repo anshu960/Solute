@@ -11,7 +11,7 @@ import AppLoader from '../../components/Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import BusinessProfilePersonal from './../../components/businessprofile/BusinessProfilePersonal';
 import BusinessProfileCover from './../../components/businessprofile/BusinessProfileCover';
-// import BusinessQR from './../../components/businessprofile/BusinessQR';
+import BusinessQR from './../../components/businessprofile/BusinessQR';
 
 import { useSelector } from 'react-redux';
 import { getBusiness } from '../../services/authService';
@@ -46,7 +46,7 @@ const BusinessProfile = () => {
                 </Card>
             </Grid>
             <Grid item xs={12} md={12} lg={4} xl={4}>
-                {/* <BusinessQR /> */}
+                <BusinessQR />
             </Grid>
         </Grid>
         <BusinessProfilePersonal />

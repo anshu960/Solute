@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "prod": "fuelme-20ef9"
+  },
+  "targets": {
+    "fuelme-20ef9": {
+      "hosting": {
+        "production": [
+          "fuelme"
+        ],
+        "staging": [
+          "fuelme-20ef9"
+        ]
+      }
+    }
+  }
+}
