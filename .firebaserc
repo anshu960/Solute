@@ -8,7 +8,7 @@
         "production": [
           "fuelme"
         ],
-        "staging": [
+        "integration": [
           "fuelme-20ef9"
         ]
       }
