@@ -339,10 +339,11 @@ const BusinessSale = () => {
         const request = {
             UserID,
             BusinessID,
+            
             Transactions:transactionList
         }
         setLoading(true);
-        SendEvent(SocketEvent.CREATE_BUSINESS_SALE,request,handleCreateSaleEvent)
+        SendEvent(SocketEvent.CREATE_SALE,request,handleCreateSaleEvent)
     }
 
     useEffect(()=>{

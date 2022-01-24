@@ -316,6 +316,8 @@ const useStyles = makeStyles((theme)=>createStyles({
 const Sale = () => {
   const dispatch = useDispatch()
   const allProduct = useSelector(state => state.product.allProduct)
+  const allCustomer = useSelector(state => state.customer.allCustomer)
+  const [selectedCustomer, setSelectedCustomer] = useState({});
   const classes = useStyles();
   const history = useHistory();
   const selectedTransaction = useSelector(state => state.sale.selectedTransaction)
@@ -353,10 +355,11 @@ const Sale = () => {
     }
 
     useEffect(()=>{
+        global.selectedCustomer = undefined;
         sessionStorage.removeItem('sale');
         sessionStorage.removeItem('selectedCustomer');
         const UserID = getUserId();
-    const BusinessID = getBusinessId();
+        const BusinessID = getBusinessId();
     if(!allProduct.length){
         dispatch(retriveProduct({UserID,BusinessID}));
     }
@@ -433,6 +436,7 @@ const Sale = () => {
                 Vehicle: selectedTransaction.vehicleNo,
                 Price: selectedTransaction["selectedProduct"].Price,
                 Quantity: selectedTransaction.Quantity,
+                Customer:selectedCustomer && selectedCustomer._id ? selectedCustomer : undefined,
                 CostPrice: (parseFloat(selectedTransaction["selectedProduct"].CGST || 0) * parseFloat(selectedTransaction.Quantity)).toFixed(2),
                 IGST:(parseFloat(selectedTransaction["selectedProduct"].IGST || 0) * parseFloat(selectedTransaction.Quantity)).toFixed(2),
                 CGST:(parseFloat(selectedTransaction["selectedProduct"].CGST || 0) * parseFloat(selectedTransaction.Quantity)).toFixed(2),
@@ -442,7 +446,7 @@ const Sale = () => {
                 Tax: (parseFloat(selectedTransaction["selectedProduct"].Tax || 0) * parseFloat(selectedTransaction.Quantity)).toFixed(2),
                 MRP: selectedTransaction["selectedProduct"].MRP ? ((parseFloat(selectedTransaction["selectedProduct"].MRP || 0) * parseFloat(selectedTransaction.Quantity)).toFixed(2)) : 0,
                 FinalPrice: (parseFloat(selectedTransaction["selectedProduct"].FinalPrice || 0) * parseFloat(selectedTransaction.Quantity)).toFixed(2),
-                Mode: selectedTransaction.Mode,
+                Mode: selectedTransaction.Mode || "CASH",
                 Product:selectedTransaction.selectedProduct,
                 SaleDate:saleDate
             });
@@ -477,8 +481,32 @@ const Sale = () => {
     } 
     return 0;
   }
-
-  
+  const customerOptions = Object.keys(allCustomer).map((prd) => {
+    console.log("prd",prd);
+    return {
+        label: allCustomer[prd].Name,
+        value: allCustomer[prd]._id,
+    }
+});
+const handleChangeCustomer = (option, {name}) => {
+    const value = (option && option.value) || '';
+    const customer = allCustomer.filter((prd)=>prd._id === value)
+    if(customer.length){
+    setSelectedTransaction({
+        ...selectedTransaction,
+        selectedCustomer: customer[0]
+    })
+    setSelectedCustomer(customer[0])
+    global.selectedCustomer = customer[0]
+    }else{
+        global.selectedCustomer = undefined;
+        setSelectedCustomer({})
+        setSelectedTransaction({
+            ...selectedTransaction,
+            selectedCustomer: undefined
+        })
+    }
+  }
       
   const handleSummary = (e) => {saveTransactionToServer();};
       
@@ -494,10 +522,21 @@ const Sale = () => {
                 <Typography variant="h4" gutterBottom>
                     Sale
                 </Typography>
-                
+                <Box className={classes.actionList}>
+                <Select
+                        options={customerOptions}
+                        placeholder="Party Name"
+                        name="partyName"
+                        className={classes.selectBoxStyle}
+                        styles={customSeverityStyle}
+                        isClearable
+                        onChange={handleChangeCustomer}
+                    />
+                </Box>
             </Stack>
 
             <Card>
+            
                 <Box>
                     <TableContainer sx={{ minWidth: 800 }}>
                         <Table>

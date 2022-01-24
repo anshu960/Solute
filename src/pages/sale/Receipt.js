@@ -198,6 +198,7 @@ import { createReceipt } from '../../store/receipt';
             //setLoading(true);
             const totalSales = JSON.parse(sessionStorage.getItem("sale")).Payload;
             dispatch(createReceipt(totalSales));
+            global.selectedCustomer = undefined;
             sessionStorage.removeItem("sale");
             sessionStorage.removeItem("selectedDate");
         }else{

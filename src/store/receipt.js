@@ -14,13 +14,15 @@ const slice = createSlice({
       sale: [],
       invoice: {},
       allInvoices:[],
-      business: {}
+      business: {},
+      Customer:{}
   },
     newReceipt:{
         sale: [],
         invoice: {},
         allInvoices:[],
-        business: {}
+        business: {},
+        Customer:{},
     },
     selectedReceipt:{}
   },
@@ -67,15 +69,16 @@ export const createReceipt = (sales,callback) => async dispatch => {
     const BusinessID = getBusinessId();
     let SalesID = [];
     let TotalAmount = 0;
+    let selectedCustomer = global.selectedCustomer;
     sales.forEach(item => {
         SalesID.push(item._id);
         TotalAmount += item.FinalPrice;
-        console.log("XXXXX",item);
     });
     let request = {
       UserID,
       BusinessID,
       SalesID,
+      Customer:selectedCustomer,
       Sales:sales,
       Business:Business,
       TotalAmount,
@@ -87,7 +90,8 @@ export const createReceipt = (sales,callback) => async dispatch => {
             dispatch(createReceiptSuccess({
                 sale: data.Sales,
                 invoice: data.Payload,
-                business: Business
+                business: Business,
+                Customer:data.Customer
             }));
         }else{
         console.log("Unable to find products, please try after some time",data);
@@ -139,7 +143,8 @@ export const retriveSingleReceipt = (InvoiceNumber,callback) => async dispatch =
             dispatch(retriveSingleReceiptSuccess({
               sale: data.Sales,
               invoice: data.Payload,
-              business: data.Business
+              business: data.Business,
+              Customer:data.Customer
             }));
         }else{
         console.log("Unable to find receipt, please try after some time",data);
