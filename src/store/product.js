@@ -80,6 +80,7 @@ export const updateProduct = (request,callback) => async dispatch => {
     SendEvent(SocketEvent.UPDATE_PRODUCT,request,(data)=>{
       console.log("UPDATE_PRODUCT",data)
       if(data.Success){
+        dispatch(retriveProduct(request));
         toast("Updated Successfully");
       }else{
         toast("Oops!, please try after sometime");
