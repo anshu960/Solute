@@ -147,10 +147,10 @@ const sidebarConfig = {
         icon: <ReceiptRoundedIcon />,
         path: PATH_DASHBOARD.invoice.root,
         items: [
-          {
-            title: 'invoice',
-            path: PATH_DASHBOARD.invoice.invoice,
-          },
+          // {
+          //   title: 'invoice',
+          //   path: PATH_DASHBOARD.invoice.invoice,
+          // },
           {
             title: 'history',
             path: PATH_DASHBOARD.invoice.history,
