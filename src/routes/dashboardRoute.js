@@ -126,7 +126,7 @@ export const DashboardRoutes = {
       },
       {
         exact: true,
-        path: PATH_DASHBOARD.invoice.history,
+        path: PATH_DASHBOARD.sale.history,
         component: lazy(() => import('../pages/invoice/History'))
       },
       {

@@ -26,10 +26,14 @@ const sidebarConfig = {
             title: 'sale',
             path: PATH_DASHBOARD.sale.sale,
           },
+          // {
+          //   title: 'business sale',
+          //   path: PATH_DASHBOARD.sale.businessSale,
+          // },
           {
-            title: 'business sale',
-            path: PATH_DASHBOARD.sale.businessSale,
-          },
+            title: 'history',
+            path: PATH_DASHBOARD.sale.history,
+          }
         ]
       },
     ]
@@ -139,26 +143,26 @@ const sidebarConfig = {
       },
     ]
   },
-  {
-    //subheader: 'invoice',
-    items: [
-      {
-        title: 'invoice',
-        icon: <ReceiptRoundedIcon />,
-        path: PATH_DASHBOARD.invoice.root,
-        items: [
-          // {
-          //   title: 'invoice',
-          //   path: PATH_DASHBOARD.invoice.invoice,
-          // },
-          {
-            title: 'history',
-            path: PATH_DASHBOARD.invoice.history,
-          }
-        ]
-      },
-    ]
-  },
+  // {
+  //   //subheader: 'invoice',
+  //   items: [
+  //     {
+  //       title: 'invoice',
+  //       icon: <ReceiptRoundedIcon />,
+  //       path: PATH_DASHBOARD.invoice.root,
+  //       items: [
+  //         {
+  //           title: 'invoice',
+  //           path: PATH_DASHBOARD.invoice.invoice,
+  //         },
+  //         {
+  //           title: 'history',
+  //           path: PATH_DASHBOARD.invoice.history,
+  //         }
+  //       ]
+  //     },
+  //   ]
+  // },
   {
     //subheader: 'delivery',
     items: [

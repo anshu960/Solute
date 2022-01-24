@@ -23,6 +23,7 @@ export const PATH_DASHBOARD = {
         sale: path(ROOTS_DASHBOARD, '/sale/sale'),
         businessSale: path(ROOTS_DASHBOARD, '/sale/businessSale'),
         receipt: path(ROOTS_DASHBOARD, '/sale/receipt'),
+        history: path(ROOTS_DASHBOARD, '/sale/history'),
     },
     product: {
         root: path(ROOTS_DASHBOARD, '/product'),
