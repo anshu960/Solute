@@ -99,12 +99,14 @@ export default function InvoicePDF({saleData})  {
               <Text style={styles.body1}>{saleData.business.Address}</Text>
               <Text style={styles.body1}>{saleData.business.MobileNumber}</Text>
             </View>
-            {/* <View style={styles.col4}>
-              <Text style={[styles.overline, styles.mb8]}>Invoice to</Text>
-              <Text style={styles.body1}>{'customer'}</Text>
-              <Text style={styles.body1}>{'address'}</Text>
-              <Text style={styles.body1}>{''}</Text>
-            </View> */}
+            {saleData.Customer && saleData.Customer.Name &&
+            <View style={styles.col4}>
+            <Text style={[styles.overline, styles.mb8]}>Invoice to</Text>
+            <Text style={styles.body1}>{saleData.Customer.Name}</Text>
+            <Text style={styles.body1}>{saleData.Customer.MobileNumber || ""}</Text>
+            <Text style={styles.body1}>{saleData.Customer.Address || "" }</Text>
+          </View>
+            }
           </View>
         <Text style={[styles.overline, styles.mb8]}>Invoice Details</Text>
         <View style={styles.table}>
