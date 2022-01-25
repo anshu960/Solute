@@ -28,6 +28,7 @@ import { getUniqueId } from '../common/Utils';
 import { getBusinessId, getUser, getUserId, setBusiness, setBusinessId } from '../services/authService';
 import { PATH_AUTH, PATH_DASHBOARD } from '../routes/path';
 import Room from '@mui/icons-material/Room';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -165,7 +166,9 @@ const displayBusinessCard = () => {
           }}
         > 
           <Avatar alt={"business"} src={getBusinessImageUrl(business.BusinessTypeID)} sx={{ width: 30, height: 30, padding: '3px' }} />  
-          <Typography variant="h5" gutterBottom>
+          
+          <Typography variant="h5" gutterBottom sx={{display: 'flex', color: 'primary.darker'}}>
+            <CurrencyRupeeIcon sx={{width: 20, color: 'primary.darker'}}/>
             {getSaleAmountForBusiness(business._id)}
           </Typography>
         </CardActionArea> 
