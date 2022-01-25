@@ -44,15 +44,29 @@ export default function Home() {
   const [open, setOpen] = React.useState(false);
   const [businessId, setBusId] = React.useState();
   const allBusiness = useSelector(state => state.business.allBusiness)
+  const saleToday = useSelector(state => state.business_analytics.saleToday)
   const businessTypes = useSelector(state => state.businessTypes.businessTypes)
-  const isConnected = useSelector(state => state.room.isConnected)
-  
+  const isConnected = useSelector(state => state.room.isConnected)  
   const validateUserLogin=()=>{
     if(!getUserId() || !getUser()){
       history.push(PATH_AUTH.login)
     }else{
 
     }
+  }
+ const getSaleAmountForBusiness=(businessId)=>{
+   let amount = 0 
+    if(saleToday && saleToday.length){
+      saleToday.forEach(sale => {
+        if(sale._id === businessId){
+          amount = sale.TotalSale;
+          console.log("id not matching business matched",sale,amount,businessId,saleToday)
+        }
+      });
+    }else{
+      console.log("id not matching business saletoday is empty",saleToday)
+    }
+    return amount;
   }
 
   useEffect(()=>{
@@ -152,7 +166,7 @@ const displayBusinessCard = () => {
         > 
           <Avatar alt={"business"} src={getBusinessImageUrl(business.BusinessTypeID)} sx={{ width: 30, height: 30, padding: '3px' }} />  
           <Typography variant="h5" gutterBottom>
-            {business.Sale || 0}
+            {getSaleAmountForBusiness(business._id)}
           </Typography>
         </CardActionArea> 
           <Box sx={{display: 'flex', alignItems: 'center'}}>

@@ -11,6 +11,7 @@ import employee from './employee';
 import invoice from "./invoice";
 import sale from "./sale";
 import shipment from "./shipment";
+import business_analytics from './business_analytics';
 const reducer = combineReducers({
     business,
     businessTypes,
@@ -22,7 +23,8 @@ const reducer = combineReducers({
     receipt,
     invoice,
     sale,
-    shipment
+    shipment,
+    business_analytics
 })
 const store = configureStore({
   reducer,

@@ -8,6 +8,7 @@ import { retriveHSN } from './hsn';
 import { retriveEmployee } from './employee';
 import { getBusinessId, getUserId, setBusiness } from '../services/authService';
 import { toast } from 'react-toastify';
+import { getBusinessAnalytics } from './business_analytics';
 
 const slice = createSlice({
   name: 'Business',
@@ -38,8 +39,8 @@ const { retriveBusinessSuccess,setSelectedBusinessSuccess,setSelectedBusinessTyp
 export const retriveBusiness = (request) => async dispatch => {
   try {
     SendEvent(SocketEvent.RETRIVE_BUSINESS,request,(data)=>{
-      console.log(data)
       dispatch(retriveBusinessSuccess(data.Payload));
+      dispatch(getBusinessAnalytics(data.Payload))
     })
   } catch (e) {
     return console.error(e.message);
