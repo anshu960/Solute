@@ -40,6 +40,7 @@
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.2",
     "react-firebaseui": "^5.0.2",
+    "react-google-charts": "^4.0.0",
     "react-intersection-observer": "^8.32.2",
     "react-loader-spinner": "^4.0.0",
     "react-qr-code": "^2.0.3",
@@ -79,9 +80,9 @@
     "prodbuild": "IS_PRODUCTION=true webpack;",
     "devpatch": "cp -f ./react-dom.development.patch.txt ./node_modules/react-dom/cjs/react-dom.development.js",
     "development": "NODE_ENV='development'",
-    "productiondeploy":"cp -rf ./environment/production.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:production",
-    "stagingdeploy":"cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:production",
-    "integrationdeploy":"cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:integration"
+    "productiondeploy": "cp -rf ./environment/production.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:production",
+    "stagingdeploy": "cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:production",
+    "integrationdeploy": "cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:integration"
   },
   "eslintConfig": {
     "extends": [

@@ -19,7 +19,7 @@ import { ToastContainer } from 'react-toastify';
 import { ScrollDialog } from '../dialog';
 import { JoinRoom } from '../socket/SocketHandler';
 import SocketEvent from '../socket/SocketEvent';
-import { ChooseBusiness } from '../components/home';
+import { ChooseBusiness, LineChart } from '../components/home';
 import HomeNavbar from '../layout/home/HomeNavbar';
 import {useDispatch, useSelector} from 'react-redux'
 import {retriveBusiness, setSelectedBusiness} from './../store/business';
@@ -165,11 +165,11 @@ const displayBusinessCard = () => {
             display: 'flex',
           }}
         > 
-          <Avatar alt={"business"} src={getBusinessImageUrl(business.BusinessTypeID)} sx={{ width: 30, height: 30, padding: '3px' }} />  
-          
+          <Box><LineChart /></Box>
+        
           <Typography variant="h5" gutterBottom sx={{display: 'flex', color: 'primary.darker'}}>
-            <CurrencyRupeeIcon sx={{width: 20, color: 'primary.darker'}}/>
-            {getSaleAmountForBusiness(business._id)}
+            <CurrencyRupeeIcon sx={{width: 18, color: 'primary.darker'}}/>
+            <Typography> {getSaleAmountForBusiness(business._id)}</Typography>
           </Typography>
         </CardActionArea> 
           <Box sx={{display: 'flex', alignItems: 'center'}}>
