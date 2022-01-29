@@ -13,7 +13,6 @@ export default function ShipmentCreate() {
   const [fields, setFields] = useState(defaultFields);
   const [files, setFiles] = useState([]);
   const onChange = (event)=> setFields({...fields,[event.target.name]:event.target.value})
-
   const handleSave = () => {
     const UserID = getUserId();
     const BusinessID = getBusinessId();
@@ -31,7 +30,7 @@ export default function ShipmentCreate() {
     }
   }
   const shipmentFields = [...shipmentDetails, ...senderDetails, ...receiverDetails, ...deliveryBoyDetails];
-  const prepareInputFields = (fields) => fields.map((field) =>
+  const prepareInputFields = (iFields) => iFields.map((field) =>
   (
     <Grid item xs={12} md={12} lg={6} xl={6}>
       <Stack spacing={3}>
