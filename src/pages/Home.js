@@ -156,12 +156,12 @@ const displayBusinessCard = () => {
       >
         <CardActionArea
           sx={{
-            p: 3,
+            p: 1,
             borderRadius: 1,
             color: 'primary.main',
             bgcolor: 'background.neutral',
             justifyContent:'space-between',
-            alignItems: 'flex-start',
+            alignItems: 'center',
             display: 'flex',
           }}
         > 

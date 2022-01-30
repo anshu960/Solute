@@ -3,10 +3,11 @@ import { Chart } from "react-google-charts";
 
 const data = [
   ["Year", "Sales"],
-  ["2004", 1000],
-  ["2005", 1170],
-  ["2006", 660],
-  ["2007", 1030],
+  ["2004", 800],
+  ["2005", 1270],
+  ["2006", 860],
+  ["2007", 120],
+  ["2008", 1500],
 ];
 
 const options = {
@@ -21,7 +22,7 @@ const options = {
     }
   },
   vAxis: {
-    baselineColor: '#fff',
+    baselineColor: 'none',
     textPosition: 'none',
     gridlines: {
         color: 'transparent'
@@ -33,8 +34,8 @@ export default function LineChart() {
   return (
     <Chart
       chartType="LineChart"
-      width="50"
-      height="50"
+      width="80"
+      height="80"
       data={data}
       options={options}
     />
