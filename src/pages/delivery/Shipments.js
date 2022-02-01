@@ -30,6 +30,8 @@ import { PATH_DASHBOARD, PATH_PAGE } from '../../routes/path';
 import InputTextField from '../../components/InputTextField';
 import {useDispatch, useSelector} from 'react-redux'
 import { retriveAllInvoice, retriveAllReceipt } from '../../store/invoice';
+import { ScrollDialog } from '../../dialog';
+import { AddStop } from '../../components/shipment/stop';
   
   const useStyles = makeStyles((theme)=>createStyles({
     rightSection: {
@@ -208,6 +210,7 @@ const Shipments = () => {
     const allInvoice= useSelector(state=>state.invoice.allInvoice)
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [addStopOpen, setAddStopOpen] = useState(false);
     useEffect(()=>{
         dispatch(retriveAllInvoice(startDate,endDate))
     },[startDate,endDate])
@@ -216,12 +219,17 @@ const Shipments = () => {
         const dateObj = new Date(dateStr);
         return (dateObj.getDate() + "-" + (dateObj.getMonth() + 1) + "-" + dateObj.getFullYear());
     }
+    const handleClose = () => {
+        setAddStopOpen(false);
+      }
 
+    const contentBody = () => <AddStop open={addStopOpen} setOpen={setAddStopOpen}/>
     return (
       <Page title="History">
           <Fragment>
             <Container>
             <ToastContainer />
+            <ScrollDialog body={contentBody()} handleClose={handleClose} scroll={'paper'} title="Add Stopage" open={addStopOpen} dialogWidth="xs"/>
               <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                   <Typography variant="h4" gutterBottom>
                     Shipments
@@ -282,6 +290,9 @@ const Shipments = () => {
                                       <TableCell
                                         onClick={()=>{history.push({ pathname: PATH_DASHBOARD.delivery.profile, search: `?id=${"123"}` })}}
                                       >click</TableCell>
+                                      <TableCell
+                                        onClick={()=>{setAddStopOpen(true)}}
+                                      >Add Stopage</TableCell>
                                   </TableRow>
                               </TableHead>
                               <TableBody>
