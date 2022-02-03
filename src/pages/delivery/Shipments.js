@@ -32,6 +32,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { retriveAllInvoice, retriveAllReceipt } from '../../store/invoice';
 import { ScrollDialog } from '../../dialog';
 import { AddStop } from '../../components/shipment/stop';
+import { retriveShipment } from '../../store/shipment';
   
   const useStyles = makeStyles((theme)=>createStyles({
     rightSection: {
@@ -207,12 +208,12 @@ const Shipments = () => {
     const dispatch = useDispatch()
     const history = useHistory();
     const tableRef = React.useRef();
-    const allInvoice= useSelector(state=>state.invoice.allInvoice)
+    const allShipment= useSelector(state=>state.shipment.allShipment)
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [addStopOpen, setAddStopOpen] = useState(false);
     useEffect(()=>{
-        dispatch(retriveAllInvoice(startDate,endDate))
+        dispatch(retriveShipment(startDate,endDate))
     },[startDate,endDate])
         
     const getDateToDisplay=(dateStr)=>{
@@ -222,7 +223,7 @@ const Shipments = () => {
     const handleClose = () => {
         setAddStopOpen(false);
       }
-
+      console.log("allShipment",allShipment)
     const contentBody = () => <AddStop open={addStopOpen} setOpen={setAddStopOpen}/>
     return (
       <Page title="History">
@@ -296,14 +297,14 @@ const Shipments = () => {
                                   </TableRow>
                               </TableHead>
                               <TableBody>
-                              { allInvoice && allInvoice.length ? allInvoice.map((invoice, index) => (
+                              { allShipment && allShipment.length ? allShipment.map((shipment, index) => (
                                     <TableRow key={index}>
-                                      <TableCell>{(invoice.InvoiceNumber)}</TableCell>
-                                      <TableCell>{invoice.TotalPrice}</TableCell>
-                                      <TableCell>{getDateToDisplay(invoice.InvoiceDate)}</TableCell>
-                                      <TableCell>{invoice.IGST}</TableCell>
-                                      <TableCell>{invoice.CGST}</TableCell>
-                                      <TableCell><Button variant="text" onClick={()=>{window.open(`/#${PATH_PAGE.shipmentTrack}?id=${invoice.InvoiceNumber}`, "_blank");}}
+                                      <TableCell>{(shipment.ShipmentID)}</TableCell>
+                                      <TableCell>{shipment.TotalPrice}</TableCell>
+                                      <TableCell>{getDateToDisplay(shipment.InvoiceDate)}</TableCell>
+                                      <TableCell>{shipment.IGST}</TableCell>
+                                      <TableCell>{shipment.CGST}</TableCell>
+                                      <TableCell><Button variant="text" onClick={()=>{window.open(`/#${PATH_PAGE.shipmentTrack}?id=${shipment.InvoiceNumber}`, "_blank");}}
                                       >Show</Button></TableCell>
                                     </TableRow>
                                 )) : <TableRow><TableCell colSpan={8}>{"Unable to find shipments for selected date range"}</TableCell></TableRow> }

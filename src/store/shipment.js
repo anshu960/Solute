@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
+import { getBusinessId, getUserId } from '../services/authService';
 import SocketEvent from '../socket/SocketEvent';
 import { SendEvent } from '../socket/SocketHandler';
 
@@ -27,10 +28,15 @@ export default slice.reducer
 
 const { retriveShipmentSuccess,createShipmentSuccess ,setSelectShipmentSuccess} = slice.actions
 
-export const retriveShipment = (request) => async dispatch => {
+export const retriveShipment = (startDate,endDate) => async dispatch => {
   try {
+    const request = {
+      BusinessID:getBusinessId(),
+      UserID:getUserId(),
+      startDate,endDate
+    }
     SendEvent(SocketEvent.SHIPMENT_RETRIVE,request,(data)=>{
-      console.log("RETRIVE_Shipment",data)
+      console.log("SHIPMENT_RETRIVE",data)
       dispatch(retriveShipmentSuccess(data.Payload));
     })
   } catch (e) {
