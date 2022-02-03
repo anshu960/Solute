@@ -1,32 +1,20 @@
   export const adjustmentFields = [
     {
-      id: 'ProductName',
-      label: 'Product Name',
-      type: 'text',
-      placeholder: 'Enter Product Name'
-    },
-    {
-      id: 'Quantity',
-      label: 'Quantity',
+      id: 'RemovedQuantity',
+      label: 'Remove Quantity',
       type: 'number',
-      placeholder: 'Enter Quantity'
+      placeholder: 'Enter Quantity to remove'
     },
     {
-      id: 'AdjustmentQuantity',
-      label: 'Adjust Quantity',
-      type: 'number',
-      placeholder: 'Enter Adjustment Quantity'
-    },
-    {
-      id: 'StockQuantity',
+      id: 'TotalQuantity',
       label: 'Total Quantity',
       type: 'number',
       placeholder: 'Enter Total Quantity'
     },
     {
-      id: 'Comments',
-      label: 'Comments',
+      id: 'Comment',
+      label: 'Comment',
       type: 'text',
-      placeholder: 'Enter Comments'
+      placeholder: 'Enter Comment'
     },
   ]

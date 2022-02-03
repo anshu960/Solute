@@ -1,26 +1,21 @@
   export const stockinFields = [
     {
-      id: 'ProductName',
-      label: 'Product Name',
-      type: 'text',
-      placeholder: 'Enter Product Name'
-    },
-    {
-      id: 'Quantity',
-      label: 'Quantity',
-      type: 'number',
-      placeholder: 'Enter Quantity'
-    },
-    {
-      id: 'AddQuantity',
+      id: 'AddedQuantity',
       label: 'Add Quantity',
       type: 'number',
-      placeholder: 'Enter Add Quantity'
+      placeholder: 'Enter Quantity to add'
     },
+    
     {
-      id: 'StockQuantity',
+      id: 'TotalQuantity',
       label: 'Total Quantity',
       type: 'number',
       placeholder: 'Enter Total Quantity'
+    },
+    {
+      id: 'Comment',
+      label: 'Comment',
+      type: 'text',
+      placeholder: 'Enter Comment'
     },
   ]

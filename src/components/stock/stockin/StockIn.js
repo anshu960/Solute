@@ -7,11 +7,14 @@ import InputTextField from '../../InputTextField';
 import { stockinFields } from './FieldConfig';
 
 const defaultFields = {
-  ProductName: '',
-  Quantity: '',
-  AdjustmentQuantity: '',
-  StockQuantity: '',
-};
+  UserID:"",
+  BusinessID:"",
+  ProductID:"",
+  TotalQuantity:"",
+  AddedQuantity: "",
+  RemovedQuantity: "",
+  Comment: "",
+}
 // ----------------------------------------------------------------------
 
 export default function StockAdustment({open, setOpen}) {

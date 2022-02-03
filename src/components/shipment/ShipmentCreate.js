@@ -16,7 +16,6 @@ export default function ShipmentCreate() {
   const handleSave = () => {
     const UserID = getUserId();
     const BusinessID = getBusinessId();
-    if(fields.HSN_CODE){
       let request = fields
       request.UserID = UserID
       request.BusinessID = BusinessID
@@ -25,9 +24,6 @@ export default function ShipmentCreate() {
           setFields(defaultFields)
         }
       }));
-    }else{
-      console.log(fields)
-    }
   }
   const shipmentFields = [...shipmentDetails, ...senderDetails, ...receiverDetails, ...deliveryBoyDetails];
   const prepareInputFields = (iFields) => iFields.map((field) =>

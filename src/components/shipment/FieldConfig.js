@@ -34,7 +34,7 @@ export const shipmentDetails = [
 
 export const senderDetails = [
   {
-    id: 'Sender',
+    id: 'SenderName',
     label: 'Sender Name',
     type: 'text',
     placeholder: 'Enter Sender Name'
@@ -55,7 +55,7 @@ export const senderDetails = [
 
 export const receiverDetails = [
   {
-    id: 'Receiver',
+    id: 'ReceiverName',
     label: 'Receiver Name',
     type: 'text',
     placeholder: 'Enter Receiver Name'
@@ -76,7 +76,7 @@ export const receiverDetails = [
 
 export const deliveryBoyDetails = [
   {
-    id: 'DeliveryBoy',
+    id: 'DeliveryBoyName',
     label: 'Delivery Boy Name',
     type: 'text',
     placeholder: 'Enter Delivery Boy Name'
@@ -98,18 +98,16 @@ export const deliveryBoyDetails = [
 export const defaultFields = {
   Name: '',
   Weight: '',
-  From: '',
-  To: '',
   ShipmentDate: '',
   ShipmentDeliveryDate: '',
   Description: '',
-  Sender: '',
+  SenderName: '',
   SenderContact: '',
   SenderAddress: '',
-  Receiver: '',
+  ReceiverName: '',
   ReceiverContact: '',
   ReceiverAddress: '',
-  DeliveryBoy: '',
+  DeliveryBoyName: '',
   DeliveryBoyContact: '',
   DeliveryBoyAddress: '',
 };
