@@ -281,31 +281,26 @@ const Shipments = () => {
                               <TableHead>
                                   <TableRow>
                                       <TableCell>ID</TableCell>
-                                      <TableCell>Name</TableCell>
-                                      <TableCell>DATE</TableCell>
                                       <TableCell>From</TableCell>
                                       <TableCell>To</TableCell>
-                                      <TableCell
-                                        onClick={()=>{window.open(`/#${PATH_PAGE.shipmentTrack}?id=${'123'}`, "_blank");}}
-                                      >click</TableCell>
-                                      <TableCell
-                                        onClick={()=>{history.push({ pathname: PATH_DASHBOARD.delivery.profile, search: `?id=${"123"}` })}}
-                                      >click</TableCell>
-                                      <TableCell
-                                        onClick={()=>{setAddStopOpen(true)}}
-                                      >Add Stopage</TableCell>
+                                      <TableCell>Delivery Date</TableCell>
+                                      <TableCell>Status</TableCell>
+                                      <TableCell>Stopage</TableCell>
+                                      <TableCell>Details</TableCell>
+                                      <TableCell>Track</TableCell>      
                                   </TableRow>
                               </TableHead>
                               <TableBody>
-                              { allShipment && allShipment.length ? allShipment.map((shipment, index) => (
-                                    <TableRow key={index}>
-                                      <TableCell>{(shipment.ShipmentID)}</TableCell>
-                                      <TableCell>{shipment.TotalPrice}</TableCell>
-                                      <TableCell>{getDateToDisplay(shipment.InvoiceDate)}</TableCell>
-                                      <TableCell>{shipment.IGST}</TableCell>
-                                      <TableCell>{shipment.CGST}</TableCell>
-                                      <TableCell><Button variant="text" onClick={()=>{window.open(`/#${PATH_PAGE.shipmentTrack}?id=${shipment.InvoiceNumber}`, "_blank");}}
-                                      >Show</Button></TableCell>
+                              { allShipment && allShipment.length ? allShipment.map((shipment) => (
+                                    <TableRow key={shipment.ShipmentID}>
+                                        <TableCell>{(shipment.ShipmentID)}</TableCell>
+                                        <TableCell>{shipment.SenderAddress}</TableCell>
+                                        <TableCell>{shipment.ReceiverAddress}</TableCell>
+                                        <TableCell>{getDateToDisplay(shipment.ShipmentDeliveryDate)}</TableCell>
+                                        <TableCell>{shipment.ShipmentDelivered ? 'Delivered': 'In-progress'}</TableCell>
+                                        <TableCell><Button variant="text" onClick={()=>{setAddStopOpen(true)}}>Add</Button></TableCell>
+                                        <TableCell><Button variant="text" onClick={()=>{history.push({ pathname: PATH_DASHBOARD.delivery.profile, search: `?id=${shipment.ShipmentID}` })}}>View</Button></TableCell>
+                                        <TableCell><Button variant="text" onClick={()=>{window.open(`/#${PATH_PAGE.shipmentTrack}?id=${shipment.ShipmentID}`, "_blank");}}>Locate</Button></TableCell>
                                     </TableRow>
                                 )) : <TableRow><TableCell colSpan={8}>{"Unable to find shipments for selected date range"}</TableCell></TableRow> }
                             </TableBody>

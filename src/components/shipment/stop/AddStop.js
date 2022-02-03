@@ -121,7 +121,6 @@ export default function AddStop({open, setOpen}) {
     </Grid>
   ))
   
-  console.log(stopage);
   return (
     <React.Fragment>
       <DialogContent dividers={true}>
