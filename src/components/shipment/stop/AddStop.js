@@ -4,15 +4,15 @@ import { useState,useEffect, useRef } from 'react';
 import { Button, DialogActions, DialogContent, DialogContentText, Grid, Stack, Typography } from '@mui/material';
 import StockInAction from './AddStopAction';
 import InputTextField from '../../InputTextField';
-import { stopFields } from './FieldConfig';
+import { addButton, stopFields } from './FieldConfig';
 
 const defaultFields = {
   SenderAddress: '',
   ReceiverAddress: '',
-  stop1Address:'',
-  stop1DeliveryBoyName:'',
-  stop1DeliveryBoyContact:'',
-  stop1DeliveryBoyAddress:'',
+  // stop1Address:'',
+  // stop1DeliveryBoyName:'',
+  // stop1DeliveryBoyContact:'',
+  // stop1DeliveryBoyAddress:'',
 };
 // ----------------------------------------------------------------------
 
@@ -25,14 +25,14 @@ export default function AddStop({open, setOpen}) {
     setFields({...fields,[event.target.name]:event.target.value})
   } 
   
-  useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
-      if (descriptionElement !== null) {
-        descriptionElement.focus();
-      }
-    }
-  }, [open]);
+  // useEffect(() => {
+  //   if (open) {
+  //     const { current: descriptionElement } = descriptionElementRef;
+  //     if (descriptionElement !== null) {
+  //       descriptionElement.focus();
+  //     }
+  //   }
+  // }, [open]);
 
   const handleConfirm = () => {
     console.log(fields)
@@ -70,7 +70,7 @@ export default function AddStop({open, setOpen}) {
   })
   
   const handleAddStopage = () => {
-    let elements = Object.keys(stopage).length+2;
+    let elements = Object.keys(stopage).length+1;
     const stopageFields = createStopageFields(elements);
     setStopage({
       ...stopage, ...stopageFields,
@@ -78,9 +78,22 @@ export default function AddStop({open, setOpen}) {
   }
   
   const getStopage = () => {
-    let resultFields = [];
+    const resultFields = [];
     for(let key in stopage){
-      resultFields = [...resultFields,...stopage[key]];
+      resultFields.push(<Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <Grid container spacing={3} py={2}>
+          {stopage[key].map((field)=>{
+            return <Grid item xs={12} md={12} lg={6} xl={4}>
+              <Stack spacing={3}>
+                {/* <Typography variant='subtitle2'>
+                  {field.label}
+                </Typography> */}
+                {getField(field)}
+              </Stack>
+            </Grid>
+          })}
+          </Grid>
+        </Stack>)
     }
     return resultFields;
   }
@@ -108,18 +121,33 @@ export default function AddStop({open, setOpen}) {
       default: return getTextField(field);
     }
   }
-  const stopFieldsWithStopage = [...stopFields, ...getStopage()]
-  const prepareInputFields = () => stopFieldsWithStopage.map((field) =>
+  //const stopFieldsWithStopage = [...getStopage()]
+  const prepareInputFields = () => stopFields.map((field) =>
   (
-    <Grid item xs={12} md={12} lg={12} xl={12}>
+    <Grid item xs={12} md={12} lg={6} xl={4}>
       <Stack spacing={3}>
-        <Typography variant='subtitle2'>
+        {/* <Typography variant='subtitle2'>
           {field.label}
-        </Typography>
+        </Typography> */}
         {getField(field)}
       </Stack>
     </Grid>
   ))
+
+   const prepareStopageFields = () => {
+    return getStopage();
+   }
+  //stopFieldsWithStopage.map((field) =>
+  // (
+  //   <Grid item xs={12} md={12} lg={6} xl={4}>
+  //     <Stack spacing={3}>
+  //       {/* <Typography variant='subtitle2'>
+  //         {field.label}
+  //       </Typography> */}
+  //       {getField(field)}
+  //     </Stack>
+  //   </Grid>
+  // ))
   
   return (
     <React.Fragment>
@@ -130,13 +158,28 @@ export default function AddStop({open, setOpen}) {
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
               <Grid container spacing={3} py={2}>
                 {prepareInputFields()}
-                </Grid>
+              </Grid>
               </Stack>
+            </Stack>
+            <Stack spacing={3}>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+              <Grid container spacing={3} py={2}>
+                <Grid item xs={12} md={12} lg={6} xl={4}>
+                  <Typography variant='subtitle2'>
+                    {addButton.label}
+                  </Typography>
+                  {getField(addButton)}
+                </Grid>
+              </Grid>
+              </Stack>
+            </Stack>
+            <Stack spacing={3}>
+              {prepareStopageFields()}
             </Stack>
           </form> 
         </DialogContentText>
       </DialogContent>
-      <DialogActions sx={{justifyContent: 'space-around'}}>
+      <DialogActions sx={{justifyContent: 'end'}}>
           <StockInAction handleConfirm={handleConfirm} setOpen={setOpen} />
       </DialogActions>  
     </React.Fragment>

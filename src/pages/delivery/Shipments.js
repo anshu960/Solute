@@ -230,7 +230,7 @@ const Shipments = () => {
           <Fragment>
             <Container>
             <ToastContainer />
-            <ScrollDialog body={contentBody()} handleClose={handleClose} scroll={'paper'} title="Add Stopage" open={addStopOpen} dialogWidth="xs"/>
+            <ScrollDialog body={contentBody()} handleClose={handleClose} scroll={'paper'} title="Add Stopage" open={addStopOpen} dialogWidth="xl"/>
               <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                   <Typography variant="h4" gutterBottom>
                     Shipments
