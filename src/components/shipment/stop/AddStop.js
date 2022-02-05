@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { useState,useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 // material
 import { Button, DialogActions, DialogContent, DialogContentText, Grid, Stack, Typography } from '@mui/material';
 import StockInAction from './AddStopAction';
+import Select from 'react-select';
 import InputTextField from '../../InputTextField';
 import { addButton, stopFields } from './FieldConfig';
 
@@ -25,6 +26,11 @@ export default function AddStop({open, setOpen}) {
     console.log(fields)
   }
   
+  const onSelected = (option, { name }) => {
+    const value = (option && option.value) || '';
+    setFields({...fields,[name]:value})
+  }
+
   const createStopageFields = (index) => ({
    ['stopage'+index]: [
     {
@@ -50,6 +56,19 @@ export default function AddStop({open, setOpen}) {
       label: 'Delivery Boy Address',
       type: 'text',
       placeholder: 'Enter Delivery Boy Address'
+    },
+    {
+      id: `Stop${index}Status`,
+      label: 'Status',
+      type: 'select',
+      placeholder: 'Select Status',
+      options: [
+        {label: "Picked", value: 1},
+        {label: "In Transit", value: 2},
+        {label: "Delivered", value: 3},
+        {label: "Dropped", value: 4},
+      
+      ]
     },
    ]
   })
@@ -95,6 +114,21 @@ export default function AddStop({open, setOpen}) {
       multiline={!!(field.multiline)}
     />
   )
+
+  const getSelectField = (field) =>{
+    if(field.id === 'HSN'){
+      field.options = hsnList;
+    }
+    return(
+    <Select
+      name={field.id}
+      options={field.options}
+      placeholder={field.placeholder}
+      isClearable
+      value={field.options.filter((v) => v.value === fields[field.id])}
+      onChange={onSelected}
+    />
+  )}
   
   const getButtonField = (field) =>(
     <Button variant="contained" color="info" onClick={handleAddStopage} >Add Stopage</Button>
@@ -103,6 +137,7 @@ export default function AddStop({open, setOpen}) {
   const getField = (field) => {
     switch (field.type) {
       case 'button': return getButtonField(field);
+      case 'select': return getSelectField(field);
       default: return getTextField(field);
     }
   }
