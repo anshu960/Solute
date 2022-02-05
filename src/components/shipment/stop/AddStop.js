@@ -9,10 +9,6 @@ import { addButton, stopFields } from './FieldConfig';
 const defaultFields = {
   SenderAddress: '',
   ReceiverAddress: '',
-  // stop1Address:'',
-  // stop1DeliveryBoyName:'',
-  // stop1DeliveryBoyContact:'',
-  // stop1DeliveryBoyAddress:'',
 };
 // ----------------------------------------------------------------------
 
@@ -23,20 +19,10 @@ export default function AddStop({open, setOpen}) {
 
   const onChange = (event)=>{
     setFields({...fields,[event.target.name]:event.target.value})
-  } 
-  
-  // useEffect(() => {
-  //   if (open) {
-  //     const { current: descriptionElement } = descriptionElementRef;
-  //     if (descriptionElement !== null) {
-  //       descriptionElement.focus();
-  //     }
-  //   }
-  // }, [open]);
+  }
 
   const handleConfirm = () => {
     console.log(fields)
-    
   }
   
   const createStopageFields = (index) => ({
@@ -66,7 +52,6 @@ export default function AddStop({open, setOpen}) {
       placeholder: 'Enter Delivery Boy Address'
     },
    ]
-    
   })
   
   const handleAddStopage = () => {
@@ -121,7 +106,6 @@ export default function AddStop({open, setOpen}) {
       default: return getTextField(field);
     }
   }
-  //const stopFieldsWithStopage = [...getStopage()]
   const prepareInputFields = () => stopFields.map((field) =>
   (
     <Grid item xs={12} md={12} lg={6} xl={4}>
@@ -134,20 +118,9 @@ export default function AddStop({open, setOpen}) {
     </Grid>
   ))
 
-   const prepareStopageFields = () => {
+  const prepareStopageFields = () => {
     return getStopage();
-   }
-  //stopFieldsWithStopage.map((field) =>
-  // (
-  //   <Grid item xs={12} md={12} lg={6} xl={4}>
-  //     <Stack spacing={3}>
-  //       {/* <Typography variant='subtitle2'>
-  //         {field.label}
-  //       </Typography> */}
-  //       {getField(field)}
-  //     </Stack>
-  //   </Grid>
-  // ))
+  }
   
   return (
     <React.Fragment>
