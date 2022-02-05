@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // @mui
 import { Button, Grid, Stack, Typography,  } from '@mui/material';
 import InputTextField from '../../InputTextField';
@@ -13,10 +13,15 @@ const defaultFields = {
   ReceiverAddress: '',
 };
 
-export default function ReceiverInformation() {
+export default function ReceiverInformation({shipment}) {
   const [fields, setFields] = useState(defaultFields);
   const onChange = (event)=> setFields({...fields,[event.target.name]:event.target.value})
-  
+  useEffect(()=>{
+    const ship = shipment.length ? shipment[0] : null;
+    if(ship){
+      setFields(ship);
+    }
+  },[shipment])
   const handleSave = () => {
     console.log(fields)
   }

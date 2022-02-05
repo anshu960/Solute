@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // @mui
 import { Button, Grid, Stack, Typography,  } from '@mui/material';
 import InputTextField from '../../InputTextField';
@@ -18,10 +18,15 @@ const defaultFields = {
   Description: '',
 };
 
-export default function ShipmentInformation() {
+export default function ShipmentInformation({shipment}) {
   const [fields, setFields] = useState(defaultFields);
   const onChange = (event)=> setFields({...fields,[event.target.name]:event.target.value})
-  
+  useEffect(()=>{
+    const ship = shipment.length ? shipment[0] : null;
+    if(ship){
+      setFields(ship);
+    }
+  },[shipment])
   const onSelected = (option, { name }) => {
     const value = (option && option.value) || '';
     setFields({...fields,[name]:value})

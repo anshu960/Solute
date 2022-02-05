@@ -29,52 +29,11 @@ import Page from '../../components/Page';
 import { PATH_DASHBOARD, PATH_PAGE } from '../../routes/path';
 import InputTextField from '../../components/InputTextField';
 import {useDispatch, useSelector} from 'react-redux'
-import { retriveAllInvoice, retriveAllReceipt } from '../../store/invoice';
 import { ScrollDialog } from '../../dialog';
 import { AddStop } from '../../components/shipment/stop';
 import { retriveShipment } from '../../store/shipment';
   
   const useStyles = makeStyles((theme)=>createStyles({
-    rightSection: {
-        width: '96%',
-    },
-    inRightSection: {
-        padding: '25px 70px 20px 32px',
-        [theme.breakpoints.between('1024', '1400')]: {
-            padding: '18px',
-        },
-    },
-    adminButton: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        color: '#fff',
-    },
-    addNewGroup: {
-        color: '#fff',
-        border: '1px solid #428BCA',
-        borderRadius: '2px',
-        backgroundColor: '#428BCA',
-        height: '48px',
-        marginLeft: '15px',
-        width: '205px',
-        '&:hover': {
-            backgroundColor: '#428BCA',
-        },
-    },
-    inAdminButton: {
-        display: 'flex',
-    },
-    addNewGroupBulk: {
-        width: '165px',
-        [theme.breakpoints.between('1024', '1400')]: {
-            marginLeft: '0px',
-        },
-    },
-    bottomButtonExpert: {
-        cursor: 'pointer',
-        textAlign: 'right',
-    },
     table: {
         width: '100%',
         borderSpacing: '0px 0px',
@@ -109,16 +68,6 @@ import { retriveShipment } from '../../store/shipment';
                 cursor: 'pointer',
             },
         },
-    },
-    selectBoxStyle: {
-        '& span': {
-            display: 'none',
-        },
-    },
-    selectBoxSectionTarget: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
     },
     selctAutTar: {
         width: '14%',
@@ -175,26 +124,6 @@ import { retriveShipment } from '../../store/shipment';
             color: '#428BCA',
         },
     },
-    saleRate:{
-        border:'none',
-        textAlign:'center',
-        width: '85px',
-        height: '48px',
-        display: 'inline-block',
-        lineHeight: '26px',
-        borderRadius: '4px',
-        backgroundColor: theme.palette.grey[300]
-    },
-    saleRateActive:{
-        border:'none',
-        textAlign:'center',
-        width: '85px',
-        height: '48px',
-        display: 'inline-block',
-        lineHeight: '26px',
-        borderRadius: '4px',
-        backgroundColor: theme.palette.grey[200]
-    },
     search:{
         '& input': {
             height: '17px',
@@ -223,7 +152,6 @@ const Shipments = () => {
     const handleClose = () => {
         setAddStopOpen(false);
       }
-      console.log("allShipment",allShipment)
     const contentBody = () => <AddStop open={addStopOpen} setOpen={setAddStopOpen}/>
     return (
       <Page title="History">

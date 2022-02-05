@@ -8,10 +8,11 @@ import {
 } from 'react';
 import { useHistory, Link as RouterLink } from 'react-router-dom';
 import Page from '../../components/Page';
-import { SendEvent } from '../../socket/SocketHandler';
-import SocketEvent from '../../socket/SocketEvent';
+import {useDispatch, useSelector} from 'react-redux'
 import AppLoader from '../../components/Loader';
 import { ToastContainer, toast } from 'react-toastify';
+import { retriveShipment } from '../../store/shipment';
+import { getParameterByName } from '../../common/Utils';
 import { SenderInformation, ProfileCover, DeliveryBoyInformation, ShipmentInformation, ReceiverInformation } from '../../components/shipment/profile';
 
 // ----------------------------------------------------------------------
@@ -37,32 +38,45 @@ const TabsWrapperStyle = styled('div')(({ theme }) => ({
 
 const Profile = () => {
   const history = useHistory();
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState('shipment');
+  const allShipment= useSelector(state=>state.shipment.allShipment)
+  const {id} = getParameterByName("id");
   const handleChangeTab = (newValue) => {
     setCurrentTab(newValue);
   };
+  
 
+  React.useEffect(()=>{
+    const startDate = new Date()
+    const endDate = new Date()
+    if(!allShipment.length){
+      dispatch(retriveShipment(startDate,endDate))
+    }
+},[])
+const shipment = allShipment.length ? allShipment.filter((shipment)=> shipment.ShipmentID == id) : []
+console.log(shipment,id)
   const PROFILE_TABS = [
     {
       value: 'shipment',
       //icon: ,
-      component: <ShipmentInformation />,
+      component: <ShipmentInformation shipment={shipment}/>,
     },
     {
         value: 'delivery boy',
         //icon: ,
-        component: <DeliveryBoyInformation />,
+        component: <DeliveryBoyInformation shipment={shipment}/>,
     },
     {
         value: 'receiver',
         //icon: ,
-        component: <ReceiverInformation />,
+        component: <ReceiverInformation shipment={shipment}/>,
     },
     {
       value: 'sender',
       //icon: ,
-      component: <SenderInformation />,
+      component: <SenderInformation shipment={shipment}/>,
     },
   ];
 
@@ -85,7 +99,7 @@ const Profile = () => {
             position: 'relative',
           }}
         >
-          <ProfileCover />
+          <ProfileCover shipment={shipment}/>
 
           <TabsWrapperStyle>
             <Tabs

@@ -34,7 +34,7 @@ const InfoStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function ProfileCover() {
+export default function ProfileCover({shipment}) {
   const [files, setFiles] = useState([]);
   return (
     <RootStyle>
@@ -48,8 +48,8 @@ export default function ProfileCover() {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant="h4">{"Shipment"}</Typography>
-          <Typography sx={{ opacity: 0.72 }}>{"Desc"}</Typography>
+          <Typography variant="h4">{shipment && shipment[0] && shipment[0].Name}</Typography>
+          <Typography sx={{ opacity: 0.72 }}>{shipment && shipment[0] && shipment[0].Description}</Typography>
         </Box>
       </InfoStyle>
       <Box
