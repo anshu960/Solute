@@ -1,15 +1,6 @@
 import React from "react";
 import { Chart } from "react-google-charts";
 
-const data = [
-  ["Year", "Sales"],
-  ["2004", 800],
-  ["2005", 1270],
-  ["2006", 860],
-  ["2007", 120],
-  ["2008", 1500],
-];
-
 const options = {
   //title: "Company Performance",
   curveType: "function",
@@ -30,7 +21,14 @@ const options = {
   }
 };
 
-export default function LineChart() {
+export default function LineChart({sale}) {
+  const data = [
+    ["instance", "Sales"],
+  ];
+  data.push(['1',sale/4]);
+  data.push(['2',sale*3]);
+  data.push(['3',sale/2]);
+  data.push(['4',sale]);
   return (
     <Chart
       chartType="LineChart"

@@ -165,7 +165,7 @@ const displayBusinessCard = () => {
             display: 'flex',
           }}
         > 
-          <Box><LineChart /></Box>
+          <Box><LineChart sale={getSaleAmountForBusiness(business._id)}/></Box>
         
           <Typography variant="h5" gutterBottom sx={{display: 'flex', color: 'primary.darker'}}>
             <CurrencyRupeeIcon sx={{width: 18, color: 'primary.darker'}}/>
