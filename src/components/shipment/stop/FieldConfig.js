@@ -3,13 +3,15 @@
       id: 'SenderAddress',
       label: 'Sender Address',
       type: 'text',
-      placeholder: 'Enter Sender Address'
+      placeholder: 'Enter Sender Address',
+      disabled: true,
     },
     {
       id: 'ReceiverAddress',
       label: 'Receiver Address',
       type: 'text',
-      placeholder: 'Enter Receiver Address'
+      placeholder: 'Enter Receiver Address',
+      disabled: true,
     },
     {
       id: `Status`,

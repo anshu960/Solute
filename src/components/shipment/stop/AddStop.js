@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useRef } from 'react';
 // material
 import { Button, DialogActions, DialogContent, DialogContentText, Grid, Stack, Typography } from '@mui/material';
-import StockInAction from './AddStopAction';
+import AddStopAction from './AddStopAction';
 import Select from 'react-select';
 import InputTextField from '../../InputTextField';
 import { addButton, stopFields } from './FieldConfig';
@@ -13,10 +13,17 @@ const defaultFields = {
 };
 // ----------------------------------------------------------------------
 
-export default function AddStop({open, setOpen}) {
+export default function AddStop({shipment, setOpen}) {
   const [fields, setFields] = useState(defaultFields);
-  const [stopage, setStopage] = useState({  });
+  const [stopage, setStopage] = useState({});
   const descriptionElementRef = useRef(null);
+  console.log(shipment);
+  React.useEffect(()=>{
+    const ship = Object.keys(shipment).length ? shipment : null;
+    if(ship){
+      setFields(ship);
+    }
+  },[shipment]);
 
   const onChange = (event)=>{
     setFields({...fields,[event.target.name]:event.target.value})
@@ -112,6 +119,7 @@ export default function AddStop({open, setOpen}) {
       value={fields[field.id]}
       type={field.type}
       multiline={!!(field.multiline)}
+      disabled={field.disabled}
     />
   )
 
@@ -185,7 +193,7 @@ export default function AddStop({open, setOpen}) {
         </DialogContentText>
       </DialogContent>
       <DialogActions sx={{justifyContent: 'end'}}>
-          <StockInAction handleConfirm={handleConfirm} setOpen={setOpen} />
+          <AddStopAction handleConfirm={handleConfirm} setOpen={setOpen} />
       </DialogActions>  
     </React.Fragment>
   );

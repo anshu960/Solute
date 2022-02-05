@@ -27,7 +27,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import { getBusinessId, getUserId } from '../../services/authService';
 import Page from '../../components/Page';
 import { PATH_DASHBOARD, PATH_PAGE } from '../../routes/path';
-import InputTextField from '../../components/InputTextField';
 import {useDispatch, useSelector} from 'react-redux'
 import { ScrollDialog } from '../../dialog';
 import { AddStop } from '../../components/shipment/stop';
@@ -140,7 +139,10 @@ const Shipments = () => {
     const allShipment= useSelector(state=>state.shipment.allShipment)
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [addStopOpen, setAddStopOpen] = useState(false);
+    const [addStopOpen, setAddStopOpen] = useState({
+        open: false,
+        shipment: null
+    });
     useEffect(()=>{
         dispatch(retriveShipment(startDate,endDate))
     },[startDate,endDate])
@@ -150,15 +152,15 @@ const Shipments = () => {
         return (dateObj.getDate() + "-" + (dateObj.getMonth() + 1) + "-" + dateObj.getFullYear());
     }
     const handleClose = () => {
-        setAddStopOpen(false);
+        setAddStopOpen({open: false, shipment:{}});
       }
-    const contentBody = () => <AddStop open={addStopOpen} setOpen={setAddStopOpen}/>
+    const contentBody = () => <AddStop shipment={addStopOpen.shipment} setOpen={setAddStopOpen}/>
     return (
       <Page title="History">
           <Fragment>
             <Container>
             <ToastContainer />
-            <ScrollDialog body={contentBody()} handleClose={handleClose} scroll={'paper'} title="Add Stopage" open={addStopOpen} dialogWidth="xl"/>
+            <ScrollDialog body={contentBody()} handleClose={handleClose} scroll={'paper'} title="Add Stopage" open={addStopOpen.open} dialogWidth="xl"/>
               <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                   <Typography variant="h4" gutterBottom>
                     Shipments
@@ -226,7 +228,7 @@ const Shipments = () => {
                                         <TableCell>{shipment.ReceiverAddress}</TableCell>
                                         <TableCell>{getDateToDisplay(shipment.ShipmentDeliveryDate)}</TableCell>
                                         <TableCell>{shipment.ShipmentDelivered ? 'Delivered': 'In-progress'}</TableCell>
-                                        <TableCell><Button variant="text" onClick={()=>{setAddStopOpen(true)}}>Add</Button></TableCell>
+                                        <TableCell><Button variant="text" onClick={()=>{setAddStopOpen({open: true,shipment})}}>Add</Button></TableCell>
                                         <TableCell><Button variant="text" onClick={()=>{history.push({ pathname: PATH_DASHBOARD.delivery.profile, search: `?id=${shipment.ShipmentID}` })}}>View</Button></TableCell>
                                         <TableCell><Button variant="text" onClick={()=>{window.open(`/#${PATH_PAGE.shipmentTrack}?id=${shipment.ShipmentID}`, "_blank");}}>Locate</Button></TableCell>
                                     </TableRow>
