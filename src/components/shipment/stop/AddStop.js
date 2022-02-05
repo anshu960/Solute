@@ -116,9 +116,6 @@ export default function AddStop({open, setOpen}) {
   )
 
   const getSelectField = (field) =>{
-    if(field.id === 'HSN'){
-      field.options = hsnList;
-    }
     return(
     <Select
       name={field.id}
