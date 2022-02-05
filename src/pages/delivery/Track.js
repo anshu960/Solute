@@ -13,21 +13,33 @@ import { Container, Stack } from '@mui/material';
 const steps = [
   {
     label: 'From',
-    description: `Address Source.`,
+    address: 'Sec - 1, Noida, UP-201301',
+    description: `Delivered`,
   },
   {
-    label: 'In-Progress',
-    description:
-      'Out for delivery.',
+    label: 'Stopage 1',
+    address:`Address of Stoage 1`,
+    description: `Delivered`,
+  },
+  {
+    label: 'Stopage 2',
+    address:`Address of Stoage 2`,
+    description: `Picked`,
+  },
+  {
+    label: 'Stopage 3',
+    address:`Address of Stoage 3`,
+    description: `Waiting`,
   },
   {
     label: 'To',
-    description: `Address Destination.`,
+    address:`Address of Desitnation`,
+    description: `Delivered Successfully`,
   },
 ];
 
 export default function Track() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(4);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -56,16 +68,13 @@ export default function Track() {
                 <Step key={step.label}>
                     <StepLabel
                     optional={
-                        index === 2 ? (
-                        <Typography variant="caption">Destination</Typography>
-                        ) : null
-                    }
+                        <Typography variant="caption">{step.address}</Typography>}
                     >
                     {step.label}
                     </StepLabel>
                     <StepContent>
                     <Typography>{step.description}</Typography>
-                    <Box sx={{ mb: 2 }}>
+                    {/* <Box sx={{ mb: 2 }}>
                         <div>
                         <Button
                             variant="contained"
@@ -82,19 +91,19 @@ export default function Track() {
                             Back
                         </Button>
                         </div>
-                    </Box>
+                    </Box> */}
                     </StepContent>
                 </Step>
                 ))}
             </Stepper>
-            {activeStep === steps.length && (
+            {/* {activeStep === steps.length && (
                 <Paper square elevation={0} sx={{ p: 3 }}>
                 <Typography>Delivered Successfully</Typography>
                 <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
                     Reset
                 </Button>
                 </Paper>
-            )}
+            )} */}
             </Box>
             </Container>
         </React.Fragment>
