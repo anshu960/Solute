@@ -30,6 +30,18 @@ export const shipmentDetails = [
     placeholder: 'Enter Description',
     multiline: true,
   },
+  {
+    id: `Status`,
+    label: 'Status',
+    type: 'select',
+    placeholder: 'Select Status',
+    options: [
+      {label: "Picked", value: 1},
+      {label: "In Transit", value: 2},
+      {label: "Delivered", value: 3},
+      {label: "Dropped", value: 4},
+    ]
+  },
 ]
 
 export const senderDetails = [
