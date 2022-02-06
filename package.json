@@ -82,7 +82,8 @@
     "development": "NODE_ENV='development'",
     "productiondeploy": "cp -rf ./environment/production.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:production",
     "stagingdeploy": "cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:production",
-    "integrationdeploy": "cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:integration"
+    "integrationdeploy": "cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:integration",
+    "livedeploy": "cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:integration"
   },
   "eslintConfig": {
     "extends": [
