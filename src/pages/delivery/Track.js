@@ -11,6 +11,7 @@ import Page from '../../components/Page';
 import { Container, Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { retriveShipmentStatus } from '../../store/shipment';
+import { getParameterByName } from '../../common/Utils';
 
 const steps = [
   {
@@ -44,10 +45,10 @@ export default function Track() {
   const dispatch = useDispatch();
   const allStatus = useSelector(state=>state.shipment.allShipmentStatus)
   const [activeStep, setActiveStep] = React.useState(0);
-
+  const {id} = getParameterByName("id");
   React.useEffect(()=>{
     setTimeout(()=>{
-      dispatch(retriveShipmentStatus(1,(data)=>{
+      dispatch(retriveShipmentStatus(id,(data)=>{
           if(data && data.length){
             data.forEach(element => {
               if(element.Status === 4){
