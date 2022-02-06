@@ -10,6 +10,9 @@
         ],
         "integration": [
           "fuelme-20ef9"
+        ],
+        "live": [
+          "solute"
         ]
       }
     }

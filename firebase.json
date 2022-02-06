@@ -27,7 +27,7 @@
       ] 
     },
     {
-      "target": "solute", 
+      "target": "live", 
       "public": "./public",
       "ignore": [
         "firebase.json",
