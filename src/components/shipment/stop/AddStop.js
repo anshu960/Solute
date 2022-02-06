@@ -12,10 +12,50 @@ const defaultFields = {
   ReceiverAddress: '',
 };
 // ----------------------------------------------------------------------
-
+const createStopageFields = (index) => ({
+  ['stopage'+index]: [
+   {
+     id: `Stop${index}Address`,
+     label: `Stopage${index} Address`,
+     type: 'text',
+     placeholder: `Enter Stopage${index} Address`
+   },
+   {
+     id: `Stop${index}DeliveryBoyName`,
+     label: 'Delivery Boy Name',
+     type: 'text',
+     placeholder: 'Enter Delivery Boy Name'
+   },
+   {
+     id: `Stop${index}DeliveryBoyContact`,
+     label: 'Delivery Boy Contact',
+     type: 'text',
+     placeholder: 'Enter Delivery Boy Contact'
+   },
+   {
+     id: `Stop${index}DeliveryBoyAddress`,
+     label: 'Delivery Boy Address',
+     type: 'text',
+     placeholder: 'Enter Delivery Boy Address'
+   },
+   {
+     id: `Stop${index}Status`,
+     label: 'Status',
+     type: 'select',
+     placeholder: 'Select Status',
+     options: [
+       {label: "Picked", value: 1},
+       {label: "In Transit", value: 2},
+       {label: "Delivered", value: 3},
+       {label: "Dropped", value: 4},
+     
+     ]
+   },
+  ]
+ })
 export default function AddStop({shipment, setOpen}) {
   const [fields, setFields] = useState(defaultFields);
-  const [stopage, setStopage] = useState({});
+  const [stopage, setStopage] = useState(createStopageFields(1));
   const descriptionElementRef = useRef(null);
   console.log(shipment);
   React.useEffect(()=>{
@@ -38,47 +78,7 @@ export default function AddStop({shipment, setOpen}) {
     setFields({...fields,[name]:value})
   }
 
-  const createStopageFields = (index) => ({
-   ['stopage'+index]: [
-    {
-      id: `Stop${index}Address`,
-      label: `Stopage${index} Address`,
-      type: 'text',
-      placeholder: `Enter Stopage${index} Address`
-    },
-    {
-      id: `Stop${index}DeliveryBoyName`,
-      label: 'Delivery Boy Name',
-      type: 'text',
-      placeholder: 'Enter Delivery Boy Name'
-    },
-    {
-      id: `Stop${index}DeliveryBoyContact`,
-      label: 'Delivery Boy Contact',
-      type: 'text',
-      placeholder: 'Enter Delivery Boy Contact'
-    },
-    {
-      id: `Stop${index}DeliveryBoyAddress`,
-      label: 'Delivery Boy Address',
-      type: 'text',
-      placeholder: 'Enter Delivery Boy Address'
-    },
-    {
-      id: `Stop${index}Status`,
-      label: 'Status',
-      type: 'select',
-      placeholder: 'Select Status',
-      options: [
-        {label: "Picked", value: 1},
-        {label: "In Transit", value: 2},
-        {label: "Delivered", value: 3},
-        {label: "Dropped", value: 4},
-      
-      ]
-    },
-   ]
-  })
+  
   
   const handleAddStopage = () => {
     let elements = Object.keys(stopage).length+1;
@@ -163,7 +163,7 @@ export default function AddStop({shipment, setOpen}) {
   }
   
   return (
-    <React.Fragment>
+    <React.Fragment style={{outerHeight:800}}>
       <DialogContent dividers={true}>
         <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
           <form action="">
@@ -176,14 +176,14 @@ export default function AddStop({shipment, setOpen}) {
             </Stack>
             <Stack spacing={3}>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-              <Grid container spacing={3} py={2}>
+              {/* <Grid container spacing={3} py={2}>
                 <Grid item xs={12} md={12} lg={6} xl={4}>
                   <Typography variant='subtitle2'>
                     {addButton.label}
                   </Typography>
                   {getField(addButton)}
                 </Grid>
-              </Grid>
+              </Grid> */}
               </Stack>
             </Stack>
             <Stack spacing={3}>

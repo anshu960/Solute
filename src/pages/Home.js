@@ -209,7 +209,7 @@ const displayBusinessCard = () => {
             Let's start powering you up!
           </Typography>
           <Typography align="center" sx={{ color: 'text.secondary' }}>
-            Choose/Register business to FuelMe.
+            Choose/Register business to Solute.
           </Typography>
         </Box>
         <Grid container spacing={3} sx={{ my: 10 }}>
