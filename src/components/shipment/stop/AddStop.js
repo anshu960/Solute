@@ -6,6 +6,9 @@ import AddStopAction from './AddStopAction';
 import Select from 'react-select';
 import InputTextField from '../../InputTextField';
 import { addButton, stopFields } from './FieldConfig';
+import { createShipmentStatus} from '../../../store/shipment';
+import {useDispatch, useSelector} from 'react-redux'
+import { getBusinessId, getUserId } from '../../../services/authService';
 
 const defaultFields = {
   SenderAddress: '',
@@ -15,10 +18,10 @@ const defaultFields = {
 const createStopageFields = (index) => ({
   ['stopage'+index]: [
    {
-     id: `Stop${index}Address`,
-     label: `Stopage${index} Address`,
+     id: `Address`,
+     label: `Stopage Address`,
      type: 'text',
-     placeholder: `Enter Stopage${index} Address`
+     placeholder: `Enter Stopage Address`
    },
    {
      id: `Stop${index}DeliveryBoyName`,
@@ -39,21 +42,21 @@ const createStopageFields = (index) => ({
      placeholder: 'Enter Delivery Boy Address'
    },
    {
-     id: `Stop${index}Status`,
+     id: `Status`,
      label: 'Status',
      type: 'select',
      placeholder: 'Select Status',
      options: [
        {label: "Picked", value: 1},
        {label: "In Transit", value: 2},
-       {label: "Delivered", value: 3},
-       {label: "Dropped", value: 4},
-     
+       {label: "Dropped", value: 3},
+       {label: "Delivered", value: 4},
      ]
    },
   ]
  })
 export default function AddStop({shipment, setOpen}) {
+  const dispatch = useDispatch();
   const [fields, setFields] = useState(defaultFields);
   const [stopage, setStopage] = useState(createStopageFields(1));
   const descriptionElementRef = useRef(null);
@@ -71,6 +74,16 @@ export default function AddStop({shipment, setOpen}) {
 
   const handleConfirm = () => {
     console.log(fields)
+    const request = {...fields,...{
+      UserID:getUserId(),
+      BusinessID:getBusinessId(),
+      ShipmentID:shipment._id,
+      _id:undefined,
+      ShipmentNumber:shipment.ShipmentID
+    }}
+    dispatch(createShipmentStatus(request,()=>{
+      setOpen({open: false, shipment:{}});
+    }));
   }
   
   const onSelected = (option, { name }) => {

@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Page from '../../components/Page';
 import { Container, Stack } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { retriveShipmentStatus } from '../../store/shipment';
 
 const steps = [
   {
@@ -39,8 +41,23 @@ const steps = [
 ];
 
 export default function Track() {
-  const [activeStep, setActiveStep] = React.useState(2);
+  const dispatch = useDispatch();
+  const allStatus = useSelector(state=>state.shipment.allShipmentStatus)
+  const [activeStep, setActiveStep] = React.useState(0);
 
+  React.useEffect(()=>{
+    setTimeout(()=>{
+      dispatch(retriveShipmentStatus(1,(data)=>{
+          if(data && data.length){
+            data.forEach(element => {
+              if(element.Status === 4){
+                setActiveStep(data.length)
+              }
+            });
+          }
+      }))
+    },500)
+  },[])
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -64,11 +81,11 @@ export default function Track() {
               </Stack>
             <Box sx={{ maxWidth: 400 }}>
             <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((step, index) => (
+                {allStatus.map((step, index) => (
                 <Step key={step.label}>
                     <StepLabel
                     optional={
-                        <Typography variant="caption">{step.address}</Typography>}
+                        <Typography variant="caption">{step.Address}</Typography>}
                     >
                     {step.label}
                     </StepLabel>
