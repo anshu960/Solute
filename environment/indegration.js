@@ -1,6 +1,6 @@
 module.exports = Object.freeze({
     server:"integration",
-    socket:"https://fuel-me-k8lps.ondigitalocean.app",
+    socket:"https://solute-r227wnciga-el.a.run.app",
     mode:"production",
     PORT:1010
 });
