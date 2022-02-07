@@ -51,7 +51,7 @@ export default function Register() {
     <RootStyle title="Login">
       <MHidden width="mdDown">
       <SectionStyle>
-           <img src={image_config.Logo} alt="Fuel Me" />
+           <img src={image_config.Logo} alt="Solute" />
         </SectionStyle>
       </MHidden>
 
@@ -59,7 +59,7 @@ export default function Register() {
         <ContentStyle>
           <Box sx={{ mb: 5 }}>
             <Typography variant="h4" gutterBottom>
-              Signup to Fuel Me
+              Signup to Solute
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
               Enjoy the best experience.

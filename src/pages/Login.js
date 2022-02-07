@@ -65,9 +65,9 @@ export default function Login() {
       <MHidden width="mdDown">
         <SectionStyle>
           {/* <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Fuel Me
+            Solute
           </Typography> */}
-           <img src={ImageConfig.Logo} alt="Fuel Me" />
+           <img src={ImageConfig.Logo} alt="Solute" />
         </SectionStyle>
       </MHidden>
 

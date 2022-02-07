@@ -46,7 +46,7 @@ export default function RegisterBusiness() {
     <RootStyle title="Register">
       <MHidden width="mdDown">
       <SectionStyle>
-           <img src={image_config.Logo} alt="Fuel Me" />
+           <img src={image_config.Logo} alt="Solute" />
         </SectionStyle>
       </MHidden>
 
@@ -54,7 +54,7 @@ export default function RegisterBusiness() {
         <ContentStyle>
           <Box sx={{ mb: 5 }}>
             <Typography variant="h4" gutterBottom>
-              Register Business to Fuel Me
+              Register Business to Solute
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
               Enjoy the best experience.
