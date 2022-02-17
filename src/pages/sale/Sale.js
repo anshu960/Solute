@@ -36,46 +36,8 @@ import { retriveCustomer } from '../../store/customer';
 import { setSelectedTransaction } from '../../store/sale';
 
 const useStyles = makeStyles((theme)=>createStyles({
-    rightSection: {
-        width: '96%',
-    },
-    inRightSection: {
-        padding: '25px 70px 20px 32px',
-        [theme.breakpoints.between('1024', '1400')]: {
-            padding: '18px',
-        },
-    },
-    adminButton: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        color: '#fff',
-    },
-    addNewGroup: {
-        //fontSize: '18px',
-        color: '#fff',
-        border: '1px solid #428BCA',
-        borderRadius: '2px',
-        backgroundColor: '#428BCA',
-        height: '48px',
-        marginLeft: '15px',
-        width: '205px',
-        '&:hover': {
-            backgroundColor: '#428BCA',
-        },
-    },
-    inAdminButton: {
-        display: 'flex',
-    },
     addNewGroupBulk: {
-        //fontSize: '18px',
-        //color: '#428BCA',
-        //border: '1px solid #428BCA',
-        //borderRadius: '2px',
-        //backgroundColor: '#fff',
-        //height: '48px',
         width: '165px',
-        //marginLeft: '70px',
         [theme.breakpoints.between('1024', '1400')]: {
             marginLeft: '0px',
         },
@@ -185,7 +147,6 @@ const useStyles = makeStyles((theme)=>createStyles({
         },
     },
     saleRate:{
-        //color:'#4289c7',
         border:'none',
         textAlign:'center',
         width: '85px',
@@ -215,21 +176,7 @@ const useStyles = makeStyles((theme)=>createStyles({
     control: (base) => ({
         ...base,
         width: '100%',
-        //height: '48px',
-        //overflowY: 'scroll',
-        //color:'#fff',
-        //backgroundColor: '#D5DEE112',
-        //padding: '4px 12px',
-        //borderRadius: '2px',
         fontSize: '15px',
-        // [breakpoints.between('1024', '1400')]: {
-        //     fontSize: '12px',
-        //     padding: '4px 4px',
-        // },
-        '& div':{
-            //color: '#fff'
-        }
-  
     }),
     menu: (base) => ({
         ...base,
@@ -245,9 +192,6 @@ const useStyles = makeStyles((theme)=>createStyles({
         ...base,
         width: '19% !important',
         marginRight: '10px',
-        // [breakpoints.between('1024', '1400')]: {
-        //     marginRight: '5px',
-        // },
         '&:last-child': {
             marginRight: '0px',
         },
@@ -267,25 +211,10 @@ const useStyles = makeStyles((theme)=>createStyles({
     control: (base) => ({
         ...base,
         width: '100%',
-        //height: '48px',
-        //overflowY: 'scroll',
-        //color:'#fff',
-        //backgroundColor: '#D5DEE112',
-        //padding: '4px 12px',
-        //borderRadius: '2px',
         fontSize: '15px',
-        // [breakpoints.between('1024', '1400')]: {
-        //     fontSize: '12px',
-        //     padding: '4px 4px',
-        // },
-        '& div':{
-          //  color: '#fff'
-        }
-  
     }),
     menu: (base) => ({
         ...base,
-    //    color: '#000',
         borderRadius: 0,
     }),
     menuList: (base) => ({
@@ -296,10 +225,6 @@ const useStyles = makeStyles((theme)=>createStyles({
     container: (base) => ({
         ...base,
         width: '100% !important',
-    //    marginRight: '10px',
-        // [breakpoints.between('1024', '1400')]: {
-        //     marginRight: '5px',
-        // },
         '&:last-child': {
             marginRight: '0px',
         },

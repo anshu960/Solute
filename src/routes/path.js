@@ -9,14 +9,14 @@ export const PATH_AUTH = {
 }
 
 export const PATH_PAGE = {
-    home: '/',
+    landing: '/',
+    home: "/home",
     profile: '/profile',
     receipt: '/receipt',
     shipmentTrack: '/shipmentTrack',
 }
 
 export const PATH_DASHBOARD = {
-    home: "/",
     root: ROOTS_DASHBOARD,
     sale: {
         root: path(ROOTS_DASHBOARD, '/sale'),

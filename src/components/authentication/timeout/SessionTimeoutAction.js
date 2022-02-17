@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 // material
 import { Button } from '@mui/material';
-import { PATH_PAGE } from '../../../routes/path';
+import { PATH_DASHBOARD } from '../../../routes/path';
 // ----------------------------------------------------------------------
 
 export default function SessionTimeoutAction({handleConfirm}) {
@@ -12,7 +12,7 @@ export default function SessionTimeoutAction({handleConfirm}) {
     event.preventDefault();
     localStorage.clear();
     sessionStorage.clear();
-    history.push(PATH_PAGE.home);
+    history.push(PATH_DASHBOARD.home);
   };
   
   return (

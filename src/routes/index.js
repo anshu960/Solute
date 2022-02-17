@@ -63,8 +63,13 @@ const routes = [
     },
     {
         exact: true,
-        path: PATH_PAGE.home,
-        component: lazy(() => import('../pages/Home'))
+        path: PATH_PAGE.landing,
+        component: lazy(() => import('../pages/Landing'))
+    },
+    {
+      exact: true,
+      path: PATH_PAGE.home,
+      component: lazy(() => import('../pages/Home'))
     },
     DashboardRoutes,
     //AdditionalRoutes

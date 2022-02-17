@@ -108,7 +108,7 @@ const handleRetriveRoleTypeEvent = React.useCallback((data) => {
       setUserId(data.Payload._id)
       setUser(data.Payload)
       JoinRoom(SocketEvent.JOIN_ROOM,{"ROOM_ID":data.Payload._id},handleJoinRoomEvent)
-      history.push(PATH_PAGE.home);
+      history.push(PATH_DASHBOARD.home);
     }else{
       setLoading(false);
       alert("Oops Something went wrong, please try after some time");

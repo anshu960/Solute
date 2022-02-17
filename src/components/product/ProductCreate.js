@@ -9,6 +9,7 @@ import { productFields, taxFields } from './FieldConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewProduct, setNewProductProperty } from '../../store/product';
 import { syncBusinessData } from '../../store/business';
+import { getTax } from './TaxUtility';
 
 export default function ProductCreate({handleAddProduct}) {
   const dispatch = useDispatch()
@@ -30,6 +31,18 @@ export default function ProductCreate({handleAddProduct}) {
     handleAddProduct(fields,files)
   }
 
+  const updateTax = (product) => {
+    let hsn = {}
+    if(product.HSN && allHSN){
+      allHSN.forEach(element => {
+          if(element._id === product.HSN){
+            hsn = element;
+          }
+      });
+    }
+    const result = getTax(product, hsn);
+    dispatch(setNewProductProperty(result))
+  }
 
   const onChange = (event)=>{
     const update = {[event.target.name]:event.target.value}
@@ -48,88 +61,6 @@ export default function ProductCreate({handleAddProduct}) {
     dispatch(setNewProductProperty(update))
     updateTax({...fields,...update});
   }
-
-
-  const updateTax = (product)=>{
-    let newProductToUpdate = {...product}
-    let basePrice = parseFloat(product.Price)
-    let allAppliedTaxAmount = parseFloat(0)
-    let hsn = {}
-    if(product.HSN && allHSN){
-      allHSN.forEach(element => {
-          if(element._id === product.HSN){
-            hsn = element;
-          }
-      });
-    }
-    console.log("Selected HSN  = ",hsn);
-    if(hsn.SGST){
-      let percent = parseFloat(hsn.SGST)
-      let percentDivider = percent/100
-      let newTaxAmount = parseFloat(basePrice * percentDivider)
-      newProductToUpdate.SGST = newTaxAmount.toFixed(2);
-      allAppliedTaxAmount = parseFloat(allAppliedTaxAmount + newTaxAmount)
-    }
-    if(hsn.CGST){
-      let percent = parseFloat(hsn.CGST)
-      let percentDivider = percent/100
-      let newTaxAmount = parseFloat(basePrice * percentDivider)
-      newProductToUpdate.CGST = newTaxAmount.toFixed(2);
-      allAppliedTaxAmount = parseFloat(allAppliedTaxAmount + newTaxAmount)
-    }
-
-    if(hsn.IGST){
-      let percent = parseFloat(hsn.IGST)
-      let percentDivider = percent/100
-      let newTaxAmount = parseFloat(basePrice * percentDivider)
-      newProductToUpdate.IGST = newTaxAmount.toFixed(2);
-      allAppliedTaxAmount = parseFloat(allAppliedTaxAmount + newTaxAmount)
-    }
-
-    if(hsn.CESS){
-      let percent = parseFloat(hsn.CESS)
-      let percentDivider = percent/100
-      let newTaxAmount = parseFloat(basePrice * percentDivider)
-      newProductToUpdate.CESS = newTaxAmount.toFixed(2);
-      allAppliedTaxAmount = parseFloat(allAppliedTaxAmount + newTaxAmount)
-    }
-
-    if(hsn.VAT){
-      let percent = parseFloat(hsn.VAT)
-      let percentDivider = percent/100
-      let newTaxAmount = parseFloat(basePrice * percentDivider)
-      newProductToUpdate.VAT = newTaxAmount.toFixed(2);
-      allAppliedTaxAmount = parseFloat(allAppliedTaxAmount + newTaxAmount)
-    }
-    console.log("allAppliedTaxAmount = ",allAppliedTaxAmount)
-
-
-    console.log("updateTax Product = ",product);
-      let taxAmount = parseFloat(allAppliedTaxAmount.toFixed(2));
-      let productPrice = parseFloat(product.Price);
-      let finalPrice = parseFloat(productPrice + taxAmount).toFixed(2);
-      console.log("productPrice = ",productPrice);
-      console.log("taxAmount = ",taxAmount);
-      console.log("finalPrice = ",finalPrice);
-     if(product.Price){
-        if(product.TaxIncluded){
-          dispatch(setNewProductProperty({
-            Tax:product.HSN ? taxAmount : product.Tax,
-            FinalPrice:productPrice
-          }))
-        }else{
-          dispatch(setNewProductProperty({Tax:product.HSN ? taxAmount : product.Tax 
-            ,FinalPrice: product.HSN ? finalPrice : parseFloat(product.Tax) + parseFloat(finalPrice),
-            IGST:newProductToUpdate.IGST,
-            CGST:newProductToUpdate.CGST,
-            SGST:newProductToUpdate.SGST,
-            VAT:newProductToUpdate.VAT,
-            CESS:newProductToUpdate.CESS,
-          }))
-        }
-      }
-  }
-  
 
   const getTextField = (field) =>(
     <InputTextField
