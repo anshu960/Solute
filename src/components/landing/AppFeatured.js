@@ -132,7 +132,7 @@ export default function AppFeatured() {
   };
 
   return (
-    <Card>
+    <Card sx={{borderRadius: 0}}>
       <Slider ref={carouselRef} {...settings}>
         {MOCK_APPS.map((app, index) => (
           <CarouselItem key={app.id} item={app} isActive={index === currentIndex} />
