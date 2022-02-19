@@ -2,9 +2,11 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
-//
-import AccountPopover from './AccountPopover';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { Box, Stack, AppBar, Toolbar, IconButton, Button } from '@mui/material';
+
+import { PATH_AUTH } from '../../routes/path';
+import Logo from '../../components/Logo/Logo';
 
 // ----------------------------------------------------------------------
 
@@ -20,10 +22,8 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
 }));
 
 const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
-  //minHeight: APPBAR_MOBILE,
   [theme.breakpoints.up('lg')]: {
     minHeight: APPBAR_DESKTOP,
-    //padding: theme.spacing(0, 5)
   }
 }));
 
@@ -34,12 +34,16 @@ LandingNavbar.propTypes = {
 };
 
 export default function LandingNavbar() {
+  const history = useHistory();
   return (
     <RootStyle>
       <ToolbarStyle>
+        <Logo />
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          <AccountPopover />
+          {/* <AccountPopover /> */}
+          <Button onClick={()=>{history.push(PATH_AUTH.login)}}>Login</Button>
+          <Button onClick={()=>{history.push(PATH_AUTH.login)}}>Signup</Button>
         </Stack>
       </ToolbarStyle>
     </RootStyle>

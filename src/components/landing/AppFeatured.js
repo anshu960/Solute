@@ -32,7 +32,7 @@ const CarouselImgStyle = styled('img')(({ theme }) => ({
   width: '100%',
   objectFit: 'cover',
   [theme.breakpoints.up('xl')]: {
-    height: 520
+    height: 800
   }
 }));
 

@@ -12,7 +12,10 @@ import { MainCarousel} from '../../components/landing';
 
 const RootStyle = styled(Page)(({ theme }) => ({
   minHeight: '100%',
-  paddingTop: theme.spacing(15),
+  paddingTop: theme.spacing(12),
+  [theme.breakpoints.up('md')]: {
+    paddingTom: theme.spacing(10)
+  }
   //paddingBottom: theme.spacing(10)
 }));
 
