@@ -17,7 +17,7 @@ import { PATH_DASHBOARD, PATH_PAGE } from '../../routes/path';
 const MENU_OPTIONS = [
   {
     label: 'Home',
-    linkTo: PATH_DASHBOARD.home,
+    linkTo: PATH_PAGE.home,
   },
   {
     label: 'Profile',
