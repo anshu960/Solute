@@ -4,22 +4,28 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Grid, Card, Container, Typography, useMediaQuery } from '@mui/material';
 // ----------------------------------------------------------------------
 
+const images = [
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Flightning.png?alt=media&token=cfb1eddf-d007-43d5-bf31-4aa84de94191',
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Ftime.png?alt=media&token=022fa1ce-8088-4f1a-96b1-e40657224c0a',
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Fuptime.png?alt=media&token=e5df8f34-1a48-4ee2-9687-e75ad1d70702',
+]
+
 const CARDS = [
   {
-    //icon: surli1,
-    title: 'Speed',
+    icon: images[0],
+    title: 'Lightening Fast',
     description:
-      'Register wide range of business at ine platform and enjoy the hassle free experience.'
+      'All the operations happens in real time.No waiting time for you sales and invoices.Performs everything in real time'
   },
   {
-    //icon: dot1,
-    title: 'Time Saved',
-    description: 'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
+    icon: images[1],
+    title: 'Saved Time',
+    description: 'Time Saved'
   },
   {
-    //icon: freehand1,
-    title: 'Retention',
-    description: '5K happy customers and counting.'
+    icon: images[2],
+    title: 'Alway Up',
+    description: '99.99% Uptime'
   }
 ];
 

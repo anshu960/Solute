@@ -4,22 +4,32 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Grid, Card, Container, Typography, useMediaQuery } from '@mui/material';
 // ----------------------------------------------------------------------
 
+const images = [
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Fsecure.png?alt=media&token=199fe594-3a35-425a-bcbc-58ebe65f224a',
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Freliable.png?alt=media&token=97fb9217-4663-4d9e-a7bb-1818a6529c7f',
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Fhappy_customer.png?alt=media&token=ed8df6e6-23a3-40c8-9cb8-1435e9fdd1f7',
+]
+
 const CARDS = [
   {
-    //icon: surli1,
-    title: 'Register Business',
+    icon: images[0],
+    title: 'Secured',
     description:
-      'Register wide range of business at ine platform and enjoy the hassle free experience.'
+    'Completely secured online, no access to anyone else but you.'
+      //'Register wide range of business at one platform and enjoy the hassle free experience.'
   },
   {
-    //icon: dot1,
-    title: 'Manage',
-    description: 'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
+    icon: images[1],
+    title: 'Reliable',
+    description: 
+    'Manage multiple businesses from any device throughout the world.',
+    //'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
   },
   {
-    //icon: freehand1,
+    icon: images[2],
     title: 'Happy Customer',
-    description: '5K happy customers and counting.'
+    description: `5000+ happy customers and counting.
+    Your first 3 months is on us.No payment required at all.`
   }
 ];
 

@@ -17,21 +17,22 @@ import p2 from '../../images/Indian_Oil_Logo.png'
 
 // ----------------------------------------------------------------------
 
-const TITLES = ['Banner One Desc', 'Banner Two Desc'];
-const IMAGES = [p1,p2];
+const TITLES = ['Grow your business exponential', 'Manage your business anywhere and everywhere'];
+const IMAGES = ['https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_curosel%2Fbusinessman.jpg?alt=media&token=10fa96b2-51ac-4fb0-9e3e-a2ee8e2c71c2',
+'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_curosel%2Fbusinessman_sale.jpg?alt=media&token=579e03be-db40-472f-95fc-7e3d83f24295'];
 
 const MOCK_APPS = [...Array(2)].map((_, index) => ({
   id: index,
   title: TITLES[index],
-  description: 'desc',
-  image: IMAGES[0]
+  description: '',
+  image: IMAGES[index]
 }));
 const CarouselImgStyle = styled('img')(({ theme }) => ({
-  height: 280,
+  height: "60%",
   width: '100%',
   objectFit: 'cover',
   [theme.breakpoints.up('xl')]: {
-    height: 800
+    height: "60%"
   }
 }));
 
@@ -110,14 +111,17 @@ export default function AppFeatured() {
     slidesToShow: 1,
     slidesToScroll: 1,
     rtl: Boolean(theme.direction === 'rtl'),
+    '& .slick-slide': {height:'auto !important'},
     beforeChange: (current, next) => setCurrentIndex(next),
     ...CarouselControlsPaging1({
       color: 'primary.main',
+      '& .slick-slide': {height:'auto !important'},
       sx: {
         top: theme.spacing(3),
         left: theme.spacing(3),
         bottom: 'auto',
-        right: 'auto'
+        right: 'auto',
+        '& .slick-slide': {height:'auto !important'},
       }
     })
   };
