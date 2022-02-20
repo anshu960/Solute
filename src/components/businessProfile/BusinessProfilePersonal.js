@@ -12,7 +12,7 @@ import { getParameterByName } from '../../common/Utils';
 import { Box } from '@mui/system';
 import CheckIcon from '@mui/icons-material/Check';
 import { getMobileNumber, getUserId, getBusiness, setBusiness, setBusinessId } from '../../services/authService';
-import { PATH_DASHBOARD } from '../../routes/path';
+import { PATH_DASHBOARD, PATH_PAGE } from '../../routes/path';
 import { registerFields } from './FieldConfig';
 import InputTextField from '../InputTextField';
 
@@ -55,7 +55,7 @@ const handleCreateBusinessEvent = useCallback((data) => {
   if(data.Payload && data.Payload._id){
       setBusinessId(data.Payload._id);
       setBusiness(data.Payload);
-      history.push(PATH_DASHBOARD.sale.sale);
+      history.push(PATH_PAGE.home);
   }
 }, []);
 

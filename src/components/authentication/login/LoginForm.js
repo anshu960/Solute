@@ -13,7 +13,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { registerAuthObserver } from '../../../services/firebase/firebaseAuthService';
 import { setMobileNumber, setUser, setUserId } from '../../../services/authService';
 import firebase from '@firebase/app';
-import { PATH_AUTH, PATH_DASHBOARD } from '../../../routes/path';
+import { PATH_AUTH, PATH_PAGE } from '../../../routes/path';
 require('firebase/auth');
 
 const uiConfig = {
@@ -55,7 +55,7 @@ export default function LoginForm(props) {
       setUser(data.Payload)
       JoinRoom(SocketEvent.JOIN_ROOM,{"ROOM_ID":data.Payload._id},handleJoinRoomEvent)
       console.log("SocketEvent.JOIN_ROOM if");
-      history.push(PATH_DASHBOARD.home);
+      history.push(PATH_PAGE.home);
     }else{
       console.log("SocketEvent.JOIN_ROOM else");
       history.push(PATH_AUTH.signup);

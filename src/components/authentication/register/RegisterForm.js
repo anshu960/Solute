@@ -108,7 +108,7 @@ const handleRetriveRoleTypeEvent = React.useCallback((data) => {
       setUserId(data.Payload._id)
       setUser(data.Payload)
       JoinRoom(SocketEvent.JOIN_ROOM,{"ROOM_ID":data.Payload._id},handleJoinRoomEvent)
-      history.push(PATH_DASHBOARD.home);
+      history.push(PATH_PAGE.home);
     }else{
       setLoading(false);
       alert("Oops Something went wrong, please try after some time");
@@ -158,7 +158,7 @@ const handleCreateBusinessEvent = useCallback((data) => {
       setBusinessId(data.Payload._id);
       setBusiness(data.Payload);
       setLoading(false);
-      history.push(PATH_DASHBOARD.sale.sale);
+      history.push(PATH_PAGE.home);
   }
 }, []);
 const createBusiness = (inputFields) => {

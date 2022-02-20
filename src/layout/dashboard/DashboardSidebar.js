@@ -124,7 +124,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               width: '100%',
               alignItems: 'center',
             }}
-            onClick={()=>{history.push(PATH_DASHBOARD.home)}}
+            onClick={()=>{history.push(PATH_PAGE.home)}}
             >
               <KeyboardBackspaceIcon sx={{ width: 20, height: 20 }} />
               <Box
