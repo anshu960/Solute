@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { JoinRoom } from '../../socket/SocketHandler';
 import SocketEvent from '../../socket/SocketEvent';
 import LandingNavbar from '../../layout/landing/LandingNavbar';
-import { MainCarousel} from '../../components/landing';
+import { MainCarousel, WhySolute, WhyChose} from '../../components/landing';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -28,6 +28,8 @@ export default function Landing() {
       <ToastContainer></ToastContainer>
       <LandingNavbar />
       <MainCarousel />
+      <WhySolute />
+      <WhyChose />
     </RootStyle>
   );
 }

@@ -14,7 +14,6 @@ import { MotionContainer, varFadeInRight } from '../animate';
 import { CarouselControlsPaging1, CarouselControlsArrowsBasic1 } from '../carousel';
 import p1 from '../../images/Indian_Oil_Logo.png'
 import p2 from '../../images/Indian_Oil_Logo.png'
-import { CarouselControlsArrowsIndex } from '../carousel/controls';
 
 // ----------------------------------------------------------------------
 
