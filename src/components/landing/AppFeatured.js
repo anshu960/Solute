@@ -66,7 +66,7 @@ function CarouselItem({ item, isActive }) {
           }}
         >
           <MotionContainer open={isActive}>
-            <motion.div variants={varFadeInRight}>
+            {/* <motion.div variants={varFadeInRight}>
               <Typography
                 variant="overline"
                 sx={{
@@ -77,7 +77,7 @@ function CarouselItem({ item, isActive }) {
               >
                 Featured 
               </Typography>
-            </motion.div>
+            </motion.div> */}
             <motion.div variants={varFadeInRight}>
               <Typography variant="h5" gutterBottom noWrap>
                 {title}
