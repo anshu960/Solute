@@ -12,9 +12,6 @@ import { CardContent, Box, Typography, Card } from '@mui/material';
 //
 import { MotionContainer, varFadeInRight } from '../animate';
 import { CarouselControlsPaging1, CarouselControlsArrowsBasic1 } from '../carousel';
-import p1 from '../../images/Indian_Oil_Logo.png'
-import p2 from '../../images/Indian_Oil_Logo.png'
-
 // ----------------------------------------------------------------------
 
 const TITLES = ['Grow your business exponential', 'Manage your business anywhere and everywhere'];
@@ -111,17 +108,14 @@ export default function AppFeatured() {
     slidesToShow: 1,
     slidesToScroll: 1,
     rtl: Boolean(theme.direction === 'rtl'),
-    '& .slick-slide': {height:'auto !important'},
     beforeChange: (current, next) => setCurrentIndex(next),
     ...CarouselControlsPaging1({
       color: 'primary.main',
-      '& .slick-slide': {height:'auto !important'},
       sx: {
         top: theme.spacing(3),
         left: theme.spacing(3),
         bottom: 'auto',
         right: 'auto',
-        '& .slick-slide': {height:'auto !important'},
       }
     })
   };
@@ -136,7 +130,7 @@ export default function AppFeatured() {
 
   return (
     <Card sx={{borderRadius: 0}}>
-      <Slider ref={carouselRef} {...settings}>
+      <Slider ref={carouselRef} {...settings} sx={{'& .slick-slide': {height:'auto !important'},}}>
         {MOCK_APPS.map((app, index) => (
           <CarouselItem key={app.id} item={app} isActive={index === currentIndex} />
         ))}

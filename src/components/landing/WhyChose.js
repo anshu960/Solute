@@ -20,12 +20,12 @@ const CARDS = [
   {
     icon: images[1],
     title: 'Saved Time',
-    description: 'Time Saved'
+    description: 'Everything you need at one place.From sales to complete business Sollution on the go.'
   },
   {
     icon: images[2],
     title: 'Alway Up',
-    description: '99.99% Uptime'
+    description: 'Complete solute is made with great care and reliable technologies makes it always up and available to use on you fingertips.'
   }
 ];
 

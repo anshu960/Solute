@@ -127,7 +127,7 @@ export default function WhySolute() {
               color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary')
             }}
           >
-            Solute provides everything you need to grow your business with trust.
+            Always Secured and Reliable
           </Typography>
         </div>
         </Box>
