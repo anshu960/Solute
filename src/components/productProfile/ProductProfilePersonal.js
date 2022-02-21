@@ -13,21 +13,6 @@ import { getUserId } from '../../services/authService';
 import { syncBusinessData } from '../../store/business';
 
 // ----------------------------------------------------------------------
-const defaultFields = {
-  UserID:"",
-  BusinessID:"",
-  ProductID:"",
-  Name:"",
-  Price: 0,
-  PlatformCharge: 0,
-  FinalPrice: 0,
-  CostPrice: 0,
-  Tax: 0,
-  MRP: 0,
-  Description: "",
-  ManageInventory: false,
-  HSN: "",
-}
 
 export default function ProductProfilePersonal() {
   const dispatch = useDispatch()

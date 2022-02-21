@@ -16,13 +16,14 @@ import  {
 } from 'react';
 import { useHistory, Link as RouterLink, Link } from 'react-router-dom';
 import Page from '../../components/Page';
-import { SendEvent } from '../../socket/SocketHandler';
-import SocketEvent from '../../socket/SocketEvent';
 import AppLoader from '../../components/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import { retriveHSN } from '../../store/hsn';
 import { getBusinessId, getUserId } from '../../services/authService';
 import { useDispatch, useSelector } from 'react-redux';
+import { PATH_DASHBOARD } from '../../routes/path';
+import { setSelectedHSN } from '../../store/hsn';
+
 const useStyles = makeStyles((theme)=>createStyles({
     actionList: {
         display: 'flex',
@@ -74,7 +75,10 @@ const HSNs = () => {
         return(
             <Grid item xs={12} sm={6} md={3}>
             <Link component={RouterLink}
-            //onClick={()=>history.push({ pathname: PATH_DASHBOARD.product.productProfile, search: `?id=${product._id}` })}
+            onClick={()=>{
+              dispatch(setSelectedHSN(hsn));
+              history.push({ pathname: PATH_DASHBOARD.hsn.add, search: `?id=${hsn.HSNID}` })
+            }}
             underline="none">
               <Paper
                 sx={{

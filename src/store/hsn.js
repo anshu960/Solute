@@ -59,7 +59,7 @@ export const createHSN = (request,callback) => async dispatch => {
     return console.error(e.message);
   }
 }
-export const selectHSN = (hsn) => async dispatch => {
+export const setSelectedHSN = (hsn) => async dispatch => {
   try {
       dispatch(setSelectHSNSuccess(hsn));
   } catch (e) {

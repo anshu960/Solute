@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // @mui
 import { Button, Grid, Stack, Typography,  } from '@mui/material';
 import InputTextField from '../InputTextField';
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { createHSN } from '../../store/hsn';
 import { getBusinessId, getUserId } from '../../services/authService';
 import { personalDetails } from './FieldConfig';
@@ -21,7 +21,14 @@ const defaultFields = {
 export default function HSNCreate() {
   const dispatch = useDispatch()
   const [fields, setFields] = useState(defaultFields);
+  const selectedHSN = useSelector(state => state.hsn.selectedHSN)
   const onChange = (event)=> setFields({...fields,[event.target.name]:event.target.value})
+
+  useEffect(()=>{
+    if(Object.keys(selectedHSN).length){
+      setFields(selectedHSN)
+    }
+  },[selectedHSN])
 
   const handleSave = () => {
     const UserID = getUserId();
