@@ -163,9 +163,6 @@ export default function AddStop({shipment, setOpen}) {
   (
     <Grid item xs={12} md={12} lg={6} xl={4}>
       <Stack spacing={3}>
-        {/* <Typography variant='subtitle2'>
-          {field.label}
-        </Typography> */}
         {getField(field)}
       </Stack>
     </Grid>
@@ -189,14 +186,6 @@ export default function AddStop({shipment, setOpen}) {
             </Stack>
             <Stack spacing={3}>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-              {/* <Grid container spacing={3} py={2}>
-                <Grid item xs={12} md={12} lg={6} xl={4}>
-                  <Typography variant='subtitle2'>
-                    {addButton.label}
-                  </Typography>
-                  {getField(addButton)}
-                </Grid>
-              </Grid> */}
               </Stack>
             </Stack>
             <Stack spacing={3}>

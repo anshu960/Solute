@@ -49,7 +49,7 @@ export const createHSN = (request,callback) => async dispatch => {
       if(data.Payload && data.Payload._id){
         toast("HSN Created Successfully")
       }else{
-        toast("Oops, HSN couldn't be create, please check all the imputs and try again")
+        toast("Oops, HSN couldn't be create, please check all the inputs and try again")
       }
       if(callback){
         callback(data.Payload)
@@ -62,6 +62,25 @@ export const createHSN = (request,callback) => async dispatch => {
 export const setSelectedHSN = (hsn) => async dispatch => {
   try {
       dispatch(setSelectHSNSuccess(hsn));
+  } catch (e) {
+    return console.error(e.message);
+  }
+}
+
+export const updateSelectedHSN = (request, callback) => async dispatch => {
+  try {
+      SendEvent(SocketEvent.UPDATE_HSN,request,(data)=>{
+        console.log("UPDATE_HSN",data)
+        dispatch(setSelectHSNSuccess(data.Payload));
+        if(data.Payload && data.Payload._id){
+          toast("HSN Updated Successfully")
+        }else{
+          toast("Oops, HSN couldn't be updated, please check all the inputs and try again")
+        }
+        if(callback){
+          callback(data.Payload)
+        }
+      })
   } catch (e) {
     return console.error(e.message);
   }

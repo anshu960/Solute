@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Grid, Stack, Typography,  } from '@mui/material';
 import InputTextField from '../InputTextField';
 import {useDispatch, useSelector} from 'react-redux'
-import { createHSN } from '../../store/hsn';
+import { createHSN, updateSelectedHSN } from '../../store/hsn';
 import { getBusinessId, getUserId } from '../../services/authService';
 import { personalDetails } from './FieldConfig';
 const defaultFields = {
@@ -37,9 +37,14 @@ export default function HSNCreate() {
       let request = fields
       request.UserID = UserID
       request.BusinessID = BusinessID
-      dispatch(createHSN(request,()=>{
-        setFields(defaultFields)
-      }));
+      if(Object.keys(selectedHSN).length){
+        dispatch(updateSelectedHSN(request));
+      }
+      else{
+        dispatch(createHSN(request,()=>{
+          setFields(defaultFields)
+        }));
+      }
     }else{
       console.log(fields)
     }
