@@ -31,7 +31,27 @@ import {useDispatch, useSelector} from 'react-redux'
 import { ScrollDialog } from '../../dialog';
 import { AddStop } from '../../components/shipment/stop';
 import { retriveShipment } from '../../store/shipment';
-  
+const getShipmentStatusToDispaly=(stauts)=>{
+    var statusToDisplay = ""
+    switch(stauts) {
+        case 1:
+            statusToDisplay = "Picked"
+          break;
+        case 2:
+            statusToDisplay = "In Transit"
+          break;
+          case 3:
+            statusToDisplay = "Delivered"
+          break;
+          case 4:
+            statusToDisplay = "Dropped"
+          break;
+        default:
+            statusToDisplay = "Delivered"
+          break;
+      }
+      return statusToDisplay
+}
   const useStyles = makeStyles((theme)=>createStyles({
     table: {
         width: '100%',
@@ -227,7 +247,7 @@ const Shipments = () => {
                                         <TableCell>{shipment.SenderAddress}</TableCell>
                                         <TableCell>{shipment.ReceiverAddress}</TableCell>
                                         <TableCell>{getDateToDisplay(shipment.ShipmentDeliveryDate)}</TableCell>
-                                        <TableCell>{shipment.ShipmentDelivered ? 'Delivered': 'In-progress'}</TableCell>
+                                        <TableCell>{getShipmentStatusToDispaly(shipment.Status)}</TableCell>
                                         <TableCell><Button variant="text" onClick={()=>{setAddStopOpen({open: true,shipment})}}>Add</Button></TableCell>
                                         <TableCell><Button variant="text" onClick={()=>{history.push({ pathname: PATH_DASHBOARD.delivery.profile, search: `?id=${shipment.ShipmentID}` })}}>View</Button></TableCell>
                                         <TableCell><Button variant="text" onClick={()=>{window.open(`/#${PATH_PAGE.shipmentTrack}?id=${shipment.ShipmentID}`, "_blank");}}>Locate</Button></TableCell>
@@ -243,6 +263,8 @@ const Shipments = () => {
       </Page>
   
     )
+    
+    
   }
   
   export default Shipments;  

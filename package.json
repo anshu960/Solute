@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "homepage": ".",
-  "description": "Fuel Me",
+  "description": "Solute",
   "engines": {
     "node": "17.0.1"
   },
