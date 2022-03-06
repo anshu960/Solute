@@ -6,6 +6,7 @@ import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 //
 import AccountPopover from './AccountPopover';
 import Logo from '../../components/Logo/Logo';
+import NotificationsPopover from './NotificationsPopover';
 
 // ----------------------------------------------------------------------
 
@@ -44,6 +45,7 @@ export default function HomeNavbar() {
         <Logo />
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+          <NotificationsPopover />
           <AccountPopover />
         </Stack>
       </ToolbarStyle>
