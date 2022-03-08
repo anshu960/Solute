@@ -10,6 +10,7 @@ import { createShipmentStatus} from '../../../store/shipment';
 import {useDispatch, useSelector} from 'react-redux'
 import { getBusinessId, getUserId } from '../../../services/authService';
 import { addStyles } from './Style';
+import { findUser } from '../../../store/search';
 
 const defaultFields = {
   SenderAddress: '',
@@ -21,13 +22,17 @@ export default function Add({setOpen}) {
   const classes = addStyles();
   const [fields, setFields] = useState(defaultFields);
   const descriptionElementRef = useRef(null);
+  const users = useSelector(state => state.search.users);
 
   const onChange = (event)=>{
     setFields({...fields,[event.target.name]:event.target.value})
   }
 
   const handleConfirm = () => {
-    console.log(fields)
+    console.log("Users",users)
+  }
+  const search = () => {
+    dispatch(findUser(fields.MobileNumber))
   }
    
   return (
@@ -44,10 +49,10 @@ export default function Add({setOpen}) {
                       className={classes.search}
                       fullWidth
                       placeholder="Search employee by contact"
-                      //onChange={onChange}
-                      name="search"
+                      onChange={onChange}
+                      name="MobileNumber"
                       autoComplete={false}
-                      //value={fields[field.id]}
+                      value={fields["MobileNumber"]}
                       type="text"
                       />
                   </Box>
@@ -56,7 +61,11 @@ export default function Add({setOpen}) {
               <Grid item xs={12} md={12} lg={6} xl={4}>
                 <Stack spacing={3}>
                   <Box component="span" className={classes.selctAutTarDate}>
-                      <Button variant="contained" color="info" >Search</Button>
+                      <Button 
+                      onClick={search}
+                      variant="contained" 
+                      color="info" 
+                      >Search</Button>
                   </Box>
                 </Stack>
               </Grid>

@@ -12,6 +12,7 @@ import invoice from "./invoice";
 import sale from "./sale";
 import shipment from "./shipment";
 import business_analytics from './business_analytics';
+import search from "./search";
 const reducer = combineReducers({
     business,
     businessTypes,
@@ -24,7 +25,8 @@ const reducer = combineReducers({
     invoice,
     sale,
     shipment,
-    business_analytics
+    business_analytics,
+    search
 })
 const store = configureStore({
   reducer,
