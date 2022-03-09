@@ -13,13 +13,18 @@ export default function LanguagePopover() {
   const anchorRef = useRef(null)
   const [open, setOpen] = useState(false)
   //const { allLang, currentLang, onChangeLang } = useLocales()
-  const allLang = []; 
-  const currentLang = {};
+  const allLang = [{
+    label: 'English',
+    icon: '',
+  }]; 
+  const currentLang = {
+    label: 'English'
+  };
   const onChangeLang = ()=>{};
 
   return (
     <>
-      <Box
+      {/* <Box
         ref={anchorRef}
         onClick={() => setOpen(true)}
         sx={{
@@ -29,10 +34,15 @@ export default function LanguagePopover() {
           ...(open && { backgroundColor: 'action.selected' })
         }}
         color="default"
-      >
+      > */}
         {/* @ts-ignore */}
-        <img src={LanguageIcon} alt={currentLang.label} />
-      </Box>
+        <LanguageIcon 
+        color={open ? 'primary' : 'info'}
+        ref={anchorRef}
+        onClick={() => setOpen(true)}
+        />
+        {/* <img src={LanguageIcon} alt={currentLang.label} /> */}
+      {/* </Box> */}
 
       <MenuPopover
         open={open}

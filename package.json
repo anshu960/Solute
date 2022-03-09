@@ -32,6 +32,8 @@
     "firebase": "^8.0.0",
     "firebase-tools": "^9.21.0",
     "framer-motion": "^5.1.0",
+    "i18next": "^21.6.11",
+    "i18next-browser-languagedetector": "^6.1.3",
     "jsbarcode": "^3.11.5",
     "mini-css-extract-plugin": "^2.4.4",
     "qrcode": "^1.5.0",
@@ -41,6 +43,7 @@
     "react-dropzone": "^11.4.2",
     "react-firebaseui": "^5.0.2",
     "react-google-charts": "^4.0.0",
+    "react-i18next": "^11.15.4",
     "react-intersection-observer": "^8.32.2",
     "react-loader-spinner": "^4.0.0",
     "react-qr-code": "^2.0.3",
@@ -84,7 +87,7 @@
     "stagingdeploy": "cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:production",
     "integrationdeploy": "cp -rf ./environment/integration.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:integration",
     "livedeploy": "cp -rf ./environment/live.js ./environment/index.js;rm -rf ./public;yarn prodbuild; firebase deploy --only hosting:live",
-    "alldeploy":"npm run stagingdeploy;npm run integrationdeploy;npm run productiondeploy;npm run livedeploy"
+    "alldeploy": "npm run stagingdeploy;npm run integrationdeploy;npm run productiondeploy;npm run livedeploy"
   },
   "eslintConfig": {
     "extends": [

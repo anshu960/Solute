@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useRef } from 'react';
 // material
-import { Box, Button, DialogActions, DialogContent, DialogContentText, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, DialogActions, DialogContent, DialogContentText, Grid, List, ListItem, ListItemAvatar, ListItemText, ListSubheader, Stack, TextField, Typography } from '@mui/material';
 import AddAction from './AddAction';
 import Select from 'react-select';
 import InputTextField from '../../InputTextField';
@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { getBusinessId, getUserId } from '../../../services/authService';
 import { addStyles } from './Style';
 import { findUser } from '../../../store/search';
+import UserList from './UserList';
 
 const defaultFields = {
   SenderAddress: '',
@@ -21,6 +22,7 @@ export default function Add({setOpen}) {
   const dispatch = useDispatch();
   const classes = addStyles();
   const [fields, setFields] = useState(defaultFields);
+  const [selectedUser, setSelectedUser] = useState([]);
   const descriptionElementRef = useRef(null);
   const users = useSelector(state => state.search.users);
 
@@ -34,6 +36,8 @@ export default function Add({setOpen}) {
   const search = () => {
     dispatch(findUser(fields.MobileNumber))
   }
+   console.log('Users', users);
+  const showUsers = () => users.length ? users.map((user)=><UserList user={user} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>): null;
    
   return (
     <React.Fragment style={{outerHeight:800}}>
@@ -71,7 +75,8 @@ export default function Add({setOpen}) {
               </Grid>
               </Grid>
             </Stack>
-          </form> 
+          </form>
+          {showUsers()}
         </DialogContentText>
       </DialogContent>
       <DialogActions sx={{justifyContent: 'end'}}>
