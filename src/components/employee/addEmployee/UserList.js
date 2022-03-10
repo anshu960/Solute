@@ -1,8 +1,10 @@
-import { Avatar, Box, Checkbox, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
-import React, { useState } from "react";
+import {Button, Avatar, Box, Checkbox, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 
+import React, { useState } from "react";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 const UserList = ({user, selectedUser, setSelectedUser}) => {
-    const handleSelected = (e, _id) => {
+    const handleSelected = (_id) => {
         const selectedUserList = selectedUser.length ? [...selectedUser]: [];
         const index = selectedUserList.indexOf(_id);
         if(index > -1){
@@ -17,7 +19,7 @@ const UserList = ({user, selectedUser, setSelectedUser}) => {
     console.log(user, selectedUser)
     return(
         <ListItem
-      button
+      // button
       to="#"
       disableGutters
       key={1}
@@ -47,22 +49,38 @@ const UserList = ({user, selectedUser, setSelectedUser}) => {
               color: 'text.disabled'
             }}
           >
-            <Checkbox
+             <Box
+              component="div"
+              sx={{ mr: 0.5, width: 16, height: 16 }}>
+                  {user.MobileNumber}
+            </Box>
+
+            <Button sx={{marginLeft:10}} 
+             onPress={()=>{handleSelected(user._id)}}>
+            {selectedUser.indexOf(user._id) > -1 ?
+            <PersonRemoveIcon color="red">
+
+            </PersonRemoveIcon>
+             : 
+             <PersonAddIcon color="blue">
+
+            </PersonAddIcon>
+             }
+            </Button>
+            
+            {/* <Checkbox
+                sx={{ marginLeft: 10 }}
                 Name="IsPresent"
                 color="primary"
                 checked={selectedUser.indexOf(user._id) > -1 || false}
                 onChange = {(event)=>handleSelected(event, user._id)}
-            />
+            /> */}
             {/* <Box
               component="img"
               //icon={NotificationsNoneIcon}
               sx={{ mr: 0.5, width: 16, height: 16 }}
             /> */}
-            <Box
-              component="div"
-              sx={{ mr: 0.5, width: 16, height: 16 }}>
-                  {user.MobileNumber}
-            </Box>
+           
             {/* @ts-ignore */}
             {/* {formatDistanceToNow(new Date(notification.createdAt))} */}
           </Typography>
