@@ -57,9 +57,8 @@ export const getTax = (product, hsn)=>{
         }
     }
   }
-
-  export const calculateTax = (name, value, basePrice) => parseFloat((parseFloat(value)/100) * basePrice).toFixed(2);
-
+  export const TAX_PARAMETERS = ['IGST','CGST','SGST','VAT','CESS'];
+  export const calculateTax = (value, basePrice) => parseFloat((parseFloat(value)/100) * basePrice).toFixed(2);
   export const getAppliedTax = (params,fields,name) => {
     let value = 0;
     console.log(params, name)

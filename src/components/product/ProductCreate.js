@@ -9,7 +9,7 @@ import { productFields, taxFields } from './FieldConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewProduct, setNewProductProperty } from '../../store/product';
 import { syncBusinessData } from '../../store/business';
-import { calculateTax, getAppliedTax, getTax } from './TaxUtility';
+import { calculateTax, getAppliedTax, getTax, TAX_PARAMETERS } from './TaxUtility';
 
 export default function ProductCreate({handleAddProduct}) {
   const dispatch = useDispatch()
@@ -48,12 +48,11 @@ export default function ProductCreate({handleAddProduct}) {
     const name = event.target.name;
     const value = event.target.value;
     const update = {[name]:value};
-    const taxParam = ['IGST','CGST','SGST','VAT','CESS'];
-    if(taxParam.includes(name)){
-      let taxValue = calculateTax(name, value, fields.Price);
-      taxValue = isNaN(taxValue) ? 0 : taxValue;  
+    if(TAX_PARAMETERS.includes(name)){
+      let taxValue = calculateTax(value, fields.Price);
+      taxValue = isNaN(taxValue) ? 0 : taxValue;
         update[name+'Value'] = parseFloat(taxValue);
-        update["Tax"] = getAppliedTax(taxParam,fields, name) + parseFloat(taxValue);
+        update["Tax"] = getAppliedTax(TAX_PARAMETERS,fields, name) + parseFloat(taxValue);
         if(!fields.TaxIncluded){
           update["FinalPrice"] = parseFloat(parseFloat(fields.Price) + parseFloat(update["Tax"])).toFixed(2);
         }
@@ -75,6 +74,23 @@ export default function ProductCreate({handleAddProduct}) {
   const onSelected = (option, { name }) => {
     const value = (option && option.value) || '';
     const update = {[name]:value}
+    console.log(update)
+    if(value && allHSN){
+      allHSN.forEach(element => {
+          if(element._id === value){
+            TAX_PARAMETERS.forEach((param)=>{
+              update[param] = element[param];
+              let taxValue = calculateTax(element[param], fields.Price);
+              taxValue = isNaN(taxValue) ? 0 : taxValue;
+              update[param+'Value'] = parseFloat(taxValue);
+              update["Tax"] = update["Tax"] ? parseFloat(update["Tax"]) + parseFloat(taxValue): parseFloat(taxValue);
+            }) 
+          }
+      });
+    }
+    if(!fields.TaxIncluded){
+      update["FinalPrice"] = parseFloat(parseFloat(fields.Price) + parseFloat(update["Tax"])).toFixed(2);
+    }
     dispatch(setNewProductProperty(update))
 
     //updateTax({...fields,...update});
