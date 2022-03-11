@@ -62,31 +62,36 @@ export const productFields = [
       id: 'IGST',
       label: 'IGST',
       type: 'Number',
-      placeholder: 'Enter IGST Amount'
+      placeholder: 'Enter IGST Amount in %',
+      isResult: true
     },
     {
       id: 'CGST',
       label: 'CGST',
       type: 'Number',
-      placeholder: 'Enter CGST Amount'
+      placeholder: 'Enter CGST Amount in %',
+      isResult: true
     },
     {
       id: 'SGST',
       label: 'SGST',
       type: 'Number',
-      placeholder: 'Enter SGST Amount'
+      placeholder: 'Enter SGST Amount in %',
+      isResult: true
     },
     {
       id: 'VAT',
       label: 'VAT',
       type: 'Number',
-      placeholder: 'Enter VAT Amount'
+      placeholder: 'Enter VAT Amount in %',
+      isResult: true
     },
     {
       id: 'CESS',
       label: 'CESS',
       type: 'Number',
-      placeholder: 'Enter CESS Amount'
+      placeholder: 'Enter CESS Amount in %',
+      isResult: true
     },
     {
       id: 'Tax',

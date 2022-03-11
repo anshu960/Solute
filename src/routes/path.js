@@ -44,7 +44,7 @@ export const PATH_DASHBOARD = {
     employee: {
         root: path(ROOTS_DASHBOARD, '/employee'),
         employees: path(ROOTS_DASHBOARD, '/employee/employees'),
-        add: path(ROOTS_DASHBOARD, '/employee/add'),
+        //add: path(ROOTS_DASHBOARD, '/employee/add'),
         attendance: path(ROOTS_DASHBOARD,'/employee/attendance'),
         profile: path(ROOTS_DASHBOARD,'/employee/profile'),
     },

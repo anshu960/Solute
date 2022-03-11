@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 // @mui
 import { Box, Button, Collapse, Grid, Stack, Typography,  } from '@mui/material';
 import InputTextField from '../InputTextField';
@@ -9,7 +9,7 @@ import { productFields, taxFields } from './FieldConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewProduct, setNewProductProperty } from '../../store/product';
 import { syncBusinessData } from '../../store/business';
-import { getTax } from './TaxUtility';
+import { calculateTax, getAppliedTax, getTax } from './TaxUtility';
 
 export default function ProductCreate({handleAddProduct}) {
   const dispatch = useDispatch()
@@ -45,34 +45,78 @@ export default function ProductCreate({handleAddProduct}) {
   }
 
   const onChange = (event)=>{
-    const update = {[event.target.name]:event.target.value}
+    const name = event.target.name;
+    const value = event.target.value;
+    const update = {[name]:value};
+    const taxParam = ['IGST','CGST','SGST','VAT','CESS'];
+    if(taxParam.includes(name)){
+      let taxValue = calculateTax(name, value, fields.Price);
+      taxValue = isNaN(taxValue) ? 0 : taxValue;  
+        update[name+'Value'] = parseFloat(taxValue);
+        update["Tax"] = getAppliedTax(taxParam,fields, name) + parseFloat(taxValue);
+        if(!fields.TaxIncluded){
+          update["FinalPrice"] = parseFloat(parseFloat(fields.Price) + parseFloat(update["Tax"])).toFixed(2);
+        }
+    }
+    
+    console.log('update :: ',update, fields)
     dispatch(setNewProductProperty(update));
-    updateTax({...fields,...update});
+    //updateTax({...fields,...update});
   }
 
   const onChecked = (event)=>{
     const update = {[event.target.name]:event.target.checked}
+    if(fields.TaxIncluded){
+      update["FinalPrice"] = parseFloat(parseFloat(fields.Price) + parseFloat(update["Tax"])).toFixed(2);
+    }
     dispatch(setNewProductProperty(update))
-    updateTax({...fields,...update});
+    //updateTax({...fields,...update});
   }
   const onSelected = (option, { name }) => {
     const value = (option && option.value) || '';
     const update = {[name]:value}
     dispatch(setNewProductProperty(update))
-    updateTax({...fields,...update});
+
+    //updateTax({...fields,...update});
   }
 
   const getTextField = (field) =>(
-    <InputTextField
-      fullWidth
-      placeholder={field.placeholder}
-      onChange={onChange}
-      name={field.id}
-      autoComplete={field.id}
-      value={fields[field.id]}
-      type={field.type}
-      multiline={!!(field.multiline)}
-    />
+      field.isResult ? (
+        <Box sx={{display: 'flex'}}>
+          <InputTextField
+            fullWidth
+            sx={{width:'110%'}}
+            placeholder={field.placeholder}
+            onChange={onChange}
+            name={field.id}
+            autoComplete={field.id}
+            value={fields[field.id]}
+            type={field.type}
+            multiline={!!(field.multiline)}
+          />
+          <Box sx={{marginLeft: '35px'}}>
+            <InputTextField
+              fullWidth
+              placeholder="Total"
+              onChange={onChange}
+              name={field.id+"Value"}
+              value={fields[field.id+"Value"]}
+              type={field.type}
+            />
+          </Box>
+        </Box>
+      ): (
+        <InputTextField
+            fullWidth
+            placeholder={field.placeholder}
+            onChange={onChange}
+            name={field.id}
+            autoComplete={field.id}
+            value={fields[field.id]}
+            type={field.type}
+            multiline={!!(field.multiline)}
+          />
+      )
   )
 
   const getCheckboxField = (field) =>(
@@ -135,9 +179,11 @@ export default function ProductCreate({handleAddProduct}) {
       </Grid>
       <Grid item xs={12} md={12} lg={12} xl={12}>
         <Stack spacing={3}>
-      <Collapse in={isOpen}>
-        {prepareInputFields(taxFields)}
-        </Collapse>
+          <Collapse in={isOpen}>
+            <Grid container spacing={3} py={2}>
+              {prepareInputFields(taxFields)}
+            </Grid>
+          </Collapse>
         </Stack>
         </Grid>
       <Grid item xs={12} md={12} lg={12} xl={12}>

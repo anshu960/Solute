@@ -79,11 +79,11 @@ export const DashboardRoutes = {
         path: PATH_DASHBOARD.customer.customers,
         component: lazy(() => import('../pages/customer/Customers'))
       },
-      {
-        exact: true,
-        path: PATH_DASHBOARD.employee.add,
-        component: lazy(() => import('../pages/employee/AddEmployee'))
-      },
+      // {
+      //   exact: true,
+      //   path: PATH_DASHBOARD.employee.add,
+      //   component: lazy(() => import('../pages/employee/AddEmployee'))
+      // },
       {
         exact: true,
         path: PATH_DASHBOARD.employee.employees,

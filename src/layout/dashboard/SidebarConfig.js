@@ -105,10 +105,10 @@ const sidebarConfig = {
             title: 'employees',
             path: PATH_DASHBOARD.employee.employees,
           },
-          {
-            title: 'add',
-            path: PATH_DASHBOARD.employee.add,
-          },
+          // {
+          //   title: 'add',
+          //   path: PATH_DASHBOARD.employee.add,
+          // },
           {
             title: 'attendance',
             path: PATH_DASHBOARD.employee.attendance,
