@@ -13,6 +13,7 @@ export const PATH_PAGE = {
     home: "/home",
     profile: '/profile',
     receipt: '/receipt',
+    deliveryReceipt: '/deliveryReceipt',
     shipmentTrack: '/shipmentTrack',
 }
 

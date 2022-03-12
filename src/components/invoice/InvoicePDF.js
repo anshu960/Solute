@@ -212,7 +212,7 @@ export default function InvoicePDF({saleData}) {
             <Text style={styles.subtitle2}>NOTES</Text>
             <Text>We appreciate your business.</Text>
           </View>
-          <View style={[styles.col4, styles.alignRight]}>
+          <View style={[styles.col8, styles.alignRight]}>
             <Text style={styles.subtitle2}>Have a Question?</Text>
             <Text>support@parmartechnologies.com</Text>
           </View>

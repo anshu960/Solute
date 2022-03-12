@@ -53,6 +53,11 @@ const routes = [
     },
     {
         exact: true,
+        path: PATH_PAGE.deliveryReceipt,
+        component: lazy(() => import('../pages/deliveryReceipt/DeliveryReceipt'))
+    },
+    {
+        exact: true,
         path: PATH_PAGE.profile,
         component: lazy(() => import('../pages/Profile'))
     },

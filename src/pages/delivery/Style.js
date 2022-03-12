@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme)=>createStyles({
     datePicker: {
         height: '48px',
     },
+    search:{
+        '& input': {
+            height: '17px',
+        }
+    }
   }));
 
   export {

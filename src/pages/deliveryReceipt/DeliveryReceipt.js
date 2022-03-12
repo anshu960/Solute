@@ -17,7 +17,7 @@ import SocketEvent from '../../socket/SocketEvent';
 import AppLoader from '../../components/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import { getBusiness, getBusinessId, getUserId } from '../../services/authService';
-import { InvoicePDF } from '../../components/receipt';
+import { InvoicePDF } from '../../components/deliveryReceipt';
 import Page from '../../components/Page';
 import { PDFViewer } from '@react-pdf/renderer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,7 @@ import { getParameterByName } from '../../common/Utils';
     },
   }));
   
-  const Receipt = () => {
+  const DeliveryReceipt = () => {
     const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch()
@@ -60,16 +60,13 @@ import { getParameterByName } from '../../common/Utils';
                   <Typography variant="h4" gutterBottom>
                     Receipt
                   </Typography>
-                  <Box className={classes.actionList}>
-                    {/* <InvoiceToolbar /> */}
-                  </Box> 
               </Stack>
                 <Card>
-                {saleData && saleData.invoice && saleData.sale && saleData.sale.length ?
+                {/* {saleData && saleData.invoice && saleData.sale && saleData.sale.length ? */}
                     <PDFViewer width="100%" height="100%" style={{ border: 'none' }}>
                         <InvoicePDF saleData={saleData}/>
                     </PDFViewer>
-                : null}
+                {/* : null} */}
             </Card>
           </Container>
           </Fragment>
@@ -78,4 +75,4 @@ import { getParameterByName } from '../../common/Utils';
     )
   }
   
-  export default Receipt;
+  export default DeliveryReceipt;

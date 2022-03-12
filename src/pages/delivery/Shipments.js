@@ -18,19 +18,15 @@ import {
   import TableCell from '@mui/material/TableCell';
   import TableHead from '@mui/material/TableHead';
   import TableRow from '@mui/material/TableRow';
-  import CalendarIcon from '@mui/icons-material/CalendarToday';
   import { useHistory, Link as RouterLink } from 'react-router-dom';
-import { SendEvent } from '../../socket/SocketHandler';
-import SocketEvent from '../../socket/SocketEvent';
-import AppLoader from '../../components/Loader';
 import { toast, ToastContainer } from 'react-toastify';
-import { getBusinessId, getUserId } from '../../services/authService';
 import Page from '../../components/Page';
 import { PATH_DASHBOARD, PATH_PAGE } from '../../routes/path';
 import {useDispatch, useSelector} from 'react-redux'
 import { ScrollDialog } from '../../dialog';
 import { AddStop } from '../../components/shipment/stop';
 import { retriveShipment } from '../../store/shipment';
+import { useStyles } from './Style';
 const getShipmentStatusToDispaly=(stauts)=>{
     var statusToDisplay = ""
     switch(stauts) {
@@ -51,105 +47,7 @@ const getShipmentStatusToDispaly=(stauts)=>{
           break;
       }
       return statusToDisplay
-}
-  const useStyles = makeStyles((theme)=>createStyles({
-    table: {
-        width: '100%',
-        borderSpacing: '0px 0px',
-        border: '1px solid #7070704D',
-        '& tr': {
-            '&:nth-child(1)': {
-                '& th': {
-                    textAlign:'center',
-                    borderBottom: '1px solid #7070704D',
-                    fontSize: '15px',
-                    color: '#1e1e1f',
-                    fontFamily: 'Gilroy-Semibold',
-                    padding: '5px 10px',
-                    backgroundColor: '#b0b0b1',
-                    '& span': {
-                        padding: '0px',
-                        color: '#000',
-                        '& svg': {
-                            verticalAlign: 'top',
-                        },
-                    },
-                },
-            },
-        },
-        '& td': {
-            textAlign:'center',
-            '&:nth-child(2)': {
-                color: '#428BCA',
-            },
-            '&:last-child': {
-                color: '#428BCA',
-                cursor: 'pointer',
-            },
-        },
-    },
-    selctAutTar: {
-        width: '14%',
-        marginRight: '7px',
-        position: 'relative',
-        [theme.breakpoints.between('1024', '1400')]: {
-            width: '22%',
-        },
-        '& div': {
-            width: '100%',
-            borderRadius: '2px',
-        },
-        '& input': {
-            padding: '15px 14px',
-            fontSize: '15px',
-        },
-    },
-    actionList: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        flexGrow: '1',
-    },
-    selctAutTarDate: {
-        color:'#fff',
-        marginRight: '7px',
-        position: 'relative',
-        [theme.breakpoints.between('1024', '1400')]: {
-            width: '18%',
-        },
-        '& input': {
-            padding: '10px 0px 10px 10px',
-            border: '1px solid #cccccc',
-            borderRadius: '4px',
-        },
-    },
-    calendarIcon: {
-        position: 'absolute',
-        right: '40px',
-        top: '14px',
-        color: '#8F8FB3',
-        fontSize: '14px',
-        zIndex: '99',
-    },
-    datePicker: {
-        height: '48px',
-    },
-    textField: {
-        color: '#428BCA',
-        border: '1px solid #428BCA',
-        fontSize: '15px',
-        fontFamily: 'Gilroy-Semibold',
-        padding: '5px 10px',
-        '& input' : {
-            color: '#428BCA',
-        },
-    },
-    search:{
-        '& input': {
-            height: '17px',
-        }
-    }
-  }));
-  
+}  
   
 const Shipments = () => {
     const classes = useStyles();
@@ -217,7 +115,7 @@ const Shipments = () => {
                               selected={endDate}
                               onChange={(date) =>{
                                 if(date){
-                                setEndDate(date);
+                                    setEndDate(date);
                                 }
                               }}
                           />
@@ -251,6 +149,7 @@ const Shipments = () => {
                                         <TableCell><Button variant="text" onClick={()=>{setAddStopOpen({open: true,shipment})}}>Add</Button></TableCell>
                                         <TableCell><Button variant="text" onClick={()=>{history.push({ pathname: PATH_DASHBOARD.delivery.profile, search: `?id=${shipment.ShipmentID}` })}}>View</Button></TableCell>
                                         <TableCell><Button variant="text" onClick={()=>{window.open(`/#${PATH_PAGE.shipmentTrack}?id=${shipment.ShipmentID}`, "_blank");}}>Locate</Button></TableCell>
+                                        <TableCell><Button variant="text" onClick={()=>{window.open(`/#${PATH_PAGE.deliveryReceipt}?id=${shipment.ShipmentID}`, "_blank");}}>Receipt</Button></TableCell>
                                     </TableRow>
                                 )) : <TableRow><TableCell colSpan={8}>{"Unable to find shipments for selected date range"}</TableCell></TableRow> }
                             </TableBody>

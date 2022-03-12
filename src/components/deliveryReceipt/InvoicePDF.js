@@ -69,15 +69,11 @@ const styles = StyleSheet.create({
 
 // ----------------------------------------------------------------------
 
-// InvoicePDF.propTypes = {
-//   invoice: PropTypes.object.isRequired
-// };
-
 export default function InvoicePDF({saleData})  {
   let canvas;
   // For QR Code
   canvas = document.createElement('canvas');
-  QRCode.toCanvas(canvas, saleData.invoice._id);
+  QRCode.toCanvas(canvas, '123');
   const qr = canvas.toDataURL();
   return (
     <Document>
@@ -87,14 +83,9 @@ export default function InvoicePDF({saleData})  {
           <Image
             src={qr}
             style={{ height: 60, }} />
-          <Text style={styles.noBorder}>{"Invoice No: "+saleData.invoice.InvoiceNumber}</Text>
+          <Text style={styles.noBorder}>{"Invoice No: 123"}</Text>
           </View>
-          {/* <View style={{ alignItems: 'right', flexDirection: 'column' }}>
-            <Text style={styles.h3}>{'Paid'}</Text>
-            <Text>INV-12345</Text>
-          </View> */}
             <View style={styles.col4}>
-              {/* <Text style={[styles.overline, styles.mb8]}>Invoice from</Text> */}
               <Text style={styles.body1}>{saleData.business.Name}</Text>
               <Text style={styles.body1}>{saleData.business.Address}</Text>
               <Text style={styles.body1}>{saleData.business.MobileNumber}</Text>
@@ -108,98 +99,84 @@ export default function InvoicePDF({saleData})  {
           </View>
             }
           </View>
-        <Text style={[styles.overline, styles.mb8]}>Invoice Details</Text>
+        <Text style={[styles.overline, styles.mb8]}>Delivery Details</Text>
         <View style={styles.table}>
           <View style={styles.tableHeader}>
             <View style={styles.tableRow}>
-              <View style={styles.tableCell_1}>
-                <Text style={styles.subtitle2}>#</Text>
+              <View style={styles.tableCell_2}>
+                <Text style={styles.subtitle2}>Sender's</Text>
               </View>
               <View style={styles.tableCell_2}>
-                <Text style={styles.subtitle2}>Product</Text>
-              </View>
-              <View style={styles.tableCell_3}>
-                <Text style={styles.subtitle2}>Unit price</Text>
-              </View>
-              <View style={styles.tableCell_3}>
-                <Text style={styles.subtitle2}>Tax</Text>
-              </View>
-              <View style={styles.tableCell_3}>
-                <Text style={styles.subtitle2}>Qty</Text>
-              </View>
-              <View style={[styles.tableCell_3, styles.alignRight]}>
-                <Text style={styles.subtitle2}>Total</Text>
+                <Text style={styles.subtitle2}>Receiver's</Text>
               </View>
             </View>
           </View>
 
           <View style={styles.tableBody}>
-              {saleData.sale && saleData.sale.length ? saleData.sale.map((sale,index) => (<View style={styles.tableRow}>
-                <View style={styles.tableCell_1}>
-                  <Text>{index+1}</Text>
+                {(<View style={styles.tableRow}> 
+                <View style={styles.tableCell_2}>
+                  <Text style={styles.subtitle2}>{'Name : '}</Text>
+                  <Text style={styles.subtitle2}>{'Contact : '}</Text>
+                  <Text style={styles.subtitle2}>{'Address : '}</Text>
+                  <Text style={styles.subtitle2}>{'Contents : '}</Text>
+                  <Text style={styles.subtitle2}>{'Volumentric Weight : '}</Text>
                 </View>
                 <View style={styles.tableCell_2}>
-                  <Text style={styles.subtitle2}>{sale.ProductName}</Text>
-                  {/* <Text>{'Diesel'}</Text> */}
+                <Text style={styles.subtitle2}>{'Name : '}</Text>
+                  <Text style={styles.subtitle2}>{'Contact : '}</Text>
+                  <Text style={styles.subtitle2}>{'Address : '}</Text>
+                  <Text style={styles.subtitle2}>{'Mode : AIR | SF'}</Text>
+                  <Text style={styles.subtitle2}>{'Declared Value : '}</Text>
                 </View>
-                <View style={styles.tableCell_3}>
-                  <Text>{sale.Price}</Text>
-                </View>
-                <View style={styles.tableCell_3}>
-                  <Text>{sale.Tax}</Text>
-                </View>
-                <View style={styles.tableCell_3}>
-                  <Text>{sale.Quantity}</Text>
-                </View>
-                <View style={[styles.tableCell_3, styles.alignRight]}>
-                  <Text>{sale.FinalPrice}</Text>
-                </View>
-              </View>)): null
+              </View>)
               }
-
-            {/* <View style={[styles.tableRow, styles.noBorder]}>
-              <View style={styles.tableCell_1} />
-              <View style={styles.tableCell_2} />
-              <View style={styles.tableCell_3} />
-              <View style={styles.tableCell_3}>
-                <Text>Subtotal</Text>
+              <View style={styles.table}>
+          <View style={styles.tableHeader}>
+            <View style={styles.tableRow}>
+              <View style={styles.tableCell_2}>
+                <Text style={styles.subtitle2}>RECEIVED IN GOOD CONDITION</Text>
               </View>
-              <View style={[styles.tableCell_3, styles.alignRight]}>
-                <Text>{saleData.invoice.TotalAmount}</Text>
+              <View style={styles.tableCell_2}>
+                <Text style={styles.subtitle2}>CONSIGNOR COPY</Text>
               </View>
-            </View> */}
-
-            {/* <View style={[styles.tableRow, styles.noBorder]}>
-              <View style={styles.tableCell_1} />
-              <View style={styles.tableCell_2} />
-              <View style={styles.tableCell_3} />
-              <View style={styles.tableCell_3}>
-                <Text>Discount</Text>
+            </View>
+          </View>
+                {(<View style={styles.tableRow}> 
+                <View style={styles.tableCell_2}>
+                  <Text style={styles.subtitle2}>{'Sign : '}</Text>
+                  <Text style={styles.subtitle2}>{'Name : '}</Text>
+                  <Text style={styles.subtitle2}>{'Relation : '}</Text>
+                  <Text style={styles.subtitle2}>{'Mobile No : '}</Text>
+                </View>
+                <View style={styles.tableCell_2}>
+                <Text style={styles.subtitle2}>{'Date : '}</Text>
+                  <Text style={styles.subtitle2}>{'Sign : '}</Text>
+                  <Text style={styles.subtitle2}>{'Seal : '}</Text>
+                  <Text style={styles.subtitle2}>{'Place : '}</Text>
+                </View>
+              </View>)
+              }
               </View>
-              <View style={[styles.tableCell_3, styles.alignRight]}>
-                <Text>{1000}</Text>
+            <View style={[styles.tableRow, styles.noBorder]}>
+              <View>
+                <Text >We declare that this consignment does not contain personal mail, cash, jewellery, contraband, illegal drugs,
+                  any prohibited items and commodities which can cause safety hazards while transported by air and surface
+                  Non Negotible Consignment Not/Subject to Varanasi Jurisdiction. Please refer to all the terms & conditions
+                  printed overleaf of this Consignment note.
+                  This is a non negotiable note subject to standard condition of carriage.Carrier's liability is limited to Rs. 100/-
+                  per Consignment for any cause. If not covered by risk surcharge, claim value on this shipper shall in no
+                  circumstancesexceed Rs. 100/- (One hundred only) for parcels and documents.
+                  Read the terms & Condition overleaf. I declare that this Consignmentdontain any contraband, cash, jewelry etc.
+                </Text>
               </View>
-            </View> */}
-
-            {/* <View style={[styles.tableRow, styles.noBorder]}>
-              <View style={styles.tableCell_1} />
-              <View style={styles.tableCell_2} />
-              <View style={styles.tableCell_3} />
-              <View style={styles.tableCell_3}>
-                <Text>Taxes</Text>
-              </View>
-              <View style={[styles.tableCell_3, styles.alignRight]}>
-                <Text>{1000}</Text>
-              </View>
-            </View> */}
-
+            </View>
             <View style={[styles.tableRow, styles.noBorder]}>
               <View style={styles.tableCell_1} />
               <View style={styles.tableCell_2} />
               <View style={styles.tableCell_3} />
-              <View style={styles.tableCell_3}>
-                <Text style={styles.h4}>Total</Text>
-              </View>
+              <View style={styles.tableCell_3} >
+              <Text >Sender's Sign : </Text>
+                </View>
               <View style={[styles.tableCell_3, styles.alignRight]}>
               <Text>{saleData.invoice.FinalPrice}</Text>
               </View>
