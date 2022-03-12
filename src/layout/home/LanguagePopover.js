@@ -6,21 +6,14 @@ import { Box, MenuItem, ListItemIcon, ListItemText } from '@mui/material'
 // components
 import MenuPopover from '../../components/MenuPopover';
 import LanguageIcon from '@mui/icons-material/Language';
+import useLocales from '../../Hooks/useLocales';
 
 // ----------------------------------------------------------------------
 
 export default function LanguagePopover() {
   const anchorRef = useRef(null)
   const [open, setOpen] = useState(false)
-  //const { allLang, currentLang, onChangeLang } = useLocales()
-  const allLang = [{
-    label: 'English',
-    icon: '',
-  }]; 
-  const currentLang = {
-    label: 'English'
-  };
-  const onChangeLang = ()=>{};
+  const { allLang, currentLang, onChangeLang } = useLocales()
 
   return (
     <>
@@ -61,7 +54,7 @@ export default function LanguagePopover() {
               sx={{ py: 1, px: 2.5 }}
             >
               <ListItemIcon>
-                <Box component="img" alt={option.label} src={option.icon} />
+                {/* <Box component="img" alt={option.label} src={option.icon} /> */}
               </ListItemIcon>
               <ListItemText primaryTypographyProps={{ variant: 'body2' }}>
                 {option.label}
