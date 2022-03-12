@@ -178,7 +178,7 @@ export default function InvoicePDF({saleData})  {
               <Text >Sender's Sign : </Text>
                 </View>
               <View style={[styles.tableCell_3, styles.alignRight]}>
-              <Text>{saleData.invoice.FinalPrice}</Text>
+              {/* <Text>{saleData.invoice.FinalPrice}</Text> */}
               </View>
             </View>
           </View>
