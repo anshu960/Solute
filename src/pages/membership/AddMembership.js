@@ -30,7 +30,7 @@ const CardStyle = styled(Card)(({ theme }) => {
 
   return {
     maxWidth: 380,
-    minHeight: 440,
+    minHeight: 350,
     margin: 'auto',
     textAlign: 'center',
     padding: theme.spacing(10, 5, 0),
@@ -67,21 +67,6 @@ const CardStyle = styled(Card)(({ theme }) => {
   };
 });
 
-const CardIconStyle = styled('img')(({ theme }) => ({
-  width: 100,
-  height: 100,
-  margin: 'auto',
-  marginBottom: theme.spacing(10),
-  filter: shadowIcon(theme.palette.primary.main)
-}));
-
-
-
-const images = [
-  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Fsecure.png?alt=media&token=199fe594-3a35-425a-bcbc-58ebe65f224a',
-  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Freliable.png?alt=media&token=97fb9217-4663-4d9e-a7bb-1818a6529c7f',
-  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Fhappy_customer.png?alt=media&token=ed8df6e6-23a3-40c8-9cb8-1435e9fdd1f7',
-]
 const CARDS = [
   {
     id: 1,
@@ -102,14 +87,14 @@ const CARDS = [
   {
     id: 3,
     plan: 'Quarterly',
-    title: '299',
+    title: '499',
     description: `5000+ happy customers and counting.
     Your first 3 months is on us.No payment required at all.`
   },
   {
     id: 4,
     plan: 'Half Yearly',
-    title: '499',
+    title: '799',
     description: 
     'Manage multiple businesses from any device throughout the world.',
     //'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
@@ -117,14 +102,14 @@ const CARDS = [
   {
     id: 5,
     plan: '9 Month',
-    title: '699',
+    title: '1099',
     description: `5000+ happy customers and counting.
     Your first 3 months is on us.No payment required at all.`
   },
   {
     id: 6,
     plan: 'Yearly',
-    title: '999',
+    title: '1399',
     description: `5000+ happy customers and counting.
     Your first 3 months is on us.No payment required at all.`
   }
@@ -164,7 +149,7 @@ const shadowIcon = (color) => `drop-shadow(2px 2px 2px ${alpha(color, 0.48)})`;
                   <Typography variant="h4" gutterBottom>
                     Membership
                   </Typography>
-                  <MembershipUpload setFiles={setFiles}/>
+                  {/* <MembershipUpload setFiles={setFiles}/> */}
               </Stack>
                 <Grid container spacing={3} sx={{ my: 10 }}>
                 {CARDS.map((card, index) => (
