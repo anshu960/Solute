@@ -73,48 +73,44 @@ const CARDS = [
     plan: '14 Days',
     title: 'Free',
     description:
-    'Completely secured online, no access to anyone else but you.'
-      //'Register wide range of business at one platform and enjoy the hassle free experience.'
+    `It is a trial pack and completely free of cost. 
+    It is applied only first time.`
   },
   {
     id: 2,
     plan: 'Monthly',
     title: '199',
     description: 
-    'Manage multiple businesses from any device throughout the world.',
-    //'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
+    'It is monthly rental plan.',
   },
   {
     id: 3,
     plan: 'Quarterly',
     title: '499',
-    description: `5000+ happy customers and counting.
-    Your first 3 months is on us.No payment required at all.`
+    description: `It is quarterly rental plan.`
   },
   {
     id: 4,
     plan: 'Half Yearly',
     title: '799',
     description: 
-    'Manage multiple businesses from any device throughout the world.',
+    `It is half yearly paid plan.`,
     //'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
   },
   {
     id: 5,
     plan: '9 Month',
     title: '1099',
-    description: `5000+ happy customers and counting.
-    Your first 3 months is on us.No payment required at all.`
+    description: `It is 9 month paid plan.`
   },
   {
     id: 6,
     plan: 'Yearly',
     title: '1399',
-    description: `5000+ happy customers and counting.
-    Your first 3 months is on us.No payment required at all.`
+    description: `It is yearly rental plan.`
   }
 ];
-const shadowIcon = (color) => `drop-shadow(2px 2px 2px ${alpha(color, 0.48)})`;
+
   const AddMembership = () => {
     const classes = useStyles();
     const history = useHistory();
