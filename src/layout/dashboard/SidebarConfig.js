@@ -117,22 +117,22 @@ const sidebarConfig = {
       },
     ]
   },
-  // {
-  //   //subheader: 'membership',
-  //   items: [
-  //     {
-  //       title: 'membership',
-  //       icon: <CardMembershipIcon />,
-  //       path: PATH_DASHBOARD.membership.root,
-  //       items: [
-  //         {
-  //           title: 'add',
-  //           path: PATH_DASHBOARD.membership.add,
-  //         }
-  //       ]
-  //     },
-  //   ]
-  // },
+  {
+    //subheader: 'membership',
+    items: [
+      {
+        title: 'membership',
+        icon: <CardMembershipIcon />,
+        path: PATH_DASHBOARD.membership.root,
+        items: [
+          {
+            title: 'add',
+            path: PATH_DASHBOARD.membership.add,
+          }
+        ]
+      },
+    ]
+  },
   {
     //subheader: 'vehicle',
     items: [

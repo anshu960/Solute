@@ -2,14 +2,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton } from '@mui/material';
 // components
 import { MHidden } from '../../components/@material-extend';
 //
-// import Searchbar from './Searchbar';
-import AccountPopover from './AccountPopover';
-// import LanguagePopover from './LanguagePopover';
-// import NotificationsPopover from './NotificationsPopover';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 // ----------------------------------------------------------------------

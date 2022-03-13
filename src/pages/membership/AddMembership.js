@@ -1,16 +1,18 @@
 import * as React from 'react';
 import {
   Alert,
+    Avatar,
     Box, Button, Card, Container,
     Grid,
     Stack,
-    Typography
+    Typography,
+    useMediaQuery
   } from '@mui/material';
   import {
       useEffect,
     useState,useCallback,Fragment
   } from 'react';
-import { useHistory, Link as RouterLink } from 'react-router-dom';
+import { useHistory, Link as RouterLink, Link } from 'react-router-dom';
 import AppLoader from '../../components/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import Page from '../../components/Page';
@@ -18,13 +20,123 @@ import { useStyles } from './Style';
 import { MembershipUpload } from '../../components/membership';
 import { readFile } from '../../components/excel';
 import MembershipCard from '../../components/membership/MembershipCard';
-  
+import { alpha, useTheme, styled } from '@mui/material/styles';
+
+const CardStyle = styled(Card)(({ theme }) => {
+  const shadowCard = (opacity) =>
+    theme.palette.mode === 'light'
+      ? alpha(theme.palette.grey[500], opacity)
+      : alpha(theme.palette.common.black, opacity);
+
+  return {
+    maxWidth: 380,
+    minHeight: 440,
+    margin: 'auto',
+    textAlign: 'center',
+    padding: theme.spacing(10, 5, 0),
+    boxShadow: `-40px 40px 80px 0 ${shadowCard(0.48)}`,
+    [theme.breakpoints.up('md')]: {
+      boxShadow: 'none',
+      backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800]
+    },
+    '&.cardLeft': {
+      [theme.breakpoints.up('md')]: { marginTop: -40 }
+    },
+    '&.cardCenter': {
+      [theme.breakpoints.up('md')]: {
+        marginTop: -80,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: `-40px 40px 80px 0 ${shadowCard(0.4)}`,
+        '&:before': {
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: -1,
+          content: "''",
+          margin: 'auto',
+          position: 'absolute',
+          width: 'calc(100% - 40px)',
+          height: 'calc(100% - 40px)',
+          borderRadius: theme.shape.borderRadiusMd,
+          backgroundColor: theme.palette.background.paper,
+          boxShadow: `-20px 20px 40px 0 ${shadowCard(0.12)}`
+        }
+      }
+    }
+  };
+});
+
+const CardIconStyle = styled('img')(({ theme }) => ({
+  width: 100,
+  height: 100,
+  margin: 'auto',
+  marginBottom: theme.spacing(10),
+  filter: shadowIcon(theme.palette.primary.main)
+}));
+
+
+
+const images = [
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Fsecure.png?alt=media&token=199fe594-3a35-425a-bcbc-58ebe65f224a',
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Freliable.png?alt=media&token=97fb9217-4663-4d9e-a7bb-1818a6529c7f',
+  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Fhappy_customer.png?alt=media&token=ed8df6e6-23a3-40c8-9cb8-1435e9fdd1f7',
+]
+const CARDS = [
+  {
+    id: 1,
+    plan: '14 Days',
+    title: 'Free',
+    description:
+    'Completely secured online, no access to anyone else but you.'
+      //'Register wide range of business at one platform and enjoy the hassle free experience.'
+  },
+  {
+    id: 2,
+    plan: 'Monthly',
+    title: '199',
+    description: 
+    'Manage multiple businesses from any device throughout the world.',
+    //'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
+  },
+  {
+    id: 3,
+    plan: 'Quarterly',
+    title: '299',
+    description: `5000+ happy customers and counting.
+    Your first 3 months is on us.No payment required at all.`
+  },
+  {
+    id: 4,
+    plan: 'Half Yearly',
+    title: '499',
+    description: 
+    'Manage multiple businesses from any device throughout the world.',
+    //'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
+  },
+  {
+    id: 5,
+    plan: '9 Month',
+    title: '699',
+    description: `5000+ happy customers and counting.
+    Your first 3 months is on us.No payment required at all.`
+  },
+  {
+    id: 6,
+    plan: 'Yearly',
+    title: '999',
+    description: `5000+ happy customers and counting.
+    Your first 3 months is on us.No payment required at all.`
+  }
+];
+const shadowIcon = (color) => `drop-shadow(2px 2px 2px ${alpha(color, 0.48)})`;
   const AddMembership = () => {
     const classes = useStyles();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
     const [files, setFiles] = useState([]);
     const [users, setUsers] = useState([]);
+    
     useEffect(
         ()=>{
             if(files.length){
@@ -36,7 +148,12 @@ import MembershipCard from '../../components/membership/MembershipCard';
         },
         [files.length]
     )
-        console.log(users)
+    console.log(users)
+
+    const handleActive = (id) => {
+      console.log(id)
+    }
+
     return (
       <Page title="Membership">
           <Fragment>
@@ -50,7 +167,43 @@ import MembershipCard from '../../components/membership/MembershipCard';
                   <MembershipUpload setFiles={setFiles}/>
               </Stack>
                 <Grid container spacing={3} sx={{ my: 10 }}>
-                    {
+                {CARDS.map((card, index) => (
+                    <Grid key={card.title} sx={{px: 2, pb: 5,}} item xs={12} md={4}>
+                      <div 
+                      //variants={varFadeInUp}
+                      >
+                        <CardStyle className="cardLeft">
+                        <Typography variant="h3" paragraph>
+                            {card.plan}
+                          </Typography>
+                          {/* <CardIconStyle
+                            src={card.icon}
+                            alt={card.title}
+                            sx={{
+                              ...({ filter: (theme) => shadowIcon(theme.palette.info.main)})
+                            }}
+                          /> */}
+                          <Typography variant="h5" paragraph>
+                            {card.title}
+                          </Typography>
+                          <Typography paragraph sx={{ color: true ? 'text.secondary' : 'common.white' }}>
+                            {card.description}
+                          </Typography>
+                          <Box>
+                            <Button
+                              style={{cursor:'pointer',width: '165px',}}
+                              variant="outlined"
+                              onClick={()=>handleActive(card.id)}
+                            >
+                                Active
+                            </Button>
+                          </Box>
+                          
+                        </CardStyle>
+                      </div>
+                    </Grid>
+                  ))}
+                    {/* {
                         (users && users.length) 
                         ? users.map((user)=> user.Name ? <MembershipCard user={user}/> : null)
                         : (<Grid item xs={12}>
@@ -60,7 +213,7 @@ import MembershipCard from '../../components/membership/MembershipCard';
                               </Alert>
                             </Box>
                           </Grid>)
-                    }
+                    } */}
                 </Grid>
           </Container>
           </Fragment>
