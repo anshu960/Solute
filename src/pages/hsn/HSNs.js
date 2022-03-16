@@ -124,7 +124,7 @@ const HSNs = () => {
                 
             </Stack>
             <Grid container spacing={3} sx={{ my: 10 }}>
-            { allHSN.length 
+            { allHSN && allHSN.length 
             ? allHSN.map((hsn) =>  getHSN(hsn))
             : <Grid item xs={12}>
                 <Box>

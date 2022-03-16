@@ -157,13 +157,6 @@ const CARDS = [
                         <Typography variant="h3" paragraph>
                             {card.plan}
                           </Typography>
-                          {/* <CardIconStyle
-                            src={card.icon}
-                            alt={card.title}
-                            sx={{
-                              ...({ filter: (theme) => shadowIcon(theme.palette.info.main)})
-                            }}
-                          /> */}
                           <Typography variant="h5" paragraph>
                             {card.title}
                           </Typography>
@@ -184,17 +177,6 @@ const CARDS = [
                       </div>
                     </Grid>
                   ))}
-                    {/* {
-                        (users && users.length) 
-                        ? users.map((user)=> user.Name ? <MembershipCard user={user}/> : null)
-                        : (<Grid item xs={12}>
-                            <Box>
-                              <Alert variant="outlined" severity="info">
-                                  No Card to Display, Please export
-                              </Alert>
-                            </Box>
-                          </Grid>)
-                    } */}
                 </Grid>
           </Container>
           </Fragment>

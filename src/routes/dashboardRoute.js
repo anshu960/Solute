@@ -46,6 +46,21 @@ export const DashboardRoutes = {
       },
       {
         exact: true,
+        path: PATH_DASHBOARD.room.rooms,
+        component: lazy(() => import('../pages/room/Rooms'))
+      },
+      {
+        exact: true,
+        path: PATH_DASHBOARD.room.roomProfile,
+        component: lazy(() => import('../pages/room/RoomProfile'))
+      },
+      {
+        exact: true,
+        path: PATH_DASHBOARD.room.add,
+        component: lazy(() => import('../pages/room/AddRoom'))
+      },
+      {
+        exact: true,
         path: PATH_DASHBOARD.hsn.hsn,
         component: lazy(() => import('../pages/hsn/HSNs'))
       },

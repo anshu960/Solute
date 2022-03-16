@@ -8,6 +8,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import NightShelterIcon from '@mui/icons-material/NightShelter';
 import { PATH_DASHBOARD } from '../../routes/path';
 // ----------------------------------------------------------------------
 
@@ -178,6 +179,26 @@ const sidebarConfig = {
           {
             title: 'add',
             path: PATH_DASHBOARD.delivery.add,
+          }
+        ]
+      },
+    ]
+  },
+  {
+    //subheader: 'room',
+    items: [
+      {
+        title: 'room',
+        icon: <NightShelterIcon />,
+        path: PATH_DASHBOARD.room.root,
+        items: [
+          {
+            title: 'rooms',
+            path: PATH_DASHBOARD.room.rooms,
+          },
+          {
+            title: 'add',
+            path: PATH_DASHBOARD.room.add,
           }
         ]
       },

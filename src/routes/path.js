@@ -81,5 +81,11 @@ export const PATH_DASHBOARD = {
         add:path(ROOTS_DASHBOARD,'/delivery/add'),
         profile:path(ROOTS_DASHBOARD,'/delivery/profile'),
         shipments:path(ROOTS_DASHBOARD,'/delivery/shipments'),
+    },
+    room: {
+        root:path(ROOTS_DASHBOARD,'/room'),
+        add:path(ROOTS_DASHBOARD,'/room/add'),
+        rooms:path(ROOTS_DASHBOARD,'/room/rooms'),
+        roomProfile: path(ROOTS_DASHBOARD, '/room/profile'),
     }
 }
