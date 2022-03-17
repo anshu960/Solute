@@ -69,18 +69,12 @@ function NotificationItem({ notification }) {
       </ListItemAvatar>
       <ListItemText
         primary={title}
+      />
+      <ListItemText
         secondary={
-          <Typography
-            variant="caption"
-            sx={{
-              mt: 0.5,
-              display: 'flex',
-              alignItems: 'center',
-              color: 'text.disabled'
-            }}
-          >
+          <Box>
             {notification.Type === notification_type.REQUEST ? 
-            <Typography style={{flexDirection:"row"}}>
+            <Box >
             
             <Button 
             onClick={()=>{acceptRequest(notification)}}
@@ -96,7 +90,7 @@ function NotificationItem({ notification }) {
               </CheckIcon>
             </Button>
             <Button 
-            sx={{marginLeft:10}} 
+            //sx={{marginLeft:10}} 
             onClick={()=>{rejectRequest(notification)}}
             >
               <ClearIcon
@@ -109,13 +103,13 @@ function NotificationItem({ notification }) {
               >
               </ClearIcon>
             </Button>
-            </Typography>
+            </Box>
            :
             null
             }
             {/* @ts-ignore */}
             {formatDistanceToNow(new Date(notification.CreatedAt))}
-          </Typography>
+            </Box>
         }
       />
     </ListItem>
