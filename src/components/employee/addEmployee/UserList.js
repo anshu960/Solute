@@ -3,17 +3,14 @@ import {Button, Avatar, Box, Checkbox, ListItem, ListItemAvatar, ListItemText, T
 import React, { useState } from "react";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import { sendConnectionRequest } from "../../../store/employee";
+import { useDispatch } from "react-redux";
 const UserList = ({user, selectedUser, setSelectedUser}) => {
-    const handleSelected = (_id) => {
-        const selectedUserList = selectedUser.length ? [...selectedUser]: [];
-        const index = selectedUserList.indexOf(_id);
-        if(index > -1){
-            selectedUserList.splice(index,1);
-        }
-        else{
-            selectedUserList.push(_id)
-        }
-        setSelectedUser(selectedUserList)
+  const dispatch = useDispatch()
+    const handleSelected = (user) => {
+        dispatch(sendConnectionRequest(user,()=>{
+
+        }))
     } 
 
     console.log(user, selectedUser)
@@ -56,13 +53,16 @@ const UserList = ({user, selectedUser, setSelectedUser}) => {
             </Box>
 
             <Button sx={{marginLeft:10}} 
-             onPress={()=>{handleSelected(user._id)}}>
+            onClick={()=>{handleSelected(user)}}
+             >
             {selectedUser.indexOf(user._id) > -1 ?
-            <PersonRemoveIcon color="red">
+            <PersonRemoveIcon color="red" 
+            >
 
             </PersonRemoveIcon>
              : 
-             <PersonAddIcon color="blue">
+             <PersonAddIcon color="blue"
+             >
 
             </PersonAddIcon>
              }
