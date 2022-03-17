@@ -9,6 +9,7 @@ import { retriveEmployee } from './employee';
 import { getBusinessId, getUserId, setBusiness } from '../services/authService';
 import { toast } from 'react-toastify';
 import { getBusinessAnalytics } from './business_analytics';
+import { retriveNotification } from './notification';
 
 const slice = createSlice({
   name: 'Business',
@@ -73,6 +74,7 @@ export const syncBusinessData = () => async dispatch => {
       dispatch(retriveCustomer(request));
       dispatch(retriveHSN(request));
       dispatch(retriveEmployee(request));
+      dispatch(retriveNotification())
   } catch (e) {
     return console.error(e.message);
   }

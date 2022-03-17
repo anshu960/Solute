@@ -1,12 +1,9 @@
-import React, { ReactNode, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { set, sub, formatDistanceToNow } from 'date-fns'
-//import { Icon } from '@iconify/react'
+import {useDispatch, useSelector} from 'react-redux'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-// import bellFill from '@iconify/icons-eva/bell-fill'
-// import clockFill from '@iconify/icons-eva/clock-fill'
-// import doneAllFill from '@iconify/icons-eva/done-all-fill'
-// material
+
 import {
   Box,
   List,
@@ -21,18 +18,10 @@ import {
   ListSubheader,
   ListItemAvatar
 } from '@mui/material'
-// components
-//import Scrollbar from '../../Components/Scrollbar/Scrollbar'
 import MenuPopover from '../../components/MenuPopover';
-//import MIconButton from '../../omponents/MaterialExtend/MIconButton'
-// Images
+
 import avatars2 from '../../images/Indian_Oil_Logo.png'
-// import avatars2 from '../../Common/images/mock-images/avatar_2.jpeg'
-// import notificationPackage from '../../Common/icons/ic_notification_package.svg'
-// import notificationShipping from '../../Common/icons/ic_notification_shipping.svg'
-// import notificationMail from '../../Common/icons/ic_notification_mail.svg'
-// import notificationChat from '../../Common/icons/ic_notification_chat.svg'
-// ----------------------------------------------------------------------
+import { retriveNotification } from '../../store/notification';
 
 const NOTIFICATIONS = [
   {
@@ -40,7 +29,7 @@ const NOTIFICATIONS = [
     title: 'Your order is placed',
     description: 'waiting for shipping',
     avatar: null,
-    type: 'order_placed',
+    Type: 'order_placed',
     createdAt: set(new Date(), { hours: 10, minutes: 30 }),
     isUnRead: true
   },
@@ -49,7 +38,7 @@ const NOTIFICATIONS = [
     title: 'test',
     description: 'answered to your comment on the Minimal',
     avatar: avatars2,
-    type: 'friend_interactive',
+    Type: 'friend_interactive',
     createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
     isUnRead: true
   },
@@ -58,7 +47,7 @@ const NOTIFICATIONS = [
     title: 'You have new message',
     description: '5 unread messages',
     avatar: null,
-    type: 'chat_message',
+    Type: 'chat_message',
     createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
     isUnRead: false
   },
@@ -67,7 +56,7 @@ const NOTIFICATIONS = [
     title: 'You have new mail',
     description: 'sent from Guido Padberg',
     avatar: null,
-    type: 'mail',
+    Type: 'mail',
     createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
     isUnRead: false
   },
@@ -76,7 +65,7 @@ const NOTIFICATIONS = [
     title: 'Delivery processing',
     description: 'Your order is being shipped',
     avatar: null,
-    type: 'order_shipped',
+    Type: 'order_shipped',
     createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
     isUnRead: false
   }
@@ -85,43 +74,43 @@ const NOTIFICATIONS = [
 function renderContent(notification) {
   const title = (
     <Typography variant="subtitle2">
-      {notification.title}
+      {notification.Title}
       <Typography
         component="span"
         variant="body2"
         sx={{ color: 'text.secondary' }}
       >
-        &nbsp; {notification.description}
+        &nbsp; {notification.Message}
       </Typography>
     </Typography>
   )
 
-  if (notification.type === 'order_placed') {
+  if (notification.Type === 'order_placed') {
     return {
-      avatar: <img alt={notification.title} src={avatars2} />,
+      avatar: <img alt={notification.Title} src={avatars2} />,
       title
     }
   }
-  if (notification.type === 'order_shipped') {
+  if (notification.Type === 'order_shipped') {
     return {
-      avatar: <img alt={notification.title} src={avatars2} />,
+      avatar: <img alt={notification.Title} src={avatars2} />,
       title
     }
   }
-  if (notification.type === 'mail') {
+  if (notification.Type === 'mail') {
     return {
-      avatar: <img alt={notification.title} src={avatars2} />,
+      avatar: <img alt={notification.Title} src={avatars2} />,
       title
     }
   }
-  if (notification.type === 'chat_message') {
+  if (notification.Type === 'chat_message') {
     return {
-      avatar: <img alt={notification.title} src={avatars2} />,
+      avatar: <img alt={notification.Title} src={avatars2} />,
       title
     }
   }
   return {
-    avatar: <img alt={notification.title} src={avatars2} />,
+    avatar: <img alt={notification.Title} src={avatars2} />,
     title
   }
 }
@@ -141,7 +130,7 @@ function NotificationItem({ notification }) {
       sx={{
         py: 1.5,
         px: 2.5,
-        '&:not(:last-of-type)': { mb: '1px' },
+        '&:not(:last-of-Type)': { mb: '1px' },
         ...(isUnRead && {
           backgroundColor: 'action.selected'
         })
@@ -168,7 +157,7 @@ function NotificationItem({ notification }) {
               sx={{ mr: 0.5, width: 16, height: 16 }}
             />
             {/* @ts-ignore */}
-            {formatDistanceToNow(new Date(notification.createdAt))}
+            {formatDistanceToNow(new Date(notification.CreatedAt))}
           </Typography>
         }
       />
@@ -178,18 +167,18 @@ function NotificationItem({ notification }) {
 
 export default function NotificationsPopover() {
   const anchorRef = useRef(null)
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
-  const [notifications, setNotifications] = useState(NOTIFICATIONS)
-  const totalUnRead = notifications.filter(item => item.isUnRead).length
+  const notifications = useSelector(state=>state.Notification.allNotification)
+  const totalUnRead = notifications.filter(item => !item.IsRead).length
 
-  const handleMarkAllAsRead = () => {
-    setNotifications(
-      notifications.map(notification => ({
-        ...notification,
-        isUnRead: false
-      }))
-    )
+  useEffect(()=>{
+    dispatch(retriveNotification())
+  },[])
+  const retriveNotifications=()=>{
+    dispatch(retriveNotification())
   }
+
   return (
     <>
       {/* <MIconButton
@@ -200,7 +189,10 @@ export default function NotificationsPopover() {
         <Badge badgeContent={totalUnRead} color="error">
           <NotificationsNoneIcon width={20} height={20}
           ref={anchorRef}
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            setOpen(true) 
+            retriveNotifications()
+          }}
           color={open ? 'primary' : 'info'}
           />
           {/* <Icon icon={NotificationsNoneIcon} width={20} height={20} /> */}
@@ -248,7 +240,7 @@ export default function NotificationsPopover() {
             {notifications.slice(0, 2).map(notification => (
               // @ts-ignore
               <NotificationItem
-                key={notification.id}
+                key={notification._id}
                 notification={notification}
               />
             ))}
@@ -268,7 +260,7 @@ export default function NotificationsPopover() {
             {notifications.slice(2, 5).map(notification => (
               // @ts-ignore
               <NotificationItem
-                key={notification.id}
+                key={notification._id}
                 notification={notification}
               />
             ))}

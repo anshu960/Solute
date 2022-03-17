@@ -1,0 +1,3 @@
+module.exports = Object.freeze({
+    "ACCEPT_EMPLOYEE_CONNECTION_REQUEST":"ACCEPT_EMPLOYEE_CONNECTION_REQUEST",
+});
