@@ -3,7 +3,10 @@ import { Link as RouterLink } from 'react-router-dom'
 import { set, sub, formatDistanceToNow } from 'date-fns'
 import {useDispatch, useSelector} from 'react-redux'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-
+import notification_type from '../../config/notification_type';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+import {acceptRequest,rejectRequest} from "./../../helper/notification_helper";
 import {
   Box,
   List,
@@ -19,57 +22,7 @@ import {
   ListItemAvatar
 } from '@mui/material'
 import MenuPopover from '../../components/MenuPopover';
-
-import avatars2 from '../../images/Indian_Oil_Logo.png'
 import { retriveNotification } from '../../store/notification';
-
-const NOTIFICATIONS = [
-  {
-    id: 1,
-    title: 'Your order is placed',
-    description: 'waiting for shipping',
-    avatar: null,
-    Type: 'order_placed',
-    createdAt: set(new Date(), { hours: 10, minutes: 30 }),
-    isUnRead: true
-  },
-  {
-    id: 2,
-    title: 'test',
-    description: 'answered to your comment on the Minimal',
-    avatar: avatars2,
-    Type: 'friend_interactive',
-    createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
-    isUnRead: true
-  },
-  {
-    id: 3,
-    title: 'You have new message',
-    description: '5 unread messages',
-    avatar: null,
-    Type: 'chat_message',
-    createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
-    isUnRead: false
-  },
-  {
-    id: 3,
-    title: 'You have new mail',
-    description: 'sent from Guido Padberg',
-    avatar: null,
-    Type: 'mail',
-    createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
-    isUnRead: false
-  },
-  {
-    id: 4,
-    title: 'Delivery processing',
-    description: 'Your order is being shipped',
-    avatar: null,
-    Type: 'order_shipped',
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: false
-  }
-]
 
 function renderContent(notification) {
   const title = (
@@ -84,33 +37,8 @@ function renderContent(notification) {
       </Typography>
     </Typography>
   )
-
-  if (notification.Type === 'order_placed') {
-    return {
-      avatar: <img alt={notification.Title} src={avatars2} />,
-      title
-    }
-  }
-  if (notification.Type === 'order_shipped') {
-    return {
-      avatar: <img alt={notification.Title} src={avatars2} />,
-      title
-    }
-  }
-  if (notification.Type === 'mail') {
-    return {
-      avatar: <img alt={notification.Title} src={avatars2} />,
-      title
-    }
-  }
-  if (notification.Type === 'chat_message') {
-    return {
-      avatar: <img alt={notification.Title} src={avatars2} />,
-      title
-    }
-  }
   return {
-    avatar: <img alt={notification.Title} src={avatars2} />,
+    avatar: <img alt={notification.Title} src={{uri:Notification.Image}} />,
     title
   }
 }
@@ -151,11 +79,40 @@ function NotificationItem({ notification }) {
               color: 'text.disabled'
             }}
           >
-            <Box
-              component="img"
-              icon={NotificationsNoneIcon}
-              sx={{ mr: 0.5, width: 16, height: 16 }}
-            />
+            {notification.Type === notification_type.REQUEST ? 
+            <Typography style={{flexDirection:"row"}}>
+            
+            <Button 
+            onClick={()=>{acceptRequest(notification)}}
+            >
+              <CheckIcon 
+               sx={{ 
+                color: "white", 
+                backgroundColor: "blue", 
+                borderRadius: "50%" 
+              }}
+              >
+
+              </CheckIcon>
+            </Button>
+            <Button 
+            sx={{marginLeft:10}} 
+            onClick={()=>{rejectRequest(notification)}}
+            >
+              <ClearIcon
+              sx={{ 
+                color: "white", 
+                backgroundColor: "red", 
+                borderRadius: "50%" 
+              }}
+              onClick={()=>{}}
+              >
+              </ClearIcon>
+            </Button>
+            </Typography>
+           :
+            null
+            }
             {/* @ts-ignore */}
             {formatDistanceToNow(new Date(notification.CreatedAt))}
           </Typography>
