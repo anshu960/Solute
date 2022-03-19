@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { alpha,styled, useTheme } from '@mui/material/styles';
 import { Avatar, Box, Typography } from '@mui/material';
 import ProfileImage from './ProfileImage';
+import { getUser } from '../../services/authService';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
@@ -36,6 +37,7 @@ const InfoStyle = styled('div')(({ theme }) => ({
 
 export default function ProfileCover() {
   const [files, setFiles] = useState([]);
+  const user = getUser();
   return (
     <RootStyle>
       <InfoStyle>
@@ -48,8 +50,8 @@ export default function ProfileCover() {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant="h4">{"Profile"}</Typography>
-          <Typography sx={{ opacity: 0.72 }}>{"Desc"}</Typography>
+          <Typography variant="h4">{user.Name}</Typography>
+          <Typography sx={{ opacity: 0.72 }}>{""}</Typography>
         </Box>
       </InfoStyle>
       <Box
