@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react'
 // material
 import { Box, MenuItem, ListItemIcon, ListItemText } from '@mui/material'
-// hooks
-//import useLocales from '../../Hooks/useLocales'
 // components
 import MenuPopover from '../../components/MenuPopover';
 import LanguageIcon from '@mui/icons-material/Language';

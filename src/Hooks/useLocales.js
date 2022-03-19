@@ -19,18 +19,19 @@ const CustomLanguages = [
 // ----------------------------------------------------------------------
 
 export default function useLocales() {
-  const { i18n, t: translate } = useTranslation()
+  const { i18n, t } = useTranslation()
   const langStorage = localStorage.getItem('i18nextLng')
   const currentLang =
     CustomLanguages.find(_lang => _lang.value === langStorage) ||
     CustomLanguages[0]
   const handleChangeLanguage = (newLang) => {
+    console.log(newLang)
     i18n.changeLanguage(newLang)
   }
 
   return {
     onChangeLang: handleChangeLanguage,
-    translate,
+    t,
     currentLang,
     allLang: CustomLanguages
   }

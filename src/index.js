@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { Provider } from 'react-redux'
 import store from './store'
 import App from './App';
+import './i18n';
 import "regenerator-runtime/runtime";
 
 ReactDOM.render(

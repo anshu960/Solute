@@ -29,6 +29,7 @@ import { getBusinessId, getUser, getUserId, setBusiness, setBusinessId } from '.
 import { PATH_AUTH, PATH_DASHBOARD } from '../routes/path';
 import Room from '@mui/icons-material/Room';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import useLocales from '../Hooks/useLocales';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -197,6 +198,7 @@ const displayBusinessCard = () => {
     )
 }
   console.log(allBusiness)
+  const { t } = useLocales();
   const handleClose = () => setOpen(false);
   const bodyContent = () => <ChooseBusiness history={history} businessTypes={businessTypes} businessId={businessId} setBusinessId={setBusId} handleClose={handleClose} open={open}/>
   return (
@@ -206,10 +208,10 @@ const displayBusinessCard = () => {
       <Container maxWidth="lg">
         <Box sx={{ mb: 5 }}>
           <Typography variant="h3" align="center" paragraph>
-            Let's start powering you up!
+            {t('page_title')}
           </Typography>
           <Typography align="center" sx={{ color: 'text.secondary' }}>
-            Choose/Register business to Solute.
+            {t('page_subtitle')}
           </Typography>
         </Box>
         <Grid container spacing={3} sx={{ my: 10 }}>
