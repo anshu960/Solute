@@ -86,10 +86,10 @@ const sidebarConfig = {
             title: 'customers',
             path: PATH_DASHBOARD.customer.customers,
           },
-          {
-            title: 'add',
-            path: PATH_DASHBOARD.customer.add,
-          },
+          // {
+          //   title: 'add',
+          //   path: PATH_DASHBOARD.customer.add,
+          // },
         ]
       },
     ]

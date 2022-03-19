@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
-import { PATH_DASHBOARD } from '../../routes/path';
+import { ScrollDialog } from '../../dialog';
+import { AddCustomer } from './addCustomer';
+import AppLoader from '../Loader';
 
 export default function AddCustomerButton () {
     const history = useHistory();
-    return(<Button
-        variant="outlined"
-        onClick={() => history.push({ pathname: PATH_DASHBOARD.customer.add })}
-        startIcon={<AddOutlinedIcon />}
-    >
-        Add Customer
-    </Button>)
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    }
+    const contentBody = () => <AddCustomer setOpen={setOpen} setLoading={setLoading}/>
+    return(
+        <Fragment>
+            { loading ? <AppLoader/> :null}
+            <ScrollDialog body={contentBody()} handleClose={handleClose} scroll={'paper'} title="Add Customer" open={open} dialogWidth="xl"/>
+            <Button
+                variant="outlined"
+                onClick={()=>{setOpen({open: true})}}
+                startIcon={<AddOutlinedIcon />}
+            >
+                Add Customer
+            </Button>
+        </Fragment>
+    )
 }

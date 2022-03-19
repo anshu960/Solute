@@ -84,11 +84,11 @@ export const DashboardRoutes = {
         path: PATH_DASHBOARD.delivery.profile,
         component: lazy(() => import('../pages/delivery/Profile'))
       },
-      {
-        exact: true,
-        path: PATH_DASHBOARD.customer.add,
-        component: lazy(() => import('../pages/customer/AddCustomer'))
-      },
+      // {
+      //   exact: true,
+      //   path: PATH_DASHBOARD.customer.add,
+      //   component: lazy(() => import('../pages/customer/AddCustomer'))
+      // },
       {
         exact: true,
         path: PATH_DASHBOARD.customer.customers,
