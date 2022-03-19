@@ -57,7 +57,7 @@ const Customers = () => {
   },[])
 
   const refreshCustomerList=()=>{
-    //setLoading(true);
+    setLoading(true);
     const UserID = getUserId();
     const BusinessID = getBusinessId();
     const request = {UserID,BusinessID}
