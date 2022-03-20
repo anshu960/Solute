@@ -105,3 +105,25 @@ export const acceptConnectionRequest = (notificaioon,callback) => async dispatch
     return console.error(e.message);
   }
 }
+
+export const rejectConnectionRequest = (notificaioon,callback) => async dispatch => {
+  try {
+    const request = {Notification:notificaioon}
+    request.UserID = getUserId()
+    SendEvent(SocketEvent.DELETE_EMPLOYEE_CONNECTION_REQUEST,request,(data)=>{
+      console.log("Response  DELETE_EMPLOYEE_CONNECTION_REQUEST data = ",data)
+      if(data.Payload && data.Payload._id){
+        toast("Connection Request Rejected successfully")
+        dispatch(syncBusinessData());
+      }else{
+        toast("Oops, Something went wrong, please try after sometime")
+      }
+      if(callback){
+        callback(data.Payload)
+      }
+      dispatch(setSelectedEmployeeConnectionsRequest({}));
+    })
+  } catch (e) {
+    return console.error(e.message);
+  }
+}
