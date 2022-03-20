@@ -112,7 +112,7 @@ export const rejectConnectionRequest = (notificaioon,callback) => async dispatch
     request.UserID = getUserId()
     SendEvent(SocketEvent.DELETE_EMPLOYEE_CONNECTION_REQUEST,request,(data)=>{
       console.log("Response  DELETE_EMPLOYEE_CONNECTION_REQUEST data = ",data)
-      if(data.Payload && data.Payload._id){
+      if(data.Payload && data.Payload.deletedCount){
         toast("Connection Request Rejected successfully")
         dispatch(syncBusinessData());
       }else{
