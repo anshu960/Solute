@@ -46,8 +46,9 @@ function renderContent(notification) {
 }
 
 function NotificationItem({ notification }) {
-  const dispatch = useDispatch()
+  // @ts-ignore
   const { avatar, title } = renderContent(notification)
+  // @ts-ignore
   const { id, isUnRead } = notification
   return (<Fragment>
     <ListItem
@@ -80,14 +81,14 @@ function NotificationItem({ notification }) {
           <Button
             color="info"
             variant="contained"
-            onClick={()=>{acceptRequest(dispatch,notification)}}
+            onClick={()=>{acceptRequest(notification)}}
             startIcon={<CheckIcon />}>
               Accept
           </Button>
           <Button
           color="error"
           variant="outlined"
-          onClick={()=>{rejectRequest(dispatch,notification)}}
+          onClick={()=>{rejectRequest(notification)}}
           startIcon={<ClearIcon />}>
             Reject
           </Button>
@@ -108,7 +109,8 @@ export default function NotificationsPopover() {
   const anchorRef = useRef(null)
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
-  const notifications = useSelector(state=>state.Notification.allNotification)
+  const allNotifications = useSelector(state=>state.Notification.allNotification)
+  const notifications = allNotifications ? allNotifications.slice().sort((a,b)=>new Date(a.CreatedAt).getTime() - new Date(b.CreatedAt).getTime()) : allNotifications;  
   const totalUnRead = notifications.filter(item => !item.IsRead).length
 
   useEffect(()=>{
