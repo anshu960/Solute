@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { getBusiness, getBusinessId, getUserId } from '../services/authService';
 import SocketEvent from '../socket/SocketEvent';
 import { SendEvent } from '../socket/SocketHandler';
+import { syncBusinessData } from './business';
 
 // Slice
 
@@ -70,6 +71,28 @@ export const sendConnectionRequest = (user,callback) => async dispatch => {
       console.log("Response  CREATE_EMPLOYEE_CONNECTION_REQUEST data = ",data)
       if(data.Payload && data.Payload._id){
         toast("Connection Request sent successfully")
+      }else{
+        toast("Oops, Something went wrong, please try after sometime")
+      }
+      if(callback){
+        callback(data.Payload)
+      }
+      dispatch(setSelectedEmployeeConnectionsRequest(data.Payload));
+    })
+  } catch (e) {
+    return console.error(e.message);
+  }
+}
+
+export const acceptConnectionRequest = (notificaioon,callback) => async dispatch => {
+  try {
+    const request = {Notification:notificaioon}
+    request.UserID = getUserId()
+    SendEvent(SocketEvent.ACCEPT_EMPLOYEE_CONNECTION_REQUEST,request,(data)=>{
+      console.log("Response  ACCEPT_EMPLOYEE_CONNECTION_REQUEST data = ",data)
+      if(data.Payload && data.Payload._id){
+        toast("Connection Request Accepted successfully")
+        dispatch(syncBusinessData());
       }else{
         toast("Oops, Something went wrong, please try after sometime")
       }

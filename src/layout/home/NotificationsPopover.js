@@ -46,9 +46,8 @@ function renderContent(notification) {
 }
 
 function NotificationItem({ notification }) {
-  // @ts-ignore
+  const dispatch = useDispatch()
   const { avatar, title } = renderContent(notification)
-  // @ts-ignore
   const { id, isUnRead } = notification
   return (
     <ListItem
@@ -79,7 +78,7 @@ function NotificationItem({ notification }) {
             <Box >
             
             <Button 
-            onClick={()=>{acceptRequest(notification)}}
+            onClick={()=>{acceptRequest(dispatch,notification)}}
             >
               <CheckIcon 
                sx={{ 
@@ -93,7 +92,7 @@ function NotificationItem({ notification }) {
             </Button>
             <Button 
             //sx={{marginLeft:10}} 
-            onClick={()=>{rejectRequest(notification)}}
+            onClick={()=>{rejectRequest(dispatch,notification)}}
             >
               <ClearIcon
               sx={{ 
