@@ -26,19 +26,21 @@ import { retriveNotification } from '../../store/notification';
 
 function renderContent(notification) {
   const title = (
+    <Box>
     <Typography variant="subtitle2">
       {notification.Title}
-      <Typography
-        component="span"
-        variant="body2"
-        sx={{ color: 'text.secondary' }}
-      >
-        &nbsp; {notification.Message}
-      </Typography>
     </Typography>
+    <Typography
+    component="span"
+    variant="body2"
+    sx={{ color: 'text.secondary' }}
+  >
+  {notification.Message}
+  </Typography>
+  </Box>
   )
   return {
-    avatar: <img alt={notification.Title} src={{uri:Notification.Image}} />,
+    avatar: <img alt={notification.Title} src={notification.Image} />,
     title
   }
 }
