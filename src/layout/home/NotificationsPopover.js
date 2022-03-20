@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import React, { Fragment, ReactNode, useEffect, useRef, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { set, sub, formatDistanceToNow } from 'date-fns'
 import {useDispatch, useSelector} from 'react-redux'
@@ -50,7 +50,7 @@ function NotificationItem({ notification }) {
   const { avatar, title } = renderContent(notification)
   // @ts-ignore
   const { id, isUnRead } = notification
-  return (
+  return (<Fragment>
     <ListItem
       button
       to="#"
@@ -72,49 +72,36 @@ function NotificationItem({ notification }) {
       <ListItemText
         primary={title}
       />
-      <ListItemText
-        secondary={
-          <Box>
-            {notification.Type === notification_type.REQUEST ? 
-            <Box >
-            
-            <Button 
-            onClick={()=>{acceptRequest(notification)}}
-            >
-              <CheckIcon 
-               sx={{ 
-                color: "white", 
-                backgroundColor: "blue", 
-                borderRadius: "50%" 
-              }}
-              >
-
-              </CheckIcon>
-            </Button>
-            <Button 
-            //sx={{marginLeft:10}} 
-            onClick={()=>{rejectRequest(notification)}}
-            >
-              <ClearIcon
-              sx={{ 
-                color: "white", 
-                backgroundColor: "red", 
-                borderRadius: "50%" 
-              }}
-              onClick={()=>{}}
-              >
-              </ClearIcon>
-            </Button>
-            </Box>
-           :
-            null
-            }
-            {/* @ts-ignore */}
-            {formatDistanceToNow(new Date(notification.CreatedAt))}
-            </Box>
-        }
-      />
     </ListItem>
+    <ListItemText
+    secondary={
+      <Box sx={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+        {notification.Type === notification_type.REQUEST ? 
+        <Box sx={{display: 'flex', justifyContent: 'space-between', width: '70%'}}>
+          <Button
+            color="info"
+            variant="contained"
+            onClick={()=>{acceptRequest(notification)}}
+            startIcon={<CheckIcon />}>
+              Accept
+          </Button>
+          <Button
+          color="error"
+          variant="outlined"
+          onClick={()=>{rejectRequest(notification)}}
+          startIcon={<ClearIcon />}>
+            Reject
+          </Button>
+        </Box>
+       :
+        null
+        }
+        {/* @ts-ignore */}
+        {formatDistanceToNow(new Date(notification.CreatedAt))}
+      </Box>
+    }
+  />
+  </Fragment>
   )
 }
 
