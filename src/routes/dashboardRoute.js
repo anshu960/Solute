@@ -46,19 +46,39 @@ export const DashboardRoutes = {
       },
       {
         exact: true,
-        path: PATH_DASHBOARD.room.rooms,
-        component: lazy(() => import('../pages/room/Rooms'))
+        path: PATH_DASHBOARD.hotel.rooms,
+        component: lazy(() => import('../pages/hotel/Rooms'))
       },
       {
         exact: true,
-        path: PATH_DASHBOARD.room.roomProfile,
-        component: lazy(() => import('../pages/room/RoomProfile'))
+        path: PATH_DASHBOARD.hotel.roomProfile,
+        component: lazy(() => import('../pages/hotel/RoomProfile'))
       },
       {
         exact: true,
-        path: PATH_DASHBOARD.room.add,
-        component: lazy(() => import('../pages/room/AddRoom'))
+        path: PATH_DASHBOARD.flat.rooms,
+        component: lazy(() => import('../pages/flat/Rooms'))
       },
+      {
+        exact: true,
+        path: PATH_DASHBOARD.flat.roomProfile,
+        component: lazy(() => import('../pages/flat/RoomProfile'))
+      },
+      {
+        exact: true,
+        path: PATH_DASHBOARD.pg.rooms,
+        component: lazy(() => import('../pages/pg/Rooms'))
+      },
+      {
+        exact: true,
+        path: PATH_DASHBOARD.pg.roomProfile,
+        component: lazy(() => import('../pages/pg/RoomProfile'))
+      },
+      // {
+      //   exact: true,
+      //   path: PATH_DASHBOARD.room.add,
+      //   component: lazy(() => import('../pages/room/AddRoom'))
+      // },
       {
         exact: true,
         path: PATH_DASHBOARD.hsn.hsn,

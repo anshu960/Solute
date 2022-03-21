@@ -185,20 +185,48 @@ const sidebarConfig = {
     ]
   },
   {
-    //subheader: 'room',
+    //subheader: 'hotel',
     items: [
       {
-        title: 'room',
+        title: 'hotel',
         icon: <NightShelterIcon />,
-        path: PATH_DASHBOARD.room.root,
+        path: PATH_DASHBOARD.hotel.root,
         items: [
           {
             title: 'rooms',
-            path: PATH_DASHBOARD.room.rooms,
-          },
+            path: PATH_DASHBOARD.hotel.rooms,
+          }
+        ]
+      },
+    ]
+  },
+  {
+    //subheader: 'flat',
+    items: [
+      {
+        title: 'flat',
+        icon: <NightShelterIcon />,
+        path: PATH_DASHBOARD.flat.root,
+        items: [
           {
-            title: 'add',
-            path: PATH_DASHBOARD.room.add,
+            title: 'rooms',
+            path: PATH_DASHBOARD.flat.rooms,
+          }
+        ]
+      },
+    ]
+  },
+  {
+    //subheader: 'pg',
+    items: [
+      {
+        title: 'p g',
+        icon: <NightShelterIcon />,
+        path: PATH_DASHBOARD.pg.root,
+        items: [
+          {
+            title: 'rooms',
+            path: PATH_DASHBOARD.pg.rooms,
           }
         ]
       },

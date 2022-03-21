@@ -82,10 +82,19 @@ export const PATH_DASHBOARD = {
         profile:path(ROOTS_DASHBOARD,'/delivery/profile'),
         shipments:path(ROOTS_DASHBOARD,'/delivery/shipments'),
     },
-    room: {
-        root:path(ROOTS_DASHBOARD,'/room'),
-        add:path(ROOTS_DASHBOARD,'/room/add'),
-        rooms:path(ROOTS_DASHBOARD,'/room/rooms'),
-        roomProfile: path(ROOTS_DASHBOARD, '/room/profile'),
+    hotel: {
+        root:path(ROOTS_DASHBOARD,'/hotel'),
+        rooms:path(ROOTS_DASHBOARD,'/hotel/rooms'),
+        roomProfile: path(ROOTS_DASHBOARD, '/hotel/profile'),
+    },
+    flat: {
+        root:path(ROOTS_DASHBOARD,'/flat'),
+        rooms:path(ROOTS_DASHBOARD,'/flat/rooms'),
+        roomProfile: path(ROOTS_DASHBOARD, '/flat/profile'),
+    },
+    pg: {
+        root:path(ROOTS_DASHBOARD,'/pg'),
+        rooms:path(ROOTS_DASHBOARD,'/pg/rooms'),
+        roomProfile: path(ROOTS_DASHBOARD, '/pg/profile'),
     }
 }
