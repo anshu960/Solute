@@ -9,6 +9,12 @@ import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFi
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import NightShelterIcon from '@mui/icons-material/NightShelter';
+import SingleBedIcon from '@mui/icons-material/SingleBed';
+import BusinessIcon from '@mui/icons-material/Business';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import ApartmentRoundedIcon from '@mui/icons-material/ApartmentRounded';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import PersonAddAlt1RoundedIcon from '@mui/icons-material/PersonAddAlt1Rounded';
 import { PATH_DASHBOARD } from '../../routes/path';
 // ----------------------------------------------------------------------
 
@@ -85,6 +91,26 @@ const sidebarConfig = {
           {
             title: 'customers',
             path: PATH_DASHBOARD.customer.customers,
+          },
+          // {
+          //   title: 'add',
+          //   path: PATH_DASHBOARD.customer.add,
+          // },
+        ]
+      },
+    ]
+  },
+  {
+    //subheader: 'tenant',
+    items: [
+      {
+        title: 'tenant',
+        icon: <PersonAddAlt1RoundedIcon />,
+        path: PATH_DASHBOARD.tenant.root,
+        items: [
+          {
+            title: 'tenants',
+            path: PATH_DASHBOARD.tenant.tenants,
           },
           // {
           //   title: 'add',
@@ -189,7 +215,7 @@ const sidebarConfig = {
     items: [
       {
         title: 'hotel',
-        icon: <NightShelterIcon />,
+        icon: <BusinessIcon />,
         path: PATH_DASHBOARD.hotel.root,
         items: [
           {
@@ -205,7 +231,7 @@ const sidebarConfig = {
     items: [
       {
         title: 'flat',
-        icon: <NightShelterIcon />,
+        icon: <ApartmentIcon />,
         path: PATH_DASHBOARD.flat.root,
         items: [
           {
@@ -221,13 +247,41 @@ const sidebarConfig = {
     items: [
       {
         title: 'p g',
-        icon: <NightShelterIcon />,
+        icon: <ApartmentRoundedIcon />,
         path: PATH_DASHBOARD.pg.root,
         items: [
           {
             title: 'rooms',
             path: PATH_DASHBOARD.pg.rooms,
           }
+        ]
+      },
+    ]
+  },
+  {
+    //subheader: 'bookings',
+    items: [
+      {
+        title: 'bookings',
+        icon: <AddBusinessIcon />,
+        path: PATH_DASHBOARD.bookings.root,
+        items: [
+          {
+            title: 'hotel',
+            path: PATH_DASHBOARD.bookings.hotel,
+          },
+          {
+            title: 'flat',
+            path: PATH_DASHBOARD.bookings.flat,
+          },
+          {
+            title: 'p g',
+            path: PATH_DASHBOARD.bookings.pg,
+          },
+          {
+            title: 'all bookings',
+            path: PATH_DASHBOARD.bookings.all,
+          },
         ]
       },
     ]

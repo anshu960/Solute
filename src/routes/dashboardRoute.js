@@ -114,6 +114,11 @@ export const DashboardRoutes = {
         path: PATH_DASHBOARD.customer.customers,
         component: lazy(() => import('../pages/customer/Customers'))
       },
+      {
+        exact: true,
+        path: PATH_DASHBOARD.tenant.tenants,
+        component: lazy(() => import('../pages/tenant/Tenants'))
+      },
       // {
       //   exact: true,
       //   path: PATH_DASHBOARD.employee.add,

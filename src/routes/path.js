@@ -42,6 +42,11 @@ export const PATH_DASHBOARD = {
         customers: path(ROOTS_DASHBOARD, '/customer/customers'),
         //add: path(ROOTS_DASHBOARD, '/customer/add'),
     },
+    tenant: {
+        root: path(ROOTS_DASHBOARD, '/tenant'),
+        tenants: path(ROOTS_DASHBOARD, '/tenant/tenants'),
+        //add: path(ROOTS_DASHBOARD, '/customer/add'),
+    },
     employee: {
         root: path(ROOTS_DASHBOARD, '/employee'),
         employees: path(ROOTS_DASHBOARD, '/employee/employees'),
@@ -96,5 +101,12 @@ export const PATH_DASHBOARD = {
         root:path(ROOTS_DASHBOARD,'/pg'),
         rooms:path(ROOTS_DASHBOARD,'/pg/rooms'),
         roomProfile: path(ROOTS_DASHBOARD, '/pg/profile'),
+    },
+    bookings: {
+        root:path(ROOTS_DASHBOARD,'/bookings'),
+        hotel:path(ROOTS_DASHBOARD,'/bookings/hotel'),
+        flat: path(ROOTS_DASHBOARD, '/bookings/flat'),
+        pg: path(ROOTS_DASHBOARD, '/bookings/pg'),
+        all: path(ROOTS_DASHBOARD, '/bookings/all'),
     }
 }
