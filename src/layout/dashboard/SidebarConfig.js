@@ -286,6 +286,22 @@ const sidebarConfig = {
       },
     ]
   },
+  {
+    //subheader: 'student',
+    items: [
+      {
+        title: 'student',
+        icon: <PersonAddAlt1RoundedIcon />,
+        path: PATH_DASHBOARD.student.root,
+        items: [
+          {
+            title: 'students',
+            path: PATH_DASHBOARD.student.students,
+          },
+        ]
+      },
+    ]
+  },
 ]
 };
 

@@ -2,17 +2,17 @@ import * as React from 'react';
 import { useState, useRef } from 'react';
 // material
 import { DialogActions, DialogContent, DialogContentText, Grid, Stack, Typography } from '@mui/material';
-import AddCustomerAction from './AddCustomerAction';
+import AddCustomerAction from './AddStudentAction';
 import Select from 'react-select';
 import InputTextField from '../../InputTextField';
-import { customerFields } from './FieldConfig';
+import { studentFields } from './FieldConfig';
 import {useDispatch} from 'react-redux'
 import { SendEvent } from '../../../socket/SocketHandler';
 import SocketEvent from '../../../socket/SocketEvent';
 
 // ----------------------------------------------------------------------
 
-export default function AddCustomer({setOpen, setLoading}) {
+export default function AddStudent({setOpen, setLoading}) {
   const dispatch = useDispatch();
   const [fields, setFields] = useState({});
   const descriptionElementRef = useRef(null);
@@ -77,7 +77,7 @@ const handleUpdateCustomerEvent = React.useCallback((data) => {
       default: return getTextField(field);
     }
   }
-  const prepareInputFields = () => customerFields.map((field) =>
+  const prepareInputFields = () => studentFields.map((field) =>
   (
     <Grid item xs={12} md={12} lg={6} xl={4}>
       <Stack spacing={3}>

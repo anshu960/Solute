@@ -108,5 +108,9 @@ export const PATH_DASHBOARD = {
         flat: path(ROOTS_DASHBOARD, '/bookings/flat'),
         pg: path(ROOTS_DASHBOARD, '/bookings/pg'),
         all: path(ROOTS_DASHBOARD, '/bookings/all'),
-    }
+    },
+    student: {
+        root: path(ROOTS_DASHBOARD, '/student'),
+        students: path(ROOTS_DASHBOARD, '/student/students'),
+    },
 }

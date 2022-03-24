@@ -181,6 +181,11 @@ export const DashboardRoutes = {
       },
       {
         exact: true,
+        path: PATH_DASHBOARD.student.students,
+        component: lazy(() => import('../pages/student/Students'))
+      },
+      {
+        exact: true,
         path: PATH_DASHBOARD.root,
         component: () => <Redirect to="/" />
       },
