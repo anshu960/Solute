@@ -302,6 +302,26 @@ const sidebarConfig = {
       },
     ]
   },
+  {
+    //subheader: 'class room',
+    items: [
+      {
+        title: 'class room',
+        icon: <PersonAddAlt1RoundedIcon />,
+        path: PATH_DASHBOARD.classRoom.root,
+        items: [
+          {
+            title: 'classes',
+            path: PATH_DASHBOARD.classRoom.classes,
+          },
+          {
+            title: 'section',
+            path: PATH_DASHBOARD.classRoom.section,
+          },
+        ]
+      },
+    ]
+  },
 ]
 };
 
