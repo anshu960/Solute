@@ -322,6 +322,26 @@ const sidebarConfig = {
       },
     ]
   },
+  {
+    //subheader: 'subject',
+    items: [
+      {
+        title: 'subject',
+        icon: <PersonAddAlt1RoundedIcon />,
+        path: PATH_DASHBOARD.subject.root,
+        items: [
+          {
+            title: 'subjects',
+            path: PATH_DASHBOARD.subject.subjects,
+          },
+          {
+            title: 'courses',
+            path: PATH_DASHBOARD.subject.courses,
+          },
+        ]
+      },
+    ]
+  },
 ]
 };
 

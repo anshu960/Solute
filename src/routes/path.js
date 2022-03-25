@@ -118,4 +118,9 @@ export const PATH_DASHBOARD = {
         classes: path(ROOTS_DASHBOARD, '/classRoom/classes'),
         section: path(ROOTS_DASHBOARD, '/classRoom/section'),
     },
+    subject: {
+        root: path(ROOTS_DASHBOARD, '/subject'),
+        subjects: path(ROOTS_DASHBOARD, '/subject/subjects'),
+        courses: path(ROOTS_DASHBOARD, '/subject/courses'),
+    },
 }
