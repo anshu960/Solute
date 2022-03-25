@@ -21,7 +21,7 @@ import AppLoader from '../Loader';
                 onClick={()=>{setOpen({open: true})}}
                 startIcon={<AddOutlinedIcon />}
             >
-                Add Section
+                Add Course
             </Button>
         </Fragment>
     )
