@@ -21,6 +21,8 @@ import { MembershipUpload } from '../../components/membership';
 import { readFile } from '../../components/excel';
 import MembershipCard from '../../components/membership/MembershipCard';
 import { alpha, useTheme, styled } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { subscribeToPlan } from '../../store/subscription';
 
 const CardStyle = styled(Card)(({ theme }) => {
   const shadowCard = (opacity) =>
@@ -80,6 +82,7 @@ const CARDS = [
     id: 2,
     plan: 'Monthly',
     title: '199',
+    amount:199.0,
     description: 
     'It is monthly rental plan.',
   },
@@ -87,12 +90,14 @@ const CARDS = [
     id: 3,
     plan: 'Quarterly',
     title: '499',
+    amount:499.0,
     description: `It is quarterly rental plan.`
   },
   {
     id: 4,
     plan: 'Half Yearly',
     title: '799',
+    amount:799.0,
     description: 
     `It is half yearly paid plan.`,
     //'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
@@ -101,17 +106,20 @@ const CARDS = [
     id: 5,
     plan: '9 Month',
     title: '1099',
+    amount:1099.0,
     description: `It is 9 month paid plan.`
   },
   {
     id: 6,
     plan: 'Yearly',
     title: '1399',
+    amount:1399.0,
     description: `It is yearly rental plan.`
   }
 ];
 
   const AddMembership = () => {
+    const dispatch = useDispatch()
     const classes = useStyles();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
@@ -131,8 +139,9 @@ const CARDS = [
     )
     console.log(users)
 
-    const handleActive = (id) => {
-      console.log(id)
+    const handleActive = (plan) => {
+      console.log(plan)
+      dispatch(subscribeToPlan(plan))
     }
 
     return (
@@ -167,7 +176,7 @@ const CARDS = [
                             <Button
                               style={{cursor:'pointer',width: '165px',}}
                               variant="outlined"
-                              onClick={()=>handleActive(card.id)}
+                              onClick={()=>handleActive(card)}
                             >
                                 Active
                             </Button>

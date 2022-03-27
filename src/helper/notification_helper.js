@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { acceptConnectionRequest, rejectConnectionRequest } from "../store/employee";
 import NoitficartionActions from "./../config/notification_action"
 export const acceptRequest = (dispatch,notification,callback) => {

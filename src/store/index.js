@@ -14,6 +14,7 @@ import shipment from "./shipment";
 import business_analytics from './business_analytics';
 import search from "./search";
 import Notification from "./notification"
+import Subscription from "./subscription"
 const reducer = combineReducers({
     business,
     businessTypes,
@@ -28,7 +29,8 @@ const reducer = combineReducers({
     shipment,
     business_analytics,
     search,
-    Notification
+    Notification,
+    Subscription
 })
 const store = configureStore({
   reducer,

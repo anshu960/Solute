@@ -5,6 +5,7 @@ import ThemeConfig from './theme';
 import ScrollToTop from './components/ScrollToTop';
 import {useDispatch, useSelector} from 'react-redux'
 import {connect} from './store/room';
+import { loadRazorpay } from './helper/payment_helper';
 
 // ----------------------------------------------------------------------
 export default function App() {
@@ -14,6 +15,8 @@ export default function App() {
 
   useEffect(()=>{
     dispatch(connect());
+    loadRazorpay();
+    
   },[])
 
   return (
