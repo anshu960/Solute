@@ -2,14 +2,11 @@ import * as React from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
-import ReceiptRoundedIcon from '@mui/icons-material/ReceiptRounded';
 import FactCheckRoundedIcon from '@mui/icons-material/FactCheckRounded';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-import NightShelterIcon from '@mui/icons-material/NightShelter';
-import SingleBedIcon from '@mui/icons-material/SingleBed';
 import BusinessIcon from '@mui/icons-material/Business';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import ApartmentRoundedIcon from '@mui/icons-material/ApartmentRounded';
@@ -281,62 +278,6 @@ const sidebarConfig = {
           {
             title: 'all bookings',
             path: PATH_DASHBOARD.bookings.all,
-          },
-        ]
-      },
-    ]
-  },
-  {
-    //subheader: 'student',
-    items: [
-      {
-        title: 'student',
-        icon: <PersonAddAlt1RoundedIcon />,
-        path: PATH_DASHBOARD.student.root,
-        items: [
-          {
-            title: 'students',
-            path: PATH_DASHBOARD.student.students,
-          },
-        ]
-      },
-    ]
-  },
-  {
-    //subheader: 'class room',
-    items: [
-      {
-        title: 'class room',
-        icon: <PersonAddAlt1RoundedIcon />,
-        path: PATH_DASHBOARD.classRoom.root,
-        items: [
-          {
-            title: 'classes',
-            path: PATH_DASHBOARD.classRoom.classes,
-          },
-          {
-            title: 'section',
-            path: PATH_DASHBOARD.classRoom.section,
-          },
-        ]
-      },
-    ]
-  },
-  {
-    //subheader: 'subject',
-    items: [
-      {
-        title: 'subject',
-        icon: <PersonAddAlt1RoundedIcon />,
-        path: PATH_DASHBOARD.subject.root,
-        items: [
-          {
-            title: 'subjects',
-            path: PATH_DASHBOARD.subject.subjects,
-          },
-          {
-            title: 'courses',
-            path: PATH_DASHBOARD.subject.courses,
           },
         ]
       },
