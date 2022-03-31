@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify';
 import { getBusiness, getUserId } from '../services/authService';
 import SocketEvent from '../socket/SocketEvent';
 import { SendEvent } from '../socket/SocketHandler';
@@ -47,36 +48,53 @@ export const createRazorpayOrder = (amount,callBack) => async dispatch => {
 
   export const subscribeToPlan = (plan) => async dispatch => {
     try {
-        dispatch(createRazorpayOrder(plan.amount,(razorpayOrder)=>{
-            showRazorpay(razorpayOrder)
+        dispatch(createRazorpayOrder(plan.Amount,(razorpayOrder)=>{
+            showRazorpay(razorpayOrder,plan)
         }));
     } catch (e) {
       return console.error(e.message);
     }
   }
 
-  const showRazorpay=(transaction)=>{
-    const { amount, id: order_id, currency } = transaction;
+const updateSubscriptionPayment = (paymentOrder,paymentResponse,plan) => {
+    try {
+        if(paymentResponse.razorpay_payment_id && paymentResponse.razorpay_order_id && paymentResponse.razorpay_signature){
+          let business = getBusiness();
+      let BusinessID = business._id
+      let UserID = getUserId()
+      let request = {...paymentResponse,BusinessID,UserID,
+        ...{OrderDetails:paymentOrder}
+        ,...{PlanDetails:plan}}
+      SendEvent(SocketEvent.UPDATE_SUBSCRIPTION_PAYMENT_RESPONSE,request,(data)=>{
+        console.log("UPDATE_SUBSCRIPTION_PAYMENT_RESPONSE \n",JSON.stringify(data))
+        if(data.Payload && data.ResponseCode === 200){
+          toast("Congrats!, Subscribed successfully")
+        }else{
+          toast("Oops! Something went wrong")
+        }
+      })
+        }else{
+          toast("Oops!, Someting went wrong with the payment")
+        }
+    } catch (e) {
+      return console.error(e.message);
+    }
+  }
+
+  const showRazorpay=(transaction,plan,callBack)=>{
     const business = getBusiness()
     const options = {
-      key: 'rzp_test_iABvXOSIa0Dv3B', // Enter the Key ID generated from the Dashboard
-      amount: amount.toString(),
-      currency: currency,
+      key: transaction.PaymentKey, // Enter the Key ID generated from the Dashboard
+      amount: transaction.Amount,
+      currency: transaction.Currency,
       name: 'Solute',
       description: 'Membership',
       image: { uri:ImageConfig.Logo },
-      order_id: order_id,
+      order_id: transaction.PaymentGatewayOrderID,
       handler: (response) =>{
-        const data = {
-          orderCreationId: order_id,
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-        };
-
-        // const result = await axios.post('/payment/success', data);
-
-        alert(data.msg);
+        console.log("Payment Response ",response);
+        console.log("Payment Response ",JSON.stringify(response));
+        updateSubscriptionPayment(transaction,response,plan)
       },
       
       prefill: {

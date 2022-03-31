@@ -69,54 +69,49 @@ const CardStyle = styled(Card)(({ theme }) => {
   };
 });
 
-const CARDS = [
-  {
-    id: 1,
-    plan: '14 Days',
-    title: 'Free',
-    description:
-    `It is a trial pack and completely free of cost. 
-    It is applied only first time.`
-  },
-  {
-    id: 2,
-    plan: 'Monthly',
-    title: '199',
-    amount:199.0,
-    description: 
-    'It is monthly rental plan.',
-  },
-  {
-    id: 3,
-    plan: 'Quarterly',
-    title: '499',
-    amount:499.0,
-    description: `It is quarterly rental plan.`
-  },
-  {
-    id: 4,
-    plan: 'Half Yearly',
-    title: '799',
-    amount:799.0,
-    description: 
-    `It is half yearly paid plan.`,
-    //'Manage the complete business from sale, delivery, invoice, sharable receipt to reports with analytics'
-  },
-  {
-    id: 5,
-    plan: '9 Month',
-    title: '1099',
-    amount:1099.0,
-    description: `It is 9 month paid plan.`
-  },
-  {
-    id: 6,
-    plan: 'Yearly',
-    title: '1399',
-    amount:1399.0,
-    description: `It is yearly rental plan.`
-  }
-];
+const CARDS = [{
+  "_id":  "6245335d808ed504a6e83874",
+  "Description": "It is a trial pack and completely free of cost. It is applied only first time.",
+  "Title": "14 Days",
+  "Days": 14,
+  "Amount": 0,
+  "Currency": "INR"
+},{
+  "_id":  "62453547808ed504a6e83875",
+  "Description": "It is monthly rental plan.",
+  "Title": "Monthly",
+  "Days": 30,
+  "Amount": 199,
+  "Currency": "INR"
+},{
+  "_id": "62453576808ed504a6e83876",
+  "Description": "It is quarterly rental plan.",
+  "Title": "Quarterly",
+  "Days": 90,
+  "Amount": 499,
+  "Currency": "INR"
+},{
+  "_id":"62453606808ed504a6e83877",
+  "Description": "It is half yearly paid plan",
+  "Title": "Half Yearly",
+  "Days": 180,
+  "Amount": 799,
+  "Currency": "INR"
+},{
+  "_id": "62453654808ed504a6e83878",
+  "Description": "It is 9 month paid plan.",
+  "Title": "9 Month",
+  "Days": 270,
+  "Amount": 1099,
+  "Currency": "INR"
+},{
+  "_id": "62453698808ed504a6e83879",
+  "Description": "It is yearly rental plan.",
+  "Title": "Yearly",
+  "Days": 270,
+  "Amount": 1399,
+  "Currency": "INR"
+}];
 
   const AddMembership = () => {
     const dispatch = useDispatch()
@@ -158,19 +153,19 @@ const CARDS = [
               </Stack>
                 <Grid container spacing={3} sx={{ my: 10 }}>
                 {CARDS.map((card, index) => (
-                    <Grid key={card.title} sx={{px: 2, pb: 5,}} item xs={12} md={4}>
+                    <Grid key={card.Title} sx={{px: 2, pb: 5,}} item xs={12} md={4}>
                       <div 
                       //variants={varFadeInUp}
                       >
                         <CardStyle className="cardLeft">
                         <Typography variant="h3" paragraph>
-                            {card.plan}
+                            {card.Title}
                           </Typography>
                           <Typography variant="h5" paragraph>
-                            {card.title}
+                            {card.Description}
                           </Typography>
                           <Typography paragraph sx={{ color: true ? 'text.secondary' : 'common.white' }}>
-                            {card.description}
+                            {card.Currency + " " + card.Amount}
                           </Typography>
                           <Box>
                             <Button
