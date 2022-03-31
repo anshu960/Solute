@@ -1,4 +1,5 @@
-import firebase from 'firebase';
+import firebase from "firebase/app";
+import "firebase/auth";
 import firebase_config from '../../config/firebase_config';
 import { PATH_AUTH } from '../../routes/path';
 
