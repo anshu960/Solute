@@ -23,6 +23,7 @@ import MembershipCard from '../../components/membership/MembershipCard';
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { retriveActiveSubscription, subscribeToPlan } from '../../store/subscription';
+import { getBusiness } from '../../services/authService';
 
 const CardStyle = styled(Card)(({ theme }) => {
   const shadowCard = (opacity) =>
@@ -42,7 +43,7 @@ const CardStyle = styled(Card)(({ theme }) => {
       backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800]
     },
     '&.cardLeft': {
-      [theme.breakpoints.up('md')]: { marginTop: -40 }
+      [theme.breakpoints.up('md')]: { marginTop: -40 },
     },
     '&.cardCenter': {
       [theme.breakpoints.up('md')]: {
@@ -75,7 +76,7 @@ const CARDS = [{
   "Title": "14 Days",
   "Days": 14,
   "Amount": 0,
-  "Currency": "INR"
+  "Currency": "INR",
 },{
   "_id":  "62453547808ed504a6e83875",
   "Description": "It is monthly rental plan.",
@@ -143,6 +144,31 @@ const CARDS = [{
       dispatch(subscribeToPlan(plan))
     }
 
+    const getPlanColor = (plan) => {
+      if(Object.keys(currentSubscription).length && currentSubscription.SubscriptionPlanID === plan._id){
+          return currentSubscription.isActive ? 'green': 'red';
+      }
+      return 'orange';
+    }
+
+    const getCardDetails = (plan) => {
+      const business = getBusiness();
+      const days = (new Date().getTime() - new Date(business.CreatedAt).getTime())/(24*60*60*1000)
+      let colorCode = '', text = 'Purchase';
+      if(plan.Amount){
+        colorCode = getPlanColor(plan);
+        text = colorCode === 'green' ? 'Renewal': 'Purchase';
+      }
+      else{
+        colorCode = ((plan.Days - days) > 0) ? 'green' : 'red';
+        text = colorCode === 'green' ? 'Active': 'Expired';
+      }
+      return {
+        css: {border: `3px solid ${colorCode}`},
+        text
+      }
+    }
+
     return (
       <Page title="Membership">
           <Fragment>
@@ -156,13 +182,11 @@ const CARDS = [{
                   {/* <MembershipUpload setFiles={setFiles}/> */}
               </Stack>
                 <Grid container spacing={3} sx={{ my: 10 }}>
-                {CARDS.map((card, index) => (
-                    <Grid key={card.Title} sx={{px: 2, pb: 5,}} item xs={12} md={4}>
-                      <div 
-                      //variants={varFadeInUp}
-                      >
-                        <CardStyle className="cardLeft">
-                        <Typography variant="h3" paragraph>
+                {CARDS.map((card, index) => {
+                    const cardDetails = getCardDetails(card)
+                    return (<Grid key={card.Title} sx={{px: 2, pb: 5}} item xs={12} md={4} >
+                        <CardStyle className="cardLeft" sx={cardDetails.css}>
+                          <Typography variant="h3" paragraph>
                             {card.Title}
                           </Typography>
                           <Typography variant="h5" paragraph>
@@ -173,18 +197,18 @@ const CARDS = [{
                           </Typography>
                           <Box>
                             <Button
+                              color={cardDetails.text === 'Expired' ? 'error': (cardDetails.text === 'Renewal' ? 'success': 'info')}
                               style={{cursor:'pointer',width: '165px',}}
+                              disabled={cardDetails.text === 'Expired' ? true: false}
                               variant="outlined"
                               onClick={()=>handleActive(card)}
                             >
-                                {currentSubscription && currentSubscription._id && card._id == currentSubscription.SubscriptionPlanID ? "Active" : "Purchase"}
+                                {cardDetails.text}
                             </Button>
                           </Box>
-                          
                         </CardStyle>
-                      </div>
-                    </Grid>
-                  ))}
+                    </Grid>)
+                })}
                 </Grid>
           </Container>
           </Fragment>
