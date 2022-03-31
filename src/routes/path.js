@@ -78,8 +78,8 @@ export const PATH_DASHBOARD = {
         fee: path(ROOTS_DASHBOARD,'/fee/fee'),
     },
     membership:{
-        root:path(ROOTS_DASHBOARD,'/membership'),
-        add:path(ROOTS_DASHBOARD,'/membership/add'),
+        root:path(ROOTS_DASHBOARD,'/membership/add'),
+        //add:path(ROOTS_DASHBOARD,'/membership/add'),
     },
     delivery: {
         root:path(ROOTS_DASHBOARD,'/delivery'),

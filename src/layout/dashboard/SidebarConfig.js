@@ -148,25 +148,25 @@ const sidebarConfig = {
         title: 'membership',
         icon: <CardMembershipIcon />,
         path: PATH_DASHBOARD.membership.root,
-        items: [
-          {
-            title: 'add',
-            path: PATH_DASHBOARD.membership.add,
-          }
-        ]
+        // items: [
+        //   {
+        //     title: 'add',
+        //     path: PATH_DASHBOARD.membership.add,
+        //   }
+        // ]
       },
     ]
   },
-  {
-    //subheader: 'vehicle',
-    items: [
-      {
-        title: 'vehicle',
-        path: PATH_DASHBOARD.vehicle,
-        icon: <DirectionsCarFilledOutlinedIcon />,
-      },
-    ]
-  },
+  // {
+  //   //subheader: 'vehicle',
+  //   items: [
+  //     {
+  //       title: 'vehicle',
+  //       path: PATH_DASHBOARD.vehicle,
+  //       icon: <DirectionsCarFilledOutlinedIcon />,
+  //     },
+  //   ]
+  // },
   // {
   //   //subheader: 'invoice',
   //   items: [
