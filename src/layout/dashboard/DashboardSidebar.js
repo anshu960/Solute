@@ -52,7 +52,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const [Business, setBusinessDet] = useState({});
   const [user, setUser] = useState({});
   const businessTypes = useSelector(state => state.businessTypes.businessTypes)
-  const [menuConfig, setMenuConfig] = useState(EducationConfig);
+  const [menuConfig, setMenuConfig] = useState(sidebarConfig);
   const history = useHistory();
   useEffect(() => {
     if (isOpenSidebar) {
