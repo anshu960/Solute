@@ -9,7 +9,8 @@ const slice = createSlice({
     initialState: {
       allSubscriptionResults: [],
       users: [],
-      subscriptionOrder:{}
+      subscriptionOrder:{},
+      activeSubscription:{}
     },
     reducers: {
       SubscriptionSuccess: (state, action) => {
@@ -21,13 +22,25 @@ const slice = createSlice({
       subscriptionOrderSuccess: (state, action) => {
         state.users = action.payload;
       },
+      retriveActiveSubscriptionSuccess:(state,action)=>{
+        state.activeSubscription = action.payload
+      }
     },
   });
   
   export default slice.reducer
   
-  const { SubscriptionSuccess,SubscriptionUserSuccess ,subscriptionOrderSuccess} = slice.actions
-
+  const { subscriptionOrderSuccess,retriveActiveSubscriptionSuccess} = slice.actions
+  export const retriveActiveSubscription=()=>dispatch=>{
+    let business = getBusiness();
+      let BusinessID = business._id
+      let UserID = getUserId()
+      let request = {UserID,BusinessID}
+      SendEvent(SocketEvent.RETRIVE_ACTIVE_SUBSCRIPTION_PLAN,request,(data)=>{
+        console.log("RETRIVE_ACTIVE_SUBSCRIPTION_PLAN \n",JSON.stringify(data))
+        dispatch(retriveActiveSubscriptionSuccess(data.Payload));
+      })
+  } 
 export const createRazorpayOrder = (amount,callBack) => async dispatch => {
     try {
       let business = getBusiness();
@@ -49,14 +62,16 @@ export const createRazorpayOrder = (amount,callBack) => async dispatch => {
   export const subscribeToPlan = (plan) => async dispatch => {
     try {
         dispatch(createRazorpayOrder(plan.Amount,(razorpayOrder)=>{
-            showRazorpay(razorpayOrder,plan)
+            showRazorpay(razorpayOrder,plan,()=>{
+              dispatch(retriveActiveSubscription())
+            })
         }));
     } catch (e) {
       return console.error(e.message);
     }
   }
 
-const updateSubscriptionPayment = (paymentOrder,paymentResponse,plan) => {
+const updateSubscriptionPayment = (paymentOrder,paymentResponse,plan,callBack) => {
     try {
         if(paymentResponse.razorpay_payment_id && paymentResponse.razorpay_order_id && paymentResponse.razorpay_signature){
           let business = getBusiness();
@@ -71,6 +86,9 @@ const updateSubscriptionPayment = (paymentOrder,paymentResponse,plan) => {
           toast("Congrats!, Subscribed successfully")
         }else{
           toast("Oops! Something went wrong")
+        }
+        if(callBack){
+          callBack()
         }
       })
         }else{
@@ -94,7 +112,7 @@ const updateSubscriptionPayment = (paymentOrder,paymentResponse,plan) => {
       handler: (response) =>{
         console.log("Payment Response ",response);
         console.log("Payment Response ",JSON.stringify(response));
-        updateSubscriptionPayment(transaction,response,plan)
+        updateSubscriptionPayment(transaction,response,plan,callBack)
       },
       
       prefill: {

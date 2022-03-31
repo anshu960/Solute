@@ -21,8 +21,8 @@ import { MembershipUpload } from '../../components/membership';
 import { readFile } from '../../components/excel';
 import MembershipCard from '../../components/membership/MembershipCard';
 import { alpha, useTheme, styled } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
-import { subscribeToPlan } from '../../store/subscription';
+import { useDispatch, useSelector } from 'react-redux';
+import { retriveActiveSubscription, subscribeToPlan } from '../../store/subscription';
 
 const CardStyle = styled(Card)(({ theme }) => {
   const shadowCard = (opacity) =>
@@ -120,19 +120,23 @@ const CARDS = [{
     const [loading, setLoading] = useState(false);
     const [files, setFiles] = useState([]);
     const [users, setUsers] = useState([]);
+    const currentSubscription = useSelector(state=>state.Subscription.activeSubscription)
     
-    useEffect(
-        ()=>{
-            if(files.length){
-                readFile(files[0],(userList)=>{
-                    console.log(userList)
-                    setUsers(userList);
-                });
-            }
-        },
-        [files.length]
-    )
-    console.log(users)
+    // useEffect(
+    //     ()=>{
+    //         if(files.length){
+    //             readFile(files[0],(userList)=>{
+    //                 console.log(userList)
+    //                 setUsers(userList);
+    //             });
+    //         }
+    //     },
+    //     [files.length]
+    // )
+
+    useEffect(()=>{
+      dispatch(retriveActiveSubscription())
+    },[])
 
     const handleActive = (plan) => {
       console.log(plan)
@@ -173,7 +177,7 @@ const CARDS = [{
                               variant="outlined"
                               onClick={()=>handleActive(card)}
                             >
-                                Active
+                                {currentSubscription && currentSubscription._id && card._id == currentSubscription.SubscriptionPlanID ? "Active" : "Purchase"}
                             </Button>
                           </Box>
                           
