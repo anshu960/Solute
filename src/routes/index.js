@@ -72,6 +72,11 @@ const routes = [
         component: lazy(() => import('../pages/Landing'))
     },
     {
+        exact: true,
+        path: PATH_PAGE.analytics,
+        component: lazy(() => import('../pages/Analytics'))
+    },
+    {
       exact: true,
       path: PATH_PAGE.home,
       component: lazy(() => import('../pages/Home'))

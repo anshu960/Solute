@@ -15,6 +15,7 @@ export const PATH_PAGE = {
     receipt: '/receipt',
     deliveryReceipt: '/deliveryReceipt',
     shipmentTrack: '/shipmentTrack',
+    analytics: '/analytics',
 }
 
 export const PATH_DASHBOARD = {

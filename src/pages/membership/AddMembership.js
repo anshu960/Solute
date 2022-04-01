@@ -36,7 +36,7 @@ const CardStyle = styled(Card)(({ theme }) => {
     minHeight: 350,
     margin: 'auto',
     textAlign: 'center',
-    padding: theme.spacing(10, 5, 0),
+    padding: theme.spacing(10, 5, 3),
     boxShadow: `-40px 40px 80px 0 ${shadowCard(0.48)}`,
     [theme.breakpoints.up('md')]: {
       boxShadow: 'none',
