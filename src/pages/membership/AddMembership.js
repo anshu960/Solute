@@ -145,20 +145,27 @@ const CARDS = [{
     }
 
     const getPlanColor = (plan) => {
+      let cCode = 'orange', expDays = 0;
       if(Object.keys(currentSubscription).length && currentSubscription.SubscriptionPlanID === plan._id){
-          const days = (new Date().getTime() - new Date(currentSubscription.CreatedAt).getTime())/(24*60*60*1000)
-          return ((plan.Days - days) > 0) ? 'green': 'red';
-      }
-      return 'orange';
+          const days = Math.ceil(Math.abs(new Date().getTime() - new Date(currentSubscription.CreatedAt).getTime())/(24*60*60*1000));
+          expDays = plan.Days - days;
+          cCode = (expDays > 0) ? 'green': 'red' 
+        }
+        return {
+          cCode,
+          expDays
+        }
     }
 
     const getCardDetails = (plan) => {
       const business = getBusiness();
-      const days = (new Date().getTime() - new Date(business.CreatedAt).getTime())/(24*60*60*1000)
-      let colorCode = '', text = 'Purchase';
+      const days = Math.ceil(Math.abs(new Date().getTime() - new Date(business.CreatedAt).getTime())/(24*60*60*1000))
+      let colorCode = '', text = 'Purchase', expireDays = 0;
       if(plan.Amount){
-        colorCode = getPlanColor(plan);
-        text = colorCode === 'green' ? 'Renewal': 'Purchase';
+        const {cCode, expDays} = getPlanColor(plan);
+        expireDays = expDays;
+        colorCode = cCode;
+        text = cCode === 'green' ? 'Renewal': 'Purchase';
       }
       else{
         colorCode = ((plan.Days - days) > 0) ? 'green' : 'red';
@@ -166,7 +173,8 @@ const CARDS = [{
       }
       return {
         css: {border: `3px solid ${colorCode}`},
-        text
+        text,
+        expireDays
       }
     }
 
@@ -193,6 +201,11 @@ const CARDS = [{
                           <Typography variant="h5" paragraph>
                             {card.Description}
                           </Typography>
+                          {
+                            cardDetails.expireDays ? <Typography variant="h5" paragraph>
+                              It will expire in {cardDetails.expireDays}
+                            </Typography> : null
+                          }
                           <Typography paragraph sx={{ color: true ? 'text.secondary' : 'common.white' }}>
                             {card.Currency + " " + card.Amount}
                           </Typography>
