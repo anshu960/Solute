@@ -184,9 +184,6 @@ export default function SubscriptionPlan() {
                       </Typography>
                     )}
                     </Box>
-                    {/* <Typography paragraph sx={{ color: true ? 'text.secondary' : 'common.white' }}>
-                      {card.Currency + " " + card.Amount}
-                    </Typography> */}
                   </CardStyle>
               </div>
             </Grid>

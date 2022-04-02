@@ -60,7 +60,7 @@ export default function Appfooter() {
       ...localState,
       open: true,
       title: "Solute's Terms of Use",
-      content: <TnC handleClose={handleClose}/>
+      content: <TnC handleClose={handleClose}  showPrivacyPolicy={handlePolicy}/>
     })
   }
   
