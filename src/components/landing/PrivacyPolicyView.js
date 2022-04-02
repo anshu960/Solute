@@ -156,7 +156,7 @@ const   PrivacyPolicy = (props) => {
 <p><strong>QUESTIONS</strong></p>
 
 <p>If you have questions about this Privacy Statement, please feel free to email us 
-    {/* at support@supplywisdom.com */}
+    at support@solute.app
     </p>
 
 </div>

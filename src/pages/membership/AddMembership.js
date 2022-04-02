@@ -146,7 +146,8 @@ const CARDS = [{
 
     const getPlanColor = (plan) => {
       if(Object.keys(currentSubscription).length && currentSubscription.SubscriptionPlanID === plan._id){
-          return currentSubscription.isActive ? 'green': 'red';
+          const days = (new Date().getTime() - new Date(currentSubscription.CreatedAt).getTime())/(24*60*60*1000)
+          return ((plan.Days - days) > 0) ? 'green': 'red';
       }
       return 'orange';
     }
