@@ -4,10 +4,8 @@ import { styled } from '@mui/material/styles';
 // components
 import Page from '../../components/Page';
 import { ToastContainer } from 'react-toastify';
-import { JoinRoom } from '../../socket/SocketHandler';
-import SocketEvent from '../../socket/SocketEvent';
 import LandingNavbar from '../../layout/landing/LandingNavbar';
-import { MainCarousel, WhySolute, WhyChose, Appfooter} from '../../components/landing';
+import { MainCarousel, WhySolute, WhyChose, Appfooter, SubscriptionPlan } from '../../components/landing';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -30,6 +28,7 @@ export default function Landing() {
       <MainCarousel />
       <WhySolute />
       <WhyChose />
+      <SubscriptionPlan />
       <Appfooter />
     </RootStyle>
   );

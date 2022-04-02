@@ -109,7 +109,7 @@ const CARDS = [{
   "_id": "62453698808ed504a6e83879",
   "Description": "It is yearly rental plan.",
   "Title": "Yearly",
-  "Days": 270,
+  "Days": 365,
   "Amount": 1399,
   "Currency": "INR"
 }];

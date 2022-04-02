@@ -4,30 +4,68 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Grid, Card, Container, Typography, useMediaQuery } from '@mui/material';
 // ----------------------------------------------------------------------
 
-const images = [
-  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Flightning.png?alt=media&token=cfb1eddf-d007-43d5-bf31-4aa84de94191',
-  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Ftime.png?alt=media&token=022fa1ce-8088-4f1a-96b1-e40657224c0a',
-  'https://firebasestorage.googleapis.com/v0/b/fuelme-20ef9.appspot.com/o/fuel_me_website_content%2Fhome_tiles%2Fuptime.png?alt=media&token=e5df8f34-1a48-4ee2-9687-e75ad1d70702',
-]
-
-const CARDS = [
-  {
-    icon: images[0],
-    title: 'Lightening Fast',
-    description:
-      'All the operations happens in real time.No waiting time for you sales and invoices.Performs everything in real time'
-  },
-  {
-    icon: images[1],
-    title: 'Saved Time',
-    description: 'Everything you need at one place.From sales to complete business Sollution on the go.'
-  },
-  {
-    icon: images[2],
-    title: 'Alway Up',
-    description: 'Complete solute is made with great care and reliable technologies makes it always up and available to use on you fingertips.'
-  }
-];
+const CARDS = [{
+  "_id":  "6245335d808ed504a6e83874",
+  "Description": [
+    "14 Days trial pack",
+    "It is a trial pack and completely free of cost.", 
+    "It is applied only first time.",
+    ],
+  "Title": "14 Days",
+  "Days": 14,
+  "Amount": 0,
+  "Currency": "INR",
+},{
+  "_id":  "62453547808ed504a6e83875",
+  "Description": [
+    "It is monthly rental plan.",
+    "30 days plan."
+    ],
+  "Title": "Monthly",
+  "Days": 30,
+  "Amount": 199,
+  "Currency": "INR"
+},{
+  "_id": "62453576808ed504a6e83876",
+  "Description": [
+    "It is quarterly rental plan.",
+    "90 days plan."
+  ],
+  "Title": "Quarterly",
+  "Days": 90,
+  "Amount": 499,
+  "Currency": "INR"
+},{
+  "_id":"62453606808ed504a6e83877",
+  "Description": [
+    "It is half yearly paid plan",
+    "180 days plan."
+    ],
+  "Title": "Half Yearly",
+  "Days": 180,
+  "Amount": 799,
+  "Currency": "INR"
+},{
+  "_id": "62453654808ed504a6e83878",
+  "Description": [
+    "It is 9 month paid plan.",
+    "270 days plan."
+  ],
+  "Title": "9 Month",
+  "Days": 270,
+  "Amount": 1099,
+  "Currency": "INR"
+},{
+  "_id": "62453698808ed504a6e83879",
+  "Description": [
+    "It is yearly rental plan.",
+    "365 days plan."
+    ],
+  "Title": "Yearly",
+  "Days": 365,
+  "Amount": 1399,
+  "Currency": "INR"
+}];
 
 const shadowIcon = (color) => `drop-shadow(2px 2px 2px ${alpha(color, 0.48)})`;
 
@@ -93,7 +131,7 @@ const CardIconStyle = styled('img')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function WhyChose() {
+export default function SubscriptionPlan() {
   const theme = useTheme();
   const isLight = theme.palette.mode === 'light';
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
@@ -106,14 +144,14 @@ export default function WhyChose() {
           //variants={varFadeInUp}
           >
             <Typography component="p" variant="overline" sx={{ mb: 2, color: 'text.secondary', textAlign: 'center' }}>
-              Choose Solute
+              Membership
             </Typography>
           </div>
           <div 
           //variants={varFadeInDown}
           >
             <Typography variant="h2" sx={{ textAlign: 'center' }}>
-              Why businesses choose Solute?
+              Affordable Plans?
             </Typography>
           </div>
           <div //variants={varFadeInDown}
@@ -123,7 +161,7 @@ export default function WhyChose() {
               color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary')
             }}
           >
-            Solute provides everything you need to grow your business with trust.
+            Solute offers the various plans which easily affordable.
           </Typography>
         </div>
         </Box>
@@ -134,26 +172,22 @@ export default function WhyChose() {
               <div 
               //variants={varFadeInUp}
               >
-                <CardStyle className={(index === 0 && 'cardLeft') || (index === 1 && 'cardCenter')}>
-                  <CardIconStyle
-                    src={card.icon}
-                    alt={card.title}
-                    sx={{
-                      ...(index === 0 && {
-                        filter: (theme) => shadowIcon(theme.palette.info.main)
-                      }),
-                      ...(index === 1 && {
-                        filter: (theme) => shadowIcon(theme.palette.error.main)
-                      })
-                    }}
-                  />
-                  <Typography variant="h5" paragraph>
-                    {card.title}
-                  </Typography>
-                  <Typography sx={{ color: isLight ? 'text.secondary' : 'common.white' }}>
-                    {card.description}
-                  </Typography>
-                </CardStyle>
+                <CardStyle className="cardLeft">
+                    <Typography variant="h3" paragraph>
+                    {"₹" + " " + card.Amount}
+                      {/* {card.Title} */}
+                    </Typography>
+                    <Box sx={{textAlign: 'left'}}>
+                    {card.Description.map((desc, index) => 
+                      <Typography variant="h6" paragraph>
+                      <li>{desc}</li>
+                      </Typography>
+                    )}
+                    </Box>
+                    {/* <Typography paragraph sx={{ color: true ? 'text.secondary' : 'common.white' }}>
+                      {card.Currency + " " + card.Amount}
+                    </Typography> */}
+                  </CardStyle>
               </div>
             </Grid>
           ))}
