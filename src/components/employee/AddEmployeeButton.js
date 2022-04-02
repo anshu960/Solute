@@ -10,7 +10,7 @@ export default function AddEmployeeButton () {
     const [open, setOpen] = useState(false);
     const handleClose = () => {
         setOpen(false);
-      }
+    }
     const contentBody = () => <Add setOpen={setOpen}/>
     return(
     <Fragment>
