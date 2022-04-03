@@ -1,6 +1,7 @@
 module.exports = Object.freeze({
-    server:"development",
-    socket:"http://localhost:1010",
-    mode:"development",
-    PORT:1010
+    server:"live",
+    socket:"https://solute-r227wnciga-el.a.run.app",
+    mode:"production",
+    PORT:8080
 });
+
