@@ -72,9 +72,9 @@ const CardStyle = styled(Card)(({ theme }) => {
 
 const CARDS = [{
   "_id":  "6245335d808ed504a6e83874",
-  "Description": "It is a trial pack and completely free of cost. It is applied only first time.",
-  "Title": "14 Days",
-  "Days": 14,
+  "Description": "It is a trial pack and completely free of cost. It is applicable only first time.",
+  "Title": "30 Days",
+  "Days": 30,
   "Amount": 0,
   "Currency": "INR",
 },{

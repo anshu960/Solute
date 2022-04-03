@@ -5,66 +5,17 @@ import { Box, Grid, Card, Container, Typography, useMediaQuery } from '@mui/mate
 // ----------------------------------------------------------------------
 
 const CARDS = [{
-  "_id":  "6245335d808ed504a6e83874",
   "Description": [
-    "30 Days trial pack",
-    "It is a trial pack and completely free of cost.", 
-    "It is applied only first time.",
+    
     ],
-  "Title": "30 Days",
-  "Days": 30,
-  "Amount": 0,
-  "Currency": "INR",
+  "Title": "Happy Clients",
+  "count": 1
 },{
-  "_id":  "62453547808ed504a6e83875",
   "Description": [
-    "It is monthly rental plan.",
-    "30 days plan."
+   
     ],
-  "Title": "Monthly",
-  "Days": 30,
-  "Amount": 199,
-  "Currency": "INR"
-},{
-  "_id": "62453576808ed504a6e83876",
-  "Description": [
-    "It is quarterly rental plan.",
-    "90 days plan."
-  ],
-  "Title": "Quarterly",
-  "Days": 90,
-  "Amount": 499,
-  "Currency": "INR"
-},{
-  "_id":"62453606808ed504a6e83877",
-  "Description": [
-    "It is half yearly paid plan",
-    "180 days plan."
-    ],
-  "Title": "Half Yearly",
-  "Days": 180,
-  "Amount": 799,
-  "Currency": "INR"
-},{
-  "_id": "62453654808ed504a6e83878",
-  "Description": [
-    "It is 9 month paid plan.",
-    "270 days plan."
-  ],
-  "Title": "9 Month",
-  "Days": 270,
-  "Amount": 1099,
-  "Currency": "INR"
-},{
-  "_id": "62453698808ed504a6e83879",
-  "Description": [
-    "It is yearly rental plan.",
-    "365 days plan."
-    ],
-  "Title": "Yearly",
-  "Days": 365,
-  "Amount": 1399,
-  "Currency": "INR"
+    "Title": "Happy Businesses",
+  "count": 1
 }];
 
 const shadowIcon = (color) => `drop-shadow(2px 2px 2px ${alpha(color, 0.48)})`;
@@ -131,7 +82,7 @@ const CardIconStyle = styled('img')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function SubscriptionPlan() {
+export default function BusinessesCounting() {
   const theme = useTheme();
   const isLight = theme.palette.mode === 'light';
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
@@ -144,14 +95,14 @@ export default function SubscriptionPlan() {
           //variants={varFadeInUp}
           >
             <Typography component="p" variant="overline" sx={{ mb: 2, color: 'text.secondary', textAlign: 'center' }}>
-              Membership
+              Businesses
             </Typography>
           </div>
           <div 
           //variants={varFadeInDown}
           >
             <Typography variant="h2" sx={{ textAlign: 'center' }}>
-              Affordable Plans?
+              Serving businesses and clients
             </Typography>
           </div>
           <div //variants={varFadeInDown}
@@ -161,21 +112,26 @@ export default function SubscriptionPlan() {
               color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary')
             }}
           >
-            Solute offers the various plans which easily affordable.
+            Happy Businesses and clients.
           </Typography>
         </div>
         </Box>
 
         <Grid container spacing={isDesktop ? 10 : 5}>
           {CARDS.map((card, index) => (
-            <Grid key={card.title} item xs={12} md={4}>
+            <Grid key={card.title} item xs={6} md={6}>
               <div 
               //variants={varFadeInUp}
               >
                 <CardStyle className="cardLeft">
                     <Typography variant="h3" paragraph>
-                    {"₹" + " " + card.Amount}
-                      {/* {card.Title} */}
+                      {"😍"}
+                    </Typography>
+                    <Typography variant="h3" paragraph>
+                      {card.Title}
+                    </Typography>
+                    <Typography variant="h4" paragraph>
+                      {card.count} and counting
                     </Typography>
                     <Box sx={{textAlign: 'left'}}>
                     {card.Description.map((desc, index) => 

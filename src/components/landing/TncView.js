@@ -12,14 +12,14 @@ const   TnC = (props) => {
         <p>Subscription also known as membership plan can be opted by purchasing or renewed if already taken. By joining 14 days free plan auto active it is one time plan and can not be renwed. If any plan active and user opted the renewel or purchased the new plan the balance day of previous plan would include in it.</p>
         <p>The Subscription/Membership plans price may be changed time to time.</p>
         <p>The various Subscription/membership plans detailed below : </p>
-        <div><ol>
-        <li>14 Days trial pack : It is a trial pack and completely free of cost. It is applied only first time.</li>
-         <li>30 days plan : It is monthly rental plan. It is applicable only for 30 days</li>
+        <p>
+            <li>30 Days trial pack : It is a trial pack and completely free of cost. It is applied only first time.</li>
+            <li>30 days plan : It is monthly rental plan. It is applicable only for 30 days</li>
             <li>90 days plan : It is quarterly rental plan. It is applicable only for 90 days</li>
             <li>180 days plan : It is half yearly rental plan. It is applicable only for 180 days</li>
             <li>270 Month plan : It is 9 month rental plan. It is applicable only for 270 days</li>
             <li>365 Month plan : It is yearly rental plan. It is applicable only for 365 days</li>
-        </ol></div>
+        </p>
         <br></br>
         <p><strong>Refunds/Cancellations</strong></p>
 
