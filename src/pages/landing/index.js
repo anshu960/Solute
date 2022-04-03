@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import Page from '../../components/Page';
 import { ToastContainer } from 'react-toastify';
 import LandingNavbar from '../../layout/landing/LandingNavbar';
-import { MainCarousel, WhySolute, WhyChose, Appfooter, SubscriptionPlan } from '../../components/landing';
+import { MainCarousel, WhySolute, WhyChose, Appfooter, SubscriptionPlan, BusinessesCounting } from '../../components/landing';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -26,6 +26,7 @@ export default function Landing() {
       <ToastContainer></ToastContainer>
       <LandingNavbar />
       <MainCarousel />
+      <BusinessesCounting />
       <WhySolute />
       <WhyChose />
       <SubscriptionPlan />
