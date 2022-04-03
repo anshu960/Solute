@@ -120,9 +120,7 @@ export default function BusinessesCounting() {
         <Grid container spacing={isDesktop ? 10 : 5}>
           {CARDS.map((card, index) => (
             <Grid key={card.title} item xs={6} md={6}>
-              <div 
-              //variants={varFadeInUp}
-              >
+              <div>
                 <CardStyle className="cardLeft">
                     <Typography variant="h3" paragraph>
                       {"😍"}

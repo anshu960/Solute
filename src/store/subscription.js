@@ -60,6 +60,7 @@ export const createRazorpayOrder = (amount,callBack) => async dispatch => {
   }
 
   export const subscribeToPlan = (plan) => async dispatch => {
+    console.log('subscribeToPlan ::: ', plan)
     try {
         dispatch(createRazorpayOrder(plan.Amount,(razorpayOrder)=>{
             showRazorpay(razorpayOrder,plan,()=>{

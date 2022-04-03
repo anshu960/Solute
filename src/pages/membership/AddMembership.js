@@ -70,44 +70,49 @@ const CardStyle = styled(Card)(({ theme }) => {
   };
 });
 
+const _TRIAL = 30;
+
 const CARDS = [{
   "_id":  "6245335d808ed504a6e83874",
-  "Description": "It is a trial pack and completely free of cost. It is applicable only first time.",
-  "Title": "30 Days",
-  "Days": 30,
+  "Description": [
+    `It is for first ${_TRIAL} days only.`,
+    "It is a trial pack and completely free of cost."
+  ],
+  "Title": "Free",
+  "Days": _TRIAL,
   "Amount": 0,
   "Currency": "INR",
 },{
   "_id":  "62453547808ed504a6e83875",
-  "Description": "It is monthly rental plan.",
+  "Description": ["It is monthly rental plan."],
   "Title": "Monthly",
   "Days": 30,
   "Amount": 199,
   "Currency": "INR"
 },{
   "_id": "62453576808ed504a6e83876",
-  "Description": "It is quarterly rental plan.",
+  "Description": ["It is quarterly rental plan."],
   "Title": "Quarterly",
   "Days": 90,
   "Amount": 499,
   "Currency": "INR"
 },{
   "_id":"62453606808ed504a6e83877",
-  "Description": "It is half yearly paid plan",
+  "Description": ["It is half yearly paid plan"],
   "Title": "Half Yearly",
   "Days": 180,
   "Amount": 799,
   "Currency": "INR"
 },{
   "_id": "62453654808ed504a6e83878",
-  "Description": "It is 9 month paid plan.",
+  "Description": ["It is 9 month paid plan."],
   "Title": "9 Month",
   "Days": 270,
   "Amount": 1099,
   "Currency": "INR"
 },{
   "_id": "62453698808ed504a6e83879",
-  "Description": "It is yearly rental plan.",
+  "Description": ["It is yearly rental plan."],
   "Title": "Yearly",
   "Days": 365,
   "Amount": 1399,
@@ -141,7 +146,22 @@ const CARDS = [{
 
     const handleActive = (plan) => {
       console.log(plan)
-      dispatch(subscribeToPlan(plan))
+      let planDays = plan.Days, expDays = 0;
+      const freePlan = CARDS.filter((card) => card._id === '6245335d808ed504a6e83874')[0];
+      const business = getBusiness();
+      const totalDays = Math.ceil(Math.abs(new Date().getTime() - new Date(business.CreatedAt).getTime())/(24*60*60*1000))
+      const freeDays = freePlan.Days - totalDays;
+      if(freeDays > 0){
+        planDays += freeDays
+      }
+      if(Object.keys(currentSubscription).length){
+        let remainingDays = Math.ceil(Math.abs(new Date().getTime() - new Date(currentSubscription.CreatedAt).getTime())/(24*60*60*1000));
+        expDays = plan.Days - remainingDays;
+        if(expDays > 0){
+          planDays += expDays;
+        }
+      }
+      dispatch(subscribeToPlan({...plan, Days: planDays}))
     }
 
     const getPlanColor = (plan) => {
@@ -168,8 +188,10 @@ const CARDS = [{
         text = cCode === 'green' ? 'Renewal': 'Purchase';
       }
       else{
-        colorCode = ((plan.Days - days) > 0) ? 'green' : 'red';
+        const freeDays = plan.Days - days;
+        colorCode = (freeDays > 0) ? 'green' : 'red';
         text = colorCode === 'green' ? 'Active': 'Expired';
+        expireDays = (freeDays > 0) ? freeDays : 0;
       }
       return {
         css: {border: `3px solid ${colorCode}`},
@@ -198,18 +220,22 @@ const CARDS = [{
                           <Typography variant="h3" paragraph>
                             {card.Title}
                           </Typography>
-                          <Typography variant="h5" paragraph>
-                            {card.Description}
-                          </Typography>
+                          {
+                            card.Description.map((desc)=>
+                              <Typography variant="h5" paragraph>
+                              {desc}
+                            </Typography> )
+                          }
+                          
                           {
                             cardDetails.expireDays ? <Typography variant="h5" paragraph>
                               It will expire in {cardDetails.expireDays}
                             </Typography> : null
                           }
-                          <Typography paragraph sx={{ color: true ? 'text.secondary' : 'common.white' }}>
+                          {card.Amount ? <Typography paragraph sx={{ color: true ? 'text.secondary' : 'common.white' }}>
                             {card.Currency + " " + card.Amount}
-                          </Typography>
-                          <Box>
+                          </Typography>: null}
+                          {card.Amount ? <Box>
                             <Button
                               color={cardDetails.text === 'Expired' ? 'error': (cardDetails.text === 'Renewal' ? 'success': 'info')}
                               style={{cursor:'pointer',width: '165px',}}
@@ -219,7 +245,7 @@ const CARDS = [{
                             >
                                 {cardDetails.text}
                             </Button>
-                          </Box>
+                          </Box> : null}
                         </CardStyle>
                     </Grid>)
                 })}
