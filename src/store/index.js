@@ -15,6 +15,7 @@ import business_analytics from './business_analytics';
 import search from "./search";
 import Notification from "./notification"
 import Subscription from "./subscription"
+import WhatsApp from './WhatsApp';
 const reducer = combineReducers({
     business,
     businessTypes,
@@ -30,7 +31,8 @@ const reducer = combineReducers({
     business_analytics,
     search,
     Notification,
-    Subscription
+    Subscription,
+    WhatsApp
 })
 const store = configureStore({
   reducer,

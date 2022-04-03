@@ -255,6 +255,7 @@ const Sale = () => {
     Customer: '', 
   })
   console.log("selectedTransaction",selectedTransaction);
+  console.log("xxxxxxxx",allCustomer);
 
 
     const handleCreateSaleEvent = useCallback((data) => {

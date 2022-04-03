@@ -28,6 +28,7 @@ const { retriveCustomerSuccess,setSelectedCustomerSuccess } = slice.actions
 
 export const retriveCustomer = (request) => async dispatch => {
   try {
+    console.log("RETRIVE_CUSTOMER request",request)
     SendEvent(SocketEvent.RETRIVE_CUSTOMER,request,(data)=>{
       console.log("RETRIVE_CUSTOMER",data)
       dispatch(retriveCustomerSuccess(data.Payload));
