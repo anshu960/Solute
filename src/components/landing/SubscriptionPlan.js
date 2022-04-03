@@ -7,12 +7,12 @@ import { Box, Grid, Card, Container, Typography, useMediaQuery } from '@mui/mate
 const CARDS = [{
   "_id":  "6245335d808ed504a6e83874",
   "Description": [
-    "14 Days trial pack",
+    "30 Days trial pack",
     "It is a trial pack and completely free of cost.", 
     "It is applied only first time.",
     ],
-  "Title": "14 Days",
-  "Days": 14,
+  "Title": "30 Days",
+  "Days": 30,
   "Amount": 0,
   "Currency": "INR",
 },{
