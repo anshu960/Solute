@@ -46,6 +46,7 @@ function renderContent(notification) {
 }
 
 function NotificationItem({ notification }) {
+  const dispatch = useDispatch()
   // @ts-ignore
   const { avatar, title } = renderContent(notification)
   // @ts-ignore
@@ -81,14 +82,14 @@ function NotificationItem({ notification }) {
           <Button
             color="info"
             variant="contained"
-            onClick={()=>{acceptRequest(notification)}}
+            onClick={()=>{acceptRequest(dispatch,notification,()=>{})}}
             startIcon={<CheckIcon />}>
               Accept
           </Button>
           <Button
           color="error"
           variant="outlined"
-          onClick={()=>{rejectRequest(notification)}}
+          onClick={()=>{rejectRequest(dispatch,notification,()=>{})}}
           startIcon={<ClearIcon />}>
             Reject
           </Button>

@@ -1,6 +1,7 @@
 import { acceptConnectionRequest, rejectConnectionRequest } from "../store/employee";
 import NoitficartionActions from "./../config/notification_action"
 export const acceptRequest = (dispatch,notification,callback) => {
+    console.log("notification",notification);
     switch(notification.Action){
         case NoitficartionActions.ACCEPT_EMPLOYEE_CONNECTION_REQUEST:
             console.log("ACCEPT_EMPLOYEE_CONNECTION_REQUEST")
