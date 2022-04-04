@@ -1,6 +1,6 @@
 module.exports = Object.freeze({
     server:"development",
-    socket:"http://localhost:8080",
+    socket:"http://localhost:1010",
     mode:"development",
-    PORT:8080
+    PORT:1010
 });
