@@ -5,19 +5,6 @@ import { Box, Grid, Card, Container, Typography, useMediaQuery } from '@mui/mate
 import { useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 
-const CARDS = [{
-  "Description": [
-    
-    ],
-  "Title": "Happy Clients",
-  "count": 1
-},{
-  "Description": [
-   
-    ],
-    "Title": "Happy Businesses",
-  "count": 1
-}];
 
 const shadowIcon = (color) => `drop-shadow(2px 2px 2px ${alpha(color, 0.48)})`;
 
@@ -84,8 +71,22 @@ const CardIconStyle = styled('img')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function BusinessesCounting() {
-  const theme = useTheme();
   const statistics = useSelector(state=>state.Statistics.PlatformStatistics)
+  const CARDS = [{
+    "Description": [
+      
+      ],
+    "Title": "Happy Clients",
+    "count": statistics ? statistics.UserCount : 0
+  },{
+    "Description": [
+     
+      ],
+      "Title": "Happy Businesses",
+    "count": statistics ? statistics.BusinessCount : 0
+  }];
+  const theme = useTheme();
+  
   const isLight = theme.palette.mode === 'light';
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
@@ -131,7 +132,7 @@ export default function BusinessesCounting() {
                       {card.Title}
                     </Typography>
                     <Typography variant="h4" paragraph>
-                      {index === 0 ? (statistics ? statistics.BusinessCount : 101) : (statistics ? statistics.UserCount : 101) } and counting
+                      {card.count } and counting
                     </Typography>
                     <Box sx={{textAlign: 'left'}}>
                     {card.Description.map((desc, index) => 
