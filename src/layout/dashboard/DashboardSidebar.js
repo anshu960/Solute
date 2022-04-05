@@ -21,6 +21,7 @@ import { matchPath } from 'react-router-dom';
 import SidebarItem from './SidebarItem';
 import { PATH_PAGE, PATH_DASHBOARD } from '../../routes/path';
 import {useDispatch, useSelector} from 'react-redux'
+import { retriveActiveSubscription } from '../../store/subscription';
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -54,6 +55,13 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const businessTypes = useSelector(state => state.businessTypes.businessTypes)
   const [menuConfig, setMenuConfig] = useState(sidebarConfig);
   const history = useHistory();
+  const dispatch = useDispatch();
+  const currentSubscription = useSelector(state=>state.Subscription.activeSubscription)
+
+  useEffect(()=>{
+    dispatch(retriveActiveSubscription())
+  },[])
+
   useEffect(() => {
     if (isOpenSidebar) {
       onCloseSidebar();
@@ -305,13 +313,29 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     ]
   }
 
+  function handleSidebarItemClick (){ 
+    let subscriptionDays = 0;
+    const _TRIAL = 30;
+    if(Object.keys(currentSubscription).length){
+      const remainingDays = Math.ceil(Math.abs(new Date().getTime() - new Date(currentSubscription.StartDate).getTime())/(24*60*60*1000)); 
+      subscriptionDays = currentSubscription.Days - remainingDays;
+    }
+    const business = getBusiness();
+    const days = Math.ceil(Math.abs(new Date().getTime() - new Date(business.CreatedAt).getTime())/(24*60*60*1000));
+    const freeDays = _TRIAL - days;
+    const isActivePlan = freeDays > 0 || subscriptionDays > 0;
+    if(!isActivePlan){
+      history.push(PATH_DASHBOARD.membership.root)
+    }
+  }
+
   function renderSidebarItems({
     items,
     pathname,
     level = 0
   }) {
     return (
-      <List disablePadding>
+      <List disablePadding onClick={handleSidebarItemClick}>
         {items && items.reduce(
           (array, item) => reduceChild({ array, item, pathname, level }),
           []
