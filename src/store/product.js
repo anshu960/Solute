@@ -129,6 +129,7 @@ export const createProduct = (fields,files,callback) => async dispatch => {
     const UserID = getUserId();
     const BusinessID = getBusinessId();
     const request = {...fields}
+    request.IsDeleted = false;
     request.UserID = UserID
     request.BusinessID = BusinessID
     request.Price=request.Price ? parseFloat(request.Price): 0.00
