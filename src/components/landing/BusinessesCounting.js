@@ -2,6 +2,7 @@ import React from 'react';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Grid, Card, Container, Typography, useMediaQuery } from '@mui/material';
+import { useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 
 const CARDS = [{
@@ -84,6 +85,7 @@ const CardIconStyle = styled('img')(({ theme }) => ({
 
 export default function BusinessesCounting() {
   const theme = useTheme();
+  const statistics = useSelector(state=>state.Statistics.PlatformStatistics)
   const isLight = theme.palette.mode === 'light';
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
@@ -129,7 +131,7 @@ export default function BusinessesCounting() {
                       {card.Title}
                     </Typography>
                     <Typography variant="h4" paragraph>
-                      {card.count} and counting
+                      {index === 0 ? (statistics ? statistics.BusinessCount : 101) : (statistics ? statistics.UserCount : 101) } and counting
                     </Typography>
                     <Box sx={{textAlign: 'left'}}>
                     {card.Description.map((desc, index) => 

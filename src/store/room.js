@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { socket } from '../context/socket';
 import { getUserId } from '../services/authService';
 import SocketEvent from '../socket/SocketEvent';
-import {JoinRoom } from "./../socket/SocketHandler";
+import {JoinRoom, SendEvent } from "./../socket/SocketHandler";
+import { syncPlatformStatistics } from './Statistics';
 
 const isConnected = false
 
@@ -31,7 +32,9 @@ export const connect = () => async dispatch => {
     socket.on("connect",()=>{
       console.log("XXXX RoomConnected");
       dispatch(connectRoomSuccess(true));
-      JoinRoom(SocketEvent.JOIN_ROOM,{"ROOM_ID":userId},()=>{})
+      JoinRoom(SocketEvent.JOIN_ROOM,{"ROOM_ID":userId},()=>{
+        dispatch(syncPlatformStatistics()) 
+      })
     });
     socket.connect();
   } catch (e) {
