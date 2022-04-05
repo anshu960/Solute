@@ -176,11 +176,6 @@ export const DashboardRoutes = {
       },
       {
         exact: true,
-        path: PATH_DASHBOARD.membership.add,
-        component: lazy(() => import('../pages/membership/AddMembership'))
-      },
-      {
-        exact: true,
         path: PATH_DASHBOARD.student.students,
         component: lazy(() => import('../pages/student/Students'))
       },
@@ -203,6 +198,11 @@ export const DashboardRoutes = {
         exact: true,
         path: PATH_DASHBOARD.subject.courses,
         component: lazy(() => import('../pages/courses/Courses'))
+      },
+      {
+        exact: true,
+        path: PATH_DASHBOARD.membership.add,
+        component: lazy(() => import('../pages/membership/AddMembership'))
       },
       {
         exact: true,

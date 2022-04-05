@@ -208,10 +208,10 @@ const displayBusinessCard = () => {
       <Container maxWidth="lg">
         <Box sx={{ mb: 5 }}>
           <Typography variant="h3" align="center" paragraph>
-            {t('page_title')}
+            {t('lets_start_powering_you_up_lbl')}
           </Typography>
           <Typography align="center" sx={{ color: 'text.secondary' }}>
-            {t('page_subtitle')}
+            {t('choose_business_to_solute')}
           </Typography>
         </Box>
         <Grid container spacing={3} sx={{ my: 10 }}>

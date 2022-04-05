@@ -12,6 +12,7 @@ import ClassIcon from '@mui/icons-material/Class';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PaidIcon from '@mui/icons-material/Paid';
 import PersonAddAlt1RoundedIcon from '@mui/icons-material/PersonAddAlt1Rounded';
+import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import { PATH_DASHBOARD } from '../../routes/path';
 
 // ----------------------------------------------------------------------
@@ -169,6 +170,22 @@ const EducationConfig = {
             path: PATH_DASHBOARD.subject.courses,
           },
         ]
+      },
+    ]
+  },
+  {
+    //subheader: 'membership',
+    items: [
+      {
+        title: 'membership',
+        icon: <CardMembershipIcon />,
+        path: PATH_DASHBOARD.membership.root,
+        // items: [
+        //   {
+        //     title: 'add',
+        //     path: PATH_DASHBOARD.membership.add,
+        //   }
+        // ]
       },
     ]
   },
