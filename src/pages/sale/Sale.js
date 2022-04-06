@@ -34,6 +34,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { retriveProduct } from '../../store/product';
 import { retriveCustomer } from '../../store/customer';
 import { setSelectedTransaction } from '../../store/sale';
+import { AddCustomerButton } from '../../components/customer';
 
 const useStyles = makeStyles((theme)=>createStyles({
     addNewGroupBulk: {
@@ -286,9 +287,12 @@ const Sale = () => {
         sessionStorage.removeItem('selectedCustomer');
         const UserID = getUserId();
         const BusinessID = getBusinessId();
-    if(!allProduct.length){
-        dispatch(retriveProduct({UserID,BusinessID}));
-    }
+        if(!allProduct.length){
+            dispatch(retriveProduct({UserID,BusinessID}));
+        }
+        if(!allCustomer.length){
+            dispatch(retriveCustomer({UserID,BusinessID}));
+        }
     },[])
 
   /**
@@ -449,7 +453,7 @@ const handleChangeCustomer = (option, {name}) => {
                     Sale
                 </Typography>
                 <Box className={classes.actionList}>
-                <Select
+                    <Select
                         options={customerOptions}
                         placeholder="Party Name"
                         name="partyName"
@@ -458,6 +462,7 @@ const handleChangeCustomer = (option, {name}) => {
                         isClearable
                         onChange={handleChangeCustomer}
                     />
+                    <AddCustomerButton />
                 </Box>
             </Stack>
 

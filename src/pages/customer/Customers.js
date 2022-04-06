@@ -11,14 +11,12 @@ import {
 } from 'react';
 
 import Page from '../../components/Page';
-import {SendEvent } from '../../socket/SocketHandler';
-import SocketEvent from '../../socket/SocketEvent';
 import AppLoader from '../../components/Loader';
 import { ToastContainer ,toast} from 'react-toastify';
 import { AddCustomerButton, CustomerCard } from '../../components/customer';
 import { getBusinessId, getUserId } from '../../services/authService';
 import { useStyles } from './Style';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { retriveCustomer } from '../../store/customer';
 
 const defaulState = {
@@ -50,36 +48,28 @@ const defaulUpdateCustomer = {
 const Customers = () => {
   const dispatch = useDispatch()
   const classes = useStyles();
+  const customerList = useSelector(state => state.customer.allCustomer)
   const [selectedCustomer, setSelectedCustomer] = useState(defaulState);
-  const [customerList, setCustomerList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [customerToEdit, setCustomerToEdit] = useState(defaulUpdateCustomer);
 
   useEffect(()=>{  
-    refreshCustomerList();
-  },[])
+    if(!customerList.length){
+      setLoading(true);
+      refreshCustomerList();
+    }else{
+      setLoading(false);
+    }
+  },[customerList.length])
 
   const refreshCustomerList=()=>{
-    setLoading(true);
-    
     const UserID = getUserId();
     const BusinessID = getBusinessId();
     const request = {UserID,BusinessID}
     console.log("request",request)
     // JoinRoom(SocketEvent.JOIN_ROOM,{ROOM_ID:UserID})
     dispatch(retriveCustomer(request))
-    SendEvent(SocketEvent.RETRIVE_CUSTOMER,request,handleRetriveCustomerEvent)
   }
-  const handleRetriveCustomerEvent = useCallback((data) => {
-    setLoading(false);
-    console.log("handleRetriveCustomerEvent",data)
-    if(data && data.Payload && data.Payload.length){
-          setCustomerList(data.Payload);
-          setSelectedCustomer(defaulState);
-    }else{
-        console.log("Unable to find customer, please try after some time");
-    }
-  }, []);
 
 const onClickEdit = (customer,index)=>{
     setCustomerToEdit(customer);
