@@ -27,8 +27,8 @@ export default function AddCustomer({setOpen, setLoading}) {
     setLoading(true);
     setOpen(false);
     const request = {...fields};
-    console.log("UPDATE_CUSTOMER REQUEST",request);
-    SendEvent(SocketEvent.UPDATE_CUSTOMER,request,handleUpdateCustomerEvent);
+    console.log("CREATE_CUSTOMER REQUEST",request);
+    SendEvent(SocketEvent.CREATE_CUSTOMER,request,handleUpdateCustomerEvent);
 }
 const handleUpdateCustomerEvent = React.useCallback((data) => {
   setLoading(false);
