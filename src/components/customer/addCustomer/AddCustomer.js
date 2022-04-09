@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useRef } from 'react';
 // material
-import { DialogActions, DialogContent, DialogContentText, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, DialogActions, DialogContent, DialogContentText, Grid, Stack, Typography } from '@mui/material';
 import AddCustomerAction from './AddCustomerAction';
 import Select from 'react-select';
 import InputTextField from '../../InputTextField';
@@ -11,11 +11,13 @@ import { SendEvent } from '../../../socket/SocketHandler';
 import SocketEvent from '../../../socket/SocketEvent';
 import { getBusinessId, getUserId } from '../../../services/authService';
 import { addNewCustomer, setSelectedCustomer } from '../../../store/customer';
+import { addStyles } from './Style';
 
 // ----------------------------------------------------------------------
 
 export default function AddCustomer({setOpen, setLoading}) {
   const dispatch = useDispatch();
+  const classes = addStyles();
   const [fields, setFields] = useState({});
   const descriptionElementRef = useRef(null);
   React.useEffect(()=>{
@@ -103,6 +105,34 @@ const handleUpdateCustomerEvent = React.useCallback((data) => {
         <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
           <form action="">
             <Stack spacing={3}>
+            <Grid container spacing={3} py={2}>
+              <Grid item xs={12} md={12} lg={6} xl={4}>
+                <Stack spacing={3}>
+                <Box component="span" className={classes.selctAutTarDate}>
+                  <InputTextField
+                    fullWidth
+                    placeholder="Search customer by contact"
+                    onChange={onChange}
+                    name="MobileNumber"
+                    autoComplete={false}
+                    value={fields["MobileNumber"]}
+                    type="text"
+                    className={classes.search}
+                  />
+                </Box>
+                </Stack>
+              </Grid>
+              <Grid item xs={12} md={12} lg={6} xl={4}>
+                <Stack spacing={3}>
+                  <Box component="span" className={classes.selctAutTarDate}>
+                      <Button
+                      variant="contained" 
+                      color="info" 
+                      >Search</Button>
+                  </Box>
+                </Stack>
+              </Grid>
+              </Grid>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
               <Grid container spacing={3} py={2}>
                 {prepareInputFields()}

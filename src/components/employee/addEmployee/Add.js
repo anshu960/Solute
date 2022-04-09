@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { useState, useRef } from 'react';
 // material
-import { Avatar, Box, Button, DialogActions, DialogContent, DialogContentText, Grid, List, ListItem, ListItemAvatar, ListItemText, ListSubheader, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, DialogActions, DialogContent, DialogContentText, Grid, Stack, TextField } from '@mui/material';
 import AddAction from './AddAction';
-import Select from 'react-select';
-import InputTextField from '../../InputTextField';
-import { addButton, stopFields } from './FieldConfig';
-import { createShipmentStatus} from '../../../store/shipment';
-import {useDispatch, useSelector} from 'react-redux'
-import { getBusinessId, getUserId } from '../../../services/authService';
+import {useDispatch, useSelector} from 'react-redux';
 import { addStyles } from './Style';
 import { findUser } from '../../../store/search';
 import UserList from './UserList';
