@@ -293,6 +293,9 @@ const Sale = () => {
         if(!allCustomer.length){
             dispatch(retriveCustomer({UserID,BusinessID}));
         }
+        if(selectedCustomer){
+            handleChangeCustomer({value:selectedCustomer._id,Name:selectedCustomer.Name})
+        }
     },[selectedCustomer])
 
   /**
@@ -418,9 +421,10 @@ const Sale = () => {
         value: allCustomer[prd]._id,
     }
 });
-const handleChangeCustomer = (option, {name}) => {
+const handleChangeCustomer = (option) => {
+    console.log("handleChangeCustomer",option)
     const value = (option && option.value) || '';
-    const customer = allCustomer.filter((prd)=>prd._id === value)
+    const customer = allCustomer.filter((customer)=>customer._id === value)
     if(customer.length){
     setSelectedTransaction({
         ...selectedTransaction,
@@ -460,6 +464,7 @@ const handleChangeCustomer = (option, {name}) => {
                         className={classes.selectBoxStyle}
                         styles={customSeverityStyle}
                         isClearable
+                        value={selectedCustomer}
                         onChange={handleChangeCustomer}
                     />
                     <AddCustomerButton />

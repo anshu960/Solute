@@ -10,7 +10,7 @@ import {useDispatch} from 'react-redux'
 import { SendEvent } from '../../../socket/SocketHandler';
 import SocketEvent from '../../../socket/SocketEvent';
 import { getBusinessId, getUserId } from '../../../services/authService';
-import { setSelectedCustomer } from '../../../store/customer';
+import { addNewCustomer, setSelectedCustomer } from '../../../store/customer';
 
 // ----------------------------------------------------------------------
 
@@ -38,7 +38,11 @@ const handleUpdateCustomerEvent = React.useCallback((data) => {
   setLoading(false);
   console.log("handleUpdateCustomerEvent",data)
   if(data && data.status && data.status === "success"){
-    dispatch(setSelectedCustomer(data.Payload))
+    dispatch(addNewCustomer(data.Payload))
+    setTimeout(()=>{
+      dispatch(setSelectedCustomer(data.Payload))
+    },500)
+    
   }else{
       console.log("Unable to find customer, please try after some time");
   }

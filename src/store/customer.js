@@ -17,6 +17,9 @@ const slice = createSlice({
     setSelectedCustomerSuccess: (state, action) => {
       state.selectedCustomer = action.payload;
     },
+    addNewCustomerSuccess: (state, action) => {
+      state.allCustomer = [...state.allCustomer,action.payload] 
+    },
   },
 });
 
@@ -24,7 +27,7 @@ export default slice.reducer
 
 // Actions
 
-const { retriveCustomerSuccess,setSelectedCustomerSuccess } = slice.actions
+const { retriveCustomerSuccess,setSelectedCustomerSuccess,addNewCustomerSuccess } = slice.actions
 
 export const retriveCustomer = (request) => async dispatch => {
   try {
@@ -33,6 +36,14 @@ export const retriveCustomer = (request) => async dispatch => {
       console.log("RETRIVE_CUSTOMER",data)
       dispatch(retriveCustomerSuccess(data.Payload));
     })
+  } catch (e) {
+    return console.error(e.message);
+  }
+}
+
+export const addNewCustomer = (customer) => async dispatch => {
+  try {
+    dispatch(addNewCustomerSuccess(customer));
   } catch (e) {
     return console.error(e.message);
   }
