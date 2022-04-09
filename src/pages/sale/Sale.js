@@ -32,7 +32,7 @@ import { getBusiness, getBusinessId, getUserId } from '../../services/authServic
 import { PATH_DASHBOARD, PATH_PAGE } from '../../routes/path';
 import {useDispatch, useSelector} from 'react-redux'
 import { retriveProduct } from '../../store/product';
-import { retriveCustomer } from '../../store/customer';
+import { retriveCustomer, setSelectedCustomer } from '../../store/customer';
 import { setSelectedTransaction } from '../../store/sale';
 import { AddCustomerButton } from '../../components/customer';
 
@@ -243,7 +243,7 @@ const Sale = () => {
   const dispatch = useDispatch()
   const allProduct = useSelector(state => state.product.allProduct)
   const allCustomer = useSelector(state => state.customer.allCustomer)
-  const [selectedCustomer, setSelectedCustomer] = useState({});
+  const selectedCustomer = useSelector(state => state.customer.selectedCustomer)
   const classes = useStyles();
   const history = useHistory();
   const selectedTransaction = useSelector(state => state.sale.selectedTransaction)
@@ -293,7 +293,7 @@ const Sale = () => {
         if(!allCustomer.length){
             dispatch(retriveCustomer({UserID,BusinessID}));
         }
-    },[])
+    },[selectedCustomer])
 
   /**
    * Function to get month name
@@ -426,7 +426,7 @@ const handleChangeCustomer = (option, {name}) => {
         ...selectedTransaction,
         selectedCustomer: customer[0]
     })
-    setSelectedCustomer(customer[0])
+    dispatch(setSelectedCustomer(customer[0]))
     global.selectedCustomer = customer[0]
     }else{
         global.selectedCustomer = undefined;

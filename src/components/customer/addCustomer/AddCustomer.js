@@ -9,7 +9,8 @@ import { customerFields } from './FieldConfig';
 import {useDispatch} from 'react-redux'
 import { SendEvent } from '../../../socket/SocketHandler';
 import SocketEvent from '../../../socket/SocketEvent';
-import { getUserId } from '../../../services/authService';
+import { getBusinessId, getUserId } from '../../../services/authService';
+import { setSelectedCustomer } from '../../../store/customer';
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +30,7 @@ export default function AddCustomer({setOpen, setLoading}) {
     setOpen(false);
     const request = {...fields};
     request.UserID = getUserId();
+    request.BusinessID = getBusinessId();
     console.log("CREATE_CUSTOMER REQUEST",request);
     SendEvent(SocketEvent.CREATE_CUSTOMER,request,handleUpdateCustomerEvent);
 }
@@ -36,7 +38,7 @@ const handleUpdateCustomerEvent = React.useCallback((data) => {
   setLoading(false);
   console.log("handleUpdateCustomerEvent",data)
   if(data && data.status && data.status === "success"){
-    //onRefresh();
+    dispatch(setSelectedCustomer(data.Payload))
   }else{
       console.log("Unable to find customer, please try after some time");
   }
