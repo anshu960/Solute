@@ -147,11 +147,12 @@ const displayBusinessCard = () => {
           setBusinessId(business._id);
           setBusiness(business);
           dispatch(setSelectedBusiness(business,businessTypes,(selectedBusinessType)=>{
-            if(selectedBusinessType.BusinessTypeID === 27){
-              history.push(PATH_DASHBOARD.fee.fee);
-            }else{
-              history.push(PATH_DASHBOARD.sale.sale);
-            }
+            history.push(PATH_DASHBOARD.root);
+            // if(selectedBusinessType.BusinessTypeID === 27){
+            //   history.push(PATH_DASHBOARD.fee.fee);
+            // }else{
+            //   history.push(PATH_DASHBOARD.sale.sale);
+            // }
           }));
         }} 
       >

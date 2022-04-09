@@ -122,7 +122,7 @@ export default function BusinessesCounting() {
 
         <Grid container spacing={isDesktop ? 10 : 5}>
           {CARDS.map((card, index) => (
-            <Grid key={card.title} item xs={6} md={6}>
+            <Grid key={index} item xs={6} md={6}>
               <div>
                 <CardStyle className="cardLeft">
                     <Typography variant="h3" paragraph>
@@ -136,8 +136,8 @@ export default function BusinessesCounting() {
                     </Typography>
                     <Box sx={{textAlign: 'left'}}>
                     {card.Description.map((desc, index) => 
-                      <Typography variant="h6" paragraph>
-                      <li>{desc}</li>
+                      <Typography key={index} variant="h6" paragraph>
+                        <li>{desc}</li>
                       </Typography>
                     )}
                     </Box>

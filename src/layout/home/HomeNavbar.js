@@ -8,6 +8,8 @@ import AccountPopover from './AccountPopover';
 import Logo from '../../components/Logo/Logo';
 import NotificationsPopover from './NotificationsPopover';
 import LanguagePopover from './LanguagePopover';
+import { useHistory } from 'react-router-dom';
+import { PATH_PAGE } from '../../routes/path';
 
 // ----------------------------------------------------------------------
 
@@ -40,10 +42,11 @@ HomeNavbar.propTypes = {
 };
 
 export default function HomeNavbar() {
+  const history = useHistory();
   return (
     <RootStyle>
       <ToolbarStyle>
-        <Logo />
+          <Logo onClick={()=>{history.push(PATH_PAGE.landing)}} sx={{ cursor :'pointer'}}/>
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
           <LanguagePopover />
