@@ -6,7 +6,7 @@ import { ScrollDialog } from '../../dialog';
 import { AddCustomer } from './addCustomer';
 import AppLoader from '../Loader';
 
-export default function AddCustomerButton () {
+export default function AddCustomerButton ({customer}) {
     const history = useHistory();
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ export default function AddCustomerButton () {
                 onClick={()=>{setOpen({open: true})}}
                 startIcon={<AddOutlinedIcon />}
             >
-                Add Customer
+                {customer && customer.Name ? customer.Name : "Add Customer"}
             </Button>
         </Fragment>
     )

@@ -10,8 +10,9 @@ import {useDispatch} from 'react-redux'
 import { SendEvent } from '../../../socket/SocketHandler';
 import SocketEvent from '../../../socket/SocketEvent';
 import { getBusinessId, getUserId } from '../../../services/authService';
-import { addNewCustomer, setSelectedCustomer } from '../../../store/customer';
+import { addNewCustomer, findCustomerByMobile, setSelectedCustomer } from '../../../store/customer';
 import { addStyles } from './Style';
+import { toast } from 'react-toastify';
 
 // ----------------------------------------------------------------------
 
@@ -27,14 +28,30 @@ export default function AddCustomer({setOpen, setLoading}) {
     setFields({...fields,[event.target.name]:event.target.value})
   }
 
+  const onClickSearch=()=>{
+    if(fields.MobileNumber && fields.MobileNumber.length >= 10){
+      console.log("Entered Number = ",fields.MobileNumber)
+      dispatch(findCustomerByMobile(fields.MobileNumber,(customer)=>{
+        setFields({...fields,...customer})
+      }))
+    }else{
+      console.log("Please enter valid number")
+      toast("Please enter valid number")
+    }
+  }
+
   const handleConfirm=()=>{
-    setLoading(true);
     setOpen(false);
-    const request = {...fields};
-    request.UserID = getUserId();
-    request.BusinessID = getBusinessId();
-    console.log("CREATE_CUSTOMER REQUEST",request);
-    SendEvent(SocketEvent.CREATE_CUSTOMER,request,handleUpdateCustomerEvent);
+    if(fields._id && fields._id !== ""){
+      dispatch(setSelectedCustomer(fields))
+    }else{
+      setLoading(true);
+      const request = {...fields};
+      request.UserID = getUserId();
+      request.BusinessID = getBusinessId();
+      console.log("CREATE_CUSTOMER REQUEST",request);
+      SendEvent(SocketEvent.CREATE_CUSTOMER,request,handleUpdateCustomerEvent);
+    }
 }
 const handleUpdateCustomerEvent = React.useCallback((data) => {
   setLoading(false);
@@ -126,6 +143,7 @@ const handleUpdateCustomerEvent = React.useCallback((data) => {
                 <Stack spacing={3}>
                   <Box component="span" className={classes.selctAutTarDate}>
                       <Button
+                      onClick={onClickSearch}
                       variant="contained" 
                       color="info" 
                       >Search</Button>

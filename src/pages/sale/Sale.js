@@ -457,17 +457,7 @@ const handleChangeCustomer = (option) => {
                     Sale
                 </Typography>
                 <Box className={classes.actionList}>
-                    <Select
-                        options={customerOptions}
-                        placeholder="Party Name"
-                        name="partyName"
-                        className={classes.selectBoxStyle}
-                        styles={customSeverityStyle}
-                        isClearable
-                        value={selectedCustomer}
-                        onChange={handleChangeCustomer}
-                    />
-                    <AddCustomerButton />
+                    <AddCustomerButton customer={selectedCustomer} />
                 </Box>
             </Stack>
 
