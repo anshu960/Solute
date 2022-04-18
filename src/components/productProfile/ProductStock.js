@@ -6,6 +6,8 @@ import InputTextField from '../InputTextField';
 import { ScrollDialog } from '../../dialog';
 import { StockAdjustment } from '../stock/adjustment';
 import { StockIn } from '../stock/stockin';
+import { useSelector } from 'react-redux';
+import { TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineOppositeContent, TimelineSeparator } from '@mui/lab';
 // ----------------------------------------------------------------------
 
 
@@ -21,6 +23,7 @@ export default function ProductStock() {
   const [stockAdjustmentOpen, setStockAdjustmentOpen] = useState(false);
   const [stockInOpen, setStockInOpen] = useState(false);
   const onChange = (event)=> setFields({...fields,[event.target.name]:event.target.value})
+  const allStock = useSelector(state=>state.stock.allStock)
   const handleSave = () => {
     console.log(fields)
   }
@@ -63,18 +66,44 @@ export default function ProductStock() {
     <React.Fragment>
     <ScrollDialog body={contentBody()} handleClose={handleClose} scroll={'paper'} title="Stock Adjustment" open={stockAdjustmentOpen} dialogWidth="xs"/>
     <ScrollDialog body={contentBodyStockIn()} handleClose={handleClose} scroll={'paper'} title="Stock In" open={stockInOpen} dialogWidth="xs"/>
-    <Grid container spacing={3} py={2}>
+    {/* <Grid container spacing={3} py={2}>
       {prepareInputFields()}
-    </Grid>
+    </Grid> */}
       <Stack spacing={3} py={3}>
-        <Button variant="contained" onClick={()=>{setStockAdjustmentOpen(true)}} >StockAdjsutment</Button>  
+        <Button variant="contained" onClick={()=>{setStockAdjustmentOpen(true)}} >Stock Out</Button>  
       </Stack>
       <Stack spacing={3} py={3}>
         <Button variant="contained" onClick={()=>{setStockInOpen(true)}} >StockIn</Button>  
       </Stack>
-      <Stack spacing={3}>
+      {/* <Stack spacing={3}>
         <Button variant="contained" onClick={handleSave} >Save</Button>  
-      </Stack>
+      </Stack> */}
+      {allStock.length ? (
+        allStock.map((item)=>(
+          <TimelineItem>
+            <TimelineOppositeContent color="text.secondary">
+            <Typography variant="subtitle2">{allStock[1].PaymentReference}</Typography>
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+            <TimelineDot/>
+            <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent>
+            <Typography variant="subtitle1" color={"Black"}>Total Quanity : { item.TotalQuantity}</Typography>
+              {item.IncreaseQuantity && item.IncreaseQuantity>0 ? (
+                <Typography variant="subtitle2" color={"green"}>Added Quantity : {item.IncreaseQuantity}</Typography>
+              ) : (
+              <Typography variant="subtitle2" color={"red"}>Added Quantity : {item.DecreaseQuantity}</Typography>
+              )}
+            <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+            {new Date(item.CreatedAt).toLocaleDateString()}
+            </Typography>
+            </TimelineContent>
+        </TimelineItem>
+        )
+      )
+            
+        ):null}
     </React.Fragment>
   );
 }

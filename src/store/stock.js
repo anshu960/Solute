@@ -7,6 +7,7 @@ import { retriveCustomer } from './customer';
 import { retriveHSN } from './hsn';
 import { retriveEmployee } from './employee';
 import { getBusinessId, getUserId } from '../services/authService';
+import { toast } from 'react-toastify';
 
 
 const slice = createSlice({
@@ -53,10 +54,13 @@ export const createStockEntry = (entry,callback) => async dispatch => {
     SendEvent(SocketEvent.CREATE_STOCK_ENTRY,request,(data)=>{
       console.log(data)
       if(data.Payload && data.Payload._id){
+          toast("Stock Entry Updated Successfully")
         if(callback){
             dispatch(retriveStock(entry));
             callback()
         }
+      }else{
+        toast("Oops, Something went wrong, please try after sometime")
       }
     })
   } catch (e) {
@@ -68,6 +72,7 @@ export const createStockEntry = (entry,callback) => async dispatch => {
 export const retriveStock = (product) => async dispatch => {
     try {
     let request = {ProductID:product._id,UserID:getUserId(),BusinessID:getBusinessId()}
+    console.log("RETRIVE_STOCK_ENTRY request = ",request)
       SendEvent(SocketEvent.RETRIVE_STOCK_ENTRY,request,(data)=>{
         console.log(data)
         dispatch(retriveStockSuccess(data.Payload));

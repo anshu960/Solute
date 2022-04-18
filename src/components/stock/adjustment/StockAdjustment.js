@@ -40,12 +40,6 @@ export default function StockAdustment({open, setOpen}) {
 
   const handleConfirm = () => {
     let request = {...fields,...selectedProduct}
-    if(request.DecreaseQuantity){
-      request.DecreaseQuantity = parseInt(request.DecreaseQuantity)
-    }
-    if(request.DecreaseQuantity){
-      request.DecreaseQuantity = parseInt(request.DecreaseQuantity)
-    }
     console.log(request)
     dispatch(createStockEntry(request,()=>{
       setOpen(false)

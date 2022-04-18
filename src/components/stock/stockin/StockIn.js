@@ -5,21 +5,25 @@ import { DialogActions, DialogContent, DialogContentText, Grid, Stack, Typograph
 import StockInAction from './StockInAction';
 import InputTextField from '../../InputTextField';
 import { stockinFields } from './FieldConfig';
+import { useDispatch, useSelector } from 'react-redux';
+import { createStockEntry } from '../../../store/stock';
 
 const defaultFields = {
   UserID:"",
   BusinessID:"",
   ProductID:"",
   TotalQuantity:"",
-  AddedQuantity: "",
-  RemovedQuantity: "",
+  IncreaseQuantity: "",
+  DecreaseQuantity: "",
   Comment: "",
 }
 // ----------------------------------------------------------------------
 
 export default function StockAdustment({open, setOpen}) {
+  const dispatch = useDispatch();
   const [fields, setFields] = useState(defaultFields);
   const descriptionElementRef = useRef(null);
+  const selectedProduct = useSelector(state=>state.product.selectedProduct)
 
   const onChange = (event)=>{
     setFields({...fields,[event.target.name]:event.target.value})
@@ -36,7 +40,11 @@ export default function StockAdustment({open, setOpen}) {
 
   const handleConfirm = () => {
     console.log(fields)
-    
+    let request = {...fields,...selectedProduct}
+    console.log(request)
+    dispatch(createStockEntry(request,()=>{
+      setOpen(false)
+    }))
   }
 
   const getTextField = (field) =>(

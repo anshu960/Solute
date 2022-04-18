@@ -11,7 +11,8 @@ import Page from '../../components/Page';
 import AppLoader from '../../components/Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import { ProductStock, ProductProfileCover, ProductProfilePersonal, ProductHistory } from '../../components/productProfile';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { retriveStock } from '../../store/stock';
 
 // ----------------------------------------------------------------------
 
@@ -35,10 +36,17 @@ const TabsWrapperStyle = styled('div')(({ theme }) => ({
   
 
 const ProductProfile = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState('profile');
-  
+  const selectedProduct = useSelector(state=>state.product.selectedProduct)
+  React.useEffect(()=>{
+    if(selectedProduct && selectedProduct._id){
+      dispatch(retriveStock(selectedProduct))
+    }
+  },[selectedProduct])
+
   const handleChangeTab = (newValue) => {
     setCurrentTab(newValue);
   };
@@ -54,11 +62,11 @@ const ProductProfile = () => {
       //icon: ,
       component: <ProductStock />,
     },
-    {
-      value: 'history',
-      //icon: ,
-      component: <ProductHistory />,
-    }
+    // {
+    //   value: 'history',
+    //   //icon: ,
+    //   component: <ProductHistory />,
+    // }
   ];
 
   

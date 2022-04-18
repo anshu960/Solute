@@ -1,6 +1,6 @@
   export const stockinFields = [
     {
-      id: 'AddedQuantity',
+      id: 'IncreaseQuantity',
       label: 'Add Quantity',
       type: 'number',
       placeholder: 'Enter Quantity to add'
