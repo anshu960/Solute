@@ -1,6 +1,6 @@
   export const adjustmentFields = [
     {
-      id: 'RemovedQuantity',
+      id: 'DecreaseQuantity',
       label: 'Remove Quantity',
       type: 'number',
       placeholder: 'Enter Quantity to remove'

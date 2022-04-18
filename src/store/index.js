@@ -17,6 +17,7 @@ import Notification from "./notification"
 import Subscription from "./subscription"
 import WhatsApp from './WhatsApp';
 import Statistics from './Statistics';
+import stock from './stock';
 const reducer = combineReducers({
     business,
     businessTypes,
@@ -34,7 +35,8 @@ const reducer = combineReducers({
     Notification,
     Subscription,
     WhatsApp,
-    Statistics
+    Statistics,
+    stock
 })
 const store = configureStore({
   reducer,

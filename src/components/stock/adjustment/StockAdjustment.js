@@ -6,15 +6,15 @@ import StockAdjustmentAction from './StockAdjustmentAction';
 import InputTextField from '../../InputTextField';
 import { adjustmentFields } from './FieldConfig';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProductStock } from '../../../store/product_stock';
+import { createStockEntry } from '../../../store/stock';
 
 const defaultFields = {
   UserID:"",
   BusinessID:"",
   ProductID:"",
   TotalQuantity:"",
-  AddedQuantity: "",
-  RemovedQuantity: "",
+  IncreaseQuantity: "",
+  DecreaseQuantity: "",
   Comment: "",
 }
 // ----------------------------------------------------------------------
@@ -39,9 +39,17 @@ export default function StockAdustment({open, setOpen}) {
   }, [open]);
 
   const handleConfirm = () => {
-    console.log(fields)
     let request = {...fields,...selectedProduct}
-    dispatch(createProductStock(request))
+    if(request.DecreaseQuantity){
+      request.DecreaseQuantity = parseInt(request.DecreaseQuantity)
+    }
+    if(request.DecreaseQuantity){
+      request.DecreaseQuantity = parseInt(request.DecreaseQuantity)
+    }
+    console.log(request)
+    dispatch(createStockEntry(request,()=>{
+      setOpen(false)
+    }))
   }
 
   const getTextField = (field) =>(
