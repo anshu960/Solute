@@ -82,7 +82,12 @@ export default function ProductStock() {
         allStock.map((item)=>(
           <TimelineItem>
             <TimelineOppositeContent color="text.secondary">
-            <Typography variant="subtitle2">{allStock[1].PaymentReference}</Typography>
+            {item.IncreaseQuantity && item.IncreaseQuantity>0 ? (
+                <Typography variant="subtitle2" color={"green"}>Added Quantity : {item.IncreaseQuantity}</Typography>
+              ) : (
+              <Typography variant="subtitle2" color={"red"}>Removed Quantity : {item.DecreaseQuantity}</Typography>
+              )}
+            
             </TimelineOppositeContent>
             <TimelineSeparator>
             <TimelineDot/>
@@ -90,13 +95,9 @@ export default function ProductStock() {
             </TimelineSeparator>
             <TimelineContent>
             <Typography variant="subtitle1" color={"Black"}>Total Quanity : { item.TotalQuantity}</Typography>
-              {item.IncreaseQuantity && item.IncreaseQuantity>0 ? (
-                <Typography variant="subtitle2" color={"green"}>Added Quantity : {item.IncreaseQuantity}</Typography>
-              ) : (
-              <Typography variant="subtitle2" color={"red"}>Added Quantity : {item.DecreaseQuantity}</Typography>
-              )}
+            <Typography variant="subtitle2">Comment : {item.Comment}</Typography>
             <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            {new Date(item.CreatedAt).toLocaleDateString()}
+            {new Date(item.UpdatedAt).toLocaleDateString()}
             </Typography>
             </TimelineContent>
         </TimelineItem>

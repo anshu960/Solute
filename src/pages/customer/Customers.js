@@ -55,7 +55,7 @@ const Customers = () => {
 
   useEffect(()=>{  
     if(!customerList.length){
-      setLoading(true);
+      // setLoading(true);
       refreshCustomerList();
     }else{
       setLoading(false);
