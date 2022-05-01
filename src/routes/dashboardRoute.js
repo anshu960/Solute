@@ -202,7 +202,7 @@ export const DashboardRoutes = {
       {
         exact: true,
         path: PATH_DASHBOARD.root,
-        component: lazy(() => import('../pages/dashboard/Dashboard'))
+        component: lazy(() => import('../pages/dashboard'))
         //component: () => <Redirect to="/dashboard" />
       },
       {
