@@ -81,6 +81,11 @@ const routes = [
       path: PATH_PAGE.home,
       component: lazy(() => import('../pages/Home'))
     },
+    {
+      exact: true,
+      path: PATH_PAGE.catalogue,
+      component: lazy(() => import('../pages/businessCatalogue'))
+  },
     DashboardRoutes,
     //AdditionalRoutes
 ]

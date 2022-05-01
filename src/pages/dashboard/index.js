@@ -1,17 +1,15 @@
 import * as React from 'react';
 import {
-  Alert,
-  Box,
-  Container, Grid,
+  Container,
   Stack,
   Typography
 } from '@mui/material';
 import {
-  useState,Fragment, useEffect
+  Fragment,
 } from 'react';
 
 import Page from '../../components/Page';
-import { ToastContainer ,toast} from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import { useStyles } from '../customer/Style';
 import { SaleCounting } from '../../components/dashboard';
 
