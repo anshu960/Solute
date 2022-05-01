@@ -22,6 +22,7 @@ import SidebarItem from './SidebarItem';
 import { PATH_PAGE, PATH_DASHBOARD } from '../../routes/path';
 import {useDispatch, useSelector} from 'react-redux'
 import { retriveActiveSubscription } from '../../store/subscription';
+import { _TRIAL } from '../../common/Constants';
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -315,7 +316,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
   function handleSidebarItemClick (){ 
     let subscriptionDays = 0;
-    const _TRIAL = 30;
+  
     if(Object.keys(currentSubscription).length){
       const remainingDays = Math.ceil(Math.abs(new Date().getTime() - new Date(currentSubscription.StartDate).getTime())/(24*60*60*1000)); 
       subscriptionDays = currentSubscription.Days - remainingDays;

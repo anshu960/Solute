@@ -24,6 +24,7 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { retriveActiveSubscription, subscribeToPlan } from '../../store/subscription';
 import { getBusiness } from '../../services/authService';
+import { _TRIAL } from '../../common/Constants';
 
 const CardStyle = styled(Card)(({ theme }) => {
   const shadowCard = (opacity) =>
@@ -69,8 +70,6 @@ const CardStyle = styled(Card)(({ theme }) => {
     }
   };
 });
-
-const _TRIAL = 30;
 
 const CARDS = [{
   "_id":  "6245335d808ed504a6e83874",

@@ -201,13 +201,14 @@ export const DashboardRoutes = {
       },
       {
         exact: true,
-        path: PATH_DASHBOARD.membership.add,
-        component: lazy(() => import('../pages/membership/AddMembership'))
+        path: PATH_DASHBOARD.root,
+        component: lazy(() => import('../pages/dashboard/Dashboard'))
+        //component: () => <Redirect to="/dashboard" />
       },
       {
         exact: true,
-        path: PATH_DASHBOARD.root,
-        component: () => <Redirect to="/" />
+        path: PATH_DASHBOARD.membership.add,
+        component: lazy(() => import('../pages/membership/AddMembership'))
       },
     ]
   }

@@ -12,6 +12,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import ApartmentRoundedIcon from '@mui/icons-material/ApartmentRounded';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import PersonAddAlt1RoundedIcon from '@mui/icons-material/PersonAddAlt1Rounded';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import { PATH_DASHBOARD } from '../../routes/path';
 // ----------------------------------------------------------------------
 

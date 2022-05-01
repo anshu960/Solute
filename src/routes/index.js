@@ -11,7 +11,7 @@ import ProtectedRoute from "./ProtectRoute";
 import AppLoader from '../components/Loader';
 import AuthLayout from '../layout/AuthLayout';
 import { DashboardRoutes } from './dashboardRoute';
-import { PATH_AUTH, PATH_PAGE } from './path';
+import { PATH_AUTH, PATH_DASHBOARD, PATH_PAGE } from './path';
 
 // const AdditionalRoutes = {
 //   guard: ProtectedRoute,

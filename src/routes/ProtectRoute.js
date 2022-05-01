@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
     const isAuth = getUser() ? true : false;
     const isActiveMember = true;
     return (
-        isAuth ? isActiveMember ? <React.Fragment>{children}</React.Fragment> : <Redirect to={{ pathname: PATH_DASHBOARD.membership.root }} /> : <Redirect to={{ pathname: '/' }} />
+        isAuth ? (isActiveMember ? <React.Fragment>{children}</React.Fragment> : <Redirect to={{ pathname: PATH_DASHBOARD.membership.root }} />) : <Redirect to={{ pathname: '/' }} />
     );
 };
 
