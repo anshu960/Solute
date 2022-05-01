@@ -10,6 +10,8 @@ import {
   } from 'react';
 import Page from '../../components/Page';
 import { useStyles } from '../customer/Style';
+import { ProductList } from '../../components/businessCatalogue';
+import { getParameterByName } from '../../common/Utils';
 
 const BusinessCatalogue = () => {
     const classes = useStyles();
@@ -25,9 +27,10 @@ const BusinessCatalogue = () => {
                     Catalogue
                     </Typography>
                 </Stack>
-                <Alert variant="outlined" severity="info">
+                <ProductList />
+                {/* <Alert variant="outlined" severity="info">
                     No Catalogue found for the business
-                </Alert>
+                </Alert> */}
             </Container>
              </Fragment>
         </Page>
