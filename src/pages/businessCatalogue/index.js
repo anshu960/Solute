@@ -13,6 +13,8 @@ import { useStyles } from '../customer/Style';
 
 const BusinessCatalogue = () => {
     const classes = useStyles();
+    const {id} = getParameterByName("id");
+        
     return (
         <Page title="Catalogue">
             <Fragment>

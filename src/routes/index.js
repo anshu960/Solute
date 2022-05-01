@@ -83,7 +83,7 @@ const routes = [
     },
     {
       exact: true,
-      path: PATH_PAGE.catalogue,
+      path: PATH_PAGE.businessCatalogue,
       component: lazy(() => import('../pages/businessCatalogue'))
   },
     DashboardRoutes,
