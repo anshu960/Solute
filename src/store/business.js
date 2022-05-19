@@ -50,14 +50,15 @@ export const retriveBusiness = (request) => async dispatch => {
 export const setSelectedBusiness = (business,businessTypes,callback) => async dispatch => {
   try {
       dispatch(setSelectedBusinessSuccess(business));
+      let selectedBusinessType
       if(businessTypes && businessTypes.length){
-        const selectedBusinessType = businessTypes.filter((businessType)=>businessType._id === business.BusinessTypeID)
+         selectedBusinessType = businessTypes.filter((businessType)=>businessType._id === business.BusinessTypeID)
         if(selectedBusinessType && selectedBusinessType.length && selectedBusinessType[0]._id === business.BusinessTypeID){
           setSelectedBusinessTypeSuccess(selectedBusinessType[0]);
-          if(callback){
-            callback(selectedBusinessType[0]);
-          }
         }  
+      }
+      if(callback){
+        callback(selectedBusinessType[0]);
       }
       dispatch(syncBusinessData());
   } catch (e) {
