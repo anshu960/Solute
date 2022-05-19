@@ -167,11 +167,11 @@ const displayBusinessCard = () => {
             display: 'flex',
           }}
         > 
-          <Box><LineChart sale={getSaleAmountForBusiness(business._id)}/></Box>
+          <Box><LineChart sale={business.TotalSalesAmount || 0}/></Box>
         
           <Typography variant="h5" gutterBottom sx={{display: 'flex', color: 'primary.darker'}}>
             <CurrencyRupeeIcon sx={{width: 18, color: 'primary.darker'}}/>
-            <Typography> {getSaleAmountForBusiness(business._id)}</Typography>
+            <Typography> {business.TotalSalesAmount || 0}</Typography>
           </Typography>
         </CardActionArea> 
           <Box sx={{display: 'flex', alignItems: 'center'}}>

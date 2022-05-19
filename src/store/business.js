@@ -41,7 +41,7 @@ export const retriveBusiness = (request) => async dispatch => {
   try {
     SendEvent(SocketEvent.RETRIVE_BUSINESS,request,(data)=>{
       dispatch(retriveBusinessSuccess(data.Payload));
-      dispatch(getBusinessAnalytics(data.Payload))
+      // dispatch(getBusinessAnalytics(data.Payload))
     })
   } catch (e) {
     return console.error(e.message);
