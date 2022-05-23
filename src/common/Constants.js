@@ -3,7 +3,7 @@ const ACTION_TYPE_CONF = {
     BUSINESS_ALL: 'BUSINESS_ALL',
 }
 
-const _TRIAL = 60;
+const _TRIAL = 180;
 
 export {
     ACTION_TYPE_CONF,

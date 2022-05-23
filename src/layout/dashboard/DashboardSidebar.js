@@ -325,9 +325,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     const days = Math.ceil(Math.abs(new Date().getTime() - new Date(business.CreatedAt).getTime())/(24*60*60*1000));
     const freeDays = _TRIAL - days;
     const isActivePlan = freeDays > 0 || subscriptionDays > 0;
-    if(!isActivePlan){
-      history.push(PATH_DASHBOARD.membership.root)
-    }
+    // if(!isActivePlan){
+    //   history.push(PATH_DASHBOARD.membership.root)
+    // }
   }
 
   function renderSidebarItems({
