@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/action_progress"
+        android:title="@string/in_progress"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_completed"
+        android:title="@string/completed"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_pending"
+        android:title="@string/pending"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_hold"
+        android:title="@string/hold"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_dropped"
+        android:title="@string/dropped"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_invalid"
+        android:title="@string/invalid"
+        app:showAsAction="never"/>
+
+</menu>

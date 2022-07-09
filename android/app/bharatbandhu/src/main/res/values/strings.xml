@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">Bharat Bandhu</string>
+    <string name="title_activity_launch">Bharat Bandhu</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Conversation</string>
+    <string name="title_chats">Chats</string>
+    <string name="title_friends">Friends</string>
+    <string name="title_people">People</string>
+    <string name="title_task">Task</string>
+    <string name="title_more">More</string>
+    <string name="title_nearby">Nearby</string>
+    <string name="title_contacts">Contacts</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="terms_and_privacy">
+        This Terms of Service Agreement sets forth the terms and conditions by which you are sole responsible for what you do and what you get and you agree to share you basic information(Like Name,Profile Picture,Gender etc) with other users. This app is not responsible for any kind of loss or problems you get on this app. Content on this app neither provided nor controlled by the developer so we are not responsible for any content. If you put any offensive content, it will be replaced by *.There will be absolutely to tolerance for misbehave, if you do so then your account will be terminated immediately.You can report someone in chat view by selection top right option. You might see adult contents uploaded by someone, in that case please block that user and report it us. Please don’t add any adult content. Profanity filter is there on chat so you can’t send such words, if you get some words from someone, please report us. Action will be taken as soon as possible, there will be tolerance for such things. Be friendly to others and and let others be friendly to you. Happy making friends to you my friend.
+    </string>
+
+    <string name="login_title">Phone Verification</string>
+    <string name="login_sub_title">We need to register your phone number before getting started!</string>
+
+    <string name="delete_group">Delete Group</string>
+    <string name="priority_low">Low</string>
+    <string name="priority_medium">Medium</string>
+    <string name="priority_high">High</string>
+    <string name="priority_critical">Critical</string>
+    <string name="priority_not_decided">Not Decided Yet</string>
+
+    <string name="in_progress">In Progress</string>
+    <string name="completed">Completed</string>
+    <string name="pending">Pending</string>
+    <string name="hold">On Hold</string>
+    <string name="end">End</string>
+    <string name="dropped">Dropped</string>
+    <string name="deleted">Deleted</string>
+    <string name="invalid">invalid</string>
+
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="critical">Critical</string>
+    <string name="not_decided">Not Decided</string>
+
+    <string name="empty_task_message">No task found, please click on the create task button to start creating task</string>
+    <!--    <string name="delete_group">Delete Group</string>-->
 </resources>
