@@ -1,6 +1,6 @@
 package com.friendly.utility
 
-import com.solute.constants.Key
+import com.utilitykit.Constants.Key
 import org.json.JSONArray
 import org.json.JSONObject
 

@@ -79,15 +79,17 @@ open class UtilityViewController : AppCompatActivity() {
 
 
     fun alert(title: String,message:String){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(title)
-        builder.setMessage(message)
-        val dialogueListener  = DialogInterface.OnClickListener { dialog, which ->
-            DialogInterface.BUTTON_POSITIVE
+        this.runOnUiThread {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(title)
+            builder.setMessage(message)
+            val dialogueListener  = DialogInterface.OnClickListener { dialog, which ->
+                DialogInterface.BUTTON_POSITIVE
+            }
+            builder.setPositiveButton("Ok", dialogueListener)
+            val dialog = builder.create()
+            dialog.show()
         }
-        builder.setPositiveButton("Ok", dialogueListener)
-        val dialog = builder.create()
-        dialog.show()
     }
     fun alert(title: String,message:String,completion:()->Unit){
         val builder = AlertDialog.Builder(this)

@@ -25,6 +25,7 @@ class Key {
 
         val id = "ID"
         val _id = "_id"
+        val roleType = "RoleType"
 
         val payload = "Payload"
         val message = "Message"
@@ -38,6 +39,7 @@ class Key {
         val ownerUserID = "OwnerUserID"
 
         val userId = "UserID"
+        var businessID = "BusinessID"
         val roomId = "ROOM_ID"
         val mobileNumber = "MobileNumber"
         val emailId = "EmailID"
@@ -79,7 +81,8 @@ class Key {
 
         val userCredentials = "user_credentials"
         val trainerCredentials = "TrainerCredentials"
-
+        val membershipDetails = "membership_details"
+        val barcode = "Barcode"
         val height = "height"
         val weight = "weight"
         val aadhaarNumber = "aadhaar_number"

@@ -3,8 +3,10 @@ package com.utilitykit.SocketUtill
 import android.provider.ContactsContract
 import android.provider.Settings
 import android.util.Log
+import android.util.Log.d
 import com.utility.Encryption
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.payload
 import com.utilitykit.Constants.TableNames
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityKitApp
@@ -55,6 +57,7 @@ object SocketManager
     
     fun send(event: SocketEvent, data: JSONObject)
     {
+        Log.d(TAG,"Sending Event ${event.value}")
         mSocket?.emit(event.value, data)
     }
     
@@ -73,6 +76,7 @@ object SocketManager
             mSocket?.on(SocketEvent.joinRoom.value, joinRoom)
             mSocket?.on(SocketEvent.getEncryptionKeys.value, encryptionKeyHandler)
             mSocket?.on(SocketEvent.authenticate.value, onSocketEvent)
+            mSocket?.on(SocketEvent.findCustomerByMobile.value, onSocketEvent)
             mSocket?.on(SocketEvent.updateProfile.value, onSocketEvent)
             mSocket?.on(SocketEvent.getAllMessage.value, retriveMessage)
             mSocket?.on(SocketEvent.onMessage.value, onMessage)
@@ -108,6 +112,7 @@ object SocketManager
             mSocket?.on(SocketEvent.getAllAttachedDocumentTask.value, onSocketEventArray)
             mSocket?.on(SocketEvent.updateTaskStatus.value, onSocketEvent)
             mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
+
             mSocket?.connect()
         }
     }
@@ -196,6 +201,7 @@ object SocketManager
     }
     
     private val onSocketEvent = Emitter.Listener {
+        Log.d(TAG,"Event Received ${it.toString()}")
         if (it.count() > 0)
         {
             val anyData = it.first()

@@ -62,6 +62,9 @@ class SignupActivity : UtilityViewController() {
         request.put(Key.fcmToken,deviceID)
         request.put(Key.gender,gender)
         request.put(Key.imageData,encodedImage)
+        val roleType = JSONObject()
+        roleType.put(Key._id ,"61acee7871a83e09a12a1668")
+        request.put(Key.roleType,roleType)
         this.startActivityIndicator("Trying to create account")
         SocketManager.onEvent= { event, data ->
             runOnUiThread {

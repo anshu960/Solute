@@ -77,17 +77,17 @@ class LoginActivity : UtilityActivity() {
         otp4!!.setOnKeyListener(PinOnKeyListener(3))
         otp5!!.setOnKeyListener(PinOnKeyListener(4))
         otp6!!.setOnKeyListener(PinOnKeyListener(5))
-
-
         inits()
     }
 
     fun inits(){
         val countryCodePicker = findViewById<CountryCodePicker>(R.id.countrycode)
+        countryCodePicker.setDefaultCountryUsingNameCode("DE")
         countryCodePicker.setOnCountryChangeListener {
             print(countryCodePicker.selectedCountryCode)
             this.selectedCountryCode = countryCodePicker.selectedCountryCode
         }
+
     }
 
     fun onClickLogin(view:View){
@@ -127,11 +127,14 @@ class LoginActivity : UtilityActivity() {
             override fun onVerificationFailed(e: FirebaseException) {
                 stopActivityIndicator()
                 if (e is FirebaseAuthInvalidCredentialsException) {
+                    Log.d("Firebase Auth",e.stackTraceToString())
 //                    toast("Invalid phone number.")
                     toastLong("Invalid phone number.")
                 } else if (e is FirebaseTooManyRequestsException) {
+                    Log.d("Firebase Auth",e.stackTraceToString())
                     toastLong(e.localizedMessage)
                 }else{
+                    Log.d("Firebase Auth",e.stackTraceToString())
                     toastLong(e.localizedMessage)
                 }
             }
@@ -171,12 +174,14 @@ class LoginActivity : UtilityActivity() {
 
         if(phoneNumber != "" && phoneNumber.count() >= 10){
             val phoneNumber = "+" + this.getDialCode() + phoneNumber.trim()
-            PhoneAuthOptions.newBuilder(auth)
+            Log.d("Firebase Auth","trying to send otp to $phoneNumber")
+            val options =  PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber(phoneNumber)       // Phone number to verify
-                .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                .setTimeout(30L, TimeUnit.SECONDS) // Timeout and unit
                 .setActivity(this)                 // Activity (for callback binding)
                 .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
                 .build();
+            PhoneAuthProvider.verifyPhoneNumber(options)
         }else{
             this.alert("Oops!","Please enter a valid phone number")
         }
@@ -203,29 +208,32 @@ class LoginActivity : UtilityActivity() {
 
         this.startActivityIndicator("Checking for existing accounts")
         SocketManager.onEvent= { event, data ->
-            val response = data
-            val msg =  response.getString(Key.message)
-            if(response.has(Key.payload) && msg != ""){
-                var payload = response.getJSONObject(Key.payload)
-                if(payload.has(Key.name)){
-                    Defaults.store(Key.loginDetails, payload)
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    this.startActivity(intent)
+            this.runOnUiThread {
+                stopActivityIndicator()
+                Log.d("LoginResponse",data.toString())
+                if(data.has(Key.payload)){
+                    var payload = data.getJSONObject(Key.payload)
+                    if(payload.has(Key.name)){
+                        SocketManager.joinRoom(payload.getString(Key._id))
+                        Defaults.store(Key.loginDetails, payload)
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        this.startActivity(intent)
+                    }else{
+                        payload.put(Key.userId,uid)
+                        payload.put(Key.mobileNumber,phoneNumber)
+                        payload.put(Key.deviceId,deviceID)
+                        payload.put(Key.fcmToken,deviceID)
+                        payload.put(Key.dialCode,selectedCountryCode)
+                        Defaults.store(Key.loginDetails,payload)
+                        val intent = Intent(applicationContext, SignupActivity::class.java)
+                        intent.putExtra(Key.userId,uid)
+                        intent.putExtra(Key.mobileNumber,phoneNumber)
+                        intent.putExtra(Key.dialCode,selectedCountryCode)
+                        this.startActivity(intent)
+                    }
                 }else{
-                    payload.put(Key.userId,uid)
-                    payload.put(Key.mobileNumber,phoneNumber)
-                    payload.put(Key.deviceId,deviceID)
-                    payload.put(Key.fcmToken,deviceID)
-                    payload.put(Key.dialCode,selectedCountryCode)
-                    Defaults.store(Key.loginDetails,payload)
-                    val intent = Intent(applicationContext, SignupActivity::class.java)
-                    intent.putExtra(Key.userId,uid)
-                    intent.putExtra(Key.mobileNumber,phoneNumber)
-                    intent.putExtra(Key.dialCode,selectedCountryCode)
-                    this.startActivity(intent)
+//                    this.alert("Oops!","Something went wrong, PLease try after sometime")
                 }
-            }else{
-                this.alert("Oops!","Something went wrong, PLease try after sometime")
             }
         }
         SocketManager.send(SocketEvent.authenticate, request)

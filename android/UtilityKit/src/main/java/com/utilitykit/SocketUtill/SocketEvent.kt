@@ -49,6 +49,5 @@ enum class SocketEvent(val value: String)
     getAllTaskMessage("GET_ALL_TASK_MESSAGE"),
     attachDocumentTask("ATTACH_DOCUMENT_TASK"),
     getAllAttachedDocumentTask("GET_ALL_ATTACH_DOCUMENT_TASK"),
-    
-    
+    findCustomerByMobile("FIND_CUSTOMER_BY_MOBILE"),
 }

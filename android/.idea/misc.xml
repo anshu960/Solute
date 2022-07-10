@@ -5,9 +5,10 @@
       <map>
         <entry key="app/bharatbandhu/src/main/res/drawable/baseline_add_task.xml" value="0.1" />
         <entry key="app/bharatbandhu/src/main/res/layout/activity_launch.xml" value="0.15070921985815602" />
-        <entry key="app/bharatbandhu/src/main/res/layout/activity_login.xml" value="0.15070921985815602" />
-        <entry key="app/bharatbandhu/src/main/res/layout/activity_main.xml" value="0.17500002211418705" />
+        <entry key="app/bharatbandhu/src/main/res/layout/activity_login.xml" value="0.4191631993503436" />
+        <entry key="app/bharatbandhu/src/main/res/layout/activity_main.xml" value="0.3665802223094996" />
         <entry key="app/bharatbandhu/src/main/res/layout/activity_signup.xml" value="0.1" />
+        <entry key="app/bharatbandhu/src/main/res/layout/fragment_home.xml" value="0.26179634565761145" />
         <entry key="app/bharatbandhu/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="app/bharatbandhu/src/main/res/menu/group_details_menu.xml" value="0.1" />
         <entry key="app/bharatbandhu/src/main/res/menu/task_priority_menu.xml" value="0.1" />

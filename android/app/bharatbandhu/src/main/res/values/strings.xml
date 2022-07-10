@@ -2,7 +2,7 @@
     <string name="app_name">Bharat Bandhu</string>
     <string name="title_activity_launch">Bharat Bandhu</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Conversation</string>
+    <string name="title_home">Home</string>
     <string name="title_chats">Chats</string>
     <string name="title_friends">Friends</string>
     <string name="title_people">People</string>

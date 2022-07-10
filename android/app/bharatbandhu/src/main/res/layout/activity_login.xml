@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/verify_help_icon" />
+        app:srcCompat="@drawable/icon" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/login_otp_layout"
@@ -190,11 +190,15 @@
             app:ccp_autoDetectCountry="true"
             app:ccp_showArrow="true"
             app:ccp_showFlag="true"
-            app:ccp_showNameCode="false"
+            app:ccp_showNameCode="true"
             app:ccp_textGravity="CENTER"
             app:ccp_textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:ccp_countryPreference="DE"
+            app:ccp_defaultNameCode="DE"
+            app:ccp_defaultPhoneCode="49"
+            app:ccp_rememberLastSelection="true"
             app:layout_constraintTop_toTopOf="parent"></com.hbb20.CountryCodePicker>
 
 
