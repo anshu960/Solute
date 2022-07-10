@@ -21,15 +21,12 @@ class UtilityKitApp :Application(){
     var socketUrl = ""
     var selectedProfiles: ArrayList<Profile> = ArrayList<Profile>()
     var selectedTask: Task? = null
+    var appContext : Context? = null
     private var mSocket: Socket? = null
     init {
         instance = this
     }
 
-
-    init {
-        instance = this
-    }
     companion object{
         var user : User = User()
         var profile: Profile = Profile()
@@ -43,9 +40,13 @@ class UtilityKitApp :Application(){
     }
     override fun onCreate() {
         super.onCreate()
-        SQLite.init(this)
-        Database.init(this)
-        Defaults.init(this)
+    }
+
+    fun setUp(context: Context){
+        appContext = context
+        SQLite.init(appContext!!)
+        Database.init(appContext!!)
+        Defaults.init(appContext!!)
         if(BuildConfig.DEBUG){
             socketUrl = Server.host
         }else{

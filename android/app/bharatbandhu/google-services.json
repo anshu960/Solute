@@ -1,0 +1,166 @@
+{
+  "project_info": {
+    "project_number": "666336350240",
+    "project_id": "fuelme-20ef9",
+    "storage_bucket": "fuelme-20ef9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666336350240:android:25e9b5762c1cb8956d2c45",
+        "android_client_info": {
+          "package_name": "com.bharat.bandhu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666336350240-mrc1jn1agdl22q3bq9lbm76boq9k36bs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bharat.bandhu",
+            "certificate_hash": "b145b4687d40b049dae2ac3e659eadfe250123ce"
+          }
+        },
+        {
+          "client_id": "666336350240-p661ibrn2dsc6mqpogf65383oitf5e4q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bharat.bandhu",
+            "certificate_hash": "46bffa524f1e81921e7b39f8825cb932c67621d7"
+          }
+        },
+        {
+          "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQNEC1YTnJl1r_1SxYXB1msBpbD0oxC9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666336350240:android:e8f9958242cc26146d2c45",
+        "android_client_info": {
+          "package_name": "com.fuelme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQNEC1YTnJl1r_1SxYXB1msBpbD0oxC9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666336350240:android:73b9d3c5139bd80d6d2c45",
+        "android_client_info": {
+          "package_name": "com.vivek.foodie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQNEC1YTnJl1r_1SxYXB1msBpbD0oxC9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666336350240:android:639b486755f4472b6d2c45",
+        "android_client_info": {
+          "package_name": "vivek.restro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666336350240-0ktplc44pidbvjlaa4n6pgctsojhk9s5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vivek.restro",
+            "certificate_hash": "b8e9cac2e8b2ed24af8892a56a566b16f5fd9f4b"
+          }
+        },
+        {
+          "client_id": "666336350240-2jds2il1sgijheghtl0nl0ibt7jmfe00.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vivek.restro",
+            "certificate_hash": "8e05ee59d8927ccb47b35aaf573271ed7849a977"
+          }
+        },
+        {
+          "client_id": "666336350240-cs2rrsh15v5p49mhope7sped1061dcrq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vivek.restro",
+            "certificate_hash": "b145b4687d40b049dae2ac3e659eadfe250123ce"
+          }
+        },
+        {
+          "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQNEC1YTnJl1r_1SxYXB1msBpbD0oxC9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

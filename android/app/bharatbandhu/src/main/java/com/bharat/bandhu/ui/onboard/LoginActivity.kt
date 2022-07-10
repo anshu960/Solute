@@ -18,10 +18,7 @@ import com.bharat.bandhu.ui.onboard.register.SignupActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.*
 import com.hbb20.CountryCodePicker
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
@@ -172,13 +169,14 @@ class LoginActivity : UtilityActivity() {
     fun authenticateUsingPhoneNumber(){
         this.startActivityIndicator("Sending OTP to given Number")
 
-        if(phoneNumber != "" && phoneNumber.count() == 10){
-            PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+" + this.getDialCode() + phoneNumber, // Phone number to verify
-                10, // Timeout duration
-                TimeUnit.SECONDS, // Unit of timeout
-                this, // Activity (for callback binding)
-                callbacks) // OnVerificationStateChangedCallbacks
+        if(phoneNumber != "" && phoneNumber.count() >= 10){
+            val phoneNumber = "+" + this.getDialCode() + phoneNumber.trim()
+            PhoneAuthOptions.newBuilder(auth)
+                .setPhoneNumber(phoneNumber)       // Phone number to verify
+                .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                .setActivity(this)                 // Activity (for callback binding)
+                .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+                .build();
         }else{
             this.alert("Oops!","Please enter a valid phone number")
         }

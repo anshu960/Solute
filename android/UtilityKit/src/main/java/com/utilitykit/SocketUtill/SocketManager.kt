@@ -122,7 +122,7 @@ object SocketManager
             if(user._id != ""){
                 joinRoom(user._id)
             }else{
-                val deviceId =  Settings.Secure.getString(UtilityKitApp.applicationContext().contentResolver, Settings.Secure.ANDROID_ID)
+                val deviceId =  Defaults.string(Key.deviceId)
                 joinRoom(deviceId)
             }
         }
