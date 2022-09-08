@@ -5,7 +5,7 @@ import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.util.Log
 import com.solute.App
-import com.solute.database.Database
+import com.utilitykit.database.Database
 import java.io.File
 import java.io.File.separator
 import java.io.FileOutputStream

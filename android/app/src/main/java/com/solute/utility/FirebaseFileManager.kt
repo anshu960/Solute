@@ -1,4 +1,4 @@
-package com.friendly.utility
+package com.solute.utility
 
 import android.net.Uri
 import android.util.Log

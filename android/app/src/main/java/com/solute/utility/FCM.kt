@@ -1,11 +1,11 @@
-package com.friendly.utility
+package com.solute.utility
 
 import android.content.ContentValues
 import android.util.Log
-import com.solute.constants.Key
 import com.solute.constants.Server
-import com.solute.dataclass.User
+import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
+import com.utilitykit.dataclass.User
 import org.json.JSONObject
 
 class FCM {

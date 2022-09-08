@@ -4,8 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.solute.App
-import com.solute.dataclass.ContactData
-import com.solute.dataclass.User
+import com.utilitykit.dataclass.ContactData
+import com.utilitykit.dataclass.User
+
 
 class SMSManager {
     companion object{

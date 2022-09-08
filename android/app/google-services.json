@@ -14,19 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "666336350240-mrc1jn1agdl22q3bq9lbm76boq9k36bs.apps.googleusercontent.com",
+          "client_id": "666336350240-6p80pmj2qlh8lnbtkqffu01bess556k5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bharat.bandhu",
             "certificate_hash": "b145b4687d40b049dae2ac3e659eadfe250123ce"
-          }
-        },
-        {
-          "client_id": "666336350240-p661ibrn2dsc6mqpogf65383oitf5e4q.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bharat.bandhu",
-            "certificate_hash": "46bffa524f1e81921e7b39f8825cb932c67621d7"
           }
         },
         {
@@ -58,6 +50,43 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQNEC1YTnJl1r_1SxYXB1msBpbD0oxC9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666336350240:android:3c071bfc494fda1c6d2c45",
+        "android_client_info": {
+          "package_name": "com.solute"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666336350240-4pia6s8dqbdoif09g9jg6q9lp4bd8d4o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.solute",
+            "certificate_hash": "b145b4687d40b049dae2ac3e659eadfe250123ce"
+          }
+        },
         {
           "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
           "client_type": 3

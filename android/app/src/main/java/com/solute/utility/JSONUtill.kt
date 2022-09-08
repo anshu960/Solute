@@ -1,6 +1,6 @@
-package com.friendly.utility
+package com.solute.utility
 
-import com.solute.dataclass.Profile
+import com.utilitykit.dataclass.Profile
 
 
 class JSONUtill

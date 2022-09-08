@@ -1,4 +1,4 @@
-package com.friendly.utility
+package com.solute.utility
 
 import com.utilitykit.Constants.Key
 import org.json.JSONArray

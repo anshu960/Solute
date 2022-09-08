@@ -1,4 +1,4 @@
-package com.friendly.utility
+package com.solute.utility
 import android.Manifest
 import android.content.ContentUris
 import android.content.Context
@@ -6,9 +6,9 @@ import android.net.Uri
 import android.provider.ContactsContract
 import androidx.annotation.RequiresPermission
 import com.google.i18n.phonenumbers.PhoneNumberUtil
-import com.solute.dataclass.ContactData
-import com.solute.dataclass.Profile
-import com.solute.dataclass.User
+import com.utilitykit.dataclass.ContactData
+import com.utilitykit.dataclass.Profile
+import com.utilitykit.dataclass.User
 
 /**
  * @author aminography

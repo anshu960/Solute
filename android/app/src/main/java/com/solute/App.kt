@@ -3,13 +3,13 @@ package com.solute
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.Fragment
-import com.friendly.utility.FCM
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.solute.utility.FCM
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityViewController
@@ -69,9 +69,6 @@ class App: Application() {
             Defaults.store(Key.fcmToken, token)
         }
         FCM().updateFcmTokenToServer()
-    }
-    fun getMSocket(): Socket? {
-        return mSocket
     }
 
     companion object{
