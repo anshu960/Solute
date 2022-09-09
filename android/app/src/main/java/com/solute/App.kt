@@ -2,6 +2,7 @@ package com.solute
 
 import android.app.Application
 import android.content.Context
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
@@ -12,6 +13,7 @@ import com.google.firebase.storage.ktx.storage
 import com.solute.utility.FCM
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
+import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
 import com.utilitykit.database.Database
 import com.utilitykit.database.SQLite
@@ -21,7 +23,6 @@ import com.utilitykit.dataclass.Task
 import com.utilitykit.dataclass.User
 import java.net.Socket
 class App: Application() {
-
     var activity: UtilityViewController? = null
     var fragment: Fragment? = null
     var socketUrl = ""
@@ -51,14 +52,16 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        UtilityKitApp().setUp(this)
         FirebaseApp.initializeApp(this)
         SQLite.init(this)
         Database.init(this)
-        Defaults.init(this)
+        val deviceId = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
+        Defaults.store(Key.deviceId,deviceId)
 //        Analytics.initFirebaseSetup(this)
 //        Analytics().logAppLaunch()
-        getAndUpdateToken()
-        setUpFirebaseStorage()
+//        getAndUpdateToken()
+//        setUpFirebaseStorage()
 
     }
     fun getAndUpdateToken(){
@@ -68,7 +71,10 @@ class App: Application() {
         if (token != null) {
             Defaults.store(Key.fcmToken, token)
         }
-        FCM().updateFcmTokenToServer()
+
+    }
+    fun getMSocket(): Socket? {
+        return mSocket
     }
 
     companion object{
