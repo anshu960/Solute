@@ -38,6 +38,7 @@
     <string name="high">High</string>
     <string name="critical">Critical</string>
     <string name="not_decided">Not Decided</string>
+    <string name="business">Business</string>
 
     <string name="empty_task_message">No task found, please click on the create task button to start creating task</string>
     <!--    <string name="delete_group">Delete Group</string>-->

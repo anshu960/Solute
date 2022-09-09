@@ -14,12 +14,16 @@ import org.json.JSONObject
 
 class BusinessHandler {
     init {
-        BusinessHandler.instance = this
+        instance = this
     }
     companion object{
         private var instance: BusinessHandler? = null
         fun shared() : BusinessHandler {
-            return instance as BusinessHandler
+            if(instance != null){
+                return instance as BusinessHandler
+            }else{
+                return BusinessHandler()
+            }
         }
     }
      val retriveBusiness = Emitter.Listener {

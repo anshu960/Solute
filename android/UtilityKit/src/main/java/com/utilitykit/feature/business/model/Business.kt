@@ -1,4 +1,4 @@
-package com.utilitykit.dataclass
+package com.utilitykit.feature.business.model
 
 import com.google.gson.annotations.SerializedName
 
