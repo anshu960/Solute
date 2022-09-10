@@ -18,14 +18,27 @@ class CartRepository {
     val cartCount : LiveData<Int>
         get()=cartCountLiveData
 
+    val discountLiveData = MutableLiveData<Int>()
+    val discount : LiveData<Int>
+    get() = discountLiveData
+
+    val subtotalLiveData = MutableLiveData<Int>()
+    val subtotal : LiveData<Int>
+        get() = subtotalLiveData
+
+    val taxlLiveData = MutableLiveData<Int>()
+    val tax : LiveData<Int>
+        get() = taxlLiveData
+
+    val instantDiscountLiveData = MutableLiveData<Int>()
+    val instantDiscount : LiveData<Int>
+        get() = instantDiscountLiveData
+
+    val totalAmountLiveData = MutableLiveData<Int>()
+    val totalAmount : LiveData<Int>
+        get() = totalAmountLiveData
 
 
-    fun getProductQuantity(product: Product):Int{
-        var quanity = 0
-        if(cart.value != null && cart.value!!.has(product.Id)){
-            quanity = cart.value!!.getInt(product.Id!!)
-        }
-        return quanity
-    }
+
 
 }

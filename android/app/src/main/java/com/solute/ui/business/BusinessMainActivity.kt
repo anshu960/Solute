@@ -48,6 +48,7 @@ class BusinessMainActivity : AppCompatActivity() {
         CartHelper.shared().viewModel?.cartCount?.observe(this){
             bottomNavigationView?.getOrCreateBadge(R.id.navigation_business_main_cart)!!.number = it
         }
+        CartHelper.shared().viewModel?.resetCart()
     }
 
     override fun onSupportNavigateUp(): Boolean {

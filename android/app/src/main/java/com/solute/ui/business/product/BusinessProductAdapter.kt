@@ -87,8 +87,8 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         decreaseButton?.setOnClickListener { CartHelper.shared().removeFromCart(product) }
     }
     fun updateQuanity(product:Product){
-        val quanity = CartHelper.shared().repository.getProductQuantity(product)
-        if(quanity>0){
+        val quanity = CartHelper.shared().viewModel?.getProductQuantity(product)
+        if(quanity != null &&  quanity>0){
             stepperContainer?.visibility = View.VISIBLE
             addToCartCard?.visibility = View.GONE
             productQuantity?.text = quanity.toString()
