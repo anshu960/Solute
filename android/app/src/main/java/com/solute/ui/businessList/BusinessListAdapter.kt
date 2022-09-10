@@ -1,11 +1,14 @@
 package com.solute.ui.businessList
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.solute.MainActivity
 import com.solute.R
+import com.solute.ui.business.BusinessMainActivity
 import com.utilitykit.feature.business.model.Business
 
 class BusinessListAdapter(val context: Context, val allBusiness: List<Business>) :
@@ -23,7 +26,11 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
     override fun onBindViewHolder(holder: BusinessViewHolder, position: Int) {
         val item = allBusiness[position]
         holder.itemView.setOnClickListener {
-
+            if(context is MainActivity){
+                val mainActivty = context as MainActivity
+                val intent = Intent(mainActivty,BusinessMainActivity::class.java)
+                mainActivty.startActivity(intent)
+            }
         }
         holder.bind(item)
     }

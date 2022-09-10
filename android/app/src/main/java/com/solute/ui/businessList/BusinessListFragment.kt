@@ -54,7 +54,7 @@ class BusinessListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_business_list, container, false)
         this.recyclerView = view.findViewById(R.id.fragment_business_list_recycler)
-
+        reload()
         return view
     }
 }

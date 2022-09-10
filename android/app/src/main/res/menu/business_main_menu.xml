@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_business_main_product"
+        android:icon="@drawable/baseline_category"
+        android:title="@string/product" />
+    <item
+        android:id="@+id/navigation_business_main_cart"
+        android:icon="@drawable/shopping_cart"
+        android:title="@string/cart" />
+    <item
+        android:id="@+id/navigation_business_main_invoice"
+        android:icon="@drawable/receipt"
+        android:title="@string/invoice" />
+</menu>
