@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.business.model.Business
+import com.utilitykit.feature.business.viewModel.BusinessViewModalFactory
+import com.utilitykit.feature.business.viewModel.BusinessViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -18,16 +20,20 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BusinessListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    var recyclerView : RecyclerView? = null
+    private lateinit var businessViewModel: BusinessViewModel
+    private var adapter : BusinessListAdapter? = null
+    var allBusiness : ArrayList<Business> =  ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        adapter = this.context?.let { BusinessListAdapter(it,allBusiness) }
+        businessViewModel = ViewModelProvider(this, BusinessViewModalFactory(BusinessHandler.shared().repository)).get(
+            BusinessViewModel::class.java)
+        businessViewModel.allBusiness.observe(this,{
+            allBusiness.add(it)
+        })
+        BusinessHandler.shared().setup(businessViewModel)
+        BusinessHandler.shared().fetchAllBusiness()
     }
 
     override fun onCreateView(
@@ -35,26 +41,11 @@ class BusinessListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_business_list, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BusinessListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BusinessListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val view = inflater.inflate(R.layout.fragment_business_list, container, false)
+        this.recyclerView = view.findViewById(R.id.fragment_business_list_recycler)
+        this.recyclerView!!.layoutManager = LinearLayoutManager(this.context)
+        adapter = this.context?.let { BusinessListAdapter(it,allBusiness) }
+        this.recyclerView!!.adapter = this.adapter
+        return view
     }
 }

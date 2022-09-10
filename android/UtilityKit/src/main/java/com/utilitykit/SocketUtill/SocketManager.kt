@@ -1,15 +1,12 @@
 package com.utilitykit.SocketUtill
 
 import android.provider.ContactsContract
-import android.provider.Settings
 import android.util.Log
-import android.util.Log.d
 import com.utility.Encryption
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.payload
 import com.utilitykit.Constants.TableNames
 import com.utilitykit.Defaults
-import com.utilitykit.SocketUtill.handler.BusinessHandler
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
 import com.utilitykit.database.SQLite
@@ -115,7 +112,7 @@ object SocketManager
             mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
             mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
             //Solute
-            mSocket?.on(SocketEvent.RETRIVE_BUSINESS.value,BusinessHandler.shared().retriveBusiness)
+            mSocket?.on(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
             mSocket?.connect()
         }
     }
