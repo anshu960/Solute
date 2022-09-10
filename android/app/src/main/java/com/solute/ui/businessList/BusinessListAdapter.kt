@@ -9,22 +9,18 @@ import com.solute.R
 import com.utilitykit.feature.business.model.Business
 
 class BusinessListAdapter(val context: Context, val allBusiness: List<Business>) :
-    RecyclerView.Adapter<BusinessViewHolder>()
-{
+    RecyclerView.Adapter<BusinessViewHolder>() {
 
-    override fun getItemCount(): Int
-    {
+    override fun getItemCount(): Int {
         return allBusiness.count()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusinessViewHolder
-    {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusinessViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return BusinessViewHolder(inflater, parent)
     }
 
-    override fun onBindViewHolder(holder: BusinessViewHolder, position: Int)
-    {
+    override fun onBindViewHolder(holder: BusinessViewHolder, position: Int) {
         val item = allBusiness[position]
         holder.itemView.setOnClickListener {
 
@@ -37,22 +33,21 @@ class BusinessViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recycler
     inflater.inflate(
         R.layout.recycler_item_business, parent, false
     )
-)
-{
+) {
     private var businessName: TextView? = null
     private var businessMobile: TextView? = null
     private var businessAddress: TextView? = null
 
-    init
-    {
+    init {
         businessName = itemView.findViewById(R.id.recycler_item_business_name_txt)
         businessMobile = itemView.findViewById(R.id.recycler_item_business_mobile_txt)
         businessAddress = itemView.findViewById(R.id.recycler_item_business_location_txt)
     }
 
-    fun bind(business: Business)
-    {
-
+    fun bind(business: Business) {
+        businessName?.text = business.Name
+        businessMobile?.text = business.MobileNumber
+        businessAddress?.text = business.Address
 
     }
 }

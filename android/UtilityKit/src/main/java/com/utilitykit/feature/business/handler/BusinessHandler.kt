@@ -25,7 +25,7 @@ class BusinessHandler {
     private lateinit var businessViewModel: BusinessViewModel
     val repository = BusinessRepository()
     val gson = Gson()
-
+    var allBusiness : ArrayList<Business> = arrayListOf()
     init {
         instance = this
     }
@@ -62,8 +62,10 @@ class BusinessHandler {
                 {
                     val item = payload.getJSONObject(i)
                     val business = gson.fromJson(item.toString(),Business::class.java)
+                    allBusiness.add(business)
                     repository.businessLiveData.postValue(business)
                 }
+
             }
         }
     }
