@@ -14,10 +14,9 @@ import org.json.JSONObject
 
 class ProductHandler {
 
-    private lateinit var productViewModel: ProductViewModel
+    var productViewModel: ProductViewModel? = null
     val repository = ProductRepository()
     val gson = Gson()
-    var allProduct : ArrayList<Product> = arrayListOf()
     init {
         instance = this
     }
@@ -36,47 +35,12 @@ class ProductHandler {
         productViewModel = model
     }
 
-    fun addToCart(product: Product){
-        var allCartItem = repository.cartLiveData.value
-        if (allCartItem != null){
-            if(allCartItem!!.has(product.Id)){
-                var quantity = allCartItem.getInt(product.Id)
-                quantity+=1
-                allCartItem.put(product.Id,quantity)
-            }else{
-                allCartItem.put(product.Id,1)
-            }
-            repository.cartLiveData.postValue(allCartItem)
-        }else{
-            val newCart = JSONObject()
-            newCart.put(product.Id,1)
-            repository.cartLiveData.postValue(newCart)
-        }
-    }
-
-    fun removeFromCart(product: Product){
-        var allCartItem = repository.cartLiveData.value
-        if (allCartItem != null){
-            if(allCartItem!!.has(product.Id)){
-                var quantity = allCartItem.getInt(product.Id)
-                quantity-=1
-                if(quantity<1){
-                 allCartItem.remove(product.Id)
-                }else{
-                    allCartItem.put(product.Id,quantity)
-                }
-            }
-            repository.cartLiveData.postValue(allCartItem)
-        }
-        repository.updateCount()
-    }
 
     fun fetchAllProduct(){
         val request = JSONObject()
         val user = User()
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId,user._id)
-
         request.put(Key.businessID,business!!.Id)
         SocketManager.send(SocketEvent.RETRIVE_PRODUCT,request)
     }
@@ -87,14 +51,14 @@ class ProductHandler {
             val anyData = it.first() as JSONObject
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONArray(Key.payload)
-                allProduct = arrayListOf()
+                var allProduct : ArrayList<Product> = arrayListOf()
                 for (i in 0 until payload.length())
                 {
                     val item = payload.getJSONObject(i)
                     val product = gson.fromJson(item.toString(),Product::class.java)
                     allProduct.add(product)
-                    repository.productLiveData.postValue(product)
                 }
+                repository.productLiveData.postValue(allProduct)
             }
         }
     }

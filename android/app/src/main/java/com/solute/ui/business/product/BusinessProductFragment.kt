@@ -38,6 +38,7 @@ class BusinessProductFragment : Fragment() {
             ProductViewModel::class.java
         )
         productViewModel.allProduct.observe(this, {
+            allProduct = it as ArrayList<Product>
             this.reload()
         })
         ProductHandler.shared().setup(productViewModel)
@@ -45,7 +46,9 @@ class BusinessProductFragment : Fragment() {
     }
 
     fun reload() {
-        allProduct = ProductHandler.shared().allProduct
+        if(ProductHandler.shared().repository.productLiveData.value != null){
+            allProduct = ProductHandler.shared().repository.productLiveData.value as ArrayList<Product>
+        }
         this.recyclerView!!.layoutManager = LinearLayoutManager(this.context)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
         this.recyclerView!!.adapter = this.adapter

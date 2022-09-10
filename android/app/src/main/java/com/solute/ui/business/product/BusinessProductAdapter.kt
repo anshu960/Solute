@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.business.BusinessMainActivity
-import com.utilitykit.feature.product.handler.ProductHandler
+import com.utilitykit.feature.cart.helper.CartHelper
 import com.utilitykit.feature.product.model.Product
 
 class BusinessProductAdapter(val context: Context,val fragment: Fragment,val allProduct: List<Product>) :
@@ -79,15 +79,15 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         productFinalPrice?.text = "₹ " + product.FinalPrice.toString()
         stepperContainer?.visibility = View.GONE
         updateQuanity(product)
-        ProductHandler.shared().repository.cart.observe(fragment) {
+        CartHelper.shared().viewModel?.cart?.observe(fragment) {
             updateQuanity(product)
         }
-        addToCartCard?.setOnClickListener { ProductHandler.shared().addToCart(product) }
-        increaseButton?.setOnClickListener { ProductHandler.shared().addToCart(product) }
-        decreaseButton?.setOnClickListener { ProductHandler.shared().removeFromCart(product) }
+        addToCartCard?.setOnClickListener { CartHelper.shared().addToCart(product) }
+        increaseButton?.setOnClickListener { CartHelper.shared().addToCart(product) }
+        decreaseButton?.setOnClickListener { CartHelper.shared().removeFromCart(product) }
     }
     fun updateQuanity(product:Product){
-        val quanity = ProductHandler.shared().repository.getProductQuantity(product)
+        val quanity = CartHelper.shared().repository.getProductQuantity(product)
         if(quanity>0){
             stepperContainer?.visibility = View.VISIBLE
             addToCartCard?.visibility = View.GONE

@@ -15,9 +15,7 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
 
         }
     }
-    val allProduct : LiveData<Product>
+    val allProduct : LiveData<List<Product>>
     get() = productRepository.allProduct
 
-    val cart : LiveData<JSONObject>
-        get() = productRepository.cart
 }
