@@ -14,6 +14,7 @@ import com.utilitykit.dataclass.ContactData
 import com.utilitykit.dataclass.Conversation
 import com.utilitykit.dataclass.Message
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.product.handler.ProductHandler
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -113,6 +114,8 @@ object SocketManager
             mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
             //Solute
             mSocket?.on(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
+            mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value,ProductHandler.shared().retriveProduct)
+            //conenct the socket
             mSocket?.connect()
         }
     }

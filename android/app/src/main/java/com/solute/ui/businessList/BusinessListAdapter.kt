@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.business.BusinessMainActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
 
 class BusinessListAdapter(val context: Context, val allBusiness: List<Business>) :
@@ -29,6 +30,7 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
             if(context is MainActivity){
                 val mainActivty = context as MainActivity
                 val intent = Intent(mainActivty,BusinessMainActivity::class.java)
+                BusinessHandler.shared().repository.business = item
                 mainActivty.startActivity(intent)
             }
         }
