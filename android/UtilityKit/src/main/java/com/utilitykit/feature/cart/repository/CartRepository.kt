@@ -18,6 +18,10 @@ class CartRepository {
     val cartCount : LiveData<Int>
         get()=cartCountLiveData
 
+    val mrpLiveData = MutableLiveData<Int>()
+    val mrp : LiveData<Int>
+        get() = mrpLiveData
+
     val discountLiveData = MutableLiveData<Int>()
     val discount : LiveData<Int>
     get() = discountLiveData

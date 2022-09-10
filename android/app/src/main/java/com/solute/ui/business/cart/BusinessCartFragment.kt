@@ -31,6 +31,7 @@ class BusinessCartFragment : Fragment() {
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
 
+    var mrpValueTxt : TextView? = null
     var discountValueTxt: TextView? = null
     var subTotalValueTxt: TextView? = null
     var taxValueTxt: TextView? = null
@@ -62,6 +63,9 @@ class BusinessCartFragment : Fragment() {
             allProduct = it as ArrayList<Product>
             this.reload()
         }
+        cartViewModel?.mrp?.observe(this) {
+            this.mrpValueTxt?.text = it.toString()
+        }
         cartViewModel?.discount?.observe(this) {
             this.discountValueTxt?.text = it.toString()
         }
@@ -85,6 +89,7 @@ class BusinessCartFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_business_cart, container, false)
+        mrpValueTxt = view.findViewById(R.id.business_fragment_mrp_txt)
         recyclerView = view.findViewById(R.id.business_fragment_recycler)
         discountValueTxt = view.findViewById(R.id.business_fragment_discount_txt)
         subTotalValueTxt = view.findViewById(R.id.business_fragment_subtotal_total_amount_txt)

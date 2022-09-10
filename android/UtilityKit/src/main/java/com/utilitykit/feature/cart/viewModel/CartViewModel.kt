@@ -28,6 +28,9 @@ class CartViewModel (private val cartRepository: CartRepository):ViewModel(){
     val cartCount : LiveData<Int>
     get()=cartRepository.cartCount
 
+    val mrp : LiveData<Int>
+        get() = cartRepository.mrp
+
     val discount : LiveData<Int>
         get() = cartRepository.discount
 
@@ -60,6 +63,7 @@ class CartViewModel (private val cartRepository: CartRepository):ViewModel(){
     }
 
     fun updatePricesInCart(){
+        var totalMrp = 0
         var priceDiscount = 0
         var priceSubtotal = 0
         var priceTax = 0
@@ -73,6 +77,9 @@ class CartViewModel (private val cartRepository: CartRepository):ViewModel(){
             if(it.Price != null){
                 priceSubtotal = priceSubtotal + (it.Price!! * quanity)
             }
+            if(it.MRP != null){
+                totalMrp = totalMrp + (it.MRP!! * quanity)
+            }
             if(it.Tax != null){
                 priceTax = priceTax + (it.Tax!! * quanity)
             }
@@ -85,6 +92,7 @@ class CartViewModel (private val cartRepository: CartRepository):ViewModel(){
         cartRepository.discountLiveData.postValue(priceDiscount)
         cartRepository.taxlLiveData.postValue(priceTax)
         cartRepository.totalAmountLiveData.postValue(priceTotal)
+        cartRepository.mrpLiveData.postValue(totalMrp)
     }
 
     fun updateCount(){
