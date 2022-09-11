@@ -5,19 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
-import androidx.core.text.set
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.ui.business.product.BusinessProductAdapter
-import com.utilitykit.feature.cart.helper.CartHelper
-import com.utilitykit.feature.cart.viewModel.CartViewModalFactory
+import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.cart.viewModel.CartViewModel
-import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 
 /**
@@ -37,24 +34,25 @@ class BusinessCartFragment : Fragment() {
     var taxValueTxt: TextView? = null
     var instantDiscountValueTxt: TextInputEditText? = null
     var totalValueTxt: TextView? = null
+    var saleButton: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessProductAdapter(it, this, allProduct) }
-        cartViewModel = CartHelper.shared().viewModel
+        cartViewModel = CartHandler.shared().viewModel
         addListener()
     }
 
     fun reload() {
-        if (CartHelper.shared().repository.cartProducts != null && CartHelper.shared().repository.cartProducts.value != null) {
-            allProduct = CartHelper.shared().repository.cartProducts.value as ArrayList<Product>
+        if (CartHandler.shared().repository.cartProducts != null && CartHandler.shared().repository.cartProducts.value != null) {
+            allProduct = CartHandler.shared().repository.cartProducts.value as ArrayList<Product>
         }
         this.recyclerView!!.layoutManager = LinearLayoutManager(this.context)
         adapter = this.context?.let { BusinessProductAdapter(it, this, allProduct) }
         this.recyclerView!!.adapter = this.adapter
         cartViewModel?.updatePricesInCart()
-        if (CartHelper.shared().repository.instantDiscount != null && CartHelper.shared().repository.instantDiscount.value != null) {
-            instantDiscountValueTxt?.setText(CartHelper.shared().repository.instantDiscount.value!!.toString())
+        if (CartHandler.shared().repository.instantDiscount != null && CartHandler.shared().repository.instantDiscount.value != null) {
+            instantDiscountValueTxt?.setText(CartHandler.shared().repository.instantDiscount.value!!.toString())
         }
     }
 
@@ -105,6 +103,8 @@ class BusinessCartFragment : Fragment() {
                 cartViewModel?.updateInstantDiscount(0)
             }
         }
+        saleButton = view.findViewById(R.id.business_fragment_sale_btn)
+        saleButton?.setOnClickListener { cartViewModel?.createSaleAndGenerateReceipt() }
         return view
     }
 }

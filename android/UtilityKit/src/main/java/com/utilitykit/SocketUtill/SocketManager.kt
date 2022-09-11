@@ -14,6 +14,7 @@ import com.utilitykit.dataclass.ContactData
 import com.utilitykit.dataclass.Conversation
 import com.utilitykit.dataclass.Message
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -115,6 +116,8 @@ object SocketManager
             //Solute
             mSocket?.on(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value,ProductHandler.shared().retriveProduct)
+            mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
+            mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value,CartHandler.shared().createCustomerInvoice)
             //conenct the socket
             mSocket?.connect()
         }
