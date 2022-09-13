@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -57,11 +58,13 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
     private var addToCartCard: CardView? = null
     private var increaseButton: ImageButton? = null
     private var decreaseButton: ImageButton? = null
-
+    private var productTax : TextView? = null
+    private var taxIncludedCheckBox : CheckBox? = null
+    private var taxLable : TextView? = null
     init {
         productName = itemView.findViewById(R.id.recycler_item_product_name_txt)
         productDescription = itemView.findViewById(R.id.recycler_item_product_description_txt)
-        productPrice = itemView.findViewById(R.id.recycler_item_product_price_txt)
+        productPrice = itemView.findViewById(R.id.recycler_item_product_mrp_txt)
         productDiscount = itemView.findViewById(R.id.recycler_item_product_discount_txt)
         productFinalPrice = itemView.findViewById(R.id.recycler_item_product_final_price_txt)
         productQuantity = itemView.findViewById(R.id.recycler_item_product_stepper_count_txt)
@@ -69,15 +72,32 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         addToCartCard = itemView.findViewById(R.id.recycler_item_product_add_to_cart_card)
         increaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_add_btn)
         decreaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_remove_btn)
+        productTax = itemView.findViewById(R.id.recycler_item_product_tax)
+        taxIncludedCheckBox = itemView.findViewById(R.id.recycler_item_product_check_box)
+        taxLable = itemView.findViewById(R.id.recycler_item_product_tax_lbl)
     }
 
     fun bind(fragment:Fragment,product: Product) {
         productName?.text = product.Name
         productDescription?.text = product.Description
-        productPrice?.text = "₹ " + product.MRP.toString()
-        productDiscount?.text = "₹ " + product.Discount.toString()
-        productFinalPrice?.text = "₹ " + product.FinalPrice.toString()
+        productPrice?.text = "₹ ${product.MRP}"
+
+        productDiscount?.text = "₹ ${product.Discount}"
+        productFinalPrice?.text = "₹ ${product.FinalPrice}"
         stepperContainer?.visibility = View.GONE
+
+        if(product.Tax != null && product.Tax!! > 0){
+            productTax?.text = "₹ ${product.Tax}"
+            taxIncludedCheckBox?.isChecked = product.TaxIncluded!!
+            productTax?.visibility = View.VISIBLE
+            taxIncludedCheckBox?.visibility = View.VISIBLE
+            taxLable?.visibility = View.VISIBLE
+        }else{
+            productTax?.visibility = View.GONE
+            taxIncludedCheckBox?.visibility = View.GONE
+            taxLable?.visibility = View.GONE
+        }
+        taxIncludedCheckBox?.isEnabled = false
         updateQuanity(product)
         CartHandler.shared().viewModel?.cart?.observe(fragment) {
             updateQuanity(product)

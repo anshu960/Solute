@@ -30,9 +30,9 @@ class CartRepository {
     val subtotal : LiveData<Int>
         get() = subtotalLiveData
 
-    val taxlLiveData = MutableLiveData<Int>()
+    val taxLiveData = MutableLiveData<Int>()
     val tax : LiveData<Int>
-        get() = taxlLiveData
+        get() = taxLiveData
 
     val instantDiscountLiveData = MutableLiveData<Int>()
     val instantDiscount : LiveData<Int>

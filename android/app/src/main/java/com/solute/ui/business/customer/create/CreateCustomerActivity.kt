@@ -28,7 +28,8 @@ class CreateCustomerActivity : AppCompatActivity() {
         saveButton = findViewById(R.id.create_customer_activity_save_btn)
         cancelButton = findViewById(R.id.create_customer_activity_cancel_btn)
         cancelButton?.setOnClickListener { slideDown() }
-        title = "Add new or existing customer"
+//        title = "Add new or existing customer"
+        title = ""
         configureWindow()
     }
     fun configureWindow(){
