@@ -4,16 +4,16 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.bharat.bandhu",
+  "applicationId": "com.solute",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "0.0.1",
-      "outputFile": "bharatbandhu-release.apk"
+      "versionCode": 3,
+      "versionName": "0.0.3",
+      "outputFile": "app-release.apk"
     }
   ],
   "elementType": "File"

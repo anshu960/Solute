@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#282253</color>
     <color name="colorAccent">#D81B60</color>
     <color name="buttonDefaultTint">#0076ff</color>
-    <color name="colorThemePrimary">#FF8400</color>
+    <color name="colorThemePrimary">#66aae1</color>
     <color name="lightGray">#a6a6a6</color>
     <color name="darkGray">#282828</color>
     <color name="lightBackground">#F7F8FA</color>
@@ -17,7 +17,8 @@
     <color name="inProgressLight">#C4EEFA</color>
     <color name="priority_medium_background">#FEF1E6</color>
     <color name="priority_medium">#F17105</color>
-
+    <color name="transparent">#00ffffff</color>
+    <color name="semi_transparent_black">#7D000000</color>
 
     <color name="delete">#C73535</color>
     <color name="pending">#F17105</color>

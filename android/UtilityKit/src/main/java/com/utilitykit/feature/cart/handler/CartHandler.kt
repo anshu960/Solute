@@ -1,14 +1,12 @@
 package com.utilitykit.feature.cart.handler
 
-import android.app.Application
 import android.content.Intent
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.cart.model.Sale
+import com.utilitykit.feature.cart.repository.CartRepository
 import com.utilitykit.feature.cart.viewModel.CartViewModel
 import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.product.repository.CartRepository
 import io.socket.emitter.Emitter
 import org.json.JSONObject
 

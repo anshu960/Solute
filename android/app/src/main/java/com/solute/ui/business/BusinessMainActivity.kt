@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solute.R
 import com.solute.ui.business.receipt.ReceiptDetailsActivity
+import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.cart.viewModel.CartViewModalFactory
@@ -39,7 +40,11 @@ class BusinessMainActivity : UtilityActivity() {
             setOf(R.id.navigation_business_main_product, R.id.navigation_business_main_cart,R.id.navigation_business_main_invoice,)
         )
         setUpRequiredModels()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        SocketManager.verifyIfConnectedOrNot()
     }
 
     fun setUpRequiredModels(){

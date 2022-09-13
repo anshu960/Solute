@@ -88,6 +88,14 @@
           }
         },
         {
+          "client_id": "666336350240-stml84hufl6l70nvmp0rsa56aqicpd3p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.solute",
+            "certificate_hash": "af459643f2f34f816ccb4742defa7a3d60e1e155"
+          }
+        },
+        {
           "client_id": "666336350240-ipv46igem3nh8og2sft93ec1tale1p21.apps.googleusercontent.com",
           "client_type": 3
         }

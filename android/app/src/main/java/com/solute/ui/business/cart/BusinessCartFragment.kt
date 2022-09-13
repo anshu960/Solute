@@ -1,5 +1,6 @@
 package com.solute.ui.business.cart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
+import com.solute.ui.business.customer.create.CreateCustomerActivity
 import com.solute.ui.business.product.BusinessProductAdapter
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.cart.viewModel.CartViewModel
@@ -104,7 +106,12 @@ class BusinessCartFragment : Fragment() {
             }
         }
         saleButton = view.findViewById(R.id.business_fragment_sale_btn)
-        saleButton?.setOnClickListener { cartViewModel?.createSaleAndGenerateReceipt() }
+        saleButton?.setOnClickListener { onClickSale() }
         return view
+    }
+    fun onClickSale(){
+        val intent = Intent(this.context,CreateCustomerActivity::class.java)
+        this.startActivity(intent)
+//        cartViewModel?.createSaleAndGenerateReceipt()
     }
 }

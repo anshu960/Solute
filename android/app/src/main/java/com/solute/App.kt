@@ -64,6 +64,9 @@ class App: Application() {
 //        setUpFirebaseStorage()
 
     }
+
+
+
     fun getAndUpdateToken(){
         val messaging = FirebaseMessaging.getInstance()
         messaging.isAutoInitEnabled = true

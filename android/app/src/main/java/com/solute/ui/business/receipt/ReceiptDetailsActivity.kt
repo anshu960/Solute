@@ -1,6 +1,5 @@
 package com.solute.ui.business.receipt
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -9,13 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.solute.R
-import com.solute.ui.business.product.BusinessProductAdapter
 import com.solute.utility.SMSManager
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.cart.model.CustomerInvoice
 import com.utilitykit.feature.cart.model.Sale
+import com.utilitykit.feature.invoice.handler.InvoiceHandler
+import com.utilitykit.feature.invoice.model.CustomerInvoice
+import com.utilitykit.qr.QRCodeUtill
 import org.json.JSONObject
 
 class ReceiptDetailsActivity : UtilityActivity() {
@@ -64,6 +64,10 @@ class ReceiptDetailsActivity : UtilityActivity() {
         shareButton?.setOnClickListener {
             SMSManager().shareInvoice(this,customerInvoice!!.InvoiceNumber!!,customerInvoice!!.FinalPrice!!)
         }
+        InvoiceHandler.shared().repository.allSalesLiveData.observe(this) {
+            sales = it as ArrayList<Sale>
+            reloadData()
+        }
     }
     fun getCustomerMobileNumber():String{
         toast("Mobile Number Not found For Customer")
@@ -82,13 +86,18 @@ class ReceiptDetailsActivity : UtilityActivity() {
                 sales.add(sale)
             }
             reloadData()
+        }else{
+            InvoiceHandler.shared().repository.customerInvoice.value
+            customerInvoice = InvoiceHandler.shared().repository.customerInvoice.value
+            InvoiceHandler.shared().viewModel?.fetchAllSales()
+            reloadData()
         }
     }
+
     fun reloadData(){
         this.recycler!!.layoutManager = LinearLayoutManager(this)
         adapter = this?.let { ReceiptAdapter(it ,sales) }
         this.recycler!!.adapter = this.adapter
-
         businessName?.text = business?.Name
         receiptNumber?.text = customerInvoice?.InvoiceNumber.toString()
         businessAddress?.text = business?.Address
@@ -97,5 +106,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
         subTotal?.text =  "₹ " + customerInvoice?.TotalPrice.toString()
         discount?.text =  "₹ " + customerInvoice?.InstantDiscount.toString()
         total?.text =  "₹ " + customerInvoice?.FinalPrice.toString()
+        val qrBitmap = QRCodeUtill().getQRImage("https://solute.app/#/receipt?id=$customerInvoice?.InvoiceNumber.toString()")
+        qrImage?.setImageBitmap(qrBitmap)
     }
 }

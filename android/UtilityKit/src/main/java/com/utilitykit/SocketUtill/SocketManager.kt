@@ -15,6 +15,7 @@ import com.utilitykit.dataclass.Conversation
 import com.utilitykit.dataclass.Message
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.cart.handler.CartHandler
+import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -118,8 +119,16 @@ object SocketManager
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value,ProductHandler.shared().retriveProduct)
             mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
             mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value,CartHandler.shared().createCustomerInvoice)
+            mSocket?.on(SocketEvent.RETRIVE_INVOICE.value,InvoiceHandler.shared().retriveInvoice)
+            mSocket?.on(SocketEvent.RETRIVE_SALES.value,InvoiceHandler.shared().retriveSales)
             //conenct the socket
             mSocket?.connect()
+        }
+    }
+
+    fun verifyIfConnectedOrNot(){
+        if (mSocket?.connected() != true){
+            connect()
         }
     }
     

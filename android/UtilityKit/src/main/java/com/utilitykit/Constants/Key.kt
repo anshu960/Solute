@@ -106,6 +106,7 @@ class Key {
         val isDeleted = "IsDeleted"
         val isTyping = "IsTyping"
         val invoice = "Invoice"
+        val invoiceNumber = "InvoiceNumber"
 
         val userCredentials = "user_credentials"
         val trainerCredentials = "TrainerCredentials"
@@ -121,6 +122,7 @@ class Key {
         val currentGymId = "current_gym_id"
         val joiningDate = "current_gym_joining_date"
         val startDate = "StartDate"
+        val endDate = "EndDate"
         val dueDate = "DueDate"
         val priority = "Priority"
         val lastGymId = "last_gym_id"

@@ -5,7 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import com.solute.R
+import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.invoice.handler.InvoiceHandler
+import com.utilitykit.feature.invoice.model.CustomerInvoice
+import com.utilitykit.feature.invoice.viewModel.InvoiceViewModalFactory
+import com.utilitykit.feature.invoice.viewModel.InvoiceViewModel
+import org.json.JSONObject
+import java.lang.Long
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,16 +31,26 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BusinessInvoiceFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    val business = BusinessHandler.shared().repository.business
+    var invoices : ArrayList<CustomerInvoice> = arrayListOf()
+    var adapter : InvoiceHistoryAdapter? = null
+    var recycler : RecyclerView? = null
+    var searchInput : TextInputEditText? = null
+    private lateinit var invoiceViewModel: InvoiceViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        invoiceViewModel = ViewModelProvider(
+            this,
+            InvoiceViewModalFactory(InvoiceHandler.shared().repository)
+        ).get(
+            InvoiceViewModel::class.java
+        )
+        invoiceViewModel.filteredCustomerInvoice.observe(this) {
+            this.invoices = it as ArrayList<CustomerInvoice>
+            reloadData()
         }
+        InvoiceHandler.shared().setup(invoiceViewModel)
+        invoiceViewModel.fetchAllInvoice()
     }
 
     override fun onCreateView(
@@ -35,26 +58,24 @@ class BusinessInvoiceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_business_invoice, container, false)
+        val view = inflater.inflate(R.layout.fragment_business_invoice, container, false)
+        recycler = view.findViewById(R.id.business_invoice_fragment_recycler)
+        searchInput = view.findViewById(R.id.business_invoice_fragment_top_search_text_input)
+        searchInput?.doOnTextChanged { text, start, before, count ->
+            if(text?.isEmpty() == false){
+                val invoiceNumber = text.toString()!!.toLong()
+                invoiceViewModel?.filter(invoiceNumber)
+            }else{
+                invoiceViewModel?.clearAllFilters()
+            }
+        }
+        reloadData()
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BusinessInvoiceFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BusinessInvoiceFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun reloadData(){
+        this.recycler!!.layoutManager = LinearLayoutManager(this.context)
+        adapter = this?.let { InvoiceHistoryAdapter(this.requireContext() ,invoices) }
+        this.recycler!!.adapter = this.adapter
     }
 }

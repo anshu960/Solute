@@ -1,4 +1,4 @@
-package com.utilitykit.feature.cart.model
+package com.utilitykit.feature.invoice.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -7,7 +7,7 @@ data class CustomerInvoice(
     @SerializedName("BusinessID"      ) var BusinessID      : String?                      = null,
     @SerializedName("CustomerID"      ) var CustomerID      : String?                      = null,
     @SerializedName("IsDeleted"       ) var IsDeleted       : Boolean?                     = null,
-    @SerializedName("SalesID"         ) var SalesID         : ArrayList<ArrayList<String>> = arrayListOf(),
+    @SerializedName("SalesID"         ) var SalesID         : ArrayList<String> = arrayListOf(),
     @SerializedName("InvoiceNumber"   ) var InvoiceNumber   : Long?                         = null,
     @SerializedName("TotalPrice"      ) var TotalPrice      : Float?                         = null,
     @SerializedName("SGST"            ) var SGST            : String?                      = null,

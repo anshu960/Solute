@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.solute">
+
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
@@ -16,10 +17,19 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".ui.business.customer.create.CreateCustomerActivity"
+            android:theme="@style/TransparentCompat"
+            android:exported="false" />
+        <activity
+            android:name=".ui.business.create.CreateBusinessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.business.receipt.ReceiptDetailsActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.BusinessMainActivity"
             android:exported="false"

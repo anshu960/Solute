@@ -1,60 +1,66 @@
 package com.solute.ui.more
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.solute.App
 import com.solute.R
+import com.solute.ui.login.LoginActivity
+import com.solute.ui.profile.ProfileActivity
+import com.solute.utility.LocalFileManager
+import com.squareup.picasso.Picasso
+import com.utilitykit.Constants.Key
+import com.utilitykit.Defaults
+import com.utilitykit.dataclass.User
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MoreFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MoreFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    val user = User()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_more, container, false)
+        val picasso = Picasso.get()
+        val view = inflater.inflate(R.layout.fragment_more, container, false)
+        if (this.user.profilePic != "") {
+            LocalFileManager().getLocalFileUrl(this.user.profilePic) { url ->
+                val profileImageView: ImageView = view.findViewById(R.id.more_profile_name)
+                picasso.load(this.user.profilePic)?.into(profileImageView)
+            }
+        }
+        val profileLayout : ConstraintLayout = view.findViewById(R.id.more_profile_layout)
+        profileLayout.setOnClickListener { presentProfile() }
+        val profileNameTextView: TextView = view.findViewById(R.id.more_profile_name)
+        profileNameTextView?.text = this.user.name
+        val logoutButton : Button = view.findViewById(R.id.more_logout_btn)
+        logoutButton.setOnClickListener { onClickLogout() }
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MoreFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MoreFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun presentProfile() {
+        val intent = Intent(context, ProfileActivity::class.java)
+        requireContext().startActivity(intent)
     }
+
+
+
+    fun onClickLogout() {
+        FirebaseAuth.getInstance().signOut()
+        Defaults.remove(Key.loginDetails)
+        val intent = Intent(context, LoginActivity::class.java)
+        startActivity(intent)
+    }
+
 }

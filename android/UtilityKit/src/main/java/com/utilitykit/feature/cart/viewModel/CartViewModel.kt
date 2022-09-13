@@ -10,9 +10,9 @@ import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.UtilityKitApp.Companion.user
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.cart.repository.CartRepository
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.product.repository.CartRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -161,6 +161,7 @@ class CartViewModel (private val cartRepository: CartRepository):ViewModel(){
         request.put(Key.sales,JSONArray(sales))
         request.put(Key.salesID,JSONArray(salesIds))
         request.put(Key.business,JSONObject(gson.toJson(business)))
+        request.put(Key.instantDiscount,instantDiscount.value)
         SocketManager.send(SocketEvent.GENERATE_CUSTOMER_INVOICE,request)
     }
 
@@ -219,7 +220,6 @@ class CartViewModel (private val cartRepository: CartRepository):ViewModel(){
                 transactionData.put(Key.costPrice,it.CostPrice)
                 transactionData.put(Key.saleDate,now())
                 transactionData.put(Key.discount,discount.value)
-                transactionData.put(Key.instantDiscount,instantDiscount.value)
                 transactions.add(transactionData)
             }
         }

@@ -1,4 +1,4 @@
-package com.utilitykit.feature.product.repository
+package com.utilitykit.feature.cart.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
