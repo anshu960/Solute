@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,8 @@ import com.solute.ui.business.customer.create.CreateCustomerActivity
 import com.solute.ui.business.product.BusinessProductAdapter
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.cart.viewModel.CartViewModel
+import com.utilitykit.feature.customer.handler.CustomerHandler
+import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.product.model.Product
 
 /**
@@ -37,6 +41,13 @@ class BusinessCartFragment : Fragment() {
     var instantDiscountValueTxt: TextInputEditText? = null
     var totalValueTxt: TextView? = null
     var saleButton: Button? = null
+    var selectedCustomer : Customer? = null
+
+    var addCustomerCard : CardView? = null
+    var addCustomerName : TextView? = null
+    var addCustomerMobile : TextView? = null
+    var addCustomerInstruction : TextView? = null
+    var deleteCustomerButton : ImageButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +92,10 @@ class BusinessCartFragment : Fragment() {
         cartViewModel?.totalAmount?.observe(this) {
             this.totalValueTxt?.text = it.toString()
         }
+        CustomerHandler.shared().repository.customerLiveData.observe(this){
+                selectedCustomer = it
+                loadCustomerDetailsInUI()
+        }
     }
 
     override fun onCreateView(
@@ -99,19 +114,51 @@ class BusinessCartFragment : Fragment() {
         reload()
         instantDiscountValueTxt?.doOnTextChanged { text, start, before, count ->
             if (text != null && !text.isBlank()) {
-                val newDiscount = text.trim().toString().toInt()
+                val newDiscount = text.trim().toString().toFloat()
                 cartViewModel?.updateInstantDiscount(newDiscount)
             }else{
-                cartViewModel?.updateInstantDiscount(0)
+                cartViewModel?.updateInstantDiscount(0F)
             }
         }
         saleButton = view.findViewById(R.id.business_fragment_sale_btn)
         saleButton?.setOnClickListener { onClickSale() }
+        addCustomerCard = view.findViewById(R.id.business_fragment_customer_card)
+        addCustomerName = view.findViewById(R.id.business_fragment_customer_name)
+        addCustomerMobile = view.findViewById(R.id.business_fragment_customer_mobile)
+        addCustomerInstruction = view.findViewById(R.id.business_fragment_customer_add_txt)
+        addCustomerInstruction?.setOnClickListener { onClickAddCustomer() }
+        deleteCustomerButton = view.findViewById(R.id.business_fragment_customer_delete_btn)
+        deleteCustomerButton?.setOnClickListener { CustomerHandler.shared().repository.customerLiveData.postValue(null) }
+        loadCustomerDetailsInUI()
         return view
     }
-    fun onClickSale(){
-        val intent = Intent(this.context,CreateCustomerActivity::class.java)
-        this.startActivity(intent)
-//        cartViewModel?.createSaleAndGenerateReceipt()
+
+    fun loadCustomerDetailsInUI(){
+        if(this.selectedCustomer != null && this.selectedCustomer!!.Id != null && this.selectedCustomer!!.Id != ""){
+            addCustomerName?.visibility = View.VISIBLE
+            addCustomerMobile?.visibility = View.VISIBLE
+            addCustomerInstruction?.visibility = View.GONE
+            addCustomerName?.text = this.selectedCustomer!!.Name
+            addCustomerMobile?.text = this.selectedCustomer!!.MobileNumber
+            deleteCustomerButton?.visibility = View.VISIBLE
+        }else{
+            addCustomerName?.visibility = View.GONE
+            addCustomerMobile?.visibility = View.GONE
+            addCustomerInstruction?.visibility = View.VISIBLE
+            deleteCustomerButton?.visibility = View.GONE
+        }
     }
+
+    fun onClickSale(){
+        cartViewModel?.createSaleAndGenerateReceipt(selectedCustomer)
+    }
+    fun onClickAddCustomer(){
+        if(this.selectedCustomer != null && this.selectedCustomer!!.Id != null && this.selectedCustomer!!.Id != ""){
+            return
+        }else{
+            val intent = Intent(this.context,CreateCustomerActivity::class.java)
+            this.startActivity(intent)
+        }
+    }
+
 }

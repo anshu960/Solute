@@ -19,7 +19,7 @@ class FCM {
         notification.put("sound","default")
         if(to != ""){
             var header = ContentValues()
-            header.put("Authorization","key=${Server.fcmServerKey}")
+//            header.put("Authorization","key=${Server.fcmServerKey}")
             header.put("Content-Type","application/json")
             var requestData = JSONObject()
             requestData.put("to",to)

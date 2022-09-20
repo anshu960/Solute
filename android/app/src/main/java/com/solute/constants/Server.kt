@@ -2,7 +2,7 @@ package com.solute.constants
 
 object Server {
           val fcmServer = "https://fcm.googleapis.com/fcm/send"
-          val fcmServerKey = "AAAAKXmn_9s:APA91bGaycBjW2RMnZmZxJCAvqCLZbFXxhlKIRAHXjRFvW-8flk4MdRPsc0_QG7XbEiurUZlPs_OKQxPfV9_RUSSTl-dlsc0MYzZZK92ZEO2r3svR5BkdlzCcnlMUAggB45cVQ2TCGqR"
+
           val productionHost = "https://friendly-r227wnciga-el.a.run.app"
           val devHost = "http://192.168.0.170"
           val socketPort = "8080"

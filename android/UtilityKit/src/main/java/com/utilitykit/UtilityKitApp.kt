@@ -3,12 +3,12 @@ package com.utilitykit
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.Fragment
+import androidx.multidex.BuildConfig
 import com.utilitykit.Constants.Server
 import com.utilitykit.database.Database
 import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
-import com.utilitykit.dataclass.Task
 import com.utilitykit.dataclass.User
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -19,8 +19,6 @@ class UtilityKitApp :Application(){
     var activity: UtilityViewController? = null
     var fragment: Fragment? = null
     var socketUrl = ""
-    var selectedProfiles: ArrayList<Profile> = ArrayList<Profile>()
-    var selectedTask: Task? = null
     var appContext : Context? = null
     private var mSocket: Socket? = null
     init {
@@ -47,11 +45,11 @@ class UtilityKitApp :Application(){
         SQLite.init(appContext!!)
         Database.init(appContext!!)
         Defaults.init(appContext!!)
-        if(BuildConfig.DEBUG){
-            socketUrl = Server.host
-        }else{
-            socketUrl = Server.host
-        }
+//        if(BuildConfig.DEBUG){
+//            socketUrl = Server.devHost
+//        }else{
+            socketUrl = Server.prodDost
+//        }
         try {
             mSocket = IO.socket(socketUrl)
 

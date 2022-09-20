@@ -10,28 +10,77 @@ import android.view.View
 import android.view.WindowManager
 import android.view.animation.LinearInterpolator
 import android.widget.Button
+import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
+import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
+import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.customer.handler.CustomerHandler
 
-class CreateCustomerActivity : AppCompatActivity() {
+class CreateCustomerActivity : UtilityActivity() {
     private var darkPriorityBar = false
     var layout : ConstraintLayout? = null
     var cancelButton : Button? = null
     var saveButton : Button? = null
+    var searchButton : Button? = null
+    var mobileNumber : EditText? = null
+    var customerName : TextInputEditText? = null
+    var customerEmail : EditText? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_customer)
         layout = findViewById(R.id.activity_create_customer_layout)
         overridePendingTransition(0, 0)
         layout?.setOnClickListener { slideDown() }
+        searchButton = findViewById(R.id.create_customer_activity_search_btn)
         saveButton = findViewById(R.id.create_customer_activity_save_btn)
         cancelButton = findViewById(R.id.create_customer_activity_cancel_btn)
         cancelButton?.setOnClickListener { slideDown() }
 //        title = "Add new or existing customer"
         title = ""
+        mobileNumber = findViewById(R.id.create_customer_activity_phone_et)
+        customerName = findViewById(R.id.create_customer_activity_name_tiet)
+        customerEmail = findViewById(R.id.create_customer_activity_email_tiet)
+        searchButton?.setOnClickListener { searchCustomer() }
+        saveButton?.setOnClickListener { createCustomer() }
         configureWindow()
+        CustomerHandler.shared().repository.customerLiveData.observe(this){
+            if(it != null && it.Id != null && !it.Id!!.isEmpty()){
+                this.slideDown()
+            }
+        }
     }
+
+    fun createCustomer(){
+        val mobileNumber = mobileNumber?.text.toString()
+        val name = customerName?.text.toString()
+        val email = customerEmail?.text.toString()
+        var isValid = true
+        if(mobileNumber.isEmpty() || mobileNumber.length < 10){
+            isValid = false
+            alert("Oops!","Please enter a valid mobile number")
+        }
+        if( name.isEmpty() && name.length < 3){
+            isValid = false
+            alert("Oops!","Please enter a valid name of customer")
+        }
+        if(isValid){
+            CustomerHandler.shared().viewModel?.createNewCustomer(name,mobileNumber,email)
+        }
+    }
+
+    fun searchCustomer(){
+        val mobileNumber = mobileNumber?.text.toString()
+        if(mobileNumber.isEmpty() || mobileNumber.length < 10){
+            alert("Oops!","Please enter a valid mobile number")
+        }else{
+            CustomerHandler.shared().searchCustomerByMobile(mobileNumber)
+        }
+    }
+
+
+
     fun configureWindow(){
         // Set the Status bar appearance for different API levels
         if (Build.VERSION.SDK_INT in 19..20) {

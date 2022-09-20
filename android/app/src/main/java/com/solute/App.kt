@@ -5,6 +5,8 @@ import android.content.Context
 import android.provider.Settings
 import androidx.fragment.app.Fragment
 import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
@@ -52,6 +54,11 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(/*context=*/this)
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            PlayIntegrityAppCheckProviderFactory.getInstance()
+        )
         UtilityKitApp().setUp(this)
         FirebaseApp.initializeApp(this)
         SQLite.init(this)

@@ -6,6 +6,7 @@ import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.cart.repository.CartRepository
 import com.utilitykit.feature.cart.viewModel.CartViewModel
+import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.product.model.Product
 import io.socket.emitter.Emitter
 import org.json.JSONObject
@@ -48,7 +49,7 @@ class CartHandler {
                     allSale.add(newSale)
                 }
                 if(allSale.count() > 0){
-                    viewModel?.createInvoice(allSale,salesIds)
+                    viewModel?.createInvoice(allSale,salesIds,CustomerHandler.shared().repository.customer.value)
                 }
             }
         }

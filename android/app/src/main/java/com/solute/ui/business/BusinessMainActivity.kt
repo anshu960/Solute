@@ -17,11 +17,15 @@ import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.cart.viewModel.CartViewModalFactory
 import com.utilitykit.feature.cart.viewModel.CartViewModel
+import com.utilitykit.feature.customer.handler.CustomerHandler
+import com.utilitykit.feature.customer.viewModel.CustomerViewModalFactory
+import com.utilitykit.feature.customer.viewModel.CustomerViewModel
 
 class BusinessMainActivity : UtilityActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var cartViewModal: CartViewModel
+    private lateinit var customerViewModal: CustomerViewModel
     var navHostFragment : NavHostFragment? = null
     var bottomNavigationView :  BottomNavigationView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +63,13 @@ class BusinessMainActivity : UtilityActivity() {
             bottomNavigationView?.getOrCreateBadge(R.id.navigation_business_main_cart)!!.number = it
         }
         CartHandler.shared().viewModel?.resetCart()
+        customerViewModal = ViewModelProvider(
+            this,
+            CustomerViewModalFactory(CustomerHandler.shared().repository)
+        )[CustomerViewModel::class.java]
+        customerViewModal.fetchAllCustomer()
+        CustomerHandler.shared().setup(customerViewModal)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

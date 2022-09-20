@@ -18,28 +18,28 @@ class CartRepository {
     val cartCount : LiveData<Int>
         get()=cartCountLiveData
 
-    val mrpLiveData = MutableLiveData<Int>()
-    val mrp : LiveData<Int>
+    val mrpLiveData = MutableLiveData<Float>()
+    val mrp : LiveData<Float>
         get() = mrpLiveData
 
-    val discountLiveData = MutableLiveData<Int>()
-    val discount : LiveData<Int>
+    val discountLiveData = MutableLiveData<Float>()
+    val discount : LiveData<Float>
     get() = discountLiveData
 
-    val subtotalLiveData = MutableLiveData<Int>()
-    val subtotal : LiveData<Int>
+    val subtotalLiveData = MutableLiveData<Float>()
+    val subtotal : LiveData<Float>
         get() = subtotalLiveData
 
-    val taxLiveData = MutableLiveData<Int>()
-    val tax : LiveData<Int>
+    val taxLiveData = MutableLiveData<Float>()
+    val tax : LiveData<Float>
         get() = taxLiveData
 
-    val instantDiscountLiveData = MutableLiveData<Int>()
-    val instantDiscount : LiveData<Int>
+    val instantDiscountLiveData = MutableLiveData<Float>()
+    val instantDiscount : LiveData<Float>
         get() = instantDiscountLiveData
 
-    val totalAmountLiveData = MutableLiveData<Int>()
-    val totalAmount : LiveData<Int>
+    val totalAmountLiveData = MutableLiveData<Float>()
+    val totalAmount : LiveData<Float>
         get() = totalAmountLiveData
 
 

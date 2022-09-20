@@ -41,6 +41,7 @@ class Key {
         val userId = "UserID"
         var businessID = "BusinessID"
         val business = "Business"
+        val customer = "Customer"
         val customerName = "CustomerName"
         val customerID = "CustomerID"
         val customerMobile = "CustomerMobile"

@@ -11,6 +11,8 @@ import com.utilitykit.UtilityKitApp.Companion.user
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.repository.CartRepository
+import com.utilitykit.feature.customer.handler.CustomerHandler
+import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import kotlinx.coroutines.Dispatchers
@@ -39,22 +41,22 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
     val cartCount: LiveData<Int>
         get() = cartRepository.cartCount
 
-    val mrp: LiveData<Int>
+    val mrp: LiveData<Float>
         get() = cartRepository.mrp
 
-    val discount: LiveData<Int>
+    val discount: LiveData<Float>
         get() = cartRepository.discount
 
-    val subtotal: LiveData<Int>
+    val subtotal: LiveData<Float>
         get() = cartRepository.subtotal
 
-    val tax: LiveData<Int>
+    val tax: LiveData<Float>
         get() = cartRepository.tax
 
-    val instantDiscount: LiveData<Int>
+    val instantDiscount: LiveData<Float>
         get() = cartRepository.instantDiscount
 
-    val totalAmount: LiveData<Int>
+    val totalAmount: LiveData<Float>
         get() = cartRepository.totalAmount
 
 
@@ -69,17 +71,17 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         updatePricesInCart()
     }
 
-    fun updateInstantDiscount(amount: Int) {
+    fun updateInstantDiscount(amount: Float) {
         cartRepository?.instantDiscountLiveData?.postValue(amount)
     }
 
     fun updatePricesInCart() {
-        var totalMrp = 0
-        var priceDiscount = 0
-        var priceSubtotal = 0
-        var priceTax = 0
-        var priceTotal = 0
-        var instantDiscountPrice = 0
+        var totalMrp : Float = 0F
+        var priceDiscount: Float = 0F
+        var priceSubtotal = 0F
+        var priceTax = 0F
+        var priceTotal = 0F
+        var instantDiscountPrice = 0F
         cartProducts.value?.forEach {
             val quanity = getProductQuantity(it)
             if (it.Discount != null) {
@@ -134,15 +136,15 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         cartRepository.cartProductLiveData.postValue(arrayListOf())
         cartRepository.cartLiveData.postValue(JSONObject())
         cartRepository.cartCountLiveData.postValue(0)
-        cartRepository.discountLiveData.postValue(0)
-        cartRepository.subtotalLiveData.postValue(0)
-        cartRepository.taxLiveData.postValue(0)
-        cartRepository.instantDiscountLiveData.postValue(0)
-        cartRepository.totalAmountLiveData.postValue(0)
+        cartRepository.discountLiveData.postValue(0F)
+        cartRepository.subtotalLiveData.postValue(0F)
+        cartRepository.taxLiveData.postValue(0F)
+        cartRepository.instantDiscountLiveData.postValue(0F)
+        cartRepository.totalAmountLiveData.postValue(0F)
     }
 
-    fun createSaleAndGenerateReceipt() {
-        val transactions = prepareTransaction()
+    fun createSaleAndGenerateReceipt(customer: Customer?) {
+        val transactions = prepareTransaction(customer)
         if (transactions.count() == 0) {
             return
         }
@@ -151,12 +153,16 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId, user._id)
         request.put(Key.businessID, business!!.Id)
+        if(CustomerHandler.shared().repository.customer.value !=null && CustomerHandler.shared().repository.customer.value!!.Id !=null){
+            val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
+            request.put(Key.customer, JSONObject(customerJson))
+        }
         request.put(Key.transactions, JSONArray(transactions))
         SocketManager.send(SocketEvent.CREATE_SALE, request)
     }
 
-    fun createInvoice(sales: ArrayList<JSONObject>, salesIds: ArrayList<String>) {
-        val transactions = prepareTransaction()
+    fun createInvoice(sales: ArrayList<JSONObject>, salesIds: ArrayList<String>,customer: Customer?) {
+        val transactions = prepareTransaction(customer)
         if (transactions.count() == 0) {
             return
         }
@@ -170,10 +176,14 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         request.put(Key.salesID, JSONArray(salesIds))
         request.put(Key.business, JSONObject(gson.toJson(business)))
         request.put(Key.instantDiscount, instantDiscount.value)
+        if(CustomerHandler.shared().repository.customer.value !=null && CustomerHandler.shared().repository.customer.value!!.Id !=null){
+            val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
+            request.put(Key.customer, JSONObject(customerJson))
+        }
         SocketManager.send(SocketEvent.GENERATE_CUSTOMER_INVOICE, request)
     }
 
-    fun prepareTransaction(): ArrayList<JSONObject> {
+    fun prepareTransaction(customer: Customer?): ArrayList<JSONObject> {
         val business = BusinessHandler.shared().repository.business
         var transactions: ArrayList<JSONObject> = arrayListOf()
         if (cartProducts.value != null && !cartProducts.value!!.isEmpty()) {
@@ -183,10 +193,12 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 val transactionData = JSONObject()
                 transactionData.put(Key.userId, user._id)
                 transactionData.put(Key.businessID, business!!.Id)
-//                json.put(Key.customerID,"")
-//                json.put(Key.customerName,"")
-//                json.put(Key.customerMobile,"")
-//                json.put(Key.vehicleNumber,"")
+                if(customer != null){
+                    transactionData.put(Key.customerID,customer.Id)
+                    transactionData.put(Key.customerName,customer.Name)
+                    transactionData.put(Key.customerMobile,customer.MobileNumber)
+                    transactionData.put(Key.vehicleNumber,customer.DeviceID)
+                }
                 val quanity = getProductQuantity(it)
                 var IGST = 0
                 var CGST = 0
@@ -224,10 +236,15 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 transactionData.put(Key.CESS, CESS)
                 transactionData.put(Key.tax, Tax)
                 transactionData.put(Key.price, it.Price)
-                transactionData.put(Key.finalPrice, totalAmount.value)
+                transactionData.put(Key.finalPrice, it.FinalPrice?.times(quanity) ?: it.FinalPrice)
                 transactionData.put(Key.costPrice, it.CostPrice)
                 transactionData.put(Key.saleDate, now())
-                transactionData.put(Key.discount, discount.value)
+                transactionData.put(Key.discount, it.Discount)
+                if(customer != null && customer.Id != null && !customer.Id!!.isEmpty()){
+                    transactionData.put(Key.customerName, customer.Name)
+                    transactionData.put(Key.customerMobile, customer.MobileNumber)
+                    transactionData.put(Key.customerID, customer.Id)
+                }
                 transactions.add(transactionData)
             }
         }
