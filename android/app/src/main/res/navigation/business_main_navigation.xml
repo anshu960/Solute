@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/business_main_navigation"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/navigation_business_main_product"
+    app:startDestination="@id/navigation_business_main_inventory"
     >
+    <fragment
+        android:id="@+id/navigation_business_main_inventory"
+        android:name="com.solute.ui.business.inventory.InventoryFragment"
+        android:label="@string/inventory"
+        tools:layout="@layout/fragment_inventory" />
     <fragment
         android:id="@+id/navigation_business_main_product"
         android:name="com.solute.ui.business.product.BusinessProductFragment"

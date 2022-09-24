@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.solute">
+
     <queries>
         <package android:name="com.whatsapp" />
     </queries>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -13,16 +15,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="33"
-        android:screenOrientation="portrait"
         tools:ignore="LockedOrientationActivity"
-        >
+        tools:targetApi="33">
+        <activity
+            android:name=".ui.business.inventory.category.CreateCategoryActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.business.customer.create.CreateCustomerActivity"
-            android:theme="@style/TransparentCompat"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/TransparentCompat" />
         <activity
             android:name=".ui.business.create.CreateBusinessActivity"
             android:exported="false" />
@@ -36,10 +40,8 @@
         <activity
             android:name=".ui.business.BusinessMainActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation = "portrait"
-
-            />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.launch.LaunchActivity"
             android:exported="true"

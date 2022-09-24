@@ -11,8 +11,8 @@ android {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 13
-        versionName "0.0.13"
+        versionCode 14
+        versionName "0.0.14"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -83,4 +83,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'com.google.zxing:core:3.3.2'
+
+//    implementation 'com.razorpay:checkout:1.6.4'
 }

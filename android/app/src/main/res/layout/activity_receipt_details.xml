@@ -218,17 +218,19 @@
                 android:id="@+id/receipt_details_receipt_whatsapp_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@null"
                 app:layout_constraintBottom_toTopOf="@+id/receipt_details_receipt_whatsapp_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@null"
                 app:srcCompat="@drawable/chat_bubble" />
 
             <TextView
                 android:id="@+id/receipt_details_receipt_whatsapp_title"
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="4dp"
                 android:text="Share on Whatsapp"
                 app:layout_constraintBottom_toBottomOf="parent"

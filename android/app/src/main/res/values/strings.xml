@@ -38,6 +38,7 @@
     <string name="high">High</string>
     <string name="critical">Critical</string>
     <string name="not_decided">Not Decided</string>
+    <string name="inventory">Inventory</string>
     <string name="business">Business</string>
     <string name="product">Product</string>
     <string name="cart">Cart</string>

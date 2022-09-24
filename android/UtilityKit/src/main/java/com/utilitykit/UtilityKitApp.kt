@@ -40,16 +40,16 @@ class UtilityKitApp :Application(){
         super.onCreate()
     }
 
-    fun setUp(context: Context){
+    fun setUp(context: Context,isProduction:Boolean){
         appContext = context
         SQLite.init(appContext!!)
         Database.init(appContext!!)
         Defaults.init(appContext!!)
-//        if(BuildConfig.DEBUG){
-//            socketUrl = Server.devHost
-//        }else{
+        if(isProduction){
             socketUrl = Server.prodDost
-//        }
+        }else{
+                socketUrl = Server.devHost
+        }
         try {
             mSocket = IO.socket(socketUrl)
 

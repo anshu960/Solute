@@ -59,7 +59,7 @@ class App: Application() {
         firebaseAppCheck.installAppCheckProviderFactory(
             PlayIntegrityAppCheckProviderFactory.getInstance()
         )
-        UtilityKitApp().setUp(this)
+        UtilityKitApp().setUp(this,!BuildConfig.DEBUG)
         FirebaseApp.initializeApp(this)
         SQLite.init(this)
         Database.init(this)

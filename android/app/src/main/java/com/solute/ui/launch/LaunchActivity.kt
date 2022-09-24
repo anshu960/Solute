@@ -58,7 +58,7 @@ class LaunchActivity : UtilityActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        UtilityKitApp().setUp(this)
+//        UtilityKitApp().setUp(this)
         SocketManager.currentActivity = this
         SocketManager.connect()
         setContentView(R.layout.activity_launch)

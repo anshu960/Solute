@@ -45,7 +45,7 @@ class BusinessProductAdapter(val context: Context,val fragment: Fragment,val all
 
 class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(
-        R.layout.recycler_item_product, parent, false
+        R.layout.recycler_item_product_sale, parent, false
     )
 ) {
     private var productName: TextView? = null

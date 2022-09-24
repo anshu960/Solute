@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#282253</color>
-    <color name="colorPrimaryDark">#282253</color>
+    <color name="colorPrimary">#54aadf</color>
+    <color name="colorPrimaryDark">#54aadf</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="buttonDefaultTint">#0076ff</color>
-    <color name="colorThemePrimary">#66aae1</color>
+    <color name="buttonDefaultTint">#54aadf</color>
+    <color name="colorThemePrimary">#54aadf</color>
     <color name="lightGray">#a6a6a6</color>
     <color name="darkGray">#282828</color>
     <color name="lightBackground">#F7F8FA</color>
-    <color name="themeBlue">#116BA8</color>
+    <color name="themeBlue">#54aadf</color>
     <color name="searchBarBackground">#F1F1F1</color>
     <color name="searchTitleColor">#AEAEAE</color>
     <color name="searchIconColor">#FFFFFF</color>
