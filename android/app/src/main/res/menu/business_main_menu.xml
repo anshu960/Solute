@@ -7,7 +7,7 @@
     <item
         android:id="@+id/navigation_business_main_product"
         android:icon="@drawable/sale"
-        android:title="@string/product" />
+        android:title="@string/sale" />
     <item
         android:id="@+id/navigation_business_main_cart"
         android:icon="@drawable/shopping_cart"

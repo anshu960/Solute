@@ -8,15 +8,14 @@
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/inventory_fragment_segment"
+        checkedButton="@+id/inventory_fragment_menu_btn"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:singleSelection="true"
-        checkedButton="@+id/inventory_fragment_menu_btn"
-        >
+        app:singleSelection="true">
 
         <Button
             android:id="@+id/inventory_fragment_menu_btn"
@@ -65,10 +64,27 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_add"
+        android:backgroundTint="@android:color/transparent"
         android:clickable="true"
-        android:src="@drawable/baseline_add"
+        android:foreground="@drawable/ic_add"
+        android:foregroundGravity="center|fill"
+        android:tint="@android:color/transparent"
+        app:backgroundTint="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/inventory_fragment_header"
+        android:layout_width="409dp"
+        android:layout_height="98dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        android:background="@drawable/header"
+        android:elevation="4dp"
+        >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

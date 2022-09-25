@@ -6,12 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.business.create.CreateBusinessActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/create_business_header"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/header"
+        android:elevation="4dp"
+        >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/create_business_scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/create_business_save_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,6 +44,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_business_name_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Business Name" />
@@ -48,6 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/create_business_name_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_business_gst_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="GST Number" />
@@ -64,6 +79,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/create_business_gst_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_business_address_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Address" />
@@ -80,6 +96,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/create_business_address_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_business_email_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email" />
@@ -96,6 +113,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/create_business_email_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_business_mobile_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Mobile Number" />
@@ -107,9 +125,10 @@
         android:id="@+id/create_business_save_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
         android:text="Create New Business"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

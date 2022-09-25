@@ -41,6 +41,7 @@
     <string name="inventory">Inventory</string>
     <string name="business">Business</string>
     <string name="product">Product</string>
+    <string name="sale">Sale</string>
     <string name="cart">Cart</string>
     <string name="invoice">Invocie</string>
     <string name="empty_task_message">No task found, please click on the create task button to start creating task</string>

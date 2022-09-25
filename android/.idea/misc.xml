@@ -20,16 +20,16 @@
         <entry key="app/src/main/res/drawable/baseline_person_add.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/baseline_phone_iphone.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/shopping_cart.xml" value="0.2255" />
-        <entry key="app/src/main/res/layout/activity_business_main.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/activity_business_main.xml" value="0.2816799840183123" />
         <entry key="app/src/main/res/layout/activity_category_details.xml" value="0.1911231884057971" />
-        <entry key="app/src/main/res/layout/activity_create_business.xml" value="0.38891722767065606" />
+        <entry key="app/src/main/res/layout/activity_create_business.xml" value="0.2396484375" />
         <entry key="app/src/main/res/layout/activity_create_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_create_customer.xml" value="0.22084175581386145" />
         <entry key="app/src/main/res/layout/activity_create_product.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_create_product_sub_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_launch.xml" value="0.37433135120581223" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.384626545852924" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1802536231884058" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21888580322265627" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.129981884057971" />
         <entry key="app/src/main/res/layout/activity_receipt_details.xml" value="0.36061827747534353" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18704710144927536" />

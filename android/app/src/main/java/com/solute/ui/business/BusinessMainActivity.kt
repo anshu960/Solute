@@ -53,10 +53,6 @@ class BusinessMainActivity : UtilityActivity() {
         SocketManager.verifyIfConnectedOrNot()
     }
 
-    override fun onBackPressed() {
-
-    }
-
     fun setUpRequiredModels(){
         cartViewModal = ViewModelProvider(
             this,
