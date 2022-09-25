@@ -21,6 +21,12 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="33">
         <activity
+            android:name=".ui.business.product.create.CreateProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.business.inventory.subCategory.CreateProductSubCategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.business.inventory.category.CreateCategoryActivity"
             android:exported="false" />
         <activity

@@ -39,10 +39,12 @@ class ProductHandler {
     fun fetchAllProduct(){
         val request = JSONObject()
         val user = User()
-        val business = BusinessHandler.shared().repository.business
-        request.put(Key.userId,user._id)
-        request.put(Key.businessID,business!!.Id)
-        SocketManager.send(SocketEvent.RETRIVE_PRODUCT,request)
+        if(BusinessHandler.shared().repository.business != null){
+            val business = BusinessHandler.shared().repository.business
+            request.put(Key.userId,user._id)
+            request.put(Key.businessID,business!!.Id)
+            SocketManager.send(SocketEvent.RETRIVE_PRODUCT,request)
+        }
     }
 
      val retriveProduct = Emitter.Listener {

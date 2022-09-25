@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,11 +13,23 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.inventory.category.CreateCategoryActivity
+import com.solute.ui.business.inventory.category.ProductCategoryAdapter
+import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 import com.solute.ui.business.inventory.product.ProductAdapter
+import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
+import com.solute.ui.business.product.create.CreateProductActivity
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
 import com.utilitykit.feature.product.viewModel.ProductViewModel
+import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
+import com.utilitykit.feature.productCategory.model.ProductCategory
+import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
+import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
+import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
+import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
+import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,10 +49,19 @@ class InventoryFragment : Fragment() {
 
     var selectedSegment = 0
     private lateinit var productViewModel: ProductViewModel
+    private lateinit var productCategoryViewModel: ProductCategoryViewModel
+    private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
     var allProduct: ArrayList<Product> = ArrayList()
+    var allCategoory: ArrayList<ProductCategory> = ArrayList()
+    var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
+
     var productAdapter : ProductAdapter? = null
+    var productCategoryAdapter : ProductCategoryAdapter? = null
+    var productSubCategoryAdapter : ProductSubCategoryAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Product
         productViewModel = ViewModelProvider(
             this,
             ProductViewModalFactory(ProductHandler.shared().repository)
@@ -56,6 +76,38 @@ class InventoryFragment : Fragment() {
         }
         ProductHandler.shared().setup(productViewModel)
         ProductHandler.shared().fetchAllProduct()
+        //Category
+        productCategoryViewModel = ViewModelProvider(
+            this,
+            ProductCategoryViewModalFactory(ProductCategoryHandler.shared().repository)
+        ).get(
+            ProductCategoryViewModel::class.java
+        )
+        ProductCategoryHandler.shared().setup(productCategoryViewModel!!)
+
+        productCategoryViewModel.allCategory.observe(this){
+            allCategoory = it as ArrayList<ProductCategory>
+            if(selectedSegment == 1){
+                loadCategory()
+            }
+        }
+        ProductCategoryHandler.shared().fetchAllProductCategory()
+        //Sub Category
+        productSubCategoryViewModel = ViewModelProvider(
+            this,
+            ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
+        ).get(
+            ProductSubCategoryViewModel::class.java
+        )
+        ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
+
+        productSubCategoryViewModel.allSubCategory.observe(this){
+            allSubCategoory = it as ArrayList<ProductSubCategory>
+            if(selectedSegment == 2){
+                loadSubCategory()
+            }
+        }
+        ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
     }
 
     override fun onCreateView(
@@ -105,10 +157,14 @@ class InventoryFragment : Fragment() {
         recycler?.adapter = this.productAdapter
     }
     fun loadCategory(){
-
+        this.productCategoryAdapter = this.context?.let { ProductCategoryAdapter(it,this,allCategoory) }
+        this.recycler?.layoutManager = LinearLayoutManager(this.context)
+        recycler?.adapter = this.productCategoryAdapter
     }
     fun loadSubCategory(){
-
+        this.productSubCategoryAdapter = this.context?.let { ProductSubCategoryAdapter(it,this,allSubCategoory) }
+        this.recycler?.layoutManager = LinearLayoutManager(this.context)
+        recycler?.adapter = this.productSubCategoryAdapter
     }
     fun loadStock(){
 
@@ -116,10 +172,15 @@ class InventoryFragment : Fragment() {
     fun onClickAddButton(){
         when(this.selectedSegment){
             0->{
-
+                val intent = Intent(this.context,CreateProductActivity::class.java)
+                startActivity(intent)
             }
             1->{
                 val intent = Intent(this.context,CreateCategoryActivity::class.java)
+                startActivity(intent)
+            }
+            2->{
+                val intent = Intent(this.context,CreateProductSubCategoryActivity::class.java)
                 startActivity(intent)
             }
         }

@@ -24,6 +24,8 @@
         <entry key="app/src/main/res/layout/activity_create_business.xml" value="0.38891722767065606" />
         <entry key="app/src/main/res/layout/activity_create_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_create_customer.xml" value="0.22084175581386145" />
+        <entry key="app/src/main/res/layout/activity_create_product.xml" value="0.23822463768115942" />
+        <entry key="app/src/main/res/layout/activity_create_product_sub_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_launch.xml" value="0.37433135120581223" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.384626545852924" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1802536231884058" />
@@ -40,7 +42,9 @@
         <entry key="app/src/main/res/layout/recycler_item_business.xml" value="0.4437367303609342" />
         <entry key="app/src/main/res/layout/recycler_item_invoice.xml" value="0.30610167591284354" />
         <entry key="app/src/main/res/layout/recycler_item_product.xml" value="0.301885986328125" />
+        <entry key="app/src/main/res/layout/recycler_item_product_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/recycler_item_product_sale.xml" value="0.23822463768115942" />
+        <entry key="app/src/main/res/layout/recycler_item_product_sub_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/recycler_item_receipt.xml" value="0.39925658313940604" />
         <entry key="app/src/main/res/layout/rrecycler_item_product.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/menu/business_home_menu.xml" value="0.29025641025641025" />

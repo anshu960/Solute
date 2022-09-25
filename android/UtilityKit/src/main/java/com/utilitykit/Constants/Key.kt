@@ -151,6 +151,7 @@ class Key {
         val steps = "Steps"
         val repetition = "Repetition"
         val category = "Category"
+        val categoryId = "CategoryID"
         val toUserId = "ToUserID"
         val isGroup = "ISGroup"
         val fromUserId = "FromUserID"

@@ -3,6 +3,7 @@ package com.solute.ui.business.inventory.category
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
@@ -19,7 +20,6 @@ class CreateCategoryActivity : UtilityActivity() {
     var categoryNameText : TextInputEditText? = null
     var saveButton : Button? = null
     var productCategoryViewModal : ProductCategoryViewModel? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_category)
