@@ -15,13 +15,18 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:editable="false"
+        android:focusable="false"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_product_category_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tap to select category" />
+            android:hint="Tap to select category"
+            android:editable="false"
+            android:focusable="false"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -33,13 +38,18 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:editable="false"
+        android:focusable="false"
         app:layout_constraintTop_toBottomOf="@+id/create_product_category_til">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_product_sub_category_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tap to select Sub Category" />
+            android:hint="Tap to select Sub Category"
+            android:editable="false"
+            android:focusable="false"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -133,7 +143,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/create_product_save_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

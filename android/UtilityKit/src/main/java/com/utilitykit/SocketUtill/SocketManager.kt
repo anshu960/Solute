@@ -120,6 +120,7 @@ object SocketManager
             //Solute
             mSocket?.on(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value,ProductHandler.shared().retriveProduct)
+            mSocket?.on(SocketEvent.CREATE_PRODUCT.value,ProductHandler.shared().onCreateProduct)
             mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
             mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value,CartHandler.shared().createCustomerInvoice)
             mSocket?.on(SocketEvent.RETRIVE_INVOICE.value,InvoiceHandler.shared().retriveInvoice)
@@ -130,6 +131,7 @@ object SocketManager
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT_CATEGORY.value,ProductCategoryHandler.shared().retriveProductCategory)
             mSocket?.on(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().onCreateProductSubCategory)
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().retriveProductSubCategory)
+
             //conenct the socket
             mSocket?.connect()
         }

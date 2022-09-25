@@ -41,10 +41,12 @@ class ProductSubCategoryHandler{
     fun fetchAllProductSubCategory(){
         val request = JSONObject()
         val user = User()
-        val business = BusinessHandler.shared().repository.business
-        request.put(Key.userId,user._id)
-        request.put(Key.businessID,business!!.Id)
-        SocketManager.send(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY,request)
+        if(BusinessHandler.shared().repository.business != null){
+            val business = BusinessHandler.shared().repository.business
+            request.put(Key.userId,user._id)
+            request.put(Key.businessID,business!!.Id)
+            SocketManager.send(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY,request)
+        }
     }
 
      val retriveProductSubCategory = Emitter.Listener {

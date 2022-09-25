@@ -3,7 +3,7 @@ package com.utilitykit.feature.productSubCategory.model
 import com.google.gson.annotations.SerializedName
 
 data class ProductSubCategory(
-    @SerializedName("ProductCategoryID") var ProductCategoryID: Long? = null,
+    @SerializedName("ProductSubCategoryID") var ProductSubCategoryID: Long? = null,
     @SerializedName("_id") var Id: String? = null,
     @SerializedName("UserID") var UserID: String? = null,
     @SerializedName("BusinessID") var BusinessID: String? = null,

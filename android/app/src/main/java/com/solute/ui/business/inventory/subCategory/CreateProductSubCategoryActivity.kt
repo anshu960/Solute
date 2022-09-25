@@ -71,17 +71,19 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
         builder.setTitle("Choose an animal")
         builder.setSingleChoiceItems(allCategoryNames, selectedCategoryIndex) { dialog, which ->
             productCategoryText?.setText(allCategoryNames[which])
-        }
-        builder.setPositiveButton("OK") { dialog, which ->
             allCategoory.forEach {
                 it.Name?.let { it1 ->
-                    allCategoryNames.set(index,it1)
-                    selectedCategoryIndex = index
-                    selectedCategory = it
+                    if(allCategoryNames[which] == it1){
+                        selectedCategoryIndex = index
+                        selectedCategory = it
+                    }
                 }
                 index+=1
             }
             index = 0
+        }
+        builder.setPositiveButton("OK") { dialog, which ->
+
         }
         builder.setNegativeButton("Cancel", null)
         val dialog = builder.create()

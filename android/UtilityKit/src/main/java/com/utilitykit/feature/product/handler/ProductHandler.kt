@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.SocketUtill.SocketEvent
 import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.model.Product
@@ -16,6 +17,7 @@ class ProductHandler {
 
     var productViewModel: ProductViewModel? = null
     val repository = ProductRepository()
+    var activity : UtilityActivity? = null
     val gson = Gson()
     init {
         instance = this
@@ -64,5 +66,33 @@ class ProductHandler {
             }
         }
     }
+
+    val onCreateProduct = Emitter.Listener {
+        if (it.isNotEmpty())
+        {
+            val anyData = it.first() as JSONObject
+            if (anyData.has(Key.payload)){
+                val payload = anyData.getJSONObject(Key.payload)
+                if(payload.has(Key._id)){
+                    val product = gson.fromJson(payload.toString(),Product::class.java)
+                    repository.newProductLiveData.postValue(product)
+                    fetchAllProduct()
+                    activity?.runOnUiThread {
+                        activity?.toast("Product created Successfully")
+                    }
+                }else{
+                    activity?.runOnUiThread {
+                        activity?.toast("Product couldn't be created, please try after some time")
+                    }
+                }
+            }else{
+                activity?.runOnUiThread {
+                    activity?.toast("Product couldn't be created, please try after some time")
+                }
+            }
+        }
+    }
+
+
 
 }
