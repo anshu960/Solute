@@ -35,7 +35,7 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
             request.put(Key.userId,user._id)
             request.put(Key.businessID,business!!.Id)
             request.put(Key.categoryId,categoryid)
-            request.put(Key.subCategoryID,categoryid)
+            request.put(Key.subCategoryID,subCategoryId)
             request.put(Key.name,name)
             request.put(Key.description,description)
             request.put(Key.manageInventory,true)

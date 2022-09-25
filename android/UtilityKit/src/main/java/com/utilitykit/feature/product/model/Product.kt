@@ -7,6 +7,8 @@ data class Product(
     @SerializedName("ProductID") var ProductID: Int? = null,
     @SerializedName("UserID") var UserID: String? = null,
     @SerializedName("BusinessID") var BusinessID: String? = null,
+    @SerializedName("CategoryID") var CategoryID: String? = null,
+    @SerializedName("SubCategoryID") var SubCategoryID: String? = null,
     @SerializedName("IsDeleted") var IsDeleted: Boolean? = null,
     @SerializedName("Name") var Name: String? = null,
     @SerializedName("Description") var Description: String? = null,

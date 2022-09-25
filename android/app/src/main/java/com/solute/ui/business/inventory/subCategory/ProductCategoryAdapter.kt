@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.solute.MainActivity
 import com.solute.ui.business.BusinessMainActivity
 import com.solute.ui.business.inventory.product.ProductViewHolder
+import com.solute.ui.business.inventory.subCategory.SubCategoryDetailsActivity
 import com.utilitykit.feature.product.model.Product
+import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productCategory.model.ProductCategory
+import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 
 class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, val allSubCategory: List<ProductSubCategory>) :
@@ -28,10 +31,10 @@ class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, va
     override fun onBindViewHolder(holder: ProductSubCategoryViewHolder, position: Int) {
         val item = allSubCategory[position]
         holder.itemView.setOnClickListener {
-            if(context is MainActivity){
-//                val mainActivty = context as MainActivity
-//                val intent = Intent(mainActivty, BusinessMainActivity::class.java)
-//                mainActivty.startActivity(intent)
+            if(context is BusinessMainActivity){
+                ProductSubCategoryHandler.shared().repository.selectedSubCategoryLiveData.postValue(item)
+                val intent = Intent(context, SubCategoryDetailsActivity::class.java)
+                context.startActivity(intent)
             }
         }
         holder.bind(fragment,item)

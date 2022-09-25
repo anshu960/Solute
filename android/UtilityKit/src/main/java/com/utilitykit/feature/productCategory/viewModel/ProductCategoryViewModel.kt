@@ -1,6 +1,7 @@
 package com.utilitykit.feature.productCategory.viewModel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
@@ -25,6 +26,8 @@ class ProductCategoryViewModel(private val productCategoryRepository: ProductCat
     val allCategory: LiveData<List<ProductCategory>>
         get() = productCategoryRepository.allCategory
 
+    val selectedCategory : LiveData<ProductCategory>
+        get() = productCategoryRepository.selectedCategory
 
     fun createNewCategory(name:String) {
         val request = JSONObject()

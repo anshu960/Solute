@@ -22,7 +22,7 @@ class ProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
         productPrice = itemView.findViewById(R.id.product_item_mrp)
     }
 
-    fun bind(fragment: Fragment, product: Product) {
+    fun bind(fragment: Fragment?, product: Product) {
         productName?.text = product.Name
         productDescription?.text = product.Description
         productPrice?.text = "₹ ${product.MRP}"

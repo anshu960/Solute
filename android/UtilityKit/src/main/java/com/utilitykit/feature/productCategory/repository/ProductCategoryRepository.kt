@@ -10,4 +10,8 @@ class ProductCategoryRepository {
      val allCategory : LiveData<List<ProductCategory>>
      get() = categoryLiveData
 
+     val selectedCategoryLiveData = MutableLiveData<ProductCategory>()
+     val selectedCategory : LiveData<ProductCategory>
+          get() = selectedCategoryLiveData
+
 }

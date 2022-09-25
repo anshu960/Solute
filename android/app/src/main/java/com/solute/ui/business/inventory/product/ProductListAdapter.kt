@@ -10,7 +10,7 @@ import com.solute.MainActivity
 import com.solute.ui.business.BusinessMainActivity
 import com.utilitykit.feature.product.model.Product
 
-class ProductAdapter(val context: Context, val fragment: Fragment, val allProduct: List<Product>) :
+class ProductAdapter(val context: Context, val fragment: Fragment?, val allProduct: List<Product>) :
     RecyclerView.Adapter<ProductViewHolder>() {
 
     override fun getItemCount(): Int {

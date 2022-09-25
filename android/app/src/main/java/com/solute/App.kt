@@ -4,6 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.provider.Settings
 import androidx.fragment.app.Fragment
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
@@ -12,9 +16,9 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import com.solute.utility.FCM
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
+import com.utilitykit.UtilityActivity
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
 import com.utilitykit.database.Database
@@ -69,7 +73,6 @@ class App: Application() {
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
 //        setUpFirebaseStorage()
-
     }
 
 
@@ -109,5 +112,18 @@ class App: Application() {
 //        val cn = am.getRunningTasks(1)[0].topActivity
 
         return activity
+    }
+
+    fun checkForAppUpdate(activity:UtilityActivity){
+        val appUpdateManager = AppUpdateManagerFactory.create(activity)
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                val option = AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE)
+                    .setAllowAssetPackDeletion(true)
+                    .build()
+                appUpdateManager.startUpdateFlow(appUpdateInfo, activity,option) }
+        }
+
     }
 }

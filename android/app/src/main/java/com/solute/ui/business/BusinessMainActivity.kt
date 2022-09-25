@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.solute.App
 import com.solute.R
 import com.solute.ui.business.receipt.ReceiptDetailsActivity
 import com.utilitykit.SocketUtill.SocketManager
@@ -44,11 +45,16 @@ class BusinessMainActivity : UtilityActivity() {
             setOf(R.id.navigation_business_main_product, R.id.navigation_business_main_cart,R.id.navigation_business_main_invoice,)
         )
         setUpRequiredModels()
+        App.applicationContext().checkForAppUpdate(this)
     }
 
     override fun onResume() {
         super.onResume()
         SocketManager.verifyIfConnectedOrNot()
+    }
+
+    override fun onBackPressed() {
+
     }
 
     fun setUpRequiredModels(){

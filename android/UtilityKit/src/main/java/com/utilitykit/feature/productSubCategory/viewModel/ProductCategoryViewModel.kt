@@ -25,7 +25,8 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
 
     val allSubCategory: LiveData<List<ProductSubCategory>>
         get() = productSubCategoryRepository.allSubCategory
-
+    val selectedSubCategory : LiveData<ProductSubCategory>
+        get() = productSubCategoryRepository.selectedSubCategory
 
     fun createNewSubCategory(name:String,category:ProductCategory) {
         val request = JSONObject()
