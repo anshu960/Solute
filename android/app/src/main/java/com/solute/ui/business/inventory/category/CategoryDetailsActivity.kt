@@ -2,6 +2,7 @@ package com.solute.ui.business.inventory.category
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
@@ -17,6 +18,8 @@ class CategoryDetailsActivity : AppCompatActivity() {
     var selectedCategory : ProductCategory? = null
     var allProduct: ArrayList<Product> = ArrayList()
     var productAdapter : ProductAdapter? = null
+    var title : TextView? = null
+    var countTxt : TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,10 @@ class CategoryDetailsActivity : AppCompatActivity() {
                 }
             }
         }
+        this.title = findViewById(R.id.category_details_title)
+        this.title?.text = selectedCategory?.Name
+        this.countTxt = findViewById(R.id.category_details_count)
+        this.countTxt?.text = "Total ${allProduct.count()} Product"
         this.productAdapter =   ProductAdapter(this,null,allProduct)
         this.recycler?.layoutManager = LinearLayoutManager(this)
         recycler?.adapter = this.productAdapter
