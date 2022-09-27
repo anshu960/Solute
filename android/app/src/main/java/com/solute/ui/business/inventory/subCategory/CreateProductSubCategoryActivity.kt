@@ -3,6 +3,7 @@ package com.solute.ui.business.inventory.subCategory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,7 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
     var selectedCategoryIndex = 0
     var selectedCategoryName = ""
     var selectedCategory : ProductCategory? = null
+    var backButton : ImageButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,8 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
         }else{
             ProductCategoryHandler.shared().fetchAllProductCategory()
         }
+        backButton = findViewById(R.id.create_sub_category_header_back)
+        backButton?.setOnClickListener { onBackPressed() }
     }
 
     fun showCategorySellection(){

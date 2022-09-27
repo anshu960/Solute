@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,6 +47,7 @@ class InventoryFragment : Fragment() {
     var segmentButton : MaterialButtonToggleGroup? = null
     var recycler : RecyclerView? = null
     var floatingAddButton : FloatingActionButton? = null
+    var countLabel : TextView? = null
 
     var selectedSegment = 0
     private lateinit var productViewModel: ProductViewModel
@@ -120,6 +122,7 @@ class InventoryFragment : Fragment() {
         segmentButton = view.findViewById(R.id.inventory_fragment_segment)
         floatingAddButton = view.findViewById(R.id.inventory_fragment_float_btn)
         floatingAddButton?.setOnClickListener { onClickAddButton() }
+        countLabel = view.findViewById(R.id.inventory_fragment_count)
         setupSegment()
         return view
     }
@@ -155,19 +158,22 @@ class InventoryFragment : Fragment() {
         this.productAdapter = this.context?.let { ProductAdapter(it,this,allProduct) }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productAdapter
+        countLabel?.text = "Total ${allProduct.count()} Product"
     }
     fun loadCategory(){
         this.productCategoryAdapter = this.context?.let { ProductCategoryAdapter(it,this,allCategoory) }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productCategoryAdapter
+        countLabel?.text = "Total ${allCategoory.count()} Category"
     }
     fun loadSubCategory(){
         this.productSubCategoryAdapter = this.context?.let { ProductSubCategoryAdapter(it,this,allSubCategoory) }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productSubCategoryAdapter
+        countLabel?.text = "Total ${allSubCategoory.count()} Sub Category"
     }
     fun loadStock(){
-
+        countLabel?.text = ""
     }
     fun onClickAddButton(){
         when(this.selectedSegment){

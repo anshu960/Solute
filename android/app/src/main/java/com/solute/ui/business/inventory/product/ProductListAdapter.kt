@@ -23,6 +23,7 @@ class ProductAdapter(val context: Context, val fragment: Fragment?, val allProdu
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+
         val item = allProduct[position]
         holder.itemView.setOnClickListener {
             if(context is MainActivity){

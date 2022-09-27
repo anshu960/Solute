@@ -3,6 +3,7 @@ package com.solute.ui.business.product.create
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -57,7 +58,7 @@ class CreateProductActivity : UtilityActivity() {
     var productPriceEditText : TextInputEditText? = null
 
     var saveButton : Button? = null
-
+    var backButton : ImageButton? = null
     private lateinit var productViewModel: ProductViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,6 +90,8 @@ class CreateProductActivity : UtilityActivity() {
         saveButton?.setOnClickListener { onClickSave() }
 
         loadProductPreFilledData()
+        backButton = findViewById(R.id.create_product_category_header_back)
+        backButton?.setOnClickListener { onBackPressed() }
 
     }
 

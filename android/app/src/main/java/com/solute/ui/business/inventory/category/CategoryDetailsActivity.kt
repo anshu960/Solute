@@ -2,6 +2,7 @@ package com.solute.ui.business.inventory.category
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ class CategoryDetailsActivity : AppCompatActivity() {
     var productAdapter : ProductAdapter? = null
     var title : TextView? = null
     var countTxt : TextView? = null
+    var backButton : ImageButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,8 @@ class CategoryDetailsActivity : AppCompatActivity() {
         this.productAdapter =   ProductAdapter(this,null,allProduct)
         this.recycler?.layoutManager = LinearLayoutManager(this)
         recycler?.adapter = this.productAdapter
+        this.backButton = findViewById(R.id.category_details_header_back)
+        backButton?.setOnClickListener { onBackPressed() }
     }
 
 

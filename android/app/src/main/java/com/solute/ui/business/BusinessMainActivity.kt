@@ -32,7 +32,6 @@ class BusinessMainActivity : UtilityActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_business_main)
-
         navHostFragment = supportFragmentManager.findFragmentById(
             R.id.business_main_nav_container
         ) as NavHostFragment
@@ -42,7 +41,7 @@ class BusinessMainActivity : UtilityActivity() {
         bottomNavigationView?.setupWithNavController(navController)
         // Setup the ActionBar with navController and 3 top level destinations
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_business_main_product, R.id.navigation_business_main_cart,R.id.navigation_business_main_invoice,)
+            setOf(R.id.navigation_business_main_inventory,R.id.navigation_business_main_product, R.id.navigation_business_main_cart,R.id.navigation_business_main_invoice,)
         )
         setUpRequiredModels()
         App.applicationContext().checkForAppUpdate(this)

@@ -50,6 +50,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
     var customerDetailsCard : CardView? = null
     var customerDetailsName : TextView? = null
     var customerDetailsMobile : TextView? = null
+    var backButton : ImageButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receipt_details)
@@ -72,7 +73,8 @@ class ReceiptDetailsActivity : UtilityActivity() {
         customerDetailsCard = findViewById(R.id.receipt_details_receipt_customer_card)
         customerDetailsName = findViewById(R.id.receipt_details_receipt_customer_name)
         customerDetailsMobile = findViewById(R.id.receipt_details_receipt_customer_mobile)
-
+        backButton = findViewById(R.id.receipt_details_header_back)
+        backButton?.setOnClickListener { onBackPressed() }
         messageButton?.setOnClickListener {
             if(customerInvoice != null && customerInvoice!!.InvoiceNumber != null){
                     SMSManager().sendInvoiceReceipt(this,

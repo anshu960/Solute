@@ -3,6 +3,7 @@ package com.solute.ui.business.inventory.category
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
@@ -20,6 +21,7 @@ class CreateCategoryActivity : UtilityActivity() {
     var categoryNameText : TextInputEditText? = null
     var saveButton : Button? = null
     var productCategoryViewModal : ProductCategoryViewModel? = null
+    var backButton:ImageButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_category)
@@ -34,6 +36,8 @@ class CreateCategoryActivity : UtilityActivity() {
         )
         ProductCategoryHandler.shared().setup(productCategoryViewModal!!)
         ProductCategoryHandler.shared().activity = this
+        backButton = findViewById(R.id.create_categoory_header_back)
+        backButton?.setOnClickListener { onBackPressed() }
     }
 
     fun onClickSave(){

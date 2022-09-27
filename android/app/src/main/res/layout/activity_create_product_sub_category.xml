@@ -60,6 +60,15 @@
         android:elevation="4dp"
         >
 
+        <ImageButton
+            android:id="@+id/create_sub_category_header_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/arrow_left"
+            tools:layout_editor_absoluteX="12dp"
+            tools:layout_editor_absoluteY="9dp"
+            android:background="@color/transparent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
