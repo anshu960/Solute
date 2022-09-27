@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
+import com.solute.ui.business.inventory.analytics.AnalyticsAdapter
 import com.solute.ui.business.inventory.category.CreateCategoryActivity
 import com.solute.ui.business.inventory.category.ProductCategoryAdapter
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
@@ -31,6 +33,7 @@ import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandl
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
+import com.utilitykit.feature.sync.SyncHandler
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +63,7 @@ class InventoryFragment : Fragment() {
     var productAdapter : ProductAdapter? = null
     var productCategoryAdapter : ProductCategoryAdapter? = null
     var productSubCategoryAdapter : ProductSubCategoryAdapter? = null
-
+    var analyticsAdapter : AnalyticsAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //Product
@@ -72,7 +75,7 @@ class InventoryFragment : Fragment() {
         )
         productViewModel.allProduct.observe(this) {
             allProduct = it as ArrayList<Product>
-            if(selectedSegment == 0){
+            if(selectedSegment == 1){
                 loadProducts()
             }
         }
@@ -130,50 +133,68 @@ class InventoryFragment : Fragment() {
         segmentButton?.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
             if(isChecked){
                 when (checkedId) {
-                    R.id.inventory_fragment_menu_btn -> {
+                    R.id.inventory_fragment_analytics_btn -> {
                         selectedSegment = 0
+                        loadAnalytics()
+                    }
+                    R.id.inventory_fragment_menu_btn -> {
+                        selectedSegment = 1
                         loadProducts()
                     }
                     R.id.inventory_fragment_category_btn -> {
-                        selectedSegment = 1
+                        selectedSegment = 2
                         loadCategory()
                     }
                     R.id.inventory_fragment_sub_category_btn -> {
-                        selectedSegment = 2
+                        selectedSegment = 3
                         loadSubCategory()
                     }
                     R.id.inventory_fragment_stock_btn -> {
-                        selectedSegment = 3
+                        selectedSegment = 4
+                        loadStock()
+                    }
+                    R.id.inventory_fragment_stock_btn -> {
+                        selectedSegment = 5
                         loadStock()
                     }
                 }
             }
         }
         if(selectedSegment == 0){
-            segmentButton?.check(R.id.inventory_fragment_menu_btn)
-            loadProducts()
+            segmentButton?.check(R.id.inventory_fragment_analytics_btn)
+            loadAnalytics()
         }
+    }
+    fun loadAnalytics(){
+        this.analyticsAdapter = this.context?.let { AnalyticsAdapter(it,this,SyncHandler.shared().getAllBusinessAnalyticsToShow()) }
+        this.recycler?.layoutManager = GridLayoutManager(this.context,2)
+        recycler?.adapter = this.analyticsAdapter
+        countLabel?.visibility = View.GONE
     }
     fun loadProducts(){
         this.productAdapter = this.context?.let { ProductAdapter(it,this,allProduct) }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productAdapter
         countLabel?.text = "Total ${allProduct.count()} Product"
+        countLabel?.visibility = View.VISIBLE
     }
     fun loadCategory(){
         this.productCategoryAdapter = this.context?.let { ProductCategoryAdapter(it,this,allCategoory) }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productCategoryAdapter
         countLabel?.text = "Total ${allCategoory.count()} Category"
+        countLabel?.visibility = View.VISIBLE
     }
     fun loadSubCategory(){
         this.productSubCategoryAdapter = this.context?.let { ProductSubCategoryAdapter(it,this,allSubCategoory) }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productSubCategoryAdapter
         countLabel?.text = "Total ${allSubCategoory.count()} Sub Category"
+        countLabel?.visibility = View.VISIBLE
     }
     fun loadStock(){
         countLabel?.text = ""
+        countLabel?.visibility = View.VISIBLE
     }
     fun onClickAddButton(){
         when(this.selectedSegment){

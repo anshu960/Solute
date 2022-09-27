@@ -20,6 +20,7 @@ import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.utilitykit.feature.sync.SyncHandler
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -124,6 +125,7 @@ object SocketManager
             mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
             mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value,CartHandler.shared().createCustomerInvoice)
             mSocket?.on(SocketEvent.RETRIVE_INVOICE.value,InvoiceHandler.shared().retriveInvoice)
+            mSocket?.on(SocketEvent.RETRIVE_SALE.value,SyncHandler.shared().onRetriveSale)
             mSocket?.on(SocketEvent.RETRIVE_SALES.value,InvoiceHandler.shared().retriveSales)
             mSocket?.on(SocketEvent.CREATE_CUSTOMER.value,CustomerHandler.shared().onCreateCustomer)
             mSocket?.on(SocketEvent.RETRIVE_CUSTOMER.value,CustomerHandler.shared().onFetchAllCustomer)

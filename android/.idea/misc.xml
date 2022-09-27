@@ -41,6 +41,8 @@
         <entry key="app/src/main/res/layout/fragment_inventory.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.14336372847011145" />
+        <entry key="app/src/main/res/layout/recycler_item_analytic.xml" value="0.16802536231884058" />
+        <entry key="app/src/main/res/layout/recycler_item_analytics.xml" value="0.2913926718891531" />
         <entry key="app/src/main/res/layout/recycler_item_business.xml" value="0.4437367303609342" />
         <entry key="app/src/main/res/layout/recycler_item_invoice.xml" value="0.30610167591284354" />
         <entry key="app/src/main/res/layout/recycler_item_product.xml" value="0.301885986328125" />
