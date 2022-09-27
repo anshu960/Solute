@@ -52,8 +52,6 @@ class LoginActivity : UtilityActivity() {
     private var otpTextViews: Array<EditText>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Database.init(this)
-        SQLite.init(this)
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
         initiatePhoneSetup()

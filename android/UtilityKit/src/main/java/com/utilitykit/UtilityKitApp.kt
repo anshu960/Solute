@@ -42,8 +42,6 @@ class UtilityKitApp :Application(){
 
     fun setUp(context: Context,isProduction:Boolean){
         appContext = context
-        SQLite.init(appContext!!)
-        Database.init(appContext!!)
         Defaults.init(appContext!!)
         if(isProduction){
             socketUrl = Server.prodDost

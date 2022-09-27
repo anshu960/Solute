@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.provider.Settings
 import androidx.fragment.app.Fragment
+import androidx.multidex.BuildConfig
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
@@ -25,15 +26,11 @@ import com.utilitykit.database.Database
 import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
-import com.utilitykit.dataclass.Task
 import com.utilitykit.dataclass.User
 import java.net.Socket
 class App: Application() {
     var activity: UtilityViewController? = null
     var fragment: Fragment? = null
-    var socketUrl = ""
-    var selectedProfiles: ArrayList<Profile> = ArrayList<Profile>()
-    var selectedTask: Task? = null
     private var mSocket: Socket? = null
     init {
         instance = this
@@ -65,8 +62,8 @@ class App: Application() {
         )
         UtilityKitApp().setUp(this,!BuildConfig.DEBUG)
         FirebaseApp.initializeApp(this)
-        SQLite.init(this)
-        Database.init(this)
+        SQLite.shared().setUp(this)
+        Database.shared().setUp(this)
         val deviceId = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
         Defaults.store(Key.deviceId,deviceId)
 //        Analytics.initFirebaseSetup(this)

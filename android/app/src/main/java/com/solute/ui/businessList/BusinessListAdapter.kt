@@ -11,6 +11,7 @@ import com.solute.R
 import com.solute.ui.business.BusinessMainActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
+import com.utilitykit.feature.sync.SyncHandler
 
 class BusinessListAdapter(val context: Context, val allBusiness: List<Business>) :
     RecyclerView.Adapter<BusinessViewHolder>() {
@@ -31,6 +32,7 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
                 val mainActivty = context as MainActivity
                 val intent = Intent(mainActivty,BusinessMainActivity::class.java)
                 BusinessHandler.shared().repository.business = item
+                SyncHandler.shared().syncAllBusinessData()
                 mainActivty.startActivity(intent)
             }
         }

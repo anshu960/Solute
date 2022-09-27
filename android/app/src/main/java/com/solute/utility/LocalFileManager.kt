@@ -54,13 +54,13 @@ class LocalFileManager
 //    }
     
     fun getLocalFileUrl(url:String,completion:(Double,String)->Unit){
-        val localUrl = Database.shared.retriveFileUrl(url)
+        val localUrl = Database.shared().retriveFileUrl(url)
         if(localUrl !=  ""){
             completion(100.0,localUrl)
         }else{
             downloadFile(url){progress,localUrl->
                 if(progress >= 100){
-                    Database.shared.storeFileUrl(localUrl,url)
+                    Database.shared().storeFileUrl(localUrl,url)
                 }
                 completion(progress,localUrl)
             }
@@ -68,13 +68,13 @@ class LocalFileManager
     }
     
     fun getLocalFileUrl(url:String,completion:(String)->Unit){
-        val localUrl = Database.shared.retriveFileUrl(url)
+        val localUrl = Database.shared().retriveFileUrl(url)
         if(localUrl !=  ""){
             completion(localUrl)
         }else{
             downloadFile(url){profress,localUrl->
                 if(profress >= 100){
-                    Database.shared.storeFileUrl(localUrl,url)
+                    Database.shared().storeFileUrl(localUrl,url)
                     completion(localUrl)
                 }
             }

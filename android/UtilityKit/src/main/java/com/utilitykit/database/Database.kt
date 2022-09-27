@@ -14,30 +14,43 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-object Database {
+class Database {
 
-    lateinit var shared : Database
+    init {
+        instance = this
+    }
 
-    fun init(context: Context) {
-        shared = this
-        shared.createTables()
+    companion object{
+        private var instance: Database? = null
+        fun shared() : Database {
+            if(instance != null){
+                return instance as Database
+            }else{
+                return Database()
+            }
+        }
+    }
+
+    fun setUp(context: Context) {
+        shared().createTables()
     }
 
     fun createTables(){
-        SQLite.execute( TableScript.createMessageTable)
-        SQLite.execute(TableScript.createConversationTable)
-        SQLite.execute(TableScript.createProfilesTable)
-        SQLite.execute(TableScript.createFriendsTable)
-        SQLite.execute(TableScript.createfriendRequestTable)
-        SQLite.execute(TableScript.createBlockListTable)
-        SQLite.execute(TableScript.createFilesTable)
+//        SQLite.execute( TableScript.createMessageTable)
+//        SQLite.execute(TableScript.createConversationTable)
+//        SQLite.execute(TableScript.createProfilesTable)
+//        SQLite.execute(TableScript.createFriendsTable)
+//        SQLite.execute(TableScript.createfriendRequestTable)
+//        SQLite.execute(TableScript.createBlockListTable)
+//        SQLite.execute(TableScript.createFilesTable)
+          SQLite.shared().execute(TableScript.createSaleTable)
     }
 
     suspend fun retriveConversations(query:String,callBack:(ArrayList<Conversation>)->Unit) = withContext(
         Dispatchers.Default) {
         var conversations:ArrayList<Conversation> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.conversation} WHERE FromUserID = '${UtilityKitApp.user._id}' OR ToUserID = '${UtilityKitApp.user._id}' ORDER BY UpdatedAt IS NULL OR UpdatedAt=''"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             val newConversation = Conversation(item)
             newConversation.message = retriveMessage(newConversation._id)
@@ -52,10 +65,10 @@ object Database {
         var newQuery = query//.toLowerCase()
         var conversations:ArrayList<Conversation> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.conversation} WHERE (ParticipantProfiles LIKE '%$newQuery%' COLLATE NOCASE) AND (FromUserID = '${UtilityKitApp.user._id}' OR ToUserID = '${UtilityKitApp.user._id}') ORDER BY UpdatedAt IS NULL OR UpdatedAt=''"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             val newConversation = Conversation(item)
-            newConversation.message = Database.shared.retriveMessage(newConversation._id)
+            newConversation.message = Database.shared().retriveMessage(newConversation._id)
             newConversation.message.content =  Encryption().decrypt(newConversation.message.content,newConversation)
             conversations.add(newConversation)
         }
@@ -64,21 +77,21 @@ object Database {
     }
     fun updateGroupName(name:String,_id:String){
         val updateQuery = "UPDATE ${TableNames.conversation}  SET GroupName='${name}' WHERE _id='${_id}'"
-        SQLite.execute(updateQuery)
+        SQLite.shared().execute(updateQuery)
     }
     fun updateGroupDescription(description:String,_id:String){
         val updateQuery = "UPDATE ${TableNames.conversation}  SET GroupDescription='${description}' WHERE _id='${_id}'"
-        SQLite.execute(updateQuery)
+        SQLite.shared().execute(updateQuery)
     }
     fun updateGroupProfilePicture(picture:String,_id:String){
         val updateQuery = "UPDATE ${TableNames.conversation}  SET ProfilePicture='${picture}' WHERE _id='${_id}'"
-        SQLite.execute(updateQuery)
+        SQLite.shared().execute(updateQuery)
     }
 
     fun retriveContacts():List<ContactData>{
         var contacts:MutableList<ContactData> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.contacts} "
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             contacts.add(ContactData(item))
         }
@@ -89,7 +102,7 @@ object Database {
     fun retriveKnownContacts():ArrayList<ContactData>{
         var contacts:ArrayList<ContactData> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.contacts} WHERE Profile LIKE '%{%'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             contacts.add(ContactData(item))
         }
@@ -99,7 +112,7 @@ object Database {
 
     fun retriveContact(mobile:String):ContactData?{
         val selectQuery = "SELECT  * FROM ${TableNames.contacts} WHERE MobileNumber='${mobile}'"
-        val rows = SQLite.getRow(selectQuery)
+        val rows = SQLite.shared().getRow(selectQuery)
         if(rows != null && rows.getAsString("MobileNumber") != ""){
             return ContactData(rows)
         }else{
@@ -109,7 +122,7 @@ object Database {
     }
     fun updateContact(user:Profile){
         val updateQuery = "UPDATE ${TableNames.contacts}  SET _id='${user._id}',ProfilePicture='${user.profilePic}',Profile='${user.data.json()}' WHERE MobileNumber='${user.mobileNumber}'"
-        SQLite.execute(updateQuery)
+        SQLite.shared().execute(updateQuery)
     }
 
 
@@ -117,7 +130,7 @@ object Database {
         val newQuery = query.toLowerCase()
         var contacts:MutableList<ContactData> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.contacts} WHERE MobileNumber LIKE '%$newQuery%' OR Name LIKE '%$newQuery%'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             contacts.add(ContactData(item))
         }
@@ -127,7 +140,7 @@ object Database {
 
     fun retriveConversation(fromId:String,toid:String):Conversation?{
         val selectQuery = "SELECT  * FROM ${TableNames.conversation} WHERE (FromUserID = '${fromId}' AND ToUserID = '${toid}') OR (FromUserID = '${toid}' AND ToUserID = '${fromId}') ORDER BY UpdatedAt IS NULL OR UpdatedAt=''"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         if(rows.count() > 0){
             return  Conversation(rows.first())
         }
@@ -136,7 +149,7 @@ object Database {
 
     fun retriveConversationByID(conversationId:String):Conversation?{
         val selectQuery = "SELECT  * FROM ${TableNames.conversation} WHERE _id = '${conversationId}'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         if(rows.count() > 0){
             return  Conversation(rows.first())
         }
@@ -146,7 +159,7 @@ object Database {
 
     fun deleteConversationByID(conversationId:String):Conversation?{
         val selectQuery = "DELETE FROM  ${TableNames.conversation} WHERE _id = '${conversationId}'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         if(rows.count() > 0){
             return  Conversation(rows.first())
         }
@@ -156,7 +169,7 @@ object Database {
     suspend fun retriveMessages(conversation:Conversation):ArrayList<Message> = withContext(Dispatchers.Default) {
         var messages:ArrayList<Message> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.message} WHERE ConversationId = '${conversation._id}' ORDER BY SentTime IS NULL OR SentTime=''"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             val message = Message(item)
 //            message.content = Encyption().decrypt(message.content,conversation)
@@ -168,7 +181,7 @@ object Database {
 
     suspend fun retriveMessage(conversationId:String):Message = withContext(Dispatchers.Default) {
         val selectQuery = "SELECT  * FROM ${TableNames.message} WHERE ConversationId = '$conversationId' ORDER BY SentTime IS NULL OR SentTime=''"
-        val row = SQLite.getRowsByQuery(selectQuery)
+        val row = SQLite.shared().getRowsByQuery(selectQuery)
         if(row.count() > 0){
             return@withContext Message(row.last())
         }else{
@@ -179,7 +192,7 @@ object Database {
     fun retriveFriends():ArrayList<Profile>{
         var friendList:ArrayList<Profile> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.friends}"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             friendList.add(Profile(item))
         }
@@ -188,14 +201,14 @@ object Database {
     }
     fun retriveProfile(id:String): Profile {
         val selectQuery = "SELECT  * FROM ${TableNames.profile} WHERE UserID='$id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         return Profile(rows)
     }
 
     fun retriveSentRequest(_id:String):ArrayList<FriendRequest>{
         var friendRequests:ArrayList<FriendRequest> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.friendRequest} WHERE FromUserID='$_id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             friendRequests.add(FriendRequest(item))
         }
@@ -205,19 +218,19 @@ object Database {
 
     fun retriveSentRequestCount(_id:String):Int{
         val selectQuery = "SELECT  * FROM ${TableNames.friendRequest} WHERE FromUserID='$_id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         return rows.count()
     }
 
     fun retriveReceivedRequestCount(_id:String):Int{
         val selectQuery = "SELECT  * FROM ${TableNames.friendRequest} WHERE ToUserID='$_id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         return rows.count()
     }
 
     fun retriveFriendRequestById(_id:String):FriendRequest?{
         val selectQuery = "SELECT  * FROM ${TableNames.friendRequest} WHERE _id='$_id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         if(rows.count() > 0){
             return FriendRequest(rows.first())
         }else
@@ -229,7 +242,7 @@ object Database {
     fun retriveReceivedRequest(_id:String):ArrayList<FriendRequest>{
         var friendRequests:ArrayList<FriendRequest> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.friendRequest} WHERE ToUserID='$_id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             friendRequests.add(FriendRequest(item))
         }
@@ -239,13 +252,13 @@ object Database {
 
     fun getProfileFromBlockList(id:String): Profile {
         val selectQuery = "SELECT  * FROM ${TableNames.blockList} WHERE UserID='$id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         return Profile(rows)
     }
 
     fun getfriendRequest(id:String):FriendRequest?{
         val selectQuery = "SELECT  * FROM ${TableNames.friendRequest} WHERE FromUserID='$id' OR ToUserID='$id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         if(rows.count() > 0){
             return FriendRequest(rows.first())
         }else
@@ -256,20 +269,20 @@ object Database {
 
     fun getProfileFromReceivedRequest(id:String):Profile{
         val selectQuery = "SELECT  * FROM ${TableNames.friendRequest} WHERE UserID='$id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         return Profile(rows)
     }
 
     fun getProfileFromFriendList(id:String):Profile{
         val selectQuery = "SELECT  * FROM ${TableNames.friends} WHERE UserID='$id'"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         return Profile(rows)
     }
 
     fun retriveFileUrl(url:String):String{
         var localUrl = ""
         val selectQuery = "SELECT  * FROM ${TableNames.files} WHERE RemoteURL='${url}'"
-        val row = SQLite.getRow(selectQuery)
+        val row = SQLite.shared().getRow(selectQuery)
         if(row.containsKey("LocalURL")){
             localUrl = row.getAsString("LocalURL")
         }
@@ -281,14 +294,14 @@ object Database {
         var contentValues = ContentValues()
         contentValues.put("LocalURL",localUrl)
         contentValues.put("RemoteURL",remoteUrl)
-        SQLite.insert(TableNames.files,contentValues)
+        SQLite.shared().insert(TableNames.files,contentValues)
     }
 
     suspend fun retriveTask(id: String):ArrayList<Task> = withContext(Dispatchers.IO) {
         var allTask:ArrayList<Task> = ArrayList()
 //        val selectQuery = "SELECT  * FROM ${TableNames.task} WHERE (Participants LIKE '%$id%' COLLATE NOCASE) ORDER BY UpdatedAt IS NULL OR UpdatedAt=''"
         val selectQuery = "SELECT  * FROM ${TableNames.task} ORDER BY UpdatedAt IS NULL OR UpdatedAt=''"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             val newTask = Task(item)
             allTask.add(newTask)
@@ -300,7 +313,7 @@ object Database {
     suspend fun retriveTaskMessages(_id: String):ArrayList<TaskMessage> = withContext(Dispatchers.IO) {
         var taskMessages:ArrayList<TaskMessage> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.taskMessage} WHERE TaskID = '${_id}' ORDER BY SentTime IS NULL OR SentTime=''"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             val message = TaskMessage(item)
             taskMessages.add(message)
@@ -312,7 +325,7 @@ object Database {
     suspend fun retriveTaskAttachemnts(_id: String):ArrayList<TaskAttachment> = withContext(Dispatchers.IO) {
         var taskAttachment:ArrayList<TaskAttachment> = ArrayList()
         val selectQuery = "SELECT  * FROM ${TableNames.taskAttachment} WHERE TaskID = '${_id}' ORDER BY UpdatedAt IS NULL OR UpdatedAt=''"
-        val rows = SQLite.getRowsByQuery(selectQuery)
+        val rows = SQLite.shared().getRowsByQuery(selectQuery)
         for(item in rows){
             val message = TaskAttachment(item)
             taskAttachment.add(message)

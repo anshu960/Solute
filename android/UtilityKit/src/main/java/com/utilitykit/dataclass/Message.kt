@@ -128,7 +128,7 @@ data class Message(
     
     fun send(fcm: String, name: String, completion: () -> Unit){
         var request = JSONObject()
-        val conversation = Database.retriveConversationByID(this.conversationID!!)
+        val conversation = Database.shared().retriveConversationByID(this.conversationID!!)
         request.put(Key.fromUserId, UtilityKitApp.user._id)
         request.put(Key.toUserId, conversation!!.getOtherUserId())
         request.put(Key.content, this.content)

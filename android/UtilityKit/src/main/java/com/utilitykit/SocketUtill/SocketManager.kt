@@ -222,7 +222,7 @@ object SocketManager
                 messageObject = messsageData
                 val message = Message(messsageData)
                 message.content = Encryption().decryptMessage(message.content, conversation!!)
-                SQLite.insert(TableNames.message, message.data)
+                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -258,7 +258,7 @@ object SocketManager
             {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.insert(TableNames.message, message.data)
+                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -273,7 +273,7 @@ object SocketManager
             {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.insert(TableNames.message, message.data)
+                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -301,7 +301,7 @@ object SocketManager
             {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.insert(TableNames.message, message.data)
+                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -319,7 +319,7 @@ object SocketManager
                     {
                         val item = payload.getJSONObject(i)
                         val message = Message(item)
-                        SQLite.insert(TableNames.message, message.data)
+                        SQLite.shared().insert(TableNames.message, message.data)
                     }
                 }
             }
@@ -336,7 +336,7 @@ object SocketManager
             {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.insert(TableNames.message, message.data)
+                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -351,7 +351,7 @@ object SocketManager
             {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.insert(TableNames.message, message.data)
+                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -366,7 +366,7 @@ object SocketManager
             {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.insert(TableNames.message, message.data)
+                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -400,7 +400,7 @@ object SocketManager
                     val item = allContactsFromServer.getJSONObject(i)
                     val newContact = ContactData(item)
                     allContacts.add(newContact)
-                    SQLite.insert(TableNames.contacts,newContact.data)
+                    SQLite.shared().insert(TableNames.contacts,newContact.data)
                 }catch (e:Exception){
                     Log.d(TAG,e.localizedMessage)
                 }
@@ -433,7 +433,7 @@ object SocketManager
             if (messsageDataAny is JSONObject)
             {
                 conversation = Conversation(messsageDataAny)
-                SQLite.insert(TableNames.conversation, conversation.data)
+                SQLite.shared().insert(TableNames.conversation, conversation.data)
             }
         }
         this.onConversation(SocketEvent.createConversation, conversation)
@@ -449,7 +449,7 @@ object SocketManager
                 val item = list.getJSONObject(i)
                 val conversation = Conversation(item)
                 allConversation.add(conversation)
-                SQLite.insert(TableNames.conversation, conversation.data)
+                SQLite.shared().insert(TableNames.conversation, conversation.data)
             }
         }
         this.onConversations(SocketEvent.getAllConversation, allConversation)

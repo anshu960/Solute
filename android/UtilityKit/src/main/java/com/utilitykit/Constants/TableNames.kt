@@ -13,5 +13,7 @@ class TableNames {
         val task = "Task"
         val taskMessage = "TaskMessage"
         val taskAttachment = "TaskAttachment"
+        val sale = "Sale"
+
     }
 }

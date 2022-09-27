@@ -7,7 +7,22 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
-object SQLite {
+class SQLite {
+    init {
+        instance = this
+    }
+
+    companion object{
+        private var instance: SQLite? = null
+        fun shared() : SQLite {
+            if(instance != null){
+                return instance as SQLite
+            }else{
+                return SQLite()
+            }
+        }
+    }
+
     lateinit var helper : SQLiteHelper
     lateinit var db : SQLiteDatabase
     lateinit var readableDb : SQLiteDatabase
@@ -18,7 +33,7 @@ object SQLite {
         return readableDb
     }
 
-    fun init(context: Context) {
+    fun setUp(context: Context){
         helper = SQLiteHelper(context)
         db = helper.writableDatabase
         readableDb = helper.readableDatabase
@@ -117,7 +132,7 @@ object SQLite {
     }
 
     fun fetchRows(query: String): ArrayList<ContentValues> {
-        val db = SQLite.readableDb
+        val db = shared().readableDb
         val cursor = db.rawQuery(query, null)
         var rows: ArrayList<ContentValues> = ArrayList()
         cursor.moveToFirst()
@@ -154,7 +169,7 @@ object SQLite {
     }
 
     fun getRow(query:String):ContentValues{
-        val db = SQLite.readableDb
+        val db = shared().readableDb
         val cursor = db.rawQuery(query,null)
         cursor.moveToFirst()
         var retVal = ContentValues()
@@ -221,7 +236,7 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
     }
     companion object {
         // If you change the database schema, you must increment the database version.
-        const val DATABASE_VERSION = 19
-        const val DATABASE_NAME = "PrimaryDatabase_version${DATABASE_VERSION}.db"
+        const val DATABASE_VERSION = 1
+        const val DATABASE_NAME = "Solute_version${DATABASE_VERSION}.db"
     }
 }

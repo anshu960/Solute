@@ -1,15 +1,21 @@
 package com.utilitykit.feature.sync
 
+import android.content.ContentValues
+import android.util.Log
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.date
+import com.utilitykit.Constants.TableNames
 import com.utilitykit.SocketUtill.SocketEvent
 import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import io.socket.emitter.Emitter
-import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SyncHandler {
     val gson = Gson()
@@ -47,11 +53,19 @@ class SyncHandler {
     }
 
     fun getAllSaleForBusiness(){
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        calendar.add(Calendar.DAY_OF_MONTH, -365)
+        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        val lastYear = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
+
         val user = User()
         if(BusinessHandler.shared().repository.business != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
             request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
+            request.put(Key.startDate,lastYear)
+            request.put(Key.endDate,today)
             SocketManager.send(SocketEvent.RETRIVE_SALE,request)
         }
     }
@@ -68,6 +82,8 @@ class SyncHandler {
                     {
                         val invoiceSaleJson = payload.get(i)
                         val newSale = gson.fromJson(invoiceSaleJson.toString(), Sale::class.java)
+                        val saleContentValue = gson.fromJson(invoiceSaleJson.toString(),ContentValues::class.java)
+                        SQLite.shared().insert(TableNames.sale,saleContentValue)
                         allSalesFromServer.add(newSale)
                     }
                 }

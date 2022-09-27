@@ -62,7 +62,6 @@ class LaunchActivity : UtilityActivity() {
         SocketManager.currentActivity = this
         SocketManager.connect()
         setContentView(R.layout.activity_launch)
-        Database.init(this)
         checkUpdatesAndClearDatabase()
         mDelayHandler = Handler()
         //Navigate with delay
