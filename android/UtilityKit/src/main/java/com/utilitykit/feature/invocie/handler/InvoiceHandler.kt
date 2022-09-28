@@ -50,7 +50,6 @@ class InvoiceHandler {
                         val newInvoice = gson.fromJson(invoiceJson.toString(),CustomerInvoice::class.java)
                         allInvoicesFromServer.add(newInvoice)
                     }
-                    allInvoicesFromServer = allInvoicesFromServer.reversed() as ArrayList<CustomerInvoice>
                     repository.allCustomerInvoiceLiveData.postValue(allInvoicesFromServer)
                     repository.filteredCustomerInvoiceLiveData.postValue(allInvoicesFromServer)
                 }

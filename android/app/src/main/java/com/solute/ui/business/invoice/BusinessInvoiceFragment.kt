@@ -46,7 +46,9 @@ class BusinessInvoiceFragment : Fragment() {
             InvoiceViewModel::class.java
         )
         invoiceViewModel.filteredCustomerInvoice.observe(this) {
-            this.invoices = it as ArrayList<CustomerInvoice>
+            if(it != null){
+                this.invoices = it as ArrayList<CustomerInvoice>
+            }
             reloadData()
         }
         InvoiceHandler.shared().setup(invoiceViewModel)
