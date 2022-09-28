@@ -190,6 +190,7 @@ class TableScript {
                                             `PaymentMode` tinytext,
                                             `Quantity` int,
                                             `Price` float,
+                                            `CostPrice` float,
                                             `Discount` float,
                                             `SGST` float,
                                             `CGST` float,

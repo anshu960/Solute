@@ -21,6 +21,8 @@ import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 import com.solute.ui.business.inventory.product.ProductAdapter
 import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
 import com.solute.ui.business.product.create.CreateProductActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
@@ -33,6 +35,7 @@ import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandl
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
+import com.utilitykit.feature.sync.BusinessAnalytics
 import com.utilitykit.feature.sync.SyncHandler
 
 // TODO: Rename parameter arguments, choose names that match
@@ -59,6 +62,7 @@ class InventoryFragment : Fragment() {
     var allProduct: ArrayList<Product> = ArrayList()
     var allCategoory: ArrayList<ProductCategory> = ArrayList()
     var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
+    var allAnalytics: ArrayList<BusinessAnalytics> = ArrayList()
 
     var productAdapter : ProductAdapter? = null
     var productCategoryAdapter : ProductCategoryAdapter? = null
@@ -113,6 +117,15 @@ class InventoryFragment : Fragment() {
             }
         }
         ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
+
+        BusinessHandler.shared().repository.analyticsLiveData.observe(this){
+            if(it != null){
+                this.allAnalytics = it
+                if(selectedSegment == 0){
+                    loadAnalytics()
+                }
+            }
+        }
     }
 
     override fun onCreateView(
@@ -166,7 +179,7 @@ class InventoryFragment : Fragment() {
         }
     }
     fun loadAnalytics(){
-        this.analyticsAdapter = this.context?.let { AnalyticsAdapter(it,this,SyncHandler.shared().getAllBusinessAnalyticsToShow()) }
+        this.analyticsAdapter = this.context?.let { AnalyticsAdapter(it,this,allAnalytics) }
         this.recycler?.layoutManager = GridLayoutManager(this.context,2)
         recycler?.adapter = this.analyticsAdapter
         countLabel?.visibility = View.GONE

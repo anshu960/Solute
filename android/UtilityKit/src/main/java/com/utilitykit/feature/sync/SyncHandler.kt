@@ -14,12 +14,15 @@ import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import io.socket.emitter.Emitter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class SyncHandler {
-    var allSales : ArrayList<Sale> = arrayListOf()
 
     val gson = Gson()
     init {
@@ -40,65 +43,79 @@ class SyncHandler {
         getAllSaleForBusiness()
     }
 
-    fun getAllBusinessAnalyticsToShow():ArrayList<BusinessAnalytics>{
+    fun updateAnalyticsToShow(allSales:ArrayList<Sale>){
         var allAnalytics : ArrayList<BusinessAnalytics> = arrayListOf()
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-        calendar.add(Calendar.DAY_OF_MONTH, -1)
-        val yesterday = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
-        calendar.add(Calendar.DAY_OF_MONTH, -6)
-        val week = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
-        calendar.add(Calendar.DAY_OF_MONTH, -6)
-        val month =  week.removeRange(6,9)
-        val year = week.removeRange(4,9)
+        GlobalScope.launch(Dispatchers.Default) {
+            val calendar = Calendar.getInstance()
+            calendar.time = Date()
+            val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
+            val yesterday = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
+            val twoDayBack = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
+            val threeDayBack = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
+            val fourDayBack = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
+            val fiveDayBack = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
+            val sixDayBack = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
+            calendar.add(Calendar.DAY_OF_MONTH, -6)
+            val month =  today.removeRange(6,9)
+            val year = today.removeRange(4,10)
 
-        var todaySaleQuantity = 0
-        var todaySaleValue = 0F
-        var yesterdaySaleQuantity = 0
-        var yesterdaySaleValue = 0F
-        var sevenDaySaleQuantity = 0
-        var sevenDaySaleValue = 0F
-        var monthSaleQuantity = 0
-        var monthSaleValue = 0F
-        var yearSaleQuantity = 0
-        var yearSaleValue = 0F
-        if (allSales.count() > 0){
-            allSales.forEach { sale->
-                if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(today)){
-                    todaySaleQuantity += sale.Quantity!!
-                    todaySaleValue += sale.FinalPrice!!
-                }
-                if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(yesterday)){
-                    yesterdaySaleQuantity += sale.Quantity!!
-                    yesterdaySaleValue += sale.FinalPrice!!
-                }
-                if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(week)){
-                    sevenDaySaleQuantity += sale.Quantity!!
-                    sevenDaySaleValue += sale.FinalPrice!!
-                }
-                if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(month)){
-                    monthSaleQuantity += sale.Quantity!!
-                    monthSaleValue += sale.FinalPrice!!
-                }
-                if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(year)){
-                    yearSaleQuantity += sale.Quantity!!
-                    yearSaleValue += sale.FinalPrice!!
+            var todaySaleQuantity = 0
+            var todaySaleValue = 0F
+            var yesterdaySaleQuantity = 0
+            var yesterdaySaleValue = 0F
+            var sevenDaySaleQuantity = 0
+            var sevenDaySaleValue = 0F
+            var monthSaleQuantity = 0
+            var monthSaleValue = 0F
+            var yearSaleQuantity = 0
+            var yearSaleValue = 0F
+            if (allSales.count() > 0){
+                allSales.forEach { sale->
+                    if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(today)){
+                        todaySaleQuantity += sale.Quantity!!
+                        todaySaleValue += sale.FinalPrice!!
+                    }
+                    if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(yesterday)){
+                        yesterdaySaleQuantity += sale.Quantity!!
+                        yesterdaySaleValue += sale.FinalPrice!!
+                    }
+                    if(sale.Quantity != null && sale.CreatedAt != null){
+                        if(sale.CreatedAt!!.contains(today) || sale.CreatedAt!!.contains(yesterday) || sale.CreatedAt!!.contains(twoDayBack) || sale.CreatedAt!!.contains(threeDayBack) || sale.CreatedAt!!.contains(fourDayBack) || sale.CreatedAt!!.contains(fiveDayBack) || sale.CreatedAt!!.contains(sixDayBack)){
+                            sevenDaySaleQuantity += sale.Quantity!!
+                            sevenDaySaleValue += sale.FinalPrice!!
+                        }
+                    }
+                    if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(month)){
+                        monthSaleQuantity += sale.Quantity!!
+                        monthSaleValue += sale.FinalPrice!!
+                    }
+                    if(sale.Quantity != null && sale.CreatedAt != null && sale.CreatedAt!!.contains(year)){
+                        yearSaleQuantity += sale.Quantity!!
+                        yearSaleValue += sale.FinalPrice!!
+                    }
                 }
             }
+            allAnalytics.add(BusinessAnalytics("Today",todaySaleValue.toInt(),"Total Sale Value ₹"))
+            allAnalytics.add(BusinessAnalytics("Today",todaySaleQuantity,"Total Sale Quantity"))
+            allAnalytics.add(BusinessAnalytics("Yesterday",yesterdaySaleValue.toInt(),"Total Sale Value ₹"))
+            allAnalytics.add(BusinessAnalytics("Yesterday",yesterdaySaleQuantity,"Total Sale Quantity"))
+            allAnalytics.add(BusinessAnalytics("7 Days",sevenDaySaleValue.toInt(),"Total Sale Value ₹"))
+            allAnalytics.add(BusinessAnalytics("7 Days",sevenDaySaleQuantity,"Total Sale Quantity"))
+            allAnalytics.add(BusinessAnalytics("Month",monthSaleValue.toInt(),"Total Sale Value ₹"))
+            allAnalytics.add(BusinessAnalytics("Month",monthSaleQuantity,"Total Sale Quantity"))
+            allAnalytics.add(BusinessAnalytics("Year",yearSaleValue.toInt(),"Total Sale Value ₹"))
+            allAnalytics.add(BusinessAnalytics("Year",yearSaleQuantity,"Total Sale Quantity"))
+            BusinessHandler.shared().repository.analyticsLiveData.postValue(allAnalytics)
         }
-        allAnalytics.add(BusinessAnalytics("Today",todaySaleValue.toInt(),"Total Sale Value ₹"))
-        allAnalytics.add(BusinessAnalytics("Today",todaySaleQuantity,"Total Sale Quantity"))
-        allAnalytics.add(BusinessAnalytics("Yesterday",yesterdaySaleValue.toInt(),"Total Sale Value ₹"))
-        allAnalytics.add(BusinessAnalytics("Yesterday",yesterdaySaleQuantity,"Total Sale Quantity"))
-        allAnalytics.add(BusinessAnalytics("7 Days",sevenDaySaleValue.toInt(),"Total Sale Value ₹"))
-        allAnalytics.add(BusinessAnalytics("7 Days",sevenDaySaleQuantity,"Total Sale Quantity"))
-        allAnalytics.add(BusinessAnalytics("Month",monthSaleValue.toInt(),"Total Sale Value ₹"))
-        allAnalytics.add(BusinessAnalytics("Month",monthSaleQuantity,"Total Sale Quantity"))
-        allAnalytics.add(BusinessAnalytics("Year",yearSaleValue.toInt(),"Total Sale Value ₹"))
-        allAnalytics.add(BusinessAnalytics("Year",yearSaleQuantity,"Total Sale Quantity"))
-        return allAnalytics
     }
+
+
 
     fun getAllSaleForBusiness(){
         val calendar = Calendar.getInstance()
@@ -119,18 +136,22 @@ class SyncHandler {
     }
 
     val onRetriveSale = Emitter.Listener {
-        if (it.isNotEmpty())
-        {
-            val anyData = it.first() as JSONObject
-            if (anyData.has(Key.payload)){
-                val payload = anyData.getJSONArray(Key.payload)
-                if(payload.length() > 0){
-                    for (i in 0 until payload.length())
-                    {
-                        val invoiceSaleJson = payload.getJSONObject(i)
-                        val newSale = gson.fromJson(invoiceSaleJson.toString(), Sale::class.java)
-                        SQLite.shared().insert(TableNames.sale,convertJsonToContentValue(invoiceSaleJson))
-                        allSales.add(newSale)
+        GlobalScope.launch(Dispatchers.Default) {
+            if (it.isNotEmpty())
+            {
+                val anyData = it.first() as JSONObject
+                if (anyData.has(Key.payload)){
+                    val payload = anyData.getJSONArray(Key.payload)
+                    var allSalesFromServer : ArrayList<Sale> = arrayListOf()
+                    if(payload.length() > 0){
+                        for (i in 0 until payload.length())
+                        {
+                            val invoiceSaleJson = payload.getJSONObject(i)
+                            val newSale = gson.fromJson(invoiceSaleJson.toString(), Sale::class.java)
+                            SQLite.shared().insert(TableNames.sale,convertJsonToContentValue(invoiceSaleJson))
+                            allSalesFromServer.add(newSale)
+                        }
+                        updateAnalyticsToShow(allSalesFromServer)
                     }
                 }
             }
