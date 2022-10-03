@@ -21,30 +21,42 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="33">
         <activity
+            android:name=".ui.business.create.SelectBusinessTypeActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+        <activity
             android:name=".ui.business.inventory.subCategory.SubCategoryDetailsActivity"
-            android:exported="false" android:theme="@style/AppTheme.NoActionBar"/>
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.inventory.category.CategoryDetailsActivity"
-            android:exported="false" android:theme="@style/AppTheme.NoActionBar"/>
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.product.create.CreateProductActivity"
-            android:exported="false" android:theme="@style/AppTheme.NoActionBar"/>
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.inventory.subCategory.CreateProductSubCategoryActivity"
-            android:exported="false" android:theme="@style/AppTheme.NoActionBar"/>
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.inventory.category.CreateCategoryActivity"
-            android:exported="false" android:theme="@style/AppTheme.NoActionBar"/>
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.customer.create.CreateCustomerActivity"
             android:exported="false"
             android:theme="@style/TransparentCompat" />
         <activity
             android:name=".ui.business.create.CreateBusinessActivity"
-            android:exported="false" android:theme="@style/AppTheme.NoActionBar" />
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.profile.ProfileActivity"
-            android:exported="false" android:theme="@style/AppTheme.NoActionBar"/>
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.receipt.ReceiptDetailsActivity"
             android:exported="false"
@@ -71,9 +83,8 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

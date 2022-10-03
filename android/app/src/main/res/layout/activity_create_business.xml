@@ -51,7 +51,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 app:boxBackgroundColor="@color/transparent"
-                app:boxBackgroundMode="@drawable/input_field_background"
+                app:boxBackgroundMode="outline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -65,21 +65,23 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/create_business_gst_layout"
+                android:id="@+id/create_business_pan_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                app:boxBackgroundColor="@color/transparent"
+                app:boxBackgroundMode="outline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/create_business_name_layout">
+                app:layout_constraintTop_toBottomOf="@+id/create_business_gst_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/create_business_gst_tiet"
+                    android:id="@+id/create_business_pan_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="GST Number" />
+                    android:hint="PAN Number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -91,7 +93,9 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/create_business_gst_layout">
+                app:boxBackgroundColor="@color/transparent"
+                app:boxBackgroundMode="outline"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_pan_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/create_business_address_tiet"
@@ -109,6 +113,8 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:boxBackgroundColor="@color/transparent"
+                app:boxBackgroundMode="outline"
                 app:layout_constraintTop_toBottomOf="@+id/create_business_address_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -127,6 +133,8 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:boxBackgroundColor="@color/transparent"
+                app:boxBackgroundMode="outline"
                 app:layout_constraintTop_toBottomOf="@+id/create_business_email_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -134,6 +142,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Mobile Number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_business_gst_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:boxBackgroundColor="@color/transparent"
+                app:boxBackgroundMode="outline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/create_business_name_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_business_gst_tiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="GST Number" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -144,6 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="Create New Business"
+        app:backgroundTint="@color/colorThemePrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

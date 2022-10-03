@@ -39,13 +39,28 @@ class SyncHandler {
         }
     }
 
+    fun clearBusinessAnalytics(){
+        var allAnalytics : ArrayList<BusinessAnalytics> = arrayListOf()
+        allAnalytics.add(BusinessAnalytics("Today",0,"Total Sale Value ₹"))
+        allAnalytics.add(BusinessAnalytics("Today",0,"Total Sale Quantity"))
+        allAnalytics.add(BusinessAnalytics("Yesterday",0,"Total Sale Value ₹"))
+        allAnalytics.add(BusinessAnalytics("Yesterday",0,"Total Sale Quantity"))
+        allAnalytics.add(BusinessAnalytics("7 Days",0,"Total Sale Value ₹"))
+        allAnalytics.add(BusinessAnalytics("7 Days",0,"Total Sale Quantity"))
+        allAnalytics.add(BusinessAnalytics("Month",0,"Total Sale Value ₹"))
+        allAnalytics.add(BusinessAnalytics("Month",0,"Total Sale Quantity"))
+        allAnalytics.add(BusinessAnalytics("Year",0,"Total Sale Value ₹"))
+        allAnalytics.add(BusinessAnalytics("Year",0,"Total Sale Quantity"))
+        BusinessHandler.shared().repository.analyticsLiveData.postValue(allAnalytics)
+    }
+
     fun syncAllBusinessData(){
         getAllSaleForBusiness()
     }
 
     fun updateAnalyticsToShow(allSales:ArrayList<Sale>){
         var allAnalytics : ArrayList<BusinessAnalytics> = arrayListOf()
-        GlobalScope.launch(Dispatchers.Default) {
+        GlobalScope.launch(Dispatchers.IO) {
             val calendar = Calendar.getInstance()
             calendar.time = Date()
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
@@ -136,7 +151,7 @@ class SyncHandler {
     }
 
     val onRetriveSale = Emitter.Listener {
-        GlobalScope.launch(Dispatchers.Default) {
+        GlobalScope.launch(Dispatchers.IO) {
             if (it.isNotEmpty())
             {
                 val anyData = it.first() as JSONObject

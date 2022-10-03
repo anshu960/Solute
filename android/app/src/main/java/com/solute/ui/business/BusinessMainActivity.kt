@@ -44,7 +44,6 @@ class BusinessMainActivity : UtilityActivity() {
             setOf(R.id.navigation_business_main_inventory,R.id.navigation_business_main_product, R.id.navigation_business_main_cart,R.id.navigation_business_main_invoice,)
         )
         setUpRequiredModels()
-        App.applicationContext().checkForAppUpdate(this)
     }
 
     override fun onResume() {

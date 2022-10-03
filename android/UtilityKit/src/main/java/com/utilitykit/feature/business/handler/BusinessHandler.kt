@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.business
 import com.utilitykit.Constants.Key.Companion.model
 import com.utilitykit.Constants.Key.Companion.payload
 import com.utilitykit.Constants.TableNames
@@ -64,9 +65,20 @@ class BusinessHandler {
                     val item = payload.getJSONObject(i)
                     val business = gson.fromJson(item.toString(),Business::class.java)
                     allBusiness.add(business)
-                    repository.businessLiveData.postValue(business)
                 }
+                repository.allBusinessLiveData.postValue(allBusiness)
+            }
+        }
+    }
 
+    val onCreateNewBusiness = Emitter.Listener {
+        if (it.isNotEmpty())
+        {
+            val anyData = it.first() as JSONObject
+            if (anyData.has(Key.payload)){
+                val payload = anyData.getJSONObject(Key.payload)
+                val business = gson.fromJson(payload.toString(),Business::class.java)
+                repository.businessLiveData.postValue(business)
             }
         }
     }

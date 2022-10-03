@@ -40,6 +40,7 @@ class Key {
 
         val userId = "UserID"
         var businessID = "BusinessID"
+        var businessTypeID = "BusinessTypeID"
         val business = "Business"
         val customer = "Customer"
         val customerName = "CustomerName"
@@ -118,7 +119,7 @@ class Key {
         val aadhaarNumber = "aadhaar_number"
 
         val dateOfBirth = "date_of_birth"
-        val address = "user_address"
+        val address = "Address"
         val zipCode = "zip_code"
         val currentGymId = "current_gym_id"
         val joiningDate = "current_gym_joining_date"

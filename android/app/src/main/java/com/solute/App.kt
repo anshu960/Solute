@@ -60,7 +60,7 @@ class App: Application() {
         firebaseAppCheck.installAppCheckProviderFactory(
             PlayIntegrityAppCheckProviderFactory.getInstance()
         )
-        UtilityKitApp().setUp(this,!BuildConfig.DEBUG)
+        UtilityKitApp().setUp(this,BuildConfig.DEBUG)
         FirebaseApp.initializeApp(this)
         SQLite.shared().setUp(this)
         Database.shared().setUp(this)
@@ -82,9 +82,6 @@ class App: Application() {
             Defaults.store(Key.fcmToken, token)
         }
 
-    }
-    fun getMSocket(): Socket? {
-        return mSocket
     }
 
     companion object{

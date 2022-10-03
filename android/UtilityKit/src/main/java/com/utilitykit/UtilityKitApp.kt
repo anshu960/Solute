@@ -40,13 +40,14 @@ class UtilityKitApp :Application(){
         super.onCreate()
     }
 
-    fun setUp(context: Context,isProduction:Boolean){
+    fun setUp(context: Context,isDebug:Boolean){
         appContext = context
         Defaults.init(appContext!!)
-        if(isProduction){
-            socketUrl = Server.prodDost
+        socketUrl = if(isDebug){
+            Server.devHost
         }else{
-                socketUrl = Server.devHost
+//            Server.prodDost
+            Server.devHost
         }
         try {
             mSocket = IO.socket(socketUrl)

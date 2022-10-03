@@ -12,6 +12,8 @@ class BusinessRepository {
 
     val businessLiveData = MutableLiveData<Business>()
     var business: Business? = null
-    val allBusiness: LiveData<Business>
-        get() = businessLiveData
+
+    val allBusinessLiveData = MutableLiveData<ArrayList<Business>>()
+    val allBusiness: LiveData<ArrayList<Business>>
+        get() = allBusinessLiveData
 }

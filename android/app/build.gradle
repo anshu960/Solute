@@ -11,8 +11,8 @@ android {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 24
-        versionName "0.0.24"
+        versionCode 27
+        versionName "0.0.27"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {

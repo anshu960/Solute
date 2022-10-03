@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#54aadf</color>
-    <color name="colorPrimaryDark">#54aadf</color>
+    <color name="colorPrimaryDark">#0822A7</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="buttonDefaultTint">#54aadf</color>
-    <color name="colorThemePrimary">#54aadf</color>
+    <color name="buttonDefaultTint">#0822A7</color>
+    <color name="colorThemePrimary">#0822A7</color>
     <color name="lightGray">#a6a6a6</color>
     <color name="darkGray">#282828</color>
     <color name="lightBackground">#F7F8FA</color>
-    <color name="themeBlue">#54aadf</color>
+    <color name="themeBlue">#0822A7</color>
     <color name="searchBarBackground">#F1F1F1</color>
     <color name="searchTitleColor">#AEAEAE</color>
     <color name="searchIconColor">#FFFFFF</color>
     <color name="defaultBackground">#E5E5E5</color>
-    <color name="inProgress">#00BAEB</color>
+    <color name="inProgress">#0822A7</color>
     <color name="inProgressLight">#C4EEFA</color>
     <color name="priority_medium_background">#FEF1E6</color>
     <color name="priority_medium">#F17105</color>
@@ -23,7 +23,7 @@
     <color name="delete">#C73535</color>
     <color name="pending">#F17105</color>
     <color name="completed">#639043</color>
-    <color name="in_progress">#00BAEB</color>
+    <color name="in_progress">#0822A7</color>
     <color name="hold">#C73535</color>
     <color name="dropped">#6655C0</color>
     <color name="invalid">#DE9636</color>

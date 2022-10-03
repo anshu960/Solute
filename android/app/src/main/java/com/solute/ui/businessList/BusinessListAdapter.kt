@@ -32,6 +32,7 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
                 val mainActivty = context as MainActivity
                 val intent = Intent(mainActivty,BusinessMainActivity::class.java)
                 BusinessHandler.shared().repository.business = item
+                SyncHandler.shared().clearBusinessAnalytics()
                 SyncHandler.shared().syncAllBusinessData()
                 mainActivty.startActivity(intent)
             }
