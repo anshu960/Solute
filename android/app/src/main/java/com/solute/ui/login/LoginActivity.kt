@@ -43,6 +43,8 @@ class LoginActivity : UtilityActivity() {
     private var storedVerificationId: String? = ""
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    var verifyBtn : Button? = null
+    var resendBtn : Button? = null
     var otp1 : EditText? = null
     var otp2 : EditText? = null
     var otp3 : EditText? = null
@@ -57,6 +59,10 @@ class LoginActivity : UtilityActivity() {
         initiatePhoneSetup()
         findViewById<ConstraintLayout>(R.id.login_otp_layout).visibility = View.GONE
         findViewById<Button>(R.id.login_resend_otp_btn).visibility = View.GONE
+        verifyBtn = findViewById(R.id.login_verify_btn)
+        verifyBtn?.setOnClickListener { onClickLogin() }
+        resendBtn = findViewById(R.id.login_resend_otp_btn)
+        resendBtn?.setOnClickListener { onClickResend() }
         otp1 = findViewById(R.id.otp_text_view_1)
         otp2 = findViewById(R.id.otp_text_view_2)
         otp3 = findViewById(R.id.otp_text_view_3)
@@ -90,7 +96,7 @@ class LoginActivity : UtilityActivity() {
 
     }
 
-    fun onClickLogin(view:View){
+    fun onClickLogin(){
         phoneNumber = findViewById<TextInputEditText>(R.id.mobile_text_field).text.toString()
 //        if(phoneNumber == "6202143211"){
 //            loginWithPhoneNumber("gLAnJJRN2dUaDmAK2IK0h3omlDs2")
@@ -116,7 +122,7 @@ class LoginActivity : UtilityActivity() {
 
     }
 
-    fun onClickResend(view: View){
+    fun onClickResend(){
         phoneNumber = findViewById<TextInputEditText>(R.id.mobile_text_field).text.toString()
 //        otp = findViewById<TextInputEditText>(R.id.login_otp_layout).text.toString()
         authenticateUsingPhoneNumber()
@@ -180,7 +186,6 @@ class LoginActivity : UtilityActivity() {
 
     fun authenticateUsingPhoneNumber(){
         this.startActivityIndicator("Sending OTP to given Number")
-
         if(phoneNumber != "" && phoneNumber.count() >= 10){
             val phoneNumber = "+" + this.getDialCode() + phoneNumber.trim()
             Log.d("Firebase Auth","trying to send otp to $phoneNumber")

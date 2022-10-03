@@ -26,6 +26,7 @@ class SelectBusinessTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_business_type)
         this.backButton = findViewById(R.id.select_business_type_header_back)
+        this.backButton?.setOnClickListener { onBackPressed() }
         this.recycler = findViewById(R.id.select_business_type_recycler)
         viewModal  = ViewModelProvider(
             this,

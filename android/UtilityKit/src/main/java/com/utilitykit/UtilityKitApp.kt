@@ -3,11 +3,7 @@ package com.utilitykit
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.multidex.BuildConfig
 import com.utilitykit.Constants.Server
-import com.utilitykit.database.Database
-import com.utilitykit.database.SQLite
-import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
 import com.utilitykit.dataclass.User
 import io.socket.client.IO
@@ -28,7 +24,6 @@ class UtilityKitApp :Application(){
     companion object{
         var user : User = User()
         var profile: Profile = Profile()
-        var friendRequest: FriendRequest = FriendRequest()
         var context : Context? = null
         var fragment : Fragment? = null
         private var instance: UtilityKitApp? = null

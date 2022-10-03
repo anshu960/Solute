@@ -142,6 +142,7 @@ class InventoryFragment : Fragment() {
         floatingAddButton?.setOnClickListener { onClickAddButton() }
         countLabel = view.findViewById(R.id.inventory_fragment_count)
         setupSegment()
+        SyncHandler.shared().syncAllBusinessData()
         return view
     }
     fun setupSegment(){

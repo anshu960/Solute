@@ -171,8 +171,10 @@ class ReceiptDetailsActivity : UtilityActivity() {
 
         discount?.text =  "₹ " + customerInvoice?.InstantDiscount.toString()
         pupulateFooter()
-        val qrBitmap = QRCodeUtill().getQRImage("https://solute.app/#/receipt?id=$customerInvoice?.InvoiceNumber.toString()")
-        qrImage?.setImageBitmap(qrBitmap)
+        if(customerInvoice != null){
+            val qrBitmap = QRCodeUtill().getQRImage("https://solute.app/#/receipt?id=${customerInvoice!!.InvoiceNumber}")
+            qrImage?.setImageBitmap(qrBitmap)
+        }
         loadShareDetails()
     }
     fun pupulateFooter(){
