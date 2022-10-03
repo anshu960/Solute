@@ -36,15 +36,13 @@ class UtilityKitApp :Application(){
             return instance as UtilityKitApp
         }
     }
-    override fun onCreate() {
-        super.onCreate()
-    }
 
     fun setUp(context: Context,isDebug:Boolean){
         appContext = context
         Defaults.init(appContext!!)
         socketUrl = if(isDebug){
             Server.devHost
+//            Server.prodDost
         }else{
 //            Server.prodDost
             Server.devHost

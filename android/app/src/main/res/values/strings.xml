@@ -51,4 +51,7 @@
     <string name="name">Name</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="email">Email</string>
+    <string name="title_activity_product_detail">ProductDetailActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

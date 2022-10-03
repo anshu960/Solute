@@ -21,11 +21,14 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
 
         }
     }
-    val allProduct : LiveData<List<Product>>
+    val allProduct : LiveData<ArrayList<Product>>
     get() = productRepository.allProduct
 
     val newProduct : LiveData<Product>
         get() = productRepository.newProduct
+
+    val selectedProduct : LiveData<Product>
+        get() = productRepository.selectedProduct
 
     fun createNewProduct(name:String,description:String,categoryid :String,subCategoryId:String,mrp:Float,costPrice:Float,salePrice : Float){
         val request = JSONObject()

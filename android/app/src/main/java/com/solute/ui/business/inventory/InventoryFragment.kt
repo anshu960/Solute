@@ -19,6 +19,7 @@ import com.solute.ui.business.inventory.category.CreateCategoryActivity
 import com.solute.ui.business.inventory.category.ProductCategoryAdapter
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 import com.solute.ui.business.inventory.product.ProductAdapter
+import com.solute.ui.business.inventory.stock.ProductStockAdapter
 import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
 import com.solute.ui.business.product.create.CreateProductActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -65,6 +66,7 @@ class InventoryFragment : Fragment() {
     var allAnalytics: ArrayList<BusinessAnalytics> = ArrayList()
 
     var productAdapter : ProductAdapter? = null
+    var productStockdapter : ProductStockAdapter? = null
     var productCategoryAdapter : ProductCategoryAdapter? = null
     var productSubCategoryAdapter : ProductSubCategoryAdapter? = null
     var analyticsAdapter : AnalyticsAdapter? = null
@@ -206,7 +208,10 @@ class InventoryFragment : Fragment() {
         countLabel?.visibility = View.VISIBLE
     }
     fun loadStock(){
-        countLabel?.text = ""
+        this.productStockdapter = this.context?.let { ProductStockAdapter(it,this,this.allProduct) }
+        this.recycler?.layoutManager = LinearLayoutManager(this.context)
+        recycler?.adapter = productStockdapter
+        countLabel?.text = "Total ${allProduct.count()} Product"
         countLabel?.visibility = View.VISIBLE
     }
     fun onClickAddButton(){

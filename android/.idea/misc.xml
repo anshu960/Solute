@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/layout/activity_launch.xml" value="0.37433135120581223" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.384626545852924" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21888580322265627" />
+        <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.22991043311962184" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.129981884057971" />
         <entry key="app/src/main/res/layout/activity_receipt_details.xml" value="0.3008621215820313" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18704710144927536" />
@@ -41,6 +42,7 @@
         <entry key="app/src/main/res/layout/fragment_business_product.xml" value="0.15760869565217392" />
         <entry key="app/src/main/res/layout/fragment_inventory.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.14336372847011145" />
+        <entry key="app/src/main/res/layout/fragment_product_detail.xml" value="0.16802536231884058" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/recycler_item_analytic.xml" value="0.16802536231884058" />
         <entry key="app/src/main/res/layout/recycler_item_analytics.xml" value="0.2913926718891531" />
@@ -50,6 +52,7 @@
         <entry key="app/src/main/res/layout/recycler_item_product.xml" value="0.301885986328125" />
         <entry key="app/src/main/res/layout/recycler_item_product_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/recycler_item_product_sale.xml" value="0.23822463768115942" />
+        <entry key="app/src/main/res/layout/recycler_item_product_stock.xml" value="0.2634461997211843" />
         <entry key="app/src/main/res/layout/recycler_item_product_sub_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/recycler_item_receipt.xml" value="0.39925658313940604" />
         <entry key="app/src/main/res/layout/rrecycler_item_product.xml" value="0.23822463768115942" />

@@ -10,8 +10,12 @@ class ProductRepository {
      val newProduct : LiveData<Product>
      get() = newProductLiveData
 
-     val productLiveData = MutableLiveData<List<Product>>()
-     val allProduct : LiveData<List<Product>>
+     val productLiveData = MutableLiveData<ArrayList<Product>>()
+     val allProduct : LiveData<ArrayList<Product>>
      get() = productLiveData
+
+     val selectedProductLiveData = MutableLiveData<Product>()
+     val selectedProduct : LiveData<Product>
+          get() = selectedProductLiveData
 
 }
