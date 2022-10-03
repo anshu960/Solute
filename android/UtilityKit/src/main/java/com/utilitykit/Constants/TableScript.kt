@@ -14,7 +14,7 @@ class TableScript {
                                             `ContentType` tinytext NOT NULL,
                                             `IsUploaded` tinyint DEFAULT 0,
                                             `IsDownloaded` tinyint DEFAULT 0,
-                                            `IsDeleted` tinyint DEFAULT 0,
+                                            `IsDeleted` BOOLEAN DEFAULT 0,
                                             `IsSent` tinyint DEFAULT 0,
                                             `IsReceived` tinyint DEFAULT 0,
                                             `IsRead` tinyint DEFAULT 0,
@@ -181,7 +181,7 @@ class TableScript {
                                             `_id` tinytext,
                                             `UserID` tinytext,
                                             `BusinessID` tinytext NOT NULL,
-                                            `IsDeleted` tinyint DEFAULT 0,
+                                            `IsDeleted` BOOLEAN,
                                             `CustomerName` tinytext,
                                             `CustomerMobile` tinytext,
                                             `VehicleNumber` tinytext,
@@ -201,6 +201,23 @@ class TableScript {
                                             `FinalPrice` float,
                                             `SaleDate` tinytext,
                                             `SaleTime` bigint,
+                                            `__v` int,
+                                            `CreatedAt` tinytext,
+                                            `UpdatedAt` tinytext,
+                                             PRIMARY KEY (_id)
+                                            )
+                                            """
+        val createProductStockTable =  """
+                                            CREATE TABLE IF NOT EXISTS `${TableNames.productStock}` (
+                                            `_id` tinytext,
+                                            `UserID` tinytext,
+                                            `BusinessID` tinytext NOT NULL,
+                                            `ProductID`tinytext,
+                                            `ActionID` tinytext,
+                                            `IncreaseQuantity` int,
+                                            `DecreaseQuantity` int,
+                                            `TotalQuantity` int,
+                                            `Comment` tinytext,
                                             `__v` int,
                                             `CreatedAt` tinytext,
                                             `UpdatedAt` tinytext,

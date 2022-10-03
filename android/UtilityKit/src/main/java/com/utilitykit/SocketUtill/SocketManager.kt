@@ -136,7 +136,7 @@ object SocketManager
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT_CATEGORY.value,ProductCategoryHandler.shared().retriveProductCategory)
             mSocket?.on(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().onCreateProductSubCategory)
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().retriveProductSubCategory)
-
+            mSocket?.on(SocketEvent.RETRIVE_ALL_STOCK_ENTRY.value,SyncHandler.shared().onRetriveAllStockEntry)
             //conenct the socket
             mSocket?.connect()
         }

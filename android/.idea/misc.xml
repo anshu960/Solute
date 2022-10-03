@@ -43,6 +43,9 @@
         <entry key="app/src/main/res/layout/fragment_inventory.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/fragment_product_detail.xml" value="0.16802536231884058" />
+        <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/fragment_product_price_details.xml" value="0.14387031408308004" />
+        <entry key="app/src/main/res/layout/fragment_product_stock_details.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/recycler_item_analytic.xml" value="0.16802536231884058" />
         <entry key="app/src/main/res/layout/recycler_item_analytics.xml" value="0.2913926718891531" />

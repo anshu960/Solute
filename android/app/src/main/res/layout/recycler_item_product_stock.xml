@@ -49,10 +49,10 @@
 
             <TextView
                 android:id="@+id/recycler_item_product_stock_quantity"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="8dp"
-                android:gravity="center"
+                android:gravity="center | left"
                 android:text="Locadiing ..."
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

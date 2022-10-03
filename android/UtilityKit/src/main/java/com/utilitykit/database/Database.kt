@@ -4,19 +4,24 @@ package com.utilitykit.database
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import com.google.gson.Gson
 import com.utility.Encryption
+import com.utilitykit.Constants.Key.Companion.product
 import com.utilitykit.Constants.TableNames
 import com.utilitykit.Constants.TableScript
+import com.utilitykit.Defaults.init
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.dataclass.*
 import com.utilitykit.feature.cart.model.Sale
+import com.utilitykit.feature.product.model.Product
+import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
 class Database {
-
+    val gson = Gson()
     init {
         instance = this
     }
@@ -37,18 +42,37 @@ class Database {
     }
 
     fun createTables(){
-//        SQLite.execute( TableScript.createMessageTable)
-//        SQLite.execute(TableScript.createConversationTable)
-//        SQLite.execute(TableScript.createProfilesTable)
-//        SQLite.execute(TableScript.createFriendsTable)
-//        SQLite.execute(TableScript.createfriendRequestTable)
-//        SQLite.execute(TableScript.createBlockListTable)
-//        SQLite.execute(TableScript.createFilesTable)
-          SQLite.shared().execute(TableScript.createSaleTable)
+        SQLite.shared().execute(TableScript.createSaleTable)
+        SQLite.shared().execute(TableScript.createProductStockTable)
     }
 
-    fun storeSale(sale:Sale){
+   fun getLatestStockForProduct(product:Product):ProductStock?{
+        var productStock : ProductStock? = null
+        var selectQuery = "SELECT * FROM ${TableNames.productStock} WHERE ProductID = '${product.Id}'  ORDER BY CreatedAt DESC LIMIT 1"
+        val row = SQLite.shared().getRowsByQuery(selectQuery)
+        if(row.count() > 0){
+            productStock = gson.fromJson(row.first().json(),ProductStock::class.java)
+        }
+       return productStock
+   }
 
+    fun getLatestStock():ProductStock?{
+        var productStock : ProductStock? = null
+        var selectQuery = "SELECT * FROM ${TableNames.productStock} ORDER BY CreatedAt DESC LIMIT 1"
+        val row = SQLite.shared().getRowsByQuery(selectQuery)
+        if(row.count() > 0){
+            productStock = gson.fromJson(row.first().json(),ProductStock::class.java)
+        }
+        return productStock
+    }
+    fun getLatestSale():Sale?{
+        var lastSale : Sale? = null
+        var selectQuery = "SELECT * FROM ${TableNames.sale} ORDER BY CreatedAt DESC LIMIT 1"
+        val row = SQLite.shared().getRowsByQuery(selectQuery)
+        if(row.count() > 0){
+            lastSale = gson.fromJson(row.first().json(),Sale::class.java)
+        }
+        return lastSale
     }
 
     fun retriveConversationByID(conversationId:String):Conversation?{

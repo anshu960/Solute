@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
+import com.utilitykit.database.Database
 import com.utilitykit.feature.product.model.Product
 
 class ProductStockViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
@@ -22,6 +23,11 @@ class ProductStockViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recy
 
     fun bind(fragment: Fragment?, product: Product) {
         productName?.text = product.Name
-        productStock?.text = "Loading..."
+        val stock = Database.shared().getLatestStockForProduct(product)
+        if(stock != null){
+            productStock?.text = stock!!.TotalQuantity.toString()
+        }else{
+            productStock?.text = " "
+        }
     }
 }

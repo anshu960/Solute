@@ -32,7 +32,7 @@ class ProductAdapter(val context: Context, val fragment: Fragment?, val allProdu
                 mainActivty.startActivity(intent)
             }
         }
-        holder.bind(fragment,item)
+        holder.bind(context,item)
     }
 }
 

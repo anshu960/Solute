@@ -106,13 +106,16 @@ class SQLite {
                 val cName = cursor.getColumnName(i)
                 try {
                     when (cursor.getType(i)) {
-                        Cursor.FIELD_TYPE_INTEGER -> retVal.put(cName, cursor.getInt(i))
+                        Cursor.FIELD_TYPE_INTEGER -> {
+                            if(cName.indexOf("Is") == 0){
+                                retVal.put(cName, cursor.getInt(i).toString().toBoolean())
+                            }else{
+                                retVal.put(cName, cursor.getInt(i))
+                            }
+                        }
                         Cursor.FIELD_TYPE_FLOAT -> retVal.put(cName, cursor.getFloat(i))
                         Cursor.FIELD_TYPE_STRING -> retVal.put(cName, cursor.getString(i))
-                        Cursor.FIELD_TYPE_BLOB -> retVal.put(
-                            cName,
-                            (cursor.getBlob(i))
-                        )
+                        Cursor.FIELD_TYPE_BLOB -> retVal.put(cName, (cursor.getBlob(i)))
                     }
                     isValuexist = true
                 } catch (ex: Exception) {
@@ -236,7 +239,7 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
     }
     companion object {
         // If you change the database schema, you must increment the database version.
-        const val DATABASE_VERSION = 2
+        const val DATABASE_VERSION = 3
         const val DATABASE_NAME = "Solute_version${DATABASE_VERSION}.db"
     }
 }

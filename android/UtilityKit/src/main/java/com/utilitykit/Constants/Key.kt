@@ -4,16 +4,11 @@ class Key {
     companion object{
         val encryptionIV = "EncryptionIV"
         val encryptionSalt = "EncryptionSalt"
-        val acknowledged = "acknowledged"
         val isAccepted = "IsAccepted"
-        val responseValue = "ResponseValue"
         val loginDetails = "UserLoginDetails"
         val content = "Content"
         val contentType = "ContentType"
-        val contacts = "Contacts"
         val allContacts = "AllContacts"
-        val firstUser = "FirstUser"
-        val secondUser = "SecondUser"
         val conversationID = "ConversationID"
         val lastMessageDetails = "lastMessageDetails"
         val time = "Time"
@@ -199,6 +194,8 @@ class Key {
         val taskID = "TaskID"
         val taskAttachmentID = "TaskAttachmentID"
         val fileURL = "FileURL"
+
+        val lastSyncDate = "LastSyncDate"
     }
 
 }

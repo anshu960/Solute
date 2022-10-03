@@ -9,10 +9,12 @@ import com.utilitykit.Constants.Key.Companion.date
 import com.utilitykit.Constants.TableNames
 import com.utilitykit.SocketUtill.SocketEvent
 import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.database.Database
 import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
+import com.utilitykit.feature.product.model.ProductStock
 import io.socket.emitter.Emitter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -56,6 +58,7 @@ class SyncHandler {
 
     fun syncAllBusinessData(){
         getAllSaleForBusiness()
+        getAllStockForBusiness()
     }
 
     fun updateAnalyticsToShow(allSales:ArrayList<Sale>){
@@ -133,25 +136,21 @@ class SyncHandler {
 
 
     fun getAllSaleForBusiness(){
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.DAY_OF_MONTH, -365)
-        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-        val lastYear = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
-
+        val lastSale = Database.shared().getLatestSale()
         val user = User()
         if(BusinessHandler.shared().repository.business != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
             request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
-            request.put(Key.startDate,lastYear)
-            request.put(Key.endDate,today)
+            if(lastSale != null){
+                request.put(Key.lastSyncDate,lastSale.CreatedAt)
+            }
             SocketManager.send(SocketEvent.RETRIVE_SALE,request)
         }
     }
 
     val onRetriveSale = Emitter.Listener {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.Default) {
             if (it.isNotEmpty())
             {
                 val anyData = it.first() as JSONObject
@@ -172,6 +171,40 @@ class SyncHandler {
             }
         }
     }
+
+    fun getAllStockForBusiness(){
+        val user = User()
+        val lastProductStock = Database.shared().getLatestStock()
+        if(BusinessHandler.shared().repository.business != null){
+            var request = JSONObject()
+            request.put(Key.userId,user._id)
+            request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
+            if(lastProductStock != null){
+            request.put(Key.lastSyncDate,lastProductStock!!.CreatedAt)
+            }
+            SocketManager.send(SocketEvent.RETRIVE_ALL_STOCK_ENTRY,request)
+        }
+    }
+
+    val onRetriveAllStockEntry = Emitter.Listener {
+        GlobalScope.launch(Dispatchers.Default) {
+            if (it.isNotEmpty())
+            {
+                val anyData = it.first() as JSONObject
+                if (anyData.has(Key.payload)){
+                    val payload = anyData.getJSONArray(Key.payload)
+                    if(payload.length() > 0){
+                        for (i in 0 until payload.length())
+                        {
+                            val newStockEntry = payload.getJSONObject(i)
+                            SQLite.shared().insert(TableNames.productStock,convertJsonToContentValue(newStockEntry))
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     fun convertJsonToContentValue(json:JSONObject):ContentValues{
         var content = ContentValues()
