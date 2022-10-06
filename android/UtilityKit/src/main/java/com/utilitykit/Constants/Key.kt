@@ -139,6 +139,7 @@ class Key {
         val status = "Status"
         val statusDescription = "StatusDescription"
         val imageUrl = "ImageURL"
+        val image = "Image"
 
         val model = "model"
         val mode = "Mode"

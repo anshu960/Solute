@@ -11,8 +11,8 @@ android {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 31
-        versionName "0.0.31"
+        versionCode 32
+        versionName "0.0.32"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -91,5 +91,6 @@ dependencies {
     //update
     implementation 'com.google.android.play:core:1.10.3'
     implementation 'com.github.shuhart:stepview:1.5.1'
+    implementation 'xyz.schwaab:avvylib:1.2.0'
 //    implementation 'com.razorpay:checkout:1.6.4'
 }

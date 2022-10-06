@@ -40,15 +40,17 @@ class App: Application() {
     var storage : FirebaseStorage? = null
     var storageRef : StorageReference? = null
     var imagesRef: StorageReference? = null
+    var productImageRef: StorageReference? = null
     var videosRef: StorageReference? = null
     var profilePicRef: StorageReference? = null
     var imagePathRef: StorageReference? = null
     var videoPathRef: StorageReference? = null
 
     fun setUpFirebaseStorage(){
-        storage = Firebase.storage("gs://friendly-221119.appspot.com/")
+        storage = Firebase.storage("gs://fuelme-20ef9.appspot.com")
         storageRef = storage?.reference?.child("chats")
         imagesRef = storageRef?.child("images")
+        productImageRef = storageRef?.child("product")
         videosRef = storageRef?.child("videos")
         profilePicRef = storage?.reference?.child("ProfilePictures")
     }
@@ -69,7 +71,7 @@ class App: Application() {
 //        Analytics.initFirebaseSetup(this)
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
-//        setUpFirebaseStorage()
+        setUpFirebaseStorage()
     }
 
 

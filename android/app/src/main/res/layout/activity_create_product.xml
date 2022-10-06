@@ -349,7 +349,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@+id/create_product_save_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -376,8 +376,8 @@
                     android:id="@+id/create_product_igst_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="IGST %" />
+                    android:hint="IGST %"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -396,8 +396,8 @@
                     android:id="@+id/create_product_cgst_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="CGST %" />
+                    android:hint="CGST %"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -416,8 +416,8 @@
                     android:id="@+id/create_product_sgst_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="SGST %" />
+                    android:hint="SGST %"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -436,8 +436,8 @@
                     android:id="@+id/create_product_vat_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="VAT %" />
+                    android:hint="VAT %"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -456,8 +456,8 @@
                     android:id="@+id/create_product_cess_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="CESS %" />
+                    android:hint="CESS %"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -476,8 +476,8 @@
                     android:id="@+id/create_product_total_tax_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:hint="Total Tax in RS"
+                    android:inputType="number"
                     app:textInputLayoutFocusedRectEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -488,7 +488,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="CheckBox"
+                android:text="Tax Included"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/create_product_total_tax_til" />
@@ -511,10 +511,64 @@
                     android:id="@+id/create_product_tax_finial_price_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:hint="Final Price"
+                    android:inputType="number"
                     app:textInputLayoutFocusedRectEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/create_product_finish_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/create_product_save_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_product_steps_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <xyz.schwaab.avvylib.AvatarView
+                android:id="@+id/create_product_finish_card_avatar"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:avvy_border_color="@color/darkGray"
+                app:avvy_border_highlight_color="#ff5900"
+                app:avvy_border_highlight_color_end="#bf15bc"
+                app:avvy_border_thickness="2dp"
+                app:avvy_border_thickness_highlight="3dp"
+                app:avvy_distance_to_border="5dp"
+                app:avvy_highlighted="true"
+                app:avvy_loading_arches="5"
+                app:avvy_loading_arches_degree_area="90"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="140dp"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/image" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

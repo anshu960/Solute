@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.solute.R
+import com.squareup.picasso.Picasso
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 
@@ -21,7 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProductDetailsFragment : Fragment() {
-
+    var image : ImageView? = null
     var productName : TextView? = null
     var productDescription : TextView? = null
     var productCategory : TextView? = null
@@ -37,6 +39,7 @@ class ProductDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_product_details, container, false)
+        image = view.findViewById(R.id.fragment_product_detail_img)
         productName = view.findViewById(R.id.fragment_product_detail_name)
         productDescription = view.findViewById(R.id.fragment_product_detail_description)
         productCategory = view.findViewById(R.id.fragment_product_detail_category)
@@ -46,12 +49,16 @@ class ProductDetailsFragment : Fragment() {
     }
 
     fun loadData(){
+        val picasso = Picasso.get()
         if(ProductHandler.shared().repository.selectedProduct != null && ProductHandler.shared().repository.selectedProduct.value != null){
             val product = ProductHandler.shared().repository.selectedProduct.value!!
             productName?.text = product.Name
             productDescription?.text = product.Description
             productCategory?.text = product.CategoryID
             productSubCategory?.text = product.SubCategoryID
+            if(product.Image.isNotEmpty()){
+                picasso.load(product.Image.first()).into(image)
+            }
         }
     }
 

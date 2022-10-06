@@ -18,6 +18,8 @@ class ProductHandler {
     var productViewModel: ProductViewModel? = null
     val repository = ProductRepository()
     var activity : UtilityActivity? = null
+    var onCreateProductCallBack : ((product: Product?) -> Unit)? = null
+    var onUpdateProductImageCallBack : ((product: Product?) -> Unit)? = null
     val gson = Gson()
     init {
         instance = this
@@ -76,19 +78,33 @@ class ProductHandler {
                 if(payload.has(Key._id)){
                     val product = gson.fromJson(payload.toString(),Product::class.java)
                     repository.newProductLiveData.postValue(product)
+                    onCreateProductCallBack?.let { it1 -> it1(product) }
                     fetchAllProduct()
-                    activity?.runOnUiThread {
-                        activity?.toast("Product created Successfully")
-                    }
                 }else{
-                    activity?.runOnUiThread {
-                        activity?.toast("Product couldn't be created, please try after some time")
-                    }
+                    onCreateProductCallBack?.let { it1 -> it1(null) }
                 }
             }else{
-                activity?.runOnUiThread {
-                    activity?.toast("Product couldn't be created, please try after some time")
+                onCreateProductCallBack?.let { it1 -> it1(null) }
+            }
+        }
+    }
+
+    val onUpdateProductImage = Emitter.Listener {
+        if (it.isNotEmpty())
+        {
+            val anyData = it.first() as JSONObject
+            if (anyData.has(Key.payload)){
+                val payload = anyData.getJSONObject(Key.payload)
+                if(payload.has(Key._id)){
+                    val product = gson.fromJson(payload.toString(),Product::class.java)
+                    repository.newProductLiveData.postValue(product)
+                    onUpdateProductImageCallBack?.let { it1 -> it1(product) }
+                    fetchAllProduct()
+                }else{
+                    onUpdateProductImageCallBack?.let { it1 -> it1(null) }
                 }
+            }else{
+                onUpdateProductImageCallBack?.let { it1 -> it1(null) }
             }
         }
     }

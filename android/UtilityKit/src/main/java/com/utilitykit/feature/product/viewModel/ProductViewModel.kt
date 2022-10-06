@@ -1,13 +1,12 @@
 package com.utilitykit.feature.product.viewModel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.business
 import com.utilitykit.SocketUtill.SocketEvent
 import com.utilitykit.SocketUtill.SocketManager
-import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.repository.ProductRepository
@@ -32,6 +31,17 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
 
     fun createNewProduct(request:JSONObject){
             SocketManager.send(SocketEvent.CREATE_PRODUCT,request)
+    }
+
+    fun updateProductImage(product:Product,image:String){
+        val request = JSONObject()
+        if(BusinessHandler.shared().repository.business != null) {
+            val business = BusinessHandler.shared().repository.business
+            request.put(Key.businessID,business!!.Id)
+        }
+        request.put(Key.image,image)
+        request.put(Key._id,product.Id)
+        SocketManager.send(SocketEvent.UPDATE_PRODUCT_IMAGE,request)
     }
 
 

@@ -125,6 +125,8 @@ object SocketManager
             mSocket?.on(SocketEvent.CREATE_BUSINESS.value,BusinessHandler.shared().onCreateNewBusiness)
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value,ProductHandler.shared().retriveProduct)
             mSocket?.on(SocketEvent.CREATE_PRODUCT.value,ProductHandler.shared().onCreateProduct)
+            mSocket?.on(SocketEvent.UPDATE_PRODUCT_IMAGE.value,ProductHandler.shared().onUpdateProductImage)
+
             mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
             mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value,CartHandler.shared().createCustomerInvoice)
             mSocket?.on(SocketEvent.RETRIVE_INVOICE.value,InvoiceHandler.shared().retriveInvoice)

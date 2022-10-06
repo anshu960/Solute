@@ -1,22 +1,31 @@
 package com.solute.ui.business.product.create
 
+import android.net.Uri
 import android.os.Bundle
+import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import com.shuhart.stepview.StepView
+import com.solute.App
 import com.solute.R
 import com.squareup.picasso.Picasso
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.product
 import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
+import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
 import com.utilitykit.feature.product.viewModel.ProductViewModel
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
@@ -41,6 +50,7 @@ class CreateProductActivity : UtilityActivity() {
     var totalTax = 0F
     var isTaxIncluded = true
     var finalPrice = 0F
+    var fileUri : Uri? = null
 
     private var stepsPosition = 0
     var allCategoory: ArrayList<ProductCategory> = ArrayList()
@@ -56,6 +66,7 @@ class CreateProductActivity : UtilityActivity() {
     var productInfoCard : CardView? = null
     var productPriceCard : CardView? = null
     var productTaxCard : CardView? = null
+    var productFinishCard : CardView? = null
 
     var imageView : ImageView? = null
 
@@ -122,11 +133,13 @@ class CreateProductActivity : UtilityActivity() {
         productInfoCard = findViewById(R.id.create_product_info_card)
         productPriceCard = findViewById(R.id.create_product_price_card)
         productTaxCard = findViewById(R.id.create_product_tax_card)
+        productFinishCard = findViewById(R.id.create_product_finish_card)
         saveButton = findViewById(R.id.create_product_save_btn)
         saveButton?.setOnClickListener { onClickSave() }
         productInfoCard?.visibility = View.VISIBLE
         productPriceCard?.visibility = View.GONE
         productTaxCard?.visibility = View.GONE
+        productFinishCard?.visibility = View.GONE
         saveButton?.text = "Next"
         categoryLayout = findViewById(R.id.create_product_category_til)
         categoryEditText = findViewById(R.id.create_product_category_tiet)
@@ -195,6 +208,7 @@ class CreateProductActivity : UtilityActivity() {
 
     fun onClickAddImage(){
         getImageUrl {
+            fileUri = it
             val picasso = Picasso.get()
             picasso.load(it).into(this.imageView)
         }
@@ -210,6 +224,7 @@ class CreateProductActivity : UtilityActivity() {
                 productStepView?.done(false)
                 productStepView?.go(stepsPosition, true)
                 saveButton?.text = "Next"
+                calculateTaxAndPrice()
             }
             1 -> {
                 productInfoCard?.visibility = View.GONE
@@ -219,6 +234,7 @@ class CreateProductActivity : UtilityActivity() {
                 productStepView?.done(false)
                 productStepView?.go(stepsPosition, true)
                 saveButton?.text = "Finish"
+                calculateTaxAndPrice()
             }
             2 -> {
                saveProductInSever()
@@ -269,17 +285,13 @@ class CreateProductActivity : UtilityActivity() {
          prdDescription = productDescriptionEditText?.text.toString()
         val prdMMRP = productMRPEditText?.text.toString()
         val prdCostPrice = productCostPriceEditText?.text.toString()
-        val prdDiscount = productDiscountEditText?.text.toString()
         val prdPrice = productPriceEditText?.text.toString()
         val prdIGST = productIGSTEditText?.text.toString()
         val prdCGST = productCGSTEditText?.text.toString()
         val prdSGST = productSGSTEditText?.text.toString()
         val prdVAT = productVATEditText?.text.toString()
         val prdCESS = productCESSEditText?.text.toString()
-        val prdTotalTax = productTotalTaxEditText?.text.toString()
-        val prdFinalTaxPrice = productTaxFinalPriceEditText?.text.toString()
         var taxApplied = 0F
-
 
         if(taxIncludedCheckBox != null){
             isTaxIncluded = taxIncludedCheckBox!!.isSelected
@@ -332,6 +344,14 @@ class CreateProductActivity : UtilityActivity() {
             }
         }
 
+        if(prdVAT.isNotEmpty()){
+            try {
+                vat = prdVAT.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid VAT")
+            }
+        }
+
         if(prdCESS.isNotEmpty()){
             try {
                 cess = prdCESS.toFloat()
@@ -340,13 +360,6 @@ class CreateProductActivity : UtilityActivity() {
             }
         }
 
-        if(prdVAT.isNotEmpty()){
-            try {
-                cess = prdVAT.toFloat()
-            }catch (error:Error){
-                toast("Please enter valid VAT")
-            }
-        }
         taxApplied += (price*(igst/100))
         taxApplied += (price*(cgst/100))
         taxApplied += (price*(sgst/100))
@@ -357,7 +370,7 @@ class CreateProductActivity : UtilityActivity() {
         if(isTaxIncluded){
             finalPrice = price
         }else{
-            finalPrice = price + taxApplied
+            finalPrice = price + totalTax
         }
         discount = mrp - finalPrice
         if(discount < 0){
@@ -513,7 +526,49 @@ class CreateProductActivity : UtilityActivity() {
             request.put(Key.costPrice, (costPrice))
             request.put(Key.finalPrice, finalPrice)
             request.put(Key.tax, totalTax)
+            ProductHandler.shared().onCreateProductCallBack = {
+                onCreateNewProduct(it)
+            }
             ProductHandler.shared().productViewModel?.createNewProduct(request)
+        }
+    }
+    fun onCreateNewProduct(product:Product?){
+        if(product != null){
+            this.runOnUiThread {
+                toastLong("Product Created, Uploading Image")
+            }
+            uploadImageInFirebase(product!!)
+        }else{
+            this.runOnUiThread {
+                toast("Oops! Something went wrong")
+            }
+        }
+    }
+
+    fun uploadImageInFirebase(product: Product){
+        if (fileUri != null && BusinessHandler.shared().repository.business != null && BusinessHandler.shared().repository.business != null) {
+            val fileName = product.Id +".png"
+            val imageRef = App.applicationContext().productImageRef?.child(BusinessHandler.shared().repository.business!!.Id!!)?.child(product.Id!!)?.child(fileName)
+            imageRef?.putFile(fileUri!!)?.addOnSuccessListener { taskSnapshot ->
+                taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                    ProductHandler.shared().onUpdateProductImageCallBack={updatedPrd->
+                            this.runOnUiThread {
+                                if(updatedPrd != null && updatedPrd!!.Id != null){
+                                    toast("Image Updated Successfully")
+                                }else{
+                                    toast("Image couldn't be updated")
+                                }
+                            }
+                        }
+                    val imageUrl = it.toString()
+                    ProductHandler.shared().productViewModel?.updateProductImage(product,imageUrl)
+                }
+            }?.addOnFailureListener { e ->
+                print(e.message)
+                this.runOnUiThread {
+                    toast("Oops! Failed to upload image at the moment")
+                }
+            }
         }
     }
 }
