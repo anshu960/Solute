@@ -1,24 +1,21 @@
 package com.solute.ui.business.product.create
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.shuhart.stepview.StepView
 import com.solute.R
 import com.squareup.picasso.Picasso
-import com.utilitykit.Constants.Key.Companion.category
-import com.utilitykit.Constants.Key.Companion.name
-import com.utilitykit.Constants.Key.Companion.price
+import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
+import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
 import com.utilitykit.feature.product.viewModel.ProductViewModel
@@ -26,11 +23,25 @@ import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productCategory.model.ProductCategory
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
+import org.json.JSONObject
 import java.lang.Error
 
 class CreateProductActivity : UtilityActivity() {
+    var prdName = ""
+    var prdDescription = ""
+    var mrp = 0F
+    var costPrice = 0F
+    var price = 0F
+    var discount = 0F
+    var igst = 0F
+    var cgst = 0F
+    var sgst = 0F
+    var vat = 0F
+    var cess = 0F
+    var totalTax = 0F
+    var isTaxIncluded = true
+    var finalPrice = 0F
+
     private var stepsPosition = 0
     var allCategoory: ArrayList<ProductCategory> = ArrayList()
     var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
@@ -93,6 +104,8 @@ class CreateProductActivity : UtilityActivity() {
     var productTotalTaxLayout : TextInputLayout? = null
     var productTotalTaxEditText : TextInputEditText? = null
 
+    var taxIncludedCheckBox : CheckBox? = null
+
     var productTaxFinalPriceLayout : TextInputLayout? = null
     var productTaxFinalPriceEditText : TextInputEditText? = null
 
@@ -129,12 +142,15 @@ class CreateProductActivity : UtilityActivity() {
 
         productMRPLayout = findViewById(R.id.create_product_mrp_til)
         productMRPEditText = findViewById(R.id.create_product_mrp_tiet)
+        productMRPEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
         productCostPriceLayout = findViewById(R.id.create_product_cost_price_til)
         productCostPriceEditText = findViewById(R.id.create_product_cost_price_tiet)
+        productCostPriceEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
         productPriceLayout = findViewById(R.id.create_product_price_til)
         productPriceEditText = findViewById(R.id.create_product_price_tiet)
+        productPriceEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
         productDiscountLayout = findViewById(R.id.create_product_discount_tel)
         productDiscountEditText = findViewById(R.id.create_product_discount_tiet)
@@ -144,21 +160,29 @@ class CreateProductActivity : UtilityActivity() {
 
         productIGSTLayout = findViewById(R.id.create_product_igst_til)
         productIGSTEditText = findViewById(R.id.create_product_igst_tiet)
+        productIGSTEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
         productCGSTLayout = findViewById(R.id.create_product_cgst_til)
         productCGSTEditText = findViewById(R.id.create_product_cgst_tiet)
+        productCGSTEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
         productSGSTLayout = findViewById(R.id.create_product_sgst_til)
         productSGSTEditText = findViewById(R.id.create_product_sgst_tiet)
+        productSGSTEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
         productVATLayout = findViewById(R.id.create_product_vat_til)
         productVATEditText = findViewById(R.id.create_product_vat_tiet)
+        productVATEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
         productCESSLayout = findViewById(R.id.create_product_cess_til)
         productCESSEditText = findViewById(R.id.create_product_cess_tiet)
+        productCESSEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
         productTotalTaxLayout = findViewById(R.id.create_product_total_tax_til)
         productTotalTaxEditText = findViewById(R.id.create_product_total_tax_tiet)
+
+        taxIncludedCheckBox = findViewById(R.id.create_product_is_tax_included_check_box)
+        taxIncludedCheckBox?.isSelected = true
 
         productTaxFinalPriceLayout = findViewById(R.id.create_product_tax_finial_price_til)
         productTaxFinalPriceEditText = findViewById(R.id.create_product_tax_finial_price_tiet)
@@ -238,6 +262,112 @@ class CreateProductActivity : UtilityActivity() {
 
             }
         }
+    }
+
+    fun calculateTaxAndPrice(){
+         prdName = productNameEditText?.text.toString()
+         prdDescription = productDescriptionEditText?.text.toString()
+        val prdMMRP = productMRPEditText?.text.toString()
+        val prdCostPrice = productCostPriceEditText?.text.toString()
+        val prdDiscount = productDiscountEditText?.text.toString()
+        val prdPrice = productPriceEditText?.text.toString()
+        val prdIGST = productIGSTEditText?.text.toString()
+        val prdCGST = productCGSTEditText?.text.toString()
+        val prdSGST = productSGSTEditText?.text.toString()
+        val prdVAT = productVATEditText?.text.toString()
+        val prdCESS = productCESSEditText?.text.toString()
+        val prdTotalTax = productTotalTaxEditText?.text.toString()
+        val prdFinalTaxPrice = productTaxFinalPriceEditText?.text.toString()
+        var taxApplied = 0F
+
+
+        if(taxIncludedCheckBox != null){
+            isTaxIncluded = taxIncludedCheckBox!!.isSelected
+        }
+
+        if(prdMMRP.isNotEmpty()){
+            try {
+                mrp = prdMMRP.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid MRP")
+            }
+        }
+        if(prdCostPrice.isNotEmpty()){
+            try {
+                costPrice = prdCostPrice.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid Cost Price")
+            }
+        }
+        if(prdPrice.isNotEmpty()){
+            try {
+                price = prdPrice.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid Sale Price")
+            }
+        }
+
+
+        if(prdSGST.isNotEmpty()){
+            try {
+                sgst = prdSGST.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid SGST")
+            }
+        }
+
+        if(prdCGST.isNotEmpty()){
+            try {
+                cgst = prdCGST.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid CGST")
+            }
+        }
+
+        if(prdIGST.isNotEmpty()){
+            try {
+                igst = prdIGST.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid IGST")
+            }
+        }
+
+        if(prdCESS.isNotEmpty()){
+            try {
+                cess = prdCESS.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid CESS")
+            }
+        }
+
+        if(prdVAT.isNotEmpty()){
+            try {
+                cess = prdVAT.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid VAT")
+            }
+        }
+        taxApplied += (price*(igst/100))
+        taxApplied += (price*(cgst/100))
+        taxApplied += (price*(sgst/100))
+        taxApplied += (price*(vat/100))
+        taxApplied += (price*(cess/100))
+        totalTax = taxApplied
+        productTotalTaxEditText?.setText("RS " + totalTax.toString())
+        if(isTaxIncluded){
+            finalPrice = price
+        }else{
+            finalPrice = price + taxApplied
+        }
+        discount = mrp - finalPrice
+        if(discount < 0){
+            productDiscountEditText?.setText("RS 0")
+        }else{
+            productDiscountEditText?.setText("RS " + discount)
+        }
+        productFinalPriceEditText?.setText("RS " + finalPrice)
+        productTaxFinalPriceEditText?.setText("RS " + finalPrice)
+
     }
 
     fun loadProductPreFilledData(){
@@ -356,36 +486,34 @@ class CreateProductActivity : UtilityActivity() {
     }
 
     fun saveProductInSever(){
-        val prdName = productNameEditText?.text.toString()
-        val prdDescription = productDescriptionEditText?.text.toString()
-        val prdMMRP = productMRPEditText?.text.toString()
-        val prdCostPrice = productCostPriceEditText?.text.toString()
-        val prdSalePrice = productPriceEditText?.text.toString()
-        var mrp = 0F
-        var costPrice = 0F
-        var salePrice = 0F
-
-        if(prdMMRP.isNotEmpty()){
-            try {
-                mrp = prdMMRP.toFloat()
-            }catch (error:Error){
-                toast("Please enter valid MRP")
-            }
+        if(prdName == ""){
+            alert("Oops!","Please enter name of the Product")
+            return
         }
-        if(prdCostPrice.isNotEmpty()){
-            try {
-                costPrice = prdCostPrice.toFloat()
-            }catch (error:Error){
-                toast("Please enter valid Cost Price")
-            }
+        val request = JSONObject()
+        val user = User()
+        if(BusinessHandler.shared().repository.business != null) {
+            val business = BusinessHandler.shared().repository.business
+            request.put(Key.userId, user._id)
+            request.put(Key.businessID, business!!.Id)
+            request.put(Key.categoryId, selectedCategory!!.Id!!)
+            request.put(Key.subCategoryID, selectedSubCategory!!.Id!!)
+            request.put(Key.name, prdName)
+            request.put(Key.description, prdDescription)
+            request.put(Key.manageInventory, true)
+            request.put(Key.taxIncluded, isTaxIncluded)
+            request.put(Key.SGST, sgst)
+            request.put(Key.CGST, cgst)
+            request.put(Key.IGST, igst)
+            request.put(Key.CESS, cess)
+            request.put(Key.VAT, vat)
+            request.put(Key.discount,discount)
+            request.put(Key.MRP, mrp)
+            request.put(Key.price, (price))
+            request.put(Key.costPrice, (costPrice))
+            request.put(Key.finalPrice, finalPrice)
+            request.put(Key.tax, totalTax)
+            ProductHandler.shared().productViewModel?.createNewProduct(request)
         }
-        if(prdSalePrice.isNotEmpty()){
-            try {
-                salePrice = prdSalePrice.toFloat()
-            }catch (error:Error){
-                toast("Please enter valid Sale Price")
-            }
-        }
-        productViewModel.createNewProduct(prdName,prdDescription,selectedCategory!!.Id!!,selectedSubCategory!!.Id!!,mrp,costPrice,salePrice)
     }
 }

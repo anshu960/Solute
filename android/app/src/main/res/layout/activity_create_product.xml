@@ -292,7 +292,8 @@
                     android:id="@+id/create_product_discount_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Discount" />
+                    android:hint="Discount (Calculated)"
+                    app:textInputLayoutFocusedRectEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -333,7 +334,8 @@
                     android:id="@+id/create_product_final_price_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Final Price" />
+                    android:hint="Final Price (Calculated)"
+                    app:textInputLayoutFocusedRectEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -374,7 +376,8 @@
                     android:id="@+id/create_product_igst_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="IGST" />
+                    android:inputType="number"
+                    android:hint="IGST %" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -393,7 +396,8 @@
                     android:id="@+id/create_product_cgst_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="CGST" />
+                    android:inputType="number"
+                    android:hint="CGST %" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -412,7 +416,8 @@
                     android:id="@+id/create_product_sgst_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="SGST" />
+                    android:inputType="number"
+                    android:hint="SGST %" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -431,7 +436,8 @@
                     android:id="@+id/create_product_vat_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="VAT" />
+                    android:inputType="number"
+                    android:hint="VAT %" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -450,7 +456,8 @@
                     android:id="@+id/create_product_cess_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="CESS" />
+                    android:inputType="number"
+                    android:hint="CESS %" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -469,7 +476,9 @@
                     android:id="@+id/create_product_total_tax_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Total Tax" />
+                    android:inputType="number"
+                    android:hint="Total Tax in RS"
+                    app:textInputLayoutFocusedRectEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
@@ -502,7 +511,9 @@
                     android:id="@+id/create_product_tax_finial_price_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Final Price" />
+                    android:inputType="number"
+                    android:hint="Final Price"
+                    app:textInputLayoutFocusedRectEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
