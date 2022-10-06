@@ -16,6 +16,7 @@ import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.json
+import com.utilitykit.jsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -65,6 +66,18 @@ class Database {
         }
         return productStock
     }
+
+    fun getAllStockForProduct(product:Product):ArrayList<ProductStock>{
+        var productStock : ArrayList<ProductStock> = arrayListOf()
+        var selectQuery = "SELECT * FROM ${TableNames.productStock} WHERE ProductID = '${product.Id}' ORDER BY CreatedAt DESC"
+        val row = SQLite.shared().getRowsByQuery(selectQuery)
+        row.forEach {
+            val newStock = gson.fromJson(it.json(),ProductStock::class.java)
+            productStock.add(newStock)
+        }
+        return productStock
+    }
+
     fun getLatestSale():Sale?{
         var lastSale : Sale? = null
         var selectQuery = "SELECT * FROM ${TableNames.sale} ORDER BY CreatedAt DESC LIMIT 1"

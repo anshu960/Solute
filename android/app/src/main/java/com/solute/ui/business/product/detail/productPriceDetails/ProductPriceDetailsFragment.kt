@@ -68,23 +68,23 @@ class ProductPriceDetailsFragment : Fragment() {
             productCostPrice?.text = product.CostPrice.toString()
             productIGSTPercent?.text = product.IGST.toString() + " %"
             if(product.IGST != null){
-                productIGST?.text = "RS " + ((product.IGST!!/product.Price!!)*100).toString()
+                productIGST?.text = "RS " + Math.round((product.IGST!!/product.Price!!)*100).toString()
             }
             productCGSTPercent?.text = product.CGST.toString() + " %"
             if(product.CGST != null){
-                productCGST?.text = "RS " + ((product.CGST!!/product.Price!!)*100).toString()
+                productCGST?.text = "RS " + Math.round((product.CGST!!/product.Price!!)*100).toString()
             }
             productSGSTPercent?.text = product.SGST.toString() + " %"
             if(product.SGST != null){
-                productSGST?.text = "RS " + ((product.SGST!!/product.Price!!)*100).toString()
+                productSGST?.text = "RS " + Math.round((product.SGST!!/product.Price!!)*100).toString()
             }
             productVATPercent?.text = product.VAT.toString() + " %"
             if(product.VAT != null){
-                productVAT?.text = "RS " + ((product.VAT!!/product.Price!!)*100).toString()
+                productVAT?.text = "RS " + Math.round((product.VAT!!/product.Price!!)*100).toString()
             }
             productCESSPercent?.text = product.CESS.toString() + " %"
             if(product.CESS != null){
-                productCESS?.text = "RS " + ((product.CESS!!/product.Price!!)*100).toString()
+                productCESS?.text = "RS " + Math.round((product.CESS!!/product.Price!!)*100).toString()
             }
             productDiscount?.text = product.Discount.toString()
             productFinalPrice?.text = product.FinalPrice.toString()
