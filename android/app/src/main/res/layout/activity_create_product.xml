@@ -126,6 +126,7 @@
             android:id="@+id/create_product_mrp_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="MRP" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,6 +145,7 @@
             android:id="@+id/create_product_cost_price_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Cost Price" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,6 +164,7 @@
             android:id="@+id/create_product_price_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Sale Price" />
     </com.google.android.material.textfield.TextInputLayout>
 

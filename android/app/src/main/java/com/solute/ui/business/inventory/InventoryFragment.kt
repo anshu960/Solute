@@ -186,6 +186,7 @@ class InventoryFragment : Fragment() {
         this.recycler?.layoutManager = GridLayoutManager(this.context,2)
         recycler?.adapter = this.analyticsAdapter
         countLabel?.visibility = View.GONE
+        floatingAddButton?.visibility = View.GONE
     }
     fun loadProducts(){
         this.productAdapter = this.context?.let { ProductAdapter(it,this,allProduct) }
@@ -193,6 +194,7 @@ class InventoryFragment : Fragment() {
         recycler?.adapter = this.productAdapter
         countLabel?.text = "Total ${allProduct.count()} Product"
         countLabel?.visibility = View.VISIBLE
+        floatingAddButton?.visibility = View.VISIBLE
     }
     fun loadCategory(){
         this.productCategoryAdapter = this.context?.let { ProductCategoryAdapter(it,this,allCategoory) }
@@ -200,6 +202,7 @@ class InventoryFragment : Fragment() {
         recycler?.adapter = this.productCategoryAdapter
         countLabel?.text = "Total ${allCategoory.count()} Category"
         countLabel?.visibility = View.VISIBLE
+        floatingAddButton?.visibility = View.VISIBLE
     }
     fun loadSubCategory(){
         this.productSubCategoryAdapter = this.context?.let { ProductSubCategoryAdapter(it,this,allSubCategoory) }
@@ -207,6 +210,7 @@ class InventoryFragment : Fragment() {
         recycler?.adapter = this.productSubCategoryAdapter
         countLabel?.text = "Total ${allSubCategoory.count()} Sub Category"
         countLabel?.visibility = View.VISIBLE
+        floatingAddButton?.visibility = View.VISIBLE
     }
     fun loadStock(){
         this.productStockdapter = this.context?.let { ProductStockAdapter(it,this,this.allProduct) }
@@ -214,18 +218,19 @@ class InventoryFragment : Fragment() {
         recycler?.adapter = productStockdapter
         countLabel?.text = "Total ${allProduct.count()} Product"
         countLabel?.visibility = View.VISIBLE
+        floatingAddButton?.visibility = View.GONE
     }
     fun onClickAddButton(){
         when(this.selectedSegment){
-            0->{
+            1->{
                 val intent = Intent(this.context,CreateProductActivity::class.java)
                 startActivity(intent)
             }
-            1->{
+            2->{
                 val intent = Intent(this.context,CreateCategoryActivity::class.java)
                 startActivity(intent)
             }
-            2->{
+            3->{
                 val intent = Intent(this.context,CreateProductSubCategoryActivity::class.java)
                 startActivity(intent)
             }

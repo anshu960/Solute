@@ -5,29 +5,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.solute.R
+import com.utilitykit.Constants.Key.Companion.productName
+import com.utilitykit.feature.product.handler.ProductHandler
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProductPriceDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class ProductPriceDetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    var productPrice : TextView? = null
+    var productMRP : TextView? = null
+    var productCostPrice : TextView? = null
+    var productIGSTPercent : TextView? = null
+    var productIGST : TextView? = null
+    var productCGSTPercent : TextView? = null
+    var productCGST : TextView? = null
+    var productSGSTPercent : TextView? = null
+    var productSGST : TextView? = null
+    var productVATPercent : TextView? = null
+    var productVAT : TextView? = null
+    var productCESSPercent : TextView? = null
+    var productCESS : TextView? = null
+    var productDiscount : TextView? = null
+    var productFinalPrice : TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,26 +40,54 @@ class ProductPriceDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_price_details, container, false)
+        val view = inflater.inflate(R.layout.fragment_product_price_details, container, false)
+        productPrice = view.findViewById(R.id.fragment_product_detail_price)
+        productMRP = view.findViewById(R.id.fragment_product_detail_mrp)
+        productCostPrice = view.findViewById(R.id.fragment_product_detail_cost_price)
+        productIGSTPercent = view.findViewById(R.id.fragment_product_detail_igst_percent)
+        productIGST = view.findViewById(R.id.fragment_product_detail_igst)
+        productCGSTPercent = view.findViewById(R.id.fragment_product_detail_cgst_percent)
+        productCGST = view.findViewById(R.id.fragment_product_detail_cgst)
+        productSGSTPercent = view.findViewById(R.id.fragment_product_detail_sgst_percent)
+        productSGST = view.findViewById(R.id.fragment_product_detail_sgst)
+        productVATPercent = view.findViewById(R.id.fragment_product_detail_vat_percent)
+        productVAT = view.findViewById(R.id.fragment_product_detail_vat)
+        productCESSPercent = view.findViewById(R.id.fragment_product_detail_cess_percent)
+        productCESS = view.findViewById(R.id.fragment_product_detail_cess)
+        productDiscount = view.findViewById(R.id.fragment_product_detail_discount)
+        productFinalPrice = view.findViewById(R.id.fragment_product_detail_final_price)
+        loadData()
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProductPriceDetailsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProductPriceDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    fun loadData(){
+        if(ProductHandler.shared().repository.selectedProduct != null && ProductHandler.shared().repository.selectedProduct.value != null){
+            val product = ProductHandler.shared().repository.selectedProduct.value!!
+            productPrice?.text = product.Price.toString()
+            productMRP?.text = product.MRP.toString()
+            productCostPrice?.text = product.CostPrice.toString()
+            productIGSTPercent?.text = product.IGST.toString() + " %"
+            if(product.IGST != null){
+                productIGST?.text = "RS " + ((product.IGST!!/product.Price!!)*100).toString()
             }
+            productCGSTPercent?.text = product.CGST.toString() + " %"
+            if(product.CGST != null){
+                productCGST?.text = "RS " + ((product.CGST!!/product.Price!!)*100).toString()
+            }
+            productSGSTPercent?.text = product.SGST.toString() + " %"
+            if(product.SGST != null){
+                productSGST?.text = "RS " + ((product.SGST!!/product.Price!!)*100).toString()
+            }
+            productVATPercent?.text = product.VAT.toString() + " %"
+            if(product.VAT != null){
+                productVAT?.text = "RS " + ((product.VAT!!/product.Price!!)*100).toString()
+            }
+            productCESSPercent?.text = product.CESS.toString() + " %"
+            if(product.CESS != null){
+                productCESS?.text = "RS " + ((product.CESS!!/product.Price!!)*100).toString()
+            }
+            productDiscount?.text = product.Discount.toString()
+            productFinalPrice?.text = product.FinalPrice.toString()
+        }
     }
 }
