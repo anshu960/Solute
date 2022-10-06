@@ -55,4 +55,10 @@
     <string name="stock">Stock</string>
     <string name="price">Price</string>
     <string name="title_activity_product_detail">Product Details</string>
+    <array name="createProductSteps">
+        <item>Info</item>
+        <item>Price</item>
+        <item>Tax</item>
+        <item>Finish</item>
+    </array>
 </resources>

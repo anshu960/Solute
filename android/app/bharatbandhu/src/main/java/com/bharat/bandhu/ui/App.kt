@@ -52,10 +52,10 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        UtilityKitApp().setUp(this)
+        UtilityKitApp().setUp(this,true)
         FirebaseApp.initializeApp(this)
-        SQLite.init(this)
-        Database.init(this)
+        SQLite.shared().setUp(this)
+        Database.shared().setUp(this)
         val deviceId = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
         Defaults.store(Key.deviceId,deviceId)
 //        Analytics.initFirebaseSetup(this)

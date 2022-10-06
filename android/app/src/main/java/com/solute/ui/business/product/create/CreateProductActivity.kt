@@ -2,14 +2,19 @@ package com.solute.ui.business.product.create
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.shuhart.stepview.StepView
 import com.solute.R
+import com.squareup.picasso.Picasso
 import com.utilitykit.Constants.Key.Companion.category
 import com.utilitykit.Constants.Key.Companion.name
 import com.utilitykit.Constants.Key.Companion.price
@@ -26,7 +31,7 @@ import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryVie
 import java.lang.Error
 
 class CreateProductActivity : UtilityActivity() {
-
+    private var stepsPosition = 0
     var allCategoory: ArrayList<ProductCategory> = ArrayList()
     var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
     var selectedCategoryIndex = 0
@@ -35,6 +40,13 @@ class CreateProductActivity : UtilityActivity() {
     var selectedSubCategoryName = ""
     var selectedCategory : ProductCategory? = null
     var selectedSubCategory : ProductSubCategory? = null
+
+    var productStepView : StepView? = null
+    var productInfoCard : CardView? = null
+    var productPriceCard : CardView? = null
+    var productTaxCard : CardView? = null
+
+    var imageView : ImageView? = null
 
     var categoryLayout : TextInputLayout? = null
     var categoryEditText : TextInputEditText? = null
@@ -57,6 +69,33 @@ class CreateProductActivity : UtilityActivity() {
     var productPriceLayout : TextInputLayout? = null
     var productPriceEditText : TextInputEditText? = null
 
+    var productDiscountLayout : TextInputLayout? = null
+    var productDiscountEditText : TextInputEditText? = null
+
+    var productFinalPriceLayout : TextInputLayout? = null
+    var productFinalPriceEditText : TextInputEditText? = null
+
+    var productIGSTLayout : TextInputLayout? = null
+    var productIGSTEditText : TextInputEditText? = null
+
+    var productCGSTLayout : TextInputLayout? = null
+    var productCGSTEditText : TextInputEditText? = null
+
+    var productSGSTLayout : TextInputLayout? = null
+    var productSGSTEditText : TextInputEditText? = null
+
+    var productVATLayout : TextInputLayout? = null
+    var productVATEditText : TextInputEditText? = null
+
+    var productCESSLayout : TextInputLayout? = null
+    var productCESSEditText : TextInputEditText? = null
+
+    var productTotalTaxLayout : TextInputLayout? = null
+    var productTotalTaxEditText : TextInputEditText? = null
+
+    var productTaxFinalPriceLayout : TextInputLayout? = null
+    var productTaxFinalPriceEditText : TextInputEditText? = null
+
     var saveButton : Button? = null
     var backButton : ImageButton? = null
     private lateinit var productViewModel: ProductViewModel
@@ -64,7 +103,18 @@ class CreateProductActivity : UtilityActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_product)
-
+        imageView = findViewById(R.id.create_product_image)
+        imageView?.setOnClickListener { onClickAddImage() }
+        productStepView = findViewById(R.id.create_product_step_view) as StepView
+        productInfoCard = findViewById(R.id.create_product_info_card)
+        productPriceCard = findViewById(R.id.create_product_price_card)
+        productTaxCard = findViewById(R.id.create_product_tax_card)
+        saveButton = findViewById(R.id.create_product_save_btn)
+        saveButton?.setOnClickListener { onClickSave() }
+        productInfoCard?.visibility = View.VISIBLE
+        productPriceCard?.visibility = View.GONE
+        productTaxCard?.visibility = View.GONE
+        saveButton?.text = "Next"
         categoryLayout = findViewById(R.id.create_product_category_til)
         categoryEditText = findViewById(R.id.create_product_category_tiet)
         categoryEditText?.setOnClickListener { showCategorySellection() }
@@ -86,13 +136,108 @@ class CreateProductActivity : UtilityActivity() {
         productPriceLayout = findViewById(R.id.create_product_price_til)
         productPriceEditText = findViewById(R.id.create_product_price_tiet)
 
-        saveButton = findViewById(R.id.create_product_save_btn)
-        saveButton?.setOnClickListener { onClickSave() }
+        productDiscountLayout = findViewById(R.id.create_product_discount_tel)
+        productDiscountEditText = findViewById(R.id.create_product_discount_tiet)
+
+        productFinalPriceLayout = findViewById(R.id.create_product_final_price_til)
+        productFinalPriceEditText = findViewById(R.id.create_product_final_price_tiet)
+
+        productIGSTLayout = findViewById(R.id.create_product_igst_til)
+        productIGSTEditText = findViewById(R.id.create_product_igst_tiet)
+
+        productCGSTLayout = findViewById(R.id.create_product_cgst_til)
+        productCGSTEditText = findViewById(R.id.create_product_cgst_tiet)
+
+        productSGSTLayout = findViewById(R.id.create_product_sgst_til)
+        productSGSTEditText = findViewById(R.id.create_product_sgst_tiet)
+
+        productVATLayout = findViewById(R.id.create_product_vat_til)
+        productVATEditText = findViewById(R.id.create_product_vat_tiet)
+
+        productCESSLayout = findViewById(R.id.create_product_cess_til)
+        productCESSEditText = findViewById(R.id.create_product_cess_tiet)
+
+        productTotalTaxLayout = findViewById(R.id.create_product_total_tax_til)
+        productTotalTaxEditText = findViewById(R.id.create_product_total_tax_tiet)
+
+        productTaxFinalPriceLayout = findViewById(R.id.create_product_tax_finial_price_til)
+        productTaxFinalPriceEditText = findViewById(R.id.create_product_tax_finial_price_tiet)
 
         loadProductPreFilledData()
         backButton = findViewById(R.id.create_product_category_header_back)
         backButton?.setOnClickListener { onBackPressed() }
 
+    }
+
+    fun onClickAddImage(){
+        getImageUrl {
+            val picasso = Picasso.get()
+            picasso.load(it).into(this.imageView)
+        }
+    }
+
+    fun onClickSave(){
+        when (stepsPosition) {
+            0 -> {
+                productInfoCard?.visibility = View.GONE
+                productPriceCard?.visibility = View.VISIBLE
+                productTaxCard?.visibility = View.GONE
+                stepsPosition = 1
+                productStepView?.done(false)
+                productStepView?.go(stepsPosition, true)
+                saveButton?.text = "Next"
+            }
+            1 -> {
+                productInfoCard?.visibility = View.GONE
+                productPriceCard?.visibility = View.GONE
+                productTaxCard?.visibility = View.VISIBLE
+                stepsPosition = 2
+                productStepView?.done(false)
+                productStepView?.go(stepsPosition, true)
+                saveButton?.text = "Finish"
+            }
+            2 -> {
+               saveProductInSever()
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        when (stepsPosition) {
+            0 -> {
+                super.onBackPressed()
+            }
+            1 -> {
+                productInfoCard?.visibility = View.VISIBLE
+                productPriceCard?.visibility = View.GONE
+                productTaxCard?.visibility = View.GONE
+                stepsPosition = 0
+                productStepView?.done(false)
+                productStepView?.go(stepsPosition, true)
+                saveButton?.text = "Next"
+            }
+            2 -> {
+                productInfoCard?.visibility = View.GONE
+                productPriceCard?.visibility = View.VISIBLE
+                productTaxCard?.visibility = View.GONE
+                stepsPosition = 1
+                productStepView?.done(false)
+                productStepView?.go(stepsPosition, true)
+                saveButton?.text = "Next"
+            }
+            3 -> {
+                productInfoCard?.visibility = View.GONE
+                productPriceCard?.visibility = View.GONE
+                productTaxCard?.visibility = View.VISIBLE
+                stepsPosition = 2
+                productStepView?.done(false)
+                productStepView?.go(stepsPosition, true)
+                saveButton?.text = "Next"
+            }
+            else -> {
+
+            }
+        }
     }
 
     fun loadProductPreFilledData(){
@@ -210,7 +355,7 @@ class CreateProductActivity : UtilityActivity() {
         dialog.show()
     }
 
-    fun onClickSave(){
+    fun saveProductInSever(){
         val prdName = productNameEditText?.text.toString()
         val prdDescription = productDescriptionEditText?.text.toString()
         val prdMMRP = productMRPEditText?.text.toString()
@@ -219,20 +364,27 @@ class CreateProductActivity : UtilityActivity() {
         var mrp = 0F
         var costPrice = 0F
         var salePrice = 0F
-        try {
-            mrp = prdMMRP.toFloat()
-        }catch (error:Error){
-            toast("Please enter valid MRP")
+
+        if(prdMMRP.isNotEmpty()){
+            try {
+                mrp = prdMMRP.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid MRP")
+            }
         }
-        try {
-            costPrice = prdCostPrice.toFloat()
-        }catch (error:Error){
-            toast("Please enter valid Cost Price")
+        if(prdCostPrice.isNotEmpty()){
+            try {
+                costPrice = prdCostPrice.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid Cost Price")
+            }
         }
-        try {
-            salePrice = prdSalePrice.toFloat()
-        }catch (error:Error){
-            toast("Please enter valid Sale Price")
+        if(prdSalePrice.isNotEmpty()){
+            try {
+                salePrice = prdSalePrice.toFloat()
+            }catch (error:Error){
+                toast("Please enter valid Sale Price")
+            }
         }
         productViewModel.createNewProduct(prdName,prdDescription,selectedCategory!!.Id!!,selectedSubCategory!!.Id!!,mrp,costPrice,salePrice)
     }
