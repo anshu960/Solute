@@ -206,24 +206,25 @@ class SyncHandler {
     }
 
 
-    fun convertJsonToContentValue(json:JSONObject):ContentValues{
-        var content = ContentValues()
-        json.keys().forEach {
-            val value = json.get(it) as Any
-            if(value is String){
-                content.put(it,value)
-            }
-            if(value is Long){
-                content.put(it,value)
-            }
-            if(value is Int){
-                content.put(it,value)
-            }
-            if(value is Boolean){
-                content.put(it,value)
-            }
-        }
-        return content
-    }
+
 }
 
+fun convertJsonToContentValue(json:JSONObject):ContentValues{
+    var content = ContentValues()
+    json.keys().forEach {
+        val value = json.get(it) as Any
+        if(value is String){
+            content.put(it,value)
+        }
+        if(value is Long){
+            content.put(it,value)
+        }
+        if(value is Int){
+            content.put(it,value)
+        }
+        if(value is Boolean){
+            content.put(it,value)
+        }
+    }
+    return content
+}

@@ -81,6 +81,7 @@ class Key {
         val sales = "Sales"
         val salesID = "SalesID"
         val quantity = "Quantity"
+        val comment = "Comment"
 
 
         val to = "to"

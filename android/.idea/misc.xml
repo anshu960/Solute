@@ -30,7 +30,7 @@
         <entry key="app/src/main/res/layout/activity_launch.xml" value="0.37433135120581223" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.384626545852924" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21888580322265627" />
-        <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.22991043311962184" />
+        <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.5050279257954031" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.129981884057971" />
         <entry key="app/src/main/res/layout/activity_receipt_details.xml" value="0.3008621215820313" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18704710144927536" />
@@ -45,7 +45,7 @@
         <entry key="app/src/main/res/layout/fragment_product_detail.xml" value="0.16802536231884058" />
         <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.32573973743628104" />
         <entry key="app/src/main/res/layout/fragment_product_price_details.xml" value="0.3688184342002676" />
-        <entry key="app/src/main/res/layout/fragment_product_stock_details.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/fragment_product_stock_details.xml" value="0.20299346058081227" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/recycler_item_analytic.xml" value="0.16802536231884058" />
         <entry key="app/src/main/res/layout/recycler_item_analytics.xml" value="0.2913926718891531" />

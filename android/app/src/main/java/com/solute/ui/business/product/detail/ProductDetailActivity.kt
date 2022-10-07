@@ -1,24 +1,35 @@
 package com.solute.ui.business.product.detail
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
+import com.solute.ui.business.product.create.CreateProductActivity
+import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.product.handler.ProductHandler
 
 
-class ProductDetailActivity : AppCompatActivity() {
+class ProductDetailActivity : UtilityActivity() {
     var navHostFragment : NavHostFragment? = null
     var bottomNavigationView :  BottomNavigationView? = null
     var navController : NavController? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     var backButton : ImageButton? = null
+    var deleteButton : ImageButton? = null
+    var fabButton : FloatingActionButton? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +37,10 @@ class ProductDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_product_detail)
         backButton = findViewById(R.id.activity_product_details_header_back)
         backButton?.setOnClickListener { onBackPressed() }
+        deleteButton = findViewById(R.id.activity_product_details_delete_btn)
+        deleteButton?.setOnClickListener { onClickDeleteProduct() }
+        fabButton = findViewById(R.id.activity_product_details_fab)
+
         navHostFragment = supportFragmentManager.findFragmentById(
             R.id.activity_product_details_container
         ) as NavHostFragment
@@ -37,10 +52,55 @@ class ProductDetailActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.product_details_menu_details,R.id.product_details_menu_price, R.id.product_details_menu_stock)
         )
+//        bottomNavigationView?.setOnNavigationItemSelectedListener { item ->
+//            when (item.itemId) {
+//                R.id.product_details_menu_details -> {
+//                    fabButton?.visibility = View.VISIBLE
+//                }
+//                R.id.product_details_menu_price -> {
+//                    fabButton?.visibility = View.VISIBLE
+//                }
+//                R.id.product_details_menu_stock -> {
+//                    fabButton?.visibility = View.GONE
+//                }
+//            }
+//            true
+//        }
+        fabButton?.setOnClickListener { onClickEdit() }
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController!!.navigateUp(appBarConfiguration)
     }
 
+    fun onClickDeleteProduct(){
+        AlertDialog.Builder(this)
+            .setMessage("Are you sure you want to delete ?")
+            .setCancelable(false)
+            .setPositiveButton("Yes",
+                DialogInterface.OnClickListener { dialog, id ->
+                    deleteProduct()
+                })
+            .setNegativeButton("No", null)
+            .show()
+    }
+
+    fun onClickEdit(){
+        val intent = Intent(this,CreateProductActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun deleteProduct(){
+        if(ProductHandler.shared().repository.selectedProduct.value != null){
+            ProductHandler.shared().onDeleteProductCallBack={
+                if(it != null && it.Id != null){
+                    this.runOnUiThread {
+                        toastLong("Product Deleted Successfully");
+                        super.onBackPressed()
+                    }
+                }
+            }
+            ProductHandler.shared().productViewModel?.deleteProduct(ProductHandler.shared().repository.selectedProduct.value!!)
+        }
+    }
 
 }

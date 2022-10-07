@@ -2,25 +2,19 @@ package com.solute.ui.business.product.create
 
 import android.net.Uri
 import android.os.Bundle
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
 import com.shuhart.stepview.StepView
 import com.solute.App
 import com.solute.R
 import com.squareup.picasso.Picasso
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.product
 import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -36,6 +30,7 @@ import org.json.JSONObject
 import java.lang.Error
 
 class CreateProductActivity : UtilityActivity() {
+    val picasso = Picasso.get()
     var prdName = ""
     var prdDescription = ""
     var mrp = 0F
@@ -51,6 +46,7 @@ class CreateProductActivity : UtilityActivity() {
     var isTaxIncluded = true
     var finalPrice = 0F
     var fileUri : Uri? = null
+    var product:Product? = null
 
     private var stepsPosition = 0
     var allCategoory: ArrayList<ProductCategory> = ArrayList()
@@ -203,7 +199,30 @@ class CreateProductActivity : UtilityActivity() {
         loadProductPreFilledData()
         backButton = findViewById(R.id.create_product_category_header_back)
         backButton?.setOnClickListener { onBackPressed() }
+        populateExistingProduct()
+    }
 
+    fun populateExistingProduct(){
+        if(ProductHandler.shared().repository.selectedProduct.value != null){
+            this.product = ProductHandler.shared().repository.selectedProduct.value!!
+            productNameEditText?.setText(product!!.Name!!)
+            productDescriptionEditText?.setText(product!!.Description!!)
+            productMRPEditText?.setText(product!!.MRP!!.toString())
+            productCostPriceEditText?.setText(product!!.CostPrice!!.toString())
+            productPriceEditText?.setText(product!!.Price!!.toString())
+            productIGSTEditText?.setText(product!!.IGST!!.toString())
+            productCGSTEditText?.setText(product!!.CGST!!.toString())
+            productSGSTEditText?.setText(product!!.SGST!!.toString())
+            productVATEditText?.setText(product!!.VAT!!.toString())
+            productCESSEditText?.setText(product!!.CESS!!.toString())
+            productTotalTaxEditText?.setText("RS " + product!!.Tax.toString())
+            productDiscountEditText?.setText("RS " + product!!.Discount)
+            productFinalPriceEditText?.setText("RS " + product!!.FinalPrice)
+            productTaxFinalPriceEditText?.setText("RS " + product!!.FinalPrice)
+            if(product!!.Image.isNotEmpty()){
+                picasso.load(product!!.Image.first()).into(imageView)
+            }
+        }
     }
 
     fun onClickAddImage(){
@@ -526,24 +545,39 @@ class CreateProductActivity : UtilityActivity() {
             request.put(Key.costPrice, (costPrice))
             request.put(Key.finalPrice, finalPrice)
             request.put(Key.tax, totalTax)
-            ProductHandler.shared().onCreateProductCallBack = {
-                onCreateNewProduct(it)
+            if(this.product != null){
+                ProductHandler.shared().onUpdateExistingProductCallBack = {
+                    onCreateNewProduct(it)
+                }
+                request.put(Key._id,product!!.Id)
+                ProductHandler.shared().productViewModel?.updateProduct(request)
+            }else{
+                ProductHandler.shared().onCreateProductCallBack = {
+                    onCreateNewProduct(it)
+                }
+                ProductHandler.shared().productViewModel?.createNewProduct(request)
             }
-            ProductHandler.shared().productViewModel?.createNewProduct(request)
         }
     }
     fun onCreateNewProduct(product:Product?){
         if(product != null){
             this.runOnUiThread {
-                toastLong("Product Created, Uploading Image")
+                if(this.fileUri != null){
+                    toastLong("Product Created, Uploading Image")
+                    uploadImageInFirebase(product!!)
+                }else{
+                    this.onBackPressed()
+                    this.onBackPressed()
+                    this.onBackPressed()
+                }
             }
-            uploadImageInFirebase(product!!)
         }else{
             this.runOnUiThread {
                 toast("Oops! Something went wrong")
             }
         }
     }
+
 
     fun uploadImageInFirebase(product: Product){
         if (fileUri != null && BusinessHandler.shared().repository.business != null && BusinessHandler.shared().repository.business != null) {
@@ -554,6 +588,9 @@ class CreateProductActivity : UtilityActivity() {
                     ProductHandler.shared().onUpdateProductImageCallBack={updatedPrd->
                             this.runOnUiThread {
                                 if(updatedPrd != null && updatedPrd!!.Id != null){
+                                    this.onBackPressed()
+                                    this.onBackPressed()
+                                    this.onBackPressed()
                                     toast("Image Updated Successfully")
                                 }else{
                                     toast("Image couldn't be updated")
@@ -569,6 +606,8 @@ class CreateProductActivity : UtilityActivity() {
                     toast("Oops! Failed to upload image at the moment")
                 }
             }
+        }else{
+            super.onBackPressed()
         }
     }
 }

@@ -223,6 +223,7 @@ class InventoryFragment : Fragment() {
     fun onClickAddButton(){
         when(this.selectedSegment){
             1->{
+                ProductHandler.shared().repository.selectedProductLiveData.postValue(null)
                 val intent = Intent(this.context,CreateProductActivity::class.java)
                 startActivity(intent)
             }

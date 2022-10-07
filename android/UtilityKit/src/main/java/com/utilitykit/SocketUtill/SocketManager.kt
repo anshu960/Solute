@@ -72,7 +72,6 @@ object SocketManager
         mSocket = UtilityKitApp.applicationContext().getMSocket()
         if (isSocketConnected == false)
         {
-
             val options = IO.Options()
             options.reconnection = true //reconnection
             options.forceNew = true
@@ -126,7 +125,8 @@ object SocketManager
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value,ProductHandler.shared().retriveProduct)
             mSocket?.on(SocketEvent.CREATE_PRODUCT.value,ProductHandler.shared().onCreateProduct)
             mSocket?.on(SocketEvent.UPDATE_PRODUCT_IMAGE.value,ProductHandler.shared().onUpdateProductImage)
-
+            mSocket?.on(SocketEvent.UPDATE_PRODUCT.value,ProductHandler.shared().onUpdateProduct)
+            mSocket?.on(SocketEvent.DELETE_PRODUCT.value,ProductHandler.shared().onDeleteProduct)
             mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
             mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value,CartHandler.shared().createCustomerInvoice)
             mSocket?.on(SocketEvent.RETRIVE_INVOICE.value,InvoiceHandler.shared().retriveInvoice)
@@ -139,6 +139,10 @@ object SocketManager
             mSocket?.on(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().onCreateProductSubCategory)
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().retriveProductSubCategory)
             mSocket?.on(SocketEvent.RETRIVE_ALL_STOCK_ENTRY.value,SyncHandler.shared().onRetriveAllStockEntry)
+            mSocket?.on(SocketEvent.REMOVE_STOCK_QUANTITY.value,ProductHandler.shared().onProductStockUpdate)
+            mSocket?.on(SocketEvent.ADD_STOCK_QUANTITY.value,ProductHandler.shared().onProductStockUpdate)
+            mSocket?.on(SocketEvent.RESET_STOCK_QUANTITY.value,ProductHandler.shared().onProductStockUpdate)
+
             //conenct the socket
             mSocket?.connect()
         }
@@ -177,12 +181,14 @@ object SocketManager
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
         isSocketConnected = false
+        mSocket?.connect()
     }
     private val onDisconnect = Emitter.Listener {
         Log.d(TAG, "Error connecting \n \n")
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
         isSocketConnected = false
+        mSocket?.connect()
     }
     
     private val joinRoom = Emitter.Listener {

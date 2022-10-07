@@ -5,8 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
 import com.utilitykit.Constants.Key.Companion.business
+import com.utilitykit.Constants.Key.Companion.image
 import com.utilitykit.SocketUtill.SocketEvent
 import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.UtilityKitApp.Companion.user
+import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.repository.ProductRepository
@@ -32,8 +35,12 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
     fun createNewProduct(request:JSONObject){
             SocketManager.send(SocketEvent.CREATE_PRODUCT,request)
     }
+    fun updateProduct(request:JSONObject){
+        SocketManager.send(SocketEvent.UPDATE_PRODUCT,request)
+    }
 
     fun updateProductImage(product:Product,image:String){
+        val user = User()
         val request = JSONObject()
         if(BusinessHandler.shared().repository.business != null) {
             val business = BusinessHandler.shared().repository.business
@@ -41,7 +48,62 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
         }
         request.put(Key.image,image)
         request.put(Key._id,product.Id)
+        request.put(Key.userId,user._id)
         SocketManager.send(SocketEvent.UPDATE_PRODUCT_IMAGE,request)
+    }
+
+    fun deleteProduct(product:Product){
+        val user = User()
+        val request = JSONObject()
+        if(BusinessHandler.shared().repository.business != null) {
+            val business = BusinessHandler.shared().repository.business
+            request.put(Key.businessID,business!!.Id)
+        }
+        request.put(Key.userId,user._id)
+        request.put(Key._id,product.Id)
+        SocketManager.send(SocketEvent.DELETE_PRODUCT,request)
+    }
+
+    fun removeStockQuantity(product:Product,quantity:Int,message:String){
+        val user = User()
+        val request = JSONObject()
+        if(BusinessHandler.shared().repository.business != null) {
+            val business = BusinessHandler.shared().repository.business
+            request.put(Key.businessID,business!!.Id)
+        }
+        request.put(Key.productID,product.Id)
+        request.put(Key.userId,user._id)
+        request.put(Key.quantity,quantity)
+        request.put(Key.comment,message)
+        SocketManager.send(SocketEvent.REMOVE_STOCK_QUANTITY,request)
+    }
+
+
+    fun addStockQuantity(product:Product,quantity:Int,message:String){
+        val user = User()
+        val request = JSONObject()
+        if(BusinessHandler.shared().repository.business != null) {
+            val business = BusinessHandler.shared().repository.business
+            request.put(Key.businessID,business!!.Id)
+        }
+        request.put(Key.productID,product.Id)
+        request.put(Key.userId,user._id)
+        request.put(Key.quantity,quantity)
+        request.put(Key.comment,message)
+        SocketManager.send(SocketEvent.ADD_STOCK_QUANTITY,request)
+    }
+    fun resetStockQuantity(product:Product,quantity:Int,message:String){
+        val user = User()
+        val request = JSONObject()
+        if(BusinessHandler.shared().repository.business != null) {
+            val business = BusinessHandler.shared().repository.business
+            request.put(Key.businessID,business!!.Id)
+        }
+        request.put(Key.productID,product.Id)
+        request.put(Key.userId,user._id)
+        request.put(Key.quantity,quantity)
+        request.put(Key.comment,message)
+        SocketManager.send(SocketEvent.RESET_STOCK_QUANTITY,request)
     }
 
 

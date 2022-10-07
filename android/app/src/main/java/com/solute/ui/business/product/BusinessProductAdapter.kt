@@ -5,16 +5,14 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.business.BusinessMainActivity
+import com.squareup.picasso.Picasso
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.product.model.Product
 
@@ -48,6 +46,7 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         R.layout.recycler_item_product_sale, parent, false
     )
 ) {
+    private var image : ImageView? = null
     private var productName: TextView? = null
     private var productDescription: TextView? = null
     private var productPrice: TextView? = null
@@ -62,6 +61,7 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
     private var taxIncludedCheckBox : CheckBox? = null
     private var taxLable : TextView? = null
     init {
+        image = itemView.findViewById(R.id.recycler_item_product_image)
         productName = itemView.findViewById(R.id.recycler_item_product_name_txt)
         productDescription = itemView.findViewById(R.id.recycler_item_product_description_txt)
         productPrice = itemView.findViewById(R.id.recycler_item_product_mrp_txt)
@@ -78,6 +78,10 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
     }
 
     fun bind(fragment:Fragment,product: Product) {
+        val picasso = Picasso.get()
+        if(product.Image.isNotEmpty()){
+            picasso.load(product.Image.first()).into(image)
+        }
         productName?.text = product.Name
         productDescription?.text = product.Description
         productPrice?.text = "₹ ${product.MRP}"
