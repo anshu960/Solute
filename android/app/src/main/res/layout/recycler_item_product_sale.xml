@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="190dp">
+    android:layout_height="170dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recycler_item_product_card"
@@ -28,12 +28,13 @@
                 android:id="@+id/recycler_item_product_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/image" />
+                app:srcCompat="@drawable/product_default_img" />
 
 
             <androidx.cardview.widget.CardView
