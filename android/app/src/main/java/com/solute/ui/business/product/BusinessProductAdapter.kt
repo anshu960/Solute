@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.product.model.Product
 
-class BusinessProductAdapter(val context: Context,val fragment: Fragment,val allProduct: List<Product>) :
+class BusinessProductAdapter(val context: Context,val fragment: Fragment?,val allProduct: List<Product>) :
     RecyclerView.Adapter<BusinessProductViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -63,7 +63,6 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
     init {
         image = itemView.findViewById(R.id.recycler_item_product_image)
         productName = itemView.findViewById(R.id.recycler_item_product_name_txt)
-        productDescription = itemView.findViewById(R.id.recycler_item_product_description_txt)
         productPrice = itemView.findViewById(R.id.recycler_item_product_mrp_txt)
         productDiscount = itemView.findViewById(R.id.recycler_item_product_discount_txt)
         productFinalPrice = itemView.findViewById(R.id.recycler_item_product_final_price_txt)
@@ -72,12 +71,9 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         addToCartCard = itemView.findViewById(R.id.recycler_item_product_add_to_cart_card)
         increaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_add_btn)
         decreaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_remove_btn)
-        productTax = itemView.findViewById(R.id.recycler_item_product_tax)
-        taxIncludedCheckBox = itemView.findViewById(R.id.recycler_item_product_check_box)
-        taxLable = itemView.findViewById(R.id.recycler_item_product_tax_lbl)
     }
 
-    fun bind(fragment:Fragment,product: Product) {
+    fun bind(fragment:Fragment?,product: Product) {
         val picasso = Picasso.get()
         if(product.Image.isNotEmpty()){
             picasso.load(product.Image.first()).into(image)
@@ -103,8 +99,12 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         }
         taxIncludedCheckBox?.isEnabled = false
         updateQuanity(product)
-        CartHandler.shared().viewModel?.cart?.observe(fragment) {
-            updateQuanity(product)
+        fragment.let {
+            if (it != null) {
+                CartHandler.shared().viewModel?.cart?.observe(it) {
+                    updateQuanity(product)
+                }
+            }
         }
         addToCartCard?.setOnClickListener { CartHandler.shared().addToCart(product) }
         increaseButton?.setOnClickListener { CartHandler.shared().addToCart(product) }

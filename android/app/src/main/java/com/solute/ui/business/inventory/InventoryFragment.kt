@@ -21,6 +21,7 @@ import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 import com.solute.ui.business.inventory.product.ProductAdapter
 import com.solute.ui.business.inventory.stock.ProductStockAdapter
 import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
+import com.solute.ui.business.product.BusinessProductAdapter
 import com.solute.ui.business.product.create.CreateProductActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
@@ -65,7 +66,7 @@ class InventoryFragment : Fragment() {
     var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
     var allAnalytics: ArrayList<BusinessAnalytics> = ArrayList()
 
-    var productAdapter : ProductAdapter? = null
+    var productAdapter : BusinessProductAdapter? = null
     var productStockdapter : ProductStockAdapter? = null
     var productCategoryAdapter : ProductCategoryAdapter? = null
     var productSubCategoryAdapter : ProductSubCategoryAdapter? = null
@@ -189,8 +190,8 @@ class InventoryFragment : Fragment() {
         floatingAddButton?.visibility = View.GONE
     }
     fun loadProducts(){
-        this.productAdapter = this.context?.let { ProductAdapter(it,this,allProduct) }
-        this.recycler?.layoutManager = LinearLayoutManager(this.context)
+        this.productAdapter = this.context?.let { BusinessProductAdapter(it,this,allProduct) }
+        this.recycler?.layoutManager = GridLayoutManager(this.context,2)
         recycler?.adapter = this.productAdapter
         countLabel?.text = "Total ${allProduct.count()} Product"
         countLabel?.visibility = View.VISIBLE

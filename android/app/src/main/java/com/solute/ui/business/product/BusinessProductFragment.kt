@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
@@ -49,7 +50,7 @@ class BusinessProductFragment : Fragment() {
         if(ProductHandler.shared().repository.productLiveData.value != null){
             allProduct = ProductHandler.shared().repository.productLiveData.value as ArrayList<Product>
         }
-        this.recyclerView!!.layoutManager = LinearLayoutManager(this.context)
+        this.recyclerView!!.layoutManager = GridLayoutManager(this.context,2)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
         this.recyclerView!!.adapter = this.adapter
     }

@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.widget.doOnTextChanged
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
@@ -60,7 +61,7 @@ class BusinessCartFragment : Fragment() {
         if (CartHandler.shared().repository.cartProducts != null && CartHandler.shared().repository.cartProducts.value != null) {
             allProduct = CartHandler.shared().repository.cartProducts.value as ArrayList<Product>
         }
-        this.recyclerView!!.layoutManager = LinearLayoutManager(this.context)
+        this.recyclerView!!.layoutManager = GridLayoutManager(this.context,2)
         adapter = this.context?.let { BusinessProductAdapter(it, this, allProduct) }
         this.recyclerView!!.adapter = this.adapter
         cartViewModel?.updatePricesInCart()

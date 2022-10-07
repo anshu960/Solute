@@ -9,9 +9,11 @@
         android:id="@+id/recycler_item_product_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,222 +26,183 @@
 
             <ImageView
                 android:id="@+id/recycler_item_product_image"
-                android:layout_width="80dp"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/image" />
 
-            <TextView
-                android:id="@+id/recycler_item_product_name_txt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
-                android:textSize="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/recycler_item_product_image"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/recycler_item_product_description_txt"
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
-                android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/recycler_item_product_image"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_name_txt" />
-
-            <TextView
-                android:id="@+id/recycler_item_product_mrp_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/recycler_item_product_price_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_description_txt" />
-
-            <TextView
-                android:id="@+id/recycler_item_product_discount_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/recycler_item_product_discount_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_mrp_txt" />
-
-            <TextView
-                android:id="@+id/recycler_item_product_final_price_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_tax" />
-
-            <LinearLayout
-                android:id="@+id/recycler_item_product_stepper_layout"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="24dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/recycler_item_product_add_to_cart_card"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/recycler_item_product_image"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_discount_lbl">
-
-                <ImageButton
-                    android:id="@+id/recycler_item_product_stepper_remove_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:backgroundTint="@android:color/holo_red_dark"
-                    app:srcCompat="@drawable/baseline_remove"
-                    app:tint="#FFF7F7" />
-
-
-                <TextView
-                    android:id="@+id/recycler_item_product_stepper_count_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="0" />
-
-
-                <ImageButton
-                    android:id="@+id/recycler_item_product_stepper_add_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:backgroundTint="@android:color/holo_green_dark"
-                    app:srcCompat="@drawable/baseline_add"
-                    app:tint="#FFF7F7" />
-            </LinearLayout>
-
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/recycler_item_product_add_to_cart_card"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                app:backgroundTint="@android:color/holo_green_dark"
-                app:cardBackgroundColor="@android:color/holo_green_dark"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_final_price_txt"
-                app:tint="@android:color/holo_green_dark">
+
+                app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_background">
 
-                    <ImageView
-                        android:id="@+id/recycler_item_product_add_to_cart_img"
-                        android:layout_width="60dp"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
+                    <LinearLayout
+                        android:id="@+id/recycler_item_product_stepper_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/shopping_cart"
-                        app:tint="@color/low_background" />
+                        app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_final_price_txt">
+
+                        <ImageButton
+                            android:id="@+id/recycler_item_product_stepper_remove_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:backgroundTint="@android:color/holo_red_dark"
+                            app:srcCompat="@drawable/baseline_remove"
+                            app:tint="#FFF7F7" />
+
+
+                        <TextView
+                            android:id="@+id/recycler_item_product_stepper_count_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="@color/white" />
+
+
+                        <ImageButton
+                            android:id="@+id/recycler_item_product_stepper_add_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:backgroundTint="@android:color/holo_green_dark"
+                            app:srcCompat="@drawable/baseline_add"
+                            app:tint="#FFF7F7" />
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/recycler_item_product_add_to_cart_card"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="2dp"
+                        app:backgroundTint="@android:color/holo_green_dark"
+                        app:cardBackgroundColor="@android:color/holo_green_dark"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_final_price_txt"
+                        app:tint="@android:color/holo_green_dark">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/recycler_item_product_add_to_cart_img"
+                                android:layout_width="60dp"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/shopping_cart"
+                                app:tint="@color/low_background" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="Add To Cart"
+                                android:textColor="@color/white"
+                                app:drawableTint="@color/low_background"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/recycler_item_product_add_to_cart_img"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/low_background" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/recycler_item_product_mrp_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="Add To Cart"
-                        app:drawableTint="@color/low_background"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:elevation="4dp"
+                        android:text="10 RS"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_name_txt" />
+
+                    <TextView
+                        android:id="@+id/recycler_item_product_name_txt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:elevation="4dp"
+                        android:text="@string/name"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/recycler_item_product_add_to_cart_img"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/low_background" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/recycler_item_product_discount_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:elevation="4dp"
+                        android:text="20 RS"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toEndOf="@+id/recycler_item_product_final_price_txt"
+                        app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_name_txt" />
+
+                    <TextView
+                        android:id="@+id/recycler_item_product_final_price_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:elevation="4dp"
+                        android:text="100RS"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toEndOf="@+id/recycler_item_product_mrp_txt"
+                        app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_name_txt" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/recycler_item_product_price_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:text="MRP"
-                app:layout_constraintStart_toEndOf="@+id/recycler_item_product_image"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_description_txt" />
-
-            <TextView
-                android:id="@+id/recycler_item_product_discount_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Discount : "
-                app:layout_constraintStart_toEndOf="@+id/recycler_item_product_image"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_mrp_txt" />
-
-            <TextView
-                android:id="@+id/recycler_item_product_final_price_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Price"
-                app:layout_constraintEnd_toStartOf="@+id/recycler_item_product_final_price_txt"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_tax" />
-
-            <TextView
-                android:id="@+id/recycler_item_product_tax_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Tax"
-                app:layout_constraintEnd_toStartOf="@+id/recycler_item_product_tax"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_description_txt" />
-
-            <TextView
-                android:id="@+id/recycler_item_product_tax"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toStartOf="@+id/recycler_item_product_check_box"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_description_txt" />
-
-            <CheckBox
-                android:id="@+id/recycler_item_product_check_box"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Included"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_product_description_txt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
