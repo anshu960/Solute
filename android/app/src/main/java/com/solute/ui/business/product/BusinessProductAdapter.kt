@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.MainActivity
 import com.solute.R
+import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.BusinessMainActivity
 import com.solute.ui.business.product.detail.ProductDetailActivity
 import com.squareup.picasso.Picasso
@@ -33,7 +34,7 @@ class BusinessProductAdapter(val context: Context,val fragment: Fragment?,val al
     override fun onBindViewHolder(holder: BusinessProductViewHolder, position: Int) {
         val item = allProduct[position]
         holder.itemView.setOnClickListener {
-            if(context is BusinessMainActivity){
+            if(context is BusinessActivity){
                 val activity = context
                 ProductHandler.shared().repository.selectedProductLiveData.postValue(item)
                 val intent = Intent(activity, ProductDetailActivity::class.java)

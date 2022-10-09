@@ -5,13 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
-import com.solute.MainActivity
 import com.solute.R
-import com.solute.ui.business.BusinessMainActivity
+import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.receipt.ReceiptDetailsActivity
-import com.utilitykit.Constants.Key
-import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import com.utilitykit.feature.invoice.model.CustomerInvoice
 
@@ -31,9 +27,8 @@ class InvoiceHistoryAdapter(val context: Context, val invoices: List<CustomerInv
         val item = invoices[position]
         holder.bind(item)
         holder.itemView.setOnClickListener {
-            if(context is BusinessMainActivity){
-                val gson = Gson()
-                val mainActivty = context as BusinessMainActivity
+            if(context is BusinessActivity){
+                val mainActivty = context
                 val intent = Intent(mainActivty, ReceiptDetailsActivity::class.java)
                 InvoiceHandler.shared().repository.customerInvoiceLiveData.postValue(item)
                 mainActivty.startActivity(intent)

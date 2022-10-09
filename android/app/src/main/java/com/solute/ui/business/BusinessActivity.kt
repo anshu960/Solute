@@ -3,20 +3,22 @@ package com.solute.ui.business
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.navigation.NavigationView
 import com.solute.R
 import com.solute.databinding.ActivityBusinessBinding
 import com.solute.ui.business.receipt.ReceiptDetailsActivity
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.cart.viewModel.CartViewModalFactory
 import com.utilitykit.feature.cart.viewModel.CartViewModel
@@ -30,6 +32,11 @@ class BusinessActivity : UtilityActivity() {
     private lateinit var binding: ActivityBusinessBinding
     private lateinit var cartViewModal: CartViewModel
     private lateinit var customerViewModal: CustomerViewModel
+
+    var businessIconImage : ImageView? = null
+    var businessName : TextView? = null
+    var businessDescription : TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,7 +62,17 @@ class BusinessActivity : UtilityActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         setUpRequiredModels()
-
+        val headerView: View = navView.getHeaderView(0)
+        businessIconImage = headerView.findViewById(R.id.nav_header_business_img)
+        businessName = headerView.findViewById(R.id.nav_header_business_name)
+        businessDescription = headerView.findViewById(R.id.nav_header_business_description)
+        if(BusinessHandler.shared().repository.business != null){
+            businessName?.text = BusinessHandler.shared().repository.business?.Name
+            businessDescription?.text = BusinessHandler.shared().repository.business?.Address
+        }else{
+            businessName?.text = ""
+            businessDescription?.text = ""
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
