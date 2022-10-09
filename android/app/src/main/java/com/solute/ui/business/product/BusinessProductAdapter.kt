@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.business.BusinessMainActivity
+import com.solute.ui.business.product.detail.ProductDetailActivity
 import com.squareup.picasso.Picasso
 import com.utilitykit.feature.cart.handler.CartHandler
+import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 
 class BusinessProductAdapter(val context: Context,val fragment: Fragment?,val allProduct: List<Product>) :
@@ -31,10 +33,11 @@ class BusinessProductAdapter(val context: Context,val fragment: Fragment?,val al
     override fun onBindViewHolder(holder: BusinessProductViewHolder, position: Int) {
         val item = allProduct[position]
         holder.itemView.setOnClickListener {
-            if(context is MainActivity){
-                val mainActivty = context as MainActivity
-                val intent = Intent(mainActivty, BusinessMainActivity::class.java)
-                mainActivty.startActivity(intent)
+            if(context is BusinessMainActivity){
+                val activity = context
+                ProductHandler.shared().repository.selectedProductLiveData.postValue(item)
+                val intent = Intent(activity, ProductDetailActivity::class.java)
+                activity.startActivity(intent)
             }
         }
         holder.bind(fragment,item)

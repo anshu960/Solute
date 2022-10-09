@@ -3,6 +3,9 @@ package com.solute.ui.business
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.system.Os.close
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solute.App
 import com.solute.R
+import com.solute.databinding.ActivityMainBinding
 import com.solute.ui.business.receipt.ReceiptDetailsActivity
 import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.UtilityActivity
@@ -45,6 +49,7 @@ class BusinessMainActivity : UtilityActivity() {
         )
         setUpRequiredModels()
     }
+
 
     override fun onResume() {
         super.onResume()

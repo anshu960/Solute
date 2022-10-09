@@ -36,11 +36,11 @@ class UtilityKitApp :Application(){
         appContext = context
         Defaults.init(appContext!!)
         socketUrl = if(isDebug){
-            Server.devHost
-//            Server.prodDost
+//            Server.devHost
+            Server.prodDost
         }else{
-//            Server.prodDost
-            Server.devHost
+            Server.prodDost
+//            Server.devHost
         }
         try {
             mSocket = IO.socket(socketUrl)

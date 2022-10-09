@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/business_home">
+
+    <fragment
+        android:id="@+id/business_home"
+        android:name="com.solute.ui.business.inventory.InventoryFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_inventory" />
+
+    <fragment
+        android:id="@+id/business_sale"
+        android:name="com.solute.ui.business.product.BusinessProductFragment"
+        android:label="@string/sale"
+        tools:layout="@layout/fragment_business_product" />
+
+    <fragment
+        android:id="@+id/business_cart"
+        android:name="com.solute.ui.business.cart.BusinessCartFragment"
+        android:label="@string/cart"
+        tools:layout="@layout/fragment_business_cart" />
+    <fragment
+        android:id="@+id/business_invoice"
+        android:name="com.solute.ui.business.invoice.BusinessInvoiceFragment"
+        android:label="@string/invoice"
+        tools:layout="@layout/fragment_business_invoice" />
+    <fragment
+        android:id="@+id/business_stock"
+        android:name="com.solute.ui.business.stock.StockFragment"
+        android:label="@string/stock"
+        tools:layout="@layout/fragment_stock" />
+
+</navigation>

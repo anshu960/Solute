@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.MainActivity
 import com.solute.R
+import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.BusinessMainActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
@@ -30,7 +31,7 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
         holder.itemView.setOnClickListener {
             if(context is MainActivity){
                 val mainActivty = context as MainActivity
-                val intent = Intent(mainActivty,BusinessMainActivity::class.java)
+                val intent = Intent(mainActivty, BusinessActivity::class.java)
                 BusinessHandler.shared().repository.business = item
                 SyncHandler.shared().clearBusinessAnalytics()
                 SyncHandler.shared().syncAllBusinessData()
