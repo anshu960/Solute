@@ -41,6 +41,9 @@
     <string name="inventory">Inventory</string>
     <string name="business">Business</string>
     <string name="product">Product</string>
+    <string name="all_product">All Products</string>
+    <string name="category">Category</string>
+    <string name="sub_category">Sub Category</string>
     <string name="sale">Sale</string>
     <string name="cart">Cart</string>
     <string name="invoice">Invocie</string>

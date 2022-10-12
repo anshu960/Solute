@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -32,6 +33,8 @@ class BusinessActivity : UtilityActivity() {
     private lateinit var binding: ActivityBusinessBinding
     private lateinit var cartViewModal: CartViewModel
     private lateinit var customerViewModal: CustomerViewModel
+    private lateinit var navView: NavigationView
+    private lateinit var navController: NavController
 
     var businessIconImage : ImageView? = null
     var businessName : TextView? = null
@@ -50,13 +53,20 @@ class BusinessActivity : UtilityActivity() {
 //                .setAction("Action", null).show()
 //        }
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_business)
+         navView = binding.navView
+         navController = findNavController(R.id.nav_host_fragment_content_business)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.business_home, R.id.business_sale, R.id.business_cart,R.id.business_stock
+                R.id.business_home,
+                R.id.business_sale,
+                R.id.business_cart,
+                R.id.business_stock,
+                R.id.business_invoice,
+                R.id.inventory_product,
+                R.id.inventory_category,
+                R.id.inventory_sub_category
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -105,5 +115,8 @@ class BusinessActivity : UtilityActivity() {
         customerViewModal.fetchAllCustomer()
         CustomerHandler.shared().setup(customerViewModal)
 
+    }
+    fun goToCart(){
+        navController.navigate(R.id.business_cart)
     }
 }

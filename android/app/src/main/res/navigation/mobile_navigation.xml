@@ -33,4 +33,21 @@
         android:label="@string/stock"
         tools:layout="@layout/fragment_stock" />
 
+<!--    Inventory-->
+    <fragment
+        android:id="@+id/inventory_product"
+        android:name="com.solute.ui.business.product.BusinessProductFragment"
+        android:label="@string/all_product"
+        tools:layout="@layout/fragment_business_product" />
+    <fragment
+        android:id="@+id/inventory_category"
+        android:name="com.solute.ui.business.inventory.category.ProductCategoryFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_product_category" />
+    <fragment
+        android:id="@+id/inventory_sub_category"
+        android:name="com.solute.ui.business.inventory.subCategory.FragmentProductSubCategory"
+        android:label="@string/sub_category"
+        tools:layout="@layout/fragment_product_sub_category" />
+
 </navigation>

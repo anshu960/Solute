@@ -21,15 +21,11 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="33">
         <activity
-            android:name=".BusinessActivity"
-            android:exported="false"
-            android:label="@string/title_activity_business"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.business.BusinessActivity"
             android:exported="false"
             android:label="@string/title_activity_business"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".ui.business.product.detail.ProductDetailActivity"
             android:exported="false"
@@ -73,11 +69,6 @@
         <activity
             android:name=".ui.business.receipt.ReceiptDetailsActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.business.BusinessMainActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.launch.LaunchActivity"

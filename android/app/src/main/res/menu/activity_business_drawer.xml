@@ -17,13 +17,36 @@
             android:icon="@drawable/shopping_cart"
             android:title="@string/cart" />
 
-        <item
-            android:id="@+id/business_stock"
-            android:icon="@drawable/inventory"
-            android:title="@string/stock" />
+
         <item
             android:id="@+id/business_invoice"
             android:icon="@drawable/receipt"
             android:title="@string/invoice" />
     </group>
+    <item
+        android:title="Inventory"
+        android:id="@+id/inventory"
+        android:icon="@drawable/inventory"
+        >
+        <menu
+            android:checkableBehavior="none"
+            android:id="@+id/business_inventory_menu">
+            <item
+                android:id="@+id/inventory_product"
+                android:icon="@drawable/menu_book"
+                android:title="@string/product" />
+            <item
+                android:id="@+id/inventory_category"
+                android:icon="@drawable/baseline_category"
+                android:title="@string/category" />
+            <item
+                android:id="@+id/inventory_sub_category"
+                android:icon="@drawable/widgets"
+                android:title="@string/sub_category" />
+            <item
+                android:id="@+id/business_stock"
+                android:icon="@drawable/inventory"
+                android:title="@string/stock" />
+        </menu>
+    </item>
 </menu>

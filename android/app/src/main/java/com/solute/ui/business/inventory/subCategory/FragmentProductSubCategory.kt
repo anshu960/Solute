@@ -1,0 +1,63 @@
+package com.solute.ui.business.inventory.subCategory
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.solute.R
+import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
+import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
+import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
+import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
+
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+class FragmentProductSubCategory : Fragment() {
+
+    var recycler : RecyclerView? = null
+    private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
+    var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
+    var productSubCategoryAdapter : ProductSubCategoryAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Sub Category
+        productSubCategoryViewModel = ViewModelProvider(
+            this,
+            ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
+        ).get(
+            ProductSubCategoryViewModel::class.java
+        )
+        ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
+
+        productSubCategoryViewModel.allSubCategory.observe(this){
+            allSubCategoory = it as ArrayList<ProductSubCategory>
+                loadSubCategory()
+        }
+        ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_product_sub_category, container, false)
+        recycler = view.findViewById(R.id.product_sub_category_fragment_recycler)
+        return view
+    }
+
+    fun loadSubCategory(){
+        this.productSubCategoryAdapter = this.context?.let { ProductSubCategoryAdapter(it,this,allSubCategoory) }
+        this.recycler?.layoutManager = LinearLayoutManager(this.context)
+        recycler?.adapter = this.productSubCategoryAdapter
+    }
+}

@@ -1,13 +1,8 @@
 package com.solute.ui.business.product.detail.productStockDetails.adapter
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.solute.MainActivity
-import com.solute.ui.business.BusinessMainActivity
 import com.utilitykit.feature.product.model.ProductStock
 
 class ProductDetailStockAdapter(val allStock: ArrayList<ProductStock>) :

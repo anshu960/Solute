@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.solute.MainActivity
-import com.solute.ui.business.BusinessMainActivity
-import com.solute.ui.business.inventory.product.ProductViewHolder
-import com.utilitykit.feature.product.model.Product
+import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productCategory.model.ProductCategory
 
@@ -28,7 +25,7 @@ class ProductCategoryAdapter(val context: Context, val fragment: Fragment, val a
     override fun onBindViewHolder(holder: ProductCategoryViewHolder, position: Int) {
         val item = allCategory[position]
         holder.itemView.setOnClickListener {
-            if(context is BusinessMainActivity){
+            if(context is UtilityActivity){
                 ProductCategoryHandler.shared().repository.selectedCategoryLiveData.postValue(item)
                 val intent = Intent(context, CategoryDetailsActivity::class.java)
                 context.startActivity(intent)

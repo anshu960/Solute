@@ -8,14 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
-import com.solute.ui.business.BusinessMainActivity
+import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.product.detail.ProductDetailActivity
 import com.squareup.picasso.Picasso
-import com.utilitykit.Constants.Key.Companion.image
-import com.utilitykit.Constants.Key.Companion.productName
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 
@@ -43,7 +40,7 @@ class ProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
         productDescription?.text = product.Description
         productPrice?.text = "₹ ${product.MRP}"
         card?.setOnClickListener {
-            if(context is BusinessMainActivity){
+            if(context is BusinessActivity){
                 ProductHandler.shared().repository.selectedProductLiveData.postValue(product)
                 val intent = Intent(context,ProductDetailActivity::class.java)
                 context.startActivity(intent)

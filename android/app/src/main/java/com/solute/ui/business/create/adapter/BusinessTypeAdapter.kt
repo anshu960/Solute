@@ -7,19 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.solute.MainActivity
 import com.solute.R
-import com.solute.ui.business.BusinessMainActivity
 import com.solute.ui.business.create.CreateBusinessActivity
 import com.solute.ui.business.create.SelectBusinessTypeActivity
-import com.solute.ui.businessList.BusinessViewHolder
 import com.squareup.picasso.Picasso
-import com.utilitykit.Constants.Key.Companion.business
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
 import com.utilitykit.feature.businessType.model.BusinessType
-import com.utilitykit.feature.sync.SyncHandler
 
 class BusinessTypeAdapter(val context: Context, val allBusinessType: ArrayList<BusinessType>) :
     RecyclerView.Adapter<BusinessTypeViewHolder>() {

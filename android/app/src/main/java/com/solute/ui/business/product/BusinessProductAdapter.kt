@@ -9,10 +9,8 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
-import com.solute.ui.business.BusinessMainActivity
 import com.solute.ui.business.product.detail.ProductDetailActivity
 import com.squareup.picasso.Picasso
 import com.utilitykit.feature.cart.handler.CartHandler

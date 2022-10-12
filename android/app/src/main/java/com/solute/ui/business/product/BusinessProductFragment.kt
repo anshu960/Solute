@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
+import com.solute.ui.business.BusinessActivity
 import com.solute.ui.businessList.BusinessListAdapter
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
@@ -29,6 +31,7 @@ class BusinessProductFragment : Fragment() {
     private lateinit var productViewModel: ProductViewModel
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
+    var cartButton : FloatingActionButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
@@ -62,10 +65,18 @@ class BusinessProductFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_business_product, container, false)
         recyclerView = view.findViewById(R.id.fragment_business_product_recycler)
+        cartButton = view.findViewById(R.id.fragment_business_product_cart_btn)
+        cartButton?.setOnClickListener { onClickCart() }
         reload()
         return view
     }
 
+    fun onClickCart(){
+        val activity = requireActivity()
+        if(activity is BusinessActivity){
+            activity.goToCart()
+        }
+    }
 
 
 }
