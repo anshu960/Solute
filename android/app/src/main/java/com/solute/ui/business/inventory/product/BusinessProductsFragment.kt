@@ -1,5 +1,6 @@
-package com.solute.ui.business.product
+package com.solute.ui.business.inventory.product
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,26 +10,32 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.play.core.integrity.IntegrityTokenRequest
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.ui.business.product.BusinessProductAdapter
+import com.solute.ui.business.product.create.CreateProductActivity
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
 import com.utilitykit.feature.product.viewModel.ProductViewModel
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [BusinessProductFragment.newInstance] factory method to
+ * Use the [BusinessProductsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BusinessProductFragment : Fragment() {
-
-    var recyclerView: RecyclerView? = null
+class BusinessProductsFragment : Fragment() {
+    var recycler : RecyclerView? = null
     private lateinit var productViewModel: ProductViewModel
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
-    var cartButton : FloatingActionButton? = null
+    var createNewProductBtn : FloatingActionButton? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
@@ -46,34 +53,28 @@ class BusinessProductFragment : Fragment() {
         ProductHandler.shared().fetchAllProduct()
     }
 
-    fun reload() {
-        if(ProductHandler.shared().repository.productLiveData.value != null){
-            allProduct = ProductHandler.shared().repository.productLiveData.value as ArrayList<Product>
-        }
-        this.recyclerView!!.layoutManager = GridLayoutManager(this.context,2)
-        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
-        this.recyclerView!!.adapter = this.adapter
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_business_sale, container, false)
-        recyclerView = view.findViewById(R.id.fragment_business_product_recycler)
-        cartButton = view.findViewById(R.id.fragment_business_product_cart_btn)
-        cartButton?.setOnClickListener { onClickCart() }
+        val view = inflater.inflate(R.layout.fragment_business_products, container, false)
+        recycler = view.findViewById(R.id.business_products_recycler)
+        createNewProductBtn = view.findViewById(R.id.business_products_fab_button)
+        createNewProductBtn?.setOnClickListener {
+            val intent = Intent(this.context,CreateProductActivity::class.java)
+            this.context?.startActivity(intent)
+        }
         reload()
         return view
     }
 
-    fun onClickCart(){
-        val activity = requireActivity()
-        if(activity is BusinessActivity){
-            activity.goToCart()
+    fun reload() {
+        if(ProductHandler.shared().repository.productLiveData.value != null){
+            allProduct = ProductHandler.shared().repository.productLiveData.value as ArrayList<Product>
         }
+        this.recycler!!.layoutManager = GridLayoutManager(this.context,2)
+        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
+        this.recycler!!.adapter = this.adapter
     }
-
-
 }

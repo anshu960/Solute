@@ -1,5 +1,6 @@
 package com.solute.ui.business.inventory.subCategory
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
+import com.solute.ui.business.inventory.category.CreateCategoryActivity
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
@@ -26,6 +29,7 @@ class FragmentProductSubCategory : Fragment() {
     private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
     var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
     var productSubCategoryAdapter : ProductSubCategoryAdapter? = null
+    var createNewSubCategoryBtn : FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +56,11 @@ class FragmentProductSubCategory : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_product_sub_category, container, false)
         recycler = view.findViewById(R.id.product_sub_category_fragment_recycler)
+        createNewSubCategoryBtn = view.findViewById(R.id.product_sub_category_fragment_add_btn)
+        createNewSubCategoryBtn?.setOnClickListener {
+            val intent = Intent(this.context, CreateProductSubCategoryActivity::class.java)
+            this.context?.startActivity(intent)
+        }
         return view
     }
 

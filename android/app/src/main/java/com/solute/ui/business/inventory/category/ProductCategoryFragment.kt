@@ -1,5 +1,6 @@
 package com.solute.ui.business.inventory.category
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productCategory.model.ProductCategory
@@ -26,6 +28,7 @@ class ProductCategoryFragment : Fragment() {
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     var allCategoory: ArrayList<ProductCategory> = ArrayList()
     var productCategoryAdapter : ProductCategoryAdapter? = null
+    var createNewCategoryBtn : FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,11 @@ class ProductCategoryFragment : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_product_category, container, false)
         recycler = view.findViewById(R.id.product_category_fragment_recycler)
+        createNewCategoryBtn = view.findViewById(R.id.product_category_add_button)
+        createNewCategoryBtn?.setOnClickListener {
+            val intent = Intent(this.context,CreateCategoryActivity::class.java)
+            this.context?.startActivity(intent)
+        }
         return view
     }
 

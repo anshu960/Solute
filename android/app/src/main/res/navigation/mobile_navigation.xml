@@ -15,7 +15,7 @@
         android:id="@+id/business_sale"
         android:name="com.solute.ui.business.product.BusinessProductFragment"
         android:label="@string/sale"
-        tools:layout="@layout/fragment_business_product" />
+        tools:layout="@layout/fragment_business_sale" />
 
     <fragment
         android:id="@+id/business_cart"
@@ -36,9 +36,9 @@
 <!--    Inventory-->
     <fragment
         android:id="@+id/inventory_product"
-        android:name="com.solute.ui.business.product.BusinessProductFragment"
+        android:name="com.solute.ui.business.inventory.product.BusinessProductsFragment"
         android:label="@string/all_product"
-        tools:layout="@layout/fragment_business_product" />
+        tools:layout="@layout/fragment_business_products" />
     <fragment
         android:id="@+id/inventory_category"
         android:name="com.solute.ui.business.inventory.category.ProductCategoryFragment"

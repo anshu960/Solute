@@ -1,11 +1,20 @@
 package com.solute.ui.business.receipt
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.res.Resources
+import android.graphics.*
+import android.graphics.pdf.PdfDocument
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -20,6 +29,7 @@ import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import com.utilitykit.feature.invoice.model.CustomerInvoice
+import com.utilitykit.pdf.PDFService
 import com.utilitykit.qr.QRCodeUtill
 import org.json.JSONObject
 
@@ -27,30 +37,30 @@ class ReceiptDetailsActivity : UtilityActivity() {
     val business = BusinessHandler.shared().repository.business
     val gson = Gson()
     var receiptData = JSONObject()
-    var customerInvoice : CustomerInvoice? = null
-    var sales : ArrayList<Sale> = arrayListOf()
-    var adapter : ReceiptAdapter? = null
-    var recycler : RecyclerView? = null
-    var qrImage : ImageView? = null
-    var businessName : TextView? = null
-    var businessAddress : TextView? = null
-    var businessMobile : TextView? = null
-    var receiptNumber : TextView? = null
-    var receiptDate : TextView? = null
-    var subTotal : TextView? = null
-    var discount : TextView? = null
-    var total : TextView? = null
-    var messageButton : ImageButton? = null
-    var shareButton : ImageButton? = null
-    var whatsappButton : ImageButton? = null
-    var messageTitle : TextView? = null
-    var shareTitle : TextView? = null
-    var whatsappTitle : TextView? = null
-    var customer : Customer? = null
-    var customerDetailsCard : CardView? = null
-    var customerDetailsName : TextView? = null
-    var customerDetailsMobile : TextView? = null
-    var backButton : ImageButton? = null
+    var customerInvoice: CustomerInvoice? = null
+    var sales: ArrayList<Sale> = arrayListOf()
+    var adapter: ReceiptAdapter? = null
+    var recycler: RecyclerView? = null
+    var qrImage: ImageView? = null
+    var businessName: TextView? = null
+    var businessAddress: TextView? = null
+    var businessMobile: TextView? = null
+    var receiptNumber: TextView? = null
+    var receiptDate: TextView? = null
+    var subTotal: TextView? = null
+    var discount: TextView? = null
+    var total: TextView? = null
+    var messageButton: ImageButton? = null
+    var shareButton: ImageButton? = null
+    var whatsappButton: ImageButton? = null
+    var messageTitle: TextView? = null
+    var shareTitle: TextView? = null
+    var whatsappTitle: TextView? = null
+    var customer: Customer? = null
+    var customerDetailsCard: CardView? = null
+    var customerDetailsName: TextView? = null
+    var customerDetailsMobile: TextView? = null
+    var backButton: ImageButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receipt_details)
@@ -76,45 +86,60 @@ class ReceiptDetailsActivity : UtilityActivity() {
         backButton = findViewById(R.id.receipt_details_header_back)
         backButton?.setOnClickListener { onBackPressed() }
         messageButton?.setOnClickListener {
-            if(customerInvoice != null && customerInvoice!!.InvoiceNumber != null){
-                    SMSManager().sendInvoiceReceipt(this,
-                        getCustomerMobileNumber(),customerInvoice!!.InvoiceNumber!!,customerInvoice!!.FinalPrice!!)
-            }else{
+            if (customerInvoice != null && customerInvoice!!.InvoiceNumber != null) {
+                SMSManager().sendInvoiceReceipt(
+                    this,
+                    getCustomerMobileNumber(),
+                    customerInvoice!!.InvoiceNumber!!,
+                    customerInvoice!!.FinalPrice!!
+                )
+            } else {
                 toast("Invoice Data Not Found")
             }
         }
         shareButton?.setOnClickListener {
-            if(customer!=null && customer!!.MobileNumber != null && customerInvoice != null){
-                SMSManager().shareInvoice(this,customerInvoice!!.InvoiceNumber!!,customerInvoice!!.FinalPrice!!)
+            if (customer != null && customer!!.MobileNumber != null && customerInvoice != null) {
+                SMSManager().shareInvoice(
+                    this,
+                    customerInvoice!!.InvoiceNumber!!,
+                    customerInvoice!!.FinalPrice!!
+                )
             }
 
         }
         whatsappButton?.setOnClickListener {
-            if(customer!=null && customer!!.MobileNumber != null && customerInvoice != null){
-                WhatsappManager().sendInvoice(this,customer!!.MobileNumber!!,customerInvoice!!.InvoiceNumber!!,customerInvoice!!.FinalPrice!!)
+            if (customer != null && customer!!.MobileNumber != null && customerInvoice != null) {
+                WhatsappManager().sendInvoice(
+                    this,
+                    customer!!.MobileNumber!!,
+                    customerInvoice!!.InvoiceNumber!!,
+                    customerInvoice!!.FinalPrice!!
+                )
             }
         }
         InvoiceHandler.shared().repository.allSalesLiveData.observe(this) {
             sales = it as ArrayList<Sale>
             reloadData()
         }
-        CustomerHandler.shared().repository.customerLiveData.observe(this){
+        CustomerHandler.shared().repository.customerLiveData.observe(this) {
             this.customer = it
             loadShareDetails()
         }
         pupulateExistingReceipt()
     }
-    fun getCustomerMobileNumber():String{
-        if(this.customer != null && this.customer!!.MobileNumber != null){
+
+    fun getCustomerMobileNumber(): String {
+        if (this.customer != null && this.customer!!.MobileNumber != null) {
             return this.customer!!.MobileNumber!!
-        }else{
+        } else {
             return ""
         }
 
     }
-    fun loadShareDetails(){
-        if(CustomerHandler.shared().repository.customer != null && CustomerHandler.shared().repository!!.customer!!.value?.MobileNumber !=  null){
-            this.customer =  CustomerHandler.shared().repository!!.customer!!.value
+
+    fun loadShareDetails() {
+        if (CustomerHandler.shared().repository.customer != null && CustomerHandler.shared().repository!!.customer!!.value?.MobileNumber != null) {
+            this.customer = CustomerHandler.shared().repository!!.customer!!.value
             messageButton?.visibility = View.VISIBLE
             whatsappButton?.visibility = View.VISIBLE
             messageTitle?.visibility = View.VISIBLE
@@ -122,13 +147,13 @@ class ReceiptDetailsActivity : UtilityActivity() {
             customerDetailsCard?.visibility = View.VISIBLE
             customerDetailsName?.text = this.customer!!.Name
             customerDetailsMobile?.text = this.customer!!.MobileNumber
-        }else{
+        } else {
             messageButton?.visibility = View.GONE
             whatsappButton?.visibility = View.GONE
             messageTitle?.visibility = View.GONE
             whatsappTitle?.visibility = View.GONE
             customerDetailsCard?.visibility = View.GONE
-            if(customerInvoice != null && customerInvoice!!.CustomerID != null){
+            if (customerInvoice != null && customerInvoice!!.CustomerID != null) {
                 CustomerHandler.shared().searchCustomerById(customerInvoice!!.CustomerID!!)
             }
         }
@@ -139,19 +164,19 @@ class ReceiptDetailsActivity : UtilityActivity() {
         CustomerHandler.shared().repository.customerLiveData.postValue(null)
     }
 
-    fun pupulateExistingReceipt(){
-        if(intent.hasExtra(Key.invoice)){
+    fun pupulateExistingReceipt() {
+        if (intent.hasExtra(Key.invoice)) {
             receiptData = JSONObject(intent.getStringExtra(Key.invoice))
             val payload = receiptData.getJSONObject(Key.payload)
-            customerInvoice = gson.fromJson(payload.toString(),CustomerInvoice::class.java)
+            customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
             var salesData = receiptData.getJSONArray(Key.sales)
             for (i in 0 until salesData.length()) {
                 val newSale = salesData.getJSONObject(i)
-                val sale = gson.fromJson(newSale.toString(),Sale::class.java)
+                val sale = gson.fromJson(newSale.toString(), Sale::class.java)
                 sales.add(sale)
             }
             reloadData()
-        }else{
+        } else {
             InvoiceHandler.shared().repository.customerInvoice.value
             customerInvoice = InvoiceHandler.shared().repository.customerInvoice.value
             InvoiceHandler.shared().viewModel?.fetchAllSales()
@@ -159,9 +184,9 @@ class ReceiptDetailsActivity : UtilityActivity() {
         }
     }
 
-    fun reloadData(){
+    fun reloadData() {
         this.recycler!!.layoutManager = LinearLayoutManager(this)
-        adapter = this?.let { ReceiptAdapter(it ,sales) }
+        adapter = this?.let { ReceiptAdapter(it, sales) }
         this.recycler!!.adapter = this.adapter
         businessName?.text = business?.Name
         receiptNumber?.text = customerInvoice?.InvoiceNumber.toString()
@@ -169,25 +194,31 @@ class ReceiptDetailsActivity : UtilityActivity() {
         businessMobile?.text = business?.MobileNumber
         receiptDate?.text = customerInvoice?.InvoiceDate
 
-        discount?.text =  "₹ " + customerInvoice?.InstantDiscount.toString()
+        discount?.text = "₹ " + customerInvoice?.InstantDiscount.toString()
         pupulateFooter()
-        if(customerInvoice != null){
-            val qrBitmap = QRCodeUtill().getQRImage("https://solute.app/#/receipt?id=${customerInvoice!!.InvoiceNumber}")
+        if (customerInvoice != null) {
+            val qrBitmap =
+                QRCodeUtill().getQRImage("https://solute.app/#/receipt?id=${customerInvoice!!.InvoiceNumber}")
             qrImage?.setImageBitmap(qrBitmap)
         }
         loadShareDetails()
     }
-    fun pupulateFooter(){
+
+    fun pupulateFooter() {
         var subTotal = 0F
         var finalPrice = 0F
         sales.forEach {
             subTotal = subTotal + it.FinalPrice!!
             finalPrice = finalPrice + it.FinalPrice!!
         }
-        if(customerInvoice != null && customerInvoice!!.InstantDiscount != null){
+        if (customerInvoice != null && customerInvoice!!.InstantDiscount != null) {
             finalPrice = finalPrice - customerInvoice!!.InstantDiscount!!
         }
-        this.subTotal?.text =  "₹ " + subTotal.toString()
-        this.total?.text =  "₹ " + finalPrice.toString()
+        this.subTotal?.text = "₹ " + subTotal.toString()
+        this.total?.text = "₹ " + finalPrice.toString()
+        PDFService().createInvoice(this,customerInvoice!!,sales)
     }
+
+
+
 }
