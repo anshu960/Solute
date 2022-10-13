@@ -1,7 +1,6 @@
 package com.solute.ui.register
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -14,9 +13,9 @@ import com.solute.utility.Country
 import com.utilitykit.Constants.Constants
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
+import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 
 class RegisterActivity : UtilityActivity() {
@@ -66,7 +65,7 @@ class RegisterActivity : UtilityActivity() {
         roleType.put(Key._id ,"61acee7871a83e09a12a1668")
         request.put(Key.roleType,roleType)
         this.startActivityIndicator("Trying to create account")
-        SocketManager.onEvent= { event, data ->
+        SocketService.shared().onEvent= { event, data ->
             runOnUiThread {
                 this.stopActivityIndicator()
                 val response = data
@@ -82,6 +81,6 @@ class RegisterActivity : UtilityActivity() {
                 }
             }
         }
-        SocketManager.send(SocketEvent.authenticate, request)
+        SocketService.shared().send(SocketEvent.authenticate, request)
     }
 }

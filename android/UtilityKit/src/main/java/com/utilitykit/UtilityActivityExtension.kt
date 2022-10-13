@@ -7,7 +7,7 @@ import android.os.PersistableBundle
 import android.view.*
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketService
 import java.util.*
 
 
@@ -31,8 +31,8 @@ open class UtilityActivity :UtilityViewController(){
     }
 
    public fun connectSocket(){
-        SocketManager.currentActivity = this
-        SocketManager.connect()
+       SocketService.shared().currentActivity = this
+       SocketService.shared().connect()
     }
     
     fun captureDate(callback:(String)->Unit){

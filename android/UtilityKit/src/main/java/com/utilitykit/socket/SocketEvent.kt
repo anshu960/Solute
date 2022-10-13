@@ -1,4 +1,4 @@
-package com.utilitykit.SocketUtill
+package com.utilitykit.socket
 
 enum class SocketEvent(val value: String)
 {

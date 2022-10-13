@@ -1,13 +1,9 @@
 package com.utilitykit.dataclass
 
 import android.content.ContentValues
-import android.util.Log
-import android.widget.Toast
 import com.utilitykit.Constants.Key
 import com.utilitykit.Constants.TaskPriority
 import com.utilitykit.Constants.TaskStatus
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.jsonObject
 import org.json.JSONArray
 import org.json.JSONObject

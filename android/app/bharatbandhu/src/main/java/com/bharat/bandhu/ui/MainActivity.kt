@@ -10,13 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bharat.bandhu.R
-import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.SocketUtill.SocketEvent
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.dataclass.User
 import org.json.JSONObject

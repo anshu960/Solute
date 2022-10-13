@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityKitApp.Companion.user
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -15,6 +14,7 @@ import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
+import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -158,7 +158,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
             request.put(Key.customer, JSONObject(customerJson))
         }
         request.put(Key.transactions, JSONArray(transactions))
-        SocketManager.send(SocketEvent.CREATE_SALE, request)
+        SocketService.shared().send(SocketEvent.CREATE_SALE, request)
     }
 
     fun createInvoice(sales: ArrayList<JSONObject>, salesIds: ArrayList<String>,customer: Customer?) {
@@ -180,7 +180,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(Key.customer, JSONObject(customerJson))
         }
-        SocketManager.send(SocketEvent.GENERATE_CUSTOMER_INVOICE, request)
+        SocketService.shared().send(SocketEvent.GENERATE_CUSTOMER_INVOICE, request)
     }
 
     fun prepareTransaction(customer: Customer?): ArrayList<JSONObject> {

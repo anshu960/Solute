@@ -22,7 +22,7 @@ import com.google.firebase.auth.*
 import com.hbb20.CountryCodePicker
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.SocketUtill.SocketEvent
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.UtilityActivity
 import com.utilitykit.database.Database

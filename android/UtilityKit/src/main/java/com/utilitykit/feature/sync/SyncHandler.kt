@@ -1,20 +1,16 @@
 package com.utilitykit.feature.sync
 
 import android.content.ContentValues
-import android.util.Log
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.date
 import com.utilitykit.Constants.TableNames
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.database.Database
 import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
-import com.utilitykit.feature.product.model.ProductStock
+import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -145,7 +141,7 @@ class SyncHandler {
             if(lastSale != null){
                 request.put(Key.lastSyncDate,lastSale.CreatedAt)
             }
-            SocketManager.send(SocketEvent.RETRIVE_SALE,request)
+            SocketService.shared().send(SocketEvent.RETRIVE_SALE,request)
         }
     }
 
@@ -182,7 +178,7 @@ class SyncHandler {
             if(lastProductStock != null){
             request.put(Key.lastSyncDate,lastProductStock!!.CreatedAt)
             }
-            SocketManager.send(SocketEvent.RETRIVE_ALL_STOCK_ENTRY,request)
+            SocketService.shared().send(SocketEvent.RETRIVE_ALL_STOCK_ENTRY,request)
         }
     }
 

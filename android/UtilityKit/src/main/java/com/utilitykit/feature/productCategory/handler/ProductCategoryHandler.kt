@@ -2,16 +2,14 @@ package com.utilitykit.feature.productCategory.handler
 
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.product.viewModel.ProductViewModel
 import com.utilitykit.feature.productCategory.model.ProductCategory
 import com.utilitykit.feature.productCategory.repository.ProductCategoryRepository
 import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
+import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
 import org.json.JSONObject
 
@@ -47,7 +45,7 @@ class ProductCategoryHandler{
             val business = BusinessHandler.shared().repository.business
             request.put(Key.userId,user._id)
             request.put(Key.businessID,business!!.Id)
-            SocketManager.send(SocketEvent.RETRIVE_PRODUCT_CATEGORY,request)
+            SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT_CATEGORY,request)
         }
     }
 

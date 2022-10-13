@@ -1,23 +1,13 @@
 package com.utilitykit.feature.business.handler
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.business
-import com.utilitykit.Constants.Key.Companion.model
-import com.utilitykit.Constants.Key.Companion.payload
-import com.utilitykit.Constants.TableNames
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
-import com.utilitykit.database.SQLite
-import com.utilitykit.dataclass.Message
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.business.repository.BusinessRepository
-import com.utilitykit.feature.business.viewModel.BusinessViewModalFactory
 import com.utilitykit.feature.business.viewModel.BusinessViewModel
+import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
 import org.json.JSONObject
 
@@ -50,7 +40,7 @@ class BusinessHandler {
         val request = JSONObject()
         val user = User()
         request.put(Key.userId,user._id)
-        SocketManager.send(SocketEvent.RETRIVE_BUSINESS,request)
+        SocketService.shared().send(SocketEvent.RETRIVE_BUSINESS,request)
     }
 
      val retriveBusiness = Emitter.Listener {

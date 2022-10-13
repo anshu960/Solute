@@ -3,10 +3,10 @@ package com.utilitykit.dataclass
 import android.content.ContentValues
 import com.solute.constants.ContentType
 import com.utilitykit.Constants.Key
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.database.Database
+import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 
 data class Message(
@@ -138,8 +138,8 @@ data class Message(
         request.put(Key.conversationID, this.conversationID)
         request.put(Key.participants, conversation!!.participants)
 
-        if (SocketManager.isSocketConnected){
-            SocketManager.send(SocketEvent.sendMessage, request)
+        if (SocketService.shared().isSocketConnected){
+            SocketService.shared().send(SocketEvent.sendMessage, request)
             completion()
         }else{
 //            ServiceManager().makeServiceCall(Server.sendMessage, request) {

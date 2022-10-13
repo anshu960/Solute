@@ -2,12 +2,9 @@ package com.utilitykit.feature.product.handler
 
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.product
 import com.utilitykit.Constants.TableNames
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
-import com.utilitykit.database.Database
 import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -17,6 +14,7 @@ import com.utilitykit.feature.product.repository.ProductRepository
 import com.utilitykit.feature.product.viewModel.ProductViewModel
 import com.utilitykit.feature.sync.SyncHandler
 import com.utilitykit.feature.sync.convertJsonToContentValue
+import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
 import org.json.JSONObject
 
@@ -57,7 +55,7 @@ class ProductHandler {
             val business = BusinessHandler.shared().repository.business
             request.put(Key.userId,user._id)
             request.put(Key.businessID,business!!.Id)
-            SocketManager.send(SocketEvent.RETRIVE_PRODUCT,request)
+            SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT,request)
         }
     }
 

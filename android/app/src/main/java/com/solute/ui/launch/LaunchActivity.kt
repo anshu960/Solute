@@ -10,11 +10,11 @@ import com.solute.ui.login.LoginActivity
 import com.solute.ui.register.RegisterActivity
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.UtilityActivity
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.database.Database
 import com.utilitykit.dataclass.User
+import com.utilitykit.socket.SocketService
 
 class LaunchActivity : UtilityActivity() {
     private var mDelayHandler: Handler? = null
@@ -59,8 +59,8 @@ class LaunchActivity : UtilityActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        UtilityKitApp().setUp(this)
-        SocketManager.currentActivity = this
-        SocketManager.connect()
+        SocketService.shared().currentActivity = this
+        SocketService.shared().connect()
         setContentView(R.layout.activity_launch)
         checkUpdatesAndClearDatabase()
         mDelayHandler = Handler()

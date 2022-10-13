@@ -13,7 +13,7 @@ import com.solute.utility.Country
 import com.utilitykit.Constants.Constants
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.SocketUtill.SocketEvent
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.UtilityViewController
 import org.json.JSONObject

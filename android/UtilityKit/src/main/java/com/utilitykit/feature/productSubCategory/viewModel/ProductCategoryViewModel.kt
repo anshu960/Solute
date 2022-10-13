@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.productCategory.model.ProductCategory
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 import com.utilitykit.feature.productSubCategory.repository.ProductSubCategoryRepository
+import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -36,6 +36,6 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
         request.put(Key.businessID, business!!.Id)
         request.put(Key.categoryId,category.Id)
         request.put(Key.name, name)
-        SocketManager.send(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY, request)
+        SocketService.shared().send(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY, request)
     }
 }

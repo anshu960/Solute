@@ -1,9 +1,9 @@
 package com.utility
 
 import android.util.Base64
-import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.dataclass.Conversation
 import com.utilitykit.dataclass.Task
+import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.crypto.Cipher
@@ -17,9 +17,9 @@ class Encryption {
           var secretKey = conversation._id + conversation.ownerUserID
           try
           {
-              val ivParameterSpec = IvParameterSpec(Base64.decode(SocketManager.iv, Base64.DEFAULT))
+              val ivParameterSpec = IvParameterSpec(Base64.decode(SocketService.shared().iv, Base64.DEFAULT))
               val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
-              val spec = PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketManager.salt, Base64.DEFAULT), 10000, 256)
+              val spec = PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketService.shared().salt, Base64.DEFAULT), 10000, 256)
               val tmp = factory.generateSecret(spec)
               val secretKey = SecretKeySpec(tmp.encoded, "AES")
               val cipher = Cipher.getInstance("AES/CBC/PKCS7Padding")
@@ -38,9 +38,9 @@ class Encryption {
             var secretKey = task._id + task._id
             try
             {
-                val ivParameterSpec = IvParameterSpec(Base64.decode(SocketManager.iv, Base64.DEFAULT))
+                val ivParameterSpec = IvParameterSpec(Base64.decode(SocketService.shared().iv, Base64.DEFAULT))
                 val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
-                val spec = PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketManager.salt, Base64.DEFAULT), 10000, 256)
+                val spec = PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketService.shared().salt, Base64.DEFAULT), 10000, 256)
                 val tmp = factory.generateSecret(spec)
                 val secretKey = SecretKeySpec(tmp.encoded, "AES")
                 val cipher = Cipher.getInstance("AES/CBC/PKCS7Padding")
@@ -60,9 +60,9 @@ class Encryption {
             var secretKey = conversation._id + conversation.ownerUserID
             try
             {
-                val ivParameterSpec =  IvParameterSpec(Base64.decode(SocketManager.iv, Base64.DEFAULT))
+                val ivParameterSpec =  IvParameterSpec(Base64.decode(SocketService.shared().iv, Base64.DEFAULT))
                 val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
-                val spec =  PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketManager.salt, Base64.DEFAULT), 10000, 256)
+                val spec =  PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketService.shared().salt, Base64.DEFAULT), 10000, 256)
                 val tmp = factory.generateSecret(spec);
                 val secretKey =  SecretKeySpec(tmp.encoded, "AES")
                 val cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
@@ -82,9 +82,9 @@ class Encryption {
             var secretKey = task._id + task._id
             try
             {
-                val ivParameterSpec =  IvParameterSpec(Base64.decode(SocketManager.iv, Base64.DEFAULT))
+                val ivParameterSpec =  IvParameterSpec(Base64.decode(SocketService.shared().iv, Base64.DEFAULT))
                 val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
-                val spec =  PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketManager.salt, Base64.DEFAULT), 10000, 256)
+                val spec =  PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketService.shared().salt, Base64.DEFAULT), 10000, 256)
                 val tmp = factory.generateSecret(spec);
                 val secretKey =  SecretKeySpec(tmp.encoded, "AES")
                 val cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
@@ -103,9 +103,9 @@ class Encryption {
          var secretKey = conversation._id + conversation.ownerUserID
          try
          {
-             val ivParameterSpec =  IvParameterSpec(Base64.decode(SocketManager.iv, Base64.DEFAULT))
+             val ivParameterSpec =  IvParameterSpec(Base64.decode(SocketService.shared().iv, Base64.DEFAULT))
              val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
-             val spec =  PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketManager.salt, Base64.DEFAULT), 10000, 256)
+             val spec =  PBEKeySpec(secretKey.toCharArray(), Base64.decode(SocketService.shared().salt, Base64.DEFAULT), 10000, 256)
              val tmp = factory.generateSecret(spec);
              val secretKey =  SecretKeySpec(tmp.encoded, "AES")
              val cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");

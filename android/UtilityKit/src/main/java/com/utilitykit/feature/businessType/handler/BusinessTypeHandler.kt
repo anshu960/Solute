@@ -2,12 +2,12 @@ package com.utilitykit.feature.businessType.handler
 
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.businessType.model.BusinessType
 import com.utilitykit.feature.businessType.repository.BusinessTypeRepository
 import com.utilitykit.feature.businessType.viewModel.BusinessTypeViewModel
+import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
 import org.json.JSONObject
 
@@ -40,7 +40,7 @@ class BusinessTypeHandler {
         val request = JSONObject()
         val user = User()
         request.put(Key.userId,user._id)
-        SocketManager.send(SocketEvent.RETRIVE_BUSINESS_TYPE,request)
+        SocketService.shared().send(SocketEvent.RETRIVE_BUSINESS_TYPE,request)
     }
 
      val retriveBusinessType = Emitter.Listener {

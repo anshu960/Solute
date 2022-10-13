@@ -2,7 +2,6 @@ package com.solute.ui.login
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.text.Editable
@@ -25,11 +24,9 @@ import com.solute.R
 import com.solute.ui.register.RegisterActivity
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
-import com.utilitykit.database.Database
-import com.utilitykit.database.SQLite
+import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
@@ -218,17 +215,17 @@ class LoginActivity : UtilityActivity() {
         val deviceID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         request.put(Key.deviceId,deviceID)
         request.put(Key.fcmToken,deviceID)
-        SocketManager.joinRoom(uid)
+        SocketService.shared().joinRoom(uid)
 
         this.startActivityIndicator("Checking for existing accounts")
-        SocketManager.onEvent= { event, data ->
+        SocketService.shared().onEvent= { event, data ->
             this.runOnUiThread {
                 stopActivityIndicator()
                 Log.d("LoginResponse",data.toString())
                 if(data.has(Key.payload)){
                     var payload = data.getJSONObject(Key.payload)
                     if(payload.has(Key.name)){
-                        SocketManager.joinRoom(payload.getString(Key._id))
+                        SocketService.shared().joinRoom(payload.getString(Key._id))
                         Defaults.store(Key.loginDetails, payload)
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         this.startActivity(intent)
@@ -250,7 +247,7 @@ class LoginActivity : UtilityActivity() {
                 }
             }
         }
-        SocketManager.send(SocketEvent.authenticate, request)
+        SocketService.shared().send(SocketEvent.authenticate, request)
     }
 
     fun onClickSignUp(view: View){

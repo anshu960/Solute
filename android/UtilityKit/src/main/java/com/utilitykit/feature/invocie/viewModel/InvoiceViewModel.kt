@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.SocketUtill.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.invoice.model.CustomerInvoice
 import com.utilitykit.feature.invoice.repository.InvoiceRepository
+import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -47,7 +47,7 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
             request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
             request.put(Key.startDate,now())
             request.put(Key.endDate,now())
-            SocketManager.send(SocketEvent.RETRIVE_INVOICE,request)
+            SocketService.shared().send(SocketEvent.RETRIVE_INVOICE,request)
         }
     }
 
@@ -71,7 +71,7 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
             request.put(Key.userId,user._id)
             request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
             request.put(Key.salesID,JSONArray(customerInvoice!!.value!!.SalesID))
-            SocketManager.send(SocketEvent.RETRIVE_SALES,request)
+            SocketService.shared().send(SocketEvent.RETRIVE_SALES,request)
         }
     }
 

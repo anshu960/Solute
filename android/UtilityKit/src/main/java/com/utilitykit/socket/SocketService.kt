@@ -1,12 +1,14 @@
-package com.utilitykit.SocketUtill
+package com.utilitykit.socket
 
+import android.app.Service
+import android.content.Intent
+import android.os.IBinder
 import android.provider.ContactsContract
 import android.util.Log
 import com.utility.Encryption
 import com.utilitykit.Constants.Key
 import com.utilitykit.Constants.TableNames
 import com.utilitykit.Defaults
-import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
 import com.utilitykit.database.SQLite
@@ -14,6 +16,7 @@ import com.utilitykit.dataclass.ContactData
 import com.utilitykit.dataclass.Conversation
 import com.utilitykit.dataclass.Message
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.customer.handler.CustomerHandler
@@ -28,12 +31,27 @@ import io.socket.emitter.Emitter
 import org.json.JSONArray
 import org.json.JSONObject
 
+class SocketService: Service() {
+    override fun onBind(p0: Intent?): IBinder? {
+        TODO("Not yet implemented")
+    }
+    init {
+        instance = this
+    }
 
-object SocketManager
-{
+    companion object{
+        private var instance: SocketService? = null
+        fun shared() : SocketService {
+            if(instance != null){
+                return instance as SocketService
+            }else{
+                return SocketService()
+            }
+        }
+    }
     var salt = ""
     var iv = ""
-    
+
     val TAG = "SOCKET.IO.MANAGER"
     var conversation : Conversation? = null
     private var mSocket: Socket? = null
@@ -60,13 +78,13 @@ object SocketManager
         fun(event: SocketEvent, data: ArrayList<Conversation>)
         {
         }
-    
+
     fun send(event: SocketEvent, data: JSONObject)
     {
         Log.d(TAG,"Sending Event ${event.value}")
         mSocket?.emit(event.value, data)
     }
-    
+
     fun connect()
     {
         mSocket = UtilityKitApp.applicationContext().getMSocket()
@@ -120,28 +138,28 @@ object SocketManager
             mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
             //Solute
             mSocket?.on(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
-            mSocket?.on(SocketEvent.RETRIVE_BUSINESS_TYPE.value,BusinessTypeHandler.shared().retriveBusinessType)
-            mSocket?.on(SocketEvent.CREATE_BUSINESS.value,BusinessHandler.shared().onCreateNewBusiness)
-            mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value,ProductHandler.shared().retriveProduct)
-            mSocket?.on(SocketEvent.CREATE_PRODUCT.value,ProductHandler.shared().onCreateProduct)
-            mSocket?.on(SocketEvent.UPDATE_PRODUCT_IMAGE.value,ProductHandler.shared().onUpdateProductImage)
-            mSocket?.on(SocketEvent.UPDATE_PRODUCT.value,ProductHandler.shared().onUpdateProduct)
-            mSocket?.on(SocketEvent.DELETE_PRODUCT.value,ProductHandler.shared().onDeleteProduct)
+            mSocket?.on(SocketEvent.RETRIVE_BUSINESS_TYPE.value, BusinessTypeHandler.shared().retriveBusinessType)
+            mSocket?.on(SocketEvent.CREATE_BUSINESS.value, BusinessHandler.shared().onCreateNewBusiness)
+            mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value, ProductHandler.shared().retriveProduct)
+            mSocket?.on(SocketEvent.CREATE_PRODUCT.value, ProductHandler.shared().onCreateProduct)
+            mSocket?.on(SocketEvent.UPDATE_PRODUCT_IMAGE.value, ProductHandler.shared().onUpdateProductImage)
+            mSocket?.on(SocketEvent.UPDATE_PRODUCT.value, ProductHandler.shared().onUpdateProduct)
+            mSocket?.on(SocketEvent.DELETE_PRODUCT.value, ProductHandler.shared().onDeleteProduct)
             mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
-            mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value,CartHandler.shared().createCustomerInvoice)
-            mSocket?.on(SocketEvent.RETRIVE_INVOICE.value,InvoiceHandler.shared().retriveInvoice)
-            mSocket?.on(SocketEvent.RETRIVE_SALE.value,SyncHandler.shared().onRetriveSale)
-            mSocket?.on(SocketEvent.RETRIVE_SALES.value,InvoiceHandler.shared().retriveSales)
-            mSocket?.on(SocketEvent.CREATE_CUSTOMER.value,CustomerHandler.shared().onCreateCustomer)
-            mSocket?.on(SocketEvent.RETRIVE_CUSTOMER.value,CustomerHandler.shared().onFetchAllCustomer)
-            mSocket?.on(SocketEvent.CREATE_PRODUCT_CATEGORY.value,ProductCategoryHandler.shared().onCreateProductCategory)
-            mSocket?.on(SocketEvent.RETRIVE_PRODUCT_CATEGORY.value,ProductCategoryHandler.shared().retriveProductCategory)
+            mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value, CartHandler.shared().createCustomerInvoice)
+            mSocket?.on(SocketEvent.RETRIVE_INVOICE.value, InvoiceHandler.shared().retriveInvoice)
+            mSocket?.on(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)
+            mSocket?.on(SocketEvent.RETRIVE_SALES.value, InvoiceHandler.shared().retriveSales)
+            mSocket?.on(SocketEvent.CREATE_CUSTOMER.value, CustomerHandler.shared().onCreateCustomer)
+            mSocket?.on(SocketEvent.RETRIVE_CUSTOMER.value, CustomerHandler.shared().onFetchAllCustomer)
+            mSocket?.on(SocketEvent.CREATE_PRODUCT_CATEGORY.value, ProductCategoryHandler.shared().onCreateProductCategory)
+            mSocket?.on(SocketEvent.RETRIVE_PRODUCT_CATEGORY.value, ProductCategoryHandler.shared().retriveProductCategory)
             mSocket?.on(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().onCreateProductSubCategory)
             mSocket?.on(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().retriveProductSubCategory)
-            mSocket?.on(SocketEvent.RETRIVE_ALL_STOCK_ENTRY.value,SyncHandler.shared().onRetriveAllStockEntry)
-            mSocket?.on(SocketEvent.REMOVE_STOCK_QUANTITY.value,ProductHandler.shared().onProductStockUpdate)
-            mSocket?.on(SocketEvent.ADD_STOCK_QUANTITY.value,ProductHandler.shared().onProductStockUpdate)
-            mSocket?.on(SocketEvent.RESET_STOCK_QUANTITY.value,ProductHandler.shared().onProductStockUpdate)
+            mSocket?.on(SocketEvent.RETRIVE_ALL_STOCK_ENTRY.value, SyncHandler.shared().onRetriveAllStockEntry)
+            mSocket?.on(SocketEvent.REMOVE_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
+            mSocket?.on(SocketEvent.ADD_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
+            mSocket?.on(SocketEvent.RESET_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
 
             //conenct the socket
             mSocket?.connect()
@@ -153,8 +171,8 @@ object SocketManager
             connect()
         }
     }
-    
-    
+
+
     val onConnect = Emitter.Listener {
         print("Connected")
         isSocketConnected = true
@@ -169,13 +187,13 @@ object SocketManager
             }
         }
     }
-    
+
     fun joinRoom(id:String){
         var data = JSONObject()
         data.put(Key.roomId,id)
         mSocket?.emit(SocketEvent.joinRoom.value, data)
     }
-    
+
     private val onConnectError = Emitter.Listener {
         Log.d(TAG, "Error connecting \n \n")
         Log.d(TAG, it.toString())
@@ -190,7 +208,7 @@ object SocketManager
         isSocketConnected = false
         mSocket?.connect()
     }
-    
+
     private val joinRoom = Emitter.Listener {
         Log.d(TAG, " Got Message \n \n")
         Log.d(TAG, it.toString())
@@ -222,7 +240,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.onEvent, messageObject)
     }
-    
+
     private val onMessage = Emitter.Listener {
         var messageObject = JSONObject()
         if (it.count() > 0)
@@ -238,7 +256,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
     }
-    
+
     private val onSocketEvent = Emitter.Listener {
         Log.d(TAG,"Event Received ${it.toString()}")
         if (it.count() > 0)
@@ -249,7 +267,7 @@ object SocketManager
             }
         }
     }
-    
+
     private val onSocketEventArray = Emitter.Listener {
         if (it.count() > 0)
         {
@@ -259,7 +277,7 @@ object SocketManager
             }
         }
     }
-    
+
     private val messageReceived = Emitter.Listener {
         var messageObject = JSONObject()
         if (it.count() > 0)
@@ -274,7 +292,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
     }
-    
+
     private val messageRead = Emitter.Listener {
         var messageObject = JSONObject()
         if (it.count() > 0)
@@ -289,7 +307,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
     }
-    
+
     private val typing = Emitter.Listener {
         var typingData = JSONObject()
         if (it.count() > 0)
@@ -302,7 +320,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.typing, typingData)
     }
-    
+
     private val previousChats = Emitter.Listener {
         var messageObject = JSONObject()
         if (it.count() > 0)
@@ -337,7 +355,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
     }
-    
+
     private val newChats = Emitter.Listener {
         var messageObject = JSONObject()
         if (it.count() > 0)
@@ -352,7 +370,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
     }
-    
+
     private val updateDeliveryStatus = Emitter.Listener {
         var messageObject = JSONObject()
         if (it.count() > 0)
@@ -367,7 +385,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
     }
-    
+
     private val updateReadStatus = Emitter.Listener {
         var messageObject = JSONObject()
         if (it.count() > 0)
@@ -382,7 +400,7 @@ object SocketManager
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
     }
-    
+
     private val findUsers = Emitter.Listener {
         var allUsers: ArrayList<ContactsContract.Profile> = ArrayList()
         val list = it.first()
@@ -396,11 +414,11 @@ object SocketManager
         }
         this.onProfiles(SocketEvent.findUsers, allUsers)
     }
-    
+
     private val updateContacts = Emitter.Listener {
         var allContacts: ArrayList<ContactData> = ArrayList()
         val data = it.first()
-        
+
         if (data is JSONObject)
         {
             val paylaod = data.getJSONObject(Key.payload)
@@ -422,7 +440,7 @@ object SocketManager
     private val retriveContacts = Emitter.Listener {
         var allContacts: ArrayList<ContactData> = ArrayList()
         val data = it.first()
-    
+
         if (data is JSONObject)
         {
             val paylaod = data.getJSONArray(Key.payload)
@@ -435,7 +453,7 @@ object SocketManager
         }
         this.onContacts(SocketEvent.retriveContacts, allContacts)
     }
-    
+
     private val createConversation = Emitter.Listener {
         var conversation = Conversation()
         if (it.count() > 0)
@@ -449,7 +467,7 @@ object SocketManager
         }
         this.onConversation(SocketEvent.createConversation, conversation)
     }
-    
+
     private val getAllConversation = Emitter.Listener {
         var allConversation: ArrayList<Conversation> = ArrayList()
         val list = it.first()
@@ -465,7 +483,7 @@ object SocketManager
         }
         this.onConversations(SocketEvent.getAllConversation, allConversation)
     }
-    
+
     private val findCompanyByName = Emitter.Listener {
         val data = it.first()
         if (data is JSONArray)
@@ -487,7 +505,7 @@ object SocketManager
             this.onEventArray(SocketEvent.findTechnologyByName, data)
         }
     }
-    
+
     private val createExperience = Emitter.Listener {
         val data = it.first()
         if (data is JSONObject)
