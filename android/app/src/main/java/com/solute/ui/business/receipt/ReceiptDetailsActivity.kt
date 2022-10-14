@@ -1,22 +1,12 @@
 package com.solute.ui.business.receipt
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.content.res.Resources
-import android.graphics.*
-import android.graphics.pdf.PdfDocument
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.solute.R
 import com.solute.utility.SMSManager
@@ -33,20 +23,15 @@ import com.utilitykit.pdf.PDFService
 import com.utilitykit.qr.QRCodeUtill
 import org.json.JSONObject
 
+
 class ReceiptDetailsActivity : UtilityActivity() {
     val business = BusinessHandler.shared().repository.business
     val gson = Gson()
     var receiptData = JSONObject()
     var customerInvoice: CustomerInvoice? = null
     var sales: ArrayList<Sale> = arrayListOf()
-    var adapter: ReceiptAdapter? = null
-    var recycler: RecyclerView? = null
     var qrImage: ImageView? = null
-    var businessName: TextView? = null
-    var businessAddress: TextView? = null
-    var businessMobile: TextView? = null
-    var receiptNumber: TextView? = null
-    var receiptDate: TextView? = null
+
     var subTotal: TextView? = null
     var discount: TextView? = null
     var total: TextView? = null
@@ -61,29 +46,17 @@ class ReceiptDetailsActivity : UtilityActivity() {
     var customerDetailsName: TextView? = null
     var customerDetailsMobile: TextView? = null
     var backButton: ImageButton? = null
+    var pdfView : WebView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receipt_details)
-        recycler = findViewById(R.id.receipt_details_receipt_recycler)
-        qrImage = findViewById(R.id.receipt_details_qr_img)
-        businessName = findViewById(R.id.receipt_details_reeceipt_business_name_txt)
-        businessAddress = findViewById(R.id.receipt_details_reeceipt_business_address_txt)
-        businessMobile = findViewById(R.id.receipt_details_reeceipt_business_mobile_txt)
-        receiptNumber = findViewById(R.id.receipt_details_reeceipt_number_txt)
-        receiptDate = findViewById(R.id.receipt_details_reeceipt_business_date_txt)
-        subTotal = findViewById(R.id.receipt_details_receipt_business_sub_total_txt)
-        discount = findViewById(R.id.receipt_details_receipt_business_discount_txt)
-        total = findViewById(R.id.receipt_details_receipt_business_total_txt)
+        pdfView = findViewById(R.id.receipt_details_pdf_img)
         messageButton = findViewById(R.id.receipt_details_receipt_message_btn)
         shareButton = findViewById(R.id.receipt_details_receipt_share_btn)
         whatsappButton = findViewById(R.id.receipt_details_receipt_whatsapp_btn)
         messageTitle = findViewById(R.id.receipt_details_receipt_message_title)
         whatsappTitle = findViewById(R.id.receipt_details_receipt_whatsapp_title)
         shareTitle = findViewById(R.id.receipt_details_receipt_share_title)
-        customerDetailsCard = findViewById(R.id.receipt_details_receipt_customer_card)
-        customerDetailsName = findViewById(R.id.receipt_details_receipt_customer_name)
-        customerDetailsMobile = findViewById(R.id.receipt_details_receipt_customer_mobile)
-        backButton = findViewById(R.id.receipt_details_header_back)
         backButton?.setOnClickListener { onBackPressed() }
         messageButton?.setOnClickListener {
             if (customerInvoice != null && customerInvoice!!.InvoiceNumber != null) {
@@ -185,16 +158,6 @@ class ReceiptDetailsActivity : UtilityActivity() {
     }
 
     fun reloadData() {
-        this.recycler!!.layoutManager = LinearLayoutManager(this)
-        adapter = this?.let { ReceiptAdapter(it, sales) }
-        this.recycler!!.adapter = this.adapter
-        businessName?.text = business?.Name
-        receiptNumber?.text = customerInvoice?.InvoiceNumber.toString()
-        businessAddress?.text = business?.Address
-        businessMobile?.text = business?.MobileNumber
-        receiptDate?.text = customerInvoice?.InvoiceDate
-
-        discount?.text = "₹ " + customerInvoice?.InstantDiscount.toString()
         pupulateFooter()
         if (customerInvoice != null) {
             val qrBitmap =
@@ -202,6 +165,13 @@ class ReceiptDetailsActivity : UtilityActivity() {
             qrImage?.setImageBitmap(qrBitmap)
         }
         loadShareDetails()
+        val pdf = PDFService().createInvoice(this,customer,business,customerInvoice!!,sales)
+        pdfView?.getSettings()?.setUseWideViewPort(true)
+        pdfView?.setInitialScale(1)
+        pdfView?.getSettings()?.setSupportZoom(true);
+        pdfView?.getSettings()?.setBuiltInZoomControls(true);
+        pdfView?.getSettings()?.setDisplayZoomControls(false);
+        pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
     }
 
     fun pupulateFooter() {
@@ -216,9 +186,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
         }
         this.subTotal?.text = "₹ " + subTotal.toString()
         this.total?.text = "₹ " + finalPrice.toString()
-        PDFService().createInvoice(this,customerInvoice!!,sales)
     }
-
 
 
 }

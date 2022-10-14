@@ -24,11 +24,13 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="33">
         <activity
+            android:name=".ui.notification.UserNotificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.business.BusinessActivity"
             android:exported="false"
             android:label="@string/title_activity_business"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.product.detail.ProductDetailActivity"
             android:exported="false"
