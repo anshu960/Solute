@@ -6,7 +6,7 @@ class InvoiceTemplate {
         <html>
     <head>
         <style>
-           body{
+             body{
     margin-top:20px;
     background:#eee;
 }
@@ -165,7 +165,7 @@ class InvoiceTemplate {
          </div>
          <!-- end invoice-header -->
          <!-- begin invoice-content -->
-         <div class="invoice-content">
+          <div class="invoice-content">
             <!-- begin table-responsive -->
             <div class="table-responsive">
                <table class="table table-invoice">
