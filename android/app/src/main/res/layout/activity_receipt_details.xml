@@ -23,9 +23,9 @@
 
             <ImageButton
                 android:id="@+id/receipt_details_receipt_message_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="44dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="26dp"
                 android:background="@null"
                 app:layout_constraintBottom_toTopOf="@+id/receipt_details_receipt_message_title"
                 app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
 
             <ImageButton
                 android:id="@+id/receipt_details_receipt_share_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="24dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="20dp"
                 android:background="@null"
@@ -57,20 +57,19 @@
                 android:id="@+id/receipt_details_receipt_message_title"
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginBottom="4dp"
-                android:text="Share Using SMS"
+                android:text="SMS"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
                 android:id="@+id/receipt_details_receipt_whatsapp_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="120dp"
                 android:background="@null"
                 app:layout_constraintBottom_toTopOf="@+id/receipt_details_receipt_whatsapp_title"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/chat_bubble" />
@@ -79,12 +78,32 @@
                 android:id="@+id/receipt_details_receipt_whatsapp_title"
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="100dp"
                 android:layout_marginBottom="4dp"
-                android:text="Share on Whatsapp"
+                android:text="Whatsapp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/receipt_details_receipt_print_title"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginEnd="65dp"
+                android:layout_marginBottom="4dp"
+                android:text="Print"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/receipt_details_receipt_share_btn" />
+
+            <ImageButton
+                android:id="@+id/receipt_details_receipt_print_btn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="65dp"
+                android:background="@null"
+                app:layout_constraintBottom_toTopOf="@+id/receipt_details_receipt_print_title"
+                app:layout_constraintEnd_toStartOf="@+id/receipt_details_receipt_share_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/print" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

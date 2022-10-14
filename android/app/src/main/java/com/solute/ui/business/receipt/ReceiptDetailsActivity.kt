@@ -1,13 +1,19 @@
 package com.solute.ui.business.receipt
 
+import android.content.Context
 import android.os.Bundle
+import android.print.PrintAttributes
+import android.print.PrintJob
+import android.print.PrintManager
 import android.view.View
 import android.webkit.WebView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.google.gson.Gson
+import com.solute.App
 import com.solute.R
 import com.solute.utility.SMSManager
 import com.solute.utility.WhatsappManager
@@ -25,6 +31,7 @@ import org.json.JSONObject
 
 
 class ReceiptDetailsActivity : UtilityActivity() {
+    private val PRINT_SERVICE: Int = 0
     val business = BusinessHandler.shared().repository.business
     val gson = Gson()
     var receiptData = JSONObject()
@@ -38,6 +45,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
     var messageButton: ImageButton? = null
     var shareButton: ImageButton? = null
     var whatsappButton: ImageButton? = null
+    var printButton : ImageButton? = null
     var messageTitle: TextView? = null
     var shareTitle: TextView? = null
     var whatsappTitle: TextView? = null
@@ -57,6 +65,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
         messageTitle = findViewById(R.id.receipt_details_receipt_message_title)
         whatsappTitle = findViewById(R.id.receipt_details_receipt_whatsapp_title)
         shareTitle = findViewById(R.id.receipt_details_receipt_share_title)
+        printButton = findViewById(R.id.receipt_details_receipt_print_btn)
         backButton?.setOnClickListener { onBackPressed() }
         messageButton?.setOnClickListener {
             if (customerInvoice != null && customerInvoice!!.InvoiceNumber != null) {
@@ -78,7 +87,11 @@ class ReceiptDetailsActivity : UtilityActivity() {
                     customerInvoice!!.FinalPrice!!
                 )
             }
-
+        }
+        printButton?.setOnClickListener {
+            this.pdfView?.let {
+                createWebPagePrint(it)
+            }
         }
         whatsappButton?.setOnClickListener {
             if (customer != null && customer!!.MobileNumber != null && customerInvoice != null) {
@@ -187,6 +200,29 @@ class ReceiptDetailsActivity : UtilityActivity() {
         this.subTotal?.text = "₹ " + subTotal.toString()
         this.total?.text = "₹ " + finalPrice.toString()
     }
-
+    fun createWebPagePrint(webView: WebView) {
+        /*if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+            return;*/
+        val printManager = this.getSystemService(Context.PRINT_SERVICE) as PrintManager
+        val printAdapter = webView.createPrintDocumentAdapter()
+        val jobName: String = "getString(R.string.webapp_name).toString()" + " Document"
+        val builder = PrintAttributes.Builder()
+        builder.setMediaSize(PrintAttributes.MediaSize.ISO_A5)
+        val printJob: PrintJob = printManager!!.print(jobName, printAdapter, builder.build())
+        if (printJob.isCompleted()) {
+            Toast.makeText(
+                App.applicationContext(),
+                "Printed Successfully",
+                Toast.LENGTH_LONG
+            ).show()
+        } else if (printJob.isFailed()) {
+            Toast.makeText(
+                App.applicationContext(),
+                "Couldn't prnit, please try after some time",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        // Save the job object for later status checking
+    }
 
 }

@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/drawable/done.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/filter.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.1595" />
+        <entry key="app/src/main/res/drawable/print.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/product_default_img.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/progress.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/search.xml" value="0.1755" />
@@ -42,7 +43,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21888580322265627" />
         <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.5050279257954031" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.129981884057971" />
-        <entry key="app/src/main/res/layout/activity_receipt_details.xml" value="0.3008621215820313" />
+        <entry key="app/src/main/res/layout/activity_receipt_details.xml" value="0.474432373046875" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18704710144927536" />
         <entry key="app/src/main/res/layout/activity_select_business_type.xml" value="0.16802536231884058" />
         <entry key="app/src/main/res/layout/activity_sub_category_details.xml" value="0.15070921985815602" />

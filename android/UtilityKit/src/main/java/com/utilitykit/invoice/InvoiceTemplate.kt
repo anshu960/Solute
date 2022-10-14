@@ -53,7 +53,8 @@ class InvoiceTemplate {
 .invoice-price {
     background: #f0f3f4;
     display: table;
-    width: 100%
+    width: 100%;
+    margin: top 20%;
 }
 
 .invoice-price .invoice-price-left,
@@ -178,7 +179,7 @@ class InvoiceTemplate {
                         <th class="text-right" width="20%">Total</th>
                      </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="text-body-center">
                      ###SalesData
                   </tbody>
                </table>
@@ -198,6 +199,13 @@ class InvoiceTemplate {
                      <div class="sub-price">
                         <small>Tax</small>
                         <span class="text-inverse">###Tax</span>
+                     </div>
+                     <div class="sub-price">
+                        <i class="fa fa-minus text-muted"></i>
+                     </div>
+                      <div class="sub-price">
+                        <small>Instant Discount</small>
+                        <span class="text-inverse">###InstantDiscount</span>
                      </div>
                   </div>
                </div>

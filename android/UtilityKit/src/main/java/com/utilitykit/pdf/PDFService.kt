@@ -8,7 +8,6 @@ import com.utilitykit.feature.invoice.model.CustomerInvoice
 import com.utilitykit.invoice.InvoiceTemplate
 
 
-
 class PDFService {
 
     fun createInvoice(context: Context?,customer:Customer?,business:Business?,invoice: CustomerInvoice,sales:ArrayList<Sale>) :String{
@@ -39,7 +38,7 @@ class PDFService {
         invoiceHtml = invoiceHtml.replace("###SubTotal",invoice.TotalPrice.toString())
         invoiceHtml = invoiceHtml.replace("###Tax",invoice.Tax.toString())
         invoiceHtml = invoiceHtml.replace("###FinalPrice",invoice.FinalPrice.toString())
-
+        invoiceHtml = invoiceHtml.replace("###InstantDiscount",invoice.InstantDiscount.toString())
         return invoiceHtml
     }
 
