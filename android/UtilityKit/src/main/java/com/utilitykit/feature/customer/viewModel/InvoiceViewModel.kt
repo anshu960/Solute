@@ -24,7 +24,7 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
         }
     }
 
-    val allCustomer : LiveData<List<Customer>>
+    val allCustomer : LiveData<ArrayList<Customer>>
         get() = customerRepository.allCustomer
 
     val customer : LiveData<Customer>

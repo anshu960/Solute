@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.utilitykit.feature.customer.model.Customer
 
 class CustomerRepository {
-    val allCustomerLiveData = MutableLiveData<List<Customer>>()
-    val allCustomer : LiveData<List<Customer>>
+    val allCustomerLiveData = MutableLiveData<ArrayList<Customer>>()
+    val allCustomer : LiveData<ArrayList<Customer>>
         get() = allCustomerLiveData
 
     val customerLiveData = MutableLiveData<Customer>()

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.ui.business.customer.create.CreateCustomerActivity
+import com.solute.ui.business.customer.select.SelectCustomerActivity
 import com.solute.ui.business.product.BusinessProductAdapter
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.cart.viewModel.CartViewModel
@@ -151,7 +152,9 @@ class BusinessCartFragment : Fragment() {
     }
 
     fun onClickSale(){
-        cartViewModel?.createSaleAndGenerateReceipt(selectedCustomer)
+//        cartViewModel?.createSaleAndGenerateReceipt(selectedCustomer)
+        val intent = Intent(this.context,SelectCustomerActivity::class.java)
+        this.context?.startActivity(intent)
     }
     fun onClickAddCustomer(){
         if(this.selectedCustomer != null && this.selectedCustomer!!.Id != null && this.selectedCustomer!!.Id != ""){

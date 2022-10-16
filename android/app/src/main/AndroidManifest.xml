@@ -24,6 +24,9 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="33">
         <activity
+            android:name=".SelectCustomerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.notification.UserNotificationActivity"
             android:exported="false" />
         <activity
