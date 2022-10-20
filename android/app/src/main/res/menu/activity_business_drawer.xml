@@ -16,12 +16,15 @@
             android:id="@+id/business_cart"
             android:icon="@drawable/shopping_cart"
             android:title="@string/cart" />
-
-
         <item
             android:id="@+id/business_invoice"
             android:icon="@drawable/receipt"
             android:title="@string/invoice" />
+        <item
+            android:id="@+id/business_employee"
+            android:icon="@drawable/employee"
+            android:title="@string/employee" />
+
     </group>
     <item
         android:title="Inventory"

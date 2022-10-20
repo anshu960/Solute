@@ -32,6 +32,7 @@ class Key {
         val groupName = "GroupName"
         val groupDescription = "GroupDescription"
         val ownerUserID = "OwnerUserID"
+        val employeeUserID = "EmployeeUserID"
 
         val userId = "UserID"
         var businessID = "BusinessID"

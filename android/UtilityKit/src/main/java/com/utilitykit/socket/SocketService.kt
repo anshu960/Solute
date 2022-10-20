@@ -20,6 +20,7 @@ import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.customer.handler.CustomerHandler
+import com.utilitykit.feature.employee.handler.EmployeeHandler
 import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
@@ -160,6 +161,9 @@ class SocketService: Service() {
             mSocket?.on(SocketEvent.REMOVE_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
             mSocket?.on(SocketEvent.ADD_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
             mSocket?.on(SocketEvent.RESET_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
+            mSocket?.on(SocketEvent.RETRIVE_EMPLOYEE.value,EmployeeHandler.shared().onFetchAllEmployee)
+            mSocket?.on(SocketEvent.FIND_USER.value,EmployeeHandler.shared().onFindUser)
+            mSocket?.on(SocketEvent.CREATE_EMPLOYEE.value,EmployeeHandler.shared().onCreateEmployee)
 
             //conenct the socket
             mSocket?.connect()

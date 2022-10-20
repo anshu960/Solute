@@ -152,9 +152,9 @@ class BusinessCartFragment : Fragment() {
     }
 
     fun onClickSale(){
-//        cartViewModel?.createSaleAndGenerateReceipt(selectedCustomer)
-        val intent = Intent(this.context,SelectCustomerActivity::class.java)
-        this.context?.startActivity(intent)
+        cartViewModel?.createSaleAndGenerateReceipt(selectedCustomer)
+//        val intent = Intent(this.context,SelectCustomerActivity::class.java)
+//        this.context?.startActivity(intent)
     }
     fun onClickAddCustomer(){
         if(this.selectedCustomer != null && this.selectedCustomer!!.Id != null && this.selectedCustomer!!.Id != ""){

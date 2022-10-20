@@ -19,6 +19,7 @@
     <color name="priority_medium">#F17105</color>
     <color name="transparent">#00ffffff</color>
     <color name="semi_transparent_black">#7D000000</color>
+    <color name="black">#000000</color>
 
     <color name="delete">#C73535</color>
     <color name="pending">#F17105</color>

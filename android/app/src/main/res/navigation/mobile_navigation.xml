@@ -49,5 +49,11 @@
         android:name="com.solute.ui.business.inventory.subCategory.FragmentProductSubCategory"
         android:label="@string/sub_category"
         tools:layout="@layout/fragment_product_sub_category" />
+    <fragment
+        android:id="@+id/business_employee"
+        android:name="com.solute.ui.business.employee.EmployeeListFragment"
+        android:label="@string/employee"
+        tools:layout="@layout/fragment_employee_list" />
+
 
 </navigation>

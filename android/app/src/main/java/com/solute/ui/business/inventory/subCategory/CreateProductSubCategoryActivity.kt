@@ -70,11 +70,11 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
             }
             index+=1
         }
-        index = 0
+        index = -1
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Choose an animal")
+        builder.setTitle("Choose an Category")
         builder.setSingleChoiceItems(allCategoryNames, selectedCategoryIndex) { dialog, which ->
-            productCategoryText?.setText(allCategoryNames[which])
+            productCategoryText?.text = allCategoryNames[which]
             allCategoory.forEach {
                 it.Name?.let { it1 ->
                     if(allCategoryNames[which] == it1){
@@ -87,7 +87,11 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
             index = 0
         }
         builder.setPositiveButton("OK") { dialog, which ->
-
+            if(selectedCategory == null && allCategoory.isNotEmpty()){
+                selectedCategory = allCategoory[0]
+                selectedCategoryIndex = 0
+                productCategoryText?.text = allCategoory[0].Name
+            }
         }
         builder.setNegativeButton("Cancel", null)
         val dialog = builder.create()

@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.vending.BILLING"/>
 
     <queries>
         <package android:name="com.whatsapp" />
@@ -24,11 +25,18 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="33">
         <activity
-            android:name=".SelectCustomerActivity"
-            android:exported="false" />
+            android:name=".ui.business.employee.create.CreateEmployeeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_create_employee"
+             />
+        <activity
+            android:name=".ui.business.customer.select.SelectCustomerActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.notification.UserNotificationActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.business.BusinessActivity"
             android:exported="false"

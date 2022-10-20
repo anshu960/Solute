@@ -33,9 +33,9 @@ class BusinessListFragment : Fragment() {
         ).get(
             BusinessViewModel::class.java
         )
-        businessViewModel.allBusiness.observe(this, {
+        businessViewModel.allBusiness.observe(this) {
             this.reload()
-        })
+        }
         BusinessHandler.shared().setup(businessViewModel)
         BusinessHandler.shared().fetchAllBusiness()
     }
@@ -45,6 +45,9 @@ class BusinessListFragment : Fragment() {
         this.recyclerView!!.layoutManager = LinearLayoutManager(this.context)
         adapter = this.context?.let { BusinessListAdapter(it, allBusiness) }
         this.recyclerView!!.adapter = this.adapter
+        if(allBusiness.isEmpty()){
+            BusinessHandler.shared().fetchAllBusiness()
+        }
     }
 
     override fun onCreateView(
