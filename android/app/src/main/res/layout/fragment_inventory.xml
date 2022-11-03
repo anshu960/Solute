@@ -21,13 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/ic_add"
-        android:backgroundTint="@android:color/transparent"
-        android:clickable="true"
-        android:foreground="@drawable/ic_add"
         android:foregroundGravity="center|fill"
-        android:tint="@android:color/transparent"
-        app:backgroundTint="@color/transparent"
+        app:tint="@android:color/white"
+        app:backgroundTint="@color/themeBlue"
+        android:src="@drawable/baseline_add"
+        app:rippleColor="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

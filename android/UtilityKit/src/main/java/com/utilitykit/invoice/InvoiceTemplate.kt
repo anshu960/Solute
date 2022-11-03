@@ -3,14 +3,29 @@ package com.utilitykit.invoice
 class InvoiceTemplate {
     companion object{
         val htmlTemplate = """
-        <html>
+       <html>
     <head>
+   
+    <link rel = "stylesheet" href =  
+"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />  
         <style>
              body{
     margin-top:20px;
     background:#eee;
 }
-
+.qr-code {  
+   max-width: 200px;  
+   margin: 10px;  
+   }  
+   body {  
+ background-color: #ffffff;  
+ justify-content: center;  
+ font-family: 'VT323', monospace;  
+ font-size: 1.5rem;  
+color: black;  
+ margin: 0px;  
+  text-align: center;   
+}  
 .invoice {
     background: #fff;
     padding: 20px
@@ -134,11 +149,19 @@ class InvoiceTemplate {
     <body>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
+  
    <div class="col-md-12">
       <div class="invoice">
+      
          <!-- end invoice-company -->
          <!-- begin invoice-header -->
          <div class="invoice-header">
+         <div class="invoice-from">
+         <img src =  
+"https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fsolute.app%2F%23%2Freceipt%3Fid%3D###InvoiceNumber&chs=160x160&chld=L|0"  
+        class = "qr-code img-thumbnail img-responsive" />
+         </div>
+         
             <div class="invoice-from">
                <small>from</small>
                <address class="m-t-5 m-b-5">
@@ -218,6 +241,10 @@ class InvoiceTemplate {
       </div>
    </div>
 </div>
+
+<script src =  
+    "https://code.jquery.com/jquery-3.5.1.js">  
+</script>  
     </body>
 </html>
         """

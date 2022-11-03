@@ -30,9 +30,8 @@ open class UtilityActivity :UtilityViewController(){
         super.onDestroy()
     }
 
-   public fun connectSocket(){
+    fun connectSocket(){
        SocketService.shared().currentActivity = this
-       SocketService.shared().connect()
     }
     
     fun captureDate(callback:(String)->Unit){

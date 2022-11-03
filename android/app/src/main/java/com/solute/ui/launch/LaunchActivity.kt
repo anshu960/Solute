@@ -7,6 +7,7 @@ import androidx.multidex.BuildConfig
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.login.LoginActivity
+import com.solute.ui.network.ConnectingActivity
 import com.solute.ui.register.RegisterActivity
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
@@ -18,7 +19,7 @@ import com.utilitykit.socket.SocketService
 
 class LaunchActivity : UtilityActivity() {
     private var mDelayHandler: Handler? = null
-    private val SPLASH_DELAY: Long = 2000 //2 seconds
+    private val SPLASH_DELAY: Long = 500 //2 seconds
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
 //            val isAccepted = Defaults.string(Key.isAccepted)
@@ -29,11 +30,10 @@ class LaunchActivity : UtilityActivity() {
                     val user = User()
                     if (user.name != "" && user.userID != "" && user._id != ""){
                         if(user.profilePic == ""){
-//                            val intent = Intent(applicationContext, AddProfilePicActivity::class.java)
-                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            val intent = Intent(applicationContext, ConnectingActivity::class.java)
                             this.startActivity(intent)
                         }else{
-                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            val intent = Intent(applicationContext, ConnectingActivity::class.java)
                             this.startActivity(intent)
                         }
                     }else{

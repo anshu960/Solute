@@ -14,8 +14,8 @@ import com.utilitykit.Constants.Constants
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.socket.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.UtilityViewController
+import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 
 
@@ -66,7 +66,7 @@ class SignupActivity : UtilityViewController() {
         roleType.put(Key._id ,"61acee7871a83e09a12a1668")
         request.put(Key.roleType,roleType)
         this.startActivityIndicator("Trying to create account")
-        SocketManager.onEvent= { event, data ->
+        SocketService.shared().onEvent= { event, data ->
             runOnUiThread {
                 this.stopActivityIndicator()
                 val response = data
@@ -82,6 +82,6 @@ class SignupActivity : UtilityViewController() {
                 }
             }
         }
-        SocketManager.send(SocketEvent.authenticate, request)
+        SocketService.shared().send(SocketEvent.authenticate, request)
     }
 }

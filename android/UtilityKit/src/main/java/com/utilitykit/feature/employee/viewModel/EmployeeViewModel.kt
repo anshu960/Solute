@@ -8,6 +8,7 @@ import com.utilitykit.Constants.Key
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.commonModel.Profile
 import com.utilitykit.feature.employee.model.Employee
 import com.utilitykit.feature.employee.repository.EmployeeRepository
 import com.utilitykit.socket.SocketService
@@ -30,8 +31,8 @@ class EmployeeViewModel (private val employeeRepository: EmployeeRepository):Vie
     val employee : LiveData<Employee>
         get() = employeeRepository.employee
 
-    val user : LiveData<User>
-        get() = employeeRepository.user
+    val profile : LiveData<Profile>
+        get() = employeeRepository.profile
 
 
 
@@ -45,16 +46,16 @@ class EmployeeViewModel (private val employeeRepository: EmployeeRepository):Vie
         }
     }
 
-    fun createNew(employeeUser:User){
+    fun createNew(employeeProfile:Profile){
         val user = User()
         if(BusinessHandler.shared().repository.business != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
             request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
-            request.put(Key.name,employeeUser.name)
-            request.put(Key.mobileNumber,employeeUser.mobile)
-            request.put(Key.employeeUserID, employeeUser._id)
-            request.put(Key.emailId,employeeUser.email)
+            request.put(Key.name,employeeProfile.Name)
+            request.put(Key.mobileNumber,employeeProfile.MobileNumber)
+            request.put(Key.employeeUserID, employeeProfile.Id)
+            request.put(Key.emailId,employeeProfile.EmailID)
             SocketService.shared().send(SocketEvent.CREATE_EMPLOYEE,request)
         }
     }

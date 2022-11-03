@@ -3,7 +3,9 @@ package com.utilitykit.feature.employee.handler
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
+import com.utilitykit.UtilityKitApp.Companion.user
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.commonModel.Profile
 import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.customer.viewModel.CustomerViewModel
@@ -73,8 +75,8 @@ class EmployeeHandler {
                 val payload = anyData.getJSONArray(Key.payload)
                 if(payload.length() > 0) {
                     val userData = payload.get(0)
-                    val user = gson.fromJson(userData.toString(), User::class.java)
-                    repository.userLiveData.postValue(user)
+                    val profile = gson.fromJson(userData.toString(), Profile::class.java)
+                    repository.profileLiveData.postValue(profile)
                 }
             }
         }

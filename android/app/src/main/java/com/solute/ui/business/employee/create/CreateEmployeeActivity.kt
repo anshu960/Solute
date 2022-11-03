@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.commonModel.Profile
 import com.utilitykit.feature.customer.viewModel.EmployeeViewModel
 import com.utilitykit.feature.employee.handler.EmployeeHandler
 import com.utilitykit.feature.employee.model.Employee
@@ -23,7 +24,7 @@ class CreateEmployeeActivity : UtilityActivity() {
 
     var viewModal : EmployeeViewModel? = null
     var employee : Employee? = null
-    var employeeUser : User? = null
+    var employeeProfile : Profile? = null
 
     var searchField : TextInputEditText? = null
     var employeeCard : CardView? = null
@@ -71,8 +72,8 @@ class CreateEmployeeActivity : UtilityActivity() {
             employee = it
             onChangeEmployee()
         }
-        viewModal?.user?.observe(this) {
-            employeeUser = it
+        viewModal?.profile?.observe(this) {
+            employeeProfile = it
             onChangeUser()
         }
         EmployeeHandler.shared().setup(viewModal!!)
@@ -86,11 +87,11 @@ class CreateEmployeeActivity : UtilityActivity() {
         }
     }
     fun onChangeUser(){
-        if(employeeUser != null){
+        if(employeeProfile != null){
             employeeCard?.visibility = View.VISIBLE
             saveButton?.visibility = View.VISIBLE
-            employeeName?.text = employeeUser!!.name
-            employeeMobile?.text = employeeUser!!.mobile
+            employeeName?.text = employeeProfile!!.Name
+            employeeMobile?.text = employeeProfile!!.MobileNumber
         }
     }
 
@@ -102,8 +103,8 @@ class CreateEmployeeActivity : UtilityActivity() {
     }
 
     fun onClickSave(){
-        if(employeeUser != null) {
-            viewModal?.createNew(employeeUser!!)
+        if(employeeProfile != null) {
+            viewModal?.createNew(employeeProfile!!)
         }
     }
 

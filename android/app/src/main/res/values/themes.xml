@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
     </style>
 
     <style name="MateriaDark" parent="Theme.MaterialComponents.Light.DarkActionBar">
@@ -77,5 +79,7 @@
         <item name="android:minHeight">48dp</item>
         <item name="android:backgroundTint">#ffffff</item>
     </style>
+
+
 </resources>
 

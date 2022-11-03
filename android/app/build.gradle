@@ -11,8 +11,8 @@ android {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 46
-        versionName "0.0.46"
+        versionCode 48
+        versionName "0.0.48"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -85,7 +85,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'com.google.zxing:core:3.3.2'
 
     //update

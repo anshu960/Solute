@@ -22,11 +22,12 @@ import com.google.firebase.auth.*
 import com.hbb20.CountryCodePicker
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
+import com.utilitykit.Defaults.init
 import com.utilitykit.socket.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.UtilityActivity
 import com.utilitykit.database.Database
 import com.utilitykit.database.SQLite
+import com.utilitykit.socket.SocketService
 
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
@@ -50,8 +51,8 @@ class LoginActivity : UtilityActivity() {
     private var otpTextViews: Array<EditText>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Database.init(this)
-        SQLite.init(this)
+        Database.shared().setUp(this)
+        SQLite.shared().setUp(this)
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
         initiatePhoneSetup()
@@ -204,17 +205,17 @@ class LoginActivity : UtilityActivity() {
         val deviceID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         request.put(Key.deviceId,deviceID)
         request.put(Key.fcmToken,deviceID)
-        SocketManager.joinRoom(uid)
+        SocketService.shared().joinRoom(uid)
 
         this.startActivityIndicator("Checking for existing accounts")
-        SocketManager.onEvent= { event, data ->
+        SocketService.shared().onEvent= { event, data ->
             this.runOnUiThread {
                 stopActivityIndicator()
                 Log.d("LoginResponse",data.toString())
                 if(data.has(Key.payload)){
                     var payload = data.getJSONObject(Key.payload)
                     if(payload.has(Key.name)){
-                        SocketManager.joinRoom(payload.getString(Key._id))
+                        SocketService.shared().joinRoom(payload.getString(Key._id))
                         Defaults.store(Key.loginDetails, payload)
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         this.startActivity(intent)
@@ -236,7 +237,7 @@ class LoginActivity : UtilityActivity() {
                 }
             }
         }
-        SocketManager.send(SocketEvent.authenticate, request)
+        SocketService.shared().send(SocketEvent.authenticate, request)
     }
 
     fun onClickSignUp(view: View){

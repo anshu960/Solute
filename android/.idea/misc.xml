@@ -30,9 +30,11 @@
         <entry key="app/src/main/res/drawable/progress.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/search.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/shopping_cart.xml" value="0.2255" />
+        <entry key="app/src/main/res/drawable/striking_text.xml" value="0.1655" />
         <entry key="app/src/main/res/layout/activity_business.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/activity_business_main.xml" value="0.2816799840183123" />
         <entry key="app/src/main/res/layout/activity_category_details.xml" value="0.1911231884057971" />
+        <entry key="app/src/main/res/layout/activity_connecting.xml" value="0.2103898841680123" />
         <entry key="app/src/main/res/layout/activity_create_business.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_create_customer.xml" value="0.5601348876953125" />
@@ -56,6 +58,7 @@
         <entry key="app/src/main/res/layout/fragment_business_list.xml" value="0.13652482269503546" />
         <entry key="app/src/main/res/layout/fragment_business_product.xml" value="0.24663457455842397" />
         <entry key="app/src/main/res/layout/fragment_business_products.xml" value="0.37313963978003106" />
+        <entry key="app/src/main/res/layout/fragment_business_sale.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_employee_list.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15070921985815602" />
@@ -79,7 +82,7 @@
         <entry key="app/src/main/res/layout/recycler_item_invoice.xml" value="0.30610167591284354" />
         <entry key="app/src/main/res/layout/recycler_item_product.xml" value="0.301885986328125" />
         <entry key="app/src/main/res/layout/recycler_item_product_category.xml" value="0.23822463768115942" />
-        <entry key="app/src/main/res/layout/recycler_item_product_sale.xml" value="0.23822463768115942" />
+        <entry key="app/src/main/res/layout/recycler_item_product_sale.xml" value="0.1" />
         <entry key="app/src/main/res/layout/recycler_item_product_stock.xml" value="0.2634461997211843" />
         <entry key="app/src/main/res/layout/recycler_item_product_sub_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/recycler_item_receipt.xml" value="0.39925658313940604" />

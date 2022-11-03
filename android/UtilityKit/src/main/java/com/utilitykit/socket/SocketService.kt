@@ -26,6 +26,7 @@ import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.utilitykit.feature.sync.SyncHandler
+import com.utilitykit.socket.repository.SocketRepository
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -33,6 +34,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class SocketService: Service() {
+
+    val repository = SocketRepository()
+    val mSocket = UtilityKitApp.applicationContext().getMSocket()
+
     override fun onBind(p0: Intent?): IBinder? {
         TODO("Not yet implemented")
     }
@@ -55,7 +60,6 @@ class SocketService: Service() {
 
     val TAG = "SOCKET.IO.MANAGER"
     var conversation : Conversation? = null
-    private var mSocket: Socket? = null
     var isSocketConnected = false
     lateinit var currentActivity: UtilityViewController
     var onEvent: (SocketEvent, JSONObject) -> Unit = fun(event: SocketEvent, data: JSONObject)
@@ -88,9 +92,6 @@ class SocketService: Service() {
 
     fun connect()
     {
-        mSocket = UtilityKitApp.applicationContext().getMSocket()
-        if (isSocketConnected == false)
-        {
             val options = IO.Options()
             options.reconnection = true //reconnection
             options.forceNew = true
@@ -164,10 +165,8 @@ class SocketService: Service() {
             mSocket?.on(SocketEvent.RETRIVE_EMPLOYEE.value,EmployeeHandler.shared().onFetchAllEmployee)
             mSocket?.on(SocketEvent.FIND_USER.value,EmployeeHandler.shared().onFindUser)
             mSocket?.on(SocketEvent.CREATE_EMPLOYEE.value,EmployeeHandler.shared().onCreateEmployee)
-
             //conenct the socket
             mSocket?.connect()
-        }
     }
 
     fun verifyIfConnectedOrNot(){
@@ -178,7 +177,7 @@ class SocketService: Service() {
 
 
     val onConnect = Emitter.Listener {
-        print("Connected")
+        repository.socketConnectionStatus.postValue(1)
         isSocketConnected = true
         if (mSocket?.connected() == true)
         {
@@ -199,6 +198,7 @@ class SocketService: Service() {
     }
 
     private val onConnectError = Emitter.Listener {
+        repository.socketConnectionStatus.postValue(0)
         Log.d(TAG, "Error connecting \n \n")
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
@@ -206,6 +206,7 @@ class SocketService: Service() {
         mSocket?.connect()
     }
     private val onDisconnect = Emitter.Listener {
+        repository.socketConnectionStatus.postValue(0)
         Log.d(TAG, "Error connecting \n \n")
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
@@ -214,7 +215,7 @@ class SocketService: Service() {
     }
 
     private val joinRoom = Emitter.Listener {
-        Log.d(TAG, " Got Message \n \n")
+        Log.d(TAG, " Got Message \n \n ${it.toString()}")
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
         this.onEvent(SocketEvent.joinRoom, JSONObject())

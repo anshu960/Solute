@@ -1,7 +1,9 @@
 package com.solute
 
 import android.app.Application
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.provider.Settings
 import androidx.fragment.app.Fragment
 import androidx.multidex.BuildConfig
@@ -27,11 +29,10 @@ import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
 import com.utilitykit.dataclass.User
-import java.net.Socket
+
 class App: Application() {
     var activity: UtilityViewController? = null
     var fragment: Fragment? = null
-    private var mSocket: Socket? = null
     init {
         instance = this
     }
@@ -72,6 +73,11 @@ class App: Application() {
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
         setUpFirebaseStorage()
+    }
+
+    override fun startForegroundService(service: Intent?): ComponentName? {
+        return super.startForegroundService(service)
+        UtilityKitApp().setUp(this,BuildConfig.DEBUG)
     }
 
 

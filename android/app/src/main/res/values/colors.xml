@@ -49,7 +49,10 @@
     <color name="high_background">#FFE0CA</color>
     <color name="critical_background">#F6D3D3</color>
     <color name="not_decided_background">#E0DCF6</color>
-
+    <color name="product_name">#0F172A</color>
+    <color name="product_discount">#0631A4</color>
+    <color name="product_mrp">#63758B</color>
+    <color name="stepper_background">#F1F3F5</color>
 
 
 

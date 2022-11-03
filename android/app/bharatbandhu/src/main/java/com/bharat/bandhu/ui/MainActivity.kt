@@ -16,8 +16,8 @@ import com.google.zxing.WriterException
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.socket.SocketEvent
-import com.utilitykit.SocketUtill.SocketManager
 import com.utilitykit.dataclass.User
+import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         request.put(Key.userId,user._id)
         request.put(Key.businessID,"62a75e360abf93da20e547b4")
         request.put(Key.mobileNumber,user.mobile)
-        SocketManager.onEvent={event,data->
+        SocketService.shared().onEvent={event,data->
             Log.d("Received",data.toString())
             if(data.has(Key.payload)){
                 val payload = data.getJSONArray(Key.payload)
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        SocketManager.send(SocketEvent.findCustomerByMobile,request)
+        SocketService.shared().send(SocketEvent.findCustomerByMobile,request)
         loadMembershipInUI()
     }
 
@@ -70,10 +70,27 @@ class MainActivity : AppCompatActivity() {
         val membership = Defaults.json(Key.membershipDetails)
         if(membership.has(Key.barcode)){
             val barcodeNumber = membership.getString(Key.barcode)
-            generateBarcode(barcodeNumber)
-            barcodeText?.text = barcodeNumber
+            if(barcodeNumber.isNotEmpty()){
+                generateBarcode(barcodeNumber)
+                barcodeText?.text = barcodeNumber
+            }else{
+                var barcodeNumber = user.mobile
+                barcodeNumber.replace("+49","")
+                barcodeNumber = barcodeNumber + "900"
+                if(barcodeNumber.isNotEmpty()) {
+                    generateBarcode(barcodeNumber)
+                    barcodeText?.text = barcodeNumber
+                }
+            }
         }else{
-            barcodeText?.text = "Membership details not found, please try after some time"
+            var barcodeNumber = user.mobile
+            barcodeNumber.replace("+49","")
+            barcodeNumber = barcodeNumber + "900"
+            if(barcodeNumber.isNotEmpty()) {
+                generateBarcode(barcodeNumber)
+                barcodeText?.text = barcodeNumber
+            }
+//            barcodeText?.text = "Membership details not found, please try after some time"
         }
     }
 

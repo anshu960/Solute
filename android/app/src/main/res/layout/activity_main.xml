@@ -53,7 +53,8 @@
         app:tint="@android:color/white"
         app:backgroundTint="@color/themeBlue"
         android:src="@drawable/baseline_add"
+        app:rippleColor="@color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/business_home_bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@color/transparent" />
+         />
 </androidx.constraintlayout.widget.ConstraintLayout>

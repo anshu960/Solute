@@ -5,7 +5,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -31,15 +34,7 @@ class BusinessProductAdapter(val context: Context,val fragment: Fragment?,val al
 
     override fun onBindViewHolder(holder: BusinessProductViewHolder, position: Int) {
         val item = allProduct[position]
-        holder.itemView.setOnClickListener {
-            if(context is BusinessActivity){
-                val activity = context
-                ProductHandler.shared().repository.selectedProductLiveData.postValue(item)
-                val intent = Intent(activity, ProductDetailActivity::class.java)
-                activity.startActivity(intent)
-            }
-        }
-        holder.bind(fragment,item)
+        holder.bind(context,fragment,item)
     }
 }
 
@@ -55,8 +50,8 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
     private var productDiscount: TextView? = null
     private var productFinalPrice: TextView? = null
     private var productQuantity: TextView? = null
-    private var stepperContainer: LinearLayout? = null
-    private var addToCartCard: CardView? = null
+    private var stepperContainer: CardView? = null
+    private var addToCartBtn: ImageButton? = null
     private var increaseButton: ImageButton? = null
     private var decreaseButton: ImageButton? = null
     private var productTax : TextView? = null
@@ -70,12 +65,12 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         productFinalPrice = itemView.findViewById(R.id.recycler_item_product_final_price_txt)
         productQuantity = itemView.findViewById(R.id.recycler_item_product_stepper_count_txt)
         stepperContainer = itemView.findViewById(R.id.recycler_item_product_stepper_layout)
-        addToCartCard = itemView.findViewById(R.id.recycler_item_product_add_to_cart_card)
+        addToCartBtn = itemView.findViewById(R.id.recycler_item_product_cart_btn)
         increaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_add_btn)
         decreaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_remove_btn)
     }
 
-    fun bind(fragment:Fragment?,product: Product) {
+    fun bind(context: Context,fragment:Fragment?,product: Product) {
         val picasso = Picasso.get()
         if(product.Image.isNotEmpty()){
             picasso.load(product.Image.first()).into(image)
@@ -83,8 +78,13 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         productName?.text = product.Name
         productDescription?.text = product.Description
         productPrice?.text = "₹ ${product.MRP}"
-
-        productDiscount?.text = "₹ ${product.Discount}"
+        val discount = discountToPercent(product)
+        if(discount != ""){
+            productDiscount?.visibility = View.VISIBLE
+            productDiscount?.text = discount
+        }else{
+            productDiscount?.visibility = View.GONE
+        }
         productFinalPrice?.text = "₹ ${product.FinalPrice}"
         stepperContainer?.visibility = View.GONE
 
@@ -108,20 +108,37 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
                 }
             }
         }
-        addToCartCard?.setOnClickListener { CartHandler.shared().addToCart(product) }
+        addToCartBtn?.setOnClickListener { CartHandler.shared().addToCart(product) }
         increaseButton?.setOnClickListener { CartHandler.shared().addToCart(product) }
         decreaseButton?.setOnClickListener { CartHandler.shared().removeFromCart(product) }
+        image?.setOnClickListener {
+//            throw NullPointerException()
+            if(context is BusinessActivity){
+                    val activity = context
+                    ProductHandler.shared().repository.selectedProductLiveData.postValue(product)
+                    val intent = Intent(activity, ProductDetailActivity::class.java)
+                    activity.startActivity(intent)
+            }
+        }
     }
     fun updateQuanity(product:Product){
         val quanity = CartHandler.shared().viewModel?.getProductQuantity(product)
         if(quanity != null &&  quanity>0){
             stepperContainer?.visibility = View.VISIBLE
-            addToCartCard?.visibility = View.GONE
+            addToCartBtn?.visibility = View.GONE
             productQuantity?.text = quanity.toString()
         }else{
             stepperContainer?.visibility = View.GONE
-            addToCartCard?.visibility = View.VISIBLE
+            addToCartBtn?.visibility = View.VISIBLE
         }
+    }
+    fun discountToPercent(product:Product):String{
+        var off = ""
+        if(product.Discount != null && product.Discount!! > 0 && product.MRP != null){
+            val perc = ((product.Discount!! / product.MRP!!)*100).toInt()
+            off= perc.toString() + "%Off"
+        }
+        return off
     }
 
 }
