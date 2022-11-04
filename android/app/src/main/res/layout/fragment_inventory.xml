@@ -22,12 +22,13 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:foregroundGravity="center|fill"
-        app:tint="@android:color/white"
-        app:backgroundTint="@color/themeBlue"
         android:src="@drawable/baseline_add"
-        app:rippleColor="@color/transparent"
+        android:visibility="gone"
+        app:backgroundTint="@color/themeBlue"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/transparent"
+        app:tint="@android:color/white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

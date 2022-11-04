@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     fun getCustomerDetails(){
         val request = JSONObject()
         request.put(Key.userId,user._id)
-        request.put(Key.businessID,"62a75e360abf93da20e547b4")
+        request.put(Key.businessID,"6364c00fb25244fcf46425f0")
         request.put(Key.mobileNumber,user.mobile)
         SocketService.shared().onEvent={event,data->
             Log.d("Received",data.toString())
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }else{
                 var barcodeNumber = user.mobile
                 barcodeNumber.replace("+49","")
-                barcodeNumber = barcodeNumber + "900"
+                barcodeNumber = "900" + barcodeNumber
                 if(barcodeNumber.isNotEmpty()) {
                     generateBarcode(barcodeNumber)
                     barcodeText?.text = barcodeNumber

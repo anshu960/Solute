@@ -110,4 +110,9 @@ class InventoryFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadAnalytics()
+    }
+
 }
