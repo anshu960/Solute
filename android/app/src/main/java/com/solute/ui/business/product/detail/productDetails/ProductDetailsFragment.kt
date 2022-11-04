@@ -11,6 +11,8 @@ import com.solute.R
 import com.squareup.picasso.Picasso
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
+import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
+import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +60,20 @@ class ProductDetailsFragment : Fragment() {
             productSubCategory?.text = product.SubCategoryID
             if(product.Image.isNotEmpty()){
                 picasso.load(product.Image.first()).into(image)
+            }
+            if(ProductCategoryHandler.shared().repository.allCategory.value != null){
+                ProductCategoryHandler.shared().repository.allCategory.value!!.forEach {
+                    if(it.Id == product.CategoryID){
+                        productCategory?.text = it.Name
+                    }
+                }
+            }
+            if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null){
+                ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.forEach {
+                    if(it.Id == product.SubCategoryID){
+                        productSubCategory?.text = it.Name
+                    }
+                }
             }
         }
     }

@@ -222,6 +222,20 @@ class CreateProductActivity : UtilityActivity() {
             if(product!!.Image.isNotEmpty()){
                 picasso.load(product!!.Image.first()).into(imageView)
             }
+            if(ProductCategoryHandler.shared().repository.allCategory.value != null){
+                ProductCategoryHandler.shared().repository.allCategory.value!!.forEach {
+                    if(it.Id == product!!.CategoryID){
+                        categoryEditText?.setText(it.Name)
+                    }
+                }
+            }
+            if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null){
+                ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.forEach {
+                    if(it.Id == product!!.SubCategoryID){
+                        subCategoryEditText?.setText(it.Name)
+                    }
+                }
+            }
         }
     }
 

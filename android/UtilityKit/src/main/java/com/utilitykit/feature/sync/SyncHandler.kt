@@ -10,6 +10,7 @@ import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
+import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
@@ -62,6 +63,10 @@ class SyncHandler {
         ProductSubCategoryHandler.shared().repository.subCategoryLiveData.postValue(null)
         getAllSaleForBusiness()
         getAllStockForBusiness()
+        CustomerHandler.shared().fetchAllCustomer()
+        ProductHandler.shared().fetchAllProduct()
+        ProductCategoryHandler.shared().fetchAllProductCategory()
+        ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
     }
 
     fun updateAnalyticsToShow(allSales:ArrayList<Sale>){
