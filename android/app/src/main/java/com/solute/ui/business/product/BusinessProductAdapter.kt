@@ -81,8 +81,10 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         val discount = discountToPercent(product)
         if(discount != ""){
             productDiscount?.visibility = View.VISIBLE
+            productPrice?.visibility = View.VISIBLE
             productDiscount?.text = discount
         }else{
+            productPrice?.visibility = View.GONE
             productDiscount?.visibility = View.GONE
         }
         productFinalPrice?.text = "₹ ${product.FinalPrice}"
