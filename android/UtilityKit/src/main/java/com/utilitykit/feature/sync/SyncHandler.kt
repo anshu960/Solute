@@ -10,6 +10,10 @@ import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
+import com.utilitykit.feature.product.handler.ProductHandler
+import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
+import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
 import kotlinx.coroutines.Dispatchers
@@ -53,6 +57,9 @@ class SyncHandler {
     }
 
     fun syncAllBusinessData(){
+        ProductHandler.shared().repository.productLiveData.postValue(arrayListOf())
+        ProductCategoryHandler.shared().repository.categoryLiveData.postValue(null)
+        ProductSubCategoryHandler.shared().repository.subCategoryLiveData.postValue(null)
         getAllSaleForBusiness()
         getAllStockForBusiness()
     }

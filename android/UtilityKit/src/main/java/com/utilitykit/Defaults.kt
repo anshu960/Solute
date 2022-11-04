@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import org.json.JSONObject
 
 object Defaults {
-    private const val NAME = "com.friendly"
+    private const val NAME = "com.utility.kit"
     private const val MODE = Context.MODE_PRIVATE
     private lateinit var shared: Defaults
     private  lateinit var sharedPreference: SharedPreferences
@@ -86,6 +86,7 @@ object Defaults {
     fun remove(key: String){
         sharedPreference.edit {
             it.remove(key)
+            it.commit()
         }
     }
 

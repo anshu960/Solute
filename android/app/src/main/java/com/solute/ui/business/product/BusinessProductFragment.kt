@@ -1,10 +1,11 @@
 package com.solute.ui.business.product
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,7 @@ class BusinessProductFragment : Fragment() {
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
     var cartButton : FloatingActionButton? = null
+    var searchView : SearchView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
@@ -38,10 +40,10 @@ class BusinessProductFragment : Fragment() {
         ).get(
             ProductViewModel::class.java
         )
-        productViewModel.allProduct.observe(this, {
+        productViewModel.allProduct.observe(this) {
             allProduct = it as ArrayList<Product>
             this.reload()
-        })
+        }
         ProductHandler.shared().setup(productViewModel)
         ProductHandler.shared().fetchAllProduct()
     }
@@ -49,6 +51,20 @@ class BusinessProductFragment : Fragment() {
     fun reload() {
         if(ProductHandler.shared().repository.productLiveData.value != null){
             allProduct = ProductHandler.shared().repository.productLiveData.value as ArrayList<Product>
+        }
+        this.recyclerView!!.layoutManager = GridLayoutManager(this.context,2)
+        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
+        this.recyclerView!!.adapter = this.adapter
+    }
+    fun search(query:String){
+        allProduct = arrayListOf()
+        if(ProductHandler.shared().repository.productLiveData.value != null){
+            val unFilteredList= ProductHandler.shared().repository.productLiveData.value as ArrayList<Product>
+            unFilteredList.forEach {
+                if(it.Name?.contains(query) == true || it.Description?.contains(query) == true){
+                    allProduct.add(it)
+                }
+            }
         }
         this.recyclerView!!.layoutManager = GridLayoutManager(this.context,2)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
@@ -64,6 +80,23 @@ class BusinessProductFragment : Fragment() {
         recyclerView = view.findViewById(R.id.fragment_business_product_recycler)
         cartButton = view.findViewById(R.id.fragment_business_product_cart_btn)
         cartButton?.setOnClickListener { onClickCart() }
+        searchView = view.findViewById(R.id.fragment_business_product_search)
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // do something on text submit
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // do something when text changes
+                if(newText != ""){
+                    search(newText)
+                }else{
+                    reload()
+                }
+                return false
+            }
+        })
         reload()
         return view
     }
@@ -74,6 +107,7 @@ class BusinessProductFragment : Fragment() {
             activity.goToCart()
         }
     }
+
 
 
 }

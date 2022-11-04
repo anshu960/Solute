@@ -206,7 +206,7 @@ class LoginActivity : UtilityActivity() {
         request.put(Key.deviceId,deviceID)
         request.put(Key.fcmToken,deviceID)
         SocketService.shared().joinRoom(uid)
-
+        Defaults.remove(Key.membershipDetails)
         this.startActivityIndicator("Checking for existing accounts")
         SocketService.shared().onEvent= { event, data ->
             this.runOnUiThread {

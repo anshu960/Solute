@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }else{
                 var barcodeNumber = user.mobile
                 barcodeNumber.replace("+49","")
-                barcodeNumber = "900" + barcodeNumber
+                barcodeNumber = "900$barcodeNumber"
                 if(barcodeNumber.isNotEmpty()) {
                     generateBarcode(barcodeNumber)
                     barcodeText?.text = barcodeNumber
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             var barcodeNumber = user.mobile
             barcodeNumber.replace("+49","")
-            barcodeNumber = barcodeNumber + "900"
+            barcodeNumber = "900$barcodeNumber"
             if(barcodeNumber.isNotEmpty()) {
                 generateBarcode(barcodeNumber)
                 barcodeText?.text = barcodeNumber
