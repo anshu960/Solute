@@ -92,6 +92,9 @@ class SocketService: Service() {
 
     fun connect()
     {
+        if(mSocket != null && mSocket!!.isActive && mSocket!!.connected()){
+            return
+        }
             val options = IO.Options()
             options.reconnection = true //reconnection
             options.forceNew = true
