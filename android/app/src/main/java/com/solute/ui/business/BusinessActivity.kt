@@ -67,7 +67,8 @@ class BusinessActivity : UtilityActivity() {
                 R.id.inventory_product,
                 R.id.inventory_category,
                 R.id.inventory_sub_category,
-                R.id.business_employee
+                R.id.business_employee,
+                R.id.business_customers
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

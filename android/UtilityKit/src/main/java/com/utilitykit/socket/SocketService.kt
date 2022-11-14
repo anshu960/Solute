@@ -27,13 +27,12 @@ import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.utilitykit.feature.sync.SyncHandler
 import com.utilitykit.socket.repository.SocketRepository
-import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import org.json.JSONArray
 import org.json.JSONObject
 
-class SocketService: Service() {
+class SocketService : Service() {
 
     val repository = SocketRepository()
     val mSocket = UtilityKitApp.applicationContext().getMSocket()
@@ -41,139 +40,271 @@ class SocketService: Service() {
     override fun onBind(p0: Intent?): IBinder? {
         TODO("Not yet implemented")
     }
+
     init {
         instance = this
     }
 
-    companion object{
+    companion object {
         private var instance: SocketService? = null
-        fun shared() : SocketService {
-            if(instance != null){
+        fun shared(): SocketService {
+            if (instance != null) {
                 return instance as SocketService
-            }else{
+            } else {
                 return SocketService()
             }
         }
     }
+
     var salt = ""
     var iv = ""
 
     val TAG = "SOCKET.IO.MANAGER"
-    var conversation : Conversation? = null
+    var conversation: Conversation? = null
     var isSocketConnected = false
     lateinit var currentActivity: UtilityViewController
-    var onEvent: (SocketEvent, JSONObject) -> Unit = fun(event: SocketEvent, data: JSONObject)
-    {
+    var onEvent: (SocketEvent, JSONObject) -> Unit = fun(event: SocketEvent, data: JSONObject) {
     }
-    var onEventArray: (SocketEvent, JSONArray) -> Unit = fun(event: SocketEvent, data: JSONArray)
-    {
+    var onEventArray: (SocketEvent, JSONArray) -> Unit = fun(event: SocketEvent, data: JSONArray) {
     }
-    var onContacts: (SocketEvent, ArrayList<ContactData>) -> Unit = fun(event: SocketEvent, data: ArrayList<ContactData>)
-    {
-    }
+    var onContacts: (SocketEvent, ArrayList<ContactData>) -> Unit =
+        fun(event: SocketEvent, data: ArrayList<ContactData>) {
+        }
     var onProfiles: (SocketEvent, ArrayList<ContactsContract.Profile>) -> Unit =
-        fun(event: SocketEvent, data: ArrayList<ContactsContract.Profile>)
-        {
+        fun(event: SocketEvent, data: ArrayList<ContactsContract.Profile>) {
         }
     var onConversation: (SocketEvent, Conversation) -> Unit =
-        fun(event: SocketEvent, data: Conversation)
-        {
+        fun(event: SocketEvent, data: Conversation) {
         }
     var onConversations: (SocketEvent, ArrayList<Conversation>) -> Unit =
-        fun(event: SocketEvent, data: ArrayList<Conversation>)
-        {
+        fun(event: SocketEvent, data: ArrayList<Conversation>) {
         }
 
-    fun send(event: SocketEvent, data: JSONObject)
-    {
-        Log.d(TAG,"Sending Event ${event.value}")
+    fun send(event: SocketEvent, data: JSONObject) {
+        Log.d(TAG, "Sending Event ${event.value}")
         mSocket?.emit(event.value, data)
     }
 
-    fun connect()
-    {
-        if(mSocket != null && mSocket!!.isActive && mSocket!!.connected()){
+    fun connect() {
+        if (mSocket != null && mSocket!!.isActive && mSocket!!.connected()) {
             return
         }
-            val options = IO.Options()
-            options.reconnection = true //reconnection
-            options.forceNew = true
-            mSocket?.on(Socket.EVENT_CONNECT, onConnect)
-            mSocket?.on(Socket.EVENT_DISCONNECT, onDisconnect)
-            mSocket?.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
-            mSocket?.on(SocketEvent.joinRoom.value, joinRoom)
-            mSocket?.on(SocketEvent.getEncryptionKeys.value, encryptionKeyHandler)
-            mSocket?.on(SocketEvent.authenticate.value, onSocketEvent)
-            mSocket?.on(SocketEvent.findCustomerByMobile.value, onSocketEvent)
-            mSocket?.on(SocketEvent.updateProfile.value, onSocketEvent)
-            mSocket?.on(SocketEvent.getAllMessage.value, retriveMessage)
-            mSocket?.on(SocketEvent.onMessage.value, onMessage)
-            mSocket?.on(SocketEvent.messageReceived.value, messageReceived)
-            mSocket?.on(SocketEvent.messageRead.value, messageRead)
-            mSocket?.on(SocketEvent.typing.value, typing)
-            mSocket?.on(SocketEvent.previousChats.value, previousChats)
-            mSocket?.on(SocketEvent.newChats.value, newChats)
-            mSocket?.on(SocketEvent.updateDeliveryStatus.value, updateDeliveryStatus)
-            mSocket?.on(SocketEvent.updateReadStatus.value, updateReadStatus)
-            mSocket?.on(SocketEvent.findUsers.value, findUsers)
-            mSocket?.on(SocketEvent.createConversation.value, createConversation)
-            mSocket?.on(SocketEvent.getAllConversation.value, getAllConversation)
-            mSocket?.on(SocketEvent.findCompanyByName.value, findCompanyByName)
-            mSocket?.on(SocketEvent.findDesignationByName.value, findDesignationByName)
-            mSocket?.on(SocketEvent.findTechnologyByName.value, findTechnologyByName)
-            mSocket?.on(SocketEvent.createExperience.value, createExperience)
-            mSocket?.on(SocketEvent.getAllExperience.value, getAllExperience)
-            mSocket?.on(SocketEvent.createGroup.value, createConversation)
-            mSocket?.on(SocketEvent.updateGroup.value,eventHandler )
-            mSocket?.on(SocketEvent.updateGroupName.value,eventHandler )
-            mSocket?.on(SocketEvent.updateGroupDescription.value,eventHandler )
-            mSocket?.on(SocketEvent.updateGroupImage.value,eventHandler )
-            mSocket?.on(SocketEvent.deleteGroup.value,eventHandler )
-            mSocket?.on(SocketEvent.updateContacts.value, updateContacts)
-            mSocket?.on(SocketEvent.retriveContacts.value, retriveContacts)
-            mSocket?.on(SocketEvent.createTask.value, onSocketEvent)
-            mSocket?.on(SocketEvent.updateTask.value, onSocketEvent)
-            mSocket?.on(SocketEvent.getAllTask.value, onSocketEventArray)
-            mSocket?.on(SocketEvent.attachDocumentTask.value, onSocketEvent)
-            mSocket?.on(SocketEvent.onTaskMessage.value, onSocketEvent)
-            mSocket?.on(SocketEvent.getAllTaskMessage.value, onSocketEventArray)
-            mSocket?.on(SocketEvent.getAllAttachedDocumentTask.value, onSocketEventArray)
-            mSocket?.on(SocketEvent.updateTaskStatus.value, onSocketEvent)
-            mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
-            mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
-            //Solute
-            mSocket?.on(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
-            mSocket?.on(SocketEvent.RETRIVE_BUSINESS_TYPE.value, BusinessTypeHandler.shared().retriveBusinessType)
-            mSocket?.on(SocketEvent.CREATE_BUSINESS.value, BusinessHandler.shared().onCreateNewBusiness)
-            mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value, ProductHandler.shared().retriveProduct)
-            mSocket?.on(SocketEvent.CREATE_PRODUCT.value, ProductHandler.shared().onCreateProduct)
-            mSocket?.on(SocketEvent.UPDATE_PRODUCT_IMAGE.value, ProductHandler.shared().onUpdateProductImage)
-            mSocket?.on(SocketEvent.UPDATE_PRODUCT.value, ProductHandler.shared().onUpdateProduct)
-            mSocket?.on(SocketEvent.DELETE_PRODUCT.value, ProductHandler.shared().onDeleteProduct)
-            mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
-            mSocket?.on(SocketEvent.GENERATE_CUSTOMER_INVOICE.value, CartHandler.shared().createCustomerInvoice)
-            mSocket?.on(SocketEvent.RETRIVE_INVOICE.value, InvoiceHandler.shared().retriveInvoice)
-            mSocket?.on(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)
-            mSocket?.on(SocketEvent.RETRIVE_SALES.value, InvoiceHandler.shared().retriveSales)
-            mSocket?.on(SocketEvent.CREATE_CUSTOMER.value, CustomerHandler.shared().onCreateCustomer)
-            mSocket?.on(SocketEvent.RETRIVE_CUSTOMER.value, CustomerHandler.shared().onFetchAllCustomer)
-            mSocket?.on(SocketEvent.CREATE_PRODUCT_CATEGORY.value, ProductCategoryHandler.shared().onCreateProductCategory)
-            mSocket?.on(SocketEvent.RETRIVE_PRODUCT_CATEGORY.value, ProductCategoryHandler.shared().retriveProductCategory)
-            mSocket?.on(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().onCreateProductSubCategory)
-            mSocket?.on(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY.value, ProductSubCategoryHandler.shared().retriveProductSubCategory)
-            mSocket?.on(SocketEvent.RETRIVE_ALL_STOCK_ENTRY.value, SyncHandler.shared().onRetriveAllStockEntry)
-            mSocket?.on(SocketEvent.REMOVE_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
-            mSocket?.on(SocketEvent.ADD_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
-            mSocket?.on(SocketEvent.RESET_STOCK_QUANTITY.value, ProductHandler.shared().onProductStockUpdate)
-            mSocket?.on(SocketEvent.RETRIVE_EMPLOYEE.value,EmployeeHandler.shared().onFetchAllEmployee)
-            mSocket?.on(SocketEvent.FIND_USER.value,EmployeeHandler.shared().onFindUser)
-            mSocket?.on(SocketEvent.CREATE_EMPLOYEE.value,EmployeeHandler.shared().onCreateEmployee)
-            //conenct the socket
-            mSocket?.connect()
+        removeSocketEventListeners()
+        mSocket?.on(Socket.EVENT_CONNECT, onConnect)
+        mSocket?.on(Socket.EVENT_DISCONNECT, onDisconnect)
+        mSocket?.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
+        mSocket?.on(SocketEvent.joinRoom.value, joinRoom)
+        mSocket?.on(SocketEvent.getEncryptionKeys.value, encryptionKeyHandler)
+        mSocket?.on(SocketEvent.authenticate.value, onSocketEvent)
+        mSocket?.on(SocketEvent.findCustomerByMobile.value, onSocketEvent)
+        mSocket?.on(SocketEvent.updateProfile.value, onSocketEvent)
+        mSocket?.on(SocketEvent.getAllMessage.value, retriveMessage)
+        mSocket?.on(SocketEvent.onMessage.value, onMessage)
+        mSocket?.on(SocketEvent.messageReceived.value, messageReceived)
+        mSocket?.on(SocketEvent.messageRead.value, messageRead)
+        mSocket?.on(SocketEvent.typing.value, typing)
+        mSocket?.on(SocketEvent.previousChats.value, previousChats)
+        mSocket?.on(SocketEvent.newChats.value, newChats)
+        mSocket?.on(SocketEvent.updateDeliveryStatus.value, updateDeliveryStatus)
+        mSocket?.on(SocketEvent.updateReadStatus.value, updateReadStatus)
+        mSocket?.on(SocketEvent.findUsers.value, findUsers)
+        mSocket?.on(SocketEvent.createConversation.value, createConversation)
+        mSocket?.on(SocketEvent.getAllConversation.value, getAllConversation)
+        mSocket?.on(SocketEvent.findCompanyByName.value, findCompanyByName)
+        mSocket?.on(SocketEvent.findDesignationByName.value, findDesignationByName)
+        mSocket?.on(SocketEvent.findTechnologyByName.value, findTechnologyByName)
+        mSocket?.on(SocketEvent.createExperience.value, createExperience)
+        mSocket?.on(SocketEvent.getAllExperience.value, getAllExperience)
+        mSocket?.on(SocketEvent.createGroup.value, createConversation)
+        mSocket?.on(SocketEvent.updateGroup.value, eventHandler)
+        mSocket?.on(SocketEvent.updateGroupName.value, eventHandler)
+        mSocket?.on(SocketEvent.updateGroupDescription.value, eventHandler)
+        mSocket?.on(SocketEvent.updateGroupImage.value, eventHandler)
+        mSocket?.on(SocketEvent.deleteGroup.value, eventHandler)
+        mSocket?.on(SocketEvent.updateContacts.value, updateContacts)
+        mSocket?.on(SocketEvent.retriveContacts.value, retriveContacts)
+        mSocket?.on(SocketEvent.createTask.value, onSocketEvent)
+        mSocket?.on(SocketEvent.updateTask.value, onSocketEvent)
+        mSocket?.on(SocketEvent.getAllTask.value, onSocketEventArray)
+        mSocket?.on(SocketEvent.attachDocumentTask.value, onSocketEvent)
+        mSocket?.on(SocketEvent.onTaskMessage.value, onSocketEvent)
+        mSocket?.on(SocketEvent.getAllTaskMessage.value, onSocketEventArray)
+        mSocket?.on(SocketEvent.getAllAttachedDocumentTask.value, onSocketEventArray)
+        mSocket?.on(SocketEvent.updateTaskStatus.value, onSocketEvent)
+        mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
+        mSocket?.on(SocketEvent.updateTaskPriority.value, onSocketEvent)
+        //Solute
+        mSocket?.on(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
+        mSocket?.on(
+            SocketEvent.RETRIVE_BUSINESS_TYPE.value,
+            BusinessTypeHandler.shared().retriveBusinessType
+        )
+        mSocket?.on(SocketEvent.CREATE_BUSINESS.value, BusinessHandler.shared().onCreateNewBusiness)
+        mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value, ProductHandler.shared().retriveProduct)
+        mSocket?.on(SocketEvent.CREATE_PRODUCT.value, ProductHandler.shared().onCreateProduct)
+        mSocket?.on(
+            SocketEvent.UPDATE_PRODUCT_IMAGE.value,
+            ProductHandler.shared().onUpdateProductImage
+        )
+        mSocket?.on(SocketEvent.UPDATE_PRODUCT.value, ProductHandler.shared().onUpdateProduct)
+        mSocket?.on(SocketEvent.DELETE_PRODUCT.value, ProductHandler.shared().onDeleteProduct)
+        mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
+        mSocket?.on(
+            SocketEvent.GENERATE_CUSTOMER_INVOICE.value,
+            CartHandler.shared().createCustomerInvoice
+        )
+        mSocket?.on(SocketEvent.RETRIVE_INVOICE.value, InvoiceHandler.shared().retriveInvoice)
+        mSocket?.on(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)
+        mSocket?.on(SocketEvent.RETRIVE_SALES.value, InvoiceHandler.shared().retriveSales)
+        mSocket?.on(SocketEvent.CREATE_CUSTOMER.value, CustomerHandler.shared().onCreateCustomer)
+        mSocket?.on(SocketEvent.RETRIVE_CUSTOMER.value, CustomerHandler.shared().onFetchAllCustomer)
+        mSocket?.on(
+            SocketEvent.CREATE_PRODUCT_CATEGORY.value,
+            ProductCategoryHandler.shared().onCreateProductCategory
+        )
+        mSocket?.on(
+            SocketEvent.RETRIVE_PRODUCT_CATEGORY.value,
+            ProductCategoryHandler.shared().retriveProductCategory
+        )
+        mSocket?.on(
+            SocketEvent.CREATE_PRODUCT_SUB_CATEGORY.value,
+            ProductSubCategoryHandler.shared().onCreateProductSubCategory
+        )
+        mSocket?.on(
+            SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY.value,
+            ProductSubCategoryHandler.shared().retriveProductSubCategory
+        )
+        mSocket?.on(
+            SocketEvent.RETRIVE_ALL_STOCK_ENTRY.value,
+            SyncHandler.shared().onRetriveAllStockEntry
+        )
+        mSocket?.on(
+            SocketEvent.REMOVE_STOCK_QUANTITY.value,
+            ProductHandler.shared().onProductStockUpdate
+        )
+        mSocket?.on(
+            SocketEvent.ADD_STOCK_QUANTITY.value,
+            ProductHandler.shared().onProductStockUpdate
+        )
+        mSocket?.on(
+            SocketEvent.RESET_STOCK_QUANTITY.value,
+            ProductHandler.shared().onProductStockUpdate
+        )
+        mSocket?.on(SocketEvent.RETRIVE_EMPLOYEE.value, EmployeeHandler.shared().onFetchAllEmployee)
+        mSocket?.on(SocketEvent.FIND_USER.value, EmployeeHandler.shared().onFindUser)
+        mSocket?.on(SocketEvent.CREATE_EMPLOYEE.value, EmployeeHandler.shared().onCreateEmployee)
+        //conenct the socket
+        mSocket?.connect()
     }
 
-    fun verifyIfConnectedOrNot(){
-        if (mSocket?.connected() != true){
+    fun removeSocketEventListeners(){
+        mSocket?.off(Socket.EVENT_CONNECT)
+        mSocket?.off(Socket.EVENT_DISCONNECT)
+        mSocket?.off(Socket.EVENT_CONNECT_ERROR)
+        mSocket?.off(SocketEvent.joinRoom.value, joinRoom)
+        mSocket?.off(SocketEvent.getEncryptionKeys.value, encryptionKeyHandler)
+        mSocket?.off(SocketEvent.authenticate.value, onSocketEvent)
+        mSocket?.off(SocketEvent.findCustomerByMobile.value, onSocketEvent)
+        mSocket?.off(SocketEvent.updateProfile.value, onSocketEvent)
+        mSocket?.off(SocketEvent.getAllMessage.value, retriveMessage)
+        mSocket?.off(SocketEvent.onMessage.value, onMessage)
+        mSocket?.off(SocketEvent.messageReceived.value, messageReceived)
+        mSocket?.off(SocketEvent.messageRead.value, messageRead)
+        mSocket?.off(SocketEvent.typing.value, typing)
+        mSocket?.off(SocketEvent.previousChats.value, previousChats)
+        mSocket?.off(SocketEvent.newChats.value, newChats)
+        mSocket?.off(SocketEvent.updateDeliveryStatus.value, updateDeliveryStatus)
+        mSocket?.off(SocketEvent.updateReadStatus.value, updateReadStatus)
+        mSocket?.off(SocketEvent.findUsers.value, findUsers)
+        mSocket?.off(SocketEvent.createConversation.value, createConversation)
+        mSocket?.off(SocketEvent.getAllConversation.value, getAllConversation)
+        mSocket?.off(SocketEvent.findCompanyByName.value, findCompanyByName)
+        mSocket?.off(SocketEvent.findDesignationByName.value, findDesignationByName)
+        mSocket?.off(SocketEvent.findTechnologyByName.value, findTechnologyByName)
+        mSocket?.off(SocketEvent.createExperience.value, createExperience)
+        mSocket?.off(SocketEvent.getAllExperience.value, getAllExperience)
+        mSocket?.off(SocketEvent.createGroup.value, createConversation)
+        mSocket?.off(SocketEvent.updateGroup.value, eventHandler)
+        mSocket?.off(SocketEvent.updateGroupName.value, eventHandler)
+        mSocket?.off(SocketEvent.updateGroupDescription.value, eventHandler)
+        mSocket?.off(SocketEvent.updateGroupImage.value, eventHandler)
+        mSocket?.off(SocketEvent.deleteGroup.value, eventHandler)
+        mSocket?.off(SocketEvent.updateContacts.value, updateContacts)
+        mSocket?.off(SocketEvent.retriveContacts.value, retriveContacts)
+        mSocket?.off(SocketEvent.createTask.value, onSocketEvent)
+        mSocket?.off(SocketEvent.updateTask.value, onSocketEvent)
+        mSocket?.off(SocketEvent.getAllTask.value, onSocketEventArray)
+        mSocket?.off(SocketEvent.attachDocumentTask.value, onSocketEvent)
+        mSocket?.off(SocketEvent.onTaskMessage.value, onSocketEvent)
+        mSocket?.off(SocketEvent.getAllTaskMessage.value, onSocketEventArray)
+        mSocket?.off(SocketEvent.getAllAttachedDocumentTask.value, onSocketEventArray)
+        mSocket?.off(SocketEvent.updateTaskStatus.value, onSocketEvent)
+        mSocket?.off(SocketEvent.updateTaskPriority.value, onSocketEvent)
+        mSocket?.off(SocketEvent.updateTaskPriority.value, onSocketEvent)
+        //Solute
+        mSocket?.off(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
+        mSocket?.off(
+            SocketEvent.RETRIVE_BUSINESS_TYPE.value,
+            BusinessTypeHandler.shared().retriveBusinessType
+        )
+        mSocket?.off(SocketEvent.CREATE_BUSINESS.value, BusinessHandler.shared().onCreateNewBusiness)
+        mSocket?.off(SocketEvent.RETRIVE_PRODUCT.value, ProductHandler.shared().retriveProduct)
+        mSocket?.off(SocketEvent.CREATE_PRODUCT.value, ProductHandler.shared().onCreateProduct)
+        mSocket?.off(
+            SocketEvent.UPDATE_PRODUCT_IMAGE.value,
+            ProductHandler.shared().onUpdateProductImage
+        )
+        mSocket?.off(SocketEvent.UPDATE_PRODUCT.value, ProductHandler.shared().onUpdateProduct)
+        mSocket?.off(SocketEvent.DELETE_PRODUCT.value, ProductHandler.shared().onDeleteProduct)
+        mSocket?.off(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
+        mSocket?.off(
+            SocketEvent.GENERATE_CUSTOMER_INVOICE.value,
+            CartHandler.shared().createCustomerInvoice
+        )
+        mSocket?.off(SocketEvent.RETRIVE_INVOICE.value, InvoiceHandler.shared().retriveInvoice)
+        mSocket?.off(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)
+        mSocket?.off(SocketEvent.RETRIVE_SALES.value, InvoiceHandler.shared().retriveSales)
+        mSocket?.off(SocketEvent.CREATE_CUSTOMER.value, CustomerHandler.shared().onCreateCustomer)
+        mSocket?.off(SocketEvent.RETRIVE_CUSTOMER.value, CustomerHandler.shared().onFetchAllCustomer)
+        mSocket?.off(
+            SocketEvent.CREATE_PRODUCT_CATEGORY.value,
+            ProductCategoryHandler.shared().onCreateProductCategory
+        )
+        mSocket?.off(
+            SocketEvent.RETRIVE_PRODUCT_CATEGORY.value,
+            ProductCategoryHandler.shared().retriveProductCategory
+        )
+        mSocket?.off(
+            SocketEvent.CREATE_PRODUCT_SUB_CATEGORY.value,
+            ProductSubCategoryHandler.shared().onCreateProductSubCategory
+        )
+        mSocket?.off(
+            SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY.value,
+            ProductSubCategoryHandler.shared().retriveProductSubCategory
+        )
+        mSocket?.off(
+            SocketEvent.RETRIVE_ALL_STOCK_ENTRY.value,
+            SyncHandler.shared().onRetriveAllStockEntry
+        )
+        mSocket?.off(
+            SocketEvent.REMOVE_STOCK_QUANTITY.value,
+            ProductHandler.shared().onProductStockUpdate
+        )
+        mSocket?.off(
+            SocketEvent.ADD_STOCK_QUANTITY.value,
+            ProductHandler.shared().onProductStockUpdate
+        )
+        mSocket?.off(
+            SocketEvent.RESET_STOCK_QUANTITY.value,
+            ProductHandler.shared().onProductStockUpdate
+        )
+        mSocket?.off(SocketEvent.RETRIVE_EMPLOYEE.value, EmployeeHandler.shared().onFetchAllEmployee)
+        mSocket?.off(SocketEvent.FIND_USER.value, EmployeeHandler.shared().onFindUser)
+        mSocket?.off(SocketEvent.CREATE_EMPLOYEE.value, EmployeeHandler.shared().onCreateEmployee)
+    }
+
+    fun verifyIfConnectedOrNot() {
+        if (mSocket?.connected() != true) {
             connect()
         }
     }
@@ -182,21 +313,20 @@ class SocketService: Service() {
     val onConnect = Emitter.Listener {
         repository.socketConnectionStatus.postValue(1)
         isSocketConnected = true
-        if (mSocket?.connected() == true)
-        {
+        if (mSocket?.connected() == true) {
             val user = User()
-            if(user._id != ""){
+            if (user._id != "") {
                 joinRoom(user._id)
-            }else{
-                val deviceId =  Defaults.string(Key.deviceId)
+            } else {
+                val deviceId = Defaults.string(Key.deviceId)
                 joinRoom(deviceId)
             }
         }
     }
 
-    fun joinRoom(id:String){
+    fun joinRoom(id: String) {
         var data = JSONObject()
-        data.put(Key.roomId,id)
+        data.put(Key.roomId, id)
         mSocket?.emit(SocketEvent.joinRoom.value, data)
     }
 
@@ -208,6 +338,7 @@ class SocketService: Service() {
         isSocketConnected = false
         mSocket?.connect()
     }
+
     private val onDisconnect = Emitter.Listener {
         repository.socketConnectionStatus.postValue(0)
         Log.d(TAG, "Error connecting \n \n")
@@ -225,10 +356,9 @@ class SocketService: Service() {
     }
     private val encryptionKeyHandler = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val data = it.first()
-            if(data is JSONObject){
+            if (data is JSONObject) {
                 messageObject = data
                 iv = messageObject.getString(Key.encryptionIV)
                 salt = messageObject.getString(Key.encryptionSalt)
@@ -239,10 +369,9 @@ class SocketService: Service() {
     }
     private val eventHandler = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val data = it.first()
-            if(data is JSONObject){
+            if (data is JSONObject) {
                 messageObject = data
             }
         }
@@ -251,11 +380,9 @@ class SocketService: Service() {
 
     private val onMessage = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageData = it.first()
-            if (messsageData is JSONObject && conversation != null)
-            {
+            if (messsageData is JSONObject && conversation != null) {
                 messageObject = messsageData
                 val message = Message(messsageData)
                 message.content = Encryption().decryptMessage(message.content, conversation!!)
@@ -266,21 +393,19 @@ class SocketService: Service() {
     }
 
     private val onSocketEvent = Emitter.Listener {
-        Log.d(TAG,"Event Received ${it.toString()}")
-        if (it.count() > 0)
-        {
+        Log.d(TAG, "Event Received ${it.toString()}")
+        if (it.count() > 0) {
             val anyData = it.first()
-            if(anyData is JSONObject){
+            if (anyData is JSONObject) {
                 this.onEvent(SocketEvent.onEvent, anyData)
             }
         }
     }
 
     private val onSocketEventArray = Emitter.Listener {
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val anyData = it.first()
-            if(anyData is JSONArray){
+            if (anyData is JSONArray) {
                 this.onEventArray(SocketEvent.onEvent, anyData)
             }
         }
@@ -288,11 +413,9 @@ class SocketService: Service() {
 
     private val messageReceived = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageData = it.first()
-            if (messsageData is JSONObject)
-            {
+            if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
                 SQLite.shared().insert(TableNames.message, message.data)
@@ -303,11 +426,9 @@ class SocketService: Service() {
 
     private val messageRead = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageData = it.first()
-            if (messsageData is JSONObject)
-            {
+            if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
                 SQLite.shared().insert(TableNames.message, message.data)
@@ -318,11 +439,9 @@ class SocketService: Service() {
 
     private val typing = Emitter.Listener {
         var typingData = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val data = it.first()
-            if (data is JSONObject)
-            {
+            if (data is JSONObject) {
                 typingData = data
             }
         }
@@ -331,11 +450,9 @@ class SocketService: Service() {
 
     private val previousChats = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageData = it.first()
-            if (messsageData is JSONObject)
-            {
+            if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
                 SQLite.shared().insert(TableNames.message, message.data)
@@ -345,15 +462,12 @@ class SocketService: Service() {
     }
     private val retriveMessage = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageData = it.first()
-            if (messsageData is JSONObject)
-            {
-                if(messsageData.has(Key.payload)){
+            if (messsageData is JSONObject) {
+                if (messsageData.has(Key.payload)) {
                     val payload = messsageData.getJSONArray(Key.payload)
-                    for (i in 0 until payload.length())
-                    {
+                    for (i in 0 until payload.length()) {
                         val item = payload.getJSONObject(i)
                         val message = Message(item)
                         SQLite.shared().insert(TableNames.message, message.data)
@@ -366,11 +480,9 @@ class SocketService: Service() {
 
     private val newChats = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageData = it.first()
-            if (messsageData is JSONObject)
-            {
+            if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
                 SQLite.shared().insert(TableNames.message, message.data)
@@ -381,11 +493,9 @@ class SocketService: Service() {
 
     private val updateDeliveryStatus = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageData = it.first()
-            if (messsageData is JSONObject)
-            {
+            if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
                 SQLite.shared().insert(TableNames.message, message.data)
@@ -396,11 +506,9 @@ class SocketService: Service() {
 
     private val updateReadStatus = Emitter.Listener {
         var messageObject = JSONObject()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageData = it.first()
-            if (messsageData is JSONObject)
-            {
+            if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
                 SQLite.shared().insert(TableNames.message, message.data)
@@ -412,10 +520,8 @@ class SocketService: Service() {
     private val findUsers = Emitter.Listener {
         var allUsers: ArrayList<ContactsContract.Profile> = ArrayList()
         val list = it.first()
-        if (list is JSONArray)
-        {
-            for (i in 0 until list.length())
-            {
+        if (list is JSONArray) {
+            for (i in 0 until list.length()) {
                 val item = list.getJSONObject(i)
 //                allUsers.add(ContactsContract.Profile(item))
             }
@@ -427,19 +533,17 @@ class SocketService: Service() {
         var allContacts: ArrayList<ContactData> = ArrayList()
         val data = it.first()
 
-        if (data is JSONObject)
-        {
+        if (data is JSONObject) {
             val paylaod = data.getJSONObject(Key.payload)
             val allContactsFromServer = paylaod.getJSONArray(Key.allContacts)
-            for (i in 0 until allContactsFromServer.length())
-            {
-                try{
+            for (i in 0 until allContactsFromServer.length()) {
+                try {
                     val item = allContactsFromServer.getJSONObject(i)
                     val newContact = ContactData(item)
                     allContacts.add(newContact)
-                    SQLite.shared().insert(TableNames.contacts,newContact.data)
-                }catch (e:Exception){
-                    Log.d(TAG,e.localizedMessage)
+                    SQLite.shared().insert(TableNames.contacts, newContact.data)
+                } catch (e: Exception) {
+                    Log.d(TAG, e.localizedMessage)
                 }
             }
         }
@@ -449,11 +553,9 @@ class SocketService: Service() {
         var allContacts: ArrayList<ContactData> = ArrayList()
         val data = it.first()
 
-        if (data is JSONObject)
-        {
+        if (data is JSONObject) {
             val paylaod = data.getJSONArray(Key.payload)
-            for (i in 0 until paylaod.length())
-            {
+            for (i in 0 until paylaod.length()) {
                 val item = paylaod.getJSONObject(i)
 //                val newProfile = ContactsContract.Profile(item)
             }
@@ -464,11 +566,9 @@ class SocketService: Service() {
 
     private val createConversation = Emitter.Listener {
         var conversation = Conversation()
-        if (it.count() > 0)
-        {
+        if (it.count() > 0) {
             val messsageDataAny = it.first()
-            if (messsageDataAny is JSONObject)
-            {
+            if (messsageDataAny is JSONObject) {
                 conversation = Conversation(messsageDataAny)
                 SQLite.shared().insert(TableNames.conversation, conversation.data)
             }
@@ -479,10 +579,8 @@ class SocketService: Service() {
     private val getAllConversation = Emitter.Listener {
         var allConversation: ArrayList<Conversation> = ArrayList()
         val list = it.first()
-        if (list is JSONArray)
-        {
-            for (i in 0 until list.length())
-            {
+        if (list is JSONArray) {
+            for (i in 0 until list.length()) {
                 val item = list.getJSONObject(i)
                 val conversation = Conversation(item)
                 allConversation.add(conversation)
@@ -494,37 +592,32 @@ class SocketService: Service() {
 
     private val findCompanyByName = Emitter.Listener {
         val data = it.first()
-        if (data is JSONArray)
-        {
+        if (data is JSONArray) {
             this.onEventArray(SocketEvent.findCompanyByName, data)
         }
     }
     private val findDesignationByName = Emitter.Listener {
         val data = it.first()
-        if (data is JSONArray)
-        {
+        if (data is JSONArray) {
             this.onEventArray(SocketEvent.findDesignationByName, data)
         }
     }
     private val findTechnologyByName = Emitter.Listener {
         val data = it.first()
-        if (data is JSONArray)
-        {
+        if (data is JSONArray) {
             this.onEventArray(SocketEvent.findTechnologyByName, data)
         }
     }
 
     private val createExperience = Emitter.Listener {
         val data = it.first()
-        if (data is JSONObject)
-        {
+        if (data is JSONObject) {
             this.onEvent(SocketEvent.createExperience, data)
         }
     }
     private val getAllExperience = Emitter.Listener {
         val data = it.first()
-        if (data is JSONArray)
-        {
+        if (data is JSONArray) {
             this.onEventArray(SocketEvent.getAllExperience, data)
         }
     }

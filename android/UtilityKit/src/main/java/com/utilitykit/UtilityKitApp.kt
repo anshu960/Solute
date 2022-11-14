@@ -35,6 +35,9 @@ class UtilityKitApp :Application(){
     fun setUp(context: Context,isDebug:Boolean){
         appContext = context
         Defaults.init(appContext!!)
+        val opts = IO.Options()
+        opts.forceNew = true
+        opts.reconnection = false
         socketUrl = if(isDebug){
 //            Server.devHost
             Server.prodDost
@@ -43,8 +46,7 @@ class UtilityKitApp :Application(){
 //            Server.devHost
         }
         try {
-            mSocket = IO.socket(socketUrl)
-
+            mSocket = IO.socket(socketUrl,opts)
         } catch (e: URISyntaxException) {
             throw RuntimeException(e)
         }

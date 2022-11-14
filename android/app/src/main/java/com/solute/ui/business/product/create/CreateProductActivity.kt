@@ -542,8 +542,8 @@ class CreateProductActivity : UtilityActivity() {
             val business = BusinessHandler.shared().repository.business
             request.put(Key.userId, user._id)
             request.put(Key.businessID, business!!.Id)
-            request.put(Key.categoryId, selectedCategory!!.Id!!)
-            request.put(Key.subCategoryID, selectedSubCategory!!.Id!!)
+            request.put(Key.categoryId, selectedCategory?.Id)
+            request.put(Key.subCategoryID, selectedSubCategory?.Id)
             request.put(Key.name, prdName)
             request.put(Key.description, prdDescription)
             request.put(Key.manageInventory, true)

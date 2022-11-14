@@ -1,9 +1,11 @@
 package com.solute
 
+import android.app.Activity
 import android.app.Application
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.provider.Settings
 import androidx.fragment.app.Fragment
 import androidx.multidex.BuildConfig
@@ -30,8 +32,10 @@ import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
 import com.utilitykit.dataclass.User
 
+
 class App: Application() {
     var activity: UtilityViewController? = null
+    private var activeActivity: Activity? = null
     var fragment: Fragment? = null
     init {
         instance = this
@@ -73,6 +77,7 @@ class App: Application() {
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
         setUpFirebaseStorage()
+        setupActivityListener()
     }
 
     override fun startForegroundService(service: Intent?): ComponentName? {
@@ -126,6 +131,28 @@ class App: Application() {
                     .build()
                 appUpdateManager.startUpdateFlow(appUpdateInfo, activity,option) }
         }
-
     }
+
+    private fun setupActivityListener() {
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
+            override fun onActivityStarted(activity: Activity) {}
+            override fun onActivityResumed(activity: Activity) {
+                activeActivity = activity
+            }
+
+            override fun onActivityPaused(activity: Activity) {
+                activeActivity = null
+            }
+
+            override fun onActivityStopped(activity: Activity) {}
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+            override fun onActivityDestroyed(activity: Activity) {}
+        })
+    }
+
+    fun getActiveActivity(): Activity? {
+        return activeActivity
+    }
+
 }

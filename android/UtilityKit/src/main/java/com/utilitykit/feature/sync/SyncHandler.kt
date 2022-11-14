@@ -88,8 +88,9 @@ class SyncHandler {
             calendar.add(Calendar.DAY_OF_MONTH, -1)
             val sixDayBack = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
             calendar.add(Calendar.DAY_OF_MONTH, -6)
-            val month =  today.removeRange(6,9)
-            val year = today.removeRange(4,10)
+            val dateComponents = today.split("-")
+            val month =  dateComponents[0] + "-" + dateComponents[1]
+            val year = dateComponents[0]
 
             var todaySaleQuantity = 0
             var todaySaleValue = 0F
@@ -151,7 +152,7 @@ class SyncHandler {
             request.put(Key.userId,user._id)
             request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
             if(lastSale != null){
-                request.put(Key.lastSyncDate,lastSale.CreatedAt)
+//                request.put(Key.lastSyncDate,lastSale.CreatedAt)
             }
             SocketService.shared().send(SocketEvent.RETRIVE_SALE,request)
         }

@@ -57,11 +57,11 @@ class InvoiceHistoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Re
     }
 
     fun bind(invoice: CustomerInvoice) {
-        invoicenumber?.text = invoice.InvoiceNumber.toString()
-        invoicePrice?.text = "₹ " +  invoice.TotalPrice
-        invoiceDiscount?.text = "₹ " + invoice.InstantDiscount
+        invoicenumber?.text = invoice.invoiceNumber.toString()
+        invoicePrice?.text = "₹ " +  invoice.totalPrice
+        invoiceDiscount?.text = "₹ " + invoice.instantDiscount
         invoiceQuantity?.text =  "5"
-        invoiceFinalPrice?.text = "₹ " +  invoice.FinalPrice
+        invoiceFinalPrice?.text = "₹ " +  invoice.finalPrice
     }
 
 }

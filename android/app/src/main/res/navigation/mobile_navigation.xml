@@ -27,6 +27,12 @@
         android:name="com.solute.ui.business.invoice.BusinessInvoiceFragment"
         android:label="@string/invoice"
         tools:layout="@layout/fragment_business_invoice" />
+    <fragment android:id="@+id/business_customers"
+        android:name="com.solute.ui.business.customer.list.CustomersFragment"
+        android:label="@string/customers"
+        tools:layout="@layout/fragment_customers"
+        >
+    </fragment>
     <fragment
         android:id="@+id/business_stock"
         android:name="com.solute.ui.business.stock.StockFragment"

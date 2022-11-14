@@ -47,6 +47,7 @@
     <string name="sale">Sale</string>
     <string name="cart">Cart</string>
     <string name="invoice">Invocie</string>
+    <string name="customers">Customers</string>
     <string name="empty_task_message">No task found, please click on the create task button to start creating task</string>
     <!--    <string name="delete_group">Delete Group</string>-->
     <string name="mobile">Mobile</string>
@@ -120,4 +121,7 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="title_activity_employee_details">EmployeeDetailsActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

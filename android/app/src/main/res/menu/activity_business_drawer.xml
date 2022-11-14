@@ -21,6 +21,10 @@
             android:icon="@drawable/receipt"
             android:title="@string/invoice" />
         <item
+            android:id="@+id/business_customers"
+            android:icon="@drawable/ic_person_black"
+            android:title="@string/customers" />
+        <item
             android:id="@+id/business_employee"
             android:icon="@drawable/employee"
             android:title="@string/employee" />

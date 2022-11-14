@@ -25,10 +25,13 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="33">
         <activity
+            android:name=".ui.business.employee.details.EmployeeDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name=".ui.network.ConnectingActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.employee.create.CreateEmployeeActivity"
             android:exported="false"

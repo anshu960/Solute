@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/drawable/print.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/product_default_img.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/progress.xml" value="0.1595" />
+        <entry key="app/src/main/res/drawable/receipt.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/search.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/shopping_cart.xml" value="0.2255" />
         <entry key="app/src/main/res/drawable/striking_text.xml" value="0.1655" />
@@ -38,13 +39,14 @@
         <entry key="app/src/main/res/layout/activity_create_business.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_category.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_create_customer.xml" value="0.5601348876953125" />
-        <entry key="app/src/main/res/layout/activity_create_employee.xml" value="0.3633218737616055" />
+        <entry key="app/src/main/res/layout/activity_create_employee.xml" value="0.278223607160043" />
         <entry key="app/src/main/res/layout/activity_create_product.xml" value="0.3587889077006907" />
         <entry key="app/src/main/res/layout/activity_create_product_sub_category.xml" value="0.23822463768115942" />
+        <entry key="app/src/main/res/layout/activity_employee_details.xml" value="0.28815886585424977" />
         <entry key="app/src/main/res/layout/activity_launch.xml" value="0.37433135120581223" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.384626545852924" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21888580322265627" />
-        <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.5050279257954031" />
+        <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.16401760556282255" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.129981884057971" />
         <entry key="app/src/main/res/layout/activity_receipt_details.xml" value="0.474432373046875" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18704710144927536" />
@@ -59,6 +61,9 @@
         <entry key="app/src/main/res/layout/fragment_business_product.xml" value="0.24663457455842397" />
         <entry key="app/src/main/res/layout/fragment_business_products.xml" value="0.37313963978003106" />
         <entry key="app/src/main/res/layout/fragment_business_sale.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/fragment_customers.xml" value="0.4188034188034188" />
+        <entry key="app/src/main/res/layout/fragment_employee_details.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/fragment_employee_info.xml" value="0.2852796692779099" />
         <entry key="app/src/main/res/layout/fragment_employee_list.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15070921985815602" />
@@ -78,7 +83,7 @@
         <entry key="app/src/main/res/layout/recycler_item_analytics.xml" value="0.2913926718891531" />
         <entry key="app/src/main/res/layout/recycler_item_business.xml" value="0.4437367303609342" />
         <entry key="app/src/main/res/layout/recycler_item_business_type.xml" value="0.16802536231884058" />
-        <entry key="app/src/main/res/layout/recycler_item_customer.xml" value="0.16576086956521738" />
+        <entry key="app/src/main/res/layout/recycler_item_customer.xml" value="0.3646927543308424" />
         <entry key="app/src/main/res/layout/recycler_item_invoice.xml" value="0.30610167591284354" />
         <entry key="app/src/main/res/layout/recycler_item_product.xml" value="0.301885986328125" />
         <entry key="app/src/main/res/layout/recycler_item_product_category.xml" value="0.23822463768115942" />
@@ -93,8 +98,10 @@
         <entry key="app/src/main/res/menu/business_home_menu.xml" value="0.29025641025641025" />
         <entry key="app/src/main/res/menu/business_main_menu.xml" value="0.30512820512820515" />
         <entry key="app/src/main/res/menu/business_menu.xml" value="0.19375" />
+        <entry key="app/src/main/res/menu/employee_details_menu.xml" value="0.18611111111111112" />
         <entry key="app/src/main/res/menu/product_details_menu.xml" value="0.26481481481481484" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.158" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1555" />
       </map>
     </option>
   </component>

@@ -19,8 +19,8 @@ class PDFService {
         customer?.Address?.let { invoiceHtml = invoiceHtml.replace("###CustomerAddress",it ) }
         customer?.MobileNumber?.let { invoiceHtml = invoiceHtml.replace("###CustomerMobile",it ) }
 
-        invoice.CreatedAt?.let { invoiceHtml = invoiceHtml.replace("###InvoiceDate",it ) }
-        invoice.InvoiceNumber?.let { invoiceHtml = invoiceHtml.replace("###InvoiceNumber",it.toString() ) }
+        invoice.createdAt?.let { invoiceHtml = invoiceHtml.replace("###InvoiceDate",it ) }
+        invoice.invoiceNumber?.let { invoiceHtml = invoiceHtml.replace("###InvoiceNumber",it.toString() ) }
         var saleItemHtml = ""
         sales.forEach {sale->
             val newRow = """
@@ -35,10 +35,10 @@ class PDFService {
             saleItemHtml = saleItemHtml + newRow
         }
         invoiceHtml = invoiceHtml.replace("###SalesData",saleItemHtml)
-        invoiceHtml = invoiceHtml.replace("###SubTotal",invoice.TotalPrice.toString())
+        invoiceHtml = invoiceHtml.replace("###SubTotal",invoice.totalPrice.toString())
         invoiceHtml = invoiceHtml.replace("###Tax",invoice.Tax.toString())
-        invoiceHtml = invoiceHtml.replace("###FinalPrice",invoice.FinalPrice.toString())
-        invoiceHtml = invoiceHtml.replace("###InstantDiscount",invoice.InstantDiscount.toString())
+        invoiceHtml = invoiceHtml.replace("###FinalPrice",invoice.finalPrice.toString())
+        invoiceHtml = invoiceHtml.replace("###InstantDiscount",invoice.instantDiscount.toString())
         return invoiceHtml
     }
 

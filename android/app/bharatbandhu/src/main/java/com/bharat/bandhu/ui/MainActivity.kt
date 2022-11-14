@@ -68,29 +68,17 @@ class MainActivity : AppCompatActivity() {
 
     fun loadMembershipInUI(){
         val membership = Defaults.json(Key.membershipDetails)
+        val hint = "Membership Details Not Found\nPlease Visit our Store to get your Membership"
         if(membership.has(Key.barcode)){
             val barcodeNumber = membership.getString(Key.barcode)
             if(barcodeNumber.isNotEmpty()){
                 generateBarcode(barcodeNumber)
                 barcodeText?.text = barcodeNumber
             }else{
-                var barcodeNumber = user.mobile
-                barcodeNumber.replace("+49","")
-                barcodeNumber = "900$barcodeNumber"
-                if(barcodeNumber.isNotEmpty()) {
-                    generateBarcode(barcodeNumber)
-                    barcodeText?.text = barcodeNumber
-                }
+                barcodeText?.text = hint
             }
         }else{
-            var barcodeNumber = user.mobile
-            barcodeNumber.replace("+49","")
-            barcodeNumber = "900$barcodeNumber"
-            if(barcodeNumber.isNotEmpty()) {
-                generateBarcode(barcodeNumber)
-                barcodeText?.text = barcodeNumber
-            }
-//            barcodeText?.text = "Membership details not found, please try after some time"
+            barcodeText?.text = hint
         }
     }
 

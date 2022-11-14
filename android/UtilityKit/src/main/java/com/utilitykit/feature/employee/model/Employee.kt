@@ -14,6 +14,8 @@ data class Employee(
     @SerializedName("Status"         ) var Status         : String?           = null,
     @SerializedName("EmailID"        ) var EmailID        : String?           = null,
     @SerializedName("MobileNumber"   ) var MobileNumber   : String?           = null,
+    @SerializedName("WhatsApp"       ) var WhatsApp       : String?           = null,
+    @SerializedName("DialCode"       ) var DialCode       : String?           = null,
     @SerializedName("Gender"         ) var Gender         : Int?              = null,
     @SerializedName("DeviceID"       ) var DeviceID       : String?           = null,
     @SerializedName("FCMToken"       ) var FCMToken       : String?           = null,

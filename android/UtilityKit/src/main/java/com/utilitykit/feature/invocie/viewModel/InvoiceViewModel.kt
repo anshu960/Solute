@@ -45,7 +45,7 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
             var request = JSONObject()
             request.put(Key.userId,user._id)
             request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
-            request.put(Key.startDate,now())
+            request.put(Key.startDate,yesterday())
             request.put(Key.endDate,now())
             SocketService.shared().send(SocketEvent.RETRIVE_INVOICE,request)
         }
@@ -54,7 +54,7 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
     fun filter(invoiceNumber:Long){
         val newFilteredList : ArrayList<CustomerInvoice> = arrayListOf()
         allCustomerInvoice.value?.forEach {
-            if(it.InvoiceNumber == invoiceNumber){
+            if(it.invoiceNumber == invoiceNumber){
                 newFilteredList.add(it)
             }
         }
@@ -70,7 +70,7 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
             var request = JSONObject()
             request.put(Key.userId,user._id)
             request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
-            request.put(Key.salesID,JSONArray(customerInvoice!!.value!!.SalesID))
+            request.put(Key.salesID,JSONArray(customerInvoice!!.value!!.salesID))
             SocketService.shared().send(SocketEvent.RETRIVE_SALES,request)
         }
     }
@@ -79,5 +79,11 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
 
     fun now(): String {
         return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+    }
+    fun yesterday(): String {
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        calendar.add(Calendar.DAY_OF_MONTH, -7)
+        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime())
     }
 }

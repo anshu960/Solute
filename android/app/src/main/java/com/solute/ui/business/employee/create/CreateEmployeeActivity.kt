@@ -84,6 +84,7 @@ class CreateEmployeeActivity : UtilityActivity() {
             viewModal?.fetchAllEmployee()
             toastLong("Request Sent, please ask your employee to accept the request")
             this.onBackPressed()
+            EmployeeHandler.shared().repository.employeeLiveData.postValue(null)
         }
     }
     fun onChangeUser(){

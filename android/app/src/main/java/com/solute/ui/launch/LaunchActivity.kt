@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.multidex.BuildConfig
-import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.login.LoginActivity
 import com.solute.ui.network.ConnectingActivity
@@ -12,8 +11,6 @@ import com.solute.ui.register.RegisterActivity
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityActivity
-import com.utilitykit.UtilityKitApp
-import com.utilitykit.database.Database
 import com.utilitykit.dataclass.User
 import com.utilitykit.socket.SocketService
 

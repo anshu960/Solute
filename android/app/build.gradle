@@ -11,8 +11,8 @@ android {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 49
-        versionName "0.0.49"
+        versionCode 53
+        versionName "0.0.53"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -53,22 +53,22 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'com.android.billingclient:billing:5.0.0'
+    implementation 'com.android.billingclient:billing:5.1.0'
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test:runner:1.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     //Google and Firebase
     implementation platform('com.google.firebase:firebase-bom:30.4.1')
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.2'
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
     implementation('com.google.firebase:firebase-auth') //{exclude module: "play-services-safetynet"}
     implementation 'com.google.firebase:firebase-analytics:21.2.0'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.android.gms:play-services-location:21.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.22'
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
