@@ -149,7 +149,7 @@ class SocketService : Service() {
         mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
         mSocket?.on(
             SocketEvent.GENERATE_CUSTOMER_INVOICE.value,
-            CartHandler.shared().createCustomerInvoice
+            CartHandler.shared().onCreateCustomerInvoice
         )
         mSocket?.on(SocketEvent.RETRIVE_INVOICE.value, InvoiceHandler.shared().retriveInvoice)
         mSocket?.on(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)
@@ -257,7 +257,7 @@ class SocketService : Service() {
         mSocket?.off(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
         mSocket?.off(
             SocketEvent.GENERATE_CUSTOMER_INVOICE.value,
-            CartHandler.shared().createCustomerInvoice
+            CartHandler.shared().onCreateCustomerInvoice
         )
         mSocket?.off(SocketEvent.RETRIVE_INVOICE.value, InvoiceHandler.shared().retriveInvoice)
         mSocket?.off(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)

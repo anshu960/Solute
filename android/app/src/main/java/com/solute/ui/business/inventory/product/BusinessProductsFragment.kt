@@ -1,6 +1,5 @@
 package com.solute.ui.business.inventory.product
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.play.core.integrity.IntegrityTokenRequest
 import com.solute.R
+import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.product.BusinessProductAdapter
-import com.solute.ui.business.product.create.CreateProductActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
@@ -35,6 +34,7 @@ class BusinessProductsFragment : Fragment() {
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
     var createNewProductBtn : FloatingActionButton? = null
+    val activity = BusinessHandler.shared().activity as? BusinessActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +64,7 @@ class BusinessProductsFragment : Fragment() {
         recycler = view.findViewById(R.id.business_products_recycler)
         createNewProductBtn = view.findViewById(R.id.business_products_fab_button)
         createNewProductBtn?.setOnClickListener {
-            val intent = Intent(this.context,CreateProductActivity::class.java)
-            this.context?.startActivity(intent)
+            activity?.navController?.navigate(R.id.business_product_create)
         }
         reload()
         return view

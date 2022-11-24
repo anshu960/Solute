@@ -25,8 +25,8 @@ class BusinessHandler {
     var businessViewModel: BusinessViewModel? = null
     val repository = BusinessRepository()
     val gson = Gson()
-    var allBusiness : ArrayList<Business> = arrayListOf()
     var activity : AppCompatActivity = UtilityActivity()
+    var mainActivity : AppCompatActivity = UtilityActivity()
     init {
         instance = this
     }
@@ -75,7 +75,6 @@ class BusinessHandler {
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONObject(Key.payload)
                 val business = gson.fromJson(payload.toString(),Business::class.java)
-                repository.businessLiveData.postValue(business)
                 businessViewModel?.insertDatabase(business)
             }
         }

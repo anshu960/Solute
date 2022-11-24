@@ -162,6 +162,8 @@ class ReceiptDetailsActivity : UtilityActivity() {
                     this.customer = it
                     reloadData()
                 }
+            }else{
+                reloadData()
             }
         } else {
             InvoiceHandler.shared().repository.customerInvoice.value
@@ -172,6 +174,8 @@ class ReceiptDetailsActivity : UtilityActivity() {
                     this.customer = it
                     reloadData()
                 }
+            }else{
+                reloadData()
             }
         }
     }
@@ -184,7 +188,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
             qrImage?.setImageBitmap(qrBitmap)
         }
         loadShareDetails()
-        val pdf = PDFService().createInvoice(this,customer,business,customerInvoice!!,sales)
+        val pdf = PDFService().createInvoice(this,customer,business.value,customerInvoice!!,sales)
         pdfView?.getSettings()?.setUseWideViewPort(true)
         pdfView?.setInitialScale(1)
         pdfView?.getSettings()?.setSupportZoom(true);

@@ -45,7 +45,7 @@ class ProductSubCategoryHandler{
         if(BusinessHandler.shared().repository.business != null){
             val business = BusinessHandler.shared().repository.business
             request.put(Key.userId,user._id)
-            request.put(Key.businessID,business!!.Id)
+            request.put(Key.businessID,business.value?.Id)
             SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY,request)
         }
     }

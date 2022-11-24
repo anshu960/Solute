@@ -63,7 +63,7 @@ class CustomersFragment : Fragment() {
 
     fun reload(){
         this.recycler!!.layoutManager = LinearLayoutManager(this.context)
-        adapter = this.context?.let { CustomerAdapter(it, allCustomer) }
+        adapter = this.context?.let { CustomerAdapter(it, allCustomer,null) }
         this.recycler!!.adapter = this.adapter
     }
     fun searchCustomer(query:String){

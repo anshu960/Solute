@@ -62,6 +62,7 @@
         <entry key="app/src/main/res/layout/fragment_business_products.xml" value="0.37313963978003106" />
         <entry key="app/src/main/res/layout/fragment_business_sale.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_create_customer.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/fragment_create_product.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_customers.xml" value="0.4188034188034188" />
         <entry key="app/src/main/res/layout/fragment_employee_details.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_employee_info.xml" value="0.2852796692779099" />
@@ -77,6 +78,7 @@
         <entry key="app/src/main/res/layout/fragment_product_stock_details.xml" value="0.20299346058081227" />
         <entry key="app/src/main/res/layout/fragment_product_sub_category.xml" value="0.1716485507246377" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.14336372847011145" />
+        <entry key="app/src/main/res/layout/fragment_select_category.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_select_customer.xml" value="0.2819913467979238" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_stock.xml" value="0.15070921985815602" />

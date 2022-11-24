@@ -18,6 +18,8 @@ class ProductCategoryHandler{
     var productCategoryViewModel: ProductCategoryViewModel? = null
     val repository = ProductCategoryRepository()
     var activity = UtilityActivity()
+    var onCreateNewCategory : ((category: ProductCategory)->Unit)? = null
+    var onSelectCategory : ((category: ProductCategory)->Unit)? = null
     val gson = Gson()
     init {
         instance = this
@@ -41,12 +43,10 @@ class ProductCategoryHandler{
     fun fetchAllProductCategory(){
         val request = JSONObject()
         val user = User()
-        if( BusinessHandler.shared().repository.business != null){
-            val business = BusinessHandler.shared().repository.business
-            request.put(Key.userId,user._id)
-            request.put(Key.businessID,business!!.Id)
-            SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT_CATEGORY,request)
-        }
+        val business = BusinessHandler.shared().repository.business
+        request.put(Key.userId,user._id)
+        request.put(Key.businessID, business.value?.Id)
+        SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT_CATEGORY,request)
     }
 
      val retriveProductCategory = Emitter.Listener {

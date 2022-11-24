@@ -1,12 +1,9 @@
 package com.utilitykit.feature.product.handler
 
-import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.TableNames
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
-import com.utilitykit.UtilityKitApp
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.model.Product
@@ -14,10 +11,8 @@ import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.product.repository.ProductRepository
 import com.utilitykit.feature.product.viewModel.ProductViewModel
 import com.utilitykit.feature.sync.SyncHandler
-import com.utilitykit.feature.sync.convertJsonToContentValue
 import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class ProductHandler {
@@ -53,12 +48,10 @@ class ProductHandler {
     fun fetchAllProduct(){
         val request = JSONObject()
         val user = User()
-        if(BusinessHandler.shared().repository.business != null){
-            val business = BusinessHandler.shared().repository.business
-            request.put(Key.userId,user._id)
-            request.put(Key.businessID,business!!.Id)
-            SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT,request)
-        }
+        val business = BusinessHandler.shared().repository.business
+        request.put(Key.userId,user._id)
+        request.put(Key.businessID,business.value?.Id)
+        SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT,request)
     }
 
      val retriveProduct = Emitter.Listener {

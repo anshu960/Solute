@@ -88,8 +88,8 @@ class BusinessActivity : UtilityActivity() {
         businessName = headerView.findViewById(R.id.nav_header_business_name)
         businessDescription = headerView.findViewById(R.id.nav_header_business_description)
         if(BusinessHandler.shared().repository.business != null){
-            businessName?.text = BusinessHandler.shared().repository.business?.Name
-            businessDescription?.text = BusinessHandler.shared().repository.business?.Address
+            businessName?.text = BusinessHandler.shared().repository.business.value?.Name
+            businessDescription?.text = BusinessHandler.shared().repository.business.value?.Address
         }else{
             businessName?.text = ""
             businessDescription?.text = ""

@@ -10,7 +10,7 @@ import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productCategory.model.ProductCategory
 
-class ProductCategoryAdapter(val context: Context, val fragment: Fragment, val allCategory: List<ProductCategory>) :
+class ProductCategoryAdapter(val context: Context, val fragment: Fragment, val allCategory: List<ProductCategory>,var onSelect:((category: ProductCategory) -> Unit)? = null) :
     RecyclerView.Adapter<ProductCategoryViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -25,12 +25,14 @@ class ProductCategoryAdapter(val context: Context, val fragment: Fragment, val a
     override fun onBindViewHolder(holder: ProductCategoryViewHolder, position: Int) {
         val item = allCategory[position]
         holder.itemView.setOnClickListener {
-            if(context is UtilityActivity){
+            if(onSelect != null){
+                onSelect!!(item)
+            }else if(context is UtilityActivity){
                 ProductCategoryHandler.shared().repository.selectedCategoryLiveData.postValue(item)
                 val intent = Intent(context, CategoryDetailsActivity::class.java)
                 context.startActivity(intent)
             }
         }
-        holder.bind(fragment,item)
+        holder.bind(fragment,item,onSelect)
     }
 }

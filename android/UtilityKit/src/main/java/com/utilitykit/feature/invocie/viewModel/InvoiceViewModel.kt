@@ -44,11 +44,13 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
         get() = invoiceRepository.allSales
 
     fun loadInvoice(){
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business!!.Id
-            UtilityKitApp.applicationContext().database.customerInvoiceDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
-                invoiceRepository.allCustomerInvoiceLiveData.postValue(it as ArrayList<CustomerInvoice>?)
-                invoiceRepository.filteredCustomerInvoiceLiveData.postValue(it)
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business.value?.Id
+            if (businessId != null) {
+                UtilityKitApp.applicationContext().database.customerInvoiceDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
+                    invoiceRepository.allCustomerInvoiceLiveData.postValue(it as ArrayList<CustomerInvoice>?)
+                    invoiceRepository.filteredCustomerInvoiceLiveData.postValue(it)
+                }
             }
         }
     }
@@ -59,8 +61,8 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
         if(BusinessHandler.shared().repository.business != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
-            UtilityKitApp.applicationContext().database.customerInvoiceDao().getRecentItemForBusiness(BusinessHandler.shared().repository.business!!.Id).observe(BusinessHandler.shared().activity){
+            request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
+            UtilityKitApp.applicationContext().database.customerInvoiceDao().getRecentItemForBusiness(BusinessHandler.shared().repository.business.value!!.Id).observe(BusinessHandler.shared().activity){
                 if(it != null){
                     request.put(Key.startDate,it.updatedAt)
                     request.put(Key.endDate,now())
@@ -89,10 +91,10 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
 
     fun fetchAllSales(){
         val user = User()
-        if(BusinessHandler.shared().repository.business != null && customerInvoice.value != null){
+        if(customerInvoice.value != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
+            request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
             request.put(Key.salesID,JSONArray(customerInvoice!!.value!!.salesID))
             SocketService.shared().send(SocketEvent.RETRIVE_SALES,request)
         }

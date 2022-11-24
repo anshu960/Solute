@@ -32,8 +32,8 @@ class ProductCategoryViewModel(private val productCategoryRepository: ProductCat
         get() = productCategoryRepository.selectedCategory
 
     fun loadCategory(){
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business!!.Id
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business.value!!.Id
             UtilityKitApp.applicationContext().database.productCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
                 productCategoryRepository.categoryLiveData.postValue(it as ArrayList<ProductCategory>?)
             }
@@ -45,7 +45,7 @@ class ProductCategoryViewModel(private val productCategoryRepository: ProductCat
         val user = User()
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId, user._id)
-        request.put(Key.businessID, business!!.Id)
+        request.put(Key.businessID, business.value?.Id)
         request.put(Key.name, name)
         SocketService.shared().send(SocketEvent.CREATE_PRODUCT_CATEGORY, request)
     }

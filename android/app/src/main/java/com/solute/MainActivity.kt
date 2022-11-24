@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.ui.business.create.SelectBusinessTypeActivity
 import com.solute.ui.network.ConnectingActivity
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.socket.SocketService
 
 
@@ -59,7 +60,7 @@ class MainActivity : UtilityActivity() {
                     }
             }
         }
-
+        BusinessHandler.shared().mainActivity = this
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)

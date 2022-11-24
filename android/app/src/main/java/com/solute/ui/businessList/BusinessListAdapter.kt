@@ -34,14 +34,12 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
     override fun onBindViewHolder(holder: BusinessViewHolder, position: Int) {
         val item = allBusiness[position]
         holder.itemView.setOnClickListener {
-            if(context is MainActivity){
-                val mainActivty = context as MainActivity
+                val mainActivty = context as? MainActivity
                 val intent = Intent(mainActivty, BusinessActivity::class.java)
-                BusinessHandler.shared().repository.business = item
+                BusinessHandler.shared().repository.businessLiveData.postValue(item)
                 SyncHandler.shared().clearBusinessAnalytics()
                 SyncHandler.shared().syncAllBusinessData()
-                mainActivty.startActivity(intent)
-            }
+                mainActivty?.startActivity(intent)
         }
         holder.bind(item,position)
     }

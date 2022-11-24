@@ -30,8 +30,8 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
         get() = productSubCategoryRepository.selectedSubCategory
 
     fun loadSubCategory(){
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business!!.Id
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business.value!!.Id
             UtilityKitApp.applicationContext().database.productSubCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
                 productSubCategoryRepository.subCategoryLiveData.postValue(it as ArrayList<ProductSubCategory>?)
             }
@@ -43,7 +43,7 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
         val user = User()
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId, user._id)
-        request.put(Key.businessID, business!!.Id)
+        request.put(Key.businessID, business.value?.Id)
         request.put(Key.categoryId,category.Id)
         request.put(Key.name, name)
         SocketService.shared().send(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY, request)

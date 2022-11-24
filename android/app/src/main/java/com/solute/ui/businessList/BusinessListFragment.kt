@@ -35,22 +35,16 @@ class BusinessListFragment : Fragment() {
             BusinessViewModel::class.java
         )
         businessViewModel.allBusiness.observe(this) {
-
-        }
-        BusinessHandler.shared().setup(businessViewModel)
-
-        UtilityKitApp.applicationContext().database.businessDao().getAllItems().observe(this){
-            if(it.isNotEmpty()){
-                BusinessHandler.shared().allBusiness = it as ArrayList<Business>
+            if(!it.isNullOrEmpty()){
+                allBusiness = it
             }
             this.reload()
         }
+        BusinessHandler.shared().setup(businessViewModel)
         BusinessHandler.shared().fetchAllBusiness()
-
     }
 
     fun reload() {
-        allBusiness = BusinessHandler.shared().allBusiness
         this.recyclerView!!.layoutManager = LinearLayoutManager(this.context)
         adapter = this.context?.let { BusinessListAdapter(it, allBusiness) }
         this.recyclerView!!.adapter = this.adapter
@@ -66,6 +60,7 @@ class BusinessListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_business_list, container, false)
         this.recyclerView = view.findViewById(R.id.fragment_business_list_recycler)
+        businessViewModel.loadBusiness()
         reload()
         return view
     }

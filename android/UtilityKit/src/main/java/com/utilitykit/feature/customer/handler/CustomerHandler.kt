@@ -42,10 +42,10 @@ class CustomerHandler {
     }
     fun fetchAllCustomer(){
         val user = User()
-        if(BusinessHandler.shared().repository.business != null){
+        if(BusinessHandler.shared().repository.business.value != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
-            request.put(Key.businessID, BusinessHandler.shared().repository.business!!.Id)
+            request.put(Key.businessID, BusinessHandler.shared().repository.business.value?.Id)
             SocketService.shared().send(SocketEvent.RETRIVE_CUSTOMER,request)
         }
     }

@@ -4,24 +4,23 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.solute.ui.business.product.create.CreateProductActivity
+import com.solute.ui.business.BusinessActivity
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 
 
 class ProductDetailActivity : UtilityActivity() {
+    val activity = BusinessHandler.shared().activity as? BusinessActivity
     var navHostFragment : NavHostFragment? = null
     var bottomNavigationView :  BottomNavigationView? = null
     var navController : NavController? = null
@@ -85,14 +84,13 @@ class ProductDetailActivity : UtilityActivity() {
     }
 
     fun onClickEdit(){
-        val intent = Intent(this,CreateProductActivity::class.java)
-        startActivity(intent)
+        activity?.navController?.navigate(R.id.business_product_create)
     }
 
     fun deleteProduct(){
         if(ProductHandler.shared().repository.selectedProduct.value != null){
             ProductHandler.shared().onDeleteProductCallBack={
-                if(it != null && it.Id != null){
+                if(it != null){
                     this.runOnUiThread {
                         toastLong("Product Deleted Successfully");
                         super.onBackPressed()

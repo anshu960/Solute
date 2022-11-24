@@ -62,7 +62,7 @@ class CartHandler {
         }
     }
 
-    val createCustomerInvoice = Emitter.Listener {
+    val onCreateCustomerInvoice = Emitter.Listener {
         if (it.isNotEmpty())
         {
             val anyData = it.first() as JSONObject

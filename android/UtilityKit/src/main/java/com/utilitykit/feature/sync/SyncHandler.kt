@@ -209,15 +209,13 @@ class SyncHandler {
     fun getAllSaleForBusiness() {
         val lastSale = UtilityKitApp.applicationContext().database.saleDao().getRecentItem()
         val user = User()
-        if (BusinessHandler.shared().repository.business != null) {
-            var request = JSONObject()
-            request.put(Key.userId, user._id)
-            request.put(Key.businessID, BusinessHandler.shared().repository.business!!.Id)
-            if (lastSale.value != null) {
-                request.put(Key.lastSyncDate, lastSale.value!!.CreatedAt)
-            }
-            SocketService.shared().send(SocketEvent.RETRIVE_SALE, request)
+        var request = JSONObject()
+        request.put(Key.userId, user._id)
+        request.put(Key.businessID, BusinessHandler.shared().repository.business.value?.Id)
+        if (lastSale.value != null) {
+            request.put(Key.lastSyncDate, lastSale.value!!.CreatedAt)
         }
+        SocketService.shared().send(SocketEvent.RETRIVE_SALE, request)
     }
 
     val onRetriveSale = Emitter.Listener {
@@ -243,13 +241,11 @@ class SyncHandler {
         val user = User()
         val lastProductStock =
             UtilityKitApp.applicationContext().database.productStockDao().getRecentItem()
-        if (BusinessHandler.shared().repository.business != null) {
-            var request = JSONObject()
-            request.put(Key.userId, user._id)
-            request.put(Key.businessID, BusinessHandler.shared().repository.business!!.Id)
-            request.put(Key.lastSyncDate, lastProductStock!!.value?.CreatedAt)
-            SocketService.shared().send(SocketEvent.RETRIVE_ALL_STOCK_ENTRY, request)
-        }
+        var request = JSONObject()
+        request.put(Key.userId, user._id)
+        request.put(Key.businessID, BusinessHandler.shared().repository.business.value?.Id)
+        request.put(Key.lastSyncDate, lastProductStock!!.value?.CreatedAt)
+        SocketService.shared().send(SocketEvent.RETRIVE_ALL_STOCK_ENTRY, request)
     }
 
     val onRetriveAllStockEntry = Emitter.Listener {

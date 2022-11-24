@@ -2,19 +2,26 @@ package com.solute.ui.business.product.create
 
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.shuhart.stepview.StepView
 import com.solute.App
 import com.solute.R
+import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.costPrice
 import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -29,7 +36,9 @@ import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 import org.json.JSONObject
 import java.lang.Error
 
-class CreateProductActivity : UtilityActivity() {
+class CreateProductFragment : Fragment() {
+    val activity = BusinessHandler.shared().activity as? BusinessActivity
+
     val picasso = Picasso.get()
     var prdName = ""
     var prdDescription = ""
@@ -49,12 +58,7 @@ class CreateProductActivity : UtilityActivity() {
     var product:Product? = null
 
     private var stepsPosition = 0
-    var allCategoory: ArrayList<ProductCategory> = ArrayList()
-    var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
-    var selectedCategoryIndex = 0
-    var selectedCategoryName = ""
-    var selectedSubCategoryIndex = 0
-    var selectedSubCategoryName = ""
+
     var selectedCategory : ProductCategory? = null
     var selectedSubCategory : ProductSubCategory? = null
 
@@ -117,89 +121,97 @@ class CreateProductActivity : UtilityActivity() {
     var productTaxFinalPriceEditText : TextInputEditText? = null
 
     var saveButton : Button? = null
-    var backButton : ImageButton? = null
-    private lateinit var productViewModel: ProductViewModel
+    var viewModal: ProductViewModel? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_product)
-        imageView = findViewById(R.id.create_product_image)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                onBackPressed()
+            }
+        })
+        loadProductPreFilledData()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_create_product, container, false)
+        imageView = view.findViewById(R.id.create_product_image)
         imageView?.setOnClickListener { onClickAddImage() }
-        productStepView = findViewById(R.id.create_product_step_view) as StepView
-        productInfoCard = findViewById(R.id.create_product_info_card)
-        productPriceCard = findViewById(R.id.create_product_price_card)
-        productTaxCard = findViewById(R.id.create_product_tax_card)
-        productFinishCard = findViewById(R.id.create_product_finish_card)
-        saveButton = findViewById(R.id.create_product_save_btn)
+        productStepView = view.findViewById(R.id.create_product_step_view) as StepView
+        productInfoCard = view.findViewById(R.id.create_product_info_card)
+        productPriceCard = view.findViewById(R.id.create_product_price_card)
+        productTaxCard = view.findViewById(R.id.create_product_tax_card)
+        productFinishCard = view.findViewById(R.id.create_product_finish_card)
+        saveButton = view.findViewById(R.id.create_product_save_btn)
         saveButton?.setOnClickListener { onClickSave() }
         productInfoCard?.visibility = View.VISIBLE
         productPriceCard?.visibility = View.GONE
         productTaxCard?.visibility = View.GONE
         productFinishCard?.visibility = View.GONE
         saveButton?.text = "Next"
-        categoryLayout = findViewById(R.id.create_product_category_til)
-        categoryEditText = findViewById(R.id.create_product_category_tiet)
+        categoryLayout = view.findViewById(R.id.create_product_category_til)
+        categoryEditText = view.findViewById(R.id.create_product_category_tiet)
         categoryEditText?.setOnClickListener { showCategorySellection() }
-        subCategoryLayout = findViewById(R.id.create_product_sub_category_til)
-        subCategoryEditText = findViewById(R.id.create_product_sub_category_tiet)
+        subCategoryLayout = view.findViewById(R.id.create_product_sub_category_til)
+        subCategoryEditText = view.findViewById(R.id.create_product_sub_category_tiet)
         subCategoryEditText?.setOnClickListener { showSubCategorySellection() }
-        productNameLayout = findViewById(R.id.create_product_name_til)
-        productNameEditText = findViewById(R.id.create_product_name_tiet)
+        productNameLayout = view.findViewById(R.id.create_product_name_til)
+        productNameEditText = view.findViewById(R.id.create_product_name_tiet)
 
-        productDescriptionLayout = findViewById(R.id.create_product_description_til)
-        productDescriptionEditText = findViewById(R.id.create_product_description_tiet)
+        productDescriptionLayout = view.findViewById(R.id.create_product_description_til)
+        productDescriptionEditText = view.findViewById(R.id.create_product_description_tiet)
 
-        productMRPLayout = findViewById(R.id.create_product_mrp_til)
-        productMRPEditText = findViewById(R.id.create_product_mrp_tiet)
+        productMRPLayout = view.findViewById(R.id.create_product_mrp_til)
+        productMRPEditText = view.findViewById(R.id.create_product_mrp_tiet)
         productMRPEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
-        productCostPriceLayout = findViewById(R.id.create_product_cost_price_til)
-        productCostPriceEditText = findViewById(R.id.create_product_cost_price_tiet)
+        productCostPriceLayout = view.findViewById(R.id.create_product_cost_price_til)
+        productCostPriceEditText = view.findViewById(R.id.create_product_cost_price_tiet)
         productCostPriceEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
-        productPriceLayout = findViewById(R.id.create_product_price_til)
-        productPriceEditText = findViewById(R.id.create_product_price_tiet)
+        productPriceLayout = view.findViewById(R.id.create_product_price_til)
+        productPriceEditText = view.findViewById(R.id.create_product_price_tiet)
         productPriceEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
-        productDiscountLayout = findViewById(R.id.create_product_discount_tel)
-        productDiscountEditText = findViewById(R.id.create_product_discount_tiet)
+        productDiscountLayout = view.findViewById(R.id.create_product_discount_tel)
+        productDiscountEditText = view.findViewById(R.id.create_product_discount_tiet)
 
-        productFinalPriceLayout = findViewById(R.id.create_product_final_price_til)
-        productFinalPriceEditText = findViewById(R.id.create_product_final_price_tiet)
+        productFinalPriceLayout = view.findViewById(R.id.create_product_final_price_til)
+        productFinalPriceEditText = view.findViewById(R.id.create_product_final_price_tiet)
 
-        productIGSTLayout = findViewById(R.id.create_product_igst_til)
-        productIGSTEditText = findViewById(R.id.create_product_igst_tiet)
+        productIGSTLayout = view.findViewById(R.id.create_product_igst_til)
+        productIGSTEditText = view.findViewById(R.id.create_product_igst_tiet)
         productIGSTEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
-        productCGSTLayout = findViewById(R.id.create_product_cgst_til)
-        productCGSTEditText = findViewById(R.id.create_product_cgst_tiet)
+        productCGSTLayout = view.findViewById(R.id.create_product_cgst_til)
+        productCGSTEditText = view.findViewById(R.id.create_product_cgst_tiet)
         productCGSTEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
-        productSGSTLayout = findViewById(R.id.create_product_sgst_til)
-        productSGSTEditText = findViewById(R.id.create_product_sgst_tiet)
+        productSGSTLayout = view.findViewById(R.id.create_product_sgst_til)
+        productSGSTEditText = view.findViewById(R.id.create_product_sgst_tiet)
         productSGSTEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
-        productVATLayout = findViewById(R.id.create_product_vat_til)
-        productVATEditText = findViewById(R.id.create_product_vat_tiet)
+        productVATLayout = view.findViewById(R.id.create_product_vat_til)
+        productVATEditText = view.findViewById(R.id.create_product_vat_tiet)
         productVATEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
-        productCESSLayout = findViewById(R.id.create_product_cess_til)
-        productCESSEditText = findViewById(R.id.create_product_cess_tiet)
+        productCESSLayout = view.findViewById(R.id.create_product_cess_til)
+        productCESSEditText = view.findViewById(R.id.create_product_cess_tiet)
         productCESSEditText?.addTextChangedListener { this.calculateTaxAndPrice() }
 
-        productTotalTaxLayout = findViewById(R.id.create_product_total_tax_til)
-        productTotalTaxEditText = findViewById(R.id.create_product_total_tax_tiet)
+        productTotalTaxLayout = view.findViewById(R.id.create_product_total_tax_til)
+        productTotalTaxEditText = view.findViewById(R.id.create_product_total_tax_tiet)
 
-        taxIncludedCheckBox = findViewById(R.id.create_product_is_tax_included_check_box)
+        taxIncludedCheckBox = view.findViewById(R.id.create_product_is_tax_included_check_box)
         taxIncludedCheckBox?.isSelected = true
 
-        productTaxFinalPriceLayout = findViewById(R.id.create_product_tax_finial_price_til)
-        productTaxFinalPriceEditText = findViewById(R.id.create_product_tax_finial_price_tiet)
+        productTaxFinalPriceLayout = view.findViewById(R.id.create_product_tax_finial_price_til)
+        productTaxFinalPriceEditText = view.findViewById(R.id.create_product_tax_finial_price_tiet)
 
         loadProductPreFilledData()
-        backButton = findViewById(R.id.create_product_category_header_back)
-        backButton?.setOnClickListener { onBackPressed() }
-        populateExistingProduct()
+        return view
     }
 
     fun populateExistingProduct(){
@@ -222,13 +234,6 @@ class CreateProductActivity : UtilityActivity() {
             if(product!!.Image.isNotEmpty()){
                 picasso.load(product!!.Image.first()).into(imageView)
             }
-            if(ProductCategoryHandler.shared().repository.allCategory.value != null){
-                ProductCategoryHandler.shared().repository.allCategory.value!!.forEach {
-                    if(it.Id == product!!.CategoryID){
-                        categoryEditText?.setText(it.Name)
-                    }
-                }
-            }
             if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null){
                 ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.forEach {
                     if(it.Id == product!!.SubCategoryID){
@@ -237,10 +242,13 @@ class CreateProductActivity : UtilityActivity() {
                 }
             }
         }
+        if(selectedCategory != null){
+            categoryEditText?.setText(selectedCategory?.Name)
+        }
     }
 
     fun onClickAddImage(){
-        getImageUrl {
+        activity?.getImageUrl {
             fileUri = it
             val picasso = Picasso.get()
             picasso.load(it).into(this.imageView)
@@ -275,10 +283,10 @@ class CreateProductActivity : UtilityActivity() {
         }
     }
 
-    override fun onBackPressed() {
+     fun onBackPressed() {
         when (stepsPosition) {
             0 -> {
-                super.onBackPressed()
+                activity?.onBackPressed()
             }
             1 -> {
                 productInfoCard?.visibility = View.VISIBLE
@@ -334,21 +342,21 @@ class CreateProductActivity : UtilityActivity() {
             try {
                 mrp = prdMMRP.toFloat()
             }catch (error:Error){
-                toast("Please enter valid MRP")
+                activity?.toast("Please enter valid MRP")
             }
         }
         if(prdCostPrice.isNotEmpty()){
             try {
                 costPrice = prdCostPrice.toFloat()
             }catch (error:Error){
-                toast("Please enter valid Cost Price")
+                activity?.toast("Please enter valid Cost Price")
             }
         }
         if(prdPrice.isNotEmpty()){
             try {
                 price = prdPrice.toFloat()
             }catch (error:Error){
-                toast("Please enter valid Sale Price")
+                activity?.toast("Please enter valid Sale Price")
             }
         }
 
@@ -357,7 +365,7 @@ class CreateProductActivity : UtilityActivity() {
             try {
                 sgst = prdSGST.toFloat()
             }catch (error:Error){
-                toast("Please enter valid SGST")
+                activity?.toast("Please enter valid SGST")
             }
         }
 
@@ -365,7 +373,7 @@ class CreateProductActivity : UtilityActivity() {
             try {
                 cgst = prdCGST.toFloat()
             }catch (error:Error){
-                toast("Please enter valid CGST")
+                activity?.toast("Please enter valid CGST")
             }
         }
 
@@ -373,7 +381,7 @@ class CreateProductActivity : UtilityActivity() {
             try {
                 igst = prdIGST.toFloat()
             }catch (error:Error){
-                toast("Please enter valid IGST")
+                activity?.toast("Please enter valid IGST")
             }
         }
 
@@ -381,7 +389,7 @@ class CreateProductActivity : UtilityActivity() {
             try {
                 vat = prdVAT.toFloat()
             }catch (error:Error){
-                toast("Please enter valid VAT")
+                activity?.toast("Please enter valid VAT")
             }
         }
 
@@ -389,7 +397,7 @@ class CreateProductActivity : UtilityActivity() {
             try {
                 cess = prdCESS.toFloat()
             }catch (error:Error){
-                toast("Please enter valid CESS")
+                activity?.toast("Please enter valid CESS")
             }
         }
 
@@ -418,170 +426,125 @@ class CreateProductActivity : UtilityActivity() {
 
     fun loadProductPreFilledData(){
         //Product Model
-        productViewModel = ViewModelProvider(
+        viewModal = ViewModelProvider(
             this,
             ProductViewModalFactory(ProductHandler.shared().repository)
         ).get(
             ProductViewModel::class.java
         )
-        ProductHandler.shared().activity = this
-        //Category
-        ProductCategoryHandler.shared().repository.categoryLiveData.observe(this){
-            if(!it.isNullOrEmpty()){
-                allCategoory = it as ArrayList<ProductCategory>
-            }
-        }
-        if(ProductCategoryHandler.shared().repository.allCategory.value != null && ProductCategoryHandler.shared().repository.allCategory.value!!.isNotEmpty()){
-            allCategoory = ProductCategoryHandler.shared().repository.allCategory.value as ArrayList<ProductCategory>
-        }else{
-            ProductCategoryHandler.shared().fetchAllProductCategory()
-        }
-        //sub category
-        ProductSubCategoryHandler.shared().repository.subCategoryLiveData.observe(this){
-            if(!it.isNullOrEmpty()){
-                allSubCategoory = it as ArrayList<ProductSubCategory>
-            }
-        }
-        if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null && ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.isNotEmpty()){
-            allSubCategoory = ProductSubCategoryHandler.shared().repository.allSubCategory.value as ArrayList<ProductSubCategory>
-        }else{
-            ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
-        }
+        ProductHandler.shared().setup(viewModal!!)
+        ProductHandler.shared().activity = this.activity
     }
 
 
     fun showCategorySellection(){
-        var allCategoryNames : Array<String> = Array(allCategoory.count()){""}
-        var index = 0
-        allCategoory.forEach {
-            it.Name?.let { it1 ->
-                allCategoryNames.set(index,it1)
-                if(it1 == selectedCategoryName){
-                    selectedCategoryIndex = index
-                }
-            }
-            index+=1
-        }
-        index = 0
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Select Category")
-        builder.setSingleChoiceItems(allCategoryNames, selectedCategoryIndex) { dialog, which ->
-            categoryEditText?.setText(allCategoryNames[which])
-            allCategoory.forEach {
-                it.Name?.let { it1 ->
-                    if(which >= 0 && allCategoryNames[which] == it1){
-                        selectedCategoryIndex = index
-                        selectedCategory = it
-                    }
-                }
-                index+=1
-            }
-            index = 0
-        }
-        builder.setPositiveButton("OK") { dialog, which ->
+        ProductCategoryHandler.shared().onSelectCategory={
+            this.selectedCategory = it
+            categoryEditText?.setText(it.Name)
 
         }
-        builder.setNegativeButton("Cancel", null)
-        val dialog = builder.create()
-        dialog.show()
+        ProductCategoryHandler.shared().onCreateNewCategory={
+            this.selectedCategory = it
+            categoryEditText?.setText(it.Name)
+        }
+       val businessActivity = BusinessHandler.shared().activity as BusinessActivity
+        businessActivity.navController.navigate(R.id.business_select_category)
     }
 
     fun showSubCategorySellection(){
-        var filteredSubCategory : ArrayList<String> = arrayListOf()
-        var index = 0
-        allSubCategoory.forEach {
-            it.Name?.let { it1 ->
-                if(selectedCategory != null && selectedCategory!!.Id == it.CategoryID){
-                    filteredSubCategory.add(it1)
-                }
-                if(it1 == selectedSubCategoryName){
-                    selectedSubCategoryIndex = index
-                }
-            }
-            index+=1
-        }
-        index = 0
-        var allSubCategoryNames : Array<String> = Array(filteredSubCategory.count()){""}
-        filteredSubCategory.forEach {
-            allSubCategoryNames.set(index,it)
-            index+=1
-        }
-        index = 0
-        if(allSubCategoryNames.isEmpty()){
-            toast("Please select category first")
-            return
-        }
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Please selecte Sub Category")
-        builder.setSingleChoiceItems(allSubCategoryNames, selectedCategoryIndex) { dialog, which ->
-            subCategoryEditText?.setText(allSubCategoryNames[which])
-            selectedSubCategoryName = allSubCategoryNames[which]
-            allSubCategoory.forEach {
-                it.Name?.let { it1 ->
-                    if(which >= 0 && allSubCategoryNames[which] == it1){
-                        selectedSubCategoryIndex = index
-                        selectedSubCategory = it
-                    }
-                }
-                index+=1
-            }
-            index = 0
-        }
-        builder.setPositiveButton("OK") { dialog, which ->
-
-        }
-        builder.setNegativeButton("Cancel", null)
-        val dialog = builder.create()
-        dialog.show()
+//        var filteredSubCategory : ArrayList<String> = arrayListOf()
+//        var index = 0
+//        allSubCategoory.forEach {
+//            it.Name?.let { it1 ->
+//                if(selectedCategory != null && selectedCategory!!.Id == it.CategoryID){
+//                    filteredSubCategory.add(it1)
+//                }
+//                if(it1 == selectedSubCategoryName){
+//                    selectedSubCategoryIndex = index
+//                }
+//            }
+//            index+=1
+//        }
+//        index = 0
+//        var allSubCategoryNames : Array<String> = Array(filteredSubCategory.count()){""}
+//        filteredSubCategory.forEach {
+//            allSubCategoryNames.set(index,it)
+//            index+=1
+//        }
+//        index = 0
+//        if(allSubCategoryNames.isEmpty()){
+//            activity?.toast("Please select category first")
+//            return
+//        }
+//        val builder = AlertDialog.Builder(this.context)
+//        builder.setTitle("Please selecte Sub Category")
+//        builder.setSingleChoiceItems(allSubCategoryNames, selectedCategoryIndex) { dialog, which ->
+//            subCategoryEditText?.setText(allSubCategoryNames[which])
+//            selectedSubCategoryName = allSubCategoryNames[which]
+//            allSubCategoory.forEach {
+//                it.Name?.let { it1 ->
+//                    if(which >= 0 && allSubCategoryNames[which] == it1){
+//                        selectedSubCategoryIndex = index
+//                        selectedSubCategory = it
+//                    }
+//                }
+//                index+=1
+//            }
+//            index = 0
+//        }
+//        builder.setPositiveButton("OK") { dialog, which ->
+//
+//        }
+//        builder.setNegativeButton("Cancel", null)
+//        val dialog = builder.create()
+//        dialog.show()
     }
 
     fun saveProductInSever(){
         if(prdName == ""){
-            alert("Oops!","Please enter name of the Product")
+            activity?.alert("Oops!","Please enter name of the Product")
             return
         }
         val request = JSONObject()
         val user = User()
-        if(BusinessHandler.shared().repository.business != null) {
-            val business = BusinessHandler.shared().repository.business
-            request.put(Key.userId, user._id)
-            request.put(Key.businessID, business!!.Id)
-            request.put(Key.categoryId, selectedCategory?.Id)
-            request.put(Key.subCategoryID, selectedSubCategory?.Id)
-            request.put(Key.name, prdName)
-            request.put(Key.description, prdDescription)
-            request.put(Key.manageInventory, true)
-            request.put(Key.taxIncluded, isTaxIncluded)
-            request.put(Key.SGST, sgst)
-            request.put(Key.CGST, cgst)
-            request.put(Key.IGST, igst)
-            request.put(Key.CESS, cess)
-            request.put(Key.VAT, vat)
-            request.put(Key.discount,discount)
-            request.put(Key.MRP, mrp)
-            request.put(Key.price, (price))
-            request.put(Key.costPrice, (costPrice))
-            request.put(Key.finalPrice, finalPrice)
-            request.put(Key.tax, totalTax)
-            if(this.product != null){
-                ProductHandler.shared().onUpdateExistingProductCallBack = {
-                    onCreateNewProduct(it)
-                }
-                request.put(Key._id,product!!.Id)
-                ProductHandler.shared().productViewModel?.updateProduct(request)
-            }else{
-                ProductHandler.shared().onCreateProductCallBack = {
-                    onCreateNewProduct(it)
-                }
-                ProductHandler.shared().productViewModel?.createNewProduct(request)
+        val business = BusinessHandler.shared().repository.business
+        request.put(Key.userId, user._id)
+        request.put(Key.businessID, business.value?.Id)
+        request.put(Key.categoryId, selectedCategory?.Id)
+        request.put(Key.subCategoryID, selectedSubCategory?.Id)
+        request.put(Key.name, prdName)
+        request.put(Key.description, prdDescription)
+        request.put(Key.manageInventory, true)
+        request.put(Key.taxIncluded, isTaxIncluded)
+        request.put(Key.SGST, sgst)
+        request.put(Key.CGST, cgst)
+        request.put(Key.IGST, igst)
+        request.put(Key.CESS, cess)
+        request.put(Key.VAT, vat)
+        request.put(Key.discount,discount)
+        request.put(Key.MRP, mrp)
+        request.put(Key.price, (price))
+        request.put(Key.costPrice, (costPrice))
+        request.put(Key.finalPrice, finalPrice)
+        request.put(Key.tax, totalTax)
+        if(this.product != null){
+            ProductHandler.shared().onUpdateExistingProductCallBack = {
+                onCreateNewProduct(it)
             }
+            request.put(Key._id,product!!.Id)
+            ProductHandler.shared().productViewModel?.updateProduct(request)
+        }else{
+            ProductHandler.shared().onCreateProductCallBack = {
+                onCreateNewProduct(it)
+            }
+            ProductHandler.shared().productViewModel?.createNewProduct(request)
         }
     }
     fun onCreateNewProduct(product:Product?){
         if(product != null){
-            this.runOnUiThread {
+            this.run {
                 if(this.fileUri != null){
-                    toastLong("Product Created, Uploading Image")
+                    activity?.toastLong("Product Created, Uploading Image")
                     uploadImageInFirebase(product!!)
                 }else{
                     this.onBackPressed()
@@ -590,28 +553,28 @@ class CreateProductActivity : UtilityActivity() {
                 }
             }
         }else{
-            this.runOnUiThread {
-                toast("Oops! Something went wrong")
+            this.run {
+                activity?.toast("Oops! Something went wrong")
             }
         }
     }
 
 
     fun uploadImageInFirebase(product: Product){
-        if (fileUri != null && BusinessHandler.shared().repository.business != null && BusinessHandler.shared().repository.business != null) {
+        if (fileUri != null && BusinessHandler.shared().repository.business != null && BusinessHandler.shared().repository.business.value != null) {
             val fileName = product.Id +".png"
-            val imageRef = App.applicationContext().productImageRef?.child(BusinessHandler.shared().repository.business!!.Id!!)?.child(product.Id!!)?.child(fileName)
+            val imageRef = App.applicationContext().productImageRef?.child(BusinessHandler.shared().repository.business.value!!.Id)?.child(product.Id!!)?.child(fileName)
             imageRef?.putFile(fileUri!!)?.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     ProductHandler.shared().onUpdateProductImageCallBack={updatedPrd->
-                            this.runOnUiThread {
+                            this.run {
                                 if(updatedPrd != null && updatedPrd!!.Id != null){
                                     this.onBackPressed()
                                     this.onBackPressed()
                                     this.onBackPressed()
-                                    toast("Image Updated Successfully")
+                                    activity?.toast("Image Updated Successfully")
                                 }else{
-                                    toast("Image couldn't be updated")
+                                    activity?.toast("Image couldn't be updated")
                                 }
                             }
                         }
@@ -620,12 +583,12 @@ class CreateProductActivity : UtilityActivity() {
                 }
             }?.addOnFailureListener { e ->
                 print(e.message)
-                this.runOnUiThread {
-                    toast("Oops! Failed to upload image at the moment")
+                this.run {
+                    activity?.toast("Oops! Failed to upload image at the moment")
                 }
             }
         }else{
-            super.onBackPressed()
+            activity?.onBackPressed()
         }
     }
 }

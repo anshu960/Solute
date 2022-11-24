@@ -1,17 +1,13 @@
 package com.utilitykit.feature.product.viewModel
 
-import android.content.Context
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityKitApp
-import com.utilitykit.UtilityKitApp.Companion.context
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.product.repository.ProductRepository
@@ -37,9 +33,9 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
 
     fun loadProduct(){
         productRepository.productLiveData.postValue(arrayListOf())
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business!!.Id
-            UtilityKitApp.applicationContext().database.productDao().getProductsFor(businessId).observe(BusinessHandler.shared().activity){
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business.value?.Id
+            UtilityKitApp.applicationContext().database.productDao().getProductsFor(businessId!!).observe(BusinessHandler.shared().activity){
                 if(!it.isNullOrEmpty()){
                     productRepository.productLiveData.postValue(it as ArrayList<Product>)
                 }
@@ -59,7 +55,7 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
         val request = JSONObject()
         if(BusinessHandler.shared().repository.business != null) {
             val business = BusinessHandler.shared().repository.business
-            request.put(Key.businessID,business!!.Id)
+            request.put(Key.businessID,business.value?.Id)
         }
         request.put(Key.image,image)
         request.put(Key._id,product.Id)
@@ -72,7 +68,7 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
         val request = JSONObject()
         if(BusinessHandler.shared().repository.business != null) {
             val business = BusinessHandler.shared().repository.business
-            request.put(Key.businessID,business!!.Id)
+            request.put(Key.businessID,business.value?.Id)
         }
         request.put(Key.userId,user._id)
         request.put(Key._id,product.Id)
@@ -84,7 +80,7 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
         val request = JSONObject()
         if(BusinessHandler.shared().repository.business != null) {
             val business = BusinessHandler.shared().repository.business
-            request.put(Key.businessID,business!!.Id)
+            request.put(Key.businessID,business.value?.Id)
         }
         request.put(Key.productID,product.Id)
         request.put(Key.userId,user._id)
@@ -97,10 +93,8 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
     fun addStockQuantity(product:Product,quantity:Int,message:String){
         val user = User()
         val request = JSONObject()
-        if(BusinessHandler.shared().repository.business != null) {
-            val business = BusinessHandler.shared().repository.business
-            request.put(Key.businessID,business!!.Id)
-        }
+        val business = BusinessHandler.shared().repository.business
+        request.put(Key.businessID,business.value?.Id)
         request.put(Key.productID,product.Id)
         request.put(Key.userId,user._id)
         request.put(Key.quantity,quantity)
@@ -110,10 +104,8 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
     fun resetStockQuantity(product:Product,quantity:Int,message:String){
         val user = User()
         val request = JSONObject()
-        if(BusinessHandler.shared().repository.business != null) {
-            val business = BusinessHandler.shared().repository.business
-            request.put(Key.businessID,business!!.Id)
-        }
+        val business = BusinessHandler.shared().repository.business
+        request.put(Key.businessID,business.value?.Id)
         request.put(Key.productID,product.Id)
         request.put(Key.userId,user._id)
         request.put(Key.quantity,quantity)

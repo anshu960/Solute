@@ -25,12 +25,13 @@
             <TextView
                 android:id="@+id/recycler_product_category_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:text="TextView"
+                android:gravity="center|left"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/recycler_product_category_arrow_image"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/recycler_product_category_select_img"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -42,6 +43,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/baseline_keyboard_arrow_right" />
+
+            <ImageView
+                android:id="@+id/recycler_product_category_select_img"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_un_selected" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

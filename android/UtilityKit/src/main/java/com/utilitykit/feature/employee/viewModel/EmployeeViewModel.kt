@@ -41,7 +41,7 @@ class EmployeeViewModel (private val employeeRepository: EmployeeRepository):Vie
         if(BusinessHandler.shared().repository.business != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
+            request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
             SocketService.shared().send(SocketEvent.RETRIVE_EMPLOYEE,request)
         }
     }
@@ -51,7 +51,7 @@ class EmployeeViewModel (private val employeeRepository: EmployeeRepository):Vie
         if(BusinessHandler.shared().repository.business != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
+            request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
             request.put(Key.name,employeeProfile.Name)
             request.put(Key.mobileNumber,employeeProfile.MobileNumber)
             request.put(Key.employeeUserID, employeeProfile.Id)
@@ -62,12 +62,10 @@ class EmployeeViewModel (private val employeeRepository: EmployeeRepository):Vie
 
     fun findUser(mobile:String){
         val user = User()
-        if(BusinessHandler.shared().repository.business != null){
-            var request = JSONObject()
-            request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
-            request.put(Key.mobileNumber, mobile)
-            SocketService.shared().send(SocketEvent.FIND_USER,request)
-        }
+        var request = JSONObject()
+        request.put(Key.userId,user._id)
+        request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
+        request.put(Key.mobileNumber, mobile)
+        SocketService.shared().send(SocketEvent.FIND_USER,request)
     }
 }

@@ -33,15 +33,15 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
         get() = customerRepository.customer
 
     fun loadCustomer(){
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business!!.Id
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business.value!!.Id
             UtilityKitApp.applicationContext().database.customerDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
                 customerRepository.allCustomerLiveData.postValue(it as ArrayList<Customer>?)
             }
         }
     }
     fun getCustomerById(id:String, completion:(customer: Customer) -> Unit){
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
             UtilityKitApp.applicationContext().database.customerDao().findCustomerById(id).observe(BusinessHandler.shared().activity){
                 completion(it)
             }
@@ -53,7 +53,7 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
         if(BusinessHandler.shared().repository.business != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
+            request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
             SocketService.shared().send(SocketEvent.RETRIVE_CUSTOMER,request)
         }
     }
@@ -62,7 +62,7 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
         if(BusinessHandler.shared().repository.business != null){
             var request = JSONObject()
             request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business!!.Id)
+            request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
             request.put(Key.name,name)
             request.put(Key.mobileNumber, mobile)
             request.put(Key.emailId,email)
@@ -78,7 +78,7 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
     }
 
     fun getInvoiceCount(id:String, completion:(count: Int) -> Unit){
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
             UtilityKitApp.applicationContext().database.customerDao().getInvoiceCount(id).observe(BusinessHandler.shared().activity){
                 if(it != null){
                     completion(it)
@@ -90,7 +90,7 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
     }
 
     fun getTotalInvoiceValue(id:String, completion:(count: Float) -> Unit){
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
             UtilityKitApp.applicationContext().database.customerDao().getTotalInvoiceValue(id).observe(BusinessHandler.shared().activity){
                 if(it != null){
                     completion(it)

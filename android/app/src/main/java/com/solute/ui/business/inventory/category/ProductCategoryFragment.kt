@@ -65,7 +65,7 @@ class ProductCategoryFragment : Fragment() {
     }
 
     fun loadCategory(){
-        this.productCategoryAdapter = this.context?.let { ProductCategoryAdapter(it,this,allCategoory) }
+        this.productCategoryAdapter = this.context?.let { ProductCategoryAdapter(it,this,allCategoory,null) }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productCategoryAdapter
     }

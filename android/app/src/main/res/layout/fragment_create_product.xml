@@ -4,40 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.business.product.create.CreateProductActivity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/create_product_category_header"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:background="@drawable/header"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/create_product_category_header_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/transparent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/arrow_left" />
-
-        <TextView
-            android:id="@+id/create_product_category_header_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Create Product"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    tools:context=".ui.business.product.create.CreateProductFragment">
 
 
     <Button
@@ -56,12 +23,11 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="70dp"
         android:layout_marginEnd="8dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/create_product_category_header">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

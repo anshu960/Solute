@@ -7,38 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.inventory.analytics.AnalyticsAdapter
 import com.solute.ui.business.inventory.category.CreateCategoryActivity
-import com.solute.ui.business.inventory.category.ProductCategoryAdapter
-import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
-import com.solute.ui.business.inventory.product.ProductAdapter
-import com.solute.ui.business.inventory.stock.ProductStockAdapter
 import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
-import com.solute.ui.business.product.BusinessProductAdapter
-import com.solute.ui.business.product.create.CreateProductActivity
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
-import com.utilitykit.feature.product.viewModel.ProductViewModel
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.model.ProductCategory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
-import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
-import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 import com.utilitykit.feature.sync.BusinessAnalytics
 import com.utilitykit.feature.sync.SyncHandler
 
@@ -64,8 +44,8 @@ class InventoryFragment : Fragment() {
     var analyticsAdapter : AnalyticsAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business!!.Id
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business.value!!.Id
             UtilityKitApp.applicationContext().database.saleDao().getAllItemsForBusiness(businessId).observe(this){
                 if(!it.isNullOrEmpty()){
                     SyncHandler.shared().updateAnalyticsToShow(it as ArrayList<Sale>)
@@ -105,8 +85,8 @@ class InventoryFragment : Fragment() {
         when(this.selectedSegment){
             1->{
                 ProductHandler.shared().repository.selectedProductLiveData.postValue(null)
-                val intent = Intent(this.context,CreateProductActivity::class.java)
-                startActivity(intent)
+//                val intent = Intent(this.context,CreateProductActivity::class.java)
+//                startActivity(intent)
             }
             2->{
                 val intent = Intent(this.context,CreateCategoryActivity::class.java)

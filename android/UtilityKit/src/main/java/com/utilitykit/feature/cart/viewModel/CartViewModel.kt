@@ -152,7 +152,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         val user = User()
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId, user._id)
-        request.put(Key.businessID, business!!.Id)
+        request.put(Key.businessID, business!!.value!!.Id)
         if(CustomerHandler.shared().repository.customer.value !=null){
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(Key.customer, JSONObject(customerJson))
@@ -168,9 +168,9 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         }
         var request = JSONObject()
         val user = User()
-        val business = BusinessHandler.shared().repository.business
+        val business = BusinessHandler.shared().repository.business.value
         request.put(Key.userId, user._id)
-        request.put(Key.businessID, business!!.Id)
+        request.put(Key.businessID, business?.Id)
         request.put(Key.transactions, JSONArray(transactions))
         request.put(Key.sales, JSONArray(sales))
         request.put(Key.salesID, JSONArray(salesIds))
@@ -192,7 +192,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 val productData = JSONObject(gson.toJson(it))
                 val transactionData = JSONObject()
                 transactionData.put(Key.userId, user._id)
-                transactionData.put(Key.businessID, business!!.Id)
+                transactionData.put(Key.businessID, business!!.value!!.Id)
                 if(customer != null){
                     transactionData.put(Key.customerID,customer.Id)
                     transactionData.put(Key.customerName,customer.Name)

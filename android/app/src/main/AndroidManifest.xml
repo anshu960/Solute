@@ -37,10 +37,6 @@
             android:exported="false"
             android:label="@string/title_activity_create_employee" />
         <activity
-            android:name=".ui.business.customer.select.SelectCustomerActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.notification.UserNotificationActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -63,10 +59,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.inventory.category.CategoryDetailsActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.business.product.create.CreateProductActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

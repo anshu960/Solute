@@ -18,6 +18,6 @@ interface BusinessDao {
     @Query("delete from Business")
     fun clearAll()
 
-    @Query("select * from Business order by BusinessNumber")
+    @Query("select * from Business order by UpdatedAt DESC")
     fun getAllItems(): LiveData<List<Business>>
 }

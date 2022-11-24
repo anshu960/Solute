@@ -1,8 +1,6 @@
 package com.utilitykit.feature.business.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.sync.BusinessAnalytics
 
@@ -12,8 +10,10 @@ class BusinessRepository {
     get() = analyticsLiveData
 
     val businessLiveData = MutableLiveData<Business>()
-    var business: Business? = null
+    val business: MutableLiveData<Business>
+        get() = businessLiveData
 
-    val allBusiness: LiveData<List<Business>>
-        get() = UtilityKitApp.applicationContext().database.businessDao().getAllItems()
+    val allBusinessLiveData = MutableLiveData<ArrayList<Business>>()
+    val allBusiness : MutableLiveData<ArrayList<Business>>
+        get() = allBusinessLiveData
 }
