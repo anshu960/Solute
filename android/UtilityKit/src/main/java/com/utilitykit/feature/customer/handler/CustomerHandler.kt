@@ -55,7 +55,6 @@ class CustomerHandler {
             if(jsonData.has(Key.payload)){
                 val customerData = jsonData.getJSONObject(Key.payload)
                 val newCustomer = gson.fromJson(customerData.toString(),Customer::class.java)
-                repository.customerLiveData.postValue(newCustomer)
                 viewModel?.insert(newCustomer)
             }
         }
@@ -66,12 +65,10 @@ class CustomerHandler {
             val anyData = it.first() as JSONObject
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONArray(Key.payload)
-                var allCustomers : ArrayList<Customer> = arrayListOf()
                 if(payload.length() > 0) {
                     for (i in 0 until payload.length()) {
                         val customerData = payload.get(i)
                         val newCustomer = gson.fromJson(customerData.toString(),Customer::class.java)
-                        allCustomers.add(newCustomer)
                         viewModel?.insert(newCustomer)
                     }
                 }

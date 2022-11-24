@@ -124,8 +124,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
     }
 
     fun loadShareDetails() {
-        if (CustomerHandler.shared().repository.customer != null && CustomerHandler.shared().repository!!.customer!!.value?.MobileNumber != null) {
-            this.customer = CustomerHandler.shared().repository!!.customer!!.value
+        if (customer != null && customer!!.MobileNumber != null) {
             messageButton?.visibility = View.VISIBLE
             whatsappButton?.visibility = View.VISIBLE
             messageTitle?.visibility = View.VISIBLE
@@ -139,9 +138,6 @@ class ReceiptDetailsActivity : UtilityActivity() {
             messageTitle?.visibility = View.GONE
             whatsappTitle?.visibility = View.GONE
             customerDetailsCard?.visibility = View.GONE
-            if (customerInvoice != null && customerInvoice!!.customerID != null) {
-                CustomerHandler.shared().searchCustomerById(customerInvoice!!.customerID!!)
-            }
         }
     }
 
@@ -161,12 +157,22 @@ class ReceiptDetailsActivity : UtilityActivity() {
                 val sale = gson.fromJson(newSale.toString(), Sale::class.java)
                 sales.add(sale)
             }
-            reloadData()
+            if(!customerInvoice?.customerID.isNullOrEmpty()){
+                CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){
+                    this.customer = it
+                    reloadData()
+                }
+            }
         } else {
             InvoiceHandler.shared().repository.customerInvoice.value
             customerInvoice = InvoiceHandler.shared().repository.customerInvoice.value
             InvoiceHandler.shared().viewModel?.fetchAllSales()
-            reloadData()
+            if(!customerInvoice?.customerID.isNullOrEmpty()){
+                CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){
+                    this.customer = it
+                    reloadData()
+                }
+            }
         }
     }
 

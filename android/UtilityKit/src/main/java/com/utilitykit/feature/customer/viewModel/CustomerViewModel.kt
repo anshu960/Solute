@@ -40,6 +40,14 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
             }
         }
     }
+    fun getCustomerById(id:String, completion:(customer: Customer) -> Unit){
+        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business!!.Id
+            UtilityKitApp.applicationContext().database.customerDao().findCustomerById(id).observe(BusinessHandler.shared().activity){
+                completion(it)
+            }
+        }
+    }
 
     fun fetchAllCustomer(){
         val user = User()

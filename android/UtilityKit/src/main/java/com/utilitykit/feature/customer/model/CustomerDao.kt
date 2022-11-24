@@ -22,4 +22,7 @@ interface CustomerDao {
 
     @Query("select * from Customer where BusinessID = :BusinessID order by UpdatedAt DESC")
     fun getAllItemsForBusiness(BusinessID: String): LiveData<List<Customer>>
+
+    @Query("select * from Customer where _id = :id order by UpdatedAt DESC LIMIT 1")
+    fun findCustomerById(id: String): LiveData<Customer>
 }
