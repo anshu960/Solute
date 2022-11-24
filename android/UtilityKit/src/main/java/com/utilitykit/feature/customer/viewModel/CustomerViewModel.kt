@@ -42,7 +42,6 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
     }
     fun getCustomerById(id:String, completion:(customer: Customer) -> Unit){
         if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business!!.Id
             UtilityKitApp.applicationContext().database.customerDao().findCustomerById(id).observe(BusinessHandler.shared().activity){
                 completion(it)
             }
@@ -75,6 +74,22 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
         viewModelScope.launch{
             UtilityKitApp.applicationContext().database.customerDao()
                 .insert(customer)
+        }
+    }
+
+    fun getInvoiceCount(id:String, completion:(count: Int) -> Unit){
+        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+            UtilityKitApp.applicationContext().database.customerDao().getInvoiceCount(id).observe(BusinessHandler.shared().activity){
+                completion(it)
+            }
+        }
+    }
+
+    fun getTotalInvoiceValue(id:String, completion:(count: Float) -> Unit){
+        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+            UtilityKitApp.applicationContext().database.customerDao().getTotalInvoiceValue(id).observe(BusinessHandler.shared().activity){
+                completion(it)
+            }
         }
     }
 }

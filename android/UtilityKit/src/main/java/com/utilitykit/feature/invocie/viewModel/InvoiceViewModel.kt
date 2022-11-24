@@ -128,4 +128,6 @@ class InvoiceViewModel (private val invoiceRepository: InvoiceRepository):ViewMo
                 .insert(sale)
         }
     }
+
+
 }

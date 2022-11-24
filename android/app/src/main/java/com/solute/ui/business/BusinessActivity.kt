@@ -34,7 +34,7 @@ class BusinessActivity : UtilityActivity() {
     private lateinit var cartViewModal: CartViewModel
     private lateinit var customerViewModal: CustomerViewModel
     private lateinit var navView: NavigationView
-    private lateinit var navController: NavController
+    lateinit var navController: NavController
 
     var businessIconImage : ImageView? = null
     var businessName : TextView? = null

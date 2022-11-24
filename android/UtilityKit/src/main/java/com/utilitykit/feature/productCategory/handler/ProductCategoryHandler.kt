@@ -55,14 +55,12 @@ class ProductCategoryHandler{
             val anyData = it.first() as JSONObject
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONArray(Key.payload)
-                var allProductCategory : ArrayList<ProductCategory> = arrayListOf()
                 for (i in 0 until payload.length())
                 {
                     val item = payload.getJSONObject(i)
-                    val product = gson.fromJson(item.toString(),ProductCategory::class.java)
-                    allProductCategory.add(product)
+                    val category = gson.fromJson(item.toString(),ProductCategory::class.java)
+                    productCategoryViewModel?.insert(category)
                 }
-                repository.categoryLiveData.postValue(allProductCategory)
             }
         }
     }
@@ -73,6 +71,8 @@ class ProductCategoryHandler{
             val anyData = it.first() as JSONObject
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONObject(Key.payload)
+                val category = gson.fromJson(payload.toString(),ProductCategory::class.java)
+                productCategoryViewModel?.insert(category)
                 if(payload.has(Key._id)){
                     activity.runOnUiThread {
                         activity.toast("Category Created Successfully")

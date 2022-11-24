@@ -22,7 +22,7 @@ import org.json.JSONObject
 
 class BusinessHandler {
 
-    private lateinit var businessViewModel: BusinessViewModel
+    lateinit var businessViewModel: BusinessViewModel
     val repository = BusinessRepository()
     val gson = Gson()
     var allBusiness : ArrayList<Business> = arrayListOf()

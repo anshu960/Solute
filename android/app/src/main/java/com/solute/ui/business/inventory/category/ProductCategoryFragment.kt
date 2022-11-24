@@ -39,11 +39,13 @@ class ProductCategoryFragment : Fragment() {
             ProductCategoryViewModel::class.java
         )
         ProductCategoryHandler.shared().setup(productCategoryViewModel!!)
-
         productCategoryViewModel.allCategory.observe(this){
-            allCategoory = it as ArrayList<ProductCategory>
+            if(!it.isNullOrEmpty()){
+                allCategoory = it as ArrayList<ProductCategory>
                 loadCategory()
+            }
         }
+        productCategoryViewModel.loadCategory()
         ProductCategoryHandler.shared().fetchAllProductCategory()
     }
 

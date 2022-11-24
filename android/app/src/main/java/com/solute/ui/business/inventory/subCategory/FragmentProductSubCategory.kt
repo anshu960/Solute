@@ -13,6 +13,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.inventory.category.CreateCategoryActivity
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
+import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
+import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
+import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
@@ -25,15 +28,23 @@ private const val ARG_PARAM2 = "param2"
 
 class FragmentProductSubCategory : Fragment() {
 
-    var recycler : RecyclerView? = null
+    var recycler: RecyclerView? = null
+    private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
     var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
-    var productSubCategoryAdapter : ProductSubCategoryAdapter? = null
-    var createNewSubCategoryBtn : FloatingActionButton? = null
+    var productSubCategoryAdapter: ProductSubCategoryAdapter? = null
+    var createNewSubCategoryBtn: FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //Sub Category
+        productCategoryViewModel = ViewModelProvider(
+            this,
+            ProductCategoryViewModalFactory(ProductCategoryHandler.shared().repository)
+        ).get(
+            ProductCategoryViewModel::class.java
+        )
+        ProductCategoryHandler.shared().setup(productCategoryViewModel!!)
         productSubCategoryViewModel = ViewModelProvider(
             this,
             ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
@@ -41,11 +52,14 @@ class FragmentProductSubCategory : Fragment() {
             ProductSubCategoryViewModel::class.java
         )
         ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
-
-        productSubCategoryViewModel.allSubCategory.observe(this){
-            allSubCategoory = it as ArrayList<ProductSubCategory>
-                loadSubCategory()
+        productSubCategoryViewModel.allSubCategory.observe(this) {
+            if (!it.isNullOrEmpty()) {
+                allSubCategoory = it as ArrayList<ProductSubCategory>
+            }
+            loadSubCategory()
         }
+        ProductCategoryHandler.shared().productCategoryViewModel?.loadCategory()
+        productSubCategoryViewModel.loadSubCategory()
         ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
     }
 
@@ -64,8 +78,9 @@ class FragmentProductSubCategory : Fragment() {
         return view
     }
 
-    fun loadSubCategory(){
-        this.productSubCategoryAdapter = this.context?.let { ProductSubCategoryAdapter(it,this,allSubCategoory) }
+    fun loadSubCategory() {
+        this.productSubCategoryAdapter =
+            this.context?.let { ProductSubCategoryAdapter(it, this, allSubCategoory) }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productSubCategoryAdapter
     }

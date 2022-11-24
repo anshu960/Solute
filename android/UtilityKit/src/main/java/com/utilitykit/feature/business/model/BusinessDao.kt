@@ -15,6 +15,9 @@ interface BusinessDao {
     @Delete
     suspend fun delete(item: Business)
 
+    @Query("delete from Business")
+    fun clearAll()
+
     @Query("select * from Business order by BusinessNumber")
     fun getAllItems(): LiveData<List<Business>>
 }

@@ -1,6 +1,5 @@
 package com.utilitykit.database
 
-import android.app.Application
 import android.content.Context
 import androidx.room.*
 import com.utilitykit.feature.business.model.Business
@@ -15,10 +14,13 @@ import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.model.ProductDao
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.product.model.ProductStockDao
+import com.utilitykit.feature.productCategory.model.ProductCategory
+import com.utilitykit.feature.productCategory.model.ProductCategoryDao
+import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
+import com.utilitykit.feature.productSubCategory.model.ProductSubCategoryDao
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.util.concurrent.Executors
 
 class Converters {
     @TypeConverter
@@ -31,8 +33,17 @@ class Converters {
 // Annotates class to be a Room Database with a table (entity) of the Word class
 @TypeConverters(Converters::class)
 @Database(
-    entities = [Business::class, Sale::class, ProductStock::class, Product::class, Customer::class, CustomerInvoice::class],
-    version = 14,
+    entities = [
+        Business::class,
+        Sale::class,
+        ProductStock::class,
+        Product::class,
+        Customer::class,
+        CustomerInvoice::class,
+        ProductCategory::class,
+        ProductSubCategory::class
+    ],
+    version = 16,
     exportSchema = false
 )
 abstract class UtilityKitDatabase : RoomDatabase() {
@@ -43,6 +54,8 @@ abstract class UtilityKitDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun customerDao(): CustomerDao
     abstract fun customerInvoiceDao(): CustomerInvoiceDao
+    abstract fun productCategoryDao(): ProductCategoryDao
+    abstract fun productSubCategoryDao(): ProductSubCategoryDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

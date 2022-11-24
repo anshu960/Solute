@@ -26,6 +26,7 @@ import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
@@ -90,7 +91,7 @@ class LoginActivity : UtilityActivity() {
             print(countryCodePicker.selectedCountryCode)
             this.selectedCountryCode = countryCodePicker.selectedCountryCode
         }
-
+        BusinessHandler.shared().businessViewModel.clearAll()
     }
 
     fun onClickLogin(){

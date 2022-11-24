@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
+import com.utilitykit.UtilityKitApp
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -28,6 +29,15 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
     val selectedSubCategory : LiveData<ProductSubCategory>
         get() = productSubCategoryRepository.selectedSubCategory
 
+    fun loadSubCategory(){
+        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business!!.Id
+            UtilityKitApp.applicationContext().database.productSubCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
+                productSubCategoryRepository.subCategoryLiveData.postValue(it as ArrayList<ProductSubCategory>?)
+            }
+        }
+    }
+
     fun createNewSubCategory(name:String,category:ProductCategory) {
         val request = JSONObject()
         val user = User()
@@ -37,5 +47,11 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
         request.put(Key.categoryId,category.Id)
         request.put(Key.name, name)
         SocketService.shared().send(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY, request)
+    }
+    fun insert(category : ProductSubCategory){
+        viewModelScope.launch{
+            UtilityKitApp.applicationContext().database.productSubCategoryDao()
+                .insert(category)
+        }
     }
 }

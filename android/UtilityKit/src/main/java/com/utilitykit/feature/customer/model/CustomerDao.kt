@@ -25,4 +25,10 @@ interface CustomerDao {
 
     @Query("select * from Customer where _id = :id order by UpdatedAt DESC LIMIT 1")
     fun findCustomerById(id: String): LiveData<Customer>
+
+    @Query("select COUNT(*) from CustomerInvoice where CustomerID = :id")
+    fun getInvoiceCount(id: String): LiveData<Int>
+
+    @Query("select SUM(FinalPrice) from CustomerInvoice where CustomerID = :id")
+    fun getTotalInvoiceValue(id: String): LiveData<Float>
 }

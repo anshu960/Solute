@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.business
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
@@ -51,6 +52,12 @@ class BusinessViewModel (private val bussinessRepository: BusinessRepository):Vi
     fun insertDatabase(business: Business){
         viewModelScope.launch{
             UtilityKitApp.applicationContext().database.businessDao().insert(business)
+        }
+    }
+
+    fun clearAll(){
+        viewModelScope.launch{
+            UtilityKitApp.applicationContext().database.businessDao().clearAll()
         }
     }
 

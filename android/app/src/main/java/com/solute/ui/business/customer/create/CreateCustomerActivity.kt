@@ -46,7 +46,7 @@ class CreateCustomerActivity : UtilityActivity() {
         saveButton?.setOnClickListener { createCustomer() }
         configureWindow()
         CustomerHandler.shared().repository.customerLiveData.observe(this){
-            if(it != null && it.Id != null && !it.Id!!.isEmpty()){
+            if(it != null && !it.Id.isEmpty()){
                 this.slideDown()
             }
         }

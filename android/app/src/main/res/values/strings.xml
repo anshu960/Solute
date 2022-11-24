@@ -48,6 +48,9 @@
     <string name="cart">Cart</string>
     <string name="invoice">Invocie</string>
     <string name="customers">Customers</string>
+    <string name="add_new_customer">Add New Customer</string>
+    <string name="barcode">Barcode</string>
+    <string name="barcode_optional">Barcode (Optional)</string>
     <string name="empty_task_message">No task found, please click on the create task button to start creating task</string>
     <!--    <string name="delete_group">Delete Group</string>-->
     <string name="mobile">Mobile</string>
@@ -56,6 +59,9 @@
     <string name="search">Search</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="email">Email</string>
+    <string name="email_optional">Email (Optional)</string>
+    <string name="save">save</string>
+    <string name="create">Create</string>
     <string name="details">Details</string>
     <string name="stock">Stock</string>
     <string name="price">Price</string>
