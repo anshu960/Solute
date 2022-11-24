@@ -26,6 +26,13 @@ import com.utilitykit.feature.cart.viewModel.CartViewModel
 import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.viewModel.CustomerViewModalFactory
 import com.utilitykit.feature.customer.viewModel.CustomerViewModel
+import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
+import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
+import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
+import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
+import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
+import com.utilitykit.feature.sync.SyncHandler
 
 class BusinessActivity : UtilityActivity() {
 
@@ -33,6 +40,8 @@ class BusinessActivity : UtilityActivity() {
     private lateinit var binding: ActivityBusinessBinding
     private lateinit var cartViewModal: CartViewModel
     private lateinit var customerViewModal: CustomerViewModel
+    private lateinit var productCategoryViewModel: ProductCategoryViewModel
+    private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
     private lateinit var navView: NavigationView
     lateinit var navController: NavController
 
@@ -116,7 +125,24 @@ class BusinessActivity : UtilityActivity() {
         )[CustomerViewModel::class.java]
         customerViewModal.fetchAllCustomer()
         CustomerHandler.shared().setup(customerViewModal)
-
+        //category
+        productCategoryViewModel = ViewModelProvider(
+            this,
+            ProductCategoryViewModalFactory(ProductCategoryHandler.shared().repository)
+        ).get(
+            ProductCategoryViewModel::class.java
+        )
+        ProductCategoryHandler.shared().setup(productCategoryViewModel!!)
+        productCategoryViewModel?.loadCategory()
+        //sub category
+        productSubCategoryViewModel = ViewModelProvider(
+            this,
+            ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
+        ).get(
+            ProductSubCategoryViewModel::class.java
+        )
+        ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
+        SyncHandler.shared().syncAllBusinessData()
     }
     fun goToCart(){
         navController.navigate(R.id.business_cart)

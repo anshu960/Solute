@@ -90,7 +90,6 @@ class InventoryFragment : Fragment() {
         recycler = view.findViewById(R.id.inventory_fragment_recycler)
         floatingAddButton = view.findViewById(R.id.inventory_fragment_float_btn)
         floatingAddButton?.setOnClickListener { onClickAddButton() }
-        SyncHandler.shared().syncAllBusinessData()
         return view
     }
 

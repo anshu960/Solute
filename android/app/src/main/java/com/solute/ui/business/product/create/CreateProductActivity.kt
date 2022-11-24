@@ -427,7 +427,9 @@ class CreateProductActivity : UtilityActivity() {
         ProductHandler.shared().activity = this
         //Category
         ProductCategoryHandler.shared().repository.categoryLiveData.observe(this){
-            allCategoory = it as ArrayList<ProductCategory>
+            if(!it.isNullOrEmpty()){
+                allCategoory = it as ArrayList<ProductCategory>
+            }
         }
         if(ProductCategoryHandler.shared().repository.allCategory.value != null && ProductCategoryHandler.shared().repository.allCategory.value!!.isNotEmpty()){
             allCategoory = ProductCategoryHandler.shared().repository.allCategory.value as ArrayList<ProductCategory>
@@ -436,7 +438,9 @@ class CreateProductActivity : UtilityActivity() {
         }
         //sub category
         ProductSubCategoryHandler.shared().repository.subCategoryLiveData.observe(this){
-            allSubCategoory = it as ArrayList<ProductSubCategory>
+            if(!it.isNullOrEmpty()){
+                allSubCategoory = it as ArrayList<ProductSubCategory>
+            }
         }
         if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null && ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.isNotEmpty()){
             allSubCategoory = ProductSubCategoryHandler.shared().repository.allSubCategory.value as ArrayList<ProductSubCategory>

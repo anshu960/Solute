@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.solute.ui.business.inventory.category.CreateCategoryActivity
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
@@ -20,11 +19,6 @@ import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandl
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class FragmentProductSubCategory : Fragment() {
 
@@ -67,7 +61,6 @@ class FragmentProductSubCategory : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_product_sub_category, container, false)
         recycler = view.findViewById(R.id.product_sub_category_fragment_recycler)
         createNewSubCategoryBtn = view.findViewById(R.id.product_sub_category_fragment_add_btn)

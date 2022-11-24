@@ -22,7 +22,7 @@ import org.json.JSONObject
 
 class BusinessHandler {
 
-    lateinit var businessViewModel: BusinessViewModel
+    var businessViewModel: BusinessViewModel? = null
     val repository = BusinessRepository()
     val gson = Gson()
     var allBusiness : ArrayList<Business> = arrayListOf()
@@ -62,7 +62,7 @@ class BusinessHandler {
                 {
                     val item = payload.getJSONObject(i)
                     val business = gson.fromJson(item.toString(),Business::class.java)
-                    businessViewModel.insertDatabase(business)
+                    businessViewModel?.insertDatabase(business)
                 }
             }
         }
@@ -76,7 +76,7 @@ class BusinessHandler {
                 val payload = anyData.getJSONObject(Key.payload)
                 val business = gson.fromJson(payload.toString(),Business::class.java)
                 repository.businessLiveData.postValue(business)
-                businessViewModel.insertDatabase(business)
+                businessViewModel?.insertDatabase(business)
             }
         }
     }

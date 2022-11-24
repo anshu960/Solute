@@ -9,6 +9,7 @@ import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.customer.handler.CustomerHandler
+import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
@@ -67,6 +68,7 @@ class SyncHandler {
         ProductHandler.shared().fetchAllProduct()
         ProductCategoryHandler.shared().fetchAllProductCategory()
         ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
+        InvoiceHandler.shared().viewModel?.fetchAllInvoice()
     }
 
     fun updateAnalyticsToShow(allSales : ArrayList<Sale>) {

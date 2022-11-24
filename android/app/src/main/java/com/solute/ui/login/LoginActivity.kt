@@ -91,7 +91,7 @@ class LoginActivity : UtilityActivity() {
             print(countryCodePicker.selectedCountryCode)
             this.selectedCountryCode = countryCodePicker.selectedCountryCode
         }
-        BusinessHandler.shared().businessViewModel.clearAll()
+        BusinessHandler.shared().businessViewModel?.clearAll()
     }
 
     fun onClickLogin(){
