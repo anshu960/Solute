@@ -1,13 +1,19 @@
 package com.utilitykit.feature.product.viewModel
 
+import android.content.Context
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
+import com.utilitykit.UtilityKitApp
+import com.utilitykit.UtilityKitApp.Companion.context
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.product.model.Product
+import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.product.repository.ProductRepository
 import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +34,18 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
 
     val selectedProduct : LiveData<Product>
         get() = productRepository.selectedProduct
+
+    fun loadProduct(){
+        productRepository.productLiveData.postValue(arrayListOf())
+        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business!!.Id
+            UtilityKitApp.applicationContext().database.productDao().getProductsFor(businessId).observe(BusinessHandler.shared().activity){
+                if(!it.isNullOrEmpty()){
+                    productRepository.productLiveData.postValue(it as ArrayList<Product>)
+                }
+            }
+        }
+    }
 
     fun createNewProduct(request:JSONObject){
         SocketService.shared().send(SocketEvent.CREATE_PRODUCT,request)
@@ -103,6 +121,18 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
         SocketService.shared().send(SocketEvent.RESET_STOCK_QUANTITY,request)
     }
 
+    fun insertStock(stockEntry : ProductStock){
+        viewModelScope.launch{
+            UtilityKitApp.applicationContext().database.productStockDao()
+                .insert(stockEntry)
+        }
+    }
+    fun insertProduct(product : Product){
+        viewModelScope.launch{
+            UtilityKitApp.applicationContext().database.productDao()
+                .insert(product)
+        }
+    }
 
 
 }

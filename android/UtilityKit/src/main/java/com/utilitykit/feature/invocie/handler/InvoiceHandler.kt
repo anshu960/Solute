@@ -4,6 +4,7 @@ import android.content.Intent
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
+import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.invoice.model.CustomerInvoice
 import com.utilitykit.feature.invoice.repository.InvoiceRepository
@@ -40,7 +41,6 @@ class InvoiceHandler {
         if (it.isNotEmpty())
         {
             val anyData = it.first() as JSONObject
-            var allInvoicesFromServer : ArrayList<CustomerInvoice> = arrayListOf()
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONArray(Key.payload)
                 if(payload.length() > 0){
@@ -48,10 +48,8 @@ class InvoiceHandler {
                     {
                         val invoiceJson = payload.get(i)
                         val newInvoice = gson.fromJson(invoiceJson.toString(),CustomerInvoice::class.java)
-                        allInvoicesFromServer.add(newInvoice)
+                        viewModel?.insert(newInvoice)
                     }
-                    repository.allCustomerInvoiceLiveData.postValue(allInvoicesFromServer)
-                    repository.filteredCustomerInvoiceLiveData.postValue(allInvoicesFromServer)
                 }
             }
         }
@@ -70,6 +68,7 @@ class InvoiceHandler {
                         val invoiceSaleJson = payload.get(i)
                         val newSale = gson.fromJson(invoiceSaleJson.toString(),Sale::class.java)
                         allSalesFromServer.add(newSale)
+                        viewModel?.insertSale(newSale)
                     }
                     repository.allSalesLiveData.postValue(allSalesFromServer)
                 }

@@ -52,6 +52,7 @@ class BusinessInvoiceFragment : Fragment() {
             reloadData()
         }
         InvoiceHandler.shared().setup(invoiceViewModel)
+        invoiceViewModel.loadInvoice()
         invoiceViewModel.fetchAllInvoice()
     }
 
@@ -71,6 +72,7 @@ class BusinessInvoiceFragment : Fragment() {
                 invoiceViewModel?.clearAllFilters()
             }
         }
+        invoiceViewModel.loadInvoice()
         reloadData()
         return view
     }

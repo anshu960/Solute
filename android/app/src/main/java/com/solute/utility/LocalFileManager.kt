@@ -5,15 +5,12 @@ import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.util.Log
 import com.solute.App
-import com.utilitykit.database.Database
 import java.io.File
 import java.io.File.separator
 import java.io.FileOutputStream
 import java.net.URL
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-
-
 class LocalFileManager
 {
     
@@ -54,31 +51,31 @@ class LocalFileManager
 //    }
     
     fun getLocalFileUrl(url:String,completion:(Double,String)->Unit){
-        val localUrl = Database.shared().retriveFileUrl(url)
-        if(localUrl !=  ""){
-            completion(100.0,localUrl)
-        }else{
-            downloadFile(url){progress,localUrl->
-                if(progress >= 100){
-                    Database.shared().storeFileUrl(localUrl,url)
-                }
-                completion(progress,localUrl)
-            }
-        }
+//        val localUrl = Database.shared().retriveFileUrl(url)
+//        if(localUrl !=  ""){
+//            completion(100.0,localUrl)
+//        }else{
+//            downloadFile(url){progress,localUrl->
+//                if(progress >= 100){
+//                    Database.shared().storeFileUrl(localUrl,url)
+//                }
+//                completion(progress,localUrl)
+//            }
+//        }
     }
     
     fun getLocalFileUrl(url:String,completion:(String)->Unit){
-        val localUrl = Database.shared().retriveFileUrl(url)
-        if(localUrl !=  ""){
-            completion(localUrl)
-        }else{
-            downloadFile(url){profress,localUrl->
-                if(profress >= 100){
-                    Database.shared().storeFileUrl(localUrl,url)
-                    completion(localUrl)
-                }
-            }
-        }
+//        val localUrl = Database.shared().retriveFileUrl(url)
+//        if(localUrl !=  ""){
+//            completion(localUrl)
+//        }else{
+//            downloadFile(url){profress,localUrl->
+//                if(profress >= 100){
+//                    Database.shared().storeFileUrl(localUrl,url)
+//                    completion(localUrl)
+//                }
+//            }
+//        }
        
     }
     

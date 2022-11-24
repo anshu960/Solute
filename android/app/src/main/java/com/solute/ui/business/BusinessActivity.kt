@@ -47,7 +47,7 @@ class BusinessActivity : UtilityActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarBusiness.toolbar)
-
+        BusinessHandler.shared().activity = this
 //        binding.appBarBusiness.fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()

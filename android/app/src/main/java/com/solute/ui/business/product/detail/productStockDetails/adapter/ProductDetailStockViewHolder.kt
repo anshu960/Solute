@@ -3,12 +3,9 @@ package com.solute.ui.business.product.detail.productStockDetails.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
-import com.utilitykit.Constants.Key.Companion.product
-import com.utilitykit.database.Database
-import com.utilitykit.feature.product.model.Product
+
 import com.utilitykit.feature.product.model.ProductStock
 
 class ProductDetailStockViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(

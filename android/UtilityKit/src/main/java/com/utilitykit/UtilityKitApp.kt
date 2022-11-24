@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.utilitykit.Constants.Server
+import com.utilitykit.database.UtilityKitDatabase
 import com.utilitykit.dataclass.Profile
 import com.utilitykit.dataclass.User
 import io.socket.client.IO
@@ -17,6 +18,13 @@ class UtilityKitApp :Application(){
     var socketUrl = ""
     var appContext : Context? = null
     private var mSocket: Socket? = null
+    val database: UtilityKitDatabase by lazy {
+        this.appContext?.let {
+            UtilityKitDatabase.getDatabase(
+                it
+            )
+        }!!
+    }
     init {
         instance = this
     }

@@ -50,7 +50,9 @@ class BusinessProductsFragment : Fragment() {
             this.reload()
         })
         ProductHandler.shared().setup(productViewModel)
+        productViewModel.loadProduct()
         ProductHandler.shared().fetchAllProduct()
+
     }
 
     override fun onCreateView(

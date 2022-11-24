@@ -10,16 +10,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
 import com.solute.ui.business.product.detail.ProductDetailActivity
 import com.solute.ui.business.product.detail.productStockDetails.adapter.ProductDetailStockAdapter
-import com.utilitykit.database.Database
+import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.ProductStock
+import com.utilitykit.feature.sync.SyncHandler
 
 
 class ProductStockDetailsFragment : Fragment() {
@@ -50,18 +50,24 @@ class ProductStockDetailsFragment : Fragment() {
                     if(it?.Id != null){
                         Toast.makeText(this.context, "Stock Updated Successfully", Toast.LENGTH_SHORT).show()
                     }
-
                     loadData()
                 }
             }
         }
+        if(!ProductHandler.shared().repository.selectedProduct.value?.Id.isNullOrEmpty()){
+            val productId = ProductHandler.shared().repository.selectedProduct.value!!.Id
+            UtilityKitApp.applicationContext().database.productStockDao().getForProduct(productId).observe(viewLifecycleOwner){
+                if(!it.isNullOrEmpty()){
+                    this.allStock = it as ArrayList<ProductStock>
+                    loadData()
+                }
+            }
+        }
+        SyncHandler.shared().getAllStockForBusiness()
         return  view
     }
 
     fun loadData(){
-        if(ProductHandler.shared().repository.selectedProduct != null && ProductHandler.shared().repository.selectedProduct.value != null) {
-            allStock = Database.shared().getAllStockForProduct(ProductHandler.shared().repository.selectedProduct.value!!)
-        }
         adapter = ProductDetailStockAdapter(allStock)
         recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = adapter

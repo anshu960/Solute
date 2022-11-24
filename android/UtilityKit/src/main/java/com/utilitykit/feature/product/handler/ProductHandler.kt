@@ -1,11 +1,12 @@
 package com.utilitykit.feature.product.handler
 
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.Constants.TableNames
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
-import com.utilitykit.database.SQLite
+import com.utilitykit.UtilityKitApp
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.model.Product
@@ -16,6 +17,7 @@ import com.utilitykit.feature.sync.SyncHandler
 import com.utilitykit.feature.sync.convertJsonToContentValue
 import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class ProductHandler {
@@ -65,14 +67,12 @@ class ProductHandler {
             val anyData = it.first() as JSONObject
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONArray(Key.payload)
-                var allProduct : ArrayList<Product> = arrayListOf()
                 for (i in 0 until payload.length())
                 {
                     val item = payload.getJSONObject(i)
                     val product = gson.fromJson(item.toString(),Product::class.java)
-                    allProduct.add(product)
+                    productViewModel?.insertProduct(product)
                 }
-                repository.productLiveData.postValue(allProduct)
             }
         }
     }
@@ -166,7 +166,7 @@ class ProductHandler {
                 if(payload.has(Key._id)){
                     SyncHandler.shared().syncAllBusinessData()
                     val stock = gson.fromJson(payload.toString(),ProductStock::class.java)
-                    SQLite.shared().insert(TableNames.productStock,convertJsonToContentValue(payload))
+                    productViewModel?.insertStock(stock)
                     onUpdateProductCallBack?.let { it1 -> it1(stock) }
                 }else{
                     onUpdateProductCallBack?.let { it1 -> it1(null) }
@@ -176,7 +176,5 @@ class ProductHandler {
             }
         }
     }
-
-
 
 }

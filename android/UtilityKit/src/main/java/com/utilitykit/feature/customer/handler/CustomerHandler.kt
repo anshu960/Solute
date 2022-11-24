@@ -56,6 +56,7 @@ class CustomerHandler {
                 val customerData = jsonData.getJSONObject(Key.payload)
                 val newCustomer = gson.fromJson(customerData.toString(),Customer::class.java)
                 repository.customerLiveData.postValue(newCustomer)
+                viewModel?.insert(newCustomer)
             }
         }
     }
@@ -71,8 +72,8 @@ class CustomerHandler {
                         val customerData = payload.get(i)
                         val newCustomer = gson.fromJson(customerData.toString(),Customer::class.java)
                         allCustomers.add(newCustomer)
+                        viewModel?.insert(newCustomer)
                     }
-                    repository.allCustomerLiveData.postValue(allCustomers)
                 }
             }
         }

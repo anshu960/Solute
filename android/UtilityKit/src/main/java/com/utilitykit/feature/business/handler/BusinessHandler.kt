@@ -1,7 +1,13 @@
 package com.utilitykit.feature.business.handler
 
+import android.app.Application
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
+import com.utilitykit.UtilityActivity
+import com.utilitykit.UtilityKitApp
+import com.utilitykit.database.UtilityKitDatabase
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.model.Business
@@ -9,6 +15,9 @@ import com.utilitykit.feature.business.repository.BusinessRepository
 import com.utilitykit.feature.business.viewModel.BusinessViewModel
 import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class BusinessHandler {
@@ -17,6 +26,7 @@ class BusinessHandler {
     val repository = BusinessRepository()
     val gson = Gson()
     var allBusiness : ArrayList<Business> = arrayListOf()
+    var activity : AppCompatActivity = UtilityActivity()
     init {
         instance = this
     }
@@ -33,7 +43,6 @@ class BusinessHandler {
 
     fun setup(model:BusinessViewModel){
         businessViewModel = model
-
     }
 
     fun fetchAllBusiness(){
@@ -49,14 +58,12 @@ class BusinessHandler {
             val anyData = it.first() as JSONObject
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONArray(Key.payload)
-                allBusiness = arrayListOf()
                 for (i in 0 until payload.length())
                 {
                     val item = payload.getJSONObject(i)
                     val business = gson.fromJson(item.toString(),Business::class.java)
-                    allBusiness.add(business)
+                    businessViewModel.insertDatabase(business)
                 }
-                repository.allBusinessLiveData.postValue(allBusiness)
             }
         }
     }
@@ -69,6 +76,7 @@ class BusinessHandler {
                 val payload = anyData.getJSONObject(Key.payload)
                 val business = gson.fromJson(payload.toString(),Business::class.java)
                 repository.businessLiveData.postValue(business)
+                businessViewModel.insertDatabase(business)
             }
         }
     }

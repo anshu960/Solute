@@ -26,8 +26,6 @@ import com.utilitykit.Defaults
 import com.utilitykit.UtilityActivity
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
-import com.utilitykit.database.Database
-import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
 import com.utilitykit.dataclass.User
@@ -69,8 +67,7 @@ class App: Application() {
         )
         UtilityKitApp().setUp(this,BuildConfig.DEBUG)
         FirebaseApp.initializeApp(this)
-        SQLite.shared().setUp(this)
-        Database.shared().setUp(this)
+//        SQLite.shared().setUp(this)
         val deviceId = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
         Defaults.store(Key.deviceId,deviceId)
 //        Analytics.initFirebaseSetup(this)

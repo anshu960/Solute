@@ -23,8 +23,10 @@ import com.solute.ui.business.inventory.stock.ProductStockAdapter
 import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
 import com.solute.ui.business.product.BusinessProductAdapter
 import com.solute.ui.business.product.create.CreateProductActivity
+import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
+import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
@@ -62,6 +64,14 @@ class InventoryFragment : Fragment() {
     var analyticsAdapter : AnalyticsAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if(!BusinessHandler.shared().repository.business?.Id.isNullOrEmpty()){
+            val businessId = BusinessHandler.shared().repository.business!!.Id
+            UtilityKitApp.applicationContext().database.saleDao().getAllItemsForBusiness(businessId).observe(this){
+                if(!it.isNullOrEmpty()){
+                    SyncHandler.shared().updateAnalyticsToShow(it as ArrayList<Sale>)
+                }
+            }
+        }
         BusinessHandler.shared().repository.analyticsLiveData.observe(this){
             if(it != null){
                 this.allAnalytics = it

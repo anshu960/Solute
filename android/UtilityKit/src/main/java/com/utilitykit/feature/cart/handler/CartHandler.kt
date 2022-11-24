@@ -3,10 +3,15 @@ package com.utilitykit.feature.cart.handler
 import android.content.Intent
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.TableNames.Companion.sale
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.cart.repository.CartRepository
 import com.utilitykit.feature.cart.viewModel.CartViewModel
 import com.utilitykit.feature.customer.handler.CustomerHandler
+import com.utilitykit.feature.customer.model.Customer
+import com.utilitykit.feature.invoice.handler.InvoiceHandler
+import com.utilitykit.feature.invoice.model.CustomerInvoice
 import com.utilitykit.feature.product.model.Product
 import io.socket.emitter.Emitter
 import org.json.JSONObject
@@ -45,6 +50,8 @@ class CartHandler {
                     val newSale = payload.getJSONObject(i)
                     if(newSale.has(Key._id)){
                         salesIds.add(newSale.getString(Key._id))
+                        val saleObj = gson.fromJson(newSale.toString(), Sale::class.java)
+                        InvoiceHandler.shared().viewModel?.insertSale(saleObj)
                     }
                     allSale.add(newSale)
                 }
@@ -62,6 +69,8 @@ class CartHandler {
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONObject(Key.payload)
                 val allSalesData = anyData.getJSONArray(Key.sales)
+                val customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
+                InvoiceHandler.shared().viewModel?.insert(customerInvoice)
                 if(payload.has(Key._id) && allSalesData.length() > 0){
                    targetIntent.putExtra(Key.invoice,anyData.toString())
                     activity.startActivity(targetIntent)

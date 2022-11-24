@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
+import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.business.viewModel.BusinessViewModalFactory
@@ -34,10 +35,18 @@ class BusinessListFragment : Fragment() {
             BusinessViewModel::class.java
         )
         businessViewModel.allBusiness.observe(this) {
-            this.reload()
+
         }
         BusinessHandler.shared().setup(businessViewModel)
+
+        UtilityKitApp.applicationContext().database.businessDao().getAllItems().observe(this){
+            if(it.isNotEmpty()){
+                BusinessHandler.shared().allBusiness = it as ArrayList<Business>
+            }
+            this.reload()
+        }
         BusinessHandler.shared().fetchAllBusiness()
+
     }
 
     fun reload() {

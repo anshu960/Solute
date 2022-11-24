@@ -1,11 +1,12 @@
 package com.utilitykit.dataclass
 
 import android.content.ContentValues
+import androidx.room.Database
 import com.solute.constants.ContentType
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.contentType
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityKitApp
-import com.utilitykit.database.Database
 import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 
@@ -128,20 +129,20 @@ data class Message(
     
     fun send(fcm: String, name: String, completion: () -> Unit){
         var request = JSONObject()
-        val conversation = Database.shared().retriveConversationByID(this.conversationID!!)
-        request.put(Key.fromUserId, UtilityKitApp.user._id)
-        request.put(Key.toUserId, conversation!!.getOtherUserId())
-        request.put(Key.content, this.content)
-        request.put(Key.contentType, contentType.name)
-        request.put(Key.messageID, this.messageID)
-        request.put(Key.time, sentTime)
-        request.put(Key.conversationID, this.conversationID)
-        request.put(Key.participants, conversation!!.participants)
+//        val conversation = Database.shared().retriveConversationByID(this.conversationID!!)
+//        request.put(Key.fromUserId, UtilityKitApp.user._id)
+//        request.put(Key.toUserId, conversation!!.getOtherUserId())
+//        request.put(Key.content, this.content)
+//        request.put(Key.contentType, contentType.name)
+//        request.put(Key.messageID, this.messageID)
+//        request.put(Key.time, sentTime)
+//        request.put(Key.conversationID, this.conversationID)
+//        request.put(Key.participants, conversation!!.participants)
 
-        if (SocketService.shared().isSocketConnected){
-            SocketService.shared().send(SocketEvent.sendMessage, request)
-            completion()
-        }else{
+//        if (SocketService.shared().isSocketConnected){
+//            SocketService.shared().send(SocketEvent.sendMessage, request)
+//            completion()
+//        }else{
 //            ServiceManager().makeServiceCall(Server.sendMessage, request) {
 //                try {
 //                    val payload = it.json.getJSONObject(Key.payload)
@@ -159,7 +160,7 @@ data class Message(
 //                    completion()
 //                }
 //            }
-        }
+//        }
 
         }
 

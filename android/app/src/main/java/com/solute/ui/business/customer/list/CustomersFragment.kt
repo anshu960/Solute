@@ -43,6 +43,7 @@ class CustomersFragment : Fragment() {
             }
         }
         CustomerHandler.shared().setup(viewModal!!)
+        viewModal?.loadCustomer()
         viewModal?.fetchAllCustomer()
     }
 

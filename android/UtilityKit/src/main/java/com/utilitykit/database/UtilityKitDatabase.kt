@@ -1,0 +1,71 @@
+package com.utilitykit.database
+
+import android.app.Application
+import android.content.Context
+import androidx.room.*
+import com.utilitykit.feature.business.model.Business
+import com.utilitykit.feature.business.model.BusinessDao
+import com.utilitykit.feature.cart.model.Sale
+import com.utilitykit.feature.customer.model.Customer
+import com.utilitykit.feature.customer.model.CustomerDao
+import com.utilitykit.feature.invocie.model.CustomerInvoiceDao
+import com.utilitykit.feature.invocie.model.SaleDao
+import com.utilitykit.feature.invoice.model.CustomerInvoice
+import com.utilitykit.feature.product.model.Product
+import com.utilitykit.feature.product.model.ProductDao
+import com.utilitykit.feature.product.model.ProductStock
+import com.utilitykit.feature.product.model.ProductStockDao
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.util.concurrent.Executors
+
+class Converters {
+    @TypeConverter
+    fun fromList(value: ArrayList<String>) = Json.encodeToString(value)
+
+    @TypeConverter
+    fun toArrayList(value: String) = Json.decodeFromString<ArrayList<String>>(value)
+}
+
+// Annotates class to be a Room Database with a table (entity) of the Word class
+@TypeConverters(Converters::class)
+@Database(
+    entities = [Business::class, Sale::class, ProductStock::class, Product::class, Customer::class, CustomerInvoice::class],
+    version = 14,
+    exportSchema = false
+)
+abstract class UtilityKitDatabase : RoomDatabase() {
+
+    abstract fun businessDao(): BusinessDao
+    abstract fun saleDao(): SaleDao
+    abstract fun productStockDao(): ProductStockDao
+    abstract fun productDao(): ProductDao
+    abstract fun customerDao(): CustomerDao
+    abstract fun customerInvoiceDao(): CustomerInvoiceDao
+
+    companion object {
+        // Singleton prevents multiple instances of database opening at the
+        // same time.
+        @Volatile
+        private var INSTANCE: UtilityKitDatabase? = null
+
+        fun getDatabase(context: Context): UtilityKitDatabase {
+            if (INSTANCE == null) {
+                synchronized(this) {
+                    // Pass the database to the INSTANCE
+                    INSTANCE = buildDatabase(context)
+                }
+            }
+            return INSTANCE!!
+        }
+
+        private fun buildDatabase(context: Context): UtilityKitDatabase {
+            return Room.databaseBuilder(
+                context.applicationContext,
+                UtilityKitDatabase::class.java,
+                "UtilityKitDatabase"
+            ).fallbackToDestructiveMigration().build()
+        }
+    }
+}

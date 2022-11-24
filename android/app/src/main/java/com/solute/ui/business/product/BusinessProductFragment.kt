@@ -97,6 +97,7 @@ class BusinessProductFragment : Fragment() {
                 return false
             }
         })
+        productViewModel.loadProduct()
         reload()
         return view
     }

@@ -7,11 +7,9 @@ import android.provider.ContactsContract
 import android.util.Log
 import com.utility.Encryption
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.TableNames
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
-import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.ContactData
 import com.utilitykit.dataclass.Conversation
 import com.utilitykit.dataclass.Message
@@ -386,7 +384,7 @@ class SocketService : Service() {
                 messageObject = messsageData
                 val message = Message(messsageData)
                 message.content = Encryption().decryptMessage(message.content, conversation!!)
-                SQLite.shared().insert(TableNames.message, message.data)
+//                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -418,7 +416,7 @@ class SocketService : Service() {
             if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.shared().insert(TableNames.message, message.data)
+//                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -431,7 +429,7 @@ class SocketService : Service() {
             if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.shared().insert(TableNames.message, message.data)
+//                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -455,7 +453,7 @@ class SocketService : Service() {
             if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.shared().insert(TableNames.message, message.data)
+//                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -470,7 +468,7 @@ class SocketService : Service() {
                     for (i in 0 until payload.length()) {
                         val item = payload.getJSONObject(i)
                         val message = Message(item)
-                        SQLite.shared().insert(TableNames.message, message.data)
+//                        SQLite.shared().insert(TableNames.message, message.data)
                     }
                 }
             }
@@ -485,7 +483,7 @@ class SocketService : Service() {
             if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.shared().insert(TableNames.message, message.data)
+//                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -498,7 +496,7 @@ class SocketService : Service() {
             if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.shared().insert(TableNames.message, message.data)
+//                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -511,7 +509,7 @@ class SocketService : Service() {
             if (messsageData is JSONObject) {
                 messageObject = messsageData
                 val message = Message(messsageData)
-                SQLite.shared().insert(TableNames.message, message.data)
+//                SQLite.shared().insert(TableNames.message, message.data)
             }
         }
         this.onEvent(SocketEvent.onMessage, messageObject)
@@ -541,7 +539,7 @@ class SocketService : Service() {
                     val item = allContactsFromServer.getJSONObject(i)
                     val newContact = ContactData(item)
                     allContacts.add(newContact)
-                    SQLite.shared().insert(TableNames.contacts, newContact.data)
+//                    SQLite.shared().insert(TableNames.contacts, newContact.data)
                 } catch (e: Exception) {
                     Log.d(TAG, e.localizedMessage)
                 }
@@ -570,7 +568,7 @@ class SocketService : Service() {
             val messsageDataAny = it.first()
             if (messsageDataAny is JSONObject) {
                 conversation = Conversation(messsageDataAny)
-                SQLite.shared().insert(TableNames.conversation, conversation.data)
+//                SQLite.shared().insert(TableNames.conversation, conversation.data)
             }
         }
         this.onConversation(SocketEvent.createConversation, conversation)
@@ -584,7 +582,7 @@ class SocketService : Service() {
                 val item = list.getJSONObject(i)
                 val conversation = Conversation(item)
                 allConversation.add(conversation)
-                SQLite.shared().insert(TableNames.conversation, conversation.data)
+//                SQLite.shared().insert(TableNames.conversation, conversation.data)
             }
         }
         this.onConversations(SocketEvent.getAllConversation, allConversation)

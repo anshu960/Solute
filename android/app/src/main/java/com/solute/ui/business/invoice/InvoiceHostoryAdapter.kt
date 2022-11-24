@@ -60,7 +60,7 @@ class InvoiceHistoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Re
         invoicenumber?.text = invoice.invoiceNumber.toString()
         invoicePrice?.text = "₹ " +  invoice.totalPrice
         invoiceDiscount?.text = "₹ " + invoice.instantDiscount
-        invoiceQuantity?.text =  "5"
+        invoiceQuantity?.text =  invoice.salesID?.count().toString()
         invoiceFinalPrice?.text = "₹ " +  invoice.finalPrice
     }
 
