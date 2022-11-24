@@ -22,7 +22,7 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
 
     init {
         viewModelScope.launch (Dispatchers.IO){
-//            fetchAllCustomer()
+
         }
     }
 

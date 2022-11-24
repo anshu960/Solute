@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.Constants.TableNames.Companion.sale
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.cart.repository.CartRepository
 import com.utilitykit.feature.cart.viewModel.CartViewModel
@@ -21,7 +22,6 @@ class CartHandler {
     var viewModel: CartViewModel? = null
     val repository = CartRepository()
     var activity = UtilityActivity()
-    var targetIntent = Intent()
     val gson = Gson()
     init {
         instance = this
@@ -71,10 +71,12 @@ class CartHandler {
                 val allSalesData = anyData.getJSONArray(Key.sales)
                 val customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
                 InvoiceHandler.shared().viewModel?.insert(customerInvoice)
-                if(payload.has(Key._id) && allSalesData.length() > 0){
-                   targetIntent.putExtra(Key.invoice,anyData.toString())
-                    activity.startActivity(targetIntent)
-                    viewModel?.resetCart()
+                CustomerHandler.shared().repository.customerLiveData.postValue(null)
+                CustomerHandler.shared().onCreateNewCustomer = null
+                BusinessHandler.shared().activity.runOnUiThread {
+                    if(payload.has(Key._id) && allSalesData.length() > 0){
+                        InvoiceHandler.shared().onCreateNewCustomerInvoiceResponse?.let { it1 -> it1(anyData) }
+                    }
                 }
             }
         }

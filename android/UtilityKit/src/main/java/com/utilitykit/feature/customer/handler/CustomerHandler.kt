@@ -20,6 +20,7 @@ class CustomerHandler {
     var viewModel: CustomerViewModel? = null
     val repository = CustomerRepository()
     var activity = UtilityActivity()
+    var onCreateNewCustomer : ((customer:Customer)->Unit)? = null
     val gson = Gson()
     init {
         instance = this
@@ -56,6 +57,8 @@ class CustomerHandler {
                 val customerData = jsonData.getJSONObject(Key.payload)
                 val newCustomer = gson.fromJson(customerData.toString(),Customer::class.java)
                 viewModel?.insert(newCustomer)
+                repository.customerLiveData.postValue(newCustomer)
+                onCreateNewCustomer?.let { it1 -> it1(newCustomer) }
             }
         }
     }

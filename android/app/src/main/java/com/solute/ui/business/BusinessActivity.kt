@@ -114,10 +114,6 @@ class BusinessActivity : UtilityActivity() {
         )[CartViewModel::class.java]
         CartHandler.shared().setup(cartViewModal)
         CartHandler.shared().activity = this
-        CartHandler.shared().targetIntent = Intent(this, ReceiptDetailsActivity::class.java)
-//        CartHandler.shared().viewModel?.cartCount?.observe(this){
-//            bottomNavigationView?.getOrCreateBadge(R.id.navigation_business_main_cart)!!.number = it
-//        }
         CartHandler.shared().viewModel?.resetCart()
         customerViewModal = ViewModelProvider(
             this,

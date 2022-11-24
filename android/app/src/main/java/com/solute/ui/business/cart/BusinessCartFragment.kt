@@ -1,6 +1,5 @@
 package com.solute.ui.business.cart
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,17 +11,14 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
-import com.solute.ui.business.customer.create.CreateCustomerActivity
-import com.solute.ui.business.customer.select.SelectCustomerActivity
+import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.product.BusinessProductAdapter
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.cart.viewModel.CartViewModel
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.product.model.Product
 
 /**
@@ -36,20 +32,13 @@ class BusinessCartFragment : Fragment() {
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
 
-    var mrpValueTxt : TextView? = null
+    var mrpValueTxt: TextView? = null
     var discountValueTxt: TextView? = null
     var subTotalValueTxt: TextView? = null
     var taxValueTxt: TextView? = null
     var instantDiscountValueTxt: TextInputEditText? = null
     var totalValueTxt: TextView? = null
     var saleButton: Button? = null
-    var selectedCustomer : Customer? = null
-
-    var addCustomerCard : CardView? = null
-    var addCustomerName : TextView? = null
-    var addCustomerMobile : TextView? = null
-    var addCustomerInstruction : TextView? = null
-    var deleteCustomerButton : ImageButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,14 +48,14 @@ class BusinessCartFragment : Fragment() {
     }
 
     fun reload() {
-        if (CartHandler.shared().repository.cartProducts != null && CartHandler.shared().repository.cartProducts.value != null) {
+        if (CartHandler.shared().repository.cartProducts.value != null) {
             allProduct = CartHandler.shared().repository.cartProducts.value as ArrayList<Product>
         }
-        this.recyclerView!!.layoutManager = GridLayoutManager(this.context,2)
+        this.recyclerView!!.layoutManager = GridLayoutManager(this.context, 2)
         adapter = this.context?.let { BusinessProductAdapter(it, this, allProduct) }
         this.recyclerView!!.adapter = this.adapter
         cartViewModel?.updatePricesInCart()
-        if (CartHandler.shared().repository.instantDiscount != null && CartHandler.shared().repository.instantDiscount.value != null) {
+        if (CartHandler.shared().repository.instantDiscount.value != null) {
             instantDiscountValueTxt?.setText(CartHandler.shared().repository.instantDiscount.value!!.toString())
         }
     }
@@ -88,15 +77,11 @@ class BusinessCartFragment : Fragment() {
         cartViewModel?.tax?.observe(this) {
             this.taxValueTxt?.text = it.toString()
         }
-        cartViewModel?.instantDiscount?.observe(this){
+        cartViewModel?.instantDiscount?.observe(this) {
             cartViewModel?.updatePricesInCart()
         }
         cartViewModel?.totalAmount?.observe(this) {
             this.totalValueTxt?.text = it.toString()
-        }
-        CustomerHandler.shared().repository.customerLiveData.observe(this){
-                selectedCustomer = it
-                loadCustomerDetailsInUI()
         }
     }
 
@@ -118,51 +103,18 @@ class BusinessCartFragment : Fragment() {
             if (text != null && !text.isBlank()) {
                 val newDiscount = text.trim().toString().toFloat()
                 cartViewModel?.updateInstantDiscount(newDiscount)
-            }else{
+            } else {
                 cartViewModel?.updateInstantDiscount(0F)
             }
         }
         saleButton = view.findViewById(R.id.business_fragment_sale_btn)
         saleButton?.setOnClickListener { onClickSale() }
-        addCustomerCard = view.findViewById(R.id.business_fragment_customer_card)
-        addCustomerName = view.findViewById(R.id.business_fragment_customer_name)
-        addCustomerMobile = view.findViewById(R.id.business_fragment_customer_mobile)
-        addCustomerInstruction = view.findViewById(R.id.business_fragment_customer_add_txt)
-        addCustomerInstruction?.setOnClickListener { onClickAddCustomer() }
-        deleteCustomerButton = view.findViewById(R.id.business_fragment_customer_delete_btn)
-        deleteCustomerButton?.setOnClickListener { CustomerHandler.shared().repository.customerLiveData.postValue(null) }
-        loadCustomerDetailsInUI()
         return view
     }
 
-    fun loadCustomerDetailsInUI(){
-        if(this.selectedCustomer != null && this.selectedCustomer!!.Id != null && this.selectedCustomer!!.Id != ""){
-            addCustomerName?.visibility = View.VISIBLE
-            addCustomerMobile?.visibility = View.VISIBLE
-            addCustomerInstruction?.visibility = View.GONE
-            addCustomerName?.text = this.selectedCustomer!!.Name
-            addCustomerMobile?.text = this.selectedCustomer!!.MobileNumber
-            deleteCustomerButton?.visibility = View.VISIBLE
-        }else{
-            addCustomerName?.visibility = View.GONE
-            addCustomerMobile?.visibility = View.GONE
-            addCustomerInstruction?.visibility = View.VISIBLE
-            deleteCustomerButton?.visibility = View.GONE
-        }
-    }
-
-    fun onClickSale(){
-        cartViewModel?.createSaleAndGenerateReceipt(selectedCustomer)
-//        val intent = Intent(this.context,SelectCustomerActivity::class.java)
-//        this.context?.startActivity(intent)
-    }
-    fun onClickAddCustomer(){
-        if(this.selectedCustomer != null && this.selectedCustomer!!.Id != null && this.selectedCustomer!!.Id != ""){
-            return
-        }else{
-            val intent = Intent(this.context,CreateCustomerActivity::class.java)
-            this.startActivity(intent)
-        }
+    fun onClickSale() {
+        val activity = BusinessHandler.shared().activity as? BusinessActivity
+        activity?.navController?.navigate(R.id.business_select_customer)
     }
 
 }

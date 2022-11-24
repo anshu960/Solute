@@ -153,7 +153,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId, user._id)
         request.put(Key.businessID, business!!.Id)
-        if(CustomerHandler.shared().repository.customer.value !=null && CustomerHandler.shared().repository.customer.value!!.Id !=null){
+        if(CustomerHandler.shared().repository.customer.value !=null){
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(Key.customer, JSONObject(customerJson))
         }
@@ -176,7 +176,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         request.put(Key.salesID, JSONArray(salesIds))
         request.put(Key.business, JSONObject(gson.toJson(business)))
         request.put(Key.instantDiscount, instantDiscount.value)
-        if(CustomerHandler.shared().repository.customer.value !=null && CustomerHandler.shared().repository.customer.value!!.Id !=null){
+        if(CustomerHandler.shared().repository.customer.value !=null){
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(Key.customer, JSONObject(customerJson))
         }

@@ -67,5 +67,10 @@
         android:name="com.solute.ui.business.customer.create.CreateCustomerFragment"
         android:label="@string/add_new_customer"
         tools:layout="@layout/fragment_create_customer" />
+    <fragment
+        android:id="@+id/business_select_customer"
+        android:name="com.solute.ui.business.customer.select.SelectCustomerFragment"
+        android:label="@string/add_customer"
+        tools:layout="@layout/fragment_select_customer" />
 
 </navigation>

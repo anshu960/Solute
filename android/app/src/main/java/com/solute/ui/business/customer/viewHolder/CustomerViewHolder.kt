@@ -14,6 +14,8 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.solute.R
+import com.utilitykit.Constants.Key.Companion.customer
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.model.Customer
 
@@ -28,6 +30,7 @@ class CustomerViewHolder (inflater: LayoutInflater, parent: ViewGroup) : Recycle
     var totalInvoiceValue : TextView? = null
     var barcodeImg : ImageView? = null
     var barcodeTxt : TextView? = null
+    var selectionImg : ImageView? = null
 
     init {
         name = itemView.findViewById(R.id.recycler_item_customer_name_txt)
@@ -36,9 +39,10 @@ class CustomerViewHolder (inflater: LayoutInflater, parent: ViewGroup) : Recycle
         totalInvoiceValue = itemView.findViewById(R.id.recycler_item_customer_wallet_txt)
         barcodeImg = itemView.findViewById(R.id.recycler_item_customer_barcode_img)
         barcodeTxt = itemView.findViewById(R.id.recycler_item_customer_barcode_txt)
+        selectionImg = itemView.findViewById(R.id.recycler_item_customer_selection_img)
     }
 
-    fun bind(customer: Customer, index:Int) {
+    fun bind(customer: Customer, onSelect: ((customer: Customer) -> Unit)? = null) {
         name?.text = customer.Name
         mobile?.text = customer.MobileNumber
         if(customer.Barcode?.isNotEmpty() == true){
@@ -56,7 +60,26 @@ class CustomerViewHolder (inflater: LayoutInflater, parent: ViewGroup) : Recycle
         CustomerHandler.shared().viewModel?.getTotalInvoiceValue(customer.Id){
             totalInvoiceValue?.text = "$it Invoice Ammount"
         }
+        if(onSelect != null){
+            selectionImg?.visibility = View.VISIBLE
+            validateSelection(customer)
+            CustomerHandler.shared().repository.customer.observe(BusinessHandler.shared().activity){
+                validateSelection(customer)
+            }
+        }else{
+            selectionImg?.visibility = View.GONE
+        }
     }
+
+    fun validateSelection(customer: Customer){
+        val selectedCustomer = CustomerHandler.shared().repository.customer.value?.Id
+        if(selectedCustomer != null && selectedCustomer == customer.Id){
+            selectionImg?.setImageResource(R.drawable.ic_selected)
+        }else{
+            selectionImg?.setImageResource(R.drawable.ic_un_selected)
+        }
+    }
+
     fun generateBarcode(code:String){
         val multiFormatWriter = MultiFormatWriter()
         var width = Resources.getSystem().getDisplayMetrics().widthPixels

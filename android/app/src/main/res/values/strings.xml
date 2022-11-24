@@ -45,10 +45,16 @@
     <string name="category">Category</string>
     <string name="sub_category">Sub Category</string>
     <string name="sale">Sale</string>
+    <string name="skip">Skip</string>
+    <string name="skip_and_generate_invoice">Skip And Generate Invoice</string>
+    <string name="sale_to_this_customer">Sale To This Customer</string>
+    <string name="add_customer_to_this_sale">Add Customer to this Sale</string>
     <string name="cart">Cart</string>
+    <string name="checkout">Checkout</string>
     <string name="invoice">Invocie</string>
     <string name="customers">Customers</string>
     <string name="add_new_customer">Add New Customer</string>
+    <string name="add_customer">Add Customer</string>
     <string name="barcode">Barcode</string>
     <string name="barcode_optional">Barcode (Optional)</string>
     <string name="empty_task_message">No task found, please click on the create task button to start creating task</string>

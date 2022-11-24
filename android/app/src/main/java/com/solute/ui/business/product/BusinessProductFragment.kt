@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
@@ -81,6 +82,7 @@ class BusinessProductFragment : Fragment() {
         cartButton = view.findViewById(R.id.fragment_business_product_cart_btn)
         cartButton?.setOnClickListener { onClickCart() }
         searchView = view.findViewById(R.id.fragment_business_product_search)
+        searchView?.isIconified = false
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // do something on text submit
@@ -103,10 +105,8 @@ class BusinessProductFragment : Fragment() {
     }
 
     fun onClickCart(){
-        val activity = requireActivity()
-        if(activity is BusinessActivity){
-            activity.goToCart()
-        }
+        val activity = BusinessHandler.shared().activity as? BusinessActivity
+        activity?.goToCart()
     }
 
 

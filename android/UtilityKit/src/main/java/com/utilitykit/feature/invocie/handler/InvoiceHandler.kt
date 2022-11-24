@@ -6,6 +6,7 @@ import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.cart.model.Sale
+import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.invoice.model.CustomerInvoice
 import com.utilitykit.feature.invoice.repository.InvoiceRepository
 import com.utilitykit.feature.invoice.viewModel.InvoiceViewModel
@@ -17,7 +18,7 @@ class InvoiceHandler {
     var viewModel: InvoiceViewModel? = null
     val repository = InvoiceRepository()
     var activity = UtilityActivity()
-    var targetIntent = Intent()
+    var onCreateNewCustomerInvoiceResponse : ((data: JSONObject)->Unit)? = null
     val gson = Gson()
     init {
         instance = this
