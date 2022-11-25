@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.ui.business.inventory.category.ProductCategoryAdapter
-import com.utilitykit.Constants.Key.Companion.search
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productCategory.model.ProductCategory
@@ -64,6 +63,7 @@ class SelectCategoryFragment : Fragment() {
         searchView = view.findViewById(R.id.select_category_search)
         recycler = view.findViewById(R.id.select_category_recycler)
         createBtn = view.findViewById(R.id.select_category_create_btn)
+        createBtn?.setOnClickListener { onClickCreate() }
         viewModal.loadCategory()
         searchView?.isIconified = false
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -102,14 +102,17 @@ class SelectCategoryFragment : Fragment() {
     fun reload() {
         this.productCategoryAdapter = this.context?.let {
             ProductCategoryAdapter(it, this, allCategoory) { category ->
-                ProductCategoryHandler.shared().repository.selectedCategoryLiveData.postValue(
-                    category
-                )
-                ProductCategoryHandler.shared().onSelectCategory?.let { it1 -> it1(category) }
                 BusinessHandler.shared().activity.onBackPressed()
+                ProductCategoryHandler.shared().onSelectCategory?.let { it1 -> it1(category) }
             }
         }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productCategoryAdapter
+    }
+
+    fun onClickCreate(){
+        if(!name?.text.isNullOrEmpty()){
+            viewModal.createNewCategory(name?.text.toString())
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.solute.ui.business.product.create
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -130,6 +132,7 @@ class CreateProductFragment : Fragment() {
             }
         })
         loadProductPreFilledData()
+        populateExistingProduct()
     }
 
     override fun onCreateView(
@@ -210,7 +213,6 @@ class CreateProductFragment : Fragment() {
         productTaxFinalPriceLayout = view.findViewById(R.id.create_product_tax_finial_price_til)
         productTaxFinalPriceEditText = view.findViewById(R.id.create_product_tax_finial_price_tiet)
 
-        loadProductPreFilledData()
         return view
     }
 
@@ -234,15 +236,16 @@ class CreateProductFragment : Fragment() {
             if(product!!.Image.isNotEmpty()){
                 picasso.load(product!!.Image.first()).into(imageView)
             }
-            if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null){
-                ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.forEach {
-                    if(it.Id == product!!.SubCategoryID){
-                        subCategoryEditText?.setText(it.Name)
-                    }
-                }
-            }
+//            if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null){
+//                ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.forEach {
+//                    if(it.Id == product!!.SubCategoryID){
+//                        subCategoryEditText?.setText(it.Name)
+//                    }
+//                }
+//            }
         }
         if(selectedCategory != null){
+            categoryEditText?.setText(selectedCategory?.Name)
             categoryEditText?.setText(selectedCategory?.Name)
         }
     }
@@ -439,13 +442,19 @@ class CreateProductFragment : Fragment() {
 
     fun showCategorySellection(){
         ProductCategoryHandler.shared().onSelectCategory={
-            this.selectedCategory = it
-            categoryEditText?.setText(it.Name)
-
+            Handler(Looper.getMainLooper()).postDelayed({
+                this.selectedCategory = it
+                categoryEditText?.setText(it.Name)
+            }, 500)
         }
         ProductCategoryHandler.shared().onCreateNewCategory={
-            this.selectedCategory = it
-            categoryEditText?.setText(it.Name)
+            activity?.runOnUiThread {
+                activity?.onBackPressed()
+            }
+            Handler(Looper.getMainLooper()).postDelayed({
+                this.selectedCategory = it
+                categoryEditText?.setText(it.Name)
+            }, 500)
         }
        val businessActivity = BusinessHandler.shared().activity as BusinessActivity
         businessActivity.navController.navigate(R.id.business_select_category)

@@ -73,12 +73,7 @@ class ProductCategoryHandler{
                 val payload = anyData.getJSONObject(Key.payload)
                 val category = gson.fromJson(payload.toString(),ProductCategory::class.java)
                 productCategoryViewModel?.insert(category)
-                if(payload.has(Key._id)){
-                    activity.runOnUiThread {
-                        activity.toast("Category Created Successfully")
-                        activity.onBackPressed()
-                    }
-                }
+                onCreateNewCategory?.let { it1 -> it1(category) }
             }
         }
     }
