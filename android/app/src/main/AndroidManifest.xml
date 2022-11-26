@@ -70,10 +70,6 @@
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.business.customer.create.CreateCustomerActivity"
-            android:exported="false"
-            android:theme="@style/TransparentCompat" />
-        <activity
             android:name=".ui.business.create.CreateBusinessActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />

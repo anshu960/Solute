@@ -43,7 +43,7 @@ class Converters {
         ProductCategory::class,
         ProductSubCategory::class
     ],
-    version = 16,
+    version = 17,
     exportSchema = false
 )
 abstract class UtilityKitDatabase : RoomDatabase() {

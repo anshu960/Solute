@@ -46,9 +46,7 @@ class StockFragment : Fragment() {
         productViewModel = ViewModelProvider(
             this,
             ProductViewModalFactory(ProductHandler.shared().repository)
-        ).get(
-            ProductViewModel::class.java
-        )
+        )[ProductViewModel::class.java]
         productViewModel.allProduct.observe(viewLifecycleOwner) {
             allProduct = it as ArrayList<Product>
                 loadStock()

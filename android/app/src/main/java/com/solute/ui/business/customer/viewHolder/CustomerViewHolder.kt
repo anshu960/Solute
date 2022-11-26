@@ -58,7 +58,7 @@ class CustomerViewHolder (inflater: LayoutInflater, parent: ViewGroup) : Recycle
             invoiceCount?.text = "$it Invoices"
         }
         CustomerHandler.shared().viewModel?.getTotalInvoiceValue(customer.Id){
-            totalInvoiceValue?.text = "$it Invoice Ammount"
+            totalInvoiceValue?.text = "$it Invoice Amount"
         }
         if(onSelect != null){
             selectionImg?.visibility = View.VISIBLE

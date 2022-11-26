@@ -155,6 +155,8 @@ class SocketService : Service() {
         mSocket?.on(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)
         mSocket?.on(SocketEvent.RETRIVE_SALES.value, InvoiceHandler.shared().retriveSales)
         mSocket?.on(SocketEvent.CREATE_CUSTOMER.value, CustomerHandler.shared().onCreateCustomer)
+        mSocket?.on(SocketEvent.UPDATE_CUSTOMER.value, CustomerHandler.shared().onUpdateCustomer)
+
         mSocket?.on(SocketEvent.RETRIVE_CUSTOMER.value, CustomerHandler.shared().onFetchAllCustomer)
         mSocket?.on(
             SocketEvent.CREATE_PRODUCT_CATEGORY.value,

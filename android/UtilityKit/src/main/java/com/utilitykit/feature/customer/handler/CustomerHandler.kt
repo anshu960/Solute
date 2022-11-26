@@ -63,6 +63,19 @@ class CustomerHandler {
         }
     }
 
+    val onUpdateCustomer = Emitter.Listener {
+        if (it.isNotEmpty()) {
+            val jsonData = it.first() as JSONObject
+            if(jsonData.has(Key.payload)){
+                val customerData = jsonData.getJSONObject(Key.payload)
+                val newCustomer = gson.fromJson(customerData.toString(),Customer::class.java)
+                viewModel?.insert(newCustomer)
+                repository.customerLiveData.postValue(newCustomer)
+                onCreateNewCustomer?.let { it1 -> it1(newCustomer) }
+            }
+        }
+    }
+
     val onFetchAllCustomer = Emitter.Listener {
         if (it.isNotEmpty()) {
             val anyData = it.first() as JSONObject

@@ -11,7 +11,6 @@ import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.customer.repository.CustomerRepository
-import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,24 +49,32 @@ class CustomerViewModel (private val customerRepository: CustomerRepository):Vie
 
     fun fetchAllCustomer(){
         val user = User()
-        if(BusinessHandler.shared().repository.business != null){
-            var request = JSONObject()
-            request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
-            SocketService.shared().send(SocketEvent.RETRIVE_CUSTOMER,request)
-        }
+        var request = JSONObject()
+        request.put(Key.userId,user._id)
+        request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
+        SocketService.shared().send(SocketEvent.RETRIVE_CUSTOMER,request)
     }
-    fun createNewCustomer(name:String,mobile:String,email:String){
+    fun createNewCustomer(name:String,mobile:String,email:String,barcode:String){
         val user = User()
-        if(BusinessHandler.shared().repository.business != null){
-            var request = JSONObject()
-            request.put(Key.userId,user._id)
-            request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
-            request.put(Key.name,name)
-            request.put(Key.mobileNumber, mobile)
-            request.put(Key.emailId,email)
-            SocketService.shared().send(SocketEvent.CREATE_CUSTOMER,request)
-        }
+        var request = JSONObject()
+        request.put(Key.userId,user._id)
+        request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
+        request.put(Key.name,name)
+        request.put(Key.mobileNumber, mobile)
+        request.put(Key.emailId,email)
+        request.put(Key.barcode,barcode)
+        SocketService.shared().send(SocketEvent.CREATE_CUSTOMER,request)
+    }
+    fun updateCustomer(customer: Customer){
+        val user = User()
+        var request = JSONObject()
+        request.put(Key.userId,user._id)
+        request.put(Key.businessID,BusinessHandler.shared().repository.business.value?.Id)
+        request.put(Key.name,customer.Name)
+        request.put(Key.mobileNumber, customer.MobileNumber)
+        request.put(Key.emailId,customer.EmailID)
+        request.put(Key.barcode,customer.Barcode)
+        SocketService.shared().send(SocketEvent.UPDATE_CUSTOMER,request)
     }
 
     fun insert(customer : Customer){

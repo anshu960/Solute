@@ -186,7 +186,7 @@ class SelectCustomerFragment : Fragment() {
                 this.selectedCustomer = it
                 onClickSale()
             }
-            viewModal?.createNewCustomer(customerName!!.text!!.toString(),customerMobile!!.text!!.toString(),customerEmail!!.text!!.toString())
+            viewModal?.createNewCustomer(customerName!!.text!!.toString(),customerMobile!!.text!!.toString(),customerEmail!!.text!!.toString(),customerMobile!!.text!!.toString())
         }
     }
 
