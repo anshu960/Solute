@@ -17,7 +17,7 @@ import org.json.JSONObject
 
 class ProductHandler {
 
-    var productViewModel: ProductViewModel? = null
+    var viewModel: ProductViewModel? = null
     val repository = ProductRepository()
     var activity : UtilityActivity? = null
     var onCreateProductCallBack : ((product: Product?) -> Unit)? = null
@@ -41,17 +41,7 @@ class ProductHandler {
     }
 
     fun setup(model:ProductViewModel){
-        productViewModel = model
-    }
-
-
-    fun fetchAllProduct(){
-        val request = JSONObject()
-        val user = User()
-        val business = BusinessHandler.shared().repository.business
-        request.put(Key.userId,user._id)
-        request.put(Key.businessID,business.value?.Id)
-        SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT,request)
+        viewModel = model
     }
 
      val retriveProduct = Emitter.Listener {
@@ -64,7 +54,7 @@ class ProductHandler {
                 {
                     val item = payload.getJSONObject(i)
                     val product = gson.fromJson(item.toString(),Product::class.java)
-                    productViewModel?.insertProduct(product)
+                    viewModel?.insertProduct(product)
                 }
             }
         }
@@ -80,7 +70,7 @@ class ProductHandler {
                     val product = gson.fromJson(payload.toString(),Product::class.java)
                     repository.newProductLiveData.postValue(product)
                     onCreateProductCallBack?.let { it1 -> it1(product) }
-                    fetchAllProduct()
+                    viewModel?.fetchAllProduct()
                 }else{
                     onCreateProductCallBack?.let { it1 -> it1(null) }
                 }
@@ -100,7 +90,7 @@ class ProductHandler {
                     val product = gson.fromJson(payload.toString(),Product::class.java)
                     repository.newProductLiveData.postValue(product)
                     onUpdateProductImageCallBack?.let { it1 -> it1(product) }
-                    fetchAllProduct()
+                    viewModel?.fetchAllProduct()
                 }else{
                     onUpdateProductImageCallBack?.let { it1 -> it1(null) }
                 }
@@ -120,7 +110,7 @@ class ProductHandler {
                     val product = gson.fromJson(payload.toString(),Product::class.java)
                     repository.newProductLiveData.postValue(product)
                     onUpdateExistingProductCallBack?.let { it1 -> it1(product) }
-                    fetchAllProduct()
+                    viewModel?.fetchAllProduct()
                 }else{
                     onUpdateExistingProductCallBack?.let { it1 -> it1(null) }
                 }
@@ -140,7 +130,7 @@ class ProductHandler {
                     val product = gson.fromJson(payload.toString(),Product::class.java)
                     repository.newProductLiveData.postValue(null)
                     onDeleteProductCallBack?.let { it1 -> it1(product) }
-                    fetchAllProduct()
+                    viewModel?.fetchAllProduct()
                 }else{
                     onDeleteProductCallBack?.let { it1 -> it1(null) }
                 }
@@ -159,7 +149,7 @@ class ProductHandler {
                 if(payload.has(Key._id)){
                     SyncHandler.shared().syncAllBusinessData()
                     val stock = gson.fromJson(payload.toString(),ProductStock::class.java)
-                    productViewModel?.insertStock(stock)
+                    viewModel?.insertStock(stock)
                     onUpdateProductCallBack?.let { it1 -> it1(stock) }
                 }else{
                     onUpdateProductCallBack?.let { it1 -> it1(null) }

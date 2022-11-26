@@ -2,6 +2,7 @@ package com.utilitykit.feature.productSubCategory.model
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.utilitykit.Constants.Key.Companion.category
 import com.utilitykit.feature.productCategory.model.ProductCategory
 
 @Dao
@@ -26,4 +27,7 @@ interface ProductSubCategoryDao {
 
     @Query("select * from ProductSubCategory where BusinessID = :BusinessID order by UpdatedAt DESC")
     fun getAllItemsForBusiness(BusinessID: String): LiveData<List<ProductSubCategory>>
+
+    @Query("select * from ProductSubCategory where CategoryID = :categoryId order by UpdatedAt DESC")
+    fun getAllItemsForCategory(categoryId: String): LiveData<List<ProductSubCategory>>
 }

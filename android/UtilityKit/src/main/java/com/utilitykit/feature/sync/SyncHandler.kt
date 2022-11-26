@@ -65,7 +65,7 @@ class SyncHandler {
         getAllSaleForBusiness()
         getAllStockForBusiness()
         CustomerHandler.shared().fetchAllCustomer()
-        ProductHandler.shared().fetchAllProduct()
+        ProductHandler.shared().viewModel?.fetchAllProduct()
         ProductCategoryHandler.shared().fetchAllProductCategory()
         ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
         InvoiceHandler.shared().viewModel?.fetchAllInvoice()
@@ -258,7 +258,7 @@ class SyncHandler {
                         val newStockEntry = payload.getJSONObject(i)
                         val newStock =
                             gson.fromJson(newStockEntry.toString(), ProductStock::class.java)
-                        ProductHandler.shared().productViewModel?.insertStock(newStock)
+                        ProductHandler.shared().viewModel?.insertStock(newStock)
                     }
                 }
             }

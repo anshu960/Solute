@@ -44,7 +44,8 @@
     <string name="all_product">All Products</string>
     <string name="category">Category</string>
     <string name="category_name">Category Name</string>
-    <string name="or_create_new_category">Orr Category New Category</string>
+    <string name="sub_category_name">Sub Category Name</string>
+    <string name="or_create_new_category">Or create New Category</string>
     <string name="sub_category">Sub Category</string>
     <string name="sale">Sale</string>
     <string name="skip">Skip</string>
@@ -59,6 +60,7 @@
     <string name="add_new_product">Add New Product</string>
     <string name="add_customer">Add Customer</string>
     <string name="select_category">Select Category</string>
+    <string name="select_sub_category">Select Sub Category</string>
     <string name="barcode">Barcode</string>
     <string name="barcode_optional">Barcode (Optional)</string>
     <string name="empty_task_message">No task found, please click on the create task button to start creating task</string>
@@ -100,7 +102,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="finish">Finish</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -140,4 +142,6 @@
     <string name="title_activity_employee_details">EmployeeDetailsActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="price_string">₹ %f</string>
+
 </resources>

@@ -9,10 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.widget.addTextChangedListener
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
@@ -23,8 +21,6 @@ import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.costPrice
-import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
@@ -135,6 +131,11 @@ class CreateProductFragment : Fragment() {
         populateExistingProduct()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -229,10 +230,10 @@ class CreateProductFragment : Fragment() {
             productSGSTEditText?.setText(product!!.SGST!!.toString())
             productVATEditText?.setText(product!!.VAT!!.toString())
             productCESSEditText?.setText(product!!.CESS!!.toString())
-            productTotalTaxEditText?.setText("RS " + product!!.Tax.toString())
-            productDiscountEditText?.setText("RS " + product!!.Discount)
-            productFinalPriceEditText?.setText("RS " + product!!.FinalPrice)
-            productTaxFinalPriceEditText?.setText("RS " + product!!.FinalPrice)
+            productTotalTaxEditText?.setText(getString(R.string.price_string,product!!.Tax))
+            productDiscountEditText?.setText(getString(R.string.price_string,product!!.Discount))
+            productFinalPriceEditText?.setText(getString(R.string.price_string,product!!.FinalPrice))
+            productTaxFinalPriceEditText?.setText(getString(R.string.price_string,product!!.FinalPrice))
             if(product!!.Image.isNotEmpty()){
                 picasso.load(product!!.Image.first()).into(imageView)
             }
@@ -246,7 +247,7 @@ class CreateProductFragment : Fragment() {
         }
         if(selectedCategory != null){
             categoryEditText?.setText(selectedCategory?.Name)
-            categoryEditText?.setText(selectedCategory?.Name)
+            subCategoryEditText?.setText(selectedSubCategory?.Name)
         }
     }
 
@@ -267,7 +268,7 @@ class CreateProductFragment : Fragment() {
                 stepsPosition = 1
                 productStepView?.done(false)
                 productStepView?.go(stepsPosition, true)
-                saveButton?.text = "Next"
+                saveButton?.text = getString(R.string.next)
                 calculateTaxAndPrice()
             }
             1 -> {
@@ -277,7 +278,7 @@ class CreateProductFragment : Fragment() {
                 stepsPosition = 2
                 productStepView?.done(false)
                 productStepView?.go(stepsPosition, true)
-                saveButton?.text = "Finish"
+                saveButton?.text = getString(R.string.finish)
                 calculateTaxAndPrice()
             }
             2 -> {
@@ -289,7 +290,9 @@ class CreateProductFragment : Fragment() {
      fun onBackPressed() {
         when (stepsPosition) {
             0 -> {
-                activity?.onBackPressed()
+                activity?.runOnUiThread {
+                    activity?.navController?.navigate(R.id.inventory_product)
+                }
             }
             1 -> {
                 productInfoCard?.visibility = View.VISIBLE
@@ -298,7 +301,7 @@ class CreateProductFragment : Fragment() {
                 stepsPosition = 0
                 productStepView?.done(false)
                 productStepView?.go(stepsPosition, true)
-                saveButton?.text = "Next"
+                saveButton?.text = getString(R.string.next)
             }
             2 -> {
                 productInfoCard?.visibility = View.GONE
@@ -307,7 +310,7 @@ class CreateProductFragment : Fragment() {
                 stepsPosition = 1
                 productStepView?.done(false)
                 productStepView?.go(stepsPosition, true)
-                saveButton?.text = "Next"
+                saveButton?.text = getString(R.string.next)
             }
             3 -> {
                 productInfoCard?.visibility = View.GONE
@@ -316,7 +319,7 @@ class CreateProductFragment : Fragment() {
                 stepsPosition = 2
                 productStepView?.done(false)
                 productStepView?.go(stepsPosition, true)
-                saveButton?.text = "Next"
+                saveButton?.text = getString(R.string.next)
             }
             else -> {
 
@@ -410,7 +413,7 @@ class CreateProductFragment : Fragment() {
         taxApplied += (price*(vat/100))
         taxApplied += (price*(cess/100))
         totalTax = taxApplied
-        productTotalTaxEditText?.setText("RS " + totalTax.toString())
+        productTotalTaxEditText?.setText(getString(R.string.price_string,totalTax))
         if(isTaxIncluded){
             finalPrice = price
         }else{
@@ -418,12 +421,12 @@ class CreateProductFragment : Fragment() {
         }
         discount = mrp - finalPrice
         if(discount < 0){
-            productDiscountEditText?.setText("RS 0")
+            productDiscountEditText?.setText(getString(R.string.price_string,0F))
         }else{
-            productDiscountEditText?.setText("RS " + discount)
+            productDiscountEditText?.setText(getString(R.string.price_string,discount))
         }
-        productFinalPriceEditText?.setText("RS " + finalPrice)
-        productTaxFinalPriceEditText?.setText("RS " + finalPrice)
+        productFinalPriceEditText?.setText(getString(R.string.price_string,finalPrice))
+        productTaxFinalPriceEditText?.setText(getString(R.string.price_string,finalPrice))
 
     }
 
@@ -445,6 +448,7 @@ class CreateProductFragment : Fragment() {
             Handler(Looper.getMainLooper()).postDelayed({
                 this.selectedCategory = it
                 categoryEditText?.setText(it.Name)
+                ProductCategoryHandler.shared().repository.selectedCategoryLiveData.postValue(it)
             }, 500)
         }
         ProductCategoryHandler.shared().onCreateNewCategory={
@@ -454,59 +458,29 @@ class CreateProductFragment : Fragment() {
             Handler(Looper.getMainLooper()).postDelayed({
                 this.selectedCategory = it
                 categoryEditText?.setText(it.Name)
+                ProductCategoryHandler.shared().repository.selectedCategoryLiveData.postValue(it)
             }, 500)
         }
-       val businessActivity = BusinessHandler.shared().activity as BusinessActivity
-        businessActivity.navController.navigate(R.id.business_select_category)
+        activity?.navController?.navigate(R.id.business_select_category)
     }
 
     fun showSubCategorySellection(){
-//        var filteredSubCategory : ArrayList<String> = arrayListOf()
-//        var index = 0
-//        allSubCategoory.forEach {
-//            it.Name?.let { it1 ->
-//                if(selectedCategory != null && selectedCategory!!.Id == it.CategoryID){
-//                    filteredSubCategory.add(it1)
-//                }
-//                if(it1 == selectedSubCategoryName){
-//                    selectedSubCategoryIndex = index
-//                }
-//            }
-//            index+=1
-//        }
-//        index = 0
-//        var allSubCategoryNames : Array<String> = Array(filteredSubCategory.count()){""}
-//        filteredSubCategory.forEach {
-//            allSubCategoryNames.set(index,it)
-//            index+=1
-//        }
-//        index = 0
-//        if(allSubCategoryNames.isEmpty()){
-//            activity?.toast("Please select category first")
-//            return
-//        }
-//        val builder = AlertDialog.Builder(this.context)
-//        builder.setTitle("Please selecte Sub Category")
-//        builder.setSingleChoiceItems(allSubCategoryNames, selectedCategoryIndex) { dialog, which ->
-//            subCategoryEditText?.setText(allSubCategoryNames[which])
-//            selectedSubCategoryName = allSubCategoryNames[which]
-//            allSubCategoory.forEach {
-//                it.Name?.let { it1 ->
-//                    if(which >= 0 && allSubCategoryNames[which] == it1){
-//                        selectedSubCategoryIndex = index
-//                        selectedSubCategory = it
-//                    }
-//                }
-//                index+=1
-//            }
-//            index = 0
-//        }
-//        builder.setPositiveButton("OK") { dialog, which ->
-//
-//        }
-//        builder.setNegativeButton("Cancel", null)
-//        val dialog = builder.create()
-//        dialog.show()
+        activity?.navController?.navigate(R.id.business_select_product_sub_category)
+        ProductSubCategoryHandler.shared().onSelectSubCategory={
+            Handler(Looper.getMainLooper()).postDelayed({
+                this.selectedSubCategory = it
+                subCategoryEditText?.setText(it.Name)
+            }, 500)
+        }
+        ProductSubCategoryHandler.shared().onCreateNewSubCategory={
+            activity?.runOnUiThread {
+                activity.onBackPressed()
+            }
+            Handler(Looper.getMainLooper()).postDelayed({
+                this.selectedSubCategory = it
+                subCategoryEditText?.setText(it.Name)
+            }, 500)
+        }
     }
 
     fun saveProductInSever(){
@@ -541,28 +515,29 @@ class CreateProductFragment : Fragment() {
                 onCreateNewProduct(it)
             }
             request.put(Key._id,product!!.Id)
-            ProductHandler.shared().productViewModel?.updateProduct(request)
+            ProductHandler.shared().viewModel?.updateProduct(request)
         }else{
             ProductHandler.shared().onCreateProductCallBack = {
                 onCreateNewProduct(it)
             }
-            ProductHandler.shared().productViewModel?.createNewProduct(request)
+            ProductHandler.shared().viewModel?.createNewProduct(request)
         }
     }
     fun onCreateNewProduct(product:Product?){
         if(product != null){
-            this.run {
+            this.activity?.runOnUiThread {
                 if(this.fileUri != null){
                     activity?.toastLong("Product Created, Uploading Image")
-                    uploadImageInFirebase(product!!)
+                    uploadImageInFirebase(product)
                 }else{
                     this.onBackPressed()
                     this.onBackPressed()
                     this.onBackPressed()
+                    this.activity?.onBackPressed()
                 }
             }
         }else{
-            this.run {
+            this.activity?.runOnUiThread  {
                 activity?.toast("Oops! Something went wrong")
             }
         }
@@ -570,14 +545,14 @@ class CreateProductFragment : Fragment() {
 
 
     fun uploadImageInFirebase(product: Product){
-        if (fileUri != null && BusinessHandler.shared().repository.business != null && BusinessHandler.shared().repository.business.value != null) {
+        if (fileUri != null && BusinessHandler.shared().repository.business.value != null) {
             val fileName = product.Id +".png"
             val imageRef = App.applicationContext().productImageRef?.child(BusinessHandler.shared().repository.business.value!!.Id)?.child(product.Id!!)?.child(fileName)
             imageRef?.putFile(fileUri!!)?.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     ProductHandler.shared().onUpdateProductImageCallBack={updatedPrd->
-                            this.run {
-                                if(updatedPrd != null && updatedPrd!!.Id != null){
+                        this.activity?.runOnUiThread  {
+                                if(updatedPrd != null){
                                     this.onBackPressed()
                                     this.onBackPressed()
                                     this.onBackPressed()
@@ -588,11 +563,11 @@ class CreateProductFragment : Fragment() {
                             }
                         }
                     val imageUrl = it.toString()
-                    ProductHandler.shared().productViewModel?.updateProductImage(product,imageUrl)
+                    ProductHandler.shared().viewModel?.updateProductImage(product,imageUrl)
                 }
             }?.addOnFailureListener { e ->
                 print(e.message)
-                this.run {
+                this.activity?.runOnUiThread {
                     activity?.toast("Oops! Failed to upload image at the moment")
                 }
             }

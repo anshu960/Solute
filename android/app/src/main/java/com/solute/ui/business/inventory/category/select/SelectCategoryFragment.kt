@@ -68,17 +68,10 @@ class SelectCategoryFragment : Fragment() {
         searchView?.isIconified = false
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                // do something on text submit
                 return false
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
-                // do something when text changes
-                if (newText != "") {
                     search(newText)
-                } else {
-                    reload()
-                }
                 return false
             }
         })

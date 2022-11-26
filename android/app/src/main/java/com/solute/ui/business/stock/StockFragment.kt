@@ -54,7 +54,7 @@ class StockFragment : Fragment() {
                 loadStock()
         }
         ProductHandler.shared().setup(productViewModel)
-        ProductHandler.shared().fetchAllProduct()
+        ProductHandler.shared().viewModel?.fetchAllProduct()
         loadStock()
         return view
     }

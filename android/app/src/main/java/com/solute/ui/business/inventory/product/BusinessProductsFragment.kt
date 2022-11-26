@@ -51,7 +51,7 @@ class BusinessProductsFragment : Fragment() {
         })
         ProductHandler.shared().setup(productViewModel)
         productViewModel.loadProduct()
-        ProductHandler.shared().fetchAllProduct()
+        ProductHandler.shared().viewModel?.fetchAllProduct()
 
     }
 

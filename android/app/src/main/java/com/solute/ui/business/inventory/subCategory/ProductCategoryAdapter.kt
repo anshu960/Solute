@@ -8,10 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.inventory.subCategory.SubCategoryDetailsActivity
+import com.utilitykit.feature.productCategory.model.ProductCategory
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 
-class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, val allSubCategory: ArrayList<ProductSubCategory>) :
+class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, val allSubCategory: ArrayList<ProductSubCategory>,var onSelect:((subCategory: ProductSubCategory) -> Unit)? = null) :
     RecyclerView.Adapter<ProductSubCategoryViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -26,7 +27,9 @@ class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, va
     override fun onBindViewHolder(holder: ProductSubCategoryViewHolder, position: Int) {
         val item = allSubCategory[position]
         holder.itemView.setOnClickListener {
-            if(context is BusinessActivity){
+            if(onSelect != null){
+                onSelect?.let { it1 -> it1(item) }
+            }else if(context is BusinessActivity){
                 ProductSubCategoryHandler.shared().repository.selectedSubCategoryLiveData.postValue(item)
                 val intent = Intent(context, SubCategoryDetailsActivity::class.java)
                 context.startActivity(intent)

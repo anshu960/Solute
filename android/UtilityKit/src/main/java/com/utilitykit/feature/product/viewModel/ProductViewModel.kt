@@ -42,7 +42,14 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
             }
         }
     }
-
+    fun fetchAllProduct(){
+        val request = JSONObject()
+        val user = User()
+        val business = BusinessHandler.shared().repository.business
+        request.put(Key.userId,user._id)
+        request.put(Key.businessID,business.value?.Id)
+        SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT,request)
+    }
     fun createNewProduct(request:JSONObject){
         SocketService.shared().send(SocketEvent.CREATE_PRODUCT,request)
     }

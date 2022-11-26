@@ -26,6 +26,12 @@ import com.utilitykit.feature.cart.viewModel.CartViewModel
 import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.viewModel.CustomerViewModalFactory
 import com.utilitykit.feature.customer.viewModel.CustomerViewModel
+import com.utilitykit.feature.invoice.handler.InvoiceHandler
+import com.utilitykit.feature.invoice.viewModel.InvoiceViewModalFactory
+import com.utilitykit.feature.invoice.viewModel.InvoiceViewModel
+import com.utilitykit.feature.product.handler.ProductHandler
+import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
+import com.utilitykit.feature.product.viewModel.ProductViewModel
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
 import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
@@ -38,7 +44,9 @@ class BusinessActivity : UtilityActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityBusinessBinding
+    private lateinit var productViewModal: ProductViewModel
     private lateinit var cartViewModal: CartViewModel
+    private lateinit var invoiceViewModal: InvoiceViewModel
     private lateinit var customerViewModal: CustomerViewModel
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
@@ -108,6 +116,11 @@ class BusinessActivity : UtilityActivity() {
     }
 
     fun setUpRequiredModels(){
+        //Product
+        productViewModal = ViewModelProvider(this,ProductViewModalFactory(ProductHandler.shared().repository))[ProductViewModel::class.java]
+        productViewModal.fetchAllProduct()
+        ProductHandler.shared().setup(productViewModal)
+        //Cart
         cartViewModal = ViewModelProvider(
             this,
             CartViewModalFactory(CartHandler.shared().repository)
@@ -115,12 +128,19 @@ class BusinessActivity : UtilityActivity() {
         CartHandler.shared().setup(cartViewModal)
         CartHandler.shared().activity = this
         CartHandler.shared().viewModel?.resetCart()
+        //Invoice
+        invoiceViewModal = ViewModelProvider(
+            this,
+            InvoiceViewModalFactory(InvoiceHandler.shared().repository)
+        )[InvoiceViewModel::class.java]
+        invoiceViewModal.fetchAllInvoice()
+        //Custommer
         customerViewModal = ViewModelProvider(
             this,
             CustomerViewModalFactory(CustomerHandler.shared().repository)
         )[CustomerViewModel::class.java]
-        customerViewModal.fetchAllCustomer()
         CustomerHandler.shared().setup(customerViewModal)
+        customerViewModal.fetchAllCustomer()
         //category
         productCategoryViewModel = ViewModelProvider(
             this,
@@ -138,6 +158,7 @@ class BusinessActivity : UtilityActivity() {
             ProductSubCategoryViewModel::class.java
         )
         ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
+        //Sync Everything
         SyncHandler.shared().syncAllBusinessData()
     }
     fun goToCart(){

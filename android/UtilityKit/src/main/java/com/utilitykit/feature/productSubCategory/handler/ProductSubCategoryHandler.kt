@@ -2,6 +2,7 @@ package com.utilitykit.feature.productSubCategory.handler
 
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.category
 import com.utilitykit.Constants.Key.Companion.product
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
@@ -18,6 +19,8 @@ class ProductSubCategoryHandler{
 
     var productSubCategoryViewModel: ProductSubCategoryViewModel? = null
     val repository = ProductSubCategoryRepository()
+    var onCreateNewSubCategory : ((category: ProductSubCategory)->Unit)? = null
+    var onSelectSubCategory : ((category: ProductSubCategory)->Unit)? = null
     var activity = UtilityActivity()
     val gson = Gson()
     init {
@@ -75,10 +78,7 @@ class ProductSubCategoryHandler{
                 val productSubCategory = gson.fromJson(payload.toString(), ProductSubCategory::class.java)
                 productSubCategoryViewModel?.insert(productSubCategory)
                 if(payload.has(Key._id)){
-                    activity.runOnUiThread {
-                        activity.toast("Sub Category Created Successfully")
-                        activity.onBackPressed()
-                    }
+                    onCreateNewSubCategory?.let { it1 -> it1(productSubCategory) }
                 }
             }
         }

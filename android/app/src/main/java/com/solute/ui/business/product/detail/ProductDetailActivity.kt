@@ -97,7 +97,7 @@ class ProductDetailActivity : UtilityActivity() {
                     }
                 }
             }
-            ProductHandler.shared().productViewModel?.deleteProduct(ProductHandler.shared().repository.selectedProduct.value!!)
+            ProductHandler.shared().viewModel?.deleteProduct(ProductHandler.shared().repository.selectedProduct.value!!)
         }
     }
 

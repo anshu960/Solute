@@ -94,7 +94,7 @@ class ProductStockDetailsFragment : Fragment() {
                 ) { dialog, which ->
                     val quantity = quantityEditText.text.toString().toInt()
                     val message = messageEditText.text.toString()
-                    ProductHandler.shared().productViewModel?.removeStockQuantity(
+                    ProductHandler.shared().viewModel?.removeStockQuantity(
                         ProductHandler.shared().repository.selectedProduct.value!!,
                         quantity,
                         message
@@ -127,7 +127,7 @@ class ProductStockDetailsFragment : Fragment() {
                 ) { dialog, which ->
                     val quantity = quantityEditText.text.toString().toInt()
                     val message = messageEditText.text.toString()
-                    ProductHandler.shared().productViewModel?.addStockQuantity(
+                    ProductHandler.shared().viewModel?.addStockQuantity(
                         ProductHandler.shared().repository.selectedProduct.value!!,
                         quantity,
                         message
@@ -160,7 +160,7 @@ class ProductStockDetailsFragment : Fragment() {
                 ) { dialog, which ->
                     val quantity = quantityEditText.text.toString().toInt()
                     val message = messageEditText.text.toString()
-                    ProductHandler.shared().productViewModel?.resetStockQuantity(
+                    ProductHandler.shared().viewModel?.resetStockQuantity(
                         ProductHandler.shared().repository.selectedProduct.value!!,
                         quantity,
                         message

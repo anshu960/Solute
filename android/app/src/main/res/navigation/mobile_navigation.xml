@@ -82,5 +82,10 @@
         android:name="com.solute.ui.business.inventory.category.select.SelectCategoryFragment"
         android:label="@string/select_category"
         tools:layout="@layout/fragment_select_category" />
+    <fragment
+        android:id="@+id/business_select_product_sub_category"
+        android:name="com.solute.ui.business.inventory.subCategory.select.SelectProductSubCategoryFragment"
+        android:label="@string/select_sub_category"
+        tools:layout="@layout/fragment_select_product_sub_category" />
 
 </navigation>

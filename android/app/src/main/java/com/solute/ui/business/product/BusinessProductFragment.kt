@@ -46,7 +46,7 @@ class BusinessProductFragment : Fragment() {
             this.reload()
         }
         ProductHandler.shared().setup(productViewModel)
-        ProductHandler.shared().fetchAllProduct()
+        ProductHandler.shared().viewModel?.fetchAllProduct()
     }
 
     fun reload() {

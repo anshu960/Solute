@@ -38,6 +38,14 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
         }
     }
 
+    fun loadSubCategory(category: ProductCategory){
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+            UtilityKitApp.applicationContext().database.productSubCategoryDao().getAllItemsForCategory(category.Id).observe(BusinessHandler.shared().activity){
+                productSubCategoryRepository.subCategoryLiveData.postValue(it as ArrayList<ProductSubCategory>?)
+            }
+        }
+    }
+
     fun createNewSubCategory(name:String,category:ProductCategory) {
         val request = JSONObject()
         val user = User()
