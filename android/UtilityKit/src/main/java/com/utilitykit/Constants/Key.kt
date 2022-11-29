@@ -33,6 +33,8 @@ class Key {
         val groupDescription = "GroupDescription"
         val ownerUserID = "OwnerUserID"
         val employeeUserID = "EmployeeUserID"
+        val employeeID = "EmployeeID"
+        val attendanceDate = "AttendanceDate"
 
         val userId = "UserID"
         var businessID = "BusinessID"
@@ -132,7 +134,7 @@ class Key {
         val gstNumber = "gst_number"
         val workingDays = "working_days"
         val workingDay = "working_day"
-        val workingHours = "working_hours"
+        val hours = "Hours"
         val panNumber = "pan_number"
 
         //For workout

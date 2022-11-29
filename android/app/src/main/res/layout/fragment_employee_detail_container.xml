@@ -4,27 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.business.employee.details.EmployeeDetailsActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/employee_details_activity_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorThemePrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/employee_details_activity_toolbar_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:src="@drawable/arrow_left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ui.business.employee.details.EmployeeDetailContainerFragment">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/activity_employee_details_container"
@@ -35,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/employee_details_activity_bottom_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employee_details_activity_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/employee_details_navigation" />
 
     <TextView
@@ -43,7 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/employee"
-        app:layout_constraintBottom_toBottomOf="@+id/employee_details_activity_toolbar"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

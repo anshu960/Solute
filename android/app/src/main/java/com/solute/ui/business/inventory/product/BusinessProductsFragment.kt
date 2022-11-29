@@ -30,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class BusinessProductsFragment : Fragment() {
     var recycler : RecyclerView? = null
-    private lateinit var productViewModel: ProductViewModel
+    private var viewModal: ProductViewModel? = null
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
     var createNewProductBtn : FloatingActionButton? = null
@@ -39,18 +39,13 @@ class BusinessProductsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
-        productViewModel = ViewModelProvider(
-            this,
-            ProductViewModalFactory(ProductHandler.shared().repository)
-        ).get(
-            ProductViewModel::class.java
-        )
-        productViewModel.allProduct.observe(this, {
+        viewModal = ProductHandler.shared().viewModel
+        viewModal?.allProduct?.observe(this) {
             allProduct = it as ArrayList<Product>
             this.reload()
-        })
-        ProductHandler.shared().setup(productViewModel)
-        productViewModel.loadProduct()
+        }
+        viewModal?.let { ProductHandler.shared().setup(it) }
+        viewModal?.loadProduct()
         ProductHandler.shared().viewModel?.fetchAllProduct()
 
     }
@@ -64,6 +59,7 @@ class BusinessProductsFragment : Fragment() {
         recycler = view.findViewById(R.id.business_products_recycler)
         createNewProductBtn = view.findViewById(R.id.business_products_fab_button)
         createNewProductBtn?.setOnClickListener {
+            ProductHandler.shared().repository.selectedProductLiveData.postValue(null)
             activity?.navController?.navigate(R.id.business_product_create)
         }
         reload()

@@ -3,14 +3,11 @@ package com.utilitykit.feature.employee.handler
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
-import com.utilitykit.UtilityKitApp.Companion.user
-import com.utilitykit.dataclass.User
 import com.utilitykit.feature.commonModel.Profile
-import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.model.Customer
-import com.utilitykit.feature.customer.viewModel.CustomerViewModel
 import com.utilitykit.feature.customer.viewModel.EmployeeViewModel
 import com.utilitykit.feature.employee.model.Employee
+import com.utilitykit.feature.employee.model.EmployeeAttendance
 import com.utilitykit.feature.employee.repository.EmployeeRepository
 import io.socket.emitter.Emitter
 import org.json.JSONObject
@@ -24,6 +21,8 @@ class EmployeeHandler {
     init {
         instance = this
     }
+    var onCreateNewAttendance : ((attendance: EmployeeAttendance)->Unit)? = null
+
     companion object{
         private var instance: EmployeeHandler? = null
         fun shared() : EmployeeHandler {
@@ -46,6 +45,19 @@ class EmployeeHandler {
                 val employeeData = jsonData.getJSONObject(Key.payload)
                 val newEmployee = gson.fromJson(employeeData.toString(),Employee::class.java)
                 repository.employeeLiveData.postValue(newEmployee)
+            }
+        }
+    }
+
+    val onCreateEmployeeAttendance = Emitter.Listener {
+        if (it.isNotEmpty()) {
+            val jsonData = it.first() as JSONObject
+            if(jsonData.has(Key.payload)){
+                val attendanceData = jsonData.getJSONObject(Key.payload)
+                val newEmployeeAttendance = gson.fromJson(attendanceData.toString(),EmployeeAttendance::class.java)
+                repository.employeeAttendanceLiveData.postValue(newEmployeeAttendance)
+                viewModel?.insertAttendance(newEmployeeAttendance)
+                onCreateNewAttendance?.let { it1 -> it1(newEmployeeAttendance) }
             }
         }
     }

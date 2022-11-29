@@ -237,13 +237,20 @@ class CreateProductFragment : Fragment() {
             if(product!!.Image.isNotEmpty()){
                 picasso.load(product!!.Image.first()).into(imageView)
             }
-//            if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null){
-//                ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.forEach {
-//                    if(it.Id == product!!.SubCategoryID){
-//                        subCategoryEditText?.setText(it.Name)
-//                    }
-//                }
-//            }
+            if(ProductCategoryHandler.shared().repository.allCategory.value != null){
+                ProductCategoryHandler.shared().repository.allCategory.value!!.forEach {
+                    if(it.Id == product!!.CategoryID){
+                        categoryEditText?.setText(it.Name)
+                    }
+                }
+            }
+            if(ProductSubCategoryHandler.shared().repository.allSubCategory.value != null){
+                ProductSubCategoryHandler.shared().repository.allSubCategory.value!!.forEach {
+                    if(it.Id == product!!.SubCategoryID){
+                        subCategoryEditText?.setText(it.Name)
+                    }
+                }
+            }
         }
         if(selectedCategory != null){
             categoryEditText?.setText(selectedCategory?.Name)
@@ -510,7 +517,7 @@ class CreateProductFragment : Fragment() {
         request.put(Key.costPrice, (costPrice))
         request.put(Key.finalPrice, finalPrice)
         request.put(Key.tax, totalTax)
-        if(this.product != null){
+        if(this.product != null && !this.product!!.Id.isEmpty()){
             ProductHandler.shared().onUpdateExistingProductCallBack = {
                 onCreateNewProduct(it)
             }

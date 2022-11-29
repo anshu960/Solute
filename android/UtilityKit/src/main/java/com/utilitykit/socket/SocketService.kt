@@ -193,114 +193,13 @@ class SocketService : Service() {
         mSocket?.on(SocketEvent.RETRIVE_EMPLOYEE.value, EmployeeHandler.shared().onFetchAllEmployee)
         mSocket?.on(SocketEvent.FIND_USER.value, EmployeeHandler.shared().onFindUser)
         mSocket?.on(SocketEvent.CREATE_EMPLOYEE.value, EmployeeHandler.shared().onCreateEmployee)
+        mSocket?.on(SocketEvent.ADD_EMPLOYEE_ATTENDACE.value,EmployeeHandler.shared().onCreateEmployeeAttendance)
         //conenct the socket
         mSocket?.connect()
     }
 
     fun removeSocketEventListeners(){
-        mSocket?.off(Socket.EVENT_CONNECT)
-        mSocket?.off(Socket.EVENT_DISCONNECT)
-        mSocket?.off(Socket.EVENT_CONNECT_ERROR)
-        mSocket?.off(SocketEvent.joinRoom.value, joinRoom)
-        mSocket?.off(SocketEvent.getEncryptionKeys.value, encryptionKeyHandler)
-        mSocket?.off(SocketEvent.authenticate.value, onSocketEvent)
-        mSocket?.off(SocketEvent.findCustomerByMobile.value, onSocketEvent)
-        mSocket?.off(SocketEvent.updateProfile.value, onSocketEvent)
-        mSocket?.off(SocketEvent.getAllMessage.value, retriveMessage)
-        mSocket?.off(SocketEvent.onMessage.value, onMessage)
-        mSocket?.off(SocketEvent.messageReceived.value, messageReceived)
-        mSocket?.off(SocketEvent.messageRead.value, messageRead)
-        mSocket?.off(SocketEvent.typing.value, typing)
-        mSocket?.off(SocketEvent.previousChats.value, previousChats)
-        mSocket?.off(SocketEvent.newChats.value, newChats)
-        mSocket?.off(SocketEvent.updateDeliveryStatus.value, updateDeliveryStatus)
-        mSocket?.off(SocketEvent.updateReadStatus.value, updateReadStatus)
-        mSocket?.off(SocketEvent.findUsers.value, findUsers)
-        mSocket?.off(SocketEvent.createConversation.value, createConversation)
-        mSocket?.off(SocketEvent.getAllConversation.value, getAllConversation)
-        mSocket?.off(SocketEvent.findCompanyByName.value, findCompanyByName)
-        mSocket?.off(SocketEvent.findDesignationByName.value, findDesignationByName)
-        mSocket?.off(SocketEvent.findTechnologyByName.value, findTechnologyByName)
-        mSocket?.off(SocketEvent.createExperience.value, createExperience)
-        mSocket?.off(SocketEvent.getAllExperience.value, getAllExperience)
-        mSocket?.off(SocketEvent.createGroup.value, createConversation)
-        mSocket?.off(SocketEvent.updateGroup.value, eventHandler)
-        mSocket?.off(SocketEvent.updateGroupName.value, eventHandler)
-        mSocket?.off(SocketEvent.updateGroupDescription.value, eventHandler)
-        mSocket?.off(SocketEvent.updateGroupImage.value, eventHandler)
-        mSocket?.off(SocketEvent.deleteGroup.value, eventHandler)
-        mSocket?.off(SocketEvent.updateContacts.value, updateContacts)
-        mSocket?.off(SocketEvent.retriveContacts.value, retriveContacts)
-        mSocket?.off(SocketEvent.createTask.value, onSocketEvent)
-        mSocket?.off(SocketEvent.updateTask.value, onSocketEvent)
-        mSocket?.off(SocketEvent.getAllTask.value, onSocketEventArray)
-        mSocket?.off(SocketEvent.attachDocumentTask.value, onSocketEvent)
-        mSocket?.off(SocketEvent.onTaskMessage.value, onSocketEvent)
-        mSocket?.off(SocketEvent.getAllTaskMessage.value, onSocketEventArray)
-        mSocket?.off(SocketEvent.getAllAttachedDocumentTask.value, onSocketEventArray)
-        mSocket?.off(SocketEvent.updateTaskStatus.value, onSocketEvent)
-        mSocket?.off(SocketEvent.updateTaskPriority.value, onSocketEvent)
-        mSocket?.off(SocketEvent.updateTaskPriority.value, onSocketEvent)
-        //Solute
-        mSocket?.off(SocketEvent.RETRIVE_BUSINESS.value, BusinessHandler.shared().retriveBusiness)
-        mSocket?.off(
-            SocketEvent.RETRIVE_BUSINESS_TYPE.value,
-            BusinessTypeHandler.shared().retriveBusinessType
-        )
-        mSocket?.off(SocketEvent.CREATE_BUSINESS.value, BusinessHandler.shared().onCreateNewBusiness)
-        mSocket?.off(SocketEvent.RETRIVE_PRODUCT.value, ProductHandler.shared().retriveProduct)
-        mSocket?.off(SocketEvent.CREATE_PRODUCT.value, ProductHandler.shared().onCreateProduct)
-        mSocket?.off(
-            SocketEvent.UPDATE_PRODUCT_IMAGE.value,
-            ProductHandler.shared().onUpdateProductImage
-        )
-        mSocket?.off(SocketEvent.UPDATE_PRODUCT.value, ProductHandler.shared().onUpdateProduct)
-        mSocket?.off(SocketEvent.DELETE_PRODUCT.value, ProductHandler.shared().onDeleteProduct)
-        mSocket?.off(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
-        mSocket?.off(
-            SocketEvent.GENERATE_CUSTOMER_INVOICE.value,
-            CartHandler.shared().onCreateCustomerInvoice
-        )
-        mSocket?.off(SocketEvent.RETRIVE_INVOICE.value, InvoiceHandler.shared().retriveInvoice)
-        mSocket?.off(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)
-        mSocket?.off(SocketEvent.RETRIVE_SALES.value, InvoiceHandler.shared().retriveSales)
-        mSocket?.off(SocketEvent.CREATE_CUSTOMER.value, CustomerHandler.shared().onCreateCustomer)
-        mSocket?.off(SocketEvent.RETRIVE_CUSTOMER.value, CustomerHandler.shared().onFetchAllCustomer)
-        mSocket?.off(
-            SocketEvent.CREATE_PRODUCT_CATEGORY.value,
-            ProductCategoryHandler.shared().onCreateProductCategory
-        )
-        mSocket?.off(
-            SocketEvent.RETRIVE_PRODUCT_CATEGORY.value,
-            ProductCategoryHandler.shared().retriveProductCategory
-        )
-        mSocket?.off(
-            SocketEvent.CREATE_PRODUCT_SUB_CATEGORY.value,
-            ProductSubCategoryHandler.shared().onCreateProductSubCategory
-        )
-        mSocket?.off(
-            SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY.value,
-            ProductSubCategoryHandler.shared().retriveProductSubCategory
-        )
-        mSocket?.off(
-            SocketEvent.RETRIVE_ALL_STOCK_ENTRY.value,
-            SyncHandler.shared().onRetriveAllStockEntry
-        )
-        mSocket?.off(
-            SocketEvent.REMOVE_STOCK_QUANTITY.value,
-            ProductHandler.shared().onProductStockUpdate
-        )
-        mSocket?.off(
-            SocketEvent.ADD_STOCK_QUANTITY.value,
-            ProductHandler.shared().onProductStockUpdate
-        )
-        mSocket?.off(
-            SocketEvent.RESET_STOCK_QUANTITY.value,
-            ProductHandler.shared().onProductStockUpdate
-        )
-        mSocket?.off(SocketEvent.RETRIVE_EMPLOYEE.value, EmployeeHandler.shared().onFetchAllEmployee)
-        mSocket?.off(SocketEvent.FIND_USER.value, EmployeeHandler.shared().onFindUser)
-        mSocket?.off(SocketEvent.CREATE_EMPLOYEE.value, EmployeeHandler.shared().onCreateEmployee)
+        mSocket?.off()
     }
 
     fun verifyIfConnectedOrNot() {

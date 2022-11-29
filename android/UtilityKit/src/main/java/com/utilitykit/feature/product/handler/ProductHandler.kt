@@ -2,16 +2,12 @@ package com.utilitykit.feature.product.handler
 
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.product.repository.ProductRepository
 import com.utilitykit.feature.product.viewModel.ProductViewModel
 import com.utilitykit.feature.sync.SyncHandler
-import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
 import org.json.JSONObject
 
@@ -108,9 +104,9 @@ class ProductHandler {
                 val payload = anyData.getJSONObject(Key.payload)
                 if(payload.has(Key._id)){
                     val product = gson.fromJson(payload.toString(),Product::class.java)
-                    repository.newProductLiveData.postValue(product)
+                    viewModel?.insertProduct(product)
                     onUpdateExistingProductCallBack?.let { it1 -> it1(product) }
-                    viewModel?.fetchAllProduct()
+                    viewModel?.loadProduct()
                 }else{
                     onUpdateExistingProductCallBack?.let { it1 -> it1(null) }
                 }
@@ -128,9 +124,9 @@ class ProductHandler {
                 val payload = anyData.getJSONObject(Key.payload)
                 if(payload.has(Key._id)){
                     val product = gson.fromJson(payload.toString(),Product::class.java)
-                    repository.newProductLiveData.postValue(null)
+                    viewModel?.insertProduct(product)
                     onDeleteProductCallBack?.let { it1 -> it1(product) }
-                    viewModel?.fetchAllProduct()
+                    viewModel?.loadProduct()
                 }else{
                     onDeleteProductCallBack?.let { it1 -> it1(null) }
                 }

@@ -14,9 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
-import com.solute.ui.business.product.detail.ProductDetailActivity
+import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.product.detail.productStockDetails.adapter.ProductDetailStockAdapter
 import com.utilitykit.UtilityKitApp
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.sync.SyncHandler
@@ -45,13 +46,10 @@ class ProductStockDetailsFragment : Fragment() {
         resetQuantityBtn?.setOnClickListener { resetQuantity() }
         loadData()
         ProductHandler.shared().onUpdateProductCallBack={
-            if(context is ProductDetailActivity){
-                (context as ProductDetailActivity).runOnUiThread {
-                    if(it?.Id != null){
-                        Toast.makeText(this.context, "Stock Updated Successfully", Toast.LENGTH_SHORT).show()
-                    }
-                    loadData()
-                }
+            val activity = BusinessHandler.shared().activity as? BusinessActivity
+            activity?.runOnUiThread {
+                activity.toast("Stock Updated Successfully")
+                loadData()
             }
         }
         if(!ProductHandler.shared().repository.selectedProduct.value?.Id.isNullOrEmpty()){

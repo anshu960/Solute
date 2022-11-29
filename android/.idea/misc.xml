@@ -25,11 +25,13 @@
         <entry key="app/src/main/res/drawable/done.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/filter.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.1595" />
+        <entry key="app/src/main/res/drawable/info.xml" value="0.1685" />
         <entry key="app/src/main/res/drawable/print.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/product_default_img.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/progress.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/receipt.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/search.xml" value="0.1755" />
+        <entry key="app/src/main/res/drawable/selector_date_text_color.xml" value="0.1655" />
         <entry key="app/src/main/res/drawable/shopping_cart.xml" value="0.2255" />
         <entry key="app/src/main/res/drawable/striking_text.xml" value="0.1655" />
         <entry key="app/src/main/res/layout/activity_business.xml" value="0.13496376811594202" />
@@ -64,6 +66,8 @@
         <entry key="app/src/main/res/layout/fragment_create_customer.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_create_product.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_customers.xml" value="0.4188034188034188" />
+        <entry key="app/src/main/res/layout/fragment_employee_detail_attendance.xml" value="0.11752593128393723" />
+        <entry key="app/src/main/res/layout/fragment_employee_detail_container.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_employee_details.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_employee_info.xml" value="0.2852796692779099" />
         <entry key="app/src/main/res/layout/fragment_employee_list.xml" value="0.15070921985815602" />
@@ -73,6 +77,7 @@
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.14336372847011145" />
         <entry key="app/src/main/res/layout/fragment_product_category.xml" value="0.1716485507246377" />
         <entry key="app/src/main/res/layout/fragment_product_detail.xml" value="0.16802536231884058" />
+        <entry key="app/src/main/res/layout/fragment_product_detail_container.xml" value="0.1908917149753435" />
         <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.32573973743628104" />
         <entry key="app/src/main/res/layout/fragment_product_price_details.xml" value="0.3688184342002676" />
         <entry key="app/src/main/res/layout/fragment_product_stock_details.xml" value="0.20299346058081227" />

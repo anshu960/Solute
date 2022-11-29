@@ -81,6 +81,9 @@
         <item name="android:backgroundTint">#ffffff</item>
     </style>
 
-
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.Holo.Small">
+        <item name="android:textColor">@color/selectorDateTextColor</item>
+        <item name="android:weekNumberColor">@color/colorLightPurple</item>
+    </style>
 </resources>
 

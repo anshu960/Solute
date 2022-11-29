@@ -2,9 +2,12 @@ package com.solute.ui.business.product.detail
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,65 +17,47 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
-import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 
 
-class ProductDetailActivity : UtilityActivity() {
+class ProductDetailContainerFragment : Fragment() {
     val activity = BusinessHandler.shared().activity as? BusinessActivity
     var navHostFragment : NavHostFragment? = null
     var bottomNavigationView :  BottomNavigationView? = null
     var navController : NavController? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    var backButton : ImageButton? = null
-    var deleteButton : ImageButton? = null
+    var deleteButton : FloatingActionButton? = null
     var fabButton : FloatingActionButton? = null
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_detail)
-        backButton = findViewById(R.id.activity_product_details_header_back)
-        backButton?.setOnClickListener { onBackPressed() }
-        deleteButton = findViewById(R.id.activity_product_details_delete_btn)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_product_detail_container, container, false)
+        deleteButton = view.findViewById(R.id.activity_product_delete_fab)
         deleteButton?.setOnClickListener { onClickDeleteProduct() }
-        fabButton = findViewById(R.id.activity_product_details_fab)
-
-        navHostFragment = supportFragmentManager.findFragmentById(
-            R.id.activity_product_details_container
-        ) as NavHostFragment
-        navController = navHostFragment!!.navController
+        fabButton = view.findViewById(R.id.activity_product_details_fab)
+        navHostFragment = childFragmentManager.findFragmentById(R.id.activity_product_details_container) as NavHostFragment
+        navController = navHostFragment?.navController
         // Setup the bottom navigation view with navController
-        bottomNavigationView = findViewById<BottomNavigationView>(R.id.activity_product_details_menu)
+        bottomNavigationView = view.findViewById(R.id.activity_product_details_menu)
         bottomNavigationView?.setupWithNavController(navController!!)
         // Setup the ActionBar with navController and 3 top level destinations
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.product_details_menu_details,R.id.product_details_menu_price, R.id.product_details_menu_stock)
         )
-//        bottomNavigationView?.setOnNavigationItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.product_details_menu_details -> {
-//                    fabButton?.visibility = View.VISIBLE
-//                }
-//                R.id.product_details_menu_price -> {
-//                    fabButton?.visibility = View.VISIBLE
-//                }
-//                R.id.product_details_menu_stock -> {
-//                    fabButton?.visibility = View.GONE
-//                }
-//            }
-//            true
-//        }
         fabButton?.setOnClickListener { onClickEdit() }
+        return view
     }
-    override fun onSupportNavigateUp(): Boolean {
+
+    fun onSupportNavigateUp(): Boolean {
         return navController!!.navigateUp(appBarConfiguration)
     }
 
     fun onClickDeleteProduct(){
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(activity)
             .setMessage("Are you sure you want to delete ?")
             .setCancelable(false)
             .setPositiveButton("Yes",
@@ -91,9 +76,9 @@ class ProductDetailActivity : UtilityActivity() {
         if(ProductHandler.shared().repository.selectedProduct.value != null){
             ProductHandler.shared().onDeleteProductCallBack={
                 if(it != null){
-                    this.runOnUiThread {
-                        toastLong("Product Deleted Successfully");
-                        super.onBackPressed()
+                    activity?.runOnUiThread {
+                       activity?.toastLong("Product Deleted Successfully");
+                        activity?.onBackPressed()
                     }
                 }
             }

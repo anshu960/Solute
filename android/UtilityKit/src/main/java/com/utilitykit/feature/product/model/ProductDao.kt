@@ -20,12 +20,12 @@ interface ProductDao {
     @Query("select * from Product WHERE ProductID=:prodId order by UpdatedAt DESC")
     fun getForProduct( prodId: String?): LiveData<List<Product>>
 
-    @Query("select * from Product WHERE BusinessID=:businessId order by UpdatedAt DESC")
-    fun getProductsFor( businessId: String): LiveData<List<Product>>
+    @Query("select * from Product WHERE BusinessID=:businessId and IsDeleted=:IsDeleted order by UpdatedAt DESC")
+    fun getProductsFor( businessId: String,IsDeleted: Boolean =false): LiveData<List<Product>>
 
     @Query("select * from Product WHERE ProductID=:prodId order by UpdatedAt DESC LIMIT 1")
     fun getRecentForProduct( prodId: String?): LiveData<Product>
 
-    @Query("select * from Product order by UpdatedAt DESC")
-    fun getAllItems(): LiveData<List<Product>>
+    @Query("select * from Product WHERE IsDeleted=:IsDeleted order by UpdatedAt DESC")
+    fun getAllItems(IsDeleted: Boolean =false): LiveData<List<Product>>
 }

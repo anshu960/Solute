@@ -31,10 +31,6 @@ class ProductDetailsFragment : Fragment() {
     var productCategory : TextView? = null
     var productSubCategory : TextView? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +48,7 @@ class ProductDetailsFragment : Fragment() {
 
     fun loadData(){
         val picasso = Picasso.get()
-        if(ProductHandler.shared().repository.selectedProduct != null && ProductHandler.shared().repository.selectedProduct.value != null){
+        if(ProductHandler.shared().repository.selectedProduct.value != null){
             val product = ProductHandler.shared().repository.selectedProduct.value!!
             productName?.text = product.Name
             productDescription?.text = product.Description

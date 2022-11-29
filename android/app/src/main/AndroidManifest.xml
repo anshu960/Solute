@@ -25,10 +25,6 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="33">
         <activity
-            android:name=".ui.business.employee.details.EmployeeDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false" />
-        <activity
             android:name=".ui.network.ConnectingActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -44,10 +40,6 @@
             android:name=".ui.business.BusinessActivity"
             android:exported="false"
             android:label="@string/title_activity_business"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.business.product.detail.ProductDetailActivity"
-            android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.create.SelectBusinessTypeActivity"

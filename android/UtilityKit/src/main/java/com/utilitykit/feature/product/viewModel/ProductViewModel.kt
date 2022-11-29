@@ -32,12 +32,14 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
         get() = productRepository.selectedProduct
 
     fun loadProduct(){
-        productRepository.productLiveData.postValue(arrayListOf())
-        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business.value?.Id
-            UtilityKitApp.applicationContext().database.productDao().getProductsFor(businessId!!).observe(BusinessHandler.shared().activity){
-                if(!it.isNullOrEmpty()){
-                    productRepository.productLiveData.postValue(it as ArrayList<Product>)
+        BusinessHandler.shared().activity?.runOnUiThread {
+            productRepository.productLiveData.postValue(arrayListOf())
+            if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+                val businessId = BusinessHandler.shared().repository.business.value?.Id
+                UtilityKitApp.applicationContext().database.productDao().getProductsFor(businessId!!).observe(BusinessHandler.shared().activity){
+                    if(!it.isNullOrEmpty()){
+                        productRepository.productLiveData.postValue(it as ArrayList<Product>)
+                    }
                 }
             }
         }

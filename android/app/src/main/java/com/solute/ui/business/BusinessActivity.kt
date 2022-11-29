@@ -158,6 +158,7 @@ class BusinessActivity : UtilityActivity() {
             ProductSubCategoryViewModel::class.java
         )
         ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
+        productSubCategoryViewModel.loadSubCategory()
         //Sync Everything
         SyncHandler.shared().syncAllBusinessData()
     }

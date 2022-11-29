@@ -10,4 +10,9 @@
         android:name="com.solute.ui.business.employee.details.employeeInfo.EmployeeInfoFragment"
         android:label="@string/details"
         tools:layout="@layout/fragment_employee_info" />
+    <fragment
+        android:id="@+id/employee_details_menu_attendance"
+        android:name="com.solute.ui.business.employee.details.attendance.EmployeeDetailAttendanceFragment"
+        android:label="@string/attendance"
+        tools:layout="@layout/fragment_employee_detail_attendance" />
 </navigation>

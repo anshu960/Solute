@@ -26,8 +26,10 @@
 
     <string name="in_progress">In Progress</string>
     <string name="completed">Completed</string>
+    <string name="comment">Comment</string>
     <string name="pending">Pending</string>
     <string name="hold">On Hold</string>
+    <string name="hours">Hours</string>
     <string name="end">End</string>
     <string name="dropped">Dropped</string>
     <string name="deleted">Deleted</string>
@@ -59,6 +61,7 @@
     <string name="add_new_customer">Add New Customer</string>
     <string name="add_new_product">Add New Product</string>
     <string name="add_customer">Add Customer</string>
+    <string name="product_details">Product Details</string>
     <string name="select_category">Select Category</string>
     <string name="select_sub_category">Select Sub Category</string>
     <string name="barcode">Barcode</string>
@@ -75,6 +78,8 @@
     <string name="save">save</string>
     <string name="create">Create</string>
     <string name="details">Details</string>
+    <string name="attendance">Attendance</string>
+    <string name="present">Present</string>
     <string name="stock">Stock</string>
     <string name="price">Price</string>
     <string name="title_activity_product_detail">Product Details</string>

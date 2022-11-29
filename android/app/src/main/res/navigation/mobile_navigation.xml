@@ -87,5 +87,15 @@
         android:name="com.solute.ui.business.inventory.subCategory.select.SelectProductSubCategoryFragment"
         android:label="@string/select_sub_category"
         tools:layout="@layout/fragment_select_product_sub_category" />
+    <fragment
+        android:id="@+id/business_product_details_container"
+        android:name="com.solute.ui.business.product.detail.ProductDetailContainerFragment"
+        android:label="@string/product_details"
+        tools:layout="@layout/fragment_select_customer" />
+    <fragment
+        android:id="@+id/business_details_details_container"
+        android:name="com.solute.ui.business.employee.details.EmployeeDetailContainerFragment"
+        android:label="@string/employee"
+        tools:layout="@layout/fragment_employee_detail_container" />
 
 </navigation>

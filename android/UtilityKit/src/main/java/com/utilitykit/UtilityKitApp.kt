@@ -47,11 +47,11 @@ class UtilityKitApp :Application(){
         opts.forceNew = true
         opts.reconnection = false
         socketUrl = if(isDebug){
-//            Server.devHost
-            Server.prodDost
+            Server.devHost
+//            Server.prodDost
         }else{
-            Server.prodDost
-//            Server.devHost
+//            Server.prodDost
+            Server.devHost
         }
         try {
             mSocket = IO.socket(socketUrl,opts)

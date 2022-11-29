@@ -14,13 +14,17 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
-import com.solute.ui.business.product.detail.ProductDetailActivity
 import com.squareup.picasso.Picasso
+import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 
-class BusinessProductAdapter(val context: Context,val fragment: Fragment?,val allProduct: List<Product>) :
+class BusinessProductAdapter(
+    val context: Context,
+    val fragment: Fragment?,
+    val allProduct: List<Product>
+) :
     RecyclerView.Adapter<BusinessProductViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -34,16 +38,17 @@ class BusinessProductAdapter(val context: Context,val fragment: Fragment?,val al
 
     override fun onBindViewHolder(holder: BusinessProductViewHolder, position: Int) {
         val item = allProduct[position]
-        holder.bind(context,fragment,item)
+        holder.bind(context, fragment, item)
     }
 }
 
-class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
-    inflater.inflate(
-        R.layout.recycler_item_product_sale, parent, false
-    )
-) {
-    private var image : ImageView? = null
+class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+    RecyclerView.ViewHolder(
+        inflater.inflate(
+            R.layout.recycler_item_product_sale, parent, false
+        )
+    ) {
+    private var image: ImageView? = null
     private var productName: TextView? = null
     private var productDescription: TextView? = null
     private var productPrice: TextView? = null
@@ -54,9 +59,10 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
     private var addToCartBtn: ImageButton? = null
     private var increaseButton: ImageButton? = null
     private var decreaseButton: ImageButton? = null
-    private var productTax : TextView? = null
-    private var taxIncludedCheckBox : CheckBox? = null
-    private var taxLable : TextView? = null
+    private var productTax: TextView? = null
+    private var taxIncludedCheckBox: CheckBox? = null
+    private var taxLable: TextView? = null
+
     init {
         image = itemView.findViewById(R.id.recycler_item_product_image)
         productName = itemView.findViewById(R.id.recycler_item_product_name_txt)
@@ -70,33 +76,33 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         decreaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_remove_btn)
     }
 
-    fun bind(context: Context,fragment:Fragment?,product: Product) {
+    fun bind(context: Context, fragment: Fragment?, product: Product) {
         val picasso = Picasso.get()
-        if(product.Image.isNotEmpty()){
+        if (product.Image.isNotEmpty()) {
             picasso.load(product.Image.first()).into(image)
         }
         productName?.text = product.Name
         productDescription?.text = product.Description
         productPrice?.text = "₹ ${product.MRP}"
         val discount = discountToPercent(product)
-        if(discount != ""){
+        if (discount != "") {
             productDiscount?.visibility = View.VISIBLE
             productPrice?.visibility = View.VISIBLE
             productDiscount?.text = discount
-        }else{
+        } else {
             productPrice?.visibility = View.GONE
             productDiscount?.visibility = View.GONE
         }
         productFinalPrice?.text = "₹ ${product.FinalPrice}"
         stepperContainer?.visibility = View.GONE
 
-        if(product.Tax != null && product.Tax!! > 0){
+        if (product.Tax != null && product.Tax!! > 0) {
             productTax?.text = "₹ ${product.Tax}"
             taxIncludedCheckBox?.isChecked = product.TaxIncluded!!
             productTax?.visibility = View.VISIBLE
             taxIncludedCheckBox?.visibility = View.VISIBLE
             taxLable?.visibility = View.VISIBLE
-        }else{
+        } else {
             productTax?.visibility = View.GONE
             taxIncludedCheckBox?.visibility = View.GONE
             taxLable?.visibility = View.GONE
@@ -114,31 +120,31 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         increaseButton?.setOnClickListener { CartHandler.shared().addToCart(product) }
         decreaseButton?.setOnClickListener { CartHandler.shared().removeFromCart(product) }
         image?.setOnClickListener {
-//            throw NullPointerException()
-            if(context is BusinessActivity){
-                    val activity = context
-                    ProductHandler.shared().repository.selectedProductLiveData.postValue(product)
-                    val intent = Intent(activity, ProductDetailActivity::class.java)
-                    activity.startActivity(intent)
+            if (context is BusinessActivity) {
+                ProductHandler.shared().repository.selectedProductLiveData.postValue(product)
+                val activity = BusinessHandler.shared().activity as? BusinessActivity
+                activity?.navController?.navigate(R.id.business_product_details_container)
             }
         }
     }
-    fun updateQuanity(product:Product){
+
+    fun updateQuanity(product: Product) {
         val quanity = CartHandler.shared().viewModel?.getProductQuantity(product)
-        if(quanity != null &&  quanity>0){
+        if (quanity != null && quanity > 0) {
             stepperContainer?.visibility = View.VISIBLE
             addToCartBtn?.visibility = View.GONE
             productQuantity?.text = quanity.toString()
-        }else{
+        } else {
             stepperContainer?.visibility = View.GONE
             addToCartBtn?.visibility = View.VISIBLE
         }
     }
-    fun discountToPercent(product:Product):String{
+
+    fun discountToPercent(product: Product): String {
         var off = ""
-        if(product.Discount != null && product.Discount!! > 0 && product.MRP != null){
-            val perc = ((product.Discount!! / product.MRP!!)*100).toInt()
-            off= perc.toString() + "%Off"
+        if (product.Discount != null && product.Discount!! > 0 && product.MRP != null) {
+            val perc = ((product.Discount!! / product.MRP!!) * 100).toInt()
+            off = perc.toString() + "%Off"
         }
         return off
     }

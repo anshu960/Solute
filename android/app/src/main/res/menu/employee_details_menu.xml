@@ -4,4 +4,8 @@
         android:id="@+id/employee_details_menu_info"
         android:icon="@drawable/info"
         android:title="@string/details" />
+    <item
+        android:id="@+id/employee_details_menu_attendance"
+        android:icon="@drawable/calender"
+        android:title="@string/attendance" />
 </menu>
