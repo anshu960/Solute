@@ -24,6 +24,10 @@
     <color name="delete">#C73535</color>
     <color name="pending">#F17105</color>
     <color name="completed">#639043</color>
+    <color name="green">#639043</color>
+    <color name="present">#54ed47</color>
+    <color name="absent">#c2c8c1</color>
+
     <color name="in_progress">#0822A7</color>
     <color name="hold">#C73535</color>
     <color name="dropped">#6655C0</color>
@@ -56,8 +60,5 @@
     <color name="stepper_background">#F1F3F5</color>
     <color name="selectorDateTextColor">#F1F3F5</color>
     <color name="colorLightPurple">#F1F3F5</color>
-
-
-
 
 </resources>

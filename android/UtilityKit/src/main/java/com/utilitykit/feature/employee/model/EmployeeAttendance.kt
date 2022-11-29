@@ -14,7 +14,7 @@ data class EmployeeAttendance(
     @ColumnInfo(name = "BusinessID") @SerializedName("BusinessID") var BusinessID: String? = null,
     @ColumnInfo(name = "IsDeleted") @SerializedName("IsDeleted") var IsDeleted: Boolean? = null,
     @ColumnInfo(name = "IsApproved") @SerializedName("IsApproved") var IsApproved: Boolean? = null,
-    @ColumnInfo(name = "IsPresent") @SerializedName("IsPresent") var Address: Boolean? = null,
+    @ColumnInfo(name = "IsPresent") @SerializedName("IsPresent") var IsPresent: Boolean? = null,
     @ColumnInfo(name = "Hours") @SerializedName("Hours") var Hours: Int? = null,
     @ColumnInfo(name = "Comment") @SerializedName("Comment") var Comment: String? = null,
     @ColumnInfo(name = "AttendanceDate") @SerializedName("AttendanceDate") var AttendanceDate: String? = null,

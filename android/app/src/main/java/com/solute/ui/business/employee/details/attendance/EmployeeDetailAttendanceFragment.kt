@@ -9,8 +9,10 @@ import android.widget.Button
 import android.widget.Switch
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.solute.R
+import com.solute.ui.CurrentDayDecorator
 import com.solute.ui.business.BusinessActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.employee.handler.EmployeeHandler
@@ -50,13 +52,19 @@ class EmployeeDetailAttendanceFragment : Fragment() {
         calenderView?.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
             onCalenderSwap()
         }
+        calenderView?.setOnMonthChangedListener { widget, date ->
+            activity?.toast("Start ${date}  ${calenderView?.selectedDate}")
+        }
         return view
     }
 
     fun onCalenderSwap(){
-
-//        activity?.toast("Start ${calenderView?.minDate}  ${calenderView?.maxDate?.days}")
-
+        addDecorator()
+    }
+    fun addDecorator(){
+        val mydate= CalendarDay.from(2022,  12, 31) // year, month, date
+        val decorator = CurrentDayDecorator(activity, mydate)
+        calenderView?.addDecorator(decorator)
     }
 
     fun onClickSave(){

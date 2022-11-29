@@ -21,11 +21,16 @@
         <entry key="app/src/main/res/drawable/baseline_phone_iphone.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/business_card.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/business_card_background.xml" value="0.175" />
+        <entry key="app/src/main/res/drawable/calender_dot_absent.xml" value="0.148" />
+        <entry key="app/src/main/res/drawable/calender_dot_present.xml" value="0.148" />
         <entry key="app/src/main/res/drawable/call.xml" value="0.1755" />
+        <entry key="app/src/main/res/drawable/circle.xml" value="0.148" />
+        <entry key="app/src/main/res/drawable/circle_blue.xml" value="0.148" />
         <entry key="app/src/main/res/drawable/done.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/filter.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/info.xml" value="0.1685" />
+        <entry key="app/src/main/res/drawable/present_dot.xml" value="0.148" />
         <entry key="app/src/main/res/drawable/print.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/product_default_img.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/progress.xml" value="0.1595" />
