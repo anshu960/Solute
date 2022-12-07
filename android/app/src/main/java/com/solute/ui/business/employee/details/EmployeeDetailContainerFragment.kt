@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solute.R
+import com.utilitykit.feature.employee.handler.EmployeeHandler
 
 class EmployeeDetailContainerFragment : Fragment() {
     var navHostFragment : NavHostFragment? = null
@@ -31,6 +32,11 @@ class EmployeeDetailContainerFragment : Fragment() {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.employee_details_menu_info)
         )
+        EmployeeHandler.shared().viewModel?.employee?.value?.let {
+            EmployeeHandler.shared().viewModel?.loadAttendanceFor(
+                it
+            )
+        }
         return view
     }
 }

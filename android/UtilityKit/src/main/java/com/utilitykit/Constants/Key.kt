@@ -35,6 +35,7 @@ class Key {
         val employeeUserID = "EmployeeUserID"
         val employeeID = "EmployeeID"
         val attendanceDate = "AttendanceDate"
+        val isPresent = "IsPresent"
 
         val userId = "UserID"
         var businessID = "BusinessID"

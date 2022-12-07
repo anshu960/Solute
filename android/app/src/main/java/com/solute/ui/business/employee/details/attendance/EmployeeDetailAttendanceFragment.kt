@@ -9,13 +9,13 @@ import android.widget.Button
 import android.widget.Switch
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
-import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.solute.R
 import com.solute.ui.CurrentDayDecorator
 import com.solute.ui.business.BusinessActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.employee.handler.EmployeeHandler
+import java.util.*
 
 
 /**
@@ -50,26 +50,27 @@ class EmployeeDetailAttendanceFragment : Fragment() {
         }
         calenderView?.keepScreenOn = true
         calenderView?.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
-            onCalenderSwap()
+
         }
         calenderView?.setOnMonthChangedListener { widget, date ->
             activity?.toast("Start ${date}  ${calenderView?.selectedDate}")
         }
+        val decorator = CurrentDayDecorator(activity)
+        decorator.isPresent = {dateStr:String->checkIfPresent(dateStr)}
+        calenderView?.addDecorator(decorator)
+
         return view
     }
 
-    fun onCalenderSwap(){
-        addDecorator()
-    }
-    fun addDecorator(){
-        val mydate= CalendarDay.from(2022,  12, 31) // year, month, date
-        val decorator = CurrentDayDecorator(activity, mydate)
-        calenderView?.addDecorator(decorator)
+    fun checkIfPresent(dateStr:String): Boolean? {
+        return EmployeeHandler.shared().viewModel?.isPresent(dateStr,employee!!)
     }
 
     fun onClickSave(){
+        var date = ""
+        date = calenderView?.selectedDate?.date.toString()
         var hoursSpent = 0F
-        val isPresent = presentSwitch!!.isActivated
+        val isPresent = presentSwitch!!.isChecked
         if(hours?.text.isNullOrEmpty() && presentSwitch?.isActivated == false){
             activity?.toast("Pleased enter hours spent and you have marked present")
             return
@@ -88,7 +89,7 @@ class EmployeeDetailAttendanceFragment : Fragment() {
                     }
                 }
             }
-            EmployeeHandler.shared().viewModel?.createNewAttendance(employee,calenderView!!.selectedDate.toString(),hoursSpent,comment)
+            EmployeeHandler.shared().viewModel?.createNewAttendance(employee,isPresent,date,hoursSpent,comment)
         }
     }
 

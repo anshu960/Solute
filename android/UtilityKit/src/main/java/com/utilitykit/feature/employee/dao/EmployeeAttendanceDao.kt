@@ -2,6 +2,8 @@ package com.utilitykit.feature.employee.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.utilitykit.feature.customer.model.Customer
+import com.utilitykit.feature.employee.model.Employee
 import com.utilitykit.feature.employee.model.EmployeeAttendance
 
 @Dao
@@ -17,6 +19,12 @@ interface EmployeeAttendanceDao {
 
     @Query("delete from EmployeeAttendance")
     fun clearAll()
+
+    @Query("select * from EmployeeAttendance where EmployeeID = :id AND AttendanceDate = :date order by UpdatedAt DESC LIMIT 1")
+    fun findAttendance(id: String,date:String): EmployeeAttendance
+
+    @Query("select * from EmployeeAttendance where EmployeeID = :id order by UpdatedAt DESC")
+    fun getAllItemsFor(id: String): LiveData<List<EmployeeAttendance>>
 
     @Query("select * from EmployeeAttendance order by UpdatedAt DESC")
     fun getAllItems(): LiveData<List<EmployeeAttendance>>

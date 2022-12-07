@@ -12,8 +12,8 @@ android {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 65
-        versionName "0.0.65"
+        versionCode 67
+        versionName "0.0.67"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -97,5 +97,6 @@ dependencies {
     implementation 'com.github.shuhart:stepview:1.5.1'
     implementation 'xyz.schwaab:avvylib:1.2.0'
     //Third party
-    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
 }

@@ -3,249 +3,295 @@ package com.utilitykit.invoice
 class InvoiceTemplate {
     companion object{
         val htmlTemplate = """
-       <html>
-    <head>
-   
-    <link rel = "stylesheet" href =  
-"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />  
-        <style>
-             body{
-    margin-top:20px;
-    background:#eee;
-}
-.qr-code {  
-   max-width: 200px;  
-   margin: 10px;  
-   }  
-   body {  
- background-color: #ffffff;  
- justify-content: center;  
- font-family: 'VT323', monospace;  
- font-size: 1.5rem;  
-color: black;  
- margin: 0px;  
-  text-align: center;   
-}  
-.invoice {
-    background: #fff;
-    padding: 20px
-}
+       <!DOCTYPE html>
+<html lang="en">
 
-.invoice-company {
-    font-size: 20px
-}
+<head>
+    <meta charset="utf-8">
+    <title>company invoice - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 
-.invoice-header {
-    margin: 0 -20px;
-    background: #f0f3f4;
-    padding: 20px
-}
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <div class="page-content container">
+        <div class="page-header text-blue-d2">
+            <h1 class="page-title text-secondary-d1">
+                Invoice
+                <small class="page-info">
+                    <i class="fa fa-angle-double-right text-80"></i>
+                    ###InvoiceNumber
+                </small>
+            </h1>
+        </div>
+        <div class="container px-0">
+            <div class="row mt-4">
+                <div class="col-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fsolute.app%2F%23%2Freceipt%3Fid%3D###InvoiceNumber&chs=160x160&chld=L|0"
+                                class="qr-code img-thumbnail img-responsive" />
+                        </div>
+                        <div class="col-sm-3">
+                            <div>
+                                <span class="text-sm text-grey-m2 align-middle">From:</span>
+                                <span class="text-600 text-110 text-blue align-middle">###BusinessName</span>
+                            </div>
+                            <div class="text-grey-m2">
+                                <div class="my-1">
+                                    ###BusinessAddress
+                                </div>
+                                <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b
+                                        class="text-600">###BusinessMobile</b></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div>
+                                <span class="text-sm text-grey-m2 align-middle">To:</span>
+                                <span class="text-600 text-110 text-blue align-middle">###CustomerName</span>
+                            </div>
+                            <div class="text-grey-m2">
+                                <div class="my-1">
+                                    ###CustomerAddress
+                                </div>
+                                <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b
+                                        class="text-600">###CustomerMobile</b></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <hr class="d-sm-none" />
+                            <div class="text-grey-m2">
+                                <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
+                                    Invoice
+                                </div>
 
-.invoice-date,
-.invoice-from,
-.invoice-to {
-    display: table-cell;
-    width: 1%
-}
+                                <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
+                                        class="text-600 text-90">ID:</span> ###InvoiceNumber</div>
 
-.invoice-from,
-.invoice-to {
-    padding-right: 20px
-}
+                                <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
+                                        class="text-600 text-90">Issue Date:</span> ###InvoiceDate</div>
 
-.invoice-date .date,
-.invoice-from strong,
-.invoice-to strong {
-    font-size: 16px;
-    font-weight: 600
-}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
+                            <thead class="bg-none bgc-default-tp1">
+                                <tr class="text-white">
+                                    <th>Description</th>
+                                    <th>MRP</th>
+                                    <th>Tax</th>
+                                    <th width="140">Quantity</th>
+                                    <th> Final Price</th>
+                                </tr>
+                            </thead>
 
-.invoice-date {
-    text-align: right;
-    padding-left: 20px
-}
+                            <tbody class="text-95 text-secondary-d3">
+                                ###SalesData
 
-.invoice-price {
-    background: #f0f3f4;
-    display: table;
-    width: 100%;
-    margin: top 20%;
-}
-
-.invoice-price .invoice-price-left,
-.invoice-price .invoice-price-right {
-    display: table-cell;
-    padding: 20px;
-    font-size: 20px;
-    font-weight: 600;
-    width: 75%;
-    position: relative;
-    vertical-align: middle
-}
-
-.invoice-price .invoice-price-left .sub-price {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0 20px
-}
-
-.invoice-price small {
-    font-size: 12px;
-    font-weight: 400;
-    display: block
-}
-
-.invoice-price .invoice-price-row {
-    display: table;
-    float: left
-}
-
-.invoice-price .invoice-price-right {
-    width: 25%;
-    background: #2d353c;
-    color: #fff;
-    font-size: 28px;
-    text-align: right;
-    vertical-align: bottom;
-    font-weight: 300
-}
-
-.invoice-price .invoice-price-right small {
-    display: block;
-    opacity: .6;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 12px
-}
-
-.invoice-footer {
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-    font-size: 10px
-}
-
-.invoice-note {
-    color: #999;
-    margin-top: 80px;
-    font-size: 85%
-}
-
-.invoice>div:not(.invoice-footer) {
-    margin-bottom: 20px
-}
-
-.text-body-center {
-	text-align: center;
-}
-
-.btn.btn-white, .btn.btn-white.disabled, .btn.btn-white.disabled:focus, .btn.btn-white.disabled:hover, .btn.btn-white[disabled], .btn.btn-white[disabled]:focus, .btn.btn-white[disabled]:hover {
-    color: #2d353c;
-    background: #fff;
-    border-color: #d9dfe3;
-}
-        </style>
-    </head>
-    <body>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-  
-   <div class="col-md-12">
-      <div class="invoice">
-      
-         <!-- end invoice-company -->
-         <!-- begin invoice-header -->
-         <div class="invoice-header">
-         <div class="invoice-from">
-         <img src =  
-"https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fsolute.app%2F%23%2Freceipt%3Fid%3D###InvoiceNumber&chs=160x160&chld=L|0"  
-        class = "qr-code img-thumbnail img-responsive" />
-         </div>
-         
-            <div class="invoice-from">
-               <small>from</small>
-               <address class="m-t-5 m-b-5">
-                  <strong class="text-inverse">###BusinessName</strong><br>
-                  Address : ###BusinessAddress<br>
-                  Mobile : ###BusinessMobile<br>
-               </address>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
+                            Note : Items once sold won't be replaced
+                        </div>
+                        <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
+                            <div class="row my-2">
+                                <div class="col-7 text-right">
+                                    SubTotal
+                                </div>
+                                <div class="col-5">
+                                    <span class="text-120 text-secondary-d1">###SubTotal</span>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-7 text-right">
+                                    Tax
+                                </div>
+                                <div class="col-5">
+                                    <span class="text-110 text-secondary-d1">###Tax</span>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-7 text-right">
+                                    Instant Discount
+                                </div>
+                                <div class="col-5">
+                                    <span class="text-110 text-secondary-d1">###InstantDiscount</span>
+                                </div>
+                            </div>
+                            <div class="row my-2 align-items-center bgc-primary-l3 p-2">
+                                <div class="col-7 text-right">
+                                    Total Amount
+                                </div>
+                                <div class="col-5">
+                                    <span class="text-150 text-success-d3 opacity-2">###FinalPrice</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <span class="text-secondary-d1 text-105">Thank you for your business</span>
+                    </div>
+                </div>
             </div>
-            <div class="invoice-to">
-               <small>to</small>
-               <address class="m-t-5 m-b-5">
-                  <strong class="text-inverse">###CustomerName</strong><br>
-                Address : ###CustomerAddress<br>
-                  ###CustomerMobile<br>
-               </address>
-            </div>
-            <div class="invoice-date">
-               <div class="invoice-detail">
-                  Invoice Number ###InvoiceNumber
-                  <br>
-               </div>
-               <small>Invoice Date</small>
-               <div class="date text-inverse m-t-5">###InvoiceDate</div>
-            </div>
-         </div>
-         <!-- end invoice-header -->
-         <!-- begin invoice-content -->
-          <div class="invoice-content">
-            <!-- begin table-responsive -->
-            <div class="table-responsive">
-               <table class="table table-invoice">
-                  <thead>
-                     <tr>
-                        <th class="text-center" width="20%">Items</th>
-                        <th class="text-center" width="40%">Unit Price</th>
-                        <th class="text-center" width="20%">Tax</th>
-                        <th class="text-right" width="20%">Quantity</th>
-                        <th class="text-right" width="20%">Total</th>
-                     </tr>
-                  </thead>
-                  <tbody class="text-body-center">
-                     ###SalesData
-                  </tbody>
-               </table>
-            </div>
-            <!-- end table-responsive -->
-            <!-- begin invoice-price -->
-            <div class="invoice-price">
-               <div class="invoice-price-left">
-                  <div class="invoice-price-row">
-                     <div class="sub-price">
-                        <small>SUBTOTAL</small>
-                        <span class="text-inverse">###SubTotal</span>
-                     </div>
-                     <div class="sub-price">
-                        <i class="fa fa-plus text-muted"></i>
-                     </div>
-                     <div class="sub-price">
-                        <small>Tax</small>
-                        <span class="text-inverse">###Tax</span>
-                     </div>
-                     <div class="sub-price">
-                        <i class="fa fa-minus text-muted"></i>
-                     </div>
-                      <div class="sub-price">
-                        <small>Instant Discount</small>
-                        <span class="text-inverse">###InstantDiscount</span>
-                     </div>
-                  </div>
-               </div>
-               <div class="invoice-price-right">
-                  <small>TOTAL</small> <span class="f-w-600">###FinalPrice</span>
-               </div>
-            </div>
-            <!-- end invoice-price -->
-         </div>
-      </div>
-   </div>
-</div>
+        </div>
+    </div>
+    </div>
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+            color: #484b51;
+        }
 
-<script src =  
-    "https://code.jquery.com/jquery-3.5.1.js">  
-</script>  
-    </body>
+        .text-secondary-d1 {
+            color: #728299 !important;
+        }
+
+        .page-header {
+            margin: 0 0 1rem;
+            padding-bottom: 1rem;
+            padding-top: .5rem;
+            border-bottom: 1px dotted #e2e2e2;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .page-title {
+            padding: 0;
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 300;
+        }
+
+        .brc-default-l1 {
+            border-color: #dce9f0 !important;
+        }
+
+        .ml-n1,
+        .mx-n1 {
+            margin-left: -.25rem !important;
+        }
+
+        .mr-n1,
+        .mx-n1 {
+            margin-right: -.25rem !important;
+        }
+
+        .mb-4,
+        .my-4 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        hr {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+        }
+
+        .text-grey-m2 {
+            color: #888a8d !important;
+        }
+
+        .text-success-m2 {
+            color: #86bd68 !important;
+        }
+
+        .font-bolder,
+        .text-600 {
+            font-weight: 600 !important;
+        }
+
+        .text-110 {
+            font-size: 110% !important;
+        }
+
+        .text-blue {
+            color: #478fcc !important;
+        }
+
+        .pb-25,
+        .py-25 {
+            padding-bottom: .75rem !important;
+        }
+
+        .pt-25,
+        .py-25 {
+            padding-top: .75rem !important;
+        }
+
+        .bgc-default-tp1 {
+            background-color: rgba(121, 169, 197, .92) !important;
+        }
+
+        .bgc-default-l4,
+        .bgc-h-default-l4:hover {
+            background-color: #f3f8fa !important;
+        }
+
+        .page-header .page-tools {
+            -ms-flex-item-align: end;
+            align-self: flex-end;
+        }
+
+        .btn-light {
+            color: #757984;
+            background-color: #f5f6f9;
+            border-color: #dddfe4;
+        }
+
+        .w-2 {
+            width: 1rem;
+        }
+
+        .text-120 {
+            font-size: 120% !important;
+        }
+
+        .text-primary-m1 {
+            color: #4087d4 !important;
+        }
+
+        .text-danger-m1 {
+            color: #dd4949 !important;
+        }
+
+        .text-blue-m2 {
+            color: #68a3d5 !important;
+        }
+
+        .text-150 {
+            font-size: 150% !important;
+        }
+
+        .text-60 {
+            font-size: 60% !important;
+        }
+
+        .text-grey-m1 {
+            color: #7b7d81 !important;
+        }
+
+        .align-bottom {
+            vertical-align: bottom !important;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+    </script>
+</body>
+
 </html>
         """
     }
