@@ -1,0 +1,6 @@
+framework module Pods_Solute_SoluteUITests {
+  umbrella header "Pods-Solute-SoluteUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

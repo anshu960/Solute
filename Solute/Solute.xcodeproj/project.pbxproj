@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2051969470DF8F14D5C2A7E6 /* Pods_Solute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E9E1FE8CE0490DFAFE8E38 /* Pods_Solute.framework */; };
+		4A079D6D2940A0D70014B9B9 /* OnBaordingNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D6C2940A0D70014B9B9 /* OnBaordingNavigation.swift */; };
+		4A079D6E2940A0D70014B9B9 /* OnBaordingNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D6C2940A0D70014B9B9 /* OnBaordingNavigation.swift */; };
+		4A079D6F2940A0D70014B9B9 /* OnBaordingNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D6C2940A0D70014B9B9 /* OnBaordingNavigation.swift */; };
+		4A079D712940A31B0014B9B9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D702940A31B0014B9B9 /* LoginView.swift */; };
+		4A079D722940A31B0014B9B9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D702940A31B0014B9B9 /* LoginView.swift */; };
+		4A079D732940A31B0014B9B9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D702940A31B0014B9B9 /* LoginView.swift */; };
+		4A079D752940A3310014B9B9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D742940A3310014B9B9 /* RegisterView.swift */; };
+		4A079D762940A3310014B9B9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D742940A3310014B9B9 /* RegisterView.swift */; };
+		4A079D772940A3310014B9B9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D742940A3310014B9B9 /* RegisterView.swift */; };
+		4A079D7A2940A35D0014B9B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D792940A35D0014B9B9 /* HomeView.swift */; };
+		4A079D7B2940A35D0014B9B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D792940A35D0014B9B9 /* HomeView.swift */; };
+		4A079D7C2940A35D0014B9B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D792940A35D0014B9B9 /* HomeView.swift */; };
+		4A26E08629473BBE00B3266D /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E08329473BBE00B3266D /* OTPView.swift */; };
 		4A8CBA9C29406DE60071BEDC /* SoluteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBA9B29406DE60071BEDC /* SoluteApp.swift */; };
 		4A8CBA9E29406DE60071BEDC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBA9D29406DE60071BEDC /* Persistence.swift */; };
 		4A8CBAA129406DE60071BEDC /* Solute.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBA9F29406DE60071BEDC /* Solute.xcdatamodeld */; };
@@ -16,6 +30,163 @@
 		4A8CBAB329406DE80071BEDC /* SoluteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBAB229406DE80071BEDC /* SoluteTests.swift */; };
 		4A8CBABD29406DE80071BEDC /* SoluteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBABC29406DE80071BEDC /* SoluteUITests.swift */; };
 		4A8CBABF29406DE80071BEDC /* SoluteUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBABE29406DE80071BEDC /* SoluteUITestsLaunchTests.swift */; };
+		4A8CBAD229406F030071BEDC /* Solute_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBAD129406F030071BEDC /* Solute_WatchApp.swift */; };
+		4A8CBAD429406F040071BEDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBAD329406F040071BEDC /* ContentView.swift */; };
+		4A8CBAD629406F050071BEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8CBAD529406F050071BEDC /* Assets.xcassets */; };
+		4A8CBAD929406F050071BEDC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8CBAD829406F050071BEDC /* Preview Assets.xcassets */; };
+		4A8CBAE329406F060071BEDC /* Solute_Watch_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBAE229406F060071BEDC /* Solute_Watch_Watch_AppTests.swift */; };
+		4A8CBAED29406F060071BEDC /* Solute_Watch_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBAEC29406F060071BEDC /* Solute_Watch_Watch_AppUITests.swift */; };
+		4A8CBAEF29406F060071BEDC /* Solute_Watch_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBAEE29406F060071BEDC /* Solute_Watch_Watch_AppUITestsLaunchTests.swift */; };
+		4A8CBAF229406F060071BEDC /* Solute Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4A8CBACF29406F030071BEDC /* Solute Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4A8CBB0629406F730071BEDC /* Solte_Framework.docc in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB0529406F720071BEDC /* Solte_Framework.docc */; };
+		4A8CBB0C29406F730071BEDC /* Solte_Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8CBB0229406F720071BEDC /* Solte_Framework.framework */; };
+		4A8CBB1329406F730071BEDC /* Solte_FrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB1229406F730071BEDC /* Solte_FrameworkTests.swift */; };
+		4A8CBB1429406F730071BEDC /* Solte_Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A8CBB0429406F720071BEDC /* Solte_Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A8CBB1729406F730071BEDC /* Solte_Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8CBB0229406F720071BEDC /* Solte_Framework.framework */; };
+		4A8CBB1829406F730071BEDC /* Solte_Framework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8CBB0229406F720071BEDC /* Solte_Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A8CBB282940755D0071BEDC /* BharatBandhuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB272940755D0071BEDC /* BharatBandhuApp.swift */; };
+		4A8CBB2A2940755D0071BEDC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB292940755D0071BEDC /* Persistence.swift */; };
+		4A8CBB2D2940755D0071BEDC /* BharatBandhu.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB2B2940755D0071BEDC /* BharatBandhu.xcdatamodeld */; };
+		4A8CBB2F2940755D0071BEDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB2E2940755D0071BEDC /* ContentView.swift */; };
+		4A8CBB31294075600071BEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8CBB30294075600071BEDC /* Assets.xcassets */; };
+		4A8CBB35294075600071BEDC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8CBB34294075600071BEDC /* Preview Assets.xcassets */; };
+		4A8CBB3F294075610071BEDC /* BharatBandhuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB3E294075610071BEDC /* BharatBandhuTests.swift */; };
+		4A8CBB49294075610071BEDC /* BharatBandhuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB48294075610071BEDC /* BharatBandhuUITests.swift */; };
+		4A8CBB4B294075610071BEDC /* BharatBandhuUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB4A294075610071BEDC /* BharatBandhuUITestsLaunchTests.swift */; };
+		4A8CBB58294089DD0071BEDC /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB57294089DD0071BEDC /* SocketService.swift */; };
+		4A8CBB59294089DD0071BEDC /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB57294089DD0071BEDC /* SocketService.swift */; };
+		4A8CBB5A294089DD0071BEDC /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB57294089DD0071BEDC /* SocketService.swift */; };
+		4A8CBB5C29408AA60071BEDC /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB5B29408AA60071BEDC /* Server.swift */; };
+		4A8CBB5D29408AA60071BEDC /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB5B29408AA60071BEDC /* Server.swift */; };
+		4A8CBB5E29408AA60071BEDC /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB5B29408AA60071BEDC /* Server.swift */; };
+		4A8CBB6129408D510071BEDC /* SocketServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB6029408D510071BEDC /* SocketServiceDelegate.swift */; };
+		4A8CBB6229408D510071BEDC /* SocketServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB6029408D510071BEDC /* SocketServiceDelegate.swift */; };
+		4A8CBB6329408D510071BEDC /* SocketServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB6029408D510071BEDC /* SocketServiceDelegate.swift */; };
+		4A8CBB6529408DCA0071BEDC /* SocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB6429408DCA0071BEDC /* SocketEvent.swift */; };
+		4A8CBB6629408DCA0071BEDC /* SocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB6429408DCA0071BEDC /* SocketEvent.swift */; };
+		4A8CBB6729408DCA0071BEDC /* SocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBB6429408DCA0071BEDC /* SocketEvent.swift */; };
+		4A9E18262940FCE400AB003A /* InputFieldMobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18252940FCE400AB003A /* InputFieldMobile.swift */; };
+		4A9E18272940FCE400AB003A /* InputFieldMobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18252940FCE400AB003A /* InputFieldMobile.swift */; };
+		4A9E18282940FCE400AB003A /* InputFieldMobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18252940FCE400AB003A /* InputFieldMobile.swift */; };
+		4A9E182A2941187800AB003A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18292941187700AB003A /* GoogleService-Info.plist */; };
+		4A9E182D29411B7000AB003A /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E182C29411B7000AB003A /* AuthenticationViewModel.swift */; };
+		4A9E182E29411B7000AB003A /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E182C29411B7000AB003A /* AuthenticationViewModel.swift */; };
+		4A9E182F29411B7000AB003A /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E182C29411B7000AB003A /* AuthenticationViewModel.swift */; };
+		4A9E183229411DD100AB003A /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183129411DD100AB003A /* CountryCodes.swift */; };
+		4A9E183329411DD100AB003A /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183129411DD100AB003A /* CountryCodes.swift */; };
+		4A9E183429411DD100AB003A /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183129411DD100AB003A /* CountryCodes.swift */; };
+		4A9E183729411E8700AB003A /* MobileDialCodePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183629411E8700AB003A /* MobileDialCodePicker.swift */; };
+		4A9E183829411E8700AB003A /* MobileDialCodePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183629411E8700AB003A /* MobileDialCodePicker.swift */; };
+		4A9E183929411E8700AB003A /* MobileDialCodePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183629411E8700AB003A /* MobileDialCodePicker.swift */; };
+		4A9E183D2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183A2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift */; };
+		4A9E183E2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183A2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift */; };
+		4A9E183F2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183A2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift */; };
+		4A9E18402941B5B400AB003A /* iPhoneNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183B2941B5B400AB003A /* iPhoneNumberField.swift */; };
+		4A9E18412941B5B400AB003A /* iPhoneNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183B2941B5B400AB003A /* iPhoneNumberField.swift */; };
+		4A9E18422941B5B400AB003A /* iPhoneNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183B2941B5B400AB003A /* iPhoneNumberField.swift */; };
+		4A9E18432941B5B400AB003A /* UIFont+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183C2941B5B400AB003A /* UIFont+Init.swift */; };
+		4A9E18442941B5B400AB003A /* UIFont+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183C2941B5B400AB003A /* UIFont+Init.swift */; };
+		4A9E18452941B5B400AB003A /* UIFont+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E183C2941B5B400AB003A /* UIFont+Init.swift */; };
+		4A9E18612941B7F000AB003A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18472941B7F000AB003A /* Constants.swift */; };
+		4A9E18622941B7F000AB003A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18472941B7F000AB003A /* Constants.swift */; };
+		4A9E18632941B7F000AB003A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18472941B7F000AB003A /* Constants.swift */; };
+		4A9E18642941B7F000AB003A /* CountryCodePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18492941B7F000AB003A /* CountryCodePickerViewController.swift */; };
+		4A9E18652941B7F000AB003A /* CountryCodePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18492941B7F000AB003A /* CountryCodePickerViewController.swift */; };
+		4A9E18662941B7F000AB003A /* CountryCodePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18492941B7F000AB003A /* CountryCodePickerViewController.swift */; };
+		4A9E18672941B7F000AB003A /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184A2941B7F000AB003A /* PhoneNumberTextField.swift */; };
+		4A9E18682941B7F000AB003A /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184A2941B7F000AB003A /* PhoneNumberTextField.swift */; };
+		4A9E18692941B7F000AB003A /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184A2941B7F000AB003A /* PhoneNumberTextField.swift */; };
+		4A9E186A2941B7F000AB003A /* Bundle+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184B2941B7F000AB003A /* Bundle+Resources.swift */; };
+		4A9E186B2941B7F000AB003A /* Bundle+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184B2941B7F000AB003A /* Bundle+Resources.swift */; };
+		4A9E186C2941B7F000AB003A /* Bundle+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184B2941B7F000AB003A /* Bundle+Resources.swift */; };
+		4A9E186D2941B7F000AB003A /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184C2941B7F000AB003A /* PhoneNumber.swift */; };
+		4A9E186E2941B7F000AB003A /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184C2941B7F000AB003A /* PhoneNumber.swift */; };
+		4A9E186F2941B7F000AB003A /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184C2941B7F000AB003A /* PhoneNumber.swift */; };
+		4A9E18702941B7F100AB003A /* RegexManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184D2941B7F000AB003A /* RegexManager.swift */; };
+		4A9E18712941B7F100AB003A /* RegexManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184D2941B7F000AB003A /* RegexManager.swift */; };
+		4A9E18722941B7F100AB003A /* RegexManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184D2941B7F000AB003A /* RegexManager.swift */; };
+		4A9E18732941B7F100AB003A /* MetadataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184E2941B7F000AB003A /* MetadataTypes.swift */; };
+		4A9E18742941B7F100AB003A /* MetadataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184E2941B7F000AB003A /* MetadataTypes.swift */; };
+		4A9E18752941B7F100AB003A /* MetadataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184E2941B7F000AB003A /* MetadataTypes.swift */; };
+		4A9E18762941B7F100AB003A /* MetadataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184F2941B7F000AB003A /* MetadataParsing.swift */; };
+		4A9E18772941B7F100AB003A /* MetadataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184F2941B7F000AB003A /* MetadataParsing.swift */; };
+		4A9E18782941B7F100AB003A /* MetadataParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E184F2941B7F000AB003A /* MetadataParsing.swift */; };
+		4A9E18792941B7F100AB003A /* ParseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18502941B7F000AB003A /* ParseManager.swift */; };
+		4A9E187A2941B7F100AB003A /* ParseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18502941B7F000AB003A /* ParseManager.swift */; };
+		4A9E187B2941B7F100AB003A /* ParseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18502941B7F000AB003A /* ParseManager.swift */; };
+		4A9E187C2941B7F100AB003A /* PhoneNumberMetadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18532941B7F000AB003A /* PhoneNumberMetadata.xml */; };
+		4A9E187D2941B7F100AB003A /* PhoneNumberMetadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18532941B7F000AB003A /* PhoneNumberMetadata.xml */; };
+		4A9E187E2941B7F100AB003A /* PhoneNumberMetadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18532941B7F000AB003A /* PhoneNumberMetadata.xml */; };
+		4A9E187F2941B7F100AB003A /* PhoneNumberMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18542941B7F000AB003A /* PhoneNumberMetadata.json */; };
+		4A9E18802941B7F100AB003A /* PhoneNumberMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18542941B7F000AB003A /* PhoneNumberMetadata.json */; };
+		4A9E18812941B7F100AB003A /* PhoneNumberMetadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18542941B7F000AB003A /* PhoneNumberMetadata.json */; };
+		4A9E18822941B7F100AB003A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18552941B7F000AB003A /* README.md */; };
+		4A9E18832941B7F100AB003A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18552941B7F000AB003A /* README.md */; };
+		4A9E18842941B7F100AB003A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18552941B7F000AB003A /* README.md */; };
+		4A9E18852941B7F100AB003A /* update.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18562941B7F000AB003A /* update.sh */; };
+		4A9E18862941B7F100AB003A /* update.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18562941B7F000AB003A /* update.sh */; };
+		4A9E18872941B7F100AB003A /* update.sh in Resources */ = {isa = PBXBuildFile; fileRef = 4A9E18562941B7F000AB003A /* update.sh */; };
+		4A9E18882941B7F100AB003A /* NSRegularExpression+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18582941B7F000AB003A /* NSRegularExpression+Swift.swift */; };
+		4A9E18892941B7F100AB003A /* NSRegularExpression+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18582941B7F000AB003A /* NSRegularExpression+Swift.swift */; };
+		4A9E188A2941B7F100AB003A /* NSRegularExpression+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18582941B7F000AB003A /* NSRegularExpression+Swift.swift */; };
+		4A9E188B2941B7F100AB003A /* PhoneNumber+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18592941B7F000AB003A /* PhoneNumber+Codable.swift */; };
+		4A9E188C2941B7F100AB003A /* PhoneNumber+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18592941B7F000AB003A /* PhoneNumber+Codable.swift */; };
+		4A9E188D2941B7F100AB003A /* PhoneNumber+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18592941B7F000AB003A /* PhoneNumber+Codable.swift */; };
+		4A9E188E2941B7F100AB003A /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185A2941B7F000AB003A /* Formatter.swift */; };
+		4A9E188F2941B7F100AB003A /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185A2941B7F000AB003A /* Formatter.swift */; };
+		4A9E18902941B7F100AB003A /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185A2941B7F000AB003A /* Formatter.swift */; };
+		4A9E18912941B7F100AB003A /* MetadataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185B2941B7F000AB003A /* MetadataManager.swift */; };
+		4A9E18922941B7F100AB003A /* MetadataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185B2941B7F000AB003A /* MetadataManager.swift */; };
+		4A9E18932941B7F100AB003A /* MetadataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185B2941B7F000AB003A /* MetadataManager.swift */; };
+		4A9E18942941B7F100AB003A /* PartialFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185C2941B7F000AB003A /* PartialFormatter.swift */; };
+		4A9E18952941B7F100AB003A /* PartialFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185C2941B7F000AB003A /* PartialFormatter.swift */; };
+		4A9E18962941B7F100AB003A /* PartialFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185C2941B7F000AB003A /* PartialFormatter.swift */; };
+		4A9E18972941B7F100AB003A /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185D2941B7F000AB003A /* PhoneNumberFormatter.swift */; };
+		4A9E18982941B7F100AB003A /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185D2941B7F000AB003A /* PhoneNumberFormatter.swift */; };
+		4A9E18992941B7F100AB003A /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185D2941B7F000AB003A /* PhoneNumberFormatter.swift */; };
+		4A9E189A2941B7F100AB003A /* PhoneNumberKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185E2941B7F000AB003A /* PhoneNumberKit.swift */; };
+		4A9E189B2941B7F100AB003A /* PhoneNumberKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185E2941B7F000AB003A /* PhoneNumberKit.swift */; };
+		4A9E189C2941B7F100AB003A /* PhoneNumberKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E185E2941B7F000AB003A /* PhoneNumberKit.swift */; };
+		4A9E18A02941B7F100AB003A /* PhoneNumberParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18602941B7F000AB003A /* PhoneNumberParser.swift */; };
+		4A9E18A12941B7F100AB003A /* PhoneNumberParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18602941B7F000AB003A /* PhoneNumberParser.swift */; };
+		4A9E18A22941B7F100AB003A /* PhoneNumberParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18602941B7F000AB003A /* PhoneNumberParser.swift */; };
+		4A9E18A52941D33000AB003A /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18A42941D33000AB003A /* SubmitButton.swift */; };
+		4A9E18A62941D33000AB003A /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18A42941D33000AB003A /* SubmitButton.swift */; };
+		4A9E18A72941D33000AB003A /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18A42941D33000AB003A /* SubmitButton.swift */; };
+		4A9E18AB2941D7A800AB003A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18A82941D7A800AB003A /* AppDelegate.swift */; };
+		4A9E18AF2942412500AB003A /* InputFieldOTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18AE2942412500AB003A /* InputFieldOTP.swift */; };
+		4A9E18B02942412500AB003A /* InputFieldOTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18AE2942412500AB003A /* InputFieldOTP.swift */; };
+		4A9E18B12942412500AB003A /* InputFieldOTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18AE2942412500AB003A /* InputFieldOTP.swift */; };
+		4A9E18B32942413E00AB003A /* OTPInputFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18B22942413E00AB003A /* OTPInputFieldViewModel.swift */; };
+		4A9E18B42942413E00AB003A /* OTPInputFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18B22942413E00AB003A /* OTPInputFieldViewModel.swift */; };
+		4A9E18B52942413E00AB003A /* OTPInputFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18B22942413E00AB003A /* OTPInputFieldViewModel.swift */; };
+		4A9E18B7294245AB00AB003A /* PinSttackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18B6294245AB00AB003A /* PinSttackView.swift */; };
+		4A9E18B8294245AB00AB003A /* PinSttackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18B6294245AB00AB003A /* PinSttackView.swift */; };
+		4A9E18B9294245AB00AB003A /* PinSttackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18B6294245AB00AB003A /* PinSttackView.swift */; };
+		4A9E18BB294247AF00AB003A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18BA294247AF00AB003A /* PhoneViewModel.swift */; };
+		4A9E18BC294247AF00AB003A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18BA294247AF00AB003A /* PhoneViewModel.swift */; };
+		4A9E18BD294247AF00AB003A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E18BA294247AF00AB003A /* PhoneViewModel.swift */; };
+		4AC53D3C29452B8800A67DAB /* SoluteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D3B29452B8800A67DAB /* SoluteConstants.swift */; };
+		4AC53D3D29452B8800A67DAB /* SoluteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D3B29452B8800A67DAB /* SoluteConstants.swift */; };
+		4AC53D3E29452B8800A67DAB /* SoluteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D3B29452B8800A67DAB /* SoluteConstants.swift */; };
+		4AC53D4129452BB800A67DAB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4029452BB800A67DAB /* Keys.swift */; };
+		4AC53D4229452BB800A67DAB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4029452BB800A67DAB /* Keys.swift */; };
+		4AC53D4329452BB800A67DAB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4029452BB800A67DAB /* Keys.swift */; };
+		4AC53D4529452C3B00A67DAB /* AuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4429452C3B00A67DAB /* AuthenticationHandler.swift */; };
+		4AC53D4629452C3B00A67DAB /* AuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4429452C3B00A67DAB /* AuthenticationHandler.swift */; };
+		4AC53D4729452C3B00A67DAB /* AuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4429452C3B00A67DAB /* AuthenticationHandler.swift */; };
+		4AC53D4929452D8E00A67DAB /* AutenticationSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4829452D8E00A67DAB /* AutenticationSocketEvent.swift */; };
+		4AC53D4A29452D8E00A67DAB /* AutenticationSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4829452D8E00A67DAB /* AutenticationSocketEvent.swift */; };
+		4AC53D4B29452D8E00A67DAB /* AutenticationSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4829452D8E00A67DAB /* AutenticationSocketEvent.swift */; };
+		4AC53D4E2947207500A67DAB /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4D2947207500A67DAB /* LaunchView.swift */; };
+		4AC53D4F2947207500A67DAB /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4D2947207500A67DAB /* LaunchView.swift */; };
+		4AC53D502947207500A67DAB /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D4D2947207500A67DAB /* LaunchView.swift */; };
+		4AC53D522947260A00A67DAB /* PasscodeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D512947260A00A67DAB /* PasscodeField.swift */; };
+		4AC53D532947260A00A67DAB /* PasscodeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D512947260A00A67DAB /* PasscodeField.swift */; };
+		4AC53D542947260A00A67DAB /* PasscodeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC53D512947260A00A67DAB /* PasscodeField.swift */; };
+		C6B8290351DEC553AD08A047 /* Pods_Solute_SoluteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A407CF7F5C72E964C14137FD /* Pods_Solute_SoluteUITests.framework */; };
+		EAF9BF5B40FE66BF576DBEC6 /* Pods_BharatBandhu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF74F8B5E8D29579DA95797E /* Pods_BharatBandhu.framework */; };
+		FB07E95524C36D068F33894E /* Pods_SoluteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20DE86E1BD1BF1FDF19B40B0 /* Pods_SoluteTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +204,99 @@
 			remoteGlobalIDString = 4A8CBA9729406DE60071BEDC;
 			remoteInfo = Solute;
 		};
+		4A8CBADF29406F050071BEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A8CBA9029406DE60071BEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8CBACE29406F030071BEDC;
+			remoteInfo = "Solute Watch Watch App";
+		};
+		4A8CBAE929406F060071BEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A8CBA9029406DE60071BEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8CBACE29406F030071BEDC;
+			remoteInfo = "Solute Watch Watch App";
+		};
+		4A8CBAF029406F060071BEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A8CBA9029406DE60071BEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8CBACE29406F030071BEDC;
+			remoteInfo = "Solute Watch Watch App";
+		};
+		4A8CBB0D29406F730071BEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A8CBA9029406DE60071BEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8CBB0129406F720071BEDC;
+			remoteInfo = "Solte Framework";
+		};
+		4A8CBB0F29406F730071BEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A8CBA9029406DE60071BEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8CBA9729406DE60071BEDC;
+			remoteInfo = Solute;
+		};
+		4A8CBB1529406F730071BEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A8CBA9029406DE60071BEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8CBB0129406F720071BEDC;
+			remoteInfo = "Solte Framework";
+		};
+		4A8CBB3B294075600071BEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A8CBA9029406DE60071BEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8CBB242940755D0071BEDC;
+			remoteInfo = BharatBandhu;
+		};
+		4A8CBB45294075610071BEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A8CBA9029406DE60071BEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A8CBB242940755D0071BEDC;
+			remoteInfo = BharatBandhu;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4A8CBAF329406F060071BEDC /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				4A8CBAF229406F060071BEDC /* Solute Watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB1C29406F730071BEDC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4A8CBB1829406F730071BEDC /* Solte_Framework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		20DE86E1BD1BF1FDF19B40B0 /* Pods_SoluteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoluteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		273E42E913E06C3CFD40969A /* Pods-Solute-SoluteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Solute-SoluteUITests.release.xcconfig"; path = "Target Support Files/Pods-Solute-SoluteUITests/Pods-Solute-SoluteUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2934D7FA7511D7F27DE11303 /* Pods-Solute.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Solute.debug.xcconfig"; path = "Target Support Files/Pods-Solute/Pods-Solute.debug.xcconfig"; sourceTree = "<group>"; };
+		3D59CBDC73BAABEB378ABC63 /* Pods-Solute.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Solute.release.xcconfig"; path = "Target Support Files/Pods-Solute/Pods-Solute.release.xcconfig"; sourceTree = "<group>"; };
+		4A079D6C2940A0D70014B9B9 /* OnBaordingNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBaordingNavigation.swift; sourceTree = "<group>"; };
+		4A079D702940A31B0014B9B9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4A079D742940A3310014B9B9 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		4A079D792940A35D0014B9B9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4A26E08329473BBE00B3266D /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		4A8CBA9829406DE60071BEDC /* Solute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Solute.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8CBA9B29406DE60071BEDC /* SoluteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoluteApp.swift; sourceTree = "<group>"; };
 		4A8CBA9D29406DE60071BEDC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -49,6 +310,89 @@
 		4A8CBAB829406DE80071BEDC /* SoluteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoluteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8CBABC29406DE80071BEDC /* SoluteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoluteUITests.swift; sourceTree = "<group>"; };
 		4A8CBABE29406DE80071BEDC /* SoluteUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoluteUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4A8CBACF29406F030071BEDC /* Solute Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Solute Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8CBAD129406F030071BEDC /* Solute_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solute_WatchApp.swift; sourceTree = "<group>"; };
+		4A8CBAD329406F040071BEDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4A8CBAD529406F050071BEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4A8CBAD829406F050071BEDC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4A8CBADE29406F050071BEDC /* Solute Watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solute Watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8CBAE229406F060071BEDC /* Solute_Watch_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solute_Watch_Watch_AppTests.swift; sourceTree = "<group>"; };
+		4A8CBAE829406F060071BEDC /* Solute Watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solute Watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8CBAEC29406F060071BEDC /* Solute_Watch_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solute_Watch_Watch_AppUITests.swift; sourceTree = "<group>"; };
+		4A8CBAEE29406F060071BEDC /* Solute_Watch_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solute_Watch_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4A8CBB0229406F720071BEDC /* Solte_Framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Solte_Framework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8CBB0429406F720071BEDC /* Solte_Framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Solte_Framework.h; sourceTree = "<group>"; };
+		4A8CBB0529406F720071BEDC /* Solte_Framework.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Solte_Framework.docc; sourceTree = "<group>"; };
+		4A8CBB0B29406F730071BEDC /* Solte FrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solte FrameworkTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8CBB1229406F730071BEDC /* Solte_FrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solte_FrameworkTests.swift; sourceTree = "<group>"; };
+		4A8CBB252940755D0071BEDC /* BharatBandhu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BharatBandhu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8CBB272940755D0071BEDC /* BharatBandhuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatBandhuApp.swift; sourceTree = "<group>"; };
+		4A8CBB292940755D0071BEDC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		4A8CBB2C2940755D0071BEDC /* BharatBandhu.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BharatBandhu.xcdatamodel; sourceTree = "<group>"; };
+		4A8CBB2E2940755D0071BEDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4A8CBB30294075600071BEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4A8CBB32294075600071BEDC /* BharatBandhu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BharatBandhu.entitlements; sourceTree = "<group>"; };
+		4A8CBB34294075600071BEDC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4A8CBB3A294075600071BEDC /* BharatBandhuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BharatBandhuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8CBB3E294075610071BEDC /* BharatBandhuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatBandhuTests.swift; sourceTree = "<group>"; };
+		4A8CBB44294075610071BEDC /* BharatBandhuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BharatBandhuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8CBB48294075610071BEDC /* BharatBandhuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatBandhuUITests.swift; sourceTree = "<group>"; };
+		4A8CBB4A294075610071BEDC /* BharatBandhuUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatBandhuUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4A8CBB57294089DD0071BEDC /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		4A8CBB5B29408AA60071BEDC /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		4A8CBB6029408D510071BEDC /* SocketServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketServiceDelegate.swift; sourceTree = "<group>"; };
+		4A8CBB6429408DCA0071BEDC /* SocketEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEvent.swift; sourceTree = "<group>"; };
+		4A9E18212940C45000AB003A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4A9E18252940FCE400AB003A /* InputFieldMobile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldMobile.swift; sourceTree = "<group>"; };
+		4A9E18292941187700AB003A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A9E182C29411B7000AB003A /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		4A9E183129411DD100AB003A /* CountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodes.swift; sourceTree = "<group>"; };
+		4A9E183629411E8700AB003A /* MobileDialCodePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDialCodePicker.swift; sourceTree = "<group>"; };
+		4A9E183A2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "iPhoneNumberField+ViewModifiers.swift"; sourceTree = "<group>"; };
+		4A9E183B2941B5B400AB003A /* iPhoneNumberField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhoneNumberField.swift; sourceTree = "<group>"; };
+		4A9E183C2941B5B400AB003A /* UIFont+Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Init.swift"; sourceTree = "<group>"; };
+		4A9E18472941B7F000AB003A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4A9E18492941B7F000AB003A /* CountryCodePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodePickerViewController.swift; sourceTree = "<group>"; };
+		4A9E184A2941B7F000AB003A /* PhoneNumberTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextField.swift; sourceTree = "<group>"; };
+		4A9E184B2941B7F000AB003A /* Bundle+Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Resources.swift"; sourceTree = "<group>"; };
+		4A9E184C2941B7F000AB003A /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
+		4A9E184D2941B7F000AB003A /* RegexManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexManager.swift; sourceTree = "<group>"; };
+		4A9E184E2941B7F000AB003A /* MetadataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataTypes.swift; sourceTree = "<group>"; };
+		4A9E184F2941B7F000AB003A /* MetadataParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataParsing.swift; sourceTree = "<group>"; };
+		4A9E18502941B7F000AB003A /* ParseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseManager.swift; sourceTree = "<group>"; };
+		4A9E18532941B7F000AB003A /* PhoneNumberMetadata.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PhoneNumberMetadata.xml; sourceTree = "<group>"; };
+		4A9E18542941B7F000AB003A /* PhoneNumberMetadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PhoneNumberMetadata.json; sourceTree = "<group>"; };
+		4A9E18552941B7F000AB003A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4A9E18562941B7F000AB003A /* update.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = update.sh; sourceTree = "<group>"; };
+		4A9E18572941B7F000AB003A /* PhoneNumberKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberKit.h; sourceTree = "<group>"; };
+		4A9E18582941B7F000AB003A /* NSRegularExpression+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression+Swift.swift"; sourceTree = "<group>"; };
+		4A9E18592941B7F000AB003A /* PhoneNumber+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhoneNumber+Codable.swift"; sourceTree = "<group>"; };
+		4A9E185A2941B7F000AB003A /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		4A9E185B2941B7F000AB003A /* MetadataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataManager.swift; sourceTree = "<group>"; };
+		4A9E185C2941B7F000AB003A /* PartialFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialFormatter.swift; sourceTree = "<group>"; };
+		4A9E185D2941B7F000AB003A /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
+		4A9E185E2941B7F000AB003A /* PhoneNumberKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberKit.swift; sourceTree = "<group>"; };
+		4A9E18602941B7F000AB003A /* PhoneNumberParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberParser.swift; sourceTree = "<group>"; };
+		4A9E18A42941D33000AB003A /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
+		4A9E18A82941D7A800AB003A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4A9E18AE2942412500AB003A /* InputFieldOTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldOTP.swift; sourceTree = "<group>"; };
+		4A9E18B22942413E00AB003A /* OTPInputFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPInputFieldViewModel.swift; sourceTree = "<group>"; };
+		4A9E18B6294245AB00AB003A /* PinSttackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinSttackView.swift; sourceTree = "<group>"; };
+		4A9E18BA294247AF00AB003A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
+		4AC53D3B29452B8800A67DAB /* SoluteConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoluteConstants.swift; sourceTree = "<group>"; };
+		4AC53D4029452BB800A67DAB /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		4AC53D4429452C3B00A67DAB /* AuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHandler.swift; sourceTree = "<group>"; };
+		4AC53D4829452D8E00A67DAB /* AutenticationSocketEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutenticationSocketEvent.swift; sourceTree = "<group>"; };
+		4AC53D4D2947207500A67DAB /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		4AC53D512947260A00A67DAB /* PasscodeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeField.swift; sourceTree = "<group>"; };
+		4C686DD8FA677F9DEAB10582 /* Pods-SoluteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoluteTests.debug.xcconfig"; path = "Target Support Files/Pods-SoluteTests/Pods-SoluteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6B4CAD295832D0A96A2B659F /* Pods-BharatBandhu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BharatBandhu.release.xcconfig"; path = "Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu.release.xcconfig"; sourceTree = "<group>"; };
+		705B7A0F10AAF2D1A465A0AD /* Pods-BharatBandhu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BharatBandhu.debug.xcconfig"; path = "Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu.debug.xcconfig"; sourceTree = "<group>"; };
+		79E9E1FE8CE0490DFAFE8E38 /* Pods_Solute.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Solute.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9595C14B33CE44CCFFB9E08C /* Pods-Solute-SoluteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Solute-SoluteUITests.debug.xcconfig"; path = "Target Support Files/Pods-Solute-SoluteUITests/Pods-Solute-SoluteUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A407CF7F5C72E964C14137FD /* Pods_Solute_SoluteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Solute_SoluteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3C76CD3B1E24BA71CE0B154 /* Pods-SoluteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoluteTests.release.xcconfig"; path = "Target Support Files/Pods-SoluteTests/Pods-SoluteTests.release.xcconfig"; sourceTree = "<group>"; };
+		FF74F8B5E8D29579DA95797E /* Pods_BharatBandhu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BharatBandhu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +400,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2051969470DF8F14D5C2A7E6 /* Pods_Solute.framework in Frameworks */,
+				4A8CBB1729406F730071BEDC /* Solte_Framework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,10 +409,70 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB07E95524C36D068F33894E /* Pods_SoluteTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4A8CBAB529406DE80071BEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6B8290351DEC553AD08A047 /* Pods_Solute_SoluteUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBACC29406F030071BEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBADB29406F050071BEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBAE529406F060071BEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBAFF29406F720071BEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB0829406F730071BEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8CBB0C29406F730071BEDC /* Solte_Framework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB222940755D0071BEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF9BF5B40FE66BF576DBEC6 /* Pods_BharatBandhu.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB37294075600071BEDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB41294075610071BEDC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,13 +482,118 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		333911A80564B3B21076AA6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				79E9E1FE8CE0490DFAFE8E38 /* Pods_Solute.framework */,
+				A407CF7F5C72E964C14137FD /* Pods_Solute_SoluteUITests.framework */,
+				20DE86E1BD1BF1FDF19B40B0 /* Pods_SoluteTests.framework */,
+				FF74F8B5E8D29579DA95797E /* Pods_BharatBandhu.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C9C958CAF952FF1A83287EA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2934D7FA7511D7F27DE11303 /* Pods-Solute.debug.xcconfig */,
+				3D59CBDC73BAABEB378ABC63 /* Pods-Solute.release.xcconfig */,
+				9595C14B33CE44CCFFB9E08C /* Pods-Solute-SoluteUITests.debug.xcconfig */,
+				273E42E913E06C3CFD40969A /* Pods-Solute-SoluteUITests.release.xcconfig */,
+				4C686DD8FA677F9DEAB10582 /* Pods-SoluteTests.debug.xcconfig */,
+				C3C76CD3B1E24BA71CE0B154 /* Pods-SoluteTests.release.xcconfig */,
+				705B7A0F10AAF2D1A465A0AD /* Pods-BharatBandhu.debug.xcconfig */,
+				6B4CAD295832D0A96A2B659F /* Pods-BharatBandhu.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4A079D6029409F970014B9B9 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				4A079D782940A34D0014B9B9 /* Home */,
+				4A079D682940A01A0014B9B9 /* OnBoarding */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		4A079D6129409FA60014B9B9 /* NavigationContainer */ = {
+			isa = PBXGroup;
+			children = (
+				4A079D6B2940A0B30014B9B9 /* OnBaordingContainer */,
+			);
+			path = NavigationContainer;
+			sourceTree = "<group>";
+		};
+		4A079D682940A01A0014B9B9 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				4A26E08229473BA500B3266D /* OtpView */,
+				4AC53D4C2947206000A67DAB /* Launch */,
+				4A079D6A2940A0800014B9B9 /* Register */,
+				4A079D692940A0790014B9B9 /* Login */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		4A079D692940A0790014B9B9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4A079D702940A31B0014B9B9 /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		4A079D6A2940A0800014B9B9 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				4A079D742940A3310014B9B9 /* RegisterView.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		4A079D6B2940A0B30014B9B9 /* OnBaordingContainer */ = {
+			isa = PBXGroup;
+			children = (
+				4A079D6C2940A0D70014B9B9 /* OnBaordingNavigation.swift */,
+			);
+			path = OnBaordingContainer;
+			sourceTree = "<group>";
+		};
+		4A079D782940A34D0014B9B9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4A079D792940A35D0014B9B9 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4A26E08229473BA500B3266D /* OtpView */ = {
+			isa = PBXGroup;
+			children = (
+				4A26E08329473BBE00B3266D /* OTPView.swift */,
+			);
+			path = OtpView;
+			sourceTree = "<group>";
+		};
 		4A8CBA8F29406DE60071BEDC = {
 			isa = PBXGroup;
 			children = (
+				4A8CBB55294089B30071BEDC /* Shared */,
 				4A8CBA9A29406DE60071BEDC /* Solute */,
 				4A8CBAB129406DE80071BEDC /* SoluteTests */,
 				4A8CBABB29406DE80071BEDC /* SoluteUITests */,
+				4A8CBAD029406F030071BEDC /* Solute Watch Watch App */,
+				4A8CBAE129406F060071BEDC /* Solute Watch Watch AppTests */,
+				4A8CBAEB29406F060071BEDC /* Solute Watch Watch AppUITests */,
+				4A8CBB0329406F720071BEDC /* Solte Framework */,
+				4A8CBB1129406F730071BEDC /* Solte FrameworkTests */,
+				4A8CBB262940755D0071BEDC /* BharatBandhu */,
+				4A8CBB3D294075610071BEDC /* BharatBandhuTests */,
+				4A8CBB47294075610071BEDC /* BharatBandhuUITests */,
 				4A8CBA9929406DE60071BEDC /* Products */,
+				3C9C958CAF952FF1A83287EA /* Pods */,
+				333911A80564B3B21076AA6C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +603,14 @@
 				4A8CBA9829406DE60071BEDC /* Solute.app */,
 				4A8CBAAE29406DE80071BEDC /* SoluteTests.xctest */,
 				4A8CBAB829406DE80071BEDC /* SoluteUITests.xctest */,
+				4A8CBACF29406F030071BEDC /* Solute Watch Watch App.app */,
+				4A8CBADE29406F050071BEDC /* Solute Watch Watch AppTests.xctest */,
+				4A8CBAE829406F060071BEDC /* Solute Watch Watch AppUITests.xctest */,
+				4A8CBB0229406F720071BEDC /* Solte_Framework.framework */,
+				4A8CBB0B29406F730071BEDC /* Solte FrameworkTests.xctest */,
+				4A8CBB252940755D0071BEDC /* BharatBandhu.app */,
+				4A8CBB3A294075600071BEDC /* BharatBandhuTests.xctest */,
+				4A8CBB44294075610071BEDC /* BharatBandhuUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +619,7 @@
 			isa = PBXGroup;
 			children = (
 				4A8CBA9B29406DE60071BEDC /* SoluteApp.swift */,
+				4A8CBB2029406FA10071BEDC /* Shared */,
 				4A8CBA9D29406DE60071BEDC /* Persistence.swift */,
 				4A8CBAA229406DE60071BEDC /* ContentView.swift */,
 				4A8CBAA429406DE70071BEDC /* Assets.xcassets */,
@@ -135,20 +655,319 @@
 			path = SoluteUITests;
 			sourceTree = "<group>";
 		};
+		4A8CBAD029406F030071BEDC /* Solute Watch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBAD129406F030071BEDC /* Solute_WatchApp.swift */,
+				4A8CBAD329406F040071BEDC /* ContentView.swift */,
+				4A8CBAD529406F050071BEDC /* Assets.xcassets */,
+				4A8CBAD729406F050071BEDC /* Preview Content */,
+			);
+			path = "Solute Watch Watch App";
+			sourceTree = "<group>";
+		};
+		4A8CBAD729406F050071BEDC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBAD829406F050071BEDC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4A8CBAE129406F060071BEDC /* Solute Watch Watch AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBAE229406F060071BEDC /* Solute_Watch_Watch_AppTests.swift */,
+			);
+			path = "Solute Watch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		4A8CBAEB29406F060071BEDC /* Solute Watch Watch AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBAEC29406F060071BEDC /* Solute_Watch_Watch_AppUITests.swift */,
+				4A8CBAEE29406F060071BEDC /* Solute_Watch_Watch_AppUITestsLaunchTests.swift */,
+			);
+			path = "Solute Watch Watch AppUITests";
+			sourceTree = "<group>";
+		};
+		4A8CBB0329406F720071BEDC /* Solte Framework */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBB0429406F720071BEDC /* Solte_Framework.h */,
+				4A8CBB0529406F720071BEDC /* Solte_Framework.docc */,
+			);
+			path = "Solte Framework";
+			sourceTree = "<group>";
+		};
+		4A8CBB1129406F730071BEDC /* Solte FrameworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBB1229406F730071BEDC /* Solte_FrameworkTests.swift */,
+			);
+			path = "Solte FrameworkTests";
+			sourceTree = "<group>";
+		};
+		4A8CBB2029406FA10071BEDC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		4A8CBB262940755D0071BEDC /* BharatBandhu */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18212940C45000AB003A /* Info.plist */,
+				4A9E18292941187700AB003A /* GoogleService-Info.plist */,
+				4A8CBB272940755D0071BEDC /* BharatBandhuApp.swift */,
+				4A8CBB292940755D0071BEDC /* Persistence.swift */,
+				4A079D6029409F970014B9B9 /* Features */,
+				4A8CBB2E2940755D0071BEDC /* ContentView.swift */,
+				4A079D6129409FA60014B9B9 /* NavigationContainer */,
+				4A8CBB30294075600071BEDC /* Assets.xcassets */,
+				4A8CBB32294075600071BEDC /* BharatBandhu.entitlements */,
+				4A9E18A82941D7A800AB003A /* AppDelegate.swift */,
+				4A8CBB2B2940755D0071BEDC /* BharatBandhu.xcdatamodeld */,
+				4A8CBB33294075600071BEDC /* Preview Content */,
+			);
+			path = BharatBandhu;
+			sourceTree = "<group>";
+		};
+		4A8CBB33294075600071BEDC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBB34294075600071BEDC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4A8CBB3D294075610071BEDC /* BharatBandhuTests */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBB3E294075610071BEDC /* BharatBandhuTests.swift */,
+			);
+			path = BharatBandhuTests;
+			sourceTree = "<group>";
+		};
+		4A8CBB47294075610071BEDC /* BharatBandhuUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBB48294075610071BEDC /* BharatBandhuUITests.swift */,
+				4A8CBB4A294075610071BEDC /* BharatBandhuUITestsLaunchTests.swift */,
+			);
+			path = BharatBandhuUITests;
+			sourceTree = "<group>";
+		};
+		4A8CBB55294089B30071BEDC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18222940FC3300AB003A /* Component */,
+				4A8CBB5F29408BC40071BEDC /* Features */,
+				4A8CBB56294089BF0071BEDC /* Socket */,
+				4AC53D3F29452B8D00A67DAB /* Constant */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		4A8CBB56294089BF0071BEDC /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBB57294089DD0071BEDC /* SocketService.swift */,
+				4A8CBB6029408D510071BEDC /* SocketServiceDelegate.swift */,
+				4A8CBB6429408DCA0071BEDC /* SocketEvent.swift */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
+		4A8CBB5F29408BC40071BEDC /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E182B29411B3D00AB003A /* Authentication */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		4A9E18222940FC3300AB003A /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18A32941D32000AB003A /* Button */,
+				4A9E18462941B7F000AB003A /* PhoneNumberKit */,
+				4A9E183529411E5300AB003A /* DialCodePicker */,
+				4A9E183029411DA600AB003A /* CountryCode */,
+				4A9E18242940FC9D00AB003A /* Input */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		4A9E18242940FC9D00AB003A /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18AD2942410700AB003A /* OTP */,
+				4A9E18AC294240FF00AB003A /* MobileNumber */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		4A9E182B29411B3D00AB003A /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E182C29411B7000AB003A /* AuthenticationViewModel.swift */,
+				4AC53D4429452C3B00A67DAB /* AuthenticationHandler.swift */,
+				4AC53D4829452D8E00A67DAB /* AutenticationSocketEvent.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		4A9E183029411DA600AB003A /* CountryCode */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E183B2941B5B400AB003A /* iPhoneNumberField.swift */,
+				4A9E183A2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift */,
+				4A9E183C2941B5B400AB003A /* UIFont+Init.swift */,
+				4A9E183129411DD100AB003A /* CountryCodes.swift */,
+			);
+			path = CountryCode;
+			sourceTree = "<group>";
+		};
+		4A9E183529411E5300AB003A /* DialCodePicker */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E183629411E8700AB003A /* MobileDialCodePicker.swift */,
+			);
+			path = DialCodePicker;
+			sourceTree = "<group>";
+		};
+		4A9E18462941B7F000AB003A /* PhoneNumberKit */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18472941B7F000AB003A /* Constants.swift */,
+				4A9E18482941B7F000AB003A /* UI */,
+				4A9E184B2941B7F000AB003A /* Bundle+Resources.swift */,
+				4A9E184C2941B7F000AB003A /* PhoneNumber.swift */,
+				4A9E184D2941B7F000AB003A /* RegexManager.swift */,
+				4A9E184E2941B7F000AB003A /* MetadataTypes.swift */,
+				4A9E184F2941B7F000AB003A /* MetadataParsing.swift */,
+				4A9E18502941B7F000AB003A /* ParseManager.swift */,
+				4A9E18512941B7F000AB003A /* Resources */,
+				4A9E18572941B7F000AB003A /* PhoneNumberKit.h */,
+				4A9E18582941B7F000AB003A /* NSRegularExpression+Swift.swift */,
+				4A9E18592941B7F000AB003A /* PhoneNumber+Codable.swift */,
+				4A9E185A2941B7F000AB003A /* Formatter.swift */,
+				4A9E185B2941B7F000AB003A /* MetadataManager.swift */,
+				4A9E185C2941B7F000AB003A /* PartialFormatter.swift */,
+				4A9E185D2941B7F000AB003A /* PhoneNumberFormatter.swift */,
+				4A9E185E2941B7F000AB003A /* PhoneNumberKit.swift */,
+				4A9E18602941B7F000AB003A /* PhoneNumberParser.swift */,
+			);
+			path = PhoneNumberKit;
+			sourceTree = "<group>";
+		};
+		4A9E18482941B7F000AB003A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18492941B7F000AB003A /* CountryCodePickerViewController.swift */,
+				4A9E184A2941B7F000AB003A /* PhoneNumberTextField.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		4A9E18512941B7F000AB003A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18522941B7F000AB003A /* Original */,
+				4A9E18542941B7F000AB003A /* PhoneNumberMetadata.json */,
+				4A9E18552941B7F000AB003A /* README.md */,
+				4A9E18562941B7F000AB003A /* update.sh */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4A9E18522941B7F000AB003A /* Original */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18532941B7F000AB003A /* PhoneNumberMetadata.xml */,
+			);
+			path = Original;
+			sourceTree = "<group>";
+		};
+		4A9E18A32941D32000AB003A /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18A42941D33000AB003A /* SubmitButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		4A9E18AC294240FF00AB003A /* MobileNumber */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18252940FCE400AB003A /* InputFieldMobile.swift */,
+			);
+			path = MobileNumber;
+			sourceTree = "<group>";
+		};
+		4A9E18AD2942410700AB003A /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E18AE2942412500AB003A /* InputFieldOTP.swift */,
+				4A9E18B6294245AB00AB003A /* PinSttackView.swift */,
+				4A9E18BA294247AF00AB003A /* PhoneViewModel.swift */,
+				4A9E18B22942413E00AB003A /* OTPInputFieldViewModel.swift */,
+				4AC53D512947260A00A67DAB /* PasscodeField.swift */,
+			);
+			path = OTP;
+			sourceTree = "<group>";
+		};
+		4AC53D3F29452B8D00A67DAB /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				4A8CBB5B29408AA60071BEDC /* Server.swift */,
+				4AC53D4029452BB800A67DAB /* Keys.swift */,
+				4AC53D3B29452B8800A67DAB /* SoluteConstants.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		4AC53D4C2947206000A67DAB /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				4AC53D4D2947207500A67DAB /* LaunchView.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4A8CBAFD29406F720071BEDC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8CBB1429406F730071BEDC /* Solte_Framework.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		4A8CBA9729406DE60071BEDC /* Solute */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A8CBAC229406DE80071BEDC /* Build configuration list for PBXNativeTarget "Solute" */;
 			buildPhases = (
+				508B44C6A35779C1BE5DDDAC /* [CP] Check Pods Manifest.lock */,
 				4A8CBA9429406DE60071BEDC /* Sources */,
 				4A8CBA9529406DE60071BEDC /* Frameworks */,
 				4A8CBA9629406DE60071BEDC /* Resources */,
+				C51C4FCD511D97E548DDA5F7 /* [CP] Embed Pods Frameworks */,
+				4A8CBAF329406F060071BEDC /* Embed Watch Content */,
+				4A8CBB1C29406F730071BEDC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4A8CBAF129406F060071BEDC /* PBXTargetDependency */,
+				4A8CBB1629406F730071BEDC /* PBXTargetDependency */,
 			);
 			name = Solute;
 			productName = Solute;
@@ -159,6 +978,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A8CBAC529406DE80071BEDC /* Build configuration list for PBXNativeTarget "SoluteTests" */;
 			buildPhases = (
+				E2AAB95A96EC1B6B56AE008E /* [CP] Check Pods Manifest.lock */,
 				4A8CBAAA29406DE80071BEDC /* Sources */,
 				4A8CBAAB29406DE80071BEDC /* Frameworks */,
 				4A8CBAAC29406DE80071BEDC /* Resources */,
@@ -177,9 +997,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A8CBAC829406DE80071BEDC /* Build configuration list for PBXNativeTarget "SoluteUITests" */;
 			buildPhases = (
+				45B32F6B074FDAA183D13AA5 /* [CP] Check Pods Manifest.lock */,
 				4A8CBAB429406DE80071BEDC /* Sources */,
 				4A8CBAB529406DE80071BEDC /* Frameworks */,
 				4A8CBAB629406DE80071BEDC /* Resources */,
+				89269441AF317D4BF841C7A3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -189,6 +1011,151 @@
 			name = SoluteUITests;
 			productName = SoluteUITests;
 			productReference = 4A8CBAB829406DE80071BEDC /* SoluteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		4A8CBACE29406F030071BEDC /* Solute Watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8CBAFA29406F060071BEDC /* Build configuration list for PBXNativeTarget "Solute Watch Watch App" */;
+			buildPhases = (
+				4A8CBACB29406F030071BEDC /* Sources */,
+				4A8CBACC29406F030071BEDC /* Frameworks */,
+				4A8CBACD29406F030071BEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Solute Watch Watch App";
+			productName = "Solute Watch Watch App";
+			productReference = 4A8CBACF29406F030071BEDC /* Solute Watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4A8CBADD29406F050071BEDC /* Solute Watch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8CBAFB29406F060071BEDC /* Build configuration list for PBXNativeTarget "Solute Watch Watch AppTests" */;
+			buildPhases = (
+				4A8CBADA29406F050071BEDC /* Sources */,
+				4A8CBADB29406F050071BEDC /* Frameworks */,
+				4A8CBADC29406F050071BEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A8CBAE029406F050071BEDC /* PBXTargetDependency */,
+			);
+			name = "Solute Watch Watch AppTests";
+			productName = "Solute Watch Watch AppTests";
+			productReference = 4A8CBADE29406F050071BEDC /* Solute Watch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4A8CBAE729406F060071BEDC /* Solute Watch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8CBAFC29406F060071BEDC /* Build configuration list for PBXNativeTarget "Solute Watch Watch AppUITests" */;
+			buildPhases = (
+				4A8CBAE429406F060071BEDC /* Sources */,
+				4A8CBAE529406F060071BEDC /* Frameworks */,
+				4A8CBAE629406F060071BEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A8CBAEA29406F060071BEDC /* PBXTargetDependency */,
+			);
+			name = "Solute Watch Watch AppUITests";
+			productName = "Solute Watch Watch AppUITests";
+			productReference = 4A8CBAE829406F060071BEDC /* Solute Watch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		4A8CBB0129406F720071BEDC /* Solte Framework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8CBB1929406F730071BEDC /* Build configuration list for PBXNativeTarget "Solte Framework" */;
+			buildPhases = (
+				4A8CBAFD29406F720071BEDC /* Headers */,
+				4A8CBAFE29406F720071BEDC /* Sources */,
+				4A8CBAFF29406F720071BEDC /* Frameworks */,
+				4A8CBB0029406F720071BEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Solte Framework";
+			productName = "Solte Framework";
+			productReference = 4A8CBB0229406F720071BEDC /* Solte_Framework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4A8CBB0A29406F730071BEDC /* Solte FrameworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8CBB1D29406F730071BEDC /* Build configuration list for PBXNativeTarget "Solte FrameworkTests" */;
+			buildPhases = (
+				4A8CBB0729406F730071BEDC /* Sources */,
+				4A8CBB0829406F730071BEDC /* Frameworks */,
+				4A8CBB0929406F730071BEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A8CBB0E29406F730071BEDC /* PBXTargetDependency */,
+				4A8CBB1029406F730071BEDC /* PBXTargetDependency */,
+			);
+			name = "Solte FrameworkTests";
+			productName = "Solte FrameworkTests";
+			productReference = 4A8CBB0B29406F730071BEDC /* Solte FrameworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4A8CBB242940755D0071BEDC /* BharatBandhu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8CBB52294075610071BEDC /* Build configuration list for PBXNativeTarget "BharatBandhu" */;
+			buildPhases = (
+				7DBE7580EB5DDE6460FC1B42 /* [CP] Check Pods Manifest.lock */,
+				4A8CBB212940755D0071BEDC /* Sources */,
+				4A8CBB222940755D0071BEDC /* Frameworks */,
+				4A8CBB232940755D0071BEDC /* Resources */,
+				2C077BFEBBCC7128CA2C3D78 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BharatBandhu;
+			productName = BharatBandhu;
+			productReference = 4A8CBB252940755D0071BEDC /* BharatBandhu.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4A8CBB39294075600071BEDC /* BharatBandhuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8CBB53294075610071BEDC /* Build configuration list for PBXNativeTarget "BharatBandhuTests" */;
+			buildPhases = (
+				4A8CBB36294075600071BEDC /* Sources */,
+				4A8CBB37294075600071BEDC /* Frameworks */,
+				4A8CBB38294075600071BEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A8CBB3C294075600071BEDC /* PBXTargetDependency */,
+			);
+			name = BharatBandhuTests;
+			productName = BharatBandhuTests;
+			productReference = 4A8CBB3A294075600071BEDC /* BharatBandhuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4A8CBB43294075610071BEDC /* BharatBandhuUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8CBB54294075610071BEDC /* Build configuration list for PBXNativeTarget "BharatBandhuUITests" */;
+			buildPhases = (
+				4A8CBB40294075610071BEDC /* Sources */,
+				4A8CBB41294075610071BEDC /* Frameworks */,
+				4A8CBB42294075610071BEDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A8CBB46294075610071BEDC /* PBXTargetDependency */,
+			);
+			name = BharatBandhuUITests;
+			productName = BharatBandhuUITests;
+			productReference = 4A8CBB44294075610071BEDC /* BharatBandhuUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -212,6 +1179,35 @@
 						CreatedOnToolsVersion = 14.1;
 						TestTargetID = 4A8CBA9729406DE60071BEDC;
 					};
+					4A8CBACE29406F030071BEDC = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					4A8CBADD29406F050071BEDC = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 4A8CBACE29406F030071BEDC;
+					};
+					4A8CBAE729406F060071BEDC = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 4A8CBACE29406F030071BEDC;
+					};
+					4A8CBB0129406F720071BEDC = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					4A8CBB0A29406F730071BEDC = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 4A8CBA9729406DE60071BEDC;
+					};
+					4A8CBB242940755D0071BEDC = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					4A8CBB39294075600071BEDC = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 4A8CBB242940755D0071BEDC;
+					};
+					4A8CBB43294075610071BEDC = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 4A8CBB242940755D0071BEDC;
+					};
 				};
 			};
 			buildConfigurationList = 4A8CBA9329406DE60071BEDC /* Build configuration list for PBXProject "Solute" */;
@@ -230,6 +1226,14 @@
 				4A8CBA9729406DE60071BEDC /* Solute */,
 				4A8CBAAD29406DE80071BEDC /* SoluteTests */,
 				4A8CBAB729406DE80071BEDC /* SoluteUITests */,
+				4A8CBACE29406F030071BEDC /* Solute Watch Watch App */,
+				4A8CBADD29406F050071BEDC /* Solute Watch Watch AppTests */,
+				4A8CBAE729406F060071BEDC /* Solute Watch Watch AppUITests */,
+				4A8CBB0129406F720071BEDC /* Solte Framework */,
+				4A8CBB0A29406F730071BEDC /* Solte FrameworkTests */,
+				4A8CBB242940755D0071BEDC /* BharatBandhu */,
+				4A8CBB39294075600071BEDC /* BharatBandhuTests */,
+				4A8CBB43294075610071BEDC /* BharatBandhuUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -239,8 +1243,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9E187F2941B7F100AB003A /* PhoneNumberMetadata.json in Resources */,
 				4A8CBAA929406DE70071BEDC /* Preview Assets.xcassets in Resources */,
+				4A9E18822941B7F100AB003A /* README.md in Resources */,
+				4A9E18852941B7F100AB003A /* update.sh in Resources */,
 				4A8CBAA529406DE70071BEDC /* Assets.xcassets in Resources */,
+				4A9E187C2941B7F100AB003A /* PhoneNumberMetadata.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,17 +1266,271 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4A8CBACD29406F030071BEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A9E18802941B7F100AB003A /* PhoneNumberMetadata.json in Resources */,
+				4A8CBAD929406F050071BEDC /* Preview Assets.xcassets in Resources */,
+				4A9E18832941B7F100AB003A /* README.md in Resources */,
+				4A9E18862941B7F100AB003A /* update.sh in Resources */,
+				4A8CBAD629406F050071BEDC /* Assets.xcassets in Resources */,
+				4A9E187D2941B7F100AB003A /* PhoneNumberMetadata.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBADC29406F050071BEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBAE629406F060071BEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB0029406F720071BEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB0929406F730071BEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB232940755D0071BEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A9E18842941B7F100AB003A /* README.md in Resources */,
+				4A8CBB35294075600071BEDC /* Preview Assets.xcassets in Resources */,
+				4A9E18812941B7F100AB003A /* PhoneNumberMetadata.json in Resources */,
+				4A8CBB31294075600071BEDC /* Assets.xcassets in Resources */,
+				4A9E187E2941B7F100AB003A /* PhoneNumberMetadata.xml in Resources */,
+				4A9E18872941B7F100AB003A /* update.sh in Resources */,
+				4A9E182A2941187800AB003A /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB38294075600071BEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB42294075610071BEDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2C077BFEBBCC7128CA2C3D78 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		45B32F6B074FDAA183D13AA5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Solute-SoluteUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		508B44C6A35779C1BE5DDDAC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Solute-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7DBE7580EB5DDE6460FC1B42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BharatBandhu-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89269441AF317D4BF841C7A3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Solute-SoluteUITests/Pods-Solute-SoluteUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Solute-SoluteUITests/Pods-Solute-SoluteUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Solute-SoluteUITests/Pods-Solute-SoluteUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C51C4FCD511D97E548DDA5F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Solute/Pods-Solute-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Solute/Pods-Solute-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Solute/Pods-Solute-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2AAB95A96EC1B6B56AE008E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SoluteTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A8CBA9429406DE60071BEDC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9E18B32942413E00AB003A /* OTPInputFieldViewModel.swift in Sources */,
+				4A9E18672941B7F000AB003A /* PhoneNumberTextField.swift in Sources */,
+				4A9E186A2941B7F000AB003A /* Bundle+Resources.swift in Sources */,
+				4A8CBB58294089DD0071BEDC /* SocketService.swift in Sources */,
 				4A8CBAA129406DE60071BEDC /* Solute.xcdatamodeld in Sources */,
+				4A9E18642941B7F000AB003A /* CountryCodePickerViewController.swift in Sources */,
+				4A9E18762941B7F100AB003A /* MetadataParsing.swift in Sources */,
+				4A079D7A2940A35D0014B9B9 /* HomeView.swift in Sources */,
+				4AC53D522947260A00A67DAB /* PasscodeField.swift in Sources */,
+				4AC53D3C29452B8800A67DAB /* SoluteConstants.swift in Sources */,
+				4A9E18BB294247AF00AB003A /* PhoneViewModel.swift in Sources */,
+				4A9E18A02941B7F100AB003A /* PhoneNumberParser.swift in Sources */,
+				4AC53D4E2947207500A67DAB /* LaunchView.swift in Sources */,
+				4A9E18972941B7F100AB003A /* PhoneNumberFormatter.swift in Sources */,
 				4A8CBA9C29406DE60071BEDC /* SoluteApp.swift in Sources */,
+				4A9E183729411E8700AB003A /* MobileDialCodePicker.swift in Sources */,
 				4A8CBAA329406DE60071BEDC /* ContentView.swift in Sources */,
+				4A8CBB5C29408AA60071BEDC /* Server.swift in Sources */,
+				4AC53D4929452D8E00A67DAB /* AutenticationSocketEvent.swift in Sources */,
+				4A9E183D2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */,
+				4A9E18912941B7F100AB003A /* MetadataManager.swift in Sources */,
+				4AC53D4529452C3B00A67DAB /* AuthenticationHandler.swift in Sources */,
+				4A9E18882941B7F100AB003A /* NSRegularExpression+Swift.swift in Sources */,
+				4A9E18262940FCE400AB003A /* InputFieldMobile.swift in Sources */,
+				4A9E18402941B5B400AB003A /* iPhoneNumberField.swift in Sources */,
+				4A9E18612941B7F000AB003A /* Constants.swift in Sources */,
+				4A079D6D2940A0D70014B9B9 /* OnBaordingNavigation.swift in Sources */,
+				4A8CBB6129408D510071BEDC /* SocketServiceDelegate.swift in Sources */,
+				4A079D712940A31B0014B9B9 /* LoginView.swift in Sources */,
+				4A9E189A2941B7F100AB003A /* PhoneNumberKit.swift in Sources */,
+				4A9E186D2941B7F000AB003A /* PhoneNumber.swift in Sources */,
+				4A9E18702941B7F100AB003A /* RegexManager.swift in Sources */,
+				4A079D752940A3310014B9B9 /* RegisterView.swift in Sources */,
+				4A9E18792941B7F100AB003A /* ParseManager.swift in Sources */,
+				4A9E182D29411B7000AB003A /* AuthenticationViewModel.swift in Sources */,
+				4A9E18A52941D33000AB003A /* SubmitButton.swift in Sources */,
+				4A9E18432941B5B400AB003A /* UIFont+Init.swift in Sources */,
 				4A8CBA9E29406DE60071BEDC /* Persistence.swift in Sources */,
+				4A8CBB6529408DCA0071BEDC /* SocketEvent.swift in Sources */,
+				4A9E183229411DD100AB003A /* CountryCodes.swift in Sources */,
+				4AC53D4129452BB800A67DAB /* Keys.swift in Sources */,
+				4A9E18B7294245AB00AB003A /* PinSttackView.swift in Sources */,
+				4A9E188B2941B7F100AB003A /* PhoneNumber+Codable.swift in Sources */,
+				4A9E188E2941B7F100AB003A /* Formatter.swift in Sources */,
+				4A9E18AF2942412500AB003A /* InputFieldOTP.swift in Sources */,
+				4A9E18942941B7F100AB003A /* PartialFormatter.swift in Sources */,
+				4A9E18732941B7F100AB003A /* MetadataTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +1551,164 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4A8CBACB29406F030071BEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A9E189B2941B7F100AB003A /* PhoneNumberKit.swift in Sources */,
+				4AC53D4F2947207500A67DAB /* LaunchView.swift in Sources */,
+				4A9E18A62941D33000AB003A /* SubmitButton.swift in Sources */,
+				4A9E18922941B7F100AB003A /* MetadataManager.swift in Sources */,
+				4AC53D4A29452D8E00A67DAB /* AutenticationSocketEvent.swift in Sources */,
+				4A9E18652941B7F000AB003A /* CountryCodePickerViewController.swift in Sources */,
+				4A079D6E2940A0D70014B9B9 /* OnBaordingNavigation.swift in Sources */,
+				4A9E18622941B7F000AB003A /* Constants.swift in Sources */,
+				4A079D762940A3310014B9B9 /* RegisterView.swift in Sources */,
+				4A9E18442941B5B400AB003A /* UIFont+Init.swift in Sources */,
+				4AC53D4629452C3B00A67DAB /* AuthenticationHandler.swift in Sources */,
+				4A8CBAD429406F040071BEDC /* ContentView.swift in Sources */,
+				4A9E18772941B7F100AB003A /* MetadataParsing.swift in Sources */,
+				4A079D722940A31B0014B9B9 /* LoginView.swift in Sources */,
+				4A9E183329411DD100AB003A /* CountryCodes.swift in Sources */,
+				4A9E18272940FCE400AB003A /* InputFieldMobile.swift in Sources */,
+				4A9E18B42942413E00AB003A /* OTPInputFieldViewModel.swift in Sources */,
+				4A079D7B2940A35D0014B9B9 /* HomeView.swift in Sources */,
+				4A9E188F2941B7F100AB003A /* Formatter.swift in Sources */,
+				4A9E18B02942412500AB003A /* InputFieldOTP.swift in Sources */,
+				4A9E186B2941B7F000AB003A /* Bundle+Resources.swift in Sources */,
+				4A9E187A2941B7F100AB003A /* ParseManager.swift in Sources */,
+				4A9E18412941B5B400AB003A /* iPhoneNumberField.swift in Sources */,
+				4A9E183E2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */,
+				4A9E18952941B7F100AB003A /* PartialFormatter.swift in Sources */,
+				4A9E188C2941B7F100AB003A /* PhoneNumber+Codable.swift in Sources */,
+				4AC53D3D29452B8800A67DAB /* SoluteConstants.swift in Sources */,
+				4AC53D4229452BB800A67DAB /* Keys.swift in Sources */,
+				4A9E186E2941B7F000AB003A /* PhoneNumber.swift in Sources */,
+				4A8CBB6629408DCA0071BEDC /* SocketEvent.swift in Sources */,
+				4A9E183829411E8700AB003A /* MobileDialCodePicker.swift in Sources */,
+				4A9E18A12941B7F100AB003A /* PhoneNumberParser.swift in Sources */,
+				4A9E182E29411B7000AB003A /* AuthenticationViewModel.swift in Sources */,
+				4A8CBAD229406F030071BEDC /* Solute_WatchApp.swift in Sources */,
+				4A9E18712941B7F100AB003A /* RegexManager.swift in Sources */,
+				4A9E18B8294245AB00AB003A /* PinSttackView.swift in Sources */,
+				4A9E18682941B7F000AB003A /* PhoneNumberTextField.swift in Sources */,
+				4A9E18742941B7F100AB003A /* MetadataTypes.swift in Sources */,
+				4A8CBB5D29408AA60071BEDC /* Server.swift in Sources */,
+				4A9E18892941B7F100AB003A /* NSRegularExpression+Swift.swift in Sources */,
+				4A8CBB6229408D510071BEDC /* SocketServiceDelegate.swift in Sources */,
+				4A9E18BC294247AF00AB003A /* PhoneViewModel.swift in Sources */,
+				4AC53D532947260A00A67DAB /* PasscodeField.swift in Sources */,
+				4A9E18982941B7F100AB003A /* PhoneNumberFormatter.swift in Sources */,
+				4A8CBB59294089DD0071BEDC /* SocketService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBADA29406F050071BEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8CBAE329406F060071BEDC /* Solute_Watch_Watch_AppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBAE429406F060071BEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8CBAEF29406F060071BEDC /* Solute_Watch_Watch_AppUITestsLaunchTests.swift in Sources */,
+				4A8CBAED29406F060071BEDC /* Solute_Watch_Watch_AppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBAFE29406F720071BEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8CBB0629406F730071BEDC /* Solte_Framework.docc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB0729406F730071BEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8CBB1329406F730071BEDC /* Solte_FrameworkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB212940755D0071BEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A9E18692941B7F000AB003A /* PhoneNumberTextField.swift in Sources */,
+				4A9E186C2941B7F000AB003A /* Bundle+Resources.swift in Sources */,
+				4A8CBB5A294089DD0071BEDC /* SocketService.swift in Sources */,
+				4A8CBB282940755D0071BEDC /* BharatBandhuApp.swift in Sources */,
+				4A9E18662941B7F000AB003A /* CountryCodePickerViewController.swift in Sources */,
+				4A9E18782941B7F100AB003A /* MetadataParsing.swift in Sources */,
+				4A079D7C2940A35D0014B9B9 /* HomeView.swift in Sources */,
+				4A26E08629473BBE00B3266D /* OTPView.swift in Sources */,
+				4A9E18A22941B7F100AB003A /* PhoneNumberParser.swift in Sources */,
+				4A9E18992941B7F100AB003A /* PhoneNumberFormatter.swift in Sources */,
+				4A8CBB2A2940755D0071BEDC /* Persistence.swift in Sources */,
+				4A9E183929411E8700AB003A /* MobileDialCodePicker.swift in Sources */,
+				4A8CBB2F2940755D0071BEDC /* ContentView.swift in Sources */,
+				4A8CBB5E29408AA60071BEDC /* Server.swift in Sources */,
+				4A9E183F2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */,
+				4A9E18932941B7F100AB003A /* MetadataManager.swift in Sources */,
+				4A9E18BD294247AF00AB003A /* PhoneViewModel.swift in Sources */,
+				4A9E18B9294245AB00AB003A /* PinSttackView.swift in Sources */,
+				4A9E188A2941B7F100AB003A /* NSRegularExpression+Swift.swift in Sources */,
+				4A9E18282940FCE400AB003A /* InputFieldMobile.swift in Sources */,
+				4A9E18422941B5B400AB003A /* iPhoneNumberField.swift in Sources */,
+				4A9E18632941B7F000AB003A /* Constants.swift in Sources */,
+				4A079D6F2940A0D70014B9B9 /* OnBaordingNavigation.swift in Sources */,
+				4AC53D3E29452B8800A67DAB /* SoluteConstants.swift in Sources */,
+				4A9E18AB2941D7A800AB003A /* AppDelegate.swift in Sources */,
+				4A8CBB6329408D510071BEDC /* SocketServiceDelegate.swift in Sources */,
+				4A079D732940A31B0014B9B9 /* LoginView.swift in Sources */,
+				4A9E189C2941B7F100AB003A /* PhoneNumberKit.swift in Sources */,
+				4A9E186F2941B7F000AB003A /* PhoneNumber.swift in Sources */,
+				4AC53D502947207500A67DAB /* LaunchView.swift in Sources */,
+				4A9E18B52942413E00AB003A /* OTPInputFieldViewModel.swift in Sources */,
+				4A9E18722941B7F100AB003A /* RegexManager.swift in Sources */,
+				4A079D772940A3310014B9B9 /* RegisterView.swift in Sources */,
+				4A9E187B2941B7F100AB003A /* ParseManager.swift in Sources */,
+				4AC53D4B29452D8E00A67DAB /* AutenticationSocketEvent.swift in Sources */,
+				4A9E18B12942412500AB003A /* InputFieldOTP.swift in Sources */,
+				4AC53D4329452BB800A67DAB /* Keys.swift in Sources */,
+				4A9E182F29411B7000AB003A /* AuthenticationViewModel.swift in Sources */,
+				4A9E18A72941D33000AB003A /* SubmitButton.swift in Sources */,
+				4A9E18452941B5B400AB003A /* UIFont+Init.swift in Sources */,
+				4A8CBB2D2940755D0071BEDC /* BharatBandhu.xcdatamodeld in Sources */,
+				4A8CBB6729408DCA0071BEDC /* SocketEvent.swift in Sources */,
+				4A9E183429411DD100AB003A /* CountryCodes.swift in Sources */,
+				4AC53D542947260A00A67DAB /* PasscodeField.swift in Sources */,
+				4A9E188D2941B7F100AB003A /* PhoneNumber+Codable.swift in Sources */,
+				4AC53D4729452C3B00A67DAB /* AuthenticationHandler.swift in Sources */,
+				4A9E18902941B7F100AB003A /* Formatter.swift in Sources */,
+				4A9E18962941B7F100AB003A /* PartialFormatter.swift in Sources */,
+				4A9E18752941B7F100AB003A /* MetadataTypes.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB36294075600071BEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8CBB3F294075610071BEDC /* BharatBandhuTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A8CBB40294075610071BEDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8CBB4B294075610071BEDC /* BharatBandhuUITestsLaunchTests.swift in Sources */,
+				4A8CBB49294075610071BEDC /* BharatBandhuUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -301,6 +1721,46 @@
 			isa = PBXTargetDependency;
 			target = 4A8CBA9729406DE60071BEDC /* Solute */;
 			targetProxy = 4A8CBAB929406DE80071BEDC /* PBXContainerItemProxy */;
+		};
+		4A8CBAE029406F050071BEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A8CBACE29406F030071BEDC /* Solute Watch Watch App */;
+			targetProxy = 4A8CBADF29406F050071BEDC /* PBXContainerItemProxy */;
+		};
+		4A8CBAEA29406F060071BEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A8CBACE29406F030071BEDC /* Solute Watch Watch App */;
+			targetProxy = 4A8CBAE929406F060071BEDC /* PBXContainerItemProxy */;
+		};
+		4A8CBAF129406F060071BEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A8CBACE29406F030071BEDC /* Solute Watch Watch App */;
+			targetProxy = 4A8CBAF029406F060071BEDC /* PBXContainerItemProxy */;
+		};
+		4A8CBB0E29406F730071BEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A8CBB0129406F720071BEDC /* Solte Framework */;
+			targetProxy = 4A8CBB0D29406F730071BEDC /* PBXContainerItemProxy */;
+		};
+		4A8CBB1029406F730071BEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A8CBA9729406DE60071BEDC /* Solute */;
+			targetProxy = 4A8CBB0F29406F730071BEDC /* PBXContainerItemProxy */;
+		};
+		4A8CBB1629406F730071BEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A8CBB0129406F720071BEDC /* Solte Framework */;
+			targetProxy = 4A8CBB1529406F730071BEDC /* PBXContainerItemProxy */;
+		};
+		4A8CBB3C294075600071BEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A8CBB242940755D0071BEDC /* BharatBandhu */;
+			targetProxy = 4A8CBB3B294075600071BEDC /* PBXContainerItemProxy */;
+		};
+		4A8CBB46294075610071BEDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A8CBB242940755D0071BEDC /* BharatBandhu */;
+			targetProxy = 4A8CBB45294075610071BEDC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -416,7 +1876,9 @@
 		};
 		4A8CBAC329406DE80071BEDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2934D7FA7511D7F27DE11303 /* Pods-Solute.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Solute/Solute.entitlements;
@@ -454,7 +1916,9 @@
 		};
 		4A8CBAC429406DE80071BEDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D59CBDC73BAABEB378ABC63 /* Pods-Solute.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Solute/Solute.entitlements;
@@ -492,6 +1956,7 @@
 		};
 		4A8CBAC629406DE80071BEDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C686DD8FA677F9DEAB10582 /* Pods-SoluteTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -515,6 +1980,7 @@
 		};
 		4A8CBAC729406DE80071BEDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3C76CD3B1E24BA71CE0B154 /* Pods-SoluteTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -538,6 +2004,7 @@
 		};
 		4A8CBAC929406DE80071BEDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9595C14B33CE44CCFFB9E08C /* Pods-Solute-SoluteUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -560,6 +2027,7 @@
 		};
 		4A8CBACA29406DE80071BEDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 273E42E913E06C3CFD40969A /* Pods-Solute-SoluteUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -577,6 +2045,441 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Solute;
+			};
+			name = Release;
+		};
+		4A8CBAF429406F060071BEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Solute Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Solute Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.solute.Solute;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.solute.Solute.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		4A8CBAF529406F060071BEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Solute Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Solute Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.solute.Solute;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.solute.Solute.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		4A8CBAF629406F060071BEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.solute.Solute-Watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Solute Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Solute Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		4A8CBAF729406F060071BEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.solute.Solute-Watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Solute Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Solute Watch Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		4A8CBAF829406F060071BEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.solute.Solute-Watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Solute Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		4A8CBAF929406F060071BEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.solute.Solute-Watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Solute Watch Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		4A8CBB1A29406F730071BEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.solute.Solte-Framework";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4A8CBB1B29406F730071BEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.solute.Solte-Framework";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4A8CBB1E29406F730071BEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.solute.Solte-FrameworkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Solute.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Solute";
+			};
+			name = Debug;
+		};
+		4A8CBB1F29406F730071BEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.solute.Solte-FrameworkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Solute.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Solute";
+			};
+			name = Release;
+		};
+		4A8CBB4C294075610071BEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 705B7A0F10AAF2D1A465A0AD /* Pods-BharatBandhu.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BharatBandhu/BharatBandhu.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BharatBandhu/Preview Content\"";
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BharatBandhu/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bharat Bandhu";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4A8CBB4D294075610071BEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B4CAD295832D0A96A2B659F /* Pods-BharatBandhu.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BharatBandhu/BharatBandhu.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BharatBandhu/Preview Content\"";
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BharatBandhu/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bharat Bandhu";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4A8CBB4E294075610071BEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BharatBandhuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BharatBandhu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BharatBandhu";
+			};
+			name = Debug;
+		};
+		4A8CBB4F294075610071BEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BharatBandhuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BharatBandhu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BharatBandhu";
+			};
+			name = Release;
+		};
+		4A8CBB50294075610071BEDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BharatBandhuUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BharatBandhu;
+			};
+			name = Debug;
+		};
+		4A8CBB51294075610071BEDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BharatBandhuUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BharatBandhu;
 			};
 			name = Release;
 		};
@@ -619,6 +2522,78 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		4A8CBAFA29406F060071BEDC /* Build configuration list for PBXNativeTarget "Solute Watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A8CBAF429406F060071BEDC /* Debug */,
+				4A8CBAF529406F060071BEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A8CBAFB29406F060071BEDC /* Build configuration list for PBXNativeTarget "Solute Watch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A8CBAF629406F060071BEDC /* Debug */,
+				4A8CBAF729406F060071BEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A8CBAFC29406F060071BEDC /* Build configuration list for PBXNativeTarget "Solute Watch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A8CBAF829406F060071BEDC /* Debug */,
+				4A8CBAF929406F060071BEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A8CBB1929406F730071BEDC /* Build configuration list for PBXNativeTarget "Solte Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A8CBB1A29406F730071BEDC /* Debug */,
+				4A8CBB1B29406F730071BEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A8CBB1D29406F730071BEDC /* Build configuration list for PBXNativeTarget "Solte FrameworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A8CBB1E29406F730071BEDC /* Debug */,
+				4A8CBB1F29406F730071BEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A8CBB52294075610071BEDC /* Build configuration list for PBXNativeTarget "BharatBandhu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A8CBB4C294075610071BEDC /* Debug */,
+				4A8CBB4D294075610071BEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A8CBB53294075610071BEDC /* Build configuration list for PBXNativeTarget "BharatBandhuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A8CBB4E294075610071BEDC /* Debug */,
+				4A8CBB4F294075610071BEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A8CBB54294075610071BEDC /* Build configuration list for PBXNativeTarget "BharatBandhuUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A8CBB50294075610071BEDC /* Debug */,
+				4A8CBB51294075610071BEDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
@@ -629,6 +2604,16 @@
 			);
 			currentVersion = 4A8CBAA029406DE60071BEDC /* Solute.xcdatamodel */;
 			path = Solute.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		4A8CBB2B2940755D0071BEDC /* BharatBandhu.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4A8CBB2C2940755D0071BEDC /* BharatBandhu.xcdatamodel */,
+			);
+			currentVersion = 4A8CBB2C2940755D0071BEDC /* BharatBandhu.xcdatamodel */;
+			path = BharatBandhu.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
