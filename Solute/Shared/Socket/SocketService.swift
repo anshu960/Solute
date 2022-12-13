@@ -51,6 +51,7 @@ class SocketService:ObservableObject{
             self.connectionStatus = 0
         })
         AuthenticationHandler.shared.addFeature(manager: self.manager)
+        CustomerHandler.shared.addFeature(manager: self.manager)
     }
     
     func removeEventListener(){

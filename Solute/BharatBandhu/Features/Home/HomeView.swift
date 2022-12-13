@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State var barcode = CustomerViewModel.shared.barcode
     var body: some View {
-        Text("Home View")
+        Group{
+            Image("launch_image").resizable()
+                .frame(width: 200, height: 200)
+                .onAppear(){
+                    CustomerViewModel.shared.loadMembership()
+                }
+            if let barImage = barcode{
+                Image(uiImage: barImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                Spacer()
+            }
+            Spacer()
+        }
+        
     }
 }
 

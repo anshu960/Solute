@@ -29,6 +29,7 @@ class AuthenticationHandler{
             AuthenticationViewModel.shared.setRegisterScreen()
         }
     }
+    
     func storeUserCredentials(userData:[String:Any]){
         UserDefaults.standard.set(userData.toJSONStr(), forKey: Key.loginDetails)
         UserDefaults.standard.synchronize()

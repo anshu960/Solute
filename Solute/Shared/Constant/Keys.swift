@@ -42,8 +42,8 @@ class Key{
     public static let isPresent = "IsPresent"
     
     public static let userId = "UserID"
-    var businessID = "BusinessID"
-    var businessTypeID = "BusinessTypeID"
+    public static let businessID = "BusinessID"
+    public static let businessTypeID = "BusinessTypeID"
     public static let business = "Business"
     public static let customer = "Customer"
     public static let customerName = "CustomerName"
