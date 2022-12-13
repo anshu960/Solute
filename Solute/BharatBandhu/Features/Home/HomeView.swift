@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var barcode = CustomerViewModel.shared.barcode
+    @ObservedObject var viewModel = CustomerViewModel.shared
+    
     var body: some View {
+        Image("launch_image").resizable()
+            .frame(width: 300, height: 300)
+            .onAppear(){
+                CustomerViewModel.shared.loadMembership()
+            }
         Group{
-            Image("launch_image").resizable()
-                .frame(width: 200, height: 200)
-                .onAppear(){
-                    CustomerViewModel.shared.loadMembership()
-                }
-            if let barImage = barcode{
-                Image(uiImage: barImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                Spacer()
+            if viewModel.membershipId != ""{
+                BarCodeView(barcode: viewModel.membershipId)
+                                .scaledToFit()
+                                .padding()
+//                                .border(Color.red)
+                Text(viewModel.membershipId)
+            }else{
+                Text("Membership Details Not Found Please Visit our Store to get your Membership")
             }
             Spacer()
         }
@@ -31,5 +35,16 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+struct BarCodeView: UIViewRepresentable {
+    let barcode: String
+    func makeUIView(context: Context) -> UIImageView {
+        UIImageView()
+    }
+
+    func updateUIView(_ uiView: UIImageView, context: Context) {
+        uiView.image = UIImage(barcode: barcode)
     }
 }
