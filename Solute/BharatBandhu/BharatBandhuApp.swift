@@ -18,8 +18,7 @@ struct BharatBandhuApp: App {
     var body: some Scene {
         
         WindowGroup {
-            //            ContentView()
-            //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            
             OnBaordingNavigation()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

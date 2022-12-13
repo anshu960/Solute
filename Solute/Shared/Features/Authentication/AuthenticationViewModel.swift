@@ -13,6 +13,7 @@ final class Router: ObservableObject {
 }
 class AuthenticationViewModel:ObservableObject{
     public static let shared = AuthenticationViewModel()
+    
     @Published var isLoggedin = false
     @Published var isFreshLaunch = true
     @Published var isNewUser = false
@@ -29,25 +30,30 @@ class AuthenticationViewModel:ObservableObject{
     
     
     func checkAuthStatus(){
-        let loginDetails = LocalStorage.shared.dictionary(forKey: Key.loginDetails)
+        let loginDetails = AuthenticationHandler.shared.fetchUserCredentials()
+        if let userId = loginDetails[Key.userId] as? String, userId != ""{
+            setHomeScreen()
+            return
+        }
         if(loginDetails.isEmpty && verificationId == "" && mobileNumber == ""){
             isFreshLaunch = true
             isLoggedin = false
             if(AuthenticationViewModel.shared.navigationPath.count == 0){
                 AuthenticationViewModel.shared.navigationPath = []
-                AuthenticationViewModel.shared.navigationPath.append(.screen1)
+                setLoginScreen()
             }
         }else if(!mobileNumber.isEmpty && !verificationId.isEmpty){
-            AuthenticationViewModel.shared.navigationPath.append(.screen2)
+            setOtpScreen()
         }else if(isNewUser){
-            AuthenticationViewModel.shared.navigationPath.append(.screen3)
+            setRegisterScreen()
         }
     }
     
-    func setHomeScreen(){
+    func setLoginScreen(){
         AuthenticationViewModel.shared.navigationPath = []
         AuthenticationViewModel.shared.navigationPath.append(.screen1)
     }
+    
     func setOtpScreen(){
         AuthenticationViewModel.shared.navigationPath = []
         AuthenticationViewModel.shared.navigationPath.append(.screen2)
@@ -56,24 +62,25 @@ class AuthenticationViewModel:ObservableObject{
         AuthenticationViewModel.shared.navigationPath = []
         AuthenticationViewModel.shared.navigationPath.append(.screen3)
     }
-    func setLoginScreen(){
+    
+    func setHomeScreen(){
         AuthenticationViewModel.shared.navigationPath = []
         AuthenticationViewModel.shared.navigationPath.append(.screen4)
     }
     
     func sendOtp(mobile:String){
-        if(mobile.contains("945506")){
+        mobileNumber = mobile.replacingOccurrences(of: "-", with: "")
+        mobileNumber = mobileNumber.replacingOccurrences(of: " ", with: "")
+        mobileNumber = mobileNumber.replacingOccurrences(of: "(", with: "")
+        mobileNumber = mobileNumber.replacingOccurrences(of: ")", with: "")
+        if(mobileNumber.contains("945506")){
             mobileNumber = "+919455068676"
         }else{
-            mobileNumber = mobile.replacingOccurrences(of: "-", with: "")
-            mobileNumber = mobileNumber.replacingOccurrences(of: " ", with: "")
-            mobileNumber = mobileNumber.replacingOccurrences(of: "(", with: "")
-            mobileNumber = mobileNumber.replacingOccurrences(of: ")", with: "")
             mobileNumber = "+49\(mobileNumber)"
         }
         PhoneAuthProvider.provider()
-            .verifyPhoneNumber(mobileNumber, uiDelegate: nil) { verificationID, error in
-                self.verificationId = verificationID ?? ""
+            .verifyPhoneNumber(mobileNumber, uiDelegate: nil) { verifyID, error in
+                self.verificationId = verifyID ?? ""
                 self.error = error?.localizedDescription ?? ""
                 self.setOtpScreen()
             }
@@ -92,12 +99,12 @@ class AuthenticationViewModel:ObservableObject{
             }
             // User is signed in
             // ...
-            if let userId = authResult?.user.uid{
-                self.userId = userId
-                SocketService.shared.joinRoom(roomId: userId)
+            if let userID = authResult?.user.uid{
+                self.userId = userID
+                SocketService.shared.joinRoom(roomId: userID)
                 var request : [String:Any] = [:]
                 request[Key.mobileNumber] = self.mobileNumber
-                request[Key.userId] = userId
+                request[Key.userId] = userID
                 request[Key.deviceId] = self.deviceId
                 SocketService.shared.send(eventName: AuthenticationSocketEvent.AUHTENTICATE.rawValue, payload: request)
             }
@@ -111,4 +118,6 @@ class AuthenticationViewModel:ObservableObject{
         request[Key.name] = name
         SocketService.shared.send(eventName: AuthenticationSocketEvent.AUHTENTICATE.rawValue, payload: request)
     }
+    
+    
 }

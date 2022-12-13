@@ -22,7 +22,7 @@ struct OTPView: View {
         SubmitButton(onClick: {
             AuthenticationViewModel.shared.verifyOtp(otp: otp)
         },title: "Verify")
-        
+        Spacer()
     }
 }
 

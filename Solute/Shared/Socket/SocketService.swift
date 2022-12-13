@@ -17,10 +17,10 @@ class SocketService:ObservableObject{
     var delegate : SocketServiceDelegate? = nil
     let config : SocketIOClientConfiguration = [
         .log(true),
-//        .compress,
-//        .forceNew(true),
-//        .forceWebsockets(true),
-        .forcePolling(false),
+        //        .compress,
+        //        .forceNew(true),
+        //        .forceWebsockets(true),
+            .forcePolling(false),
     ]
     init() {
         manager = SocketManager(socketURL: URL(string: Server.shared.servers[0])!, config: config)
@@ -36,7 +36,11 @@ class SocketService:ObservableObject{
         socket?.on(clientEvent: .connect, callback: { any, socketAckEmitter in
             self.delegate?.didConnect()
             self.connectionStatus = 1
-            self.joinRoom(roomId: AuthenticationViewModel.shared.deviceId)
+            if let userId = AuthenticationHandler.shared.fetchUserCredentials()[Key._id] as? String{
+                self.joinRoom(roomId: userId)
+            }else{
+                self.joinRoom(roomId: AuthenticationViewModel.shared.deviceId)
+            }
         })
         socket?.on(clientEvent: .disconnect, callback: { any, socketAckEmitter in
             self.delegate?.didConnect()

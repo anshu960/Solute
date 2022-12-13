@@ -16,6 +16,7 @@ enum Screen: Hashable {
 
 struct OnBaordingNavigation: View {
     @ObservedObject var viewModel: AuthenticationViewModel = AuthenticationViewModel.shared
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         NavigationStack(path: $viewModel.navigationPath) {

@@ -7,112 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DE372626-176D-4CCF-B6B5-771DAF95DF0D"
+            uuid = "AB8E8BEE-F7AF-4F24-8C58-CAE47CC24F08"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/UtilityKit/UtilityKit/Classes/Utilities/LocalStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "dictionary(forKey:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D3C031DB-9FF0-4765-AAD0-FC5ADCEA343A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/Features/Authentication/AuthenticationHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "onAuthenticateEvent(_:_:)"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "fetchUserCredentials()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1AFFA865-840A-4B69-A520-6B6FB35166A5"
+            uuid = "FE67D97A-823D-41F9-B604-E053DE21CB26"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Shared/Features/Authentication/AuthenticationViewModel.swift"
+            filePath = "Shared/Features/Authentication/AuthenticationHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "verifyOtp(otp:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1AFFA865-840A-4B69-A520-6B6FB35166A5 - 759fbf2be70ffe76"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in BharatBandhu.AuthenticationViewModel.verifyOtp(otp: Swift.String) -&gt; ()"
-                  moduleName = "BharatBandhu"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/viveksingh/Developer/friendly/solute_app/Solute/Shared/Features/Authentication/AuthenticationViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "226">
-               </Location>
-               <Location
-                  uuid = "1AFFA865-840A-4B69-A520-6B6FB35166A5 - 759fbf2be70ffe76"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in BharatBandhu.AuthenticationViewModel.verifyOtp(otp: Swift.String) -&gt; ()"
-                  moduleName = "BharatBandhu"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/viveksingh/Developer/friendly/solute_app/Solute/Shared/Features/Authentication/AuthenticationViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "694">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "59DF241B-03D1-45E8-8170-3D4C528A6176"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/Features/Authentication/AuthenticationViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "verifyOtp(otp:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BE83AE50-3DA4-4A42-AF0F-C0C83EB23B5B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/Features/Authentication/AuthenticationViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "verifyOtp(otp:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5A0D165A-CEFA-434A-9A0B-62DDF7A90719"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/Features/Authentication/AuthenticationViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "sendOtp(mobile:)"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "fetchUserCredentials()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
