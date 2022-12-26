@@ -10,4 +10,4 @@ rootProject.name = "Solute"
 include ':app'
 include ':app:bharatbandhu'
 include ':UtilityKit'
-include ':app:solute:framework'
+//include ':app:solute:framework'

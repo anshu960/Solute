@@ -1,12 +1,9 @@
 package com.utilitykit.feature.invoice.handler
 
-import android.content.Intent
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
-import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.cart.model.Sale
-import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.invoice.model.CustomerInvoice
 import com.utilitykit.feature.invoice.repository.InvoiceRepository
 import com.utilitykit.feature.invoice.viewModel.InvoiceViewModel

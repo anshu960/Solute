@@ -5,6 +5,7 @@ import com.utilitykit.Constants.Key
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.productCategory.model.ProductCategory
 import com.utilitykit.feature.productCategory.repository.ProductCategoryRepository
@@ -47,6 +48,7 @@ class ProductCategoryHandler{
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId,user._id)
         request.put(Key.businessID, business.value?.Id)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT_CATEGORY,request)
     }
 

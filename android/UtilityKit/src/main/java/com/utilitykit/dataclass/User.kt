@@ -49,7 +49,7 @@ class User{
         }
 
     init {
-        val info =  Defaults.json(Key.loginDetails)
+        val info =  Defaults.shared().json(Key.loginDetails)
         try {
             this.userID = info.getString(Key.userId)
             this._id = info.getString(Key._id)
@@ -85,7 +85,7 @@ class User{
     }
 
     fun updateInLocalStorage(){
-        Defaults.store(Key.loginDetails,this.data.jsonObject())
+        Defaults.shared().store(Key.loginDetails,this.data.jsonObject())
     }
 
     fun updateProfilePicToServer(){

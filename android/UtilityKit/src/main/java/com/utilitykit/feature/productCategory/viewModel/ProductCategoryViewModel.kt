@@ -4,12 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.invoice
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.invoice.model.CustomerInvoice
 import com.utilitykit.feature.productCategory.model.ProductCategory
 import com.utilitykit.feature.productCategory.repository.ProductCategoryRepository
 import com.utilitykit.socket.SocketService
@@ -34,7 +32,7 @@ class ProductCategoryViewModel(private val productCategoryRepository: ProductCat
     fun loadCategory(){
         if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
             val businessId = BusinessHandler.shared().repository.business.value!!.Id
-            UtilityKitApp.applicationContext().database.productCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
+            DatabaseHandler.shared().database.productCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
                 productCategoryRepository.categoryLiveData.postValue(it as ArrayList<ProductCategory>?)
             }
         }
@@ -52,7 +50,7 @@ class ProductCategoryViewModel(private val productCategoryRepository: ProductCat
 
     fun insert(category : ProductCategory){
         viewModelScope.launch{
-            UtilityKitApp.applicationContext().database.productCategoryDao()
+            DatabaseHandler.shared().database.productCategoryDao()
                 .insert(category)
         }
     }

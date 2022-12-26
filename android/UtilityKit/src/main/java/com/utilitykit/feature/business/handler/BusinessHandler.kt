@@ -1,13 +1,10 @@
 package com.utilitykit.feature.business.handler
 
-import android.app.Application
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
-import com.utilitykit.UtilityKitApp
-import com.utilitykit.database.UtilityKitDatabase
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.model.Business
@@ -15,9 +12,6 @@ import com.utilitykit.feature.business.repository.BusinessRepository
 import com.utilitykit.feature.business.viewModel.BusinessViewModel
 import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class BusinessHandler {
@@ -27,6 +21,7 @@ class BusinessHandler {
     val gson = Gson()
     var activity : AppCompatActivity = UtilityActivity()
     var mainActivity : AppCompatActivity = UtilityActivity()
+    var context : Context? = null
     init {
         instance = this
     }

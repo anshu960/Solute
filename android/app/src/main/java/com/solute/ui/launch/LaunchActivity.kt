@@ -22,7 +22,7 @@ class LaunchActivity : UtilityActivity() {
 //            val isAccepted = Defaults.string(Key.isAccepted)
             val isAccepted = "true"
             if(isAccepted != ""){
-                val userDetails = Defaults.string(Key.loginDetails)
+                val userDetails = Defaults.shared().string(Key.loginDetails)
                 if(userDetails != null && userDetails != ""){
                     val user = User()
                     if (user.name != "" && user.userID != "" && user._id != ""){
@@ -77,14 +77,14 @@ class LaunchActivity : UtilityActivity() {
     }
 
     fun checkUpdatesAndClearDatabase(){
-        val previousVersion = Defaults.string(Key.versionName)
+        val previousVersion = Defaults.shared().string(Key.versionName)
         val currentVersionName = BuildConfig.VERSION_NAME
         if(previousVersion == "" && currentVersionName != ""){
 //            Database.shared.clearDatabase()
-            Defaults.store(com.utilitykit.Constants.Key.versionName, currentVersionName)
+            Defaults.shared().store(com.utilitykit.Constants.Key.versionName, currentVersionName)
         }else if(previousVersion != currentVersionName){
 //            com.utilitykit.database.Database.shared.clearDatabase()
-            Defaults.store(com.utilitykit.Constants.Key.versionName, currentVersionName)
+            Defaults.shared().store(com.utilitykit.Constants.Key.versionName, currentVersionName)
         }
     }
 }

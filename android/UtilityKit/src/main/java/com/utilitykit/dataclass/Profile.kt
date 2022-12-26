@@ -2,7 +2,6 @@ package com.utilitykit.dataclass
 
 import android.content.ContentValues
 import com.utilitykit.Constants.Key
-import com.utilitykit.UtilityKitApp
 import org.json.JSONObject
 
 class Profile(
@@ -97,7 +96,7 @@ class Profile(
 
     fun sendFriendRequest(completion:((Boolean,String)->Unit)) {
         var request = JSONObject()
-        request.put(Key.userId, UtilityKitApp.user.userID)
+//        request.put(Key.userId, UtilityKitApp.user.userID)
         request.put(Key.toUserId, this.userID)
 
 //        ServiceManager().makeServiceCall(Server.sendFriendRequest, request) {
@@ -114,7 +113,7 @@ class Profile(
 
     fun acceptFriendRequest(completion:((Boolean,String)->Unit)) {
         var request = JSONObject()
-        request.put(Key.userId, UtilityKitApp.user.userID)
+//        request.put(Key.userId, UtilityKitApp.user.userID)
         request.put(Key.toUserId, this.userID)
 //        ServiceManager().makeServiceCall(Server.acceptFriendRequest, request) {
 //            try {
@@ -129,7 +128,7 @@ class Profile(
 
     fun downloadSentFriendRequest() {
         var request = JSONObject()
-        request.put(Key.userId, UtilityKitApp.user.userID)
+//        request.put(Key.userId, UtilityKitApp.user.userID)
 //        ServiceManager().makeServiceCall(Server.getSentRequest, request) {
 //            try {
 //                fun JSONArray.toMutableList(): MutableList<Any> = MutableList(length(), this::get)
@@ -146,7 +145,7 @@ class Profile(
 
     fun downloadReceivedFriendRequest() {
         var request = JSONObject()
-        request.put(Key.userId, UtilityKitApp.user.userID)
+//        request.put(Key.userId, UtilityKitApp.user.userID)
 //        ServiceManager().makeServiceCall(Server.getSentRequest, request) {
 //            try {
 //                fun JSONArray.toMutableList(): MutableList<Any> = MutableList(length(), this::get)

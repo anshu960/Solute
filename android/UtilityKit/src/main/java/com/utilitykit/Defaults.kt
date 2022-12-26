@@ -2,17 +2,31 @@ package com.utilitykit
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 
-object Defaults {
-    private const val NAME = "com.utility.kit"
-    private const val MODE = Context.MODE_PRIVATE
-    private lateinit var shared: Defaults
-    private  lateinit var sharedPreference: SharedPreferences
+class Defaults {
+    private  val NAME = "com.utilitykit"
+    private  val MODE = Context.MODE_PRIVATE
+    private lateinit  var sharedPreference: SharedPreferences
 
-    fun init(context: Context) {
-        shared = this
+    init {
+        instance = this
+    }
+
+    fun setup(context: Context){
         sharedPreference = context.getSharedPreferences(NAME, MODE)
+    }
+
+    companion object {
+        private var instance: Defaults? = null
+        fun shared(): Defaults {
+            if (instance != null) {
+                return instance as Defaults
+            } else {
+                return Defaults()
+            }
+        }
     }
 
     /**
@@ -59,11 +73,7 @@ object Defaults {
         return sharedPreference.getBoolean(key,false)
     }
     fun string(key:String):String{
-        if (this::sharedPreference.isInitialized) {
-            return sharedPreference.getString(key,"")!!
-        }else{
-            return ""
-        }
+        return sharedPreference.getString(key,"")!!
     }
     fun json(key:String):JSONObject{
         try {

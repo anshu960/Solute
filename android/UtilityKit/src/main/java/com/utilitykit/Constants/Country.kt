@@ -3,23 +3,23 @@ package com.solute.utility
 import android.content.Context
 import android.telephony.TelephonyManager
 import android.util.Log
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.feature.business.handler.BusinessHandler
 
 class Country {
     val TAG = "COUNTRY"
     fun getCountryCode():String{
         var countryCode = ""
-        if(UtilityKitApp.context != null){
-            countryCode = UtilityKitApp.context!!.getResources().getConfiguration().locale.getCountry()
-            detectSIMCountry(UtilityKitApp.context!!)?.let {
+        if(BusinessHandler.shared().context != null){
+            countryCode = BusinessHandler.shared().context!!.getResources().getConfiguration().locale.getCountry()
+            detectSIMCountry(BusinessHandler.shared().context!!)?.let {
                 return it
             }
 
-            detectNetworkCountry(UtilityKitApp.context!!)?.let {
+            detectNetworkCountry(BusinessHandler.shared().context!!)?.let {
                 return it
             }
 
-            detectLocaleCountry(UtilityKitApp.context!!)?.let {
+            detectLocaleCountry(BusinessHandler.shared().context!!)?.let {
                 return it
             }
         }

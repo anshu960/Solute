@@ -1,6 +1,5 @@
 package com.solute.ui.business
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -17,7 +16,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.solute.R
 import com.solute.databinding.ActivityBusinessBinding
-import com.solute.ui.business.receipt.ReceiptDetailsActivity
 import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.handler.CartHandler
@@ -29,6 +27,9 @@ import com.utilitykit.feature.customer.viewModel.CustomerViewModel
 import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import com.utilitykit.feature.invoice.viewModel.InvoiceViewModalFactory
 import com.utilitykit.feature.invoice.viewModel.InvoiceViewModel
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
+import com.utilitykit.feature.mediaFile.viewModel.MediaFileViewModalFactory
+import com.utilitykit.feature.mediaFile.viewModel.MediaFileViewModel
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
 import com.utilitykit.feature.product.viewModel.ProductViewModel
@@ -50,6 +51,8 @@ class BusinessActivity : UtilityActivity() {
     private lateinit var customerViewModal: CustomerViewModel
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
+    private lateinit var mediaFileViewModel: MediaFileViewModel
+
     private lateinit var navView: NavigationView
     lateinit var navController: NavController
 
@@ -158,6 +161,15 @@ class BusinessActivity : UtilityActivity() {
             ProductSubCategoryViewModel::class.java
         )
         ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
+        productSubCategoryViewModel.loadSubCategory()
+        //MediaFile
+        mediaFileViewModel = ViewModelProvider(
+            this,
+            MediaFileViewModalFactory(MediaFileHandler.shared().repository)
+        ).get(
+            MediaFileViewModel::class.java
+        )
+        MediaFileHandler.shared().setup(mediaFileViewModel!!)
         productSubCategoryViewModel.loadSubCategory()
         //Sync Everything
         SyncHandler.shared().syncAllBusinessData()

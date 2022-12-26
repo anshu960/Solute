@@ -1,8 +1,6 @@
 package com.solute.ui.more
 
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,9 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.solute.App
 import com.solute.R
 import com.solute.ui.login.LoginActivity
 import com.solute.ui.profile.ProfileActivity
@@ -58,7 +54,7 @@ class MoreFragment : Fragment() {
 
     fun onClickLogout() {
         FirebaseAuth.getInstance().signOut()
-        Defaults.remove(Key.loginDetails)
+        Defaults.shared().remove(Key.loginDetails)
         val intent = Intent(context, LoginActivity::class.java)
         startActivity(intent)
     }

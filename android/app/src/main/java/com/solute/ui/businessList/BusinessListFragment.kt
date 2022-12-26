@@ -1,15 +1,17 @@
 package com.solute.ui.businessList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.solute.R
-import com.utilitykit.UtilityKitApp
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.business.viewModel.BusinessViewModalFactory
@@ -25,6 +27,7 @@ class BusinessListFragment : Fragment() {
     private lateinit var businessViewModel: BusinessViewModel
     private var adapter: BusinessListAdapter? = null
     var allBusiness: ArrayList<Business> = ArrayList()
+    lateinit var mAdView : AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessListAdapter(it, allBusiness) }
@@ -42,6 +45,11 @@ class BusinessListFragment : Fragment() {
         }
         BusinessHandler.shared().setup(businessViewModel)
         BusinessHandler.shared().fetchAllBusiness()
+        initAdmob()
+    }
+
+    fun initAdmob(){
+
     }
 
     fun reload() {
@@ -62,6 +70,10 @@ class BusinessListFragment : Fragment() {
         this.recyclerView = view.findViewById(R.id.fragment_business_list_recycler)
         businessViewModel.loadBusiness()
         reload()
+        MobileAds.initialize(this.requireContext()) {}
+        mAdView = view.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
         return view
     }
 }

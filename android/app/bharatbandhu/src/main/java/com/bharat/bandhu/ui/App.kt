@@ -14,12 +14,11 @@ import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
-import com.utilitykit.database.Database
-import com.utilitykit.database.SQLite
 import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
 import com.utilitykit.dataclass.Task
 import com.utilitykit.dataclass.User
+import com.utilitykit.socket.SocketService
 import java.net.Socket
 class App: Application() {
 
@@ -28,7 +27,6 @@ class App: Application() {
     var socketUrl = ""
     var selectedProfiles: ArrayList<Profile> = ArrayList<Profile>()
     var selectedTask: Task? = null
-    private var mSocket: Socket? = null
     init {
         instance = this
     }
@@ -52,17 +50,15 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        UtilityKitApp().setUp(this,true)
+        UtilityKitApp().setUp(this)
         FirebaseApp.initializeApp(this)
-        SQLite.shared().setUp(this)
-        Database.shared().setUp(this)
         val deviceId = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
         Defaults.store(Key.deviceId,deviceId)
 //        Analytics.initFirebaseSetup(this)
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
 //        setUpFirebaseStorage()
-
+        SocketService.shared().connect()
     }
     fun getAndUpdateToken(){
         val messaging = FirebaseMessaging.getInstance()
@@ -72,9 +68,6 @@ class App: Application() {
             Defaults.store(Key.fcmToken, token)
         }
 
-    }
-    fun getMSocket(): Socket? {
-        return mSocket
     }
 
     companion object{

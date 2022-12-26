@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.product.repository.ProductRepository
@@ -36,7 +38,7 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
             productRepository.productLiveData.postValue(arrayListOf())
             if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
                 val businessId = BusinessHandler.shared().repository.business.value?.Id
-                UtilityKitApp.applicationContext().database.productDao().getProductsFor(businessId!!).observe(BusinessHandler.shared().activity){
+                DatabaseHandler.shared().database.productDao().getProductsFor(businessId!!).observe(BusinessHandler.shared().activity){
                     if(!it.isNullOrEmpty()){
                         productRepository.productLiveData.postValue(it as ArrayList<Product>)
                     }
@@ -50,6 +52,7 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId,user._id)
         request.put(Key.businessID,business.value?.Id)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT,request)
     }
     fun createNewProduct(request:JSONObject){
@@ -62,14 +65,14 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
     fun updateProductImage(product:Product,image:String){
         val user = User()
         val request = JSONObject()
-        if(BusinessHandler.shared().repository.business != null) {
-            val business = BusinessHandler.shared().repository.business
-            request.put(Key.businessID,business.value?.Id)
-        }
-        request.put(Key.image,image)
+        val business = BusinessHandler.shared().repository.business
+        request.put(Key.businessID,business.value?.Id)
+        request.put(Key.fileURL,image)
         request.put(Key._id,product.Id)
         request.put(Key.userId,user._id)
-        SocketService.shared().send(SocketEvent.UPDATE_PRODUCT_IMAGE,request)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
+        request.put(Key.featureObjectID,product.Id)
+        MediaFileHandler.shared().viewModel?.createNew(request)
     }
 
     fun deleteProduct(product:Product){
@@ -124,13 +127,13 @@ class ProductViewModel (private val productRepository: ProductRepository):ViewMo
 
     fun insertStock(stockEntry : ProductStock){
         viewModelScope.launch{
-            UtilityKitApp.applicationContext().database.productStockDao()
+            DatabaseHandler.shared().database.productStockDao()
                 .insert(stockEntry)
         }
     }
     fun insertProduct(product : Product){
         viewModelScope.launch{
-            UtilityKitApp.applicationContext().database.productDao()
+            DatabaseHandler.shared().database.productDao()
                 .insert(product)
         }
     }

@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.solute.R
 import com.squareup.picasso.Picasso
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
@@ -54,8 +55,10 @@ class ProductDetailsFragment : Fragment() {
             productDescription?.text = product.Description
             productCategory?.text = product.CategoryID
             productSubCategory?.text = product.SubCategoryID
-            if(product.Image.isNotEmpty()){
-                picasso.load(product.Image.first()).into(image)
+            MediaFileHandler.shared().viewModel?.loadFor(product.Id){
+                if(it.isNotEmpty()){
+                    picasso.load(it.first().FileURL).into(image)
+                }
             }
             if(ProductCategoryHandler.shared().repository.allCategory.value != null){
                 ProductCategoryHandler.shared().repository.allCategory.value!!.forEach {

@@ -46,7 +46,7 @@ class RegisterActivity : UtilityActivity() {
         }
     }
     fun authenticateUser(name:String){
-        val info =  Defaults.json(Key.loginDetails)
+        val info =  Defaults.shared().json(Key.loginDetails)
         var request = JSONObject()
         request.put(Key.name,name)
         request.put(Key.userId,userId)
@@ -72,7 +72,7 @@ class RegisterActivity : UtilityActivity() {
                 val msg =  response.getString(Key.message)
                 val payload = response.getJSONObject(Key.payload)
                 if(msg != "" && payload.length() > 0){
-                    Defaults.store(Key.loginDetails,payload)
+                    Defaults.shared().store(Key.loginDetails,payload)
 //                    val intent = Intent(applicationContext,AddProfilePicActivity::class.java)
                     val intent = Intent(applicationContext, MainActivity::class.java)
                     this.startActivity(intent)

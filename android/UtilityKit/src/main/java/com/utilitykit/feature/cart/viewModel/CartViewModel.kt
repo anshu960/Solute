@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.payload
 import com.utilitykit.socket.SocketEvent
-import com.utilitykit.UtilityKitApp.Companion.user
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.repository.CartRepository
 import com.utilitykit.feature.customer.handler.CustomerHandler
@@ -157,6 +158,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(Key.customer, JSONObject(customerJson))
         }
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         request.put(Key.transactions, JSONArray(transactions))
         SocketService.shared().send(SocketEvent.CREATE_SALE, request)
     }
@@ -176,14 +178,17 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         request.put(Key.salesID, JSONArray(salesIds))
         request.put(Key.business, JSONObject(gson.toJson(business)))
         request.put(Key.instantDiscount, instantDiscount.value)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         if(CustomerHandler.shared().repository.customer.value !=null){
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(Key.customer, JSONObject(customerJson))
         }
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.GENERATE_CUSTOMER_INVOICE, request)
     }
 
     fun prepareTransaction(customer: Customer?): ArrayList<JSONObject> {
+        val user = User()
         val business = BusinessHandler.shared().repository.business
         var transactions: ArrayList<JSONObject> = arrayListOf()
         if (cartProducts.value != null && !cartProducts.value!!.isEmpty()) {
@@ -240,6 +245,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 transactionData.put(Key.costPrice, it.CostPrice)
                 transactionData.put(Key.saleDate, now())
                 transactionData.put(Key.discount, it.Discount)
+                transactionData.put(Key.deviceId, AuthHandler.shared().deviceId)
                 if(customer != null && customer.Id != null && !customer.Id!!.isEmpty()){
                     transactionData.put(Key.customerName, customer.Name)
                     transactionData.put(Key.customerMobile, customer.MobileNumber)

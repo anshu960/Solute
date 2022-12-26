@@ -6,18 +6,16 @@ plugins {
     id 'com.google.firebase.crashlytics'
     id 'kotlin-kapt'
 }
+apply plugin: 'kotlin-android'
 android {
     compileSdk 33
     defaultConfig {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 67
-        versionName "0.0.67"
+        versionCode 76
+        versionName "0.0.76"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    lintOptions {
-        abortOnError false
     }
     buildTypes {
         release {
@@ -32,15 +30,25 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-        dataBinding true
+    dataBinding {
+        enabled = true
     }
-
+    viewBinding {
+        enabled = true
+    }
+    lint {
+        abortOnError false
+    }
+    namespace 'com.solute'
+    dependenciesInfo {
+        includeInApk false
+        includeInBundle false
+    }
+//    ndkVersion '22.0.7026061'
 }
 
 dependencies {
-    def room_version = '2.5.0-beta02'
+    def room_version = '2.5.0-rc01'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.core:core-ktx:1.9.0'
@@ -62,19 +70,20 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     //Google and Firebase
-    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.2'
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
-    implementation 'com.google.firebase:firebase-messaging:23.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
     implementation('com.google.firebase:firebase-auth') //{exclude module: "play-services-safetynet"}
     implementation 'com.google.firebase:firebase-analytics:21.2.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.firebase:firebase-storage-ktx'
-    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.22'
-    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.13.2'
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-appcheck-playintegrity'
     implementation 'com.googlecode.mp4parser:isoparser:1.1.22'
+    implementation 'com.google.android.gms:play-services-ads:21.4.0'
 
     implementation "com.squareup.picasso:picasso:2.71828"
     //UtilityKit
@@ -84,13 +93,13 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     //country code
-    implementation 'com.hbb20:ccp:2.5.0'
+    implementation 'com.hbb20:ccp:2.6.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'com.google.code.gson:gson:2.10'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
     implementation 'com.google.android.material:material:1.7.0'
-    implementation 'com.google.zxing:core:3.3.2'
+    implementation 'com.google.zxing:core:3.5.1'
 
     //update
     implementation 'com.google.android.play:core:1.10.3'
@@ -98,5 +107,12 @@ dependencies {
     implementation 'xyz.schwaab:avvylib:1.2.0'
     //Third party
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.4'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+    google()
+    maven { url "https://jitpack.io" }
 }

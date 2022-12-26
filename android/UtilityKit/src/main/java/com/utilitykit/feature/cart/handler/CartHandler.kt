@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.Constants.TableNames.Companion.sale
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.cart.repository.CartRepository
@@ -43,6 +44,7 @@ class CartHandler {
             val anyData = it.first() as JSONObject
             if (anyData.has(Key.payload)){
                 val payload = anyData.getJSONArray(Key.payload)
+
                 var allSale : ArrayList<JSONObject> = arrayListOf()
                 var salesIds : ArrayList<String> = arrayListOf()
                 for (i in 0 until payload.length())

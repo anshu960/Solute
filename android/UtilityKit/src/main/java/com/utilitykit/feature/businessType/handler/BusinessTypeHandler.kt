@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.businessType.model.BusinessType
 import com.utilitykit.feature.businessType.repository.BusinessTypeRepository
 import com.utilitykit.feature.businessType.viewModel.BusinessTypeViewModel
@@ -40,6 +41,7 @@ class BusinessTypeHandler {
         val request = JSONObject()
         val user = User()
         request.put(Key.userId,user._id)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.RETRIVE_BUSINESS_TYPE,request)
     }
 

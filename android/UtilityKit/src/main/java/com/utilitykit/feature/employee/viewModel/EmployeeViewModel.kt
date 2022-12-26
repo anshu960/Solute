@@ -1,26 +1,21 @@
 package com.utilitykit.feature.customer.viewModel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.customer
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.commonModel.Profile
-import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.employee.model.Employee
 import com.utilitykit.feature.employee.model.EmployeeAttendance
 import com.utilitykit.feature.employee.repository.EmployeeRepository
-import com.utilitykit.feature.product.model.Product
 import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
@@ -51,7 +46,7 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
 
     fun loadAttendanceFor(employee: Employee){
         employeeRepository.allEmployeeAttendanceLiveData.postValue(arrayListOf())
-            UtilityKitApp.applicationContext().database.employeeAttendanceDao().getAllItemsFor(employee.Id).observe(BusinessHandler.shared().activity){
+        DatabaseHandler.shared().database.employeeAttendanceDao().getAllItemsFor(employee.Id).observe(BusinessHandler.shared().activity){
                 if(!it.isNullOrEmpty()){
                     employeeRepository.allEmployeeAttendanceLiveData.postValue(it as ArrayList<EmployeeAttendance>?)
                 }
@@ -64,6 +59,7 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
         var request = JSONObject()
         request.put(Key.userId, user._id)
         request.put(Key.businessID, BusinessHandler.shared().repository.business.value?.Id)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.RETRIVE_EMPLOYEE, request)
     }
 
@@ -76,12 +72,13 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
         request.put(Key.mobileNumber, employeeProfile.MobileNumber)
         request.put(Key.employeeUserID, employeeProfile.Id)
         request.put(Key.emailId, employeeProfile.EmailID)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.CREATE_EMPLOYEE, request)
     }
 
     fun insert(employee: Employee) {
         viewModelScope.launch {
-            UtilityKitApp.applicationContext().database.employeeDao()
+            DatabaseHandler.shared().database.employeeDao()
                 .insert(employee)
         }
     }
@@ -92,6 +89,7 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
         request.put(Key.userId, user._id)
         request.put(Key.businessID, BusinessHandler.shared().repository.business.value?.Id)
         request.put(Key.mobileNumber, mobile)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.FIND_USER, request)
     }
 
@@ -107,12 +105,13 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
         request.put(Key.isPresent, isPresent)
         request.put(Key.hours, hours)
         request.put(Key.comment, comment)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.ADD_EMPLOYEE_ATTENDACE, request)
     }
 
     fun insertAttendance(attendance: EmployeeAttendance) {
         viewModelScope.launch {
-            UtilityKitApp.applicationContext().database.employeeAttendanceDao()
+            DatabaseHandler.shared().database.employeeAttendanceDao()
                 .insert(attendance)
         }
     }

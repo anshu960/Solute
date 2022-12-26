@@ -69,6 +69,7 @@ class Key {
         val emailId = "EmailID"
         val password = "Password"
         val deviceId = "DeviceID"
+        val featureObjectID = "FeatureObjectID"
         val countryCode = "CountryCode"
         val fcmToken = "FCMToken"
         val created = "Created"
@@ -139,6 +140,7 @@ class Key {
         val panNumber = "pan_number"
 
         //For workout
+        val uniqueId = "UniqueID"
         val name = "Name"
         val gender = "Gender"
         val status = "Status"

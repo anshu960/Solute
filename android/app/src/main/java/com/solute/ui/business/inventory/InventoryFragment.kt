@@ -14,7 +14,7 @@ import com.solute.R
 import com.solute.ui.business.inventory.analytics.AnalyticsAdapter
 import com.solute.ui.business.inventory.category.CreateCategoryActivity
 import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.product.handler.ProductHandler
@@ -46,7 +46,7 @@ class InventoryFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
             val businessId = BusinessHandler.shared().repository.business.value!!.Id
-            UtilityKitApp.applicationContext().database.saleDao().getAllItemsForBusiness(businessId).observe(this){
+            DatabaseHandler.shared().database.saleDao().getAllItemsForBusiness(businessId).observe(this){
                 if(!it.isNullOrEmpty()){
                     SyncHandler.shared().updateAnalyticsToShow(it as ArrayList<Sale>)
                 }

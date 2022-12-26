@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -32,7 +32,7 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
     fun loadSubCategory(){
         if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
             val businessId = BusinessHandler.shared().repository.business.value!!.Id
-            UtilityKitApp.applicationContext().database.productSubCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
+            DatabaseHandler.shared().database.productSubCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
                 productSubCategoryRepository.subCategoryLiveData.postValue(it as ArrayList<ProductSubCategory>?)
             }
         }
@@ -40,7 +40,7 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
 
     fun loadSubCategory(category: ProductCategory){
         if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
-            UtilityKitApp.applicationContext().database.productSubCategoryDao().getAllItemsForCategory(category.Id).observe(BusinessHandler.shared().activity){
+            DatabaseHandler.shared().database.productSubCategoryDao().getAllItemsForCategory(category.Id).observe(BusinessHandler.shared().activity){
                 productSubCategoryRepository.subCategoryLiveData.postValue(it as ArrayList<ProductSubCategory>?)
             }
         }
@@ -58,7 +58,7 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
     }
     fun insert(category : ProductSubCategory){
         viewModelScope.launch{
-            UtilityKitApp.applicationContext().database.productSubCategoryDao()
+            DatabaseHandler.shared().database.productSubCategoryDao()
                 .insert(category)
         }
     }

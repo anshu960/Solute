@@ -13,6 +13,7 @@ import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
 import com.utilitykit.Constants.Key.Companion.product
 import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 
@@ -46,10 +47,12 @@ class ProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
                 activity?.navController?.navigate(R.id.business_product_details_container)
             }
         }
-        if(product.Image.isNotEmpty()){
-            picasso.load(product.Image.first()).into(image)
-        }else{
-            image?.setImageResource(R.drawable.image)
+        MediaFileHandler.shared().viewModel?.loadFor(product.Id){
+            if(it.isNotEmpty()){
+                picasso.load(it.first().FileURL).into(image)
+            }else{
+                image?.setImageResource(R.drawable.image)
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ enum class SocketEvent(val value: String)
     getEncryptionKeys("GET_ENCRYPTION_KEYS"),
     isOnline("IS_ONLINE"),
     onEvent("ON_EVENT"),
-    authenticate("AUHTENTICATE"),
+    authenticate("AUTHENTICATE"),
     updateProfile("UPDATE_PROFILE"),
     sendMessage("SEND_MESSAGE"),
     sendTaskMessage("SEND_TASK_MESSAGE"),

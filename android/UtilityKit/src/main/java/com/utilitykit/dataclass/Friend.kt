@@ -2,7 +2,7 @@ package com.utilitykit.dataclass
 
 import android.content.ContentValues
 import com.utilitykit.Constants.Key
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.feature.business.handler.BusinessHandler
 
 import com.utilitykit.json
 import org.json.JSONObject
@@ -110,7 +110,7 @@ class Friend(
     
     fun downloadFriendFriendRequest() {
         var request = JSONObject()
-        request.put(Key._id, UtilityKitApp.user._id)
+//        request.put(Key._id, BusinessHandler.shared().context.user._id)
 //        ServiceManager().makeServiceCall(Server.allFriendRequest, request) {
 //            try {
 //                fun JSONArray.toMutableList(): MutableList<Any> = MutableList(length(), this::get)

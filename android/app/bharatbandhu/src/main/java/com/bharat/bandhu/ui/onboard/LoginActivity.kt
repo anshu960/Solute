@@ -22,11 +22,8 @@ import com.google.firebase.auth.*
 import com.hbb20.CountryCodePicker
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.Defaults.init
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
-import com.utilitykit.database.Database
-import com.utilitykit.database.SQLite
 import com.utilitykit.socket.SocketService
 
 import org.json.JSONObject
@@ -51,8 +48,6 @@ class LoginActivity : UtilityActivity() {
     private var otpTextViews: Array<EditText>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Database.shared().setUp(this)
-        SQLite.shared().setUp(this)
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
         initiatePhoneSetup()

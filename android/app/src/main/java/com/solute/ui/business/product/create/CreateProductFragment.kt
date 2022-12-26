@@ -22,7 +22,9 @@ import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
 import com.utilitykit.Constants.Key
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
@@ -517,6 +519,7 @@ class CreateProductFragment : Fragment() {
         request.put(Key.costPrice, (costPrice))
         request.put(Key.finalPrice, finalPrice)
         request.put(Key.tax, totalTax)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         if(this.product != null && !this.product!!.Id.isEmpty()){
             ProductHandler.shared().onUpdateExistingProductCallBack = {
                 onCreateNewProduct(it)
@@ -557,18 +560,13 @@ class CreateProductFragment : Fragment() {
             val imageRef = App.applicationContext().productImageRef?.child(BusinessHandler.shared().repository.business.value!!.Id)?.child(product.Id!!)?.child(fileName)
             imageRef?.putFile(fileUri!!)?.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                    ProductHandler.shared().onUpdateProductImageCallBack={updatedPrd->
+                    MediaFileHandler.shared().onCreateNew={
                         this.activity?.runOnUiThread  {
-                                if(updatedPrd != null){
-                                    this.onBackPressed()
-                                    this.onBackPressed()
-                                    this.onBackPressed()
-                                    activity?.toast("Image Updated Successfully")
-                                }else{
-                                    activity?.toast("Image couldn't be updated")
-                                }
-                            }
+                            this.stepsPosition = 0
+                            this.onBackPressed()
+                            this.activity?.toast("Image Updated Successfully")
                         }
+                    }
                     val imageUrl = it.toString()
                     ProductHandler.shared().viewModel?.updateProductImage(product,imageUrl)
                 }

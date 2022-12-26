@@ -7,37 +7,38 @@ import android.provider.ContactsContract
 import android.util.Log
 import com.utility.Encryption
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Server
 import com.utilitykit.Defaults
-import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
 import com.utilitykit.dataclass.ContactData
 import com.utilitykit.dataclass.Conversation
 import com.utilitykit.dataclass.Message
-import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
 import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.employee.handler.EmployeeHandler
 import com.utilitykit.feature.invoice.handler.InvoiceHandler
+import com.utilitykit.feature.mediaFile.network.MediaFileNetwork
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
 import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.utilitykit.feature.sync.SyncHandler
 import com.utilitykit.socket.repository.SocketRepository
+import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.URISyntaxException
 
 class SocketService : Service() {
 
     val repository = SocketRepository()
-    val mSocket = UtilityKitApp.applicationContext().getMSocket()
-
-    override fun onBind(p0: Intent?): IBinder? {
-        TODO("Not yet implemented")
-    }
+    var mSocket: Socket? = null
+    var socketServerUrl = Server.allServers[0]
+//    var socketServerUrl = ""
 
     init {
         instance = this
@@ -80,12 +81,28 @@ class SocketService : Service() {
 
     fun send(event: SocketEvent, data: JSONObject) {
         Log.d(TAG, "Sending Event ${event.value}")
-        mSocket?.emit(event.value, data)
+        var requestData = data
+        requestData.put(Key.deviceId, AuthHandler.shared().deviceId)
+        mSocket?.emit(event.value, requestData)
+    }
+    fun send(event: String, data: JSONObject) {
+        Log.d(TAG, "Sending Event $event")
+        var requestData = data
+        requestData.put(Key.deviceId, AuthHandler.shared().deviceId)
+        mSocket?.emit(event, requestData)
     }
 
     fun connect() {
-        if (mSocket != null && mSocket!!.isActive && mSocket!!.connected()) {
-            return
+        val opts = IO.Options()
+        opts.forceNew = true
+        opts.reconnection = false
+
+        mSocket?.close()
+        try {
+            prepateSocketServerUrl()
+            mSocket = IO.socket(socketServerUrl, opts)
+        } catch (e: URISyntaxException) {
+            throw RuntimeException(e)
         }
         removeSocketEventListeners()
         mSocket?.on(Socket.EVENT_CONNECT, onConnect)
@@ -193,13 +210,20 @@ class SocketService : Service() {
         mSocket?.on(SocketEvent.RETRIVE_EMPLOYEE.value, EmployeeHandler.shared().onFetchAllEmployee)
         mSocket?.on(SocketEvent.FIND_USER.value, EmployeeHandler.shared().onFindUser)
         mSocket?.on(SocketEvent.CREATE_EMPLOYEE.value, EmployeeHandler.shared().onCreateEmployee)
-        mSocket?.on(SocketEvent.ADD_EMPLOYEE_ATTENDACE.value,EmployeeHandler.shared().onCreateEmployeeAttendance)
+        mSocket?.on(
+            SocketEvent.ADD_EMPLOYEE_ATTENDACE.value,
+            EmployeeHandler.shared().onCreateEmployeeAttendance
+        )
+        MediaFileNetwork.shared().connectScoket()
         //conenct the socket
         mSocket?.connect()
     }
 
-    fun removeSocketEventListeners(){
+    fun removeSocketEventListeners() {
         mSocket?.off()
+        MediaFileNetwork.shared().disconnectSocket()
+        mSocket?.disconnect()
+        mSocket?.close()
     }
 
     fun verifyIfConnectedOrNot() {
@@ -208,18 +232,27 @@ class SocketService : Service() {
         }
     }
 
+    fun prepateSocketServerUrl() {
+        socketServerUrl = Server.allServers[0]
+        return
+        if (socketServerUrl == "") {
+            socketServerUrl = Server.allServers[0]
+            return
+        }
+        socketServerUrl = Server.allServers[1]
+        socketServerUrl = when (Server.allServers.indexOf(socketServerUrl)) {
+            0 -> Server.allServers[1]
+            1 -> Server.allServers[2]
+            else -> Server.allServers[0]
+        }
+    }
+
 
     val onConnect = Emitter.Listener {
         repository.socketConnectionStatus.postValue(1)
         isSocketConnected = true
         if (mSocket?.connected() == true) {
-            val user = User()
-            if (user._id != "") {
-                joinRoom(user._id)
-            } else {
-                val deviceId = Defaults.string(Key.deviceId)
-                joinRoom(deviceId)
-            }
+            joinRoom(AuthHandler.shared().deviceId)
         }
     }
 
@@ -235,7 +268,7 @@ class SocketService : Service() {
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
         isSocketConnected = false
-        mSocket?.connect()
+        connect()
     }
 
     private val onDisconnect = Emitter.Listener {
@@ -244,7 +277,7 @@ class SocketService : Service() {
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
         isSocketConnected = false
-        mSocket?.connect()
+        connect()
     }
 
     private val joinRoom = Emitter.Listener {
@@ -261,8 +294,8 @@ class SocketService : Service() {
                 messageObject = data
                 iv = messageObject.getString(Key.encryptionIV)
                 salt = messageObject.getString(Key.encryptionSalt)
-                Defaults.store(Key.encryptionIV, iv)
-                Defaults.store(Key.encryptionSalt, salt)
+                Defaults.shared().store(Key.encryptionIV, iv)
+                Defaults.shared().store(Key.encryptionSalt, salt)
             }
         }
     }
@@ -519,5 +552,9 @@ class SocketService : Service() {
         if (data is JSONArray) {
             this.onEventArray(SocketEvent.getAllExperience, data)
         }
+    }
+
+    override fun onBind(p0: Intent?): IBinder? {
+        return null
     }
 }

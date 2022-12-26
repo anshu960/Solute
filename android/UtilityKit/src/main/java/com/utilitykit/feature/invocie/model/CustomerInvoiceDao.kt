@@ -20,7 +20,7 @@ interface CustomerInvoiceDao {
     fun getRecentItem(): LiveData<CustomerInvoice>
 
     @Query("select * from CustomerInvoice where BusinessID = :businessId order by UpdatedAt DESC LIMIT 1")
-    fun getRecentItemForBusiness(businessId:String): LiveData<CustomerInvoice>
+    suspend fun getRecentItemForBusiness(businessId:String): CustomerInvoice?
 
     @Query("SELECT * FROM CustomerInvoice ORDER by UpdatedAt DESC")
     fun getAllItems(): LiveData<List<CustomerInvoice>>

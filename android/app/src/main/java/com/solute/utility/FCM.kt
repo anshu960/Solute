@@ -35,7 +35,7 @@ class FCM {
     }
 
     fun updateFcmTokenToServer(){
-        val fcmToken = Defaults.string(Key.fcmToken)
+        val fcmToken = Defaults.shared().string(Key.fcmToken)
         val user = User()
         if(fcmToken != "" && user._id != ""){
             val user = User()

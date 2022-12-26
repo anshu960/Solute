@@ -10,11 +10,9 @@ import com.bharat.bandhu.ui.MainActivity
 import com.bharat.bandhu.ui.onboard.LoginActivity
 import com.bharat.bandhu.ui.onboard.register.SignupActivity
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.isAccepted
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityActivity
 import com.utilitykit.UtilityKitApp
-import com.utilitykit.database.Database
 import com.utilitykit.dataclass.User
 import com.utilitykit.socket.SocketService
 
@@ -64,7 +62,6 @@ class LaunchActivity : UtilityActivity() {
         SocketService.shared().currentActivity = this
         SocketService.shared().connect()
         setContentView(R.layout.activity_launch)
-        Database.shared().setUp(this)
         checkUpdatesAndClearDatabase()
         mDelayHandler = Handler()
         //Navigate with delay

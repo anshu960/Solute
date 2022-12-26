@@ -7,7 +7,7 @@ class Constants {
 
         val defaultErrorMessage = "Something went wrong, please try after sometime!"
 
-        val whatsappBusinessBundleId = "com.whatsapp.w4b"
+        val whatsappBusinessBundleId = "com.whatsapp"
     }
 
 

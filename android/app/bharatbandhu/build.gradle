@@ -5,6 +5,7 @@ plugins {
     id "com.google.gms.google-services"
     id 'com.google.firebase.crashlytics'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdk 33
@@ -29,15 +30,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    lintOptions {
-        checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
-        abortOnError false
-    }
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    namespace 'com.bharat.bandhu'
 }
 
 dependencies {
@@ -45,36 +45,36 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 //    implementation project(path: ':app')
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test:runner:1.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
-    implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     //Google and Firebase
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-messaging:23.0.7'
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
     implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation 'com.google.firebase:firebase-analytics:21.1.0'
+    implementation 'com.google.firebase:firebase-analytics:21.2.0'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
-    implementation 'com.google.android.gms:play-services-location:20.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.firebase:firebase-storage-ktx'
-    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.22'
-    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.13.2'
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
 
     implementation 'com.googlecode.mp4parser:isoparser:1.1.22'
 
@@ -82,15 +82,22 @@ dependencies {
     //UtilityKit
     implementation project(":UtilityKit")
     //country code
-    implementation 'com.hbb20:ccp:2.5.0'
+    implementation 'com.hbb20:ccp:2.6.1'
     //Socket
-    implementation('io.socket:socket.io-client:2.0.1') {
+    implementation('io.socket:socket.io-client:2.1.0') {
         exclude group: 'org.json', module: 'json'
     }
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
-    implementation 'com.google.zxing:core:3.3.2'
+    implementation 'com.google.zxing:core:3.5.1'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+    google()
+    maven { url "https://jitpack.io" }
 }

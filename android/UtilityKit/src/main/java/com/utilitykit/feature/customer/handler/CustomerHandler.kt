@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.customer.model.Customer
@@ -46,6 +47,7 @@ class CustomerHandler {
             var request = JSONObject()
             request.put(Key.userId,user._id)
             request.put(Key.businessID, BusinessHandler.shared().repository.business.value?.Id)
+            request.put(Key.deviceId, AuthHandler.shared().deviceId)
             SocketService.shared().send(SocketEvent.RETRIVE_CUSTOMER,request)
         }
     }

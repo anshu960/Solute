@@ -3,13 +3,16 @@ package com.utilitykit.feature.sync
 import android.content.ContentValues
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.Constants.Key.Companion.payload
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
 import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.invoice.handler.InvoiceHandler
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
@@ -69,6 +72,7 @@ class SyncHandler {
         ProductCategoryHandler.shared().fetchAllProductCategory()
         ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
         InvoiceHandler.shared().viewModel?.fetchAllInvoice()
+        MediaFileHandler.shared().viewModel?.retrieve()
     }
 
     fun updateAnalyticsToShow(allSales : ArrayList<Sale>) {
@@ -207,10 +211,11 @@ class SyncHandler {
 
 
     fun getAllSaleForBusiness() {
-        val lastSale = UtilityKitApp.applicationContext().database.saleDao().getRecentItem()
+        val lastSale = DatabaseHandler.shared().database.saleDao().getRecentItem()
         val user = User()
         var request = JSONObject()
         request.put(Key.userId, user._id)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         request.put(Key.businessID, BusinessHandler.shared().repository.business.value?.Id)
         if (lastSale.value != null) {
             request.put(Key.lastSyncDate, lastSale.value!!.CreatedAt)
@@ -229,7 +234,7 @@ class SyncHandler {
                             val invoiceSaleJson = payload.getJSONObject(i)
                             val newSale =
                                 gson.fromJson(invoiceSaleJson.toString(), Sale::class.java)
-                            UtilityKitApp.applicationContext().database.saleDao().insert(newSale)
+                            DatabaseHandler.shared().database.saleDao().insert(newSale)
                         }
                     }
                 }
@@ -240,9 +245,10 @@ class SyncHandler {
     fun getAllStockForBusiness() {
         val user = User()
         val lastProductStock =
-            UtilityKitApp.applicationContext().database.productStockDao().getRecentItem()
+            DatabaseHandler.shared().database.productStockDao().getRecentItem()
         var request = JSONObject()
         request.put(Key.userId, user._id)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         request.put(Key.businessID, BusinessHandler.shared().repository.business.value?.Id)
         request.put(Key.lastSyncDate, lastProductStock!!.value?.CreatedAt)
         SocketService.shared().send(SocketEvent.RETRIVE_ALL_STOCK_ENTRY, request)

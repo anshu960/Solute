@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.product.detail.productStockDetails.adapter.ProductDetailStockAdapter
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.ProductStock
@@ -54,7 +54,7 @@ class ProductStockDetailsFragment : Fragment() {
         }
         if(!ProductHandler.shared().repository.selectedProduct.value?.Id.isNullOrEmpty()){
             val productId = ProductHandler.shared().repository.selectedProduct.value!!.Id
-            UtilityKitApp.applicationContext().database.productStockDao().getForProduct(productId).observe(viewLifecycleOwner){
+            DatabaseHandler.shared().database.productStockDao().getForProduct(productId).observe(viewLifecycleOwner){
                 if(!it.isNullOrEmpty()){
                     this.allStock = it as ArrayList<ProductStock>
                     loadData()
@@ -72,7 +72,7 @@ class ProductStockDetailsFragment : Fragment() {
     }
 
     fun removeQuantity(){
-        if(ProductHandler.shared().repository.selectedProduct != null && ProductHandler.shared().repository.selectedProduct.value != null) {
+        if(ProductHandler.shared().repository.selectedProduct.value != null) {
             val quantityEditText = EditText(this.context)
             quantityEditText.inputType = InputType.TYPE_CLASS_NUMBER
             quantityEditText.hint = "Quantity"
@@ -105,7 +105,7 @@ class ProductStockDetailsFragment : Fragment() {
     }
 
     fun addQuantity(){
-        if(ProductHandler.shared().repository.selectedProduct != null && ProductHandler.shared().repository.selectedProduct.value != null) {
+        if(ProductHandler.shared().repository.selectedProduct.value != null) {
             val quantityEditText = EditText(this.context)
             quantityEditText.inputType = InputType.TYPE_CLASS_NUMBER
             quantityEditText.hint = "Quantity"
@@ -138,7 +138,7 @@ class ProductStockDetailsFragment : Fragment() {
     }
 
     fun resetQuantity(){
-        if(ProductHandler.shared().repository.selectedProduct != null && ProductHandler.shared().repository.selectedProduct.value != null) {
+        if(ProductHandler.shared().repository.selectedProduct.value != null) {
             val quantityEditText = EditText(this.context)
             quantityEditText.inputType = InputType.TYPE_CLASS_NUMBER
             quantityEditText.hint = "Quantity"

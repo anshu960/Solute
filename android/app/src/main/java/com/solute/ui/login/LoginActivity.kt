@@ -26,6 +26,7 @@ import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.socket.SocketService
 import org.json.JSONObject
@@ -213,11 +214,7 @@ class LoginActivity : UtilityActivity() {
         request.put(Key.mobileNumber,phoneNumber)
         request.put(Key.dialCode,getDialCode())
         request.put(Key.userId,uid)
-        val deviceID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-        request.put(Key.deviceId,deviceID)
-        request.put(Key.fcmToken,deviceID)
-        SocketService.shared().joinRoom(uid)
-
+        request.put(Key.fcmToken,AuthHandler.shared().deviceId)
         this.startActivityIndicator("Checking for existing accounts")
         SocketService.shared().onEvent= { event, data ->
             this.runOnUiThread {
@@ -226,17 +223,16 @@ class LoginActivity : UtilityActivity() {
                 if(data.has(Key.payload)){
                     var payload = data.getJSONObject(Key.payload)
                     if(payload.has(Key.name)){
-                        SocketService.shared().joinRoom(payload.getString(Key._id))
-                        Defaults.store(Key.loginDetails, payload)
+                        Defaults.shared().store(Key.loginDetails, payload)
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         this.startActivity(intent)
                     }else{
                         payload.put(Key.userId,uid)
                         payload.put(Key.mobileNumber,phoneNumber)
-                        payload.put(Key.deviceId,deviceID)
-                        payload.put(Key.fcmToken,deviceID)
+                        payload.put(Key.deviceId,AuthHandler.shared().deviceId)
+                        payload.put(Key.fcmToken,AuthHandler.shared().deviceId)
                         payload.put(Key.dialCode,selectedCountryCode)
-                        Defaults.store(Key.loginDetails,payload)
+                        Defaults.shared().store(Key.loginDetails,payload)
                         val intent = Intent(applicationContext, RegisterActivity::class.java)
                         intent.putExtra(Key.userId,uid)
                         intent.putExtra(Key.mobileNumber,phoneNumber)

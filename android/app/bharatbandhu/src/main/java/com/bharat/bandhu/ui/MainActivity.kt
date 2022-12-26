@@ -8,20 +8,20 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.bharat.bandhu.R
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
+import com.utilitykit.UtilityActivity
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : UtilityActivity() {
 
     val user = User()
     var generateButton : Button?  = null

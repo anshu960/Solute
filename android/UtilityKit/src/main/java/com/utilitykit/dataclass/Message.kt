@@ -1,13 +1,9 @@
 package com.utilitykit.dataclass
 
 import android.content.ContentValues
-import androidx.room.Database
 import com.solute.constants.ContentType
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.contentType
-import com.utilitykit.socket.SocketEvent
-import com.utilitykit.UtilityKitApp
-import com.utilitykit.socket.SocketService
+
 import org.json.JSONObject
 
 data class Message(

@@ -12,10 +12,10 @@ class WhatsappManager {
      fun sendInvoice(activity:UtilityActivity?,mobileNumber:String,invoiceNumber:Long,amount :Float) {
          var message = "Solute\n"
          message += "Invoice Generate\n"
-         message += "Invoice Number : $invoiceNumber \n"
+         message += "Invoice Number : $invoiceNumber\n"
          message += "Invoice Amount : $amount\n"
          message += "You can see your invoice anytime at link below\n"
-         message = "$message https://solute.app/#/receipt?id=$invoiceNumber"
+         message = message + "https://solute.app/#/receipt?id="+ invoiceNumber
 
         try {
             activity?.packageManager?.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES)

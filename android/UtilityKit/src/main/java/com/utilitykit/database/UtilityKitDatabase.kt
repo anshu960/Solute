@@ -14,6 +14,8 @@ import com.utilitykit.feature.employee.model.EmployeeAttendance
 import com.utilitykit.feature.invocie.model.CustomerInvoiceDao
 import com.utilitykit.feature.invocie.model.SaleDao
 import com.utilitykit.feature.invoice.model.CustomerInvoice
+import com.utilitykit.feature.mediaFile.model.MediaFile
+import com.utilitykit.feature.mediaFile.model.MediaFileDao
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.model.ProductDao
 import com.utilitykit.feature.product.model.ProductStock
@@ -48,8 +50,9 @@ class Converters {
         ProductSubCategory::class,
         Employee::class,
         EmployeeAttendance::class,
+        MediaFile::class,
     ],
-    version = 18,
+    version = 22,
     exportSchema = false
 )
 abstract class UtilityKitDatabase : RoomDatabase() {
@@ -64,6 +67,7 @@ abstract class UtilityKitDatabase : RoomDatabase() {
     abstract fun customerInvoiceDao(): CustomerInvoiceDao
     abstract fun productCategoryDao(): ProductCategoryDao
     abstract fun productSubCategoryDao(): ProductSubCategoryDao
+    abstract fun mediaFileDao():MediaFileDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

@@ -1,9 +1,12 @@
 package com.utilitykit.Constants
 
 object Server {
+    var allServers = arrayOf(
+        "http://192.168.1.3:1010",
+        "https://solute-r227wnciga-el.a.run.app",
+        "https://solute-r227wnciga-el.a.run.app",
+    )
 
-        var devHost = "http://192.168.1.2:1010/" //Debug
-        var prodDost = "https://solute-r227wnciga-el.a.run.app" //release
 }
 
 

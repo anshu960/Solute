@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import androidx.fragment.app.Fragment
-import androidx.multidex.BuildConfig
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
@@ -24,11 +23,12 @@ import com.google.firebase.storage.ktx.storage
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityActivity
-import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 
 
 class App: Application() {
@@ -60,16 +60,16 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AuthHandler.shared().deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         FirebaseApp.initializeApp(/*context=*/this)
         val firebaseAppCheck = FirebaseAppCheck.getInstance()
         firebaseAppCheck.installAppCheckProviderFactory(
             PlayIntegrityAppCheckProviderFactory.getInstance()
         )
-        UtilityKitApp().setUp(this,BuildConfig.DEBUG)
         FirebaseApp.initializeApp(this)
-//        SQLite.shared().setUp(this)
-        val deviceId = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
-        Defaults.store(Key.deviceId,deviceId)
+        DatabaseHandler.shared().appContext = this
+        Defaults.shared().setup(this)
+        Defaults.shared().store(Key.deviceId,AuthHandler.shared().deviceId)
 //        Analytics.initFirebaseSetup(this)
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
@@ -79,7 +79,6 @@ class App: Application() {
 
     override fun startForegroundService(service: Intent?): ComponentName? {
         return super.startForegroundService(service)
-        UtilityKitApp().setUp(this,BuildConfig.DEBUG)
     }
 
 
@@ -89,7 +88,7 @@ class App: Application() {
         messaging.isAutoInitEnabled = true
         val token = FirebaseMessaging.getInstance().token.toString()
         if (token != null) {
-            Defaults.store(Key.fcmToken, token)
+            Defaults.shared().store(Key.fcmToken, token)
         }
 
     }
@@ -101,6 +100,7 @@ class App: Application() {
         var context : Context? = null
         var fragment : Fragment? = null
         private var instance: App? = null
+
         fun applicationContext() : App {
             return instance as App
         }

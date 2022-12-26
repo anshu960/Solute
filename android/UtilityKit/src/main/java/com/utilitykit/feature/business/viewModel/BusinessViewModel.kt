@@ -2,23 +2,18 @@ package com.utilitykit.feature.business.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.business
-import com.utilitykit.UtilityKitApp
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.business.repository.BusinessRepository
 import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
-import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.sync.BusinessAnalytics
 import com.utilitykit.socket.SocketService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.count
-import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
@@ -39,7 +34,7 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
         get() = bussinessRepository.allBusiness
 
     fun loadBusiness() {
-        UtilityKitApp.applicationContext().database.businessDao().getAllItems().observe(
+        DatabaseHandler.shared().database.businessDao().getAllItems().observe(
             BusinessHandler.shared().mainActivity
         ) {
             if (!it.isNullOrEmpty()) {
@@ -65,6 +60,7 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
         request.put(Key.address, address)
         request.put(Key.emailId, email)
         request.put(Key.mobileNumber, mobile)
+        request.put(Key.deviceId, AuthHandler.shared().deviceId)
         if (BusinessTypeHandler.shared().repository.businessType != null) {
             request.put(
                 Key.businessTypeID,
@@ -76,13 +72,13 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
 
     fun insertDatabase(business: Business) {
         viewModelScope.launch {
-            UtilityKitApp.applicationContext().database.businessDao().insert(business)
+            DatabaseHandler.shared().database.businessDao().insert(business)
         }
     }
 
     fun clearAll() {
         viewModelScope.launch {
-            UtilityKitApp.applicationContext().database.businessDao().clearAll()
+            DatabaseHandler.shared().database.businessDao().clearAll()
         }
     }
 

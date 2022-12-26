@@ -58,19 +58,19 @@ class SMSManager {
     fun sendInvoiceReceipt(invoiceNumber:Int,amount :Float){
         var message = "Solute\n"
         message += "Invoice Generate\n"
-        message += "Invoice Number : $invoiceNumber \n"
+        message += "Invoice Number : $invoiceNumber\n"
         message += "Invoice Amount : $amount\n"
         message += "You can see your invoice anytime at link below\n"
-        message = "$message https://solute.app/#/receipt?id=$invoiceNumber"
+        message = message + "https://solute.app/#/receipt?id="+ invoiceNumber
             sendSms(null,"+919031570222",message)
     }
     fun sendInvoiceReceipt(activity:UtilityActivity?,mobileNumber:String,invoiceNumber:Long,amount :Float){
         var message = "Solute\n"
         message += "Invoice Generate\n"
-        message += "Invoice Number : $invoiceNumber \n"
+        message += "Invoice Number : $invoiceNumber\n"
         message += "Invoice Amount : $amount\n"
         message += "You can see your invoice anytime at link below\n"
-        message = "$message https://solute.app/#/receipt?id=$invoiceNumber"
+        message = message + "https://solute.app/#/receipt?id="+ invoiceNumber
         sendSms(activity,mobileNumber,message)
     }
 
@@ -79,10 +79,10 @@ class SMSManager {
         shareText.type = "text/plain"
         var message = "Solute\n"
         message += "Invoice Generate\n"
-        message += "Invoice Number : $invoiceNumber \n"
+        message += "Invoice Number : $invoiceNumber\n"
         message += "Invoice Amount : $amount\n"
         message += "You can see your invoice anytime at link below\n"
-        message = "$message https://solute.app/#/receipt?id=$invoiceNumber"
+        message = message + "https://solute.app/#/receipt?id="+ invoiceNumber
         shareText.putExtra(Intent.EXTRA_SUBJECT, "Subject from my application")
         shareText.putExtra(Intent.EXTRA_TEXT, message)
         activity?.startActivity(Intent.createChooser(shareText, "Share Via"))

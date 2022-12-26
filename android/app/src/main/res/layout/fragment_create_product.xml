@@ -258,6 +258,7 @@
                     android:id="@+id/create_product_discount_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:hint="Discount (Calculated)"
                     app:textInputLayoutFocusedRectEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -300,6 +301,7 @@
                     android:id="@+id/create_product_final_price_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:hint="Final Price (Calculated)"
                     app:textInputLayoutFocusedRectEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>

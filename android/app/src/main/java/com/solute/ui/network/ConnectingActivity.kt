@@ -40,7 +40,7 @@ class ConnectingActivity : AppCompatActivity() {
         if(!isNavigated){
             isNavigated = true
             Handler().postDelayed({
-                val userDetails = Defaults.string(Key.loginDetails)
+                val userDetails = Defaults.shared().string(Key.loginDetails)
                 if(userDetails != null && userDetails != ""){
                     val user = User()
                     if (user.name != "" && user.userID != "" && user._id != ""){
