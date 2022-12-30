@@ -6,9 +6,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autoFocus" />
 
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autoFocus" android:required="false"/>
 
     <queries>
         <package android:name="com.whatsapp" />
@@ -17,18 +17,22 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:hardwareAccelerated="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="LockedOrientationActivity"
-        android:largeHeap="true"
         tools:targetApi="33">
+        <activity
+            android:name=".ui.business.barcode.scanner.BarCodeScannerActivity"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".ui.network.ConnectingActivity"
             android:exported="false"
@@ -101,13 +105,13 @@
             android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3264976123580568~5220196222"/>
+            android:value="ca-app-pub-3264976123580568~5220196222" />
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="barcode" />
-        <!-- To use multiple models: android:value="barcode,model2,model3" -->
     </application>
 
 </manifest>

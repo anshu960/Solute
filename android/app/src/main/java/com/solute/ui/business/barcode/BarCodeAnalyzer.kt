@@ -1,19 +1,20 @@
-package com.solute.scanner
+package com.solute.ui.business.barcode
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.graphics.RectF
-import android.widget.Toast
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 
 class BarCodeAnalyzer(
     private val context: Context,
-    private val barcodeBoxView: BarcodeBoxView,
+    private val barcodeBoxView: BarCodeBoxView,
+    private val onDetectBarCode: ((code: String) -> Unit)?,
     private val previewViewWidth: Float,
     private val previewViewHeight: Float
 ) : ImageAnalysis.Analyzer {
@@ -45,7 +46,22 @@ class BarCodeAnalyzer(
             val inputImage = InputImage.fromMediaImage(img, image.imageInfo.rotationDegrees)
 
             // Process image searching for barcodes
-            val options = BarcodeScannerOptions.Builder()
+            val options = BarcodeScannerOptions.Builder().setBarcodeFormats(
+                Barcode.FORMAT_AZTEC,
+                Barcode.FORMAT_CODE_128,
+                Barcode.FORMAT_CODE_39,
+                Barcode.FORMAT_CODE_93,
+                Barcode.FORMAT_CODABAR,
+                Barcode.FORMAT_EAN_13,
+                Barcode.FORMAT_EAN_8,
+                Barcode.FORMAT_ITF,
+                Barcode.FORMAT_UPC_A,
+                Barcode.FORMAT_UPC_E,
+                Barcode.FORMAT_QR_CODE,
+                Barcode.FORMAT_PDF417,
+                Barcode.FORMAT_AZTEC,
+                Barcode.FORMAT_DATA_MATRIX
+            )
                 .build()
 
             val scanner = BarcodeScanning.getClient(options)
@@ -55,12 +71,7 @@ class BarCodeAnalyzer(
                     if (barcodes.isNotEmpty()) {
                         for (barcode in barcodes) {
                             // Handle received barcodes...
-                            Toast.makeText(
-                                context,
-                                "Value: " + barcode.rawValue,
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+                            barcode.rawValue?.let { onDetectBarCode?.let { it1 -> it1(it) } }
                             // Update bounding rect
                             barcode.boundingBox?.let { rect ->
                                 barcodeBoxView.setRect(

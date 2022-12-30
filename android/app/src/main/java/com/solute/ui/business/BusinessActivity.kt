@@ -51,7 +51,7 @@ class BusinessActivity : UtilityActivity() {
     private lateinit var customerViewModal: CustomerViewModel
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
-    private lateinit var mediaFileViewModel: MediaFileViewModel
+
 
     private lateinit var navView: NavigationView
     lateinit var navController: NavController
@@ -162,14 +162,7 @@ class BusinessActivity : UtilityActivity() {
         )
         ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
         productSubCategoryViewModel.loadSubCategory()
-        //MediaFile
-        mediaFileViewModel = ViewModelProvider(
-            this,
-            MediaFileViewModalFactory(MediaFileHandler.shared().repository)
-        ).get(
-            MediaFileViewModel::class.java
-        )
-        MediaFileHandler.shared().setup(mediaFileViewModel!!)
+
         productSubCategoryViewModel.loadSubCategory()
         //Sync Everything
         SyncHandler.shared().syncAllBusinessData()

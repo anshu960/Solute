@@ -19,27 +19,41 @@ import com.squareup.picasso.Picasso
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MoreFragment : Fragment() {
 
-    val user = User()
-
+    var user = User()
+    val picasso = Picasso.get()
+    var profileImageView : ImageView? = null
+    var profileNameTextView : TextView? = null
+    var profileStatusTextView : TextView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val picasso = Picasso.get()
         val view = inflater.inflate(R.layout.fragment_more, container, false)
-        if (this.user.profilePic != "") {
-            LocalFileManager().getLocalFileUrl(this.user.profilePic) { url ->
-                val profileImageView: ImageView = view.findViewById(R.id.more_profile_name)
-                picasso.load(this.user.profilePic)?.into(profileImageView)
-            }
-        }
         val profileLayout : ConstraintLayout = view.findViewById(R.id.more_profile_layout)
         profileLayout.setOnClickListener { presentProfile() }
-        val profileNameTextView: TextView = view.findViewById(R.id.more_profile_name)
+        profileNameTextView = view.findViewById(R.id.more_profile_name)
         profileNameTextView?.text = this.user.name
+        profileStatusTextView = view.findViewById(R.id.more_profile_status)
+        if(this.user.status != ""){
+            profileStatusTextView?.text = this.user.status
+        }else{
+            profileStatusTextView?.text = this.user.mobile
+        }
+        profileImageView = view.findViewById(R.id.more_profile_image)
+        MediaFileHandler.shared().viewModel?.loadFor(user._id){
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                picasso.load(it.first().FileURL).into(profileImageView)
+            }
+        }
         val logoutButton : Button = view.findViewById(R.id.more_logout_btn)
         logoutButton.setOnClickListener { onClickLogout() }
         return view
@@ -58,5 +72,22 @@ class MoreFragment : Fragment() {
         val intent = Intent(context, LoginActivity::class.java)
         startActivity(intent)
     }
+
+    override fun onResume() {
+        super.onResume()
+        user = User()
+        profileNameTextView?.text = this.user.name
+        if(this.user.status != ""){
+            profileStatusTextView?.text = this.user.status
+        }else{
+            profileStatusTextView?.text = this.user.mobile
+        }
+        MediaFileHandler.shared().viewModel?.loadFor(user._id){
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                picasso.load(it.first().FileURL).into(profileImageView)
+            }
+        }
+    }
+
 
 }

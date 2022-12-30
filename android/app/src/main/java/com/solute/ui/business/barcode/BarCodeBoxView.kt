@@ -1,4 +1,4 @@
-package com.solute.scanner
+package com.solute.ui.business.barcode
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,8 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.view.View
-
-class BarcodeBoxView(
+class BarCodeBoxView(
     context: Context
 ) : View(context) {
 
@@ -17,13 +16,10 @@ class BarcodeBoxView(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
         val cornerRadius = 10f
-
         paint.style = Paint.Style.STROKE
-        paint.color = Color.RED
+        paint.color = Color.BLUE
         paint.strokeWidth = 5f
-
         canvas?.drawRoundRect(mRect, cornerRadius, cornerRadius, paint)
     }
 

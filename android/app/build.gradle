@@ -13,8 +13,8 @@ android {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 79
-        versionName "0.0.79"
+        versionCode 81
+        versionName "0.0.81"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -44,6 +44,9 @@ android {
         includeInApk false
         includeInBundle false
     }
+    buildFeatures {
+        viewBinding true
+    }
 //    ndkVersion '22.0.7026061'
 }
 
@@ -63,6 +66,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'com.android.billingclient:billing:5.1.0'
+    kapt 'com.android.databinding:compiler:3.1.4'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.5.1'

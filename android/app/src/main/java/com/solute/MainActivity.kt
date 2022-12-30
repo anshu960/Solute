@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +20,9 @@ import com.solute.ui.business.create.SelectBusinessTypeActivity
 import com.solute.ui.network.ConnectingActivity
 import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
+import com.utilitykit.feature.mediaFile.viewModel.MediaFileViewModalFactory
+import com.utilitykit.feature.mediaFile.viewModel.MediaFileViewModel
 import com.utilitykit.socket.SocketService
 
 
@@ -26,7 +30,7 @@ class MainActivity : UtilityActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     var floatingButton : FloatingActionButton? = null
-
+    private lateinit var mediaFileViewModel: MediaFileViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,17 +65,22 @@ class MainActivity : UtilityActivity() {
             }
         }
         BusinessHandler.shared().mainActivity = this
+
+        //MediaFile
+        mediaFileViewModel = ViewModelProvider(
+            this,
+            MediaFileViewModalFactory(MediaFileHandler.shared().repository)
+        ).get(
+            MediaFileViewModel::class.java
+        )
+        MediaFileHandler.shared().setup(mediaFileViewModel!!)
+        MediaFileHandler.shared().repository.storageBucketReferece = App.applicationContext().imagesRef
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)
     }
 
     override fun onBackPressed() {
-
-    }
-
-    override fun onResume() {
-        super.onResume()
 
     }
 

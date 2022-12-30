@@ -60,7 +60,7 @@ class Key {
         val saleTime = "SaleTime"
         val discount = "Discount"
         val instantDiscount = "InstantDiscount"
-
+        val success = "Success"
         val productID = "ProductID"
         val productName = "ProductName"
         val product = "Product"

@@ -46,7 +46,6 @@ class App: Application() {
     var productImageRef: StorageReference? = null
     var videosRef: StorageReference? = null
     var profilePicRef: StorageReference? = null
-    var imagePathRef: StorageReference? = null
     var videoPathRef: StorageReference? = null
 
     fun setUpFirebaseStorage(){
