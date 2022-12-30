@@ -200,8 +200,7 @@ class LoginActivity : UtilityActivity() {
         val deviceID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         request.put(Key.deviceId,deviceID)
         request.put(Key.fcmToken,deviceID)
-        SocketService.shared().joinRoom(uid)
-        Defaults.remove(Key.membershipDetails)
+        Defaults.shared().remove(Key.membershipDetails)
         this.startActivityIndicator("Checking for existing accounts")
         SocketService.shared().onEvent= { event, data ->
             this.runOnUiThread {
@@ -210,8 +209,7 @@ class LoginActivity : UtilityActivity() {
                 if(data.has(Key.payload)){
                     var payload = data.getJSONObject(Key.payload)
                     if(payload.has(Key.name)){
-                        SocketService.shared().joinRoom(payload.getString(Key._id))
-                        Defaults.store(Key.loginDetails, payload)
+                        Defaults.shared().store(Key.loginDetails, payload)
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         this.startActivity(intent)
                     }else{
@@ -220,7 +218,7 @@ class LoginActivity : UtilityActivity() {
                         payload.put(Key.deviceId,deviceID)
                         payload.put(Key.fcmToken,deviceID)
                         payload.put(Key.dialCode,selectedCountryCode)
-                        Defaults.store(Key.loginDetails,payload)
+                        Defaults.shared().store(Key.loginDetails,payload)
                         val intent = Intent(applicationContext, SignupActivity::class.java)
                         intent.putExtra(Key.userId,uid)
                         intent.putExtra(Key.mobileNumber,phoneNumber)

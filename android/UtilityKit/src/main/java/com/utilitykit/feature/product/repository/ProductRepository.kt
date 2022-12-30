@@ -3,6 +3,7 @@ package com.utilitykit.feature.product.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.utilitykit.feature.product.model.Product
+import com.utilitykit.feature.product.model.ProductBarCode
 import com.utilitykit.feature.product.model.ProductStock
 import org.json.JSONObject
 
@@ -22,6 +23,10 @@ class ProductRepository {
      val productStockLiveData = MutableLiveData<ArrayList<ProductStock>>()
      val productStock : LiveData<ArrayList<ProductStock>>
           get() = productStockLiveData
+
+     val productBarCodeLiveData = MutableLiveData<ArrayList<ProductBarCode>>()
+     val productBarCode : LiveData<ArrayList<ProductBarCode>>
+          get() = productBarCodeLiveData
 
 
 }

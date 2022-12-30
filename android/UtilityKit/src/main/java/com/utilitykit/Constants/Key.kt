@@ -114,7 +114,7 @@ class Key {
         val userCredentials = "user_credentials"
         val trainerCredentials = "TrainerCredentials"
         val membershipDetails = "membership_details"
-        val barcode = "Barcode"
+        val barcode = "BarCode"
         val height = "height"
         val weight = "weight"
         val aadhaarNumber = "aadhaar_number"

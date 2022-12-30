@@ -12,7 +12,6 @@ import com.bharat.bandhu.ui.onboard.register.SignupActivity
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityActivity
-import com.utilitykit.UtilityKitApp
 import com.utilitykit.dataclass.User
 import com.utilitykit.socket.SocketService
 
@@ -24,7 +23,7 @@ class LaunchActivity : UtilityActivity() {
 //            val isAccepted = Defaults.string(Key.isAccepted)
             val isAccepted = "true"
             if(isAccepted != ""){
-                val userDetails = Defaults.string(Key.loginDetails)
+                val userDetails = Defaults.shared().string(Key.loginDetails)
                 if(userDetails != null && userDetails != ""){
                     val user = User()
                     if (user.name != "" && user.userID != "" && user._id != ""){
@@ -58,7 +57,7 @@ class LaunchActivity : UtilityActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        UtilityKitApp.applicationContext().setUp(this,false)
+
         SocketService.shared().currentActivity = this
         SocketService.shared().connect()
         setContentView(R.layout.activity_launch)
@@ -80,14 +79,14 @@ class LaunchActivity : UtilityActivity() {
     }
 
     fun checkUpdatesAndClearDatabase(){
-        val previousVersion = Defaults.string(Key.versionName)
+        val previousVersion = Defaults.shared().string(Key.versionName)
         val currentVersionName = BuildConfig.VERSION_NAME
         if(previousVersion == "" && currentVersionName != ""){
 //            Database.shared.clearDatabase()
-            Defaults.store(com.utilitykit.Constants.Key.versionName, currentVersionName)
+            Defaults.shared().store(com.utilitykit.Constants.Key.versionName, currentVersionName)
         }else if(previousVersion != currentVersionName){
 //            com.utilitykit.database.Database.shared.clearDatabase()
-            Defaults.store(com.utilitykit.Constants.Key.versionName, currentVersionName)
+            Defaults.shared().store(com.utilitykit.Constants.Key.versionName, currentVersionName)
         }
     }
 }

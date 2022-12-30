@@ -16,6 +16,10 @@ import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class ProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(
@@ -49,9 +53,13 @@ class ProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
         }
         MediaFileHandler.shared().viewModel?.loadFor(product.Id){
             if(it.isNotEmpty()){
-                picasso.load(it.first().FileURL).into(image)
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    picasso.load(it.first().FileURL).into(image)
+                }
             }else{
-                image?.setImageResource(R.drawable.image)
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    image?.setImageResource(R.drawable.image)
+                }
             }
         }
     }

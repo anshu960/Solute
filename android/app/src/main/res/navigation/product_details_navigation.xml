@@ -20,6 +20,11 @@
         android:name="com.solute.ui.business.product.detail.productStockDetails.ProductStockDetailsFragment"
         android:label="@string/stock"
         tools:layout="@layout/fragment_product_stock_details" />
+    <fragment
+        android:id="@+id/product_details_menu_barcode_list"
+        android:name="com.solute.ui.business.product.detail.productDetailBarcode.ProductDetailBarcodeListFragment"
+        android:label="@string/barcode"
+        tools:layout="@layout/fragment_product_detail_barcode_list" />
 </navigation>
 
 

@@ -2,8 +2,10 @@ package com.utilitykit.feature.product.handler
 
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.data
 import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.product.model.Product
+import com.utilitykit.feature.product.model.ProductBarCode
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.product.repository.ProductRepository
 import com.utilitykit.feature.product.viewModel.ProductViewModel
@@ -21,6 +23,7 @@ class ProductHandler {
     var onUpdateProductImageCallBack : ((product: Product?) -> Unit)? = null
     var onDeleteProductCallBack : ((product: Product?) -> Unit)? = null
     var onUpdateProductCallBack : ((product: ProductStock?) -> Unit)? = null
+    var onCreateProductBarCodeCallBack : ((product: ProductBarCode?) -> Unit)? = null
     val gson = Gson()
     init {
         instance = this
@@ -152,6 +155,26 @@ class ProductHandler {
                 }
             }else{
                 onUpdateProductCallBack?.let { it1 -> it1(null) }
+            }
+        }
+    }
+
+    val onCreateProductBarCode = Emitter.Listener {
+        if (it.isNotEmpty())
+        {
+            val anyData = it.first() as JSONObject
+            if (anyData.has(Key.payload)){
+                val payload = anyData.getJSONObject(Key.payload)
+                if(payload.has(Key._id)){
+                    SyncHandler.shared().syncAllBusinessData()
+                    val data = gson.fromJson(payload.toString(),ProductBarCode::class.java)
+                    viewModel?.insertProductBarCode(data)
+                    onCreateProductBarCodeCallBack?.let { it1 -> it1(data) }
+                }else{
+                    onCreateProductBarCodeCallBack?.let { it1 -> it1(null) }
+                }
+            }else{
+                onCreateProductBarCodeCallBack?.let { it1 -> it1(null) }
             }
         }
     }

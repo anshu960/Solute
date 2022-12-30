@@ -214,6 +214,7 @@ class SocketService : Service() {
             SocketEvent.ADD_EMPLOYEE_ATTENDACE.value,
             EmployeeHandler.shared().onCreateEmployeeAttendance
         )
+        mSocket?.on(SocketEvent.CREATE_PRODUCT_BAR_CODE.value,ProductHandler.shared().onCreateProductBarCode)
         MediaFileNetwork.shared().connectScoket()
         //conenct the socket
         mSocket?.connect()
@@ -235,16 +236,16 @@ class SocketService : Service() {
     fun prepateSocketServerUrl() {
         socketServerUrl = Server.allServers[0]
         return
-        if (socketServerUrl == "") {
-            socketServerUrl = Server.allServers[0]
-            return
-        }
-        socketServerUrl = Server.allServers[1]
-        socketServerUrl = when (Server.allServers.indexOf(socketServerUrl)) {
-            0 -> Server.allServers[1]
-            1 -> Server.allServers[2]
-            else -> Server.allServers[0]
-        }
+//        if (socketServerUrl == "") {
+//            socketServerUrl = Server.allServers[0]
+//            return
+//        }
+//        socketServerUrl = Server.allServers[1]
+//        socketServerUrl = when (Server.allServers.indexOf(socketServerUrl)) {
+//            0 -> Server.allServers[1]
+//            1 -> Server.allServers[2]
+//            else -> Server.allServers[0]
+//        }
     }
 
 
@@ -277,6 +278,9 @@ class SocketService : Service() {
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
         isSocketConnected = false
+
+
+
         connect()
     }
 
@@ -325,7 +329,7 @@ class SocketService : Service() {
     }
 
     private val onSocketEvent = Emitter.Listener {
-        Log.d(TAG, "Event Received ${it.toString()}")
+        Log.d(TAG, "Event Received ${it}")
         if (it.count() > 0) {
             val anyData = it.first()
             if (anyData is JSONObject) {

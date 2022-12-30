@@ -12,14 +12,14 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.UtilityKitApp
 import com.utilitykit.UtilityViewController
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.dataclass.FriendRequest
 import com.utilitykit.dataclass.Profile
 import com.utilitykit.dataclass.Task
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.socket.SocketService
-import java.net.Socket
 class App: Application() {
 
     var activity: UtilityViewController? = null
@@ -50,22 +50,25 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        UtilityKitApp().setUp(this)
+        AuthHandler.shared().deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        FirebaseApp.initializeApp(/*context=*/this)
+
         FirebaseApp.initializeApp(this)
-        val deviceId = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
-        Defaults.store(Key.deviceId,deviceId)
+        DatabaseHandler.shared().appContext = this
+        Defaults.shared().setup(this)
+        Defaults.shared().store(Key.deviceId, AuthHandler.shared().deviceId)
 //        Analytics.initFirebaseSetup(this)
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
-//        setUpFirebaseStorage()
-        SocketService.shared().connect()
+        setUpFirebaseStorage()
+        SocketService.shared().verifyIfConnectedOrNot()
     }
     fun getAndUpdateToken(){
         val messaging = FirebaseMessaging.getInstance()
         messaging.isAutoInitEnabled = true
         val token = FirebaseMessaging.getInstance().token.toString()
         if (token != null) {
-            Defaults.store(Key.fcmToken, token)
+//            Defaults.store(Key.fcmToken, token)
         }
 
     }

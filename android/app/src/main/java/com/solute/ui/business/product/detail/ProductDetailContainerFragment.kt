@@ -28,17 +28,14 @@ class ProductDetailContainerFragment : Fragment() {
     var navController : NavController? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    var deleteButton : FloatingActionButton? = null
-    var fabButton : FloatingActionButton? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_product_detail_container, container, false)
-        deleteButton = view.findViewById(R.id.activity_product_delete_fab)
-        deleteButton?.setOnClickListener { onClickDeleteProduct() }
-        fabButton = view.findViewById(R.id.activity_product_details_fab)
+
         navHostFragment = childFragmentManager.findFragmentById(R.id.activity_product_details_container) as NavHostFragment
         navController = navHostFragment?.navController
         // Setup the bottom navigation view with navController
@@ -48,7 +45,7 @@ class ProductDetailContainerFragment : Fragment() {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.product_details_menu_details,R.id.product_details_menu_price, R.id.product_details_menu_stock)
         )
-        fabButton?.setOnClickListener { onClickEdit() }
+
         return view
     }
 
@@ -56,34 +53,5 @@ class ProductDetailContainerFragment : Fragment() {
         return navController!!.navigateUp(appBarConfiguration)
     }
 
-    fun onClickDeleteProduct(){
-        AlertDialog.Builder(activity)
-            .setMessage("Are you sure you want to delete ?")
-            .setCancelable(false)
-            .setPositiveButton("Yes",
-                DialogInterface.OnClickListener { dialog, id ->
-                    deleteProduct()
-                })
-            .setNegativeButton("No", null)
-            .show()
-    }
-
-    fun onClickEdit(){
-        activity?.navController?.navigate(R.id.business_product_create)
-    }
-
-    fun deleteProduct(){
-        if(ProductHandler.shared().repository.selectedProduct.value != null){
-            ProductHandler.shared().onDeleteProductCallBack={
-                if(it != null){
-                    activity?.runOnUiThread {
-                       activity?.toastLong("Product Deleted Successfully");
-                        activity?.onBackPressed()
-                    }
-                }
-            }
-            ProductHandler.shared().viewModel?.deleteProduct(ProductHandler.shared().repository.selectedProduct.value!!)
-        }
-    }
 
 }

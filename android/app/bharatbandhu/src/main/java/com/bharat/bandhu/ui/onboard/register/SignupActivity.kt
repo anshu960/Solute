@@ -47,7 +47,7 @@ class SignupActivity : UtilityViewController() {
         }
     }
     fun authenticateUser(name:String){
-        val info =  Defaults.json(Key.loginDetails)
+        val info =  Defaults.shared().json(Key.loginDetails)
         var request = JSONObject()
         request.put(Key.name,name)
         request.put(Key.userId,userId)
@@ -62,6 +62,7 @@ class SignupActivity : UtilityViewController() {
         request.put(Key.fcmToken,deviceID)
         request.put(Key.gender,gender)
         request.put(Key.imageData,encodedImage)
+        request.put("AppID","com.bharat.bandhu")
         val roleType = JSONObject()
         roleType.put(Key._id ,"61acee7871a83e09a12a1668")
         request.put(Key.roleType,roleType)
@@ -73,7 +74,7 @@ class SignupActivity : UtilityViewController() {
                 val msg =  response.getString(Key.message)
                 val payload = response.getJSONObject(Key.payload)
                 if(msg != "" && payload.length() > 0){
-                    Defaults.store(Key.loginDetails,payload)
+                    Defaults.shared().store(Key.loginDetails,payload)
 //                    val intent = Intent(applicationContext,AddProfilePicActivity::class.java)
                     val intent = Intent(applicationContext, MainActivity::class.java)
                     this.startActivity(intent)

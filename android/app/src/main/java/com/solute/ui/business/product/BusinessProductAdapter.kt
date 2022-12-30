@@ -17,8 +17,13 @@ import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.handler.CartHandler
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class BusinessProductAdapter(
     val context: Context,
@@ -78,8 +83,16 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(context: Context, fragment: Fragment?, product: Product) {
         val picasso = Picasso.get()
-        if (product.Image.isNotEmpty()) {
-            picasso.load(product.Image.first()).into(image)
+        MediaFileHandler.shared().viewModel?.loadFor(product.Id){
+            if(it.isNotEmpty()){
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    picasso.load(it.first().FileURL).into(image)
+                }
+            }else{
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    image?.setImageResource(R.drawable.image)
+                }
+            }
         }
         productName?.text = product.Name
         productDescription?.text = product.Description

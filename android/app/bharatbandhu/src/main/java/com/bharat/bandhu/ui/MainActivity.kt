@@ -56,7 +56,7 @@ class MainActivity : UtilityActivity() {
                 if(payload.length() > 0){
                     val membership = payload.getJSONObject(0)
                     if(membership.has(Key._id)){
-                        Defaults.store(Key.membershipDetails,membership.toString())
+                        Defaults.shared().store(Key.membershipDetails,membership.toString())
                         this.runOnUiThread { this.loadMembershipInUI() }
                     }
                 }
@@ -67,7 +67,7 @@ class MainActivity : UtilityActivity() {
     }
 
     fun loadMembershipInUI(){
-        val membership = Defaults.json(Key.membershipDetails)
+        val membership = Defaults.shared().json(Key.membershipDetails)
         val hint = "Membership Details Not Found\nPlease Visit our Store to get your Membership"
         if(membership.has(Key.barcode)){
             val barcodeNumber = membership.getString(Key.barcode)

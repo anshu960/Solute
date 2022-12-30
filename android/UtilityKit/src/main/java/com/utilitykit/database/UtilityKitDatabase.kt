@@ -16,10 +16,7 @@ import com.utilitykit.feature.invocie.model.SaleDao
 import com.utilitykit.feature.invoice.model.CustomerInvoice
 import com.utilitykit.feature.mediaFile.model.MediaFile
 import com.utilitykit.feature.mediaFile.model.MediaFileDao
-import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.product.model.ProductDao
-import com.utilitykit.feature.product.model.ProductStock
-import com.utilitykit.feature.product.model.ProductStockDao
+import com.utilitykit.feature.product.model.*
 import com.utilitykit.feature.productCategory.model.ProductCategory
 import com.utilitykit.feature.productCategory.model.ProductCategoryDao
 import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
@@ -51,16 +48,19 @@ class Converters {
         Employee::class,
         EmployeeAttendance::class,
         MediaFile::class,
+        ProductBarCode::class,
     ],
-    version = 22,
+    version = 23,
     exportSchema = false
 )
 abstract class UtilityKitDatabase : RoomDatabase() {
 
     abstract fun businessDao(): BusinessDao
     abstract fun saleDao(): SaleDao
-    abstract fun productStockDao(): ProductStockDao
     abstract fun productDao(): ProductDao
+    abstract fun productStockDao(): ProductStockDao
+    abstract fun productBarCodeDao(): ProductBarCodeDao
+
     abstract fun customerDao(): CustomerDao
     abstract fun employeeDao(): EmployeeDao
     abstract fun employeeAttendanceDao(): EmployeeAttendanceDao
