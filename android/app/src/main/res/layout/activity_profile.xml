@@ -36,6 +36,7 @@
             android:id="@+id/username_field_my_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             android:hint="Display Name" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +59,7 @@
             android:id="@+id/status_field_my_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             android:hint="Status" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +82,7 @@
             android:id="@+id/mobile_field_my_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             android:editable="false"
             android:hint="Mobile Number" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -103,6 +106,7 @@
             android:id="@+id/email_field_my_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             android:hint="Email ID" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,6 +130,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/baseline_create"
+        android:onClick="onClickEditProfileImage"
         app:layout_constraintBottom_toBottomOf="@+id/image_my_profile"
         app:layout_constraintEnd_toEndOf="parent" />
 

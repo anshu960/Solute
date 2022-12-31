@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/business_profile_info"
+        android:icon="@drawable/info"
+        android:title="@string/details" />
+    <item
+        android:id="@+id/business_profile_finance"
+        android:icon="@drawable/payments"
+        android:title="@string/finance" />
+</menu>

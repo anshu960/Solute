@@ -6,6 +6,12 @@
     app:startDestination="@+id/business_home">
 
     <fragment
+        android:id="@+id/my_business_profile"
+        android:name="com.solute.ui.business.profile.self.SelfBusinessProfileFragment"
+        android:label="@string/business_profile"
+        tools:layout="@layout/fragment_self_business_profile" />
+
+    <fragment
         android:id="@+id/business_home"
         android:name="com.solute.ui.business.inventory.InventoryFragment"
         android:label="@string/menu_home"

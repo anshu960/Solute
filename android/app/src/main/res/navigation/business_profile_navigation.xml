@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/business_profile_navigation"
+    app:startDestination="@+id/business_profile_info"
+    >
+    <fragment
+        android:id="@+id/business_profile_info"
+        android:name="com.solute.ui.business.profile.self.info.SelfBusinessProfileInfoFragment"
+        android:label="@string/business_profile"
+        tools:layout="@layout/fragment_self_business_profile_info" />
+    <fragment
+        android:id="@+id/business_profile_finance"
+        android:name="com.solute.ui.business.profile.self.finance.SelfBusinessProfileFinanceFragment"
+        android:label="@string/business_profile"
+        tools:layout="@layout/fragment_self_business_profile_finance" />
+</navigation>

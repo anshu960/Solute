@@ -2,6 +2,7 @@ package com.solute.ui.business
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -16,6 +17,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.solute.R
 import com.solute.databinding.ActivityBusinessBinding
+import com.squareup.picasso.Picasso
+import com.utilitykit.Constants.Key.Companion.business
 import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.handler.CartHandler
@@ -40,6 +43,10 @@ import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandl
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
 import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 import com.utilitykit.feature.sync.SyncHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class BusinessActivity : UtilityActivity() {
 
@@ -52,7 +59,7 @@ class BusinessActivity : UtilityActivity() {
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
 
-
+    val picasso = Picasso.get()
     private lateinit var navView: NavigationView
     lateinit var navController: NavController
 
@@ -98,19 +105,40 @@ class BusinessActivity : UtilityActivity() {
         businessIconImage = headerView.findViewById(R.id.nav_header_business_img)
         businessName = headerView.findViewById(R.id.nav_header_business_name)
         businessDescription = headerView.findViewById(R.id.nav_header_business_description)
-        if(BusinessHandler.shared().repository.business != null){
-            businessName?.text = BusinessHandler.shared().repository.business.value?.Name
-            businessDescription?.text = BusinessHandler.shared().repository.business.value?.Address
-        }else{
-            businessName?.text = ""
-            businessDescription?.text = ""
+        businessName?.text = BusinessHandler.shared().repository.business.value?.Name
+        businessDescription?.text = BusinessHandler.shared().repository.business.value?.Address
+        if(BusinessHandler.shared().repository.business.value?.Id != null){
+            MediaFileHandler.shared().viewModel?.loadFor(BusinessHandler.shared().repository.business.value!!.Id){
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    picasso.load(it.first().FileURL).into(businessIconImage)
+                }
+            }
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.business, menu)
+
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if(item.itemId == R.id.action_settings){
+//            toastLong("settings")
+//        }
+        return when(item.itemId){
+            R.id.action_settings -> {
+                navController.navigate(R.id.my_business_profile)
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun onClickSettings(){
+        toastLong("Settings")
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -14,10 +14,16 @@ import com.solute.App
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
+import com.squareup.picasso.Picasso
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.business.model.Business
+import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
 import com.utilitykit.feature.sync.SyncHandler
 import com.utilitykit.qr.QRCodeUtill
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class BusinessListAdapter(val context: Context, val allBusiness: List<Business>) :
     RecyclerView.Adapter<BusinessViewHolder>() {
@@ -55,6 +61,8 @@ class BusinessViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recycler
     private var businessAddress: TextView? = null
     var cardLyout : ConstraintLayout? = null
     var qrImage : ImageView? = null
+    var logoImage : ImageView? = null
+    val picasso = Picasso.get()
 
     init {
         businessName = itemView.findViewById(R.id.recycler_item_business_name_txt)
@@ -62,6 +70,7 @@ class BusinessViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recycler
         businessAddress = itemView.findViewById(R.id.recycler_item_business_location_txt)
         cardLyout = itemView.findViewById(R.id.recycler_item_business_card_layout)
         qrImage = itemView.findViewById(R.id.recycler_item_business_qr_img)
+        logoImage = itemView.findViewById(R.id.recycler_item_business_logo)
     }
 
     fun bind(business: Business,index:Int) {
@@ -75,5 +84,10 @@ class BusinessViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recycler
             3-> cardLyout?.background = getDrawable(App.applicationContext(), R.drawable.business_card4)
         }
         qrImage?.setImageBitmap(QRCodeUtill().getQRImage("https://solute.app"))
+            MediaFileHandler.shared().viewModel?.loadFor(business.Id){
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    picasso.load(it.first().FileURL).into(logoImage)
+                }
+            }
     }
 }
