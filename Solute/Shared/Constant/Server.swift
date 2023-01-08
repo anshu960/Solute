@@ -9,7 +9,7 @@ import Foundation
 class Server{
     public static let shared = Server()
     var servers = [
-        "https://solute-r227wnciga-el.a.run.app",
+        "http://192.168.1.6:1010",
         "https://solute-r227wnciga-el.a.run.app"
     ]
 }

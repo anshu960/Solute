@@ -65,6 +65,26 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
         }
     }
 
+    fun findBarcodeById(barcode:String,callBack :(ProductBarCode?)->Unit){
+        scope.launch {
+            val fetchedBarCode = DatabaseHandler.shared().database.productBarCodeDao().findById(barcode)
+            callBack(fetchedBarCode)
+        }
+    }
+
+    fun findProductByBarCode(barcode:String,callBack :(Product?)->Unit){
+        scope.launch {
+            findBarcodeById(barcode){barcode->
+                if(barcode != null && !barcode!!.ProductID.isNullOrEmpty()){
+                    scope.launch {
+                        val foundProduct = DatabaseHandler.shared().database.productDao().findById(barcode!!.ProductID)
+                        callBack(foundProduct)
+                    }
+                }
+            }
+        }
+    }
+
     fun fetchAllProduct() {
         val request = JSONObject()
         val user = User()

@@ -21,6 +21,30 @@
 		4A079D7B2940A35D0014B9B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D792940A35D0014B9B9 /* HomeView.swift */; };
 		4A079D7C2940A35D0014B9B9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A079D792940A35D0014B9B9 /* HomeView.swift */; };
 		4A26E08629473BBE00B3266D /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E08329473BBE00B3266D /* OTPView.swift */; };
+		4A5E28642962C62500D364C9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28632962C62500D364C9 /* ActivityIndicator.swift */; };
+		4A5E28652962C62500D364C9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28632962C62500D364C9 /* ActivityIndicator.swift */; };
+		4A5E28662962C62500D364C9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28632962C62500D364C9 /* ActivityIndicator.swift */; };
+		4A5E286B2966728800D364C9 /* ProductHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28682966728800D364C9 /* ProductHandler.swift */; };
+		4A5E286C2966728800D364C9 /* ProductHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28682966728800D364C9 /* ProductHandler.swift */; };
+		4A5E286D2966728800D364C9 /* ProductHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28682966728800D364C9 /* ProductHandler.swift */; };
+		4A5E286E2966728800D364C9 /* ProductSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28692966728800D364C9 /* ProductSocketEvent.swift */; };
+		4A5E286F2966728800D364C9 /* ProductSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28692966728800D364C9 /* ProductSocketEvent.swift */; };
+		4A5E28702966728800D364C9 /* ProductSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28692966728800D364C9 /* ProductSocketEvent.swift */; };
+		4A5E28712966728800D364C9 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E286A2966728800D364C9 /* ProductViewModel.swift */; };
+		4A5E28722966728800D364C9 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E286A2966728800D364C9 /* ProductViewModel.swift */; };
+		4A5E28732966728800D364C9 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E286A2966728800D364C9 /* ProductViewModel.swift */; };
+		4A5E28772967239100D364C9 /* MembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28762967239100D364C9 /* MembershipView.swift */; };
+		4A5E28782967239100D364C9 /* MembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28762967239100D364C9 /* MembershipView.swift */; };
+		4A5E28792967239100D364C9 /* MembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28762967239100D364C9 /* MembershipView.swift */; };
+		4A5E287B2967239F00D364C9 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E287A2967239F00D364C9 /* ProductsView.swift */; };
+		4A5E287C2967239F00D364C9 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E287A2967239F00D364C9 /* ProductsView.swift */; };
+		4A5E287D2967239F00D364C9 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E287A2967239F00D364C9 /* ProductsView.swift */; };
+		4A5E28802967CCC100D364C9 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E287F2967CCC100D364C9 /* ThemeColor.swift */; };
+		4A5E28812967CCC100D364C9 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E287F2967CCC100D364C9 /* ThemeColor.swift */; };
+		4A5E28822967CCC100D364C9 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E287F2967CCC100D364C9 /* ThemeColor.swift */; };
+		4A5E28842967DA7C00D364C9 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28832967DA7C00D364C9 /* Product.swift */; };
+		4A5E28852967DA7C00D364C9 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28832967DA7C00D364C9 /* Product.swift */; };
+		4A5E28862967DA7C00D364C9 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E28832967DA7C00D364C9 /* Product.swift */; };
 		4A8CBA9C29406DE60071BEDC /* SoluteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBA9B29406DE60071BEDC /* SoluteApp.swift */; };
 		4A8CBA9E29406DE60071BEDC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBA9D29406DE60071BEDC /* Persistence.swift */; };
 		4A8CBAA129406DE60071BEDC /* Solute.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CBA9F29406DE60071BEDC /* Solute.xcdatamodeld */; };
@@ -309,6 +333,14 @@
 		4A079D742940A3310014B9B9 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		4A079D792940A35D0014B9B9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4A26E08329473BBE00B3266D /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
+		4A5E28632962C62500D364C9 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		4A5E28682966728800D364C9 /* ProductHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHandler.swift; sourceTree = "<group>"; };
+		4A5E28692966728800D364C9 /* ProductSocketEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSocketEvent.swift; sourceTree = "<group>"; };
+		4A5E286A2966728800D364C9 /* ProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		4A5E28762967239100D364C9 /* MembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipView.swift; sourceTree = "<group>"; };
+		4A5E287A2967239F00D364C9 /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
+		4A5E287F2967CCC100D364C9 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
+		4A5E28832967DA7C00D364C9 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		4A8CBA9829406DE60071BEDC /* Solute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Solute.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8CBA9B29406DE60071BEDC /* SoluteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoluteApp.swift; sourceTree = "<group>"; };
 		4A8CBA9D29406DE60071BEDC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -578,7 +610,9 @@
 		4A079D782940A34D0014B9B9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				4A5E28742967233800D364C9 /* membership */,
 				4A079D792940A35D0014B9B9 /* HomeView.swift */,
+				4A5E28752967234100D364C9 /* products */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -589,6 +623,49 @@
 				4A26E08329473BBE00B3266D /* OTPView.swift */,
 			);
 			path = OtpView;
+			sourceTree = "<group>";
+		};
+		4A5E28622962C60200D364C9 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				4A5E28632962C62500D364C9 /* ActivityIndicator.swift */,
+			);
+			path = ActivityIndicator;
+			sourceTree = "<group>";
+		};
+		4A5E28672966728800D364C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4A5E28682966728800D364C9 /* ProductHandler.swift */,
+				4A5E28692966728800D364C9 /* ProductSocketEvent.swift */,
+				4A5E286A2966728800D364C9 /* ProductViewModel.swift */,
+				4A5E28832967DA7C00D364C9 /* Product.swift */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		4A5E28742967233800D364C9 /* membership */ = {
+			isa = PBXGroup;
+			children = (
+				4A5E28762967239100D364C9 /* MembershipView.swift */,
+			);
+			path = membership;
+			sourceTree = "<group>";
+		};
+		4A5E28752967234100D364C9 /* products */ = {
+			isa = PBXGroup;
+			children = (
+				4A5E287A2967239F00D364C9 /* ProductsView.swift */,
+			);
+			path = products;
+			sourceTree = "<group>";
+		};
+		4A5E287E2967CCA000D364C9 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				4A5E287F2967CCC100D364C9 /* ThemeColor.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		4A8CBA8F29406DE60071BEDC = {
@@ -769,6 +846,7 @@
 		4A8CBB55294089B30071BEDC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4A5E287E2967CCA000D364C9 /* Theme */,
 				4A9E18222940FC3300AB003A /* Component */,
 				4A8CBB5F29408BC40071BEDC /* Features */,
 				4A8CBB56294089BF0071BEDC /* Socket */,
@@ -790,6 +868,7 @@
 		4A8CBB5F29408BC40071BEDC /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				4A5E28672966728800D364C9 /* Products */,
 				4AA3E1DC2948EC5C0097760B /* Customers */,
 				4A9E182B29411B3D00AB003A /* Authentication */,
 			);
@@ -799,6 +878,7 @@
 		4A9E18222940FC3300AB003A /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				4A5E28622962C60200D364C9 /* ActivityIndicator */,
 				4A9E18A32941D32000AB003A /* Button */,
 				4A9E18462941B7F000AB003A /* PhoneNumberKit */,
 				4A9E183529411E5300AB003A /* DialCodePicker */,
@@ -1510,14 +1590,18 @@
 				4A8CBAA129406DE60071BEDC /* Solute.xcdatamodeld in Sources */,
 				4A9E18642941B7F000AB003A /* CountryCodePickerViewController.swift in Sources */,
 				4A9E18762941B7F100AB003A /* MetadataParsing.swift in Sources */,
+				4A5E286B2966728800D364C9 /* ProductHandler.swift in Sources */,
 				4A079D7A2940A35D0014B9B9 /* HomeView.swift in Sources */,
 				4AC53D522947260A00A67DAB /* PasscodeField.swift in Sources */,
 				4AC53D3C29452B8800A67DAB /* SoluteConstants.swift in Sources */,
 				4A9E18BB294247AF00AB003A /* PhoneViewModel.swift in Sources */,
 				4A9E18A02941B7F100AB003A /* PhoneNumberParser.swift in Sources */,
+				4A5E28712966728800D364C9 /* ProductViewModel.swift in Sources */,
+				4A5E28842967DA7C00D364C9 /* Product.swift in Sources */,
 				4AA3E1E82948EE780097760B /* CustomerSocketEvent.swift in Sources */,
 				4AC53D4E2947207500A67DAB /* LaunchView.swift in Sources */,
 				4A9E18972941B7F100AB003A /* PhoneNumberFormatter.swift in Sources */,
+				4A5E28642962C62500D364C9 /* ActivityIndicator.swift in Sources */,
 				4A8CBA9C29406DE60071BEDC /* SoluteApp.swift in Sources */,
 				4A9E183729411E8700AB003A /* MobileDialCodePicker.swift in Sources */,
 				4AA3E1E32948ED550097760B /* CustomerViewModel.swift in Sources */,
@@ -1527,13 +1611,17 @@
 				4A9E183D2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */,
 				4A9E18912941B7F100AB003A /* MetadataManager.swift in Sources */,
 				4AC53D4529452C3B00A67DAB /* AuthenticationHandler.swift in Sources */,
+				4A5E287B2967239F00D364C9 /* ProductsView.swift in Sources */,
 				4A9E18882941B7F100AB003A /* NSRegularExpression+Swift.swift in Sources */,
 				4A9E18262940FCE400AB003A /* InputFieldMobile.swift in Sources */,
 				4A9E18402941B5B400AB003A /* iPhoneNumberField.swift in Sources */,
+				4A5E286E2966728800D364C9 /* ProductSocketEvent.swift in Sources */,
 				4A9E18612941B7F000AB003A /* Constants.swift in Sources */,
 				4A079D6D2940A0D70014B9B9 /* OnBaordingNavigation.swift in Sources */,
+				4A5E28802967CCC100D364C9 /* ThemeColor.swift in Sources */,
 				4A8CBB6129408D510071BEDC /* SocketServiceDelegate.swift in Sources */,
 				4A079D712940A31B0014B9B9 /* LoginView.swift in Sources */,
+				4A5E28772967239100D364C9 /* MembershipView.swift in Sources */,
 				4A9E189A2941B7F100AB003A /* PhoneNumberKit.swift in Sources */,
 				4A9E186D2941B7F000AB003A /* PhoneNumber.swift in Sources */,
 				4A9E18702941B7F100AB003A /* RegexManager.swift in Sources */,
@@ -1580,6 +1668,7 @@
 				4AC53D4F2947207500A67DAB /* LaunchView.swift in Sources */,
 				4A9E18A62941D33000AB003A /* SubmitButton.swift in Sources */,
 				4A9E18922941B7F100AB003A /* MetadataManager.swift in Sources */,
+				4A5E28782967239100D364C9 /* MembershipView.swift in Sources */,
 				4AC53D4A29452D8E00A67DAB /* AutenticationSocketEvent.swift in Sources */,
 				4AA3E1E42948ED550097760B /* CustomerViewModel.swift in Sources */,
 				4A9E18652941B7F000AB003A /* CountryCodePickerViewController.swift in Sources */,
@@ -1590,10 +1679,12 @@
 				4A9E18442941B5B400AB003A /* UIFont+Init.swift in Sources */,
 				4AC53D4629452C3B00A67DAB /* AuthenticationHandler.swift in Sources */,
 				4A8CBAD429406F040071BEDC /* ContentView.swift in Sources */,
+				4A5E286F2966728800D364C9 /* ProductSocketEvent.swift in Sources */,
 				4A9E18772941B7F100AB003A /* MetadataParsing.swift in Sources */,
 				4A079D722940A31B0014B9B9 /* LoginView.swift in Sources */,
 				4A9E183329411DD100AB003A /* CountryCodes.swift in Sources */,
 				4A9E18272940FCE400AB003A /* InputFieldMobile.swift in Sources */,
+				4A5E28652962C62500D364C9 /* ActivityIndicator.swift in Sources */,
 				4A9E18B42942413E00AB003A /* OTPInputFieldViewModel.swift in Sources */,
 				4A079D7B2940A35D0014B9B9 /* HomeView.swift in Sources */,
 				4A9E188F2941B7F100AB003A /* Formatter.swift in Sources */,
@@ -1601,6 +1692,8 @@
 				4A9E186B2941B7F000AB003A /* Bundle+Resources.swift in Sources */,
 				4A9E187A2941B7F100AB003A /* ParseManager.swift in Sources */,
 				4A9E18412941B5B400AB003A /* iPhoneNumberField.swift in Sources */,
+				4A5E286C2966728800D364C9 /* ProductHandler.swift in Sources */,
+				4A5E28722966728800D364C9 /* ProductViewModel.swift in Sources */,
 				4A9E183E2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */,
 				4A9E18952941B7F100AB003A /* PartialFormatter.swift in Sources */,
 				4A9E188C2941B7F100AB003A /* PhoneNumber+Codable.swift in Sources */,
@@ -1610,11 +1703,14 @@
 				4A8CBB6629408DCA0071BEDC /* SocketEvent.swift in Sources */,
 				4A9E183829411E8700AB003A /* MobileDialCodePicker.swift in Sources */,
 				4A9E18A12941B7F100AB003A /* PhoneNumberParser.swift in Sources */,
+				4A5E28812967CCC100D364C9 /* ThemeColor.swift in Sources */,
 				4AA3E1DF2948ED360097760B /* CustomerHandler.swift in Sources */,
+				4A5E28852967DA7C00D364C9 /* Product.swift in Sources */,
 				4A9E182E29411B7000AB003A /* AuthenticationViewModel.swift in Sources */,
 				4A8CBAD229406F030071BEDC /* Solute_WatchApp.swift in Sources */,
 				4A9E18712941B7F100AB003A /* RegexManager.swift in Sources */,
 				4A9E18B8294245AB00AB003A /* PinSttackView.swift in Sources */,
+				4A5E287C2967239F00D364C9 /* ProductsView.swift in Sources */,
 				4A9E18682941B7F000AB003A /* PhoneNumberTextField.swift in Sources */,
 				4A9E18742941B7F100AB003A /* MetadataTypes.swift in Sources */,
 				4A8CBB5D29408AA60071BEDC /* Server.swift in Sources */,
@@ -1678,10 +1774,13 @@
 				4AA3E1E62948ED550097760B /* CustomerViewModel.swift in Sources */,
 				4A9E18A22941B7F100AB003A /* PhoneNumberParser.swift in Sources */,
 				4A9E18992941B7F100AB003A /* PhoneNumberFormatter.swift in Sources */,
+				4A5E28702966728800D364C9 /* ProductSocketEvent.swift in Sources */,
+				4A5E28792967239100D364C9 /* MembershipView.swift in Sources */,
 				4A8CBB2A2940755D0071BEDC /* Persistence.swift in Sources */,
 				4A9E183929411E8700AB003A /* MobileDialCodePicker.swift in Sources */,
 				4A8CBB2F2940755D0071BEDC /* ContentView.swift in Sources */,
 				4A8CBB5E29408AA60071BEDC /* Server.swift in Sources */,
+				4A5E28862967DA7C00D364C9 /* Product.swift in Sources */,
 				4A9E183F2941B5B400AB003A /* iPhoneNumberField+ViewModifiers.swift in Sources */,
 				4A9E18932941B7F100AB003A /* MetadataManager.swift in Sources */,
 				4A9E18BD294247AF00AB003A /* PhoneViewModel.swift in Sources */,
@@ -1689,7 +1788,9 @@
 				4A9E188A2941B7F100AB003A /* NSRegularExpression+Swift.swift in Sources */,
 				4A9E18282940FCE400AB003A /* InputFieldMobile.swift in Sources */,
 				4A9E18422941B5B400AB003A /* iPhoneNumberField.swift in Sources */,
+				4A5E28822967CCC100D364C9 /* ThemeColor.swift in Sources */,
 				4A9E18632941B7F000AB003A /* Constants.swift in Sources */,
+				4A5E28732966728800D364C9 /* ProductViewModel.swift in Sources */,
 				4A079D6F2940A0D70014B9B9 /* OnBaordingNavigation.swift in Sources */,
 				4AC53D3E29452B8800A67DAB /* SoluteConstants.swift in Sources */,
 				4A9E18AB2941D7A800AB003A /* AppDelegate.swift in Sources */,
@@ -1698,14 +1799,17 @@
 				4A079D732940A31B0014B9B9 /* LoginView.swift in Sources */,
 				4A9E189C2941B7F100AB003A /* PhoneNumberKit.swift in Sources */,
 				4A9E186F2941B7F000AB003A /* PhoneNumber.swift in Sources */,
+				4A5E28662962C62500D364C9 /* ActivityIndicator.swift in Sources */,
 				4AC53D502947207500A67DAB /* LaunchView.swift in Sources */,
 				4A9E18B52942413E00AB003A /* OTPInputFieldViewModel.swift in Sources */,
 				4A9E18722941B7F100AB003A /* RegexManager.swift in Sources */,
 				4A079D772940A3310014B9B9 /* RegisterView.swift in Sources */,
+				4A5E286D2966728800D364C9 /* ProductHandler.swift in Sources */,
 				4A9E187B2941B7F100AB003A /* ParseManager.swift in Sources */,
 				4AC53D4B29452D8E00A67DAB /* AutenticationSocketEvent.swift in Sources */,
 				4A9E18B12942412500AB003A /* InputFieldOTP.swift in Sources */,
 				4AC53D4329452BB800A67DAB /* Keys.swift in Sources */,
+				4A5E287D2967239F00D364C9 /* ProductsView.swift in Sources */,
 				4A9E182F29411B7000AB003A /* AuthenticationViewModel.swift in Sources */,
 				4A9E18A72941D33000AB003A /* SubmitButton.swift in Sources */,
 				4A9E18452941B5B400AB003A /* UIFont+Init.swift in Sources */,
@@ -2349,7 +2453,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BharatBandhu/BharatBandhu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BharatBandhu/Preview Content\"";
 				DEVELOPMENT_TEAM = FXA6SMGMB4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2372,7 +2476,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -2391,7 +2495,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BharatBandhu/BharatBandhu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BharatBandhu/Preview Content\"";
 				DEVELOPMENT_TEAM = FXA6SMGMB4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2414,7 +2518,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

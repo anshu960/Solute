@@ -50,7 +50,7 @@ class Converters {
         MediaFile::class,
         ProductBarCode::class,
     ],
-    version = 23,
+    version = 25,
     exportSchema = false
 )
 abstract class UtilityKitDatabase : RoomDatabase() {

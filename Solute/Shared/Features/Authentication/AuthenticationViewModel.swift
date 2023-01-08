@@ -21,13 +21,13 @@ class AuthenticationViewModel:ObservableObject{
     public static let router = Router()
     @Published var navigationPath: [Screen] = []
     
-    let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    public static let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
     @Published var verificationId = ""
     @Published var error = ""
     @Published var otp = ""
     var mobileNumber = ""
     var userId = ""
-    
+    @Published var isLoading = false
     
     func checkAuthStatus(){
         let loginDetails = AuthenticationHandler.shared.fetchUserCredentials()
@@ -90,22 +90,23 @@ class AuthenticationViewModel:ObservableObject{
             withVerificationID: self.verificationId,
             verificationCode: otp
         )
+        isLoading = true
         Auth.auth().settings?.isAppVerificationDisabledForTesting = true
         Auth.auth().signIn(with: credential) { authResult, error in
             if let error = error {
                 let authError = error as NSError
                 self.error = authError.localizedDescription
+                self.isLoading = false
                 return
             }
             // User is signed in
             // ...
             if let userID = authResult?.user.uid{
                 self.userId = userID
-                SocketService.shared.joinRoom(roomId: userID)
                 var request : [String:Any] = [:]
                 request[Key.mobileNumber] = self.mobileNumber
                 request[Key.userId] = userID
-                request[Key.deviceId] = self.deviceId
+//                self.authenticateUserWithServer(payload: request)
                 SocketService.shared.send(eventName: AuthenticationSocketEvent.AUHTENTICATE.rawValue, payload: request)
             }
         }
@@ -114,10 +115,24 @@ class AuthenticationViewModel:ObservableObject{
         var request : [String:Any] = [:]
         request[Key.mobileNumber] = self.mobileNumber
         request[Key.userId] = userId
-        request[Key.deviceId] = self.deviceId
         request[Key.name] = name
         SocketService.shared.send(eventName: AuthenticationSocketEvent.AUHTENTICATE.rawValue, payload: request)
     }
     
-    
+    func authenticateUserWithServer(payload:[String:Any]){
+        var request = payload
+        request[Key.deviceId] = AuthenticationViewModel.deviceId
+        let api = Server.shared.servers.first! + "/api/" + SocketEvent.AUHTENTICATE.rawValue
+        ServiceManager.makeServiceCall(toApi: api , requestData: request) { response,result in
+            DispatchQueue.main.async {
+                AuthenticationViewModel.shared.isLoading = false
+                if let payload = response[Key.payload] as? [String:Any],let id = payload[Key._id] as? String,!id.isEmpty{
+                    AuthenticationHandler.shared.storeUserCredentials(userData: payload)
+                    AuthenticationViewModel.shared.setHomeScreen()
+                }else{
+                    AuthenticationViewModel.shared.setRegisterScreen()
+                }
+            }
+        }
+    }
 }

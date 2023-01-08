@@ -7,6 +7,6 @@
 
 import Foundation
 enum AuthenticationSocketEvent : String{
-    case AUHTENTICATE = "AUHTENTICATE"
+    case AUHTENTICATE = "AUHTENTICATE_USER"
     case REGISTER_NEW_USER = "REGISTER_NEW_USER"
 }

@@ -15,7 +15,7 @@ open class UtilityActivity :UtilityViewController(){
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        connectSocket()
+        SocketService.shared().currentActivity = this
     }
 
     override fun onRestart() {
@@ -28,10 +28,6 @@ open class UtilityActivity :UtilityViewController(){
 
     override fun onDestroy() {
         super.onDestroy()
-    }
-
-    fun connectSocket(){
-       SocketService.shared().currentActivity = this
     }
     
     fun captureDate(callback:(String)->Unit){

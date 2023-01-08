@@ -11,7 +11,9 @@ import androidx.core.content.ContextCompat
 import com.solute.R
 import com.solute.ui.business.barcode.BarCodeAnalyzer
 import com.solute.ui.business.barcode.BarCodeBoxView
+import com.utilitykit.Constants.Key.Companion.product
 import com.utilitykit.UtilityActivity
+import com.utilitykit.feature.cart.handler.CartHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -29,21 +31,33 @@ class BarCodeScannerActivity : UtilityActivity() {
         setContentView(R.layout.activity_bar_code_scanner)
         scannerView  = findViewById(R.id.bar_code_scannner_preview)
         cameraExecutor = Executors.newSingleThreadExecutor()
-        onDetectNewBarcode = {
-            this.runOnUiThread {
-                toastLong("BarCode : " + it)
-                if (ProductHandler.shared().repository.selectedProduct.value != null) {
-                    val product = ProductHandler.shared().repository.selectedProduct.value!!
-                    ProductHandler.shared().onCreateProductBarCodeCallBack={
+        val operation = intent.getStringExtra("OPERATION")
+        if(operation != null && operation == "SALE"){
+            onDetectNewBarcode = {
+                this.runOnUiThread {
+                    CartHandler.shared().addToCart(it){
                         this.runOnUiThread {
-                            super.onBackPressed()
+                            this.toastLong(it)
                         }
                     }
-                    ProductHandler.shared().viewModel?.createBarCode(product, it)
+                }
+            }
+        }else{
+            onDetectNewBarcode = {
+                this.runOnUiThread {
+                    toastLong("BarCode : " + it)
+                    if (ProductHandler.shared().repository.selectedProduct.value != null) {
+                        val product = ProductHandler.shared().repository.selectedProduct.value!!
+                        ProductHandler.shared().onCreateProductBarCodeCallBack={
+                            this.runOnUiThread {
+                                super.onBackPressed()
+                            }
+                        }
+                        ProductHandler.shared().viewModel?.createBarCode(product, it)
+                    }
                 }
             }
         }
-
         barcodeBoxView = BarCodeBoxView(this)
         addContentView(barcodeBoxView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         barcodeAnalyser = BarCodeAnalyzer(

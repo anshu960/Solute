@@ -8,27 +8,26 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel = CustomerViewModel.shared
-    
-    var body: some View {
-        Image("launch_image").resizable()
-            .frame(width: 300, height: 300)
-            .onAppear(){
-                CustomerViewModel.shared.loadMembership()
-            }
-        Group{
-            if viewModel.membershipId != ""{
-                BarCodeView(barcode: viewModel.membershipId)
-                                .scaledToFit()
-                                .padding()
-//                                .border(Color.red)
-                Text(viewModel.membershipId)
-            }else{
-                Text("Membership Details Not Found Please Visit our Store to get your Membership")
-            }
-            Spacer()
+    init() {
+            UITabBar.appearance().barTintColor = UIColor.blue
         }
-        
+
+    var body: some View {
+        TabView {
+            MembershipView()
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("Membership")
+                }
+            
+            ProductsView()
+                .tabItem {
+                    Image(systemName: "menucard.fill")
+                    Text("Products")
+                }
+        }.onAppear() {
+            UITabBar.appearance().backgroundColor = ThemeColor.defaultThemeColor
+        }
     }
 }
 
@@ -38,13 +37,3 @@ struct HomeView_Previews: PreviewProvider {
     }
 }
 
-struct BarCodeView: UIViewRepresentable {
-    let barcode: String
-    func makeUIView(context: Context) -> UIImageView {
-        UIImageView()
-    }
-
-    func updateUIView(_ uiView: UIImageView, context: Context) {
-        uiView.image = UIImage(barcode: barcode)
-    }
-}

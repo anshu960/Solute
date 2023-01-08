@@ -16,14 +16,14 @@ class SocketService:ObservableObject{
     @Published var connectionStatus = 0
     var delegate : SocketServiceDelegate? = nil
     let config : SocketIOClientConfiguration = [
-        .log(true),
-        //        .compress,
-        //        .forceNew(true),
-        //        .forceWebsockets(true),
-            .forcePolling(false),
+                .log(true),
+                .compress,
+                .forceNew(true),
+                .forceWebsockets(true),
+            .forcePolling(true),
     ]
     init() {
-        manager = SocketManager(socketURL: URL(string: Server.shared.servers[0])!, config: config)
+        manager = SocketManager(socketURL: URL(string: Server.shared.servers[1])!, config: config)
     }
     
     func connect() {
@@ -36,11 +36,7 @@ class SocketService:ObservableObject{
         socket?.on(clientEvent: .connect, callback: { any, socketAckEmitter in
             self.delegate?.didConnect()
             self.connectionStatus = 1
-            if let userId = AuthenticationHandler.shared.fetchUserCredentials()[Key._id] as? String{
-                self.joinRoom(roomId: userId)
-            }else{
-                self.joinRoom(roomId: AuthenticationViewModel.shared.deviceId)
-            }
+            self.joinRoom(roomId: AuthenticationViewModel.deviceId)
         })
         socket?.on(clientEvent: .disconnect, callback: { any, socketAckEmitter in
             self.delegate?.didConnect()
@@ -50,18 +46,24 @@ class SocketService:ObservableObject{
             self.delegate?.didConnect()
             self.connectionStatus = 0
         })
-        AuthenticationHandler.shared.addFeature(manager: self.manager)
+        manager?.defaultSocket.on(SocketEvent.joinRoom.rawValue, callback: { data, emitter in
+            print(data)
+        })
+        AuthenticationHandler.shared.addFeature()
         CustomerHandler.shared.addFeature(manager: self.manager)
+        ProductHandler.shared.addFeature(manager: self.manager)
     }
     
     func removeEventListener(){
         
     }
     func joinRoom(roomId:String) {
-        self.socket?.emit(SocketEvent.joinRoom.rawValue, with: [[Key.roomId:roomId]])
+        self.manager?.defaultSocket.emit(SocketEvent.joinRoom.rawValue, with: [[Key.roomId:roomId]])
     }
     func send(eventName:String,payload:[String:Any]) {
-        self.socket?.emit(eventName, with: [payload])
+        var request = payload
+        request[Key.deviceId] = AuthenticationViewModel.deviceId
+        self.manager?.defaultSocket.emit(eventName, with: [request])
     }
     
     

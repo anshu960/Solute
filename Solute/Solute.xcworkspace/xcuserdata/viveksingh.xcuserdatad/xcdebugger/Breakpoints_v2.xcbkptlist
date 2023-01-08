@@ -23,17 +23,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BADCE58C-9602-4915-B3CF-BCC0A10753F5"
-            shouldBeEnabled = "No"
+            uuid = "42FCDCB2-3DD3-4F4F-A6A6-305B11AF9A75"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BharatBandhu/Features/Home/HomeView.swift"
+            filePath = "Shared/Features/Authentication/AuthenticationViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "authenticateUserWithServer(payload:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2723FE71-6230-4C54-85DF-5145CCB4C567"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Features/Authentication/AuthenticationViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "authenticateUserWithServer(payload:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2723FE71-6230-4C54-85DF-5145CCB4C567 - 1f1b8da5bbb30ce8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BharatBandhu.AuthenticationViewModel.authenticateUserWithServer(payload: Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()"
+                  moduleName = "BharatBandhu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/viveksingh/Developer/friendly/solute_app/Solute/Shared/Features/Authentication/AuthenticationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "845">
+               </Location>
+               <Location
+                  uuid = "2723FE71-6230-4C54-85DF-5145CCB4C567 - 9faad24b57379bc6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Dictionary&lt;Swift.String, Any&gt;, UtilityKit.Result) -&gt; () in BharatBandhu.AuthenticationViewModel.authenticateUserWithServer(payload: Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()"
+                  moduleName = "BharatBandhu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/viveksingh/Developer/friendly/solute_app/Solute/Shared/Features/Authentication/AuthenticationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "180">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

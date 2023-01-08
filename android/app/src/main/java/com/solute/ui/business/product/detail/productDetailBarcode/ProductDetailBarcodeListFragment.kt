@@ -79,6 +79,7 @@ class ProductDetailBarcodeListFragment : Fragment() {
             makeRequest()
         } else {
             val intent = Intent(requireContext(),BarCodeScannerActivity::class.java)
+            intent.putExtra("OPERATION","ADD_INVENTTORY")
             startActivity(intent)
         }
     }

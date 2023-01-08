@@ -12,15 +12,15 @@ import CoreData
 class AuthenticationHandler{
     public static let shared = AuthenticationHandler()
     
-    func addFeature(manager: SocketManager?) {
-        manager?.defaultSocket.on(AuthenticationSocketEvent.AUHTENTICATE.rawValue, callback: onAuthenticateEvent)
+    func addFeature() {
+        SocketService.shared.manager?.defaultSocket.on(AuthenticationSocketEvent.AUHTENTICATE.rawValue, callback: onAuthenticateEvent)
     }
     
     func onAuthenticateEvent(_ data : Array<Any>,_ emitter : SocketAckEmitter){
+        AuthenticationViewModel.shared.isLoading = false
         if let data = data.first as? [String:Any]{
             if let payload = data[Key.payload] as? [String:Any],let id = payload[Key._id] as? String,!id.isEmpty{
                 storeUserCredentials(userData: payload)
-                SocketService.shared.joinRoom(roomId: id)
                 AuthenticationViewModel.shared.setHomeScreen()
             }else{
                 AuthenticationViewModel.shared.setRegisterScreen()

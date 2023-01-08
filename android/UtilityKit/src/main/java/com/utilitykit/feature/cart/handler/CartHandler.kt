@@ -3,8 +3,10 @@ package com.utilitykit.feature.cart.handler
 import android.content.Intent
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.product
 import com.utilitykit.Constants.TableNames.Companion.sale
 import com.utilitykit.UtilityActivity
+import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.cart.model.Sale
@@ -14,6 +16,7 @@ import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import com.utilitykit.feature.invoice.model.CustomerInvoice
+import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import io.socket.emitter.Emitter
 import org.json.JSONObject
@@ -106,6 +109,15 @@ class CartHandler {
         }
         viewModel?.updateCount()
         viewModel?.updateProductsInCart()
+    }
+
+    fun addToCart(barCode: String,callBack:(message:String)->Unit){
+        ProductHandler.shared().viewModel?.findProductByBarCode(barCode){prd->
+            prd?.let {
+                addToCart(it)
+                callBack("Added to cart")
+            }
+        }
     }
 
     fun removeFromCart(product: Product){

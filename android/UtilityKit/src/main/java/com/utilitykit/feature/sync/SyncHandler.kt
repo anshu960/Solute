@@ -3,7 +3,6 @@ package com.utilitykit.feature.sync
 import android.content.ContentValues
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.payload
 import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User

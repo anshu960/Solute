@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OTPView: View {
     @State var otp: String = AuthenticationViewModel.shared.otp
+    @State var isLoading: Bool = AuthenticationViewModel.shared.isLoading
     var body: some View {
         TextField("OTP", text: $otp)
             .keyboardType(.namePhonePad)
@@ -20,8 +21,18 @@ struct OTPView: View {
         
         Spacer(minLength: 12)
         SubmitButton(onClick: {
+            isLoading = true
             AuthenticationViewModel.shared.verifyOtp(otp: otp)
         },title: "Verify")
+        Group{
+            if isLoading{
+                ActivityIndicator()
+                    .frame(width: 200, height: 200)
+                    .foregroundColor(.blue)
+            }
+        }
+        
+        
         Spacer()
     }
 }

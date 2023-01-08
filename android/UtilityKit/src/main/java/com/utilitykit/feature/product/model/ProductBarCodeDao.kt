@@ -20,6 +20,9 @@ interface ProductBarCodeDao {
     @Query("select * from ProductBarCode WHERE ProductID=:prodId order by UpdatedAt DESC")
     suspend fun getForProduct( prodId: String?): List<ProductBarCode>
 
+    @Query("select * from ProductBarCode WHERE BarCode=:barcode order by UpdatedAt DESC LIMIT 1")
+    suspend fun findById( barcode: String): ProductBarCode?
+
     @Query("select * from ProductBarCode WHERE ProductID=:prodId order by UpdatedAt DESC LIMIT 1")
     fun getRecentForProduct( prodId: String?): LiveData<ProductBarCode>
 

@@ -20,6 +20,7 @@ struct LoginView: View {
                 .frame(width: 200, height: 200)
             InputFieldMobile(mobile: $mobile)
             
+            
             SubmitButton(onClick: {
                 AuthenticationViewModel.shared.sendOtp(mobile: mobile)
             },title: "Send OTP")

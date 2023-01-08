@@ -1,5 +1,6 @@
 package com.solute.ui.business.product
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
+import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
 import com.utilitykit.feature.product.viewModel.ProductViewModel
+import java.security.Key
 
 
 /**
@@ -31,6 +34,7 @@ class BusinessProductFragment : Fragment() {
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
     var cartButton : FloatingActionButton? = null
+    var scanBtn : FloatingActionButton? = null
     var searchView : SearchView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +83,8 @@ class BusinessProductFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_business_sale, container, false)
         recyclerView = view.findViewById(R.id.fragment_business_product_recycler)
+        scanBtn = view.findViewById(R.id.fragment_business_product_scan_btn)
+        scanBtn?.setOnClickListener {onClickScan()}
         cartButton = view.findViewById(R.id.fragment_business_product_cart_btn)
         cartButton?.setOnClickListener { onClickCart() }
         searchView = view.findViewById(R.id.fragment_business_product_search)
@@ -107,6 +113,11 @@ class BusinessProductFragment : Fragment() {
     fun onClickCart(){
         val activity = BusinessHandler.shared().activity as? BusinessActivity
         activity?.goToCart()
+    }
+    fun onClickScan(){
+        val intent = Intent(requireContext(), BarCodeScannerActivity::class.java)
+        intent.putExtra("OPERATION","SALE")
+        startActivity(intent)
     }
 
 
