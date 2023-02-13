@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.product
-import com.utilitykit.Constants.Key.Companion.quantity
 import com.utilitykit.database.DatabaseHandler
-import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -16,6 +13,7 @@ import com.utilitykit.feature.product.model.Product
 import com.utilitykit.feature.product.model.ProductBarCode
 import com.utilitykit.feature.product.model.ProductStock
 import com.utilitykit.feature.product.repository.ProductRepository
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -77,7 +75,7 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
             findBarcodeById(barcode){barcode->
                 if(barcode != null && !barcode!!.ProductID.isNullOrEmpty()){
                     scope.launch {
-                        val foundProduct = DatabaseHandler.shared().database.productDao().findById(barcode!!.ProductID)
+                        val foundProduct = DatabaseHandler.shared().database.productDao().findById(barcode.ProductID)
                         callBack(foundProduct)
                     }
                 }

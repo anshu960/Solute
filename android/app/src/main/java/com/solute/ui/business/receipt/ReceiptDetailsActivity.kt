@@ -73,7 +73,8 @@ class ReceiptDetailsActivity : UtilityActivity() {
                     this,
                     getCustomerMobileNumber(),
                     customerInvoice!!.invoiceNumber!!,
-                    customerInvoice!!.finalPrice!!
+                    customerInvoice!!.finalPrice!!,
+                    customerInvoice!!
                 )
             } else {
                 toast("Invoice Data Not Found")
@@ -84,7 +85,8 @@ class ReceiptDetailsActivity : UtilityActivity() {
                 SMSManager().shareInvoice(
                     this,
                     customerInvoice!!.invoiceNumber!!,
-                    customerInvoice!!.finalPrice!!
+                    customerInvoice!!.finalPrice!!,
+                    customerInvoice!!
                 )
             }
         }
@@ -99,7 +101,8 @@ class ReceiptDetailsActivity : UtilityActivity() {
                     this,
                     customer!!.MobileNumber!!,
                     customerInvoice!!.invoiceNumber!!,
-                    customerInvoice!!.finalPrice!!
+                    customerInvoice!!.finalPrice!!,
+                    customerInvoice!!
                 )
             }
         }

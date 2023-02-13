@@ -6,16 +6,15 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
@@ -56,8 +55,10 @@ class ProductDetailBarcodeListFragment : Fragment() {
 
     fun loadBarcodes(){
         ProductHandler.shared().repository.productBarCode.observe(requireParentFragment().viewLifecycleOwner){
-            this.adapter = ProductBarCodeAdapter(requireContext(),it){
+            this.adapter = this.context?.let { it1 ->
+                ProductBarCodeAdapter(it1,it){
 
+                }
             }
             recycler?.layoutManager = LinearLayoutManager(this.context)
             recycler?.adapter = this.adapter

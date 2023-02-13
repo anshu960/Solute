@@ -1,9 +1,5 @@
 package com.solute
 
-import android.app.Activity
-import android.app.ActivityManager
-import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
@@ -75,6 +71,20 @@ class MainActivity : UtilityActivity() {
         )
         MediaFileHandler.shared().setup(mediaFileViewModel!!)
         MediaFileHandler.shared().repository.storageBucketReferece = App.applicationContext().imagesRef
+        checkDynamicLink()
+    }
+
+    fun checkDynamicLink(){
+//        Firebase.dynamicLinks
+//            .getDynamicLink(intent)
+//            .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
+//                // Get deep link from result (may be null if no link is found)
+//                var deepLink: Uri? = null
+//                if (pendingDynamicLinkData != null) {
+//                    deepLink = pendingDynamicLinkData.link
+//                }
+//            }
+//            .addOnFailureListener(this) { e -> Log.w(TAG, "getDynamicLink:onFailure", e) }
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)

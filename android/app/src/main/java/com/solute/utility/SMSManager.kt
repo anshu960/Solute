@@ -7,12 +7,13 @@ import com.solute.App
 import com.utilitykit.UtilityActivity
 import com.utilitykit.dataclass.ContactData
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.invoice.model.CustomerInvoice
 
 
 class SMSManager {
     companion object{
         val inviteSms = "There is a great application 'Friendly' to Chat and Meet Friendly people around the world\n" +
-                "https://play.google.com/store/apps/details?id=com.friendly" +
+                "https://play.google.com/store/apps/details?id=com.solute" +
                 "\nCan't wait to see you there\n"
     }
 
@@ -55,26 +56,26 @@ class SMSManager {
 //    }
 
 
-    fun sendInvoiceReceipt(invoiceNumber:Int,amount :Float){
+    fun sendInvoiceReceipt(invoiceNumber:Int,amount :Float,customerInvoice: CustomerInvoice){
         var message = "Solute\n"
         message += "Invoice Generate\n"
         message += "Invoice Number : $invoiceNumber\n"
         message += "Invoice Amount : $amount\n"
         message += "You can see your invoice anytime at link below\n"
-        message = message + "https://solute.app/#/receipt?id="+ invoiceNumber
+        message += customerInvoice.ShareLink
             sendSms(null,"+919031570222",message)
     }
-    fun sendInvoiceReceipt(activity:UtilityActivity?,mobileNumber:String,invoiceNumber:Long,amount :Float){
+    fun sendInvoiceReceipt(activity:UtilityActivity?,mobileNumber:String,invoiceNumber:Long,amount :Float,customerInvoice: CustomerInvoice){
         var message = "Solute\n"
         message += "Invoice Generate\n"
         message += "Invoice Number : $invoiceNumber\n"
         message += "Invoice Amount : $amount\n"
         message += "You can see your invoice anytime at link below\n"
-        message = message + "https://solute.app/#/receipt?id="+ invoiceNumber
+        message += customerInvoice.ShareLink
         sendSms(activity,mobileNumber,message)
     }
 
-    fun shareInvoice(activity:UtilityActivity?,invoiceNumber:Long,amount :Float){
+    fun shareInvoice(activity:UtilityActivity?,invoiceNumber:Long,amount :Float,customerInvoice: CustomerInvoice){
         val shareText = Intent(Intent.ACTION_SEND)
         shareText.type = "text/plain"
         var message = "Solute\n"
@@ -82,7 +83,7 @@ class SMSManager {
         message += "Invoice Number : $invoiceNumber\n"
         message += "Invoice Amount : $amount\n"
         message += "You can see your invoice anytime at link below\n"
-        message = message + "https://solute.app/#/receipt?id="+ invoiceNumber
+        message += customerInvoice.ShareLink
         shareText.putExtra(Intent.EXTRA_SUBJECT, "Subject from my application")
         shareText.putExtra(Intent.EXTRA_TEXT, message)
         activity?.startActivity(Intent.createChooser(shareText, "Share Via"))

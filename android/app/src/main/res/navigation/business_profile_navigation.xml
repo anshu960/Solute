@@ -11,8 +11,25 @@
         android:label="@string/business_profile"
         tools:layout="@layout/fragment_self_business_profile_info" />
     <fragment
+        android:id="@+id/business_profile_address"
+        android:name="com.solute.ui.business.profile.self.address.SelfBusinessProfileAddressFragment"
+        android:label="@string/address"
+        tools:layout="@layout/fragment_self_business_profile_address">
+        <action android:id="@+id/navigate_to_create_address"
+            app:destination="@id/business_profile_create_address"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment
         android:id="@+id/business_profile_finance"
         android:name="com.solute.ui.business.profile.self.finance.SelfBusinessProfileFinanceFragment"
         android:label="@string/business_profile"
         tools:layout="@layout/fragment_self_business_profile_finance" />
+    <fragment
+        android:id="@+id/business_profile_create_address"
+        android:name="com.solute.ui.business.profile.self.address.create.SelfBusinessProfileCreateAddressFragment"
+        android:label="@string/create_address"
+        tools:layout="@layout/fragment_self_business_profile_create_address" />
 </navigation>

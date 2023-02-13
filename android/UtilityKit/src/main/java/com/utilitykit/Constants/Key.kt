@@ -109,6 +109,7 @@ class Key {
         val isDeleted = "IsDeleted"
         val isTyping = "IsTyping"
         val invoice = "Invoice"
+        val invoiceId = "InvoiceID"
         val invoiceNumber = "InvoiceNumber"
 
         val userCredentials = "user_credentials"

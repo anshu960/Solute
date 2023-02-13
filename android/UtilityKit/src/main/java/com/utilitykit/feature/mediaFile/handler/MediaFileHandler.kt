@@ -1,23 +1,12 @@
 package com.utilitykit.feature.mediaFile.handler
 
-import android.provider.MediaStore.Audio.Media
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.category
-import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.business.handler.AuthHandler
-import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.mediaFile.model.MediaFile
 import com.utilitykit.feature.mediaFile.repository.MediaFileRepository
 import com.utilitykit.feature.mediaFile.viewModel.MediaFileViewModel
-import com.utilitykit.feature.productCategory.model.ProductCategory
-import com.utilitykit.socket.SocketService
 import io.socket.emitter.Emitter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import org.json.JSONObject
 
 class MediaFileHandler{

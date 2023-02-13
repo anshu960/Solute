@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
+import com.utilitykit.Constants.Key.Companion.address
+import com.utilitykit.Constants.Key.Companion.business
+import com.utilitykit.Constants.Key.Companion.name
 import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
@@ -14,6 +17,9 @@ import com.utilitykit.feature.business.repository.BusinessRepository
 import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
 import com.utilitykit.feature.sync.BusinessAnalytics
 import com.utilitykit.socket.SocketService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
@@ -76,10 +82,32 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
         }
     }
 
+    fun removeBusinessFromDatabase(id: String) {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            DatabaseHandler.shared().database.businessDao().delete(id)
+        }
+    }
+
     fun clearAll() {
         viewModelScope.launch {
             DatabaseHandler.shared().database.businessDao().clearAll()
         }
+    }
+
+    fun deleteBusiness(
+       business: Business
+    ) {
+        val request = JSONObject()
+        val user = User()
+        request.put(Key.userId, user._id)
+        request.put(Key._id, business.Id)
+        if (BusinessTypeHandler.shared().repository.businessType != null) {
+            request.put(
+                Key.businessTypeID,
+                BusinessTypeHandler.shared().repository.businessType!!.Id
+            )
+        }
+        SocketService.shared().send(SocketEvent.DELETE_BUSINESS, request)
     }
 
 

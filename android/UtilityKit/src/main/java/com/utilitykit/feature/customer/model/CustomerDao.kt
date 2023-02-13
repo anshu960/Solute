@@ -27,8 +27,8 @@ interface CustomerDao {
     fun findCustomerById(id: String): LiveData<Customer>
 
     @Query("select COUNT(*) from CustomerInvoice where CustomerID = :id")
-    fun getInvoiceCount(id: String): LiveData<Int>
+    suspend fun getInvoiceCount(id: String): Int?
 
     @Query("select SUM(FinalPrice) from CustomerInvoice where CustomerID = :id")
-    fun getTotalInvoiceValue(id: String): LiveData<Float>
+    suspend fun getTotalInvoiceValue(id: String): Float?
 }

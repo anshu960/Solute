@@ -53,6 +53,8 @@ class LaunchActivity : UtilityActivity() {
 
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        UtilityKitApp().setUp(this)
@@ -63,11 +65,7 @@ class LaunchActivity : UtilityActivity() {
         mDelayHandler = Handler()
         //Navigate with delay
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
-
     }
-
-
-
 
     public override fun onDestroy() {
         if (mDelayHandler != null) {

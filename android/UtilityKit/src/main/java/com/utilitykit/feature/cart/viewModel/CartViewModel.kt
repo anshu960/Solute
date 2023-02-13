@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.payload
-import com.utilitykit.socket.SocketEvent
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
@@ -15,6 +13,7 @@ import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.model.Customer
 import com.utilitykit.feature.product.handler.ProductHandler
 import com.utilitykit.feature.product.model.Product
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +21,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
     val gson = Gson()
@@ -164,6 +162,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
     }
 
     fun createInvoice(sales: ArrayList<JSONObject>, salesIds: ArrayList<String>,customer: Customer?) {
+        val unixTime = System.currentTimeMillis()
         val transactions = prepareTransaction(customer)
         if (transactions.count() == 0) {
             return
@@ -171,6 +170,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         var request = JSONObject()
         val user = User()
         val business = BusinessHandler.shared().repository.business.value
+        request.put(Key.invoiceId,unixTime)
         request.put(Key.userId, user._id)
         request.put(Key.businessID, business?.Id)
         request.put(Key.transactions, JSONArray(transactions))
@@ -183,6 +183,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(Key.customer, JSONObject(customerJson))
         }
+
         request.put(Key.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.GENERATE_CUSTOMER_INVOICE, request)
     }

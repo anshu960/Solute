@@ -18,6 +18,10 @@ import com.utilitykit.Constants.Key.Companion.customer
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.customer.handler.CustomerHandler
 import com.utilitykit.feature.customer.model.Customer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class CustomerViewHolder (inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(
@@ -55,10 +59,14 @@ class CustomerViewHolder (inflater: LayoutInflater, parent: ViewGroup) : Recycle
             barcodeTxt?.visibility = View.GONE
         }
         CustomerHandler.shared().viewModel?.getInvoiceCount(customer.Id){
-            invoiceCount?.text = "$it Invoices"
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                invoiceCount?.text = "$it Invoices"
+            }
         }
         CustomerHandler.shared().viewModel?.getTotalInvoiceValue(customer.Id){
-            totalInvoiceValue?.text = "$it Invoice Amount"
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                totalInvoiceValue?.text = "$it Invoice Amount"
+            }
         }
         if(onSelect != null){
             selectionImg?.visibility = View.VISIBLE

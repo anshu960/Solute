@@ -13,6 +13,7 @@ import com.utilitykit.UtilityViewController
 import com.utilitykit.dataclass.ContactData
 import com.utilitykit.dataclass.Conversation
 import com.utilitykit.dataclass.Message
+import com.utilitykit.feature.address.network.AddressNetwork
 import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
 import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
@@ -155,6 +156,7 @@ class SocketService : Service() {
             BusinessTypeHandler.shared().retriveBusinessType
         )
         mSocket?.on(SocketEvent.CREATE_BUSINESS.value, BusinessHandler.shared().onCreateNewBusiness)
+        mSocket?.on(SocketEvent.DELETE_BUSINESS.value,BusinessHandler.shared().onDeleteBusiness)
         mSocket?.on(SocketEvent.RETRIVE_PRODUCT.value, ProductHandler.shared().retriveProduct)
         mSocket?.on(SocketEvent.CREATE_PRODUCT.value, ProductHandler.shared().onCreateProduct)
         mSocket?.on(
@@ -216,6 +218,7 @@ class SocketService : Service() {
         )
         mSocket?.on(SocketEvent.CREATE_PRODUCT_BAR_CODE.value,ProductHandler.shared().onCreateProductBarCode)
         MediaFileNetwork.shared().connectScoket()
+        AddressNetwork.shared().connectScoket()
         //conenct the socket
         mSocket?.connect()
     }

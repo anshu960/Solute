@@ -4,8 +4,11 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.view.*
+import android.view.View
+import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.Window
+import android.view.WindowManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.utilitykit.socket.SocketService
 import java.util.*
@@ -16,6 +19,9 @@ open class UtilityActivity :UtilityViewController(){
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         SocketService.shared().currentActivity = this
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+
     }
 
     override fun onRestart() {

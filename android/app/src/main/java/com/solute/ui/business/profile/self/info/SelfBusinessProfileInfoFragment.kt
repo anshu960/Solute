@@ -2,13 +2,14 @@ package com.solute.ui.business.profile.self.info
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
-import com.solute.App.Companion.user
+import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
@@ -21,11 +22,18 @@ import kotlinx.coroutines.launch
 
 class SelfBusinessProfileInfoFragment : Fragment() {
     val activity = BusinessHandler.shared().activity as? BusinessActivity
+    val business = BusinessHandler.shared().repository.business.value
     var fileUri : Uri? = null
     val picasso = Picasso.get()
 
     var profileImage: ImageView? = null
     var editProfileImgCard: CardView? = null
+    var nameField : TextInputEditText? = null
+    var mobileField : TextInputEditText? = null
+    var emailField : TextInputEditText? = null
+
+    var deleteBtn : Button? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,17 +51,28 @@ class SelfBusinessProfileInfoFragment : Fragment() {
         editProfileImgCard =
             view.findViewById(R.id.self_business_profile_info_edit_profile_img_card)
         editProfileImgCard?.setOnClickListener { onClickEditProfileImg() }
+
+        nameField = view.findViewById(R.id.self_business_profile_info_name_tiet)
+        mobileField = view.findViewById(R.id.self_business_profile_info_mobile_tiet)
+        emailField = view.findViewById(R.id.self_business_profile_info_email_tiet)
+
+        deleteBtn = view.findViewById(R.id.self_business_profile_delete_btn)
+        deleteBtn?.setOnClickListener { onClickDelete() }
+
         loadProfileData()
         return view
     }
 
     fun loadProfileData(){
-        if(BusinessHandler.shared().repository.business.value?.Id != null){
-            MediaFileHandler.shared().viewModel?.loadFor(BusinessHandler.shared().repository.business.value!!.Id){
+        if(business != null){
+            MediaFileHandler.shared().viewModel?.loadFor(business.Id){
                 CoroutineScope(Job() + Dispatchers.Main).launch {
                     picasso.load(it.first().FileURL).into(profileImage)
                 }
             }
+            nameField?.setText(business.Name)
+            mobileField?.setText(business.MobileNumber)
+            emailField?.setText(business.EmailID)
         }
     }
 
@@ -73,5 +92,17 @@ class SelfBusinessProfileInfoFragment : Fragment() {
         }
     }
 
-
+    fun onClickDelete(){
+        if (business != null) {
+            BusinessHandler.shared().onDeleteBusinessResponse={
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    BusinessHandler.shared().activity.onBackPressed()
+                    BusinessHandler.shared().activity.onBackPressed()
+                    BusinessHandler.shared().activity.onBackPressed()
+                    BusinessHandler.shared().activity.onBackPressed()
+                }
+            }
+            BusinessHandler.shared().businessViewModel?.deleteBusiness(business)
+        }
+    }
 }

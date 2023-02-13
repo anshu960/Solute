@@ -3,7 +3,6 @@ package com.solute.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -24,10 +23,10 @@ import com.solute.R
 import com.solute.ui.register.RegisterActivity
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
-import com.utilitykit.socket.SocketEvent
 import com.utilitykit.UtilityActivity
 import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
+import com.utilitykit.socket.SocketEvent
 import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
@@ -83,6 +82,20 @@ class LoginActivity : UtilityActivity() {
         otp5!!.setOnKeyListener(PinOnKeyListener(4))
         otp6!!.setOnKeyListener(PinOnKeyListener(5))
         inits()
+        checkDynamicLink()
+    }
+
+    fun checkDynamicLink(){
+//        Firebase.dynamicLinks
+//            .getDynamicLink(intent)
+//            .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
+//                // Get deep link from result (may be null if no link is found)
+//                var deepLink: Uri? = null
+//                if (pendingDynamicLinkData != null) {
+//                    deepLink = pendingDynamicLinkData.link
+//                }
+//            }
+//            .addOnFailureListener(this) { e -> Log.w(TAG, "getDynamicLink:onFailure", e) }
     }
 
     fun inits(){

@@ -15,6 +15,9 @@ interface BusinessDao {
     @Delete
     suspend fun delete(item: Business)
 
+    @Query("delete from Business where _id=:id")
+    fun delete(id:String)
+
     @Query("delete from Business")
     fun clearAll()
 

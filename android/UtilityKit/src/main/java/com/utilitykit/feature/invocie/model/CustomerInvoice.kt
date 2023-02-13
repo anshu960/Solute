@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "CustomerInvoice")
 data class CustomerInvoice(
     @PrimaryKey @ColumnInfo(name="_id") @SerializedName("_id") var _id : String = "",
+    @ColumnInfo(name="InvoiceID") @SerializedName("InvoiceID") var invoiceID : Long? = null,
+    @ColumnInfo(name="ShareLink") @SerializedName("ShareLink") var ShareLink : String? = null,
     @ColumnInfo(name="UserID") @SerializedName("UserID") var userID : String? = null,
     @ColumnInfo(name="BusinessID") @SerializedName("BusinessID") var businessID : String? = null,
     @ColumnInfo(name="CustomerID") @SerializedName("CustomerID") var customerID : String? = null,
@@ -29,7 +31,6 @@ data class CustomerInvoice(
     @ColumnInfo(name="PendingAmount") @SerializedName("PendingAmount") var pendingAmount : Float? = null,
     @ColumnInfo(name="ClearedAmount") @SerializedName("ClearedAmount") var clearedAmount : Float? = null,
     @ColumnInfo(name="InvoiceDate") @SerializedName("InvoiceDate") var invoiceDate : String? = null,
-    @ColumnInfo(name="InvoiceID") @SerializedName("InvoiceID") var invoiceID : Long? = null,
     @ColumnInfo(name="CreatedAt") @SerializedName("CreatedAt") var createdAt : String? = null,
     @ColumnInfo(name="UpdatedAt") @SerializedName("UpdatedAt") var updatedAt : String? = null,
     @ColumnInfo(name="__v") @SerializedName("__v") var __v : Int? = null

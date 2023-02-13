@@ -9,17 +9,17 @@ class Country {
     val TAG = "COUNTRY"
     fun getCountryCode():String{
         var countryCode = ""
-        if(BusinessHandler.shared().context != null){
-            countryCode = BusinessHandler.shared().context!!.getResources().getConfiguration().locale.getCountry()
-            detectSIMCountry(BusinessHandler.shared().context!!)?.let {
+        if(BusinessHandler.shared().activity != null){
+            countryCode = BusinessHandler.shared().activity!!.getResources().getConfiguration().locale.getCountry()
+            detectSIMCountry(BusinessHandler.shared().activity!!)?.let {
                 return it
             }
 
-            detectNetworkCountry(BusinessHandler.shared().context!!)?.let {
+            detectNetworkCountry(BusinessHandler.shared().activity!!)?.let {
                 return it
             }
 
-            detectLocaleCountry(BusinessHandler.shared().context!!)?.let {
+            detectLocaleCountry(BusinessHandler.shared().activity!!)?.let {
                 return it
             }
         }
