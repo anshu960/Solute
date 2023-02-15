@@ -2,6 +2,8 @@ package com.utilitykit.database
 
 import android.content.Context
 import androidx.room.*
+import com.utilitykit.feature.address.model.Address
+import com.utilitykit.feature.address.model.AddressDao
 import com.utilitykit.feature.business.model.Business
 import com.utilitykit.feature.business.model.BusinessDao
 import com.utilitykit.feature.cart.model.Sale
@@ -49,8 +51,9 @@ class Converters {
         EmployeeAttendance::class,
         MediaFile::class,
         ProductBarCode::class,
+        Address::class,
     ],
-    version = 26,
+    version = 29,
     exportSchema = false
 )
 abstract class UtilityKitDatabase : RoomDatabase() {
@@ -68,6 +71,7 @@ abstract class UtilityKitDatabase : RoomDatabase() {
     abstract fun productCategoryDao(): ProductCategoryDao
     abstract fun productSubCategoryDao(): ProductSubCategoryDao
     abstract fun mediaFileDao():MediaFileDao
+    abstract fun addressDao():AddressDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

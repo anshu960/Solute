@@ -1,6 +1,5 @@
 package com.utilitykit.feature.address.viewModel
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,12 +7,11 @@ import com.utilitykit.Constants.Key
 import com.utilitykit.UtilityActivity
 import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.dataclass.User
+import com.utilitykit.feature.address.event.AddressEvent
+import com.utilitykit.feature.address.model.Address
 import com.utilitykit.feature.address.repository.AddressRepository
 import com.utilitykit.feature.business.handler.AuthHandler
 import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.mediaFile.event.MediaFileEvent
-import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
-import com.utilitykit.feature.mediaFile.model.MediaFile
 import com.utilitykit.socket.SocketService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,62 +32,23 @@ class  AddressViewModel(private val repository: AddressRepository) :
         }
     }
 
-    val allData: LiveData<List<MediaFile>>
+    val allData: LiveData<List<Address>>
         get() = repository.allLiveData
 
-    val selectedData : LiveData< MediaFile>
+    val selectedData : LiveData< Address>
         get() = repository.selected
 
 
 
-    fun loadFor(featureObjectID:String,completion:(ArrayList<MediaFile>)->Unit){
+    fun loadFor(featureObjectID:String,completion:(ArrayList<Address>)->Unit){
         scope.launch {
             val mediaFiles = DatabaseHandler.shared().database.mediaFileDao().getAllItemsFor(featureObjectID)
             if(mediaFiles.isNotEmpty()){
-                completion(mediaFiles as ArrayList<MediaFile>)
+                completion(mediaFiles as ArrayList<Address>)
             }else{
                 retrieveFor(featureObjectID)
             }
         }
-    }
-
-    fun uploadImage(fileUri: Uri?,featureObjectID:String){
-        if (fileUri != null) {
-            val unixTime = System.currentTimeMillis()
-            val fileName = "$unixTime.png"
-            val imageRef = repository.storageBucketReferece?.child(fileName)
-            imageRef?.putFile(fileUri!!)?.addOnSuccessListener { taskSnapshot ->
-                taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                    MediaFileHandler.shared().onCreateNew={
-                        this.activity?.runOnUiThread  {
-                            this.activity?.toast("Image Updated Successfully")
-                        }
-                    }
-                    val imageUrl = it.toString()
-                    updateMediaFileInServer(featureObjectID,imageUrl)
-                }
-            }?.addOnFailureListener { e ->
-                print(e.message)
-                this.activity?.runOnUiThread {
-                    activity?.toast("Oops! Failed to upload image at the moment")
-                }
-            }
-        }else{
-            activity?.onBackPressed()
-        }
-    }
-
-
-    fun updateMediaFileInServer(featureObjectID: String, image: String) {
-        val user = User()
-        val request = JSONObject()
-        val business = BusinessHandler.shared().repository.business
-        request.put(Key.businessID, business.value?.Id)
-        request.put(Key.fileURL, image)
-        request.put(Key.userId, user._id)
-        request.put(Key.deviceId, AuthHandler.shared().deviceId)
-        request.put(Key.featureObjectID, featureObjectID)
-        MediaFileHandler.shared().viewModel?.createNew(request)
     }
 
     fun retrieveFor(featureObjectID:String){
@@ -100,7 +59,7 @@ class  AddressViewModel(private val repository: AddressRepository) :
         request.put(Key.businessID, business.value?.Id)
         request.put(Key.deviceId, AuthHandler.shared().deviceId)
         request.put(Key.featureObjectID,featureObjectID)
-        SocketService.shared().send(MediaFileEvent.RETRIEVE.value,request)
+        SocketService.shared().send(AddressEvent.RETRIEVE.value,request)
     }
 
     fun retrieve(){
@@ -108,20 +67,20 @@ class  AddressViewModel(private val repository: AddressRepository) :
         val user = User()
         val business = BusinessHandler.shared().repository.business
         request.put(Key.userId,user._id)
-        request.put(Key.businessID, business.value?.Id)
+        request.put(Key.featureObjectID, business.value?.Id)
         request.put(Key.deviceId, AuthHandler.shared().deviceId)
-        SocketService.shared().send(MediaFileEvent.RETRIEVE.value,request)
+        SocketService.shared().send(AddressEvent.RETRIEVE.value,request)
     }
 
     fun createNew(request:JSONObject) {
         val unixTime = System.currentTimeMillis()
         request.put(Key.uniqueId,unixTime)
-        SocketService.shared().send(MediaFileEvent.CREATE.value, request)
+        SocketService.shared().send(AddressEvent.CREATE.value, request)
     }
 
-    fun insert(newData :  MediaFile){
+    fun insert(newData : Address){
         viewModelScope.launch{
-            DatabaseHandler.shared().database.mediaFileDao().insert(newData)
+            DatabaseHandler.shared().database.addressDao().insert(newData)
         }
     }
 }

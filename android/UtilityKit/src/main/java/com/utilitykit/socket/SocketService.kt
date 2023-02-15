@@ -166,6 +166,7 @@ class SocketService : Service() {
         mSocket?.on(SocketEvent.UPDATE_PRODUCT.value, ProductHandler.shared().onUpdateProduct)
         mSocket?.on(SocketEvent.DELETE_PRODUCT.value, ProductHandler.shared().onDeleteProduct)
         mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
+        mSocket?.on(SocketEvent.RETRIVE_SINGLE_INVOICE.value,InvoiceHandler.shared().onRetrieveSingleInvoice)
         mSocket?.on(
             SocketEvent.GENERATE_CUSTOMER_INVOICE.value,
             CartHandler.shared().onCreateCustomerInvoice

@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.multidex.BuildConfig
 import com.solute.R
-import com.solute.ui.login.LoginActivity
 import com.solute.ui.network.ConnectingActivity
-import com.solute.ui.register.RegisterActivity
 import com.utilitykit.Constants.Key
 import com.utilitykit.Defaults
 import com.utilitykit.UtilityActivity
@@ -34,13 +32,13 @@ class LaunchActivity : UtilityActivity() {
                             this.startActivity(intent)
                         }
                     }else{
-                        val intent = Intent(applicationContext, RegisterActivity::class.java)
+                        val intent = Intent(applicationContext, ConnectingActivity::class.java)
                         intent.putExtra(Key.userId,user.userID)
                         intent.putExtra(Key._id,user._id)
                         this.startActivity(intent)
                     }
                 }else{
-                    val intent = Intent(applicationContext, LoginActivity::class.java)
+                    val intent = Intent(applicationContext, ConnectingActivity::class.java)
                     startActivity(intent)
                 }
             }else{
@@ -66,6 +64,8 @@ class LaunchActivity : UtilityActivity() {
         //Navigate with delay
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
     }
+
+
 
     public override fun onDestroy() {
         if (mDelayHandler != null) {

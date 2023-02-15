@@ -32,7 +32,7 @@ import org.json.JSONObject
 
 class ReceiptDetailsActivity : UtilityActivity() {
     private val PRINT_SERVICE: Int = 0
-    val business = BusinessHandler.shared().repository.business
+    var business = BusinessHandler.shared().repository.business.value
     val gson = Gson()
     var receiptData = JSONObject()
     var customerInvoice: CustomerInvoice? = null
@@ -115,6 +115,19 @@ class ReceiptDetailsActivity : UtilityActivity() {
             loadShareDetails()
         }
         pupulateExistingReceipt()
+        if (intent.hasExtra(Key.invoiceId)){
+            val invoiceId = intent.getStringExtra(Key.invoiceId)!!.toLong()
+            InvoiceHandler.shared().onRetriveSingleInvoiceCallBack={invoice,sales,customer,business->
+                this.runOnUiThread {
+                    this.customerInvoice = invoice
+                    this.sales = sales
+                    this.customer = customer
+                    this.business = business
+                    reloadData()
+                }
+            }
+            InvoiceHandler.shared().retrieveSingleInvoice(invoiceId)
+        }
     }
 
     fun getCustomerMobileNumber(): String {
@@ -150,7 +163,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
     }
 
     fun pupulateExistingReceipt() {
-        if (intent.hasExtra(Key.invoice)) {
+         if (intent.hasExtra(Key.invoice)) {
             receiptData = JSONObject(intent.getStringExtra(Key.invoice))
             val payload = receiptData.getJSONObject(Key.payload)
             customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
@@ -168,7 +181,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
             }else{
                 reloadData()
             }
-        } else {
+        } else if(InvoiceHandler.shared().repository.customerInvoice.value !=null) {
             InvoiceHandler.shared().repository.customerInvoice.value
             customerInvoice = InvoiceHandler.shared().repository.customerInvoice.value
             InvoiceHandler.shared().viewModel?.fetchAllSales()
@@ -191,13 +204,15 @@ class ReceiptDetailsActivity : UtilityActivity() {
             qrImage?.setImageBitmap(qrBitmap)
         }
         loadShareDetails()
-        val pdf = PDFService().createInvoice(this,customer,business.value,customerInvoice!!,sales)
-        pdfView?.getSettings()?.setUseWideViewPort(true)
-        pdfView?.setInitialScale(1)
-        pdfView?.getSettings()?.setSupportZoom(true);
-        pdfView?.getSettings()?.setBuiltInZoomControls(true);
-        pdfView?.getSettings()?.setDisplayZoomControls(false);
-        pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
+        if(customerInvoice != null){
+            val pdf = PDFService().createInvoice(this,customer,business,customerInvoice!!,sales)
+            pdfView?.getSettings()?.setUseWideViewPort(true)
+            pdfView?.setInitialScale(1)
+            pdfView?.getSettings()?.setSupportZoom(true);
+            pdfView?.getSettings()?.setBuiltInZoomControls(true);
+            pdfView?.getSettings()?.setDisplayZoomControls(false);
+            pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
+        }
     }
 
     fun pupulateFooter() {

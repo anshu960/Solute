@@ -82,20 +82,6 @@ class LoginActivity : UtilityActivity() {
         otp5!!.setOnKeyListener(PinOnKeyListener(4))
         otp6!!.setOnKeyListener(PinOnKeyListener(5))
         inits()
-        checkDynamicLink()
-    }
-
-    fun checkDynamicLink(){
-//        Firebase.dynamicLinks
-//            .getDynamicLink(intent)
-//            .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
-//                // Get deep link from result (may be null if no link is found)
-//                var deepLink: Uri? = null
-//                if (pendingDynamicLinkData != null) {
-//                    deepLink = pendingDynamicLinkData.link
-//                }
-//            }
-//            .addOnFailureListener(this) { e -> Log.w(TAG, "getDynamicLink:onFailure", e) }
     }
 
     fun inits(){

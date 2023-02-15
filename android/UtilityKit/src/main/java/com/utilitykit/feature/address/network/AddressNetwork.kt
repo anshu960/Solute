@@ -2,7 +2,6 @@ package com.utilitykit.feature.address.network
 
 import com.utilitykit.feature.address.event.AddressEvent
 import com.utilitykit.feature.address.handler.AddressHandler
-import com.utilitykit.feature.mediaFile.event.MediaFileEvent
 import com.utilitykit.socket.SocketService
 
 class AddressNetwork {
@@ -21,11 +20,11 @@ class AddressNetwork {
     }
     fun connectScoket(){
         SocketService.shared().mSocket?.on(AddressEvent.CREATE.value, AddressHandler.shared().onCreate)
-        SocketService.shared().mSocket?.on(MediaFileEvent.RETRIEVE.value,AddressHandler.shared().onRetrieve)
+        SocketService.shared().mSocket?.on(AddressEvent.RETRIEVE.value,AddressHandler.shared().onRetrieve)
     }
 
     fun disconnectSocket(){
-        SocketService.shared().mSocket?.off(MediaFileEvent.CREATE.value)
-        SocketService.shared().mSocket?.off(MediaFileEvent.RETRIEVE.value)
+        SocketService.shared().mSocket?.off(AddressEvent.CREATE.value)
+        SocketService.shared().mSocket?.off(AddressEvent.RETRIEVE.value)
     }
 }
