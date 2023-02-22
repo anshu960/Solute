@@ -69,7 +69,7 @@ class MainActivity : UtilityActivity() {
         ).get(
             MediaFileViewModel::class.java
         )
-        MediaFileHandler.shared().setup(mediaFileViewModel!!)
+        MediaFileHandler.shared().setup(mediaFileViewModel)
         MediaFileHandler.shared().repository.storageBucketReferece = App.applicationContext().imagesRef
         checkDynamicLink()
     }

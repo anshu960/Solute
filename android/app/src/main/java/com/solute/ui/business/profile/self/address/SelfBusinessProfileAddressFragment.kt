@@ -32,9 +32,12 @@ class SelfBusinessProfileAddressFragment : Fragment() {
             AddressViewModalFactory(AddressHandler.shared().repository)
         )[AddressViewModel::class.java]
         AddressHandler.shared().setup(viewModal!!)
-        viewModal!!.allData.observe(this){
+        viewModal!!.allData.observe(this){ it ->
             if(recycler != null && it!= null){
-                val adapter = AddressAdapter(this.requireContext(),it as ArrayList<Address>)
+                val adapter = AddressAdapter(this.requireContext(),it as ArrayList<Address>){address->
+                    AddressHandler.shared().repository.selectedLiveData.postValue(address)
+                    findNavController().navigate(R.id.navigate_to_create_address)
+                }
                 recycler!!.layoutManager = LinearLayoutManager(this.requireContext())
                 recycler?.adapter = adapter
             }
@@ -55,6 +58,7 @@ class SelfBusinessProfileAddressFragment : Fragment() {
     }
 
     fun onClickAdd(){
+        AddressHandler.shared().repository.selectedLiveData.postValue(null)
         findNavController().navigate(R.id.navigate_to_create_address)
     }
 }

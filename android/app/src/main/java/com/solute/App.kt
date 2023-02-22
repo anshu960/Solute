@@ -86,10 +86,7 @@ class App: Application() {
         val messaging = FirebaseMessaging.getInstance()
         messaging.isAutoInitEnabled = true
         val token = FirebaseMessaging.getInstance().token.toString()
-        if (token != null) {
-            Defaults.shared().store(Key.fcmToken, token)
-        }
-
+        Defaults.shared().store(Key.fcmToken, token)
     }
 
     companion object{

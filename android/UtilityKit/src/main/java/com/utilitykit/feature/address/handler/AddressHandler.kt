@@ -15,7 +15,9 @@ class AddressHandler{
     var viewModel: AddressViewModel? = null
     val repository = AddressRepository()
     var activity = UtilityActivity()
-    var onCreateNewAddress : ((address: Address)->Unit)? = null
+    var onCreateResponse : ((address: Address)->Unit)? = null
+    var onUpdateResponse : ((address: Address)->Unit)? = null
+    var onDeleteResponse : ((address: Address)->Unit)? = null
     val gson = Gson()
     init {
         instance = this
@@ -62,7 +64,33 @@ class AddressHandler{
                 val payload = anyData.getJSONObject(Key.payload)
                 val modelObject = gson.fromJson(payload.toString(),Address::class.java)
                 viewModel?.insert(modelObject)
-                onCreateNewAddress?.let { it1 -> it1(modelObject) }
+                onCreateResponse?.let { it1 -> it1(modelObject) }
+            }
+        }
+    }
+
+    val onUpdate = Emitter.Listener {
+        if (it.isNotEmpty())
+        {
+            val anyData = it.first() as JSONObject
+            if (anyData.has(Key.payload)){
+                val payload = anyData.getJSONObject(Key.payload)
+                val modelObject = gson.fromJson(payload.toString(),Address::class.java)
+                viewModel?.insert(modelObject)
+                onUpdateResponse?.let { it1 -> it1(modelObject) }
+            }
+        }
+    }
+
+    val onDelete = Emitter.Listener {
+        if (it.isNotEmpty())
+        {
+            val anyData = it.first() as JSONObject
+            if (anyData.has(Key.payload)){
+                val payload = anyData.getJSONObject(Key.payload)
+                val modelObject = gson.fromJson(payload.toString(),Address::class.java)
+                viewModel?.delete(modelObject)
+                onDeleteResponse?.let { it1 -> it1(modelObject) }
             }
         }
     }

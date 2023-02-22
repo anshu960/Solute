@@ -26,6 +26,7 @@ import com.utilitykit.feature.productSubCategory.model.ProductSubCategoryDao
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.json.JSONObject
 
 class Converters {
     @TypeConverter
@@ -33,7 +34,18 @@ class Converters {
 
     @TypeConverter
     fun toArrayList(value: String) = Json.decodeFromString<ArrayList<String>>(value)
+
+    @TypeConverter
+    fun toJson(value: String?):JSONObject?{
+        return JSONObject(value)
+    }
+
+    @TypeConverter
+    fun toJsonString(value: JSONObject?):String?{
+        return value.toString()
+    }
 }
+
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
 @TypeConverters(Converters::class)
@@ -53,7 +65,7 @@ class Converters {
         ProductBarCode::class,
         Address::class,
     ],
-    version = 29,
+    version = 32,
     exportSchema = false
 )
 abstract class UtilityKitDatabase : RoomDatabase() {

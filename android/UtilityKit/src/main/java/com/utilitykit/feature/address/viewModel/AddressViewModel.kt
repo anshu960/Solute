@@ -77,10 +77,22 @@ class  AddressViewModel(private val repository: AddressRepository) :
         request.put(Key.uniqueId,unixTime)
         SocketService.shared().send(AddressEvent.CREATE.value, request)
     }
+    fun updateExistingAddress(request:JSONObject) {
+        SocketService.shared().send(AddressEvent.UPDATE.value, request)
+    }
+
+    fun deleteExistingAddress(request:JSONObject) {
+        SocketService.shared().send(AddressEvent.DELETE.value, request)
+    }
 
     fun insert(newData : Address){
         viewModelScope.launch{
             DatabaseHandler.shared().database.addressDao().insert(newData)
+        }
+    }
+    fun delete(data : Address){
+        viewModelScope.launch{
+            DatabaseHandler.shared().database.addressDao().delete(data)
         }
     }
 }

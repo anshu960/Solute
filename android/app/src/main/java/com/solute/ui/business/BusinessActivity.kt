@@ -176,8 +176,8 @@ class BusinessActivity : UtilityActivity() {
         ).get(
             ProductCategoryViewModel::class.java
         )
-        ProductCategoryHandler.shared().setup(productCategoryViewModel!!)
-        productCategoryViewModel?.loadCategory()
+        ProductCategoryHandler.shared().setup(productCategoryViewModel)
+        productCategoryViewModel.loadCategory()
         //sub category
         productSubCategoryViewModel = ViewModelProvider(
             this,
@@ -185,7 +185,7 @@ class BusinessActivity : UtilityActivity() {
         ).get(
             ProductSubCategoryViewModel::class.java
         )
-        ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
+        ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel)
         productSubCategoryViewModel.loadSubCategory()
 
         productSubCategoryViewModel.loadSubCategory()

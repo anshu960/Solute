@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import org.json.JSONObject
+
 @Entity(tableName = "Address")
 data class Address(
     @PrimaryKey @ColumnInfo(name="UniqueID")  @SerializedName("UniqueID") var UniqueID: Long = 0,
@@ -22,7 +24,7 @@ data class Address(
     @ColumnInfo(name="Floor") @SerializedName("Floor") var Floor: String? = null,
     @ColumnInfo(name="MobileNumber") @SerializedName("MobileNumber") var MobileNumber: String? = null,
     @ColumnInfo(name="Type") @SerializedName("Type") var Type: String? = null,
-    @ColumnInfo(name="Location") @SerializedName("Location") var Location: ArrayList<String> = arrayListOf(),
+    @ColumnInfo(name="Location") @SerializedName("Location") var Location: JSONObject? = null,
     @ColumnInfo(name="IsPrimary") @SerializedName("IsPrimary") var IsPrimary: Boolean? = null,
     @ColumnInfo(name="IsDeleted") @SerializedName("IsDeleted") var IsDeleted: Boolean? = null,
     @ColumnInfo(name="CreatedAt") @SerializedName("CreatedAt") var CreatedAt: String? = null,

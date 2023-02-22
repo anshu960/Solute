@@ -34,6 +34,6 @@ class CurrentDayDecorator(context: Activity?) : DayViewDecorator {
     init {
         // You can set background for Decorator via drawable here
         presentDot = ContextCompat.getDrawable(context!!, R.drawable.calender_dot_present)
-        absentDot = ContextCompat.getDrawable(context!!, R.drawable.calender_dot_absent)
+        absentDot = ContextCompat.getDrawable(context, R.drawable.calender_dot_absent)
     }
 }
