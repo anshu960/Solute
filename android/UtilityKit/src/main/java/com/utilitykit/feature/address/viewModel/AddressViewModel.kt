@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utilitykit.Constants.Key
-import com.utilitykit.UtilityActivity
 import com.utilitykit.database.DatabaseHandler
 import com.utilitykit.dataclass.User
 import com.utilitykit.feature.address.event.AddressEvent
@@ -24,8 +23,6 @@ class  AddressViewModel(private val repository: AddressRepository) :
 
     private var job: Job = Job()
     private val scope = CoroutineScope(job + Dispatchers.IO)
-    var activity : UtilityActivity? = null
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -42,9 +39,9 @@ class  AddressViewModel(private val repository: AddressRepository) :
 
     fun loadFor(featureObjectID:String,completion:(ArrayList<Address>)->Unit){
         scope.launch {
-            val mediaFiles = DatabaseHandler.shared().database.mediaFileDao().getAllItemsFor(featureObjectID)
-            if(mediaFiles.isNotEmpty()){
-                completion(mediaFiles as ArrayList<Address>)
+            val allAddress = DatabaseHandler.shared().database.addressDao().getAllItemsFor(featureObjectID)
+            if(allAddress.isNotEmpty()){
+                completion(allAddress as ArrayList<Address>)
             }else{
                 retrieveFor(featureObjectID)
             }

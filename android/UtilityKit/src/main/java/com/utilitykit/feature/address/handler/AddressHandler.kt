@@ -51,7 +51,6 @@ class AddressHandler{
                     allModalObject.add(modelObject)
                     viewModel?.insert(modelObject)
                 }
-                repository.liveData?.postValue(allModalObject)
             }
         }
     }

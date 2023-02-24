@@ -28,6 +28,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.json.JSONObject
 
+
 class Converters {
     @TypeConverter
     fun fromList(value: ArrayList<String>) = Json.encodeToString(value)
@@ -36,13 +37,22 @@ class Converters {
     fun toArrayList(value: String) = Json.decodeFromString<ArrayList<String>>(value)
 
     @TypeConverter
-    fun toJson(value: String?):JSONObject?{
-        return JSONObject(value)
+    fun toJson(value: String?): JSONObject?{
+        if(value.isNullOrEmpty() || value == "null"){
+            return JSONObject()
+        }else{
+            return JSONObject(value)
+        }
     }
 
     @TypeConverter
     fun toJsonString(value: JSONObject?):String?{
-        return value.toString()
+        try {
+            return value.toString()
+        }
+        catch (error:java.lang.Error){
+            return ""
+        }
     }
 }
 
@@ -65,7 +75,7 @@ class Converters {
         ProductBarCode::class,
         Address::class,
     ],
-    version = 32,
+    version = 33,
     exportSchema = false
 )
 abstract class UtilityKitDatabase : RoomDatabase() {
