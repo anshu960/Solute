@@ -2,18 +2,32 @@ package com.utilitykit
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.*
+import android.content.ContentValues
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.*
-import android.location.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.media.MediaScannerConnection
 import android.net.Uri
-import android.os.*
+import android.os.Bundle
+import android.os.Environment
+import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
-import android.view.*
-import android.widget.*
+import android.view.Gravity
+import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,7 +38,10 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.OnSuccessListener
 import org.json.JSONObject
-import java.io.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 import java.util.concurrent.Executor
 
@@ -213,13 +230,11 @@ open class UtilityViewController : AppCompatActivity() {
     }
     fun stopActivityIndicator(){
         runOnUiThread {
-            this.activityIndicator!!.dismiss()
+            if(this.activityIndicator != null){
+                this.activityIndicator!!.dismiss()
+            }
         }
     }
-
-
-
-   
 
     private fun setupPermissions() {
         val permission = ContextCompat.checkSelfPermission(this,
