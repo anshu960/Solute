@@ -1,25 +1,23 @@
 package com.solute.ui.business.cart
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.cart.handler.CartHandler
+import com.friendly.framework.feature.cart.viewModel.CartViewModel
+import com.friendly.framework.feature.product.model.Product
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.product.BusinessProductAdapter
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.cart.handler.CartHandler
-import com.utilitykit.feature.cart.viewModel.CartViewModel
-import com.utilitykit.feature.product.model.Product
 
 /**
  * A simple [Fragment] subclass.

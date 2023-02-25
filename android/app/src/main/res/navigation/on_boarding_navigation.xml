@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/on_boarding_navigation"
+    app:startDestination="@+id/app_story"
+    >
+    <fragment
+        android:id="@+id/app_story"
+        android:name="com.solute.ui.onboarding.appStory.AppStoryFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_app_story" />
+    <fragment
+        android:id="@+id/login"
+        android:name="com.solute.ui.onboarding.login.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/enter_otp"
+        android:name="com.solute.ui.onboarding.login.OTPFragment"
+        android:label="@string/otp"
+        tools:layout="@layout/fragment_o_t_p" />
+    <fragment
+        android:id="@+id/register"
+        android:name="com.solute.ui.onboarding.register.RegisterFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_register" />
+
+</navigation>

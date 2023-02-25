@@ -61,4 +61,11 @@
     <color name="selectorDateTextColor">#F1F3F5</color>
     <color name="colorLightPurple">#F1F3F5</color>
 
+
+    //App Story
+    <color name="md_white_1000">#ffffff</color>
+    <color name="md_grey_300">#E0E0E0</color>
+    <color name="md_blue_100">#BBDEFB</color>
+    <color name="md_grey_100">#F5F5F5</color>
+
 </resources>

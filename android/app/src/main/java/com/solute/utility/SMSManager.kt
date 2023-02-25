@@ -3,11 +3,12 @@ package com.solute.utility
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.dataclass.ContactData
+import com.friendly.framework.dataclass.FriendlyUser
+import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.solute.App
-import com.utilitykit.UtilityActivity
-import com.utilitykit.dataclass.ContactData
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.invoice.model.CustomerInvoice
+
 
 
 class SMSManager {
@@ -18,7 +19,7 @@ class SMSManager {
     }
 
 
-    fun sendSms(activity : UtilityActivity?,mobile:String,message:String){
+    fun sendSms(activity : UtilityActivity?, mobile:String, message:String){
         val uri: Uri = Uri.parse("smsto:$mobile")
         val intent = Intent(Intent.ACTION_SENDTO, uri)
         intent.putExtra("sms_body", message)
@@ -90,7 +91,7 @@ class SMSManager {
     }
 
     fun sendInviteSms(contact: ContactData){
-        val user = User()
+        val user = FriendlyUser()
         val componsedMessage = "Hi ${contact.name}\n" + inviteSms + "Regards\n${user.name}"
         val uri: Uri = Uri.parse("smsto:${contact.mobileNumber}")
         val intent = Intent(Intent.ACTION_SENDTO, uri)

@@ -127,10 +127,10 @@
 //        this.responseValue = value
 //        try{
 //            this.json = JSONObject(value)
-//            this.responseMessage = json.getString(Key.message)
+//            this.responseMessage = json.getString(KeyConstant.message)
 //        }catch (e : java.lang.Exception){
 //            var jsonObject = JSONObject()
-//            jsonObject.put(Key.message, Constants.defaultErrorMessage)
+//            jsonObject.put(KeyConstant.message, Constants.defaultErrorMessage)
 //            this.json = jsonObject
 //
 //        }

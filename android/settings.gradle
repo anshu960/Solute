@@ -9,5 +9,5 @@ pluginManagement {
 rootProject.name = "Solute"
 include ':app'
 include ':app:bharatbandhu'
-include ':UtilityKit'
+include ':FriendlyFramework'
 //include ':app:solute:framework'

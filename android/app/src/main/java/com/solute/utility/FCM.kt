@@ -2,10 +2,10 @@ package com.solute.utility
 
 import android.content.ContentValues
 import android.util.Log
+import com.friendly.framework.Defaults
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.dataclass.FriendlyUser
 import com.solute.constants.Server
-import com.utilitykit.Constants.Key
-import com.utilitykit.Defaults
-import com.utilitykit.dataclass.User
 import org.json.JSONObject
 
 class FCM {
@@ -35,14 +35,15 @@ class FCM {
     }
 
     fun updateFcmTokenToServer(){
-        val fcmToken = Defaults.shared().string(Key.fcmToken)
-        val user = User()
+        val fcmToken = Defaults.shared().string(KeyConstant.fcmToken)
+        val user = FriendlyUser()
+
         if(fcmToken != "" && user._id != ""){
-            val user = User()
+            val user = FriendlyUser()
             user.fcmToken = fcmToken
             val request = JSONObject()
-            request.put(Key._id,user._id)
-            request.put(Key.fcmToken,fcmToken)
+            request.put(KeyConstant._id,user._id)
+            request.put(KeyConstant.fcmToken,fcmToken)
 //            ServiceManager().makeServiceCall(Server.updateFcm,request){
 //                Log.d("FCM","FCM Update in Server Response = " + it.responseValue)
 //            }

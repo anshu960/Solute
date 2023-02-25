@@ -14,32 +14,33 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.cart.handler.CartHandler
+import com.friendly.framework.feature.cart.viewModel.CartViewModalFactory
+import com.friendly.framework.feature.cart.viewModel.CartViewModel
+import com.friendly.framework.feature.customer.handler.CustomerHandler
+import com.friendly.framework.feature.customer.viewModel.CustomerViewModalFactory
+import com.friendly.framework.feature.customer.viewModel.CustomerViewModel
+import com.friendly.framework.feature.invoice.handler.InvoiceHandler
+import com.friendly.framework.feature.invoice.viewModel.InvoiceViewModalFactory
+import com.friendly.framework.feature.invoice.viewModel.InvoiceViewModel
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
+import com.friendly.framework.feature.product.handler.ProductHandler
+import com.friendly.framework.feature.product.viewModel.ProductViewModalFactory
+import com.friendly.framework.feature.product.viewModel.ProductViewModel
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModalFactory
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
+import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
+import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
+import com.friendly.framework.feature.sync.SyncHandler
 import com.google.android.material.navigation.NavigationView
 import com.solute.R
 import com.solute.databinding.ActivityBusinessBinding
 import com.squareup.picasso.Picasso
-import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.cart.handler.CartHandler
-import com.utilitykit.feature.cart.viewModel.CartViewModalFactory
-import com.utilitykit.feature.cart.viewModel.CartViewModel
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.viewModel.CustomerViewModalFactory
-import com.utilitykit.feature.customer.viewModel.CustomerViewModel
-import com.utilitykit.feature.invoice.handler.InvoiceHandler
-import com.utilitykit.feature.invoice.viewModel.InvoiceViewModalFactory
-import com.utilitykit.feature.invoice.viewModel.InvoiceViewModel
-import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
-import com.utilitykit.feature.product.handler.ProductHandler
-import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
-import com.utilitykit.feature.product.viewModel.ProductViewModel
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
-import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
-import com.utilitykit.feature.sync.SyncHandler
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -145,7 +146,9 @@ class BusinessActivity : UtilityActivity() {
 
     fun setUpRequiredModels(){
         //Product
-        productViewModal = ViewModelProvider(this,ProductViewModalFactory(ProductHandler.shared().repository))[ProductViewModel::class.java]
+        productViewModal = ViewModelProvider(this,
+            ProductViewModalFactory(ProductHandler.shared().repository)
+        )[ProductViewModel::class.java]
         productViewModal.fetchAllProduct()
         ProductHandler.shared().setup(productViewModal)
         //Cart

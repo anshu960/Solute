@@ -10,16 +10,17 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.business.model.Business
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
+import com.friendly.framework.feature.sync.SyncHandler
+import com.friendly.framework.qr.QRCodeUtill
 import com.solute.App
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.business.model.Business
-import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
-import com.utilitykit.feature.sync.SyncHandler
-import com.utilitykit.qr.QRCodeUtill
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

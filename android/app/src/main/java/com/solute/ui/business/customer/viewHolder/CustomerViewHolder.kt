@@ -10,14 +10,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.customer.handler.CustomerHandler
+import com.friendly.framework.feature.customer.model.Customer
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.solute.R
-import com.utilitykit.Constants.Key.Companion.customer
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.model.Customer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

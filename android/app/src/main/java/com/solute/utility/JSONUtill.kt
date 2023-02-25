@@ -1,11 +1,10 @@
 package com.solute.utility
 
-import com.utilitykit.dataclass.Profile
-
+import com.friendly.framework.dataclass.FriendlyProfile
 
 class JSONUtill
 {
-    fun getUserIdsForRequest(profiles:ArrayList<Profile>):String{
+    fun getUserIdsForRequest(profiles:ArrayList<FriendlyProfile>):String{
         var requestMobiles = "["
         var count = 0
         for (item in profiles)

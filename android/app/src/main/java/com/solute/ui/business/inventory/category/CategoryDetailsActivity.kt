@@ -1,19 +1,18 @@
 package com.solute.ui.business.inventory.category
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.product.handler.ProductHandler
+import com.friendly.framework.feature.product.model.Product
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.solute.R
-import com.solute.ui.business.inventory.product.ProductAdapter
 import com.solute.ui.business.product.BusinessProductAdapter
-import com.utilitykit.feature.product.handler.ProductHandler
-import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.model.ProductCategory
+
 
 class CategoryDetailsActivity : AppCompatActivity() {
 

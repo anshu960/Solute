@@ -1,31 +1,29 @@
 package com.bharat.bandhu.ui.launch
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.multidex.BuildConfig
 import com.bharat.bandhu.R
 import com.bharat.bandhu.ui.MainActivity
 import com.bharat.bandhu.ui.onboard.LoginActivity
 import com.bharat.bandhu.ui.onboard.register.SignupActivity
-import com.utilitykit.Constants.Key
-import com.utilitykit.Defaults
-import com.utilitykit.UtilityActivity
-import com.utilitykit.dataclass.User
-import com.utilitykit.socket.SocketService
+import com.friendly.framework.Defaults
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.dataclass.FriendlyUser
+import com.friendly.framework.socket.SocketService
 
 class LaunchActivity : UtilityActivity() {
     private var mDelayHandler: Handler? = null
     private val SPLASH_DELAY: Long = 2000 //2 seconds
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
-//            val isAccepted = Defaults.string(Key.isAccepted)
+//            val isAccepted = Defaults.string(KeyConstant.isAccepted)
             val isAccepted = "true"
             if(isAccepted != ""){
-                val userDetails = Defaults.shared().string(Key.loginDetails)
+                val userDetails = Defaults.shared().string(KeyConstant.loginDetails)
                 if(userDetails != null && userDetails != ""){
-                    val user = User()
+                    val user = FriendlyUser()
                     if (user.name != "" && user.userID != "" && user._id != ""){
                         if(user.profilePic == ""){
 //                            val intent = Intent(applicationContext, AddProfilePicActivity::class.java)
@@ -37,8 +35,8 @@ class LaunchActivity : UtilityActivity() {
                         }
                     }else{
                         val intent = Intent(applicationContext, SignupActivity::class.java)
-                        intent.putExtra(Key.userId,user.userID)
-                        intent.putExtra(Key._id,user._id)
+                        intent.putExtra(KeyConstant.userId,user.userID)
+                        intent.putExtra(KeyConstant._id,user._id)
                         this.startActivity(intent)
                     }
                 }else{
@@ -61,7 +59,6 @@ class LaunchActivity : UtilityActivity() {
         SocketService.shared().currentActivity = this
         SocketService.shared().connect()
         setContentView(R.layout.activity_launch)
-        checkUpdatesAndClearDatabase()
         mDelayHandler = Handler()
         //Navigate with delay
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
@@ -76,17 +73,5 @@ class LaunchActivity : UtilityActivity() {
             mDelayHandler!!.removeCallbacks(mRunnable)
         }
         super.onDestroy()
-    }
-
-    fun checkUpdatesAndClearDatabase(){
-        val previousVersion = Defaults.shared().string(Key.versionName)
-        val currentVersionName = BuildConfig.VERSION_NAME
-        if(previousVersion == "" && currentVersionName != ""){
-//            Database.shared.clearDatabase()
-            Defaults.shared().store(com.utilitykit.Constants.Key.versionName, currentVersionName)
-        }else if(previousVersion != currentVersionName){
-//            com.utilitykit.database.Database.shared.clearDatabase()
-            Defaults.shared().store(com.utilitykit.Constants.Key.versionName, currentVersionName)
-        }
     }
 }

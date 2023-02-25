@@ -4,16 +4,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.dataclass.FriendlyUser
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
+import com.friendly.framework.socket.SocketEvent
+import com.friendly.framework.socket.SocketService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.squareup.picasso.Picasso
-import com.utilitykit.Constants.Key
-import com.utilitykit.UtilityActivity
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
-import com.utilitykit.socket.SocketEvent
-import com.utilitykit.socket.SocketService
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class ProfileActivity : UtilityActivity() {
-    var user = User()
+    var user = FriendlyUser()
     val picasso = Picasso.get()
     var isProfilePicChanged = false
     var fileUri : Uri? = null
@@ -54,7 +55,7 @@ class ProfileActivity : UtilityActivity() {
         editProfilePictureBtn = findViewById(R.id.edit_profile_pic_btn_my_profile)
         editProfilePictureBtn?.setOnClickListener { onClickEditProfileImage() }
         updateButton = findViewById(R.id.update_btn_profile)
-        updateButton?.setOnClickListener { onClickUpdateProfile() }
+        updateButton?.setOnClickListener { onClickUpdateFriendlyFriendlyProfile() }
         MediaFileHandler.shared().viewModel?.loadFor(user._id){
             CoroutineScope(Job() + Dispatchers.Main).launch {
                 picasso.load(it.first().FileURL).into(profileImage)
@@ -76,14 +77,14 @@ class ProfileActivity : UtilityActivity() {
         }
     }
 
-    fun onClickUpdateProfile(){
+    fun onClickUpdateFriendlyFriendlyProfile(){
         val request = JSONObject()
-        request.put(Key.name,nameFiled?.text.toString())
-        request.put(Key.status,statusFiled?.text.toString())
-        request.put(Key.emailId,emailFiled?.text.toString())
-        request.put(Key._id,user._id)
-        SocketService.shared().onEvent={event,response->
-            if(response.has(Key.success) && response.getBoolean(Key.success)){
+        request.put(KeyConstant.name,nameFiled?.text.toString())
+        request.put(KeyConstant.status,statusFiled?.text.toString())
+        request.put(KeyConstant.emailId,emailFiled?.text.toString())
+        request.put(KeyConstant._id,user._id)
+        SocketService.shared().onEvent={ event, response->
+            if(response.has(KeyConstant.success) && response.getBoolean(KeyConstant.success)){
                 CoroutineScope(Job() + Dispatchers.Main).launch {
                     user.name = nameFiled?.text.toString()
                     user.status = statusFiled?.text.toString()
@@ -97,7 +98,7 @@ class ProfileActivity : UtilityActivity() {
                 }
             }
         }
-        SocketService.shared().send(SocketEvent.updateProfile,request)
+        SocketService.shared().send(SocketEvent.updateFriendlyProfile,request)
     }
 
 

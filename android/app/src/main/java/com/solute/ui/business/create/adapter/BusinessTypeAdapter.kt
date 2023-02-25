@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.businessType.handler.BusinessTypeHandler
+import com.friendly.framework.feature.businessType.model.BusinessType
 import com.solute.R
 import com.solute.ui.business.create.CreateBusinessActivity
 import com.solute.ui.business.create.SelectBusinessTypeActivity
 import com.squareup.picasso.Picasso
-import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
-import com.utilitykit.feature.businessType.model.BusinessType
+
 
 class BusinessTypeAdapter(val context: Context, val allBusinessType: ArrayList<BusinessType>) :
     RecyclerView.Adapter<BusinessTypeViewHolder>() {

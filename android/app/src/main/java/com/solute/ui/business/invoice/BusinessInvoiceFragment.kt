@@ -9,16 +9,13 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.invoice.handler.InvoiceHandler
+import com.friendly.framework.feature.invoice.model.CustomerInvoice
+import com.friendly.framework.feature.invoice.viewModel.InvoiceViewModalFactory
+import com.friendly.framework.feature.invoice.viewModel.InvoiceViewModel
 import com.google.android.material.textfield.TextInputEditText
-import com.google.gson.Gson
 import com.solute.R
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.invoice.handler.InvoiceHandler
-import com.utilitykit.feature.invoice.model.CustomerInvoice
-import com.utilitykit.feature.invoice.viewModel.InvoiceViewModalFactory
-import com.utilitykit.feature.invoice.viewModel.InvoiceViewModel
-import org.json.JSONObject
-import java.lang.Long
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

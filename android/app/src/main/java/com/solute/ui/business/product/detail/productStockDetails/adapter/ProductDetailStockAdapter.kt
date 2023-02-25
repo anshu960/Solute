@@ -3,7 +3,7 @@ package com.solute.ui.business.product.detail.productStockDetails.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.utilitykit.feature.product.model.ProductStock
+import com.friendly.framework.feature.product.model.ProductStock
 
 class ProductDetailStockAdapter(val allStock: ArrayList<ProductStock>) :
     RecyclerView.Adapter<ProductDetailStockViewHolder>() {

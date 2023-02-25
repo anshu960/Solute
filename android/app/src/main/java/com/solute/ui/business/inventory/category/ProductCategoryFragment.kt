@@ -9,12 +9,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.model.ProductCategory
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModalFactory
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.model.ProductCategory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
+
 
 
 /**

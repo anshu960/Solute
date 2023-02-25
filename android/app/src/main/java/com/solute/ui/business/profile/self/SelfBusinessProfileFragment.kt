@@ -10,10 +10,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
-import com.utilitykit.feature.business.handler.BusinessHandler
 
 class SelfBusinessProfileFragment : Fragment() {
     val activity = BusinessHandler.shared().activity as? BusinessActivity

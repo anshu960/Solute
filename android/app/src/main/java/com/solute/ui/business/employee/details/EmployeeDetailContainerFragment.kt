@@ -9,9 +9,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.friendly.framework.feature.employee.handler.EmployeeHandler
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solute.R
-import com.utilitykit.feature.employee.handler.EmployeeHandler
 
 class EmployeeDetailContainerFragment : Fragment() {
     var navHostFragment : NavHostFragment? = null

@@ -9,16 +9,17 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModalFactory
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
+import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
+import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
+import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
-import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
-import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
+
 
 class FragmentProductSubCategory : Fragment() {
 

@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.friendly.framework.feature.product.handler.ProductHandler
 import com.solute.R
-import com.utilitykit.Constants.Key.Companion.productName
-import com.utilitykit.feature.product.handler.ProductHandler
+
 
 
 

@@ -10,16 +10,16 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
+import com.friendly.framework.feature.mediaFile.viewModel.MediaFileViewModalFactory
+import com.friendly.framework.feature.mediaFile.viewModel.MediaFileViewModel
+import com.friendly.framework.socket.SocketService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.ui.business.create.SelectBusinessTypeActivity
 import com.solute.ui.network.ConnectingActivity
-import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
-import com.utilitykit.feature.mediaFile.viewModel.MediaFileViewModalFactory
-import com.utilitykit.feature.mediaFile.viewModel.MediaFileViewModel
-import com.utilitykit.socket.SocketService
 
 
 class MainActivity : UtilityActivity() {
@@ -90,12 +90,4 @@ class MainActivity : UtilityActivity() {
         return navController.navigateUp(appBarConfiguration)
     }
 
-    override fun onBackPressed() {
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        SocketService.shared().repository.isCrashed.postValue(true)
-    }
 }

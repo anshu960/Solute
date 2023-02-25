@@ -1,7 +1,6 @@
 package com.solute.ui.business.product
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,14 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.cart.handler.CartHandler
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
+import com.friendly.framework.feature.product.handler.ProductHandler
+import com.friendly.framework.feature.product.model.Product
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.cart.handler.CartHandler
-import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
-import com.utilitykit.feature.product.handler.ProductHandler
-import com.utilitykit.feature.product.model.Product
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

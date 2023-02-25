@@ -9,14 +9,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.address.handler.AddressHandler
+import com.friendly.framework.feature.address.model.Address
+import com.friendly.framework.feature.address.viewModel.AddressViewModalFactory
+import com.friendly.framework.feature.address.viewModel.AddressViewModel
+import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.profile.self.address.adapter.AddressAdapter
-import com.utilitykit.feature.address.handler.AddressHandler
-import com.utilitykit.feature.address.model.Address
-import com.utilitykit.feature.address.viewModel.AddressViewModalFactory
-import com.utilitykit.feature.address.viewModel.AddressViewModel
-import com.utilitykit.feature.business.handler.BusinessHandler
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

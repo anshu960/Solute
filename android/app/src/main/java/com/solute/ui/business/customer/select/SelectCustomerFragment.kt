@@ -2,7 +2,6 @@ package com.solute.ui.business.customer.select
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,25 +9,24 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.cart.handler.CartHandler
+import com.friendly.framework.feature.cart.viewModel.CartViewModel
+import com.friendly.framework.feature.customer.handler.CustomerHandler
+import com.friendly.framework.feature.customer.model.Customer
+import com.friendly.framework.feature.customer.viewModel.CustomerViewModalFactory
+import com.friendly.framework.feature.customer.viewModel.CustomerViewModel
+import com.friendly.framework.feature.invoice.handler.InvoiceHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.customer.adapter.CustomerAdapter
 import com.solute.ui.business.receipt.ReceiptDetailsActivity
-import com.utilitykit.Constants.Key
-import com.utilitykit.Constants.Key.Companion.customerName
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.cart.handler.CartHandler
-import com.utilitykit.feature.cart.model.Cart
-import com.utilitykit.feature.cart.viewModel.CartViewModel
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.model.Customer
-import com.utilitykit.feature.customer.viewModel.CustomerViewModalFactory
-import com.utilitykit.feature.customer.viewModel.CustomerViewModel
-import com.utilitykit.feature.invoice.handler.InvoiceHandler
 import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
@@ -137,7 +135,7 @@ class SelectCustomerFragment : Fragment() {
 
     fun onCreateInvoiceResponse(data:JSONObject){
         val intent = Intent(this.context,ReceiptDetailsActivity::class.java)
-        intent.putExtra(Key.invoice,data.toString())
+        intent.putExtra(KeyConstant.invoice,data.toString())
         val activity = BusinessHandler.shared().activity as? BusinessActivity
         activity?.onBackPressed()
         activity?.onBackPressed()

@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.invoice.handler.InvoiceHandler
+import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.receipt.ReceiptDetailsActivity
-import com.utilitykit.feature.invoice.handler.InvoiceHandler
-import com.utilitykit.feature.invoice.model.CustomerInvoice
+
 
 class InvoiceHistoryAdapter(val context: Context, val invoices: List<CustomerInvoice>) :
     RecyclerView.Adapter<InvoiceHistoryViewHolder>() {

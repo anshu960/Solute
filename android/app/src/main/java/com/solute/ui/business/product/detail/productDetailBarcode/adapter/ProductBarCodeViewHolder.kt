@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.product.model.ProductBarCode
 import com.solute.R
-import com.utilitykit.feature.product.model.ProductBarCode
 
 class ProductBarCodeViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(

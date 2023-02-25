@@ -12,21 +12,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.cart.model.Sale
+import com.friendly.framework.feature.customer.handler.CustomerHandler
+import com.friendly.framework.feature.customer.model.Customer
+import com.friendly.framework.feature.invoice.handler.InvoiceHandler
+import com.friendly.framework.feature.invoice.model.CustomerInvoice
+import com.friendly.framework.pdf.PDFService
+import com.friendly.framework.qr.QRCodeUtill
 import com.google.gson.Gson
 import com.solute.App
 import com.solute.R
 import com.solute.utility.SMSManager
 import com.solute.utility.WhatsappManager
-import com.utilitykit.Constants.Key
-import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.cart.model.Sale
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.model.Customer
-import com.utilitykit.feature.invoice.handler.InvoiceHandler
-import com.utilitykit.feature.invoice.model.CustomerInvoice
-import com.utilitykit.pdf.PDFService
-import com.utilitykit.qr.QRCodeUtill
 import org.json.JSONObject
 
 
@@ -115,8 +115,8 @@ class ReceiptDetailsActivity : UtilityActivity() {
             loadShareDetails()
         }
         pupulateExistingReceipt()
-        if (intent.hasExtra(Key.invoiceId)){
-            val invoiceId = intent.getStringExtra(Key.invoiceId)!!.toLong()
+        if (intent.hasExtra(KeyConstant.invoiceId)){
+            val invoiceId = intent.getStringExtra(KeyConstant.invoiceId)!!.toLong()
             InvoiceHandler.shared().onRetriveSingleInvoiceCallBack={invoice,sales,customer,business->
                 this.runOnUiThread {
                     this.customerInvoice = invoice
@@ -163,11 +163,11 @@ class ReceiptDetailsActivity : UtilityActivity() {
     }
 
     fun pupulateExistingReceipt() {
-         if (intent.hasExtra(Key.invoice)) {
-            receiptData = JSONObject(intent.getStringExtra(Key.invoice))
-            val payload = receiptData.getJSONObject(Key.payload)
+         if (intent.hasExtra(KeyConstant.invoice)) {
+            receiptData = JSONObject(intent.getStringExtra(KeyConstant.invoice))
+            val payload = receiptData.getJSONObject(KeyConstant.payload)
             customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
-            var salesData = receiptData.getJSONArray(Key.sales)
+            var salesData = receiptData.getJSONArray(KeyConstant.sales)
             for (i in 0 until salesData.length()) {
                 val newSale = salesData.getJSONObject(i)
                 val sale = gson.fromJson(newSale.toString(), Sale::class.java)

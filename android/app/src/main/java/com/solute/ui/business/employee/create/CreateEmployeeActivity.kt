@@ -6,25 +6,23 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModelProvider
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.dataclass.FriendlyProfile
+import com.friendly.framework.feature.customer.viewModel.EmployeeViewModel
+import com.friendly.framework.feature.employee.handler.EmployeeHandler
+import com.friendly.framework.feature.employee.model.Employee
+import com.friendly.framework.feature.employee.viewModel.EmployeeViewModalFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
-import com.utilitykit.UtilityActivity
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.commonModel.Profile
-import com.utilitykit.feature.customer.viewModel.EmployeeViewModel
-import com.utilitykit.feature.employee.handler.EmployeeHandler
-import com.utilitykit.feature.employee.model.Employee
-import com.utilitykit.feature.employee.viewModel.EmployeeViewModalFactory
+
 
 class CreateEmployeeActivity : UtilityActivity() {
 
     var viewModal : EmployeeViewModel? = null
     var employee : Employee? = null
-    var employeeProfile : Profile? = null
+    var employeeProfile : FriendlyProfile? = null
 
     var searchField : TextInputEditText? = null
     var employeeCard : CardView? = null
@@ -91,8 +89,8 @@ class CreateEmployeeActivity : UtilityActivity() {
         if(employeeProfile != null){
             employeeCard?.visibility = View.VISIBLE
             saveButton?.visibility = View.VISIBLE
-            employeeName?.text = employeeProfile!!.Name
-            employeeMobile?.text = employeeProfile!!.MobileNumber
+            employeeName?.text = employeeProfile!!.name
+            employeeMobile?.text = employeeProfile!!.mobileNumber
         }
     }
 

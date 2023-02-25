@@ -14,13 +14,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.product.handler.ProductHandler
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
 import com.solute.ui.business.product.detail.productDetailBarcode.adapter.ProductBarCodeAdapter
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.product.handler.ProductHandler
+
 
 /**
  * A simple [Fragment] subclass.
@@ -79,7 +80,7 @@ class ProductDetailBarcodeListFragment : Fragment() {
             Log.i(ContentValues.TAG, "Permission to record denied")
             makeRequest()
         } else {
-            val intent = Intent(requireContext(),BarCodeScannerActivity::class.java)
+            val intent = Intent(requireContext(), BarCodeScannerActivity::class.java)
             intent.putExtra("OPERATION","ADD_INVENTTORY")
             startActivity(intent)
         }

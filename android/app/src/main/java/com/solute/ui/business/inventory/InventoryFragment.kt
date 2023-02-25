@@ -2,25 +2,26 @@ package com.solute.ui.business.inventory
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.database.DatabaseHandler
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.cart.model.Sale
+import com.friendly.framework.feature.product.handler.ProductHandler
+import com.friendly.framework.feature.product.model.Product
+import com.friendly.framework.feature.sync.BusinessAnalytics
+import com.friendly.framework.feature.sync.SyncHandler
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.inventory.analytics.AnalyticsAdapter
 import com.solute.ui.business.inventory.category.CreateCategoryActivity
 import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
-import com.utilitykit.database.DatabaseHandler
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.cart.model.Sale
-import com.utilitykit.feature.product.handler.ProductHandler
-import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.sync.BusinessAnalytics
-import com.utilitykit.feature.sync.SyncHandler
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

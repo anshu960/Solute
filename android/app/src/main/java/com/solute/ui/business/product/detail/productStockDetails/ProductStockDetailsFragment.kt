@@ -9,18 +9,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.database.DatabaseHandler
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.product.handler.ProductHandler
+import com.friendly.framework.feature.product.model.ProductStock
+import com.friendly.framework.feature.sync.SyncHandler
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.product.detail.productStockDetails.adapter.ProductDetailStockAdapter
-import com.utilitykit.database.DatabaseHandler
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.product.handler.ProductHandler
-import com.utilitykit.feature.product.model.ProductStock
-import com.utilitykit.feature.sync.SyncHandler
 
 
 class ProductStockDetailsFragment : Fragment() {

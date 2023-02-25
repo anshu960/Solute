@@ -5,10 +5,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.database.DatabaseHandler
+import com.friendly.framework.feature.product.model.Product
 import com.solute.R
-import com.utilitykit.database.DatabaseHandler
-
-import com.utilitykit.feature.product.model.Product
 
 class ProductStockViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(

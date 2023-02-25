@@ -4,16 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.employee.handler.EmployeeHandler
+import com.friendly.framework.feature.employee.model.Employee
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.employee.viewHolder.EmployeeViewHolder
-import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.customer.model.Customer
-import com.utilitykit.feature.employee.handler.EmployeeHandler
-import com.utilitykit.feature.employee.model.Employee
 
-class EmployeeAdapter(val context: Context, val allEmployee: ArrayList<Employee>,var onSelect:((employee: Employee) -> Unit)? = null) :
+
+class EmployeeAdapter(val context: Context, val allEmployee: ArrayList<Employee>, var onSelect:((employee: Employee) -> Unit)? = null) :
     RecyclerView.Adapter<EmployeeViewHolder>() {
 
     override fun getItemCount(): Int {

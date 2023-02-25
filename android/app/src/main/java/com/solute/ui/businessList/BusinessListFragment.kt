@@ -8,14 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.business.model.Business
+import com.friendly.framework.feature.business.viewModel.BusinessViewModalFactory
+import com.friendly.framework.feature.business.viewModel.BusinessViewModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.solute.R
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.business.model.Business
-import com.utilitykit.feature.business.viewModel.BusinessViewModalFactory
-import com.utilitykit.feature.business.viewModel.BusinessViewModel
+
 
 /**
  * A simple [Fragment] subclass.

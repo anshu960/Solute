@@ -15,17 +15,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.bharat.bandhu.R
 import com.bharat.bandhu.ui.MainActivity
 import com.bharat.bandhu.ui.onboard.register.SignupActivity
+import com.friendly.framework.Defaults
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.socket.SocketEvent
+import com.friendly.framework.socket.SocketService
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.hbb20.CountryCodePicker
-import com.utilitykit.Constants.Key
-import com.utilitykit.Defaults
-import com.utilitykit.socket.SocketEvent
-import com.utilitykit.UtilityActivity
-import com.utilitykit.socket.SocketService
-
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
@@ -194,35 +193,35 @@ class LoginActivity : UtilityActivity() {
 
     fun loginWithPhoneNumber(uid:String){
         var request = JSONObject()
-        request.put(Key.mobileNumber,phoneNumber)
-        request.put(Key.dialCode,getDialCode())
-        request.put(Key.userId,uid)
+        request.put(KeyConstant.mobileNumber,phoneNumber)
+        request.put(KeyConstant.dialCode,getDialCode())
+        request.put(KeyConstant.userId,uid)
         val deviceID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-        request.put(Key.deviceId,deviceID)
-        request.put(Key.fcmToken,deviceID)
-        Defaults.shared().remove(Key.membershipDetails)
+        request.put(KeyConstant.deviceId,deviceID)
+        request.put(KeyConstant.fcmToken,deviceID)
+        Defaults.shared().remove(KeyConstant.membershipDetails)
         this.startActivityIndicator("Checking for existing accounts")
         SocketService.shared().onEvent= { event, data ->
             this.runOnUiThread {
                 stopActivityIndicator()
                 Log.d("LoginResponse",data.toString())
-                if(data.has(Key.payload)){
-                    var payload = data.getJSONObject(Key.payload)
-                    if(payload.has(Key.name)){
-                        Defaults.shared().store(Key.loginDetails, payload)
+                if(data.has(KeyConstant.payload)){
+                    var payload = data.getJSONObject(KeyConstant.payload)
+                    if(payload.has(KeyConstant.name)){
+                        Defaults.shared().store(KeyConstant.loginDetails, payload)
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         this.startActivity(intent)
                     }else{
-                        payload.put(Key.userId,uid)
-                        payload.put(Key.mobileNumber,phoneNumber)
-                        payload.put(Key.deviceId,deviceID)
-                        payload.put(Key.fcmToken,deviceID)
-                        payload.put(Key.dialCode,selectedCountryCode)
-                        Defaults.shared().store(Key.loginDetails,payload)
+                        payload.put(KeyConstant.userId,uid)
+                        payload.put(KeyConstant.mobileNumber,phoneNumber)
+                        payload.put(KeyConstant.deviceId,deviceID)
+                        payload.put(KeyConstant.fcmToken,deviceID)
+                        payload.put(KeyConstant.dialCode,selectedCountryCode)
+                        Defaults.shared().store(KeyConstant.loginDetails,payload)
                         val intent = Intent(applicationContext, SignupActivity::class.java)
-                        intent.putExtra(Key.userId,uid)
-                        intent.putExtra(Key.mobileNumber,phoneNumber)
-                        intent.putExtra(Key.dialCode,selectedCountryCode)
+                        intent.putExtra(KeyConstant.userId,uid)
+                        intent.putExtra(KeyConstant.mobileNumber,phoneNumber)
+                        intent.putExtra(KeyConstant.dialCode,selectedCountryCode)
                         this.startActivity(intent)
                     }
                 }else{

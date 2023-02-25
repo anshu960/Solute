@@ -8,13 +8,12 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.feature.cart.handler.CartHandler
+import com.friendly.framework.feature.product.handler.ProductHandler
 import com.solute.R
 import com.solute.ui.business.barcode.BarCodeAnalyzer
 import com.solute.ui.business.barcode.BarCodeBoxView
-import com.utilitykit.Constants.Key.Companion.product
-import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.cart.handler.CartHandler
-import com.utilitykit.feature.product.handler.ProductHandler
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 

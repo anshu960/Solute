@@ -2,18 +2,12 @@ package com.solute.ui.business.receipt
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.cart.model.Sale
 import com.solute.R
-import com.utilitykit.Constants.Key.Companion.product
-import com.utilitykit.feature.cart.handler.CartHandler
-import com.utilitykit.feature.cart.model.Sale
+
 
 class ReceiptAdapter(val context: Context, val sales: List<Sale>) :
     RecyclerView.Adapter<ReceiptViewHolder>() {

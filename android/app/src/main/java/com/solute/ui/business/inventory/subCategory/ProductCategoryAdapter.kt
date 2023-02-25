@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.inventory.subCategory.SubCategoryDetailsActivity
-import com.utilitykit.feature.productCategory.model.ProductCategory
-import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
-import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 
-class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, val allSubCategory: ArrayList<ProductSubCategory>,var onSelect:((subCategory: ProductSubCategory) -> Unit)? = null) :
+
+class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, val allSubCategory: ArrayList<ProductSubCategory>, var onSelect:((subCategory: ProductSubCategory) -> Unit)? = null) :
     RecyclerView.Adapter<ProductSubCategoryViewHolder>() {
 
     override fun getItemCount(): Int {

@@ -6,16 +6,13 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModalFactory
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
-import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.product.handler.ProductHandler
-import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
-import com.utilitykit.feature.product.viewModel.ProductViewModel
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
+
 
 class CreateCategoryActivity : UtilityActivity() {
     var categoryNameText : TextInputEditText? = null

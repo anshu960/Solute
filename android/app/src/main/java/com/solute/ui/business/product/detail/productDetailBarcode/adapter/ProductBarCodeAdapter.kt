@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.utilitykit.feature.product.model.ProductBarCode
+import com.friendly.framework.feature.product.model.ProductBarCode
 
 class ProductBarCodeAdapter(val context: Context, val allCategory: List<ProductBarCode>, var onSelect:((barcode: ProductBarCode) -> Unit)? = null) :
     RecyclerView.Adapter<ProductBarCodeViewHolder>() {

@@ -7,11 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.model.ProductCategory
+
 
 class ProductCategoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(
@@ -28,7 +29,7 @@ class ProductCategoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         disclosureImg = itemView.findViewById(R.id.recycler_product_category_arrow_image)
     }
 
-    fun bind(fragment: Fragment, category: ProductCategory,onSelect:((category: ProductCategory) -> Unit)? = null) {
+    fun bind(fragment: Fragment, category: ProductCategory, onSelect:((category: ProductCategory) -> Unit)? = null) {
         categoryName?.text = category.Name
         if(onSelect != null){
             selectImg?.visibility = View.VISIBLE

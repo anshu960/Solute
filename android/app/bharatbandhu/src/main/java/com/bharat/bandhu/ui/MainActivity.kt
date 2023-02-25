@@ -9,21 +9,21 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.bharat.bandhu.R
+import com.friendly.framework.Defaults
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.dataclass.FriendlyUser
+import com.friendly.framework.socket.SocketEvent
+import com.friendly.framework.socket.SocketService
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
-import com.utilitykit.Constants.Key
-import com.utilitykit.Defaults
-import com.utilitykit.UtilityActivity
-import com.utilitykit.socket.SocketEvent
-import com.utilitykit.dataclass.User
-import com.utilitykit.socket.SocketService
 import org.json.JSONObject
 
 
 class MainActivity : UtilityActivity() {
 
-    val user = User()
+    val user = FriendlyUser()
     var generateButton : Button?  = null
     var barcodeText : TextView?  = null
     var barcodeImageView : ImageView?  = null
@@ -46,17 +46,17 @@ class MainActivity : UtilityActivity() {
 
     fun getCustomerDetails(){
         val request = JSONObject()
-        request.put(Key.userId,user._id)
-        request.put(Key.businessID,"6364c00fb25244fcf46425f0")
-        request.put(Key.mobileNumber,user.mobile)
-        SocketService.shared().onEvent={event,data->
+        request.put(KeyConstant.userId,user._id)
+        request.put(KeyConstant.businessID,"6364c00fb25244fcf46425f0")
+        request.put(KeyConstant.mobileNumber,user.mobile)
+        SocketService.shared().onEvent={ event, data->
             Log.d("Received",data.toString())
-            if(data.has(Key.payload)){
-                val payload = data.getJSONArray(Key.payload)
+            if(data.has(KeyConstant.payload)){
+                val payload = data.getJSONArray(KeyConstant.payload)
                 if(payload.length() > 0){
                     val membership = payload.getJSONObject(0)
-                    if(membership.has(Key._id)){
-                        Defaults.shared().store(Key.membershipDetails,membership.toString())
+                    if(membership.has(KeyConstant._id)){
+                        Defaults.shared().store(KeyConstant.membershipDetails,membership.toString())
                         this.runOnUiThread { this.loadMembershipInUI() }
                     }
                 }
@@ -67,10 +67,10 @@ class MainActivity : UtilityActivity() {
     }
 
     fun loadMembershipInUI(){
-        val membership = Defaults.shared().json(Key.membershipDetails)
+        val membership = Defaults.shared().json(KeyConstant.membershipDetails)
         val hint = "Membership Details Not Found\nPlease Visit our Store to get your Membership"
-        if(membership.has(Key.barcode)){
-            val barcodeNumber = membership.getString(Key.barcode)
+        if(membership.has(KeyConstant.barcode)){
+            val barcodeNumber = membership.getString(KeyConstant.barcode)
             if(barcodeNumber.isNotEmpty()){
                 generateBarcode(barcodeNumber)
                 barcodeText?.text = barcodeNumber

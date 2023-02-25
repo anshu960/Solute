@@ -2,30 +2,30 @@ package com.bharat.bandhu.ui
 
 import android.app.Application
 import android.content.Context
+import android.provider.ContactsContract
 import android.provider.Settings
 import androidx.fragment.app.Fragment
+import com.friendly.framework.Defaults
+import com.friendly.framework.UtilityViewController
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.database.DatabaseHandler
+import com.friendly.framework.dataclass.FriendlyProfile
+import com.friendly.framework.dataclass.Task
+import com.friendly.framework.socket.SocketService
+import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import com.utilitykit.Constants.Key
-import com.utilitykit.Defaults
-import com.utilitykit.UtilityViewController
-import com.utilitykit.database.DatabaseHandler
-import com.utilitykit.dataclass.FriendRequest
-import com.utilitykit.dataclass.Profile
-import com.utilitykit.dataclass.Task
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.business.handler.AuthHandler
-import com.utilitykit.socket.SocketService
+
 class App: Application() {
 
     var activity: UtilityViewController? = null
     var fragment: Fragment? = null
     var socketUrl = ""
-    var selectedProfiles: ArrayList<Profile> = ArrayList<Profile>()
+    var selectedProfiles: ArrayList<ContactsContract.Profile> = ArrayList<ContactsContract.Profile>()
     var selectedTask: Task? = null
     init {
         instance = this
@@ -56,7 +56,7 @@ class App: Application() {
         FirebaseApp.initializeApp(this)
         DatabaseHandler.shared().appContext = this
         Defaults.shared().setup(this)
-        Defaults.shared().store(Key.deviceId, AuthHandler.shared().deviceId)
+        Defaults.shared().store(KeyConstant.deviceId, AuthHandler.shared().deviceId)
 //        Analytics.initFirebaseSetup(this)
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
@@ -68,17 +68,13 @@ class App: Application() {
         messaging.isAutoInitEnabled = true
         val token = FirebaseMessaging.getInstance().token.toString()
         if (token != null) {
-//            Defaults.store(Key.fcmToken, token)
+//            Defaults.store(KeyConstant.fcmToken, token)
         }
 
     }
 
     companion object{
-        var user : User = User()
-        var profile: Profile = Profile()
-        var friendRequest: FriendRequest = FriendRequest()
         var context : Context? = null
-        var fragment : Fragment? = null
         private var instance: App? = null
         fun applicationContext() : App {
             return instance as App
@@ -86,8 +82,8 @@ class App: Application() {
     }
 
     fun sync(){
-        Profile().downloadSentFriendRequest()
-        Profile().downloadReceivedFriendRequest()
+        FriendlyProfile().downloadSentFriendRequest()
+        FriendlyProfile().downloadReceivedFriendRequest()
     }
 
     fun getCurrentActivity():UtilityViewController?{

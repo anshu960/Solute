@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.business.model.Business
+import com.friendly.framework.feature.business.viewModel.BusinessViewModalFactory
+import com.friendly.framework.feature.business.viewModel.BusinessViewModel
 import com.solute.R
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.business.model.Business
-import com.utilitykit.feature.business.viewModel.BusinessViewModalFactory
-import com.utilitykit.feature.business.viewModel.BusinessViewModel
 
 
 /**

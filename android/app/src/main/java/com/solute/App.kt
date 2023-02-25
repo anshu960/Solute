@@ -8,6 +8,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import androidx.fragment.app.Fragment
+import com.friendly.framework.Defaults
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.UtilityViewController
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.database.DatabaseHandler
+import com.friendly.framework.dataclass.FriendRequest
+import com.friendly.framework.dataclass.FriendlyProfile
+import com.friendly.framework.dataclass.FriendlyUser
+import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
@@ -20,15 +29,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import com.utilitykit.Constants.Key
-import com.utilitykit.Defaults
-import com.utilitykit.UtilityActivity
-import com.utilitykit.UtilityViewController
-import com.utilitykit.database.DatabaseHandler
-import com.utilitykit.dataclass.FriendRequest
-import com.utilitykit.dataclass.Profile
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.business.handler.AuthHandler
 
 
 class App: Application() {
@@ -68,7 +68,7 @@ class App: Application() {
         FirebaseApp.initializeApp(this)
         DatabaseHandler.shared().appContext = this
         Defaults.shared().setup(this)
-        Defaults.shared().store(Key.deviceId,AuthHandler.shared().deviceId)
+        Defaults.shared().store(KeyConstant.deviceId,AuthHandler.shared().deviceId)
 //        Analytics.initFirebaseSetup(this)
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
@@ -86,12 +86,12 @@ class App: Application() {
         val messaging = FirebaseMessaging.getInstance()
         messaging.isAutoInitEnabled = true
         val token = FirebaseMessaging.getInstance().token.toString()
-        Defaults.shared().store(Key.fcmToken, token)
+        Defaults.shared().store(KeyConstant.fcmToken, token)
     }
 
     companion object{
-        var user : User = User()
-        var profile: Profile = Profile()
+        var user  = FriendlyUser()
+        var profile: FriendlyProfile = FriendlyProfile()
         var friendRequest: FriendRequest = FriendRequest()
         var context : Context? = null
         var fragment : Fragment? = null
@@ -103,8 +103,8 @@ class App: Application() {
     }
 
     fun sync(){
-        Profile().downloadSentFriendRequest()
-        Profile().downloadReceivedFriendRequest()
+        FriendlyProfile().downloadSentFriendRequest()
+        FriendlyProfile().downloadReceivedFriendRequest()
     }
 
     fun getCurrentActivity():UtilityViewController?{
@@ -114,7 +114,7 @@ class App: Application() {
         return activity
     }
 
-    fun checkForAppUpdate(activity:UtilityActivity){
+    fun checkForAppUpdate(activity: UtilityActivity){
         val appUpdateManager = AppUpdateManagerFactory.create(activity)
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->

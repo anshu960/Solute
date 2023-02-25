@@ -4,9 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.feature.address.model.Address
 import com.solute.ui.business.profile.self.address.viewHolder.AddressViewHolder
-import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.address.model.Address
+
 
 class AddressAdapter(val context: Context, private val all: ArrayList<Address>, var onSelect:((address: Address) -> Unit)? = null) :
     RecyclerView.Adapter<AddressViewHolder>() {

@@ -6,13 +6,13 @@ import android.widget.ImageButton
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.businessType.handler.BusinessTypeHandler
+import com.friendly.framework.feature.businessType.model.BusinessType
+import com.friendly.framework.feature.businessType.viewModel.BusinessTypeViewModalFactory
+import com.friendly.framework.feature.businessType.viewModel.BusinessTypeViewModel
 import com.solute.R
 import com.solute.ui.business.create.adapter.BusinessTypeAdapter
-import com.solute.ui.businessList.BusinessListAdapter
-import com.utilitykit.feature.businessType.handler.BusinessTypeHandler
-import com.utilitykit.feature.businessType.model.BusinessType
-import com.utilitykit.feature.businessType.viewModel.BusinessTypeViewModalFactory
-import com.utilitykit.feature.businessType.viewModel.BusinessTypeViewModel
+
 import java.util.ArrayList
 
 class SelectBusinessTypeActivity : AppCompatActivity() {

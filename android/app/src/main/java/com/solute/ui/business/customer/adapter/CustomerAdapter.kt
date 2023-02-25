@@ -4,13 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.customer.handler.CustomerHandler
+import com.friendly.framework.feature.customer.model.Customer
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.customer.viewHolder.CustomerViewHolder
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.model.Customer
 
-class CustomerAdapter (val context: Context ,val allCustomer: ArrayList<Customer>,var onSelect:((customer: Customer) -> Unit)? = null) :
+
+class CustomerAdapter (val context: Context, val allCustomer: ArrayList<Customer>, var onSelect:((customer: Customer) -> Unit)? = null) :
     RecyclerView.Adapter<CustomerViewHolder>() {
 
     override fun getItemCount(): Int {

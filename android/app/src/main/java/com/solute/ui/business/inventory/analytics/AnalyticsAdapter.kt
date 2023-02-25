@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.sync.BusinessAnalytics
 import com.solute.MainActivity
 import com.solute.ui.business.BusinessActivity
-import com.utilitykit.feature.sync.BusinessAnalytics
 
 class AnalyticsAdapter(val context: Context, val fragment: Fragment?, val allAnalytics: List<BusinessAnalytics>) :
     RecyclerView.Adapter<AnalyticsViewHolder>() {

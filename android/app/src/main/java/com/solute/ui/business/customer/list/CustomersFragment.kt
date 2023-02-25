@@ -11,12 +11,13 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.customer.handler.CustomerHandler
+import com.friendly.framework.feature.customer.model.Customer
+import com.friendly.framework.feature.customer.viewModel.CustomerViewModalFactory
+import com.friendly.framework.feature.customer.viewModel.CustomerViewModel
 import com.solute.R
 import com.solute.ui.business.customer.adapter.CustomerAdapter
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.model.Customer
-import com.utilitykit.feature.customer.viewModel.CustomerViewModalFactory
-import com.utilitykit.feature.customer.viewModel.CustomerViewModel
+
 
 class CustomersFragment : Fragment() {
 

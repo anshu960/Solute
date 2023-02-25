@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.friendly.framework.feature.employee.handler.EmployeeHandler
 import com.solute.R
-import com.utilitykit.feature.employee.handler.EmployeeHandler
 
 class EmployeeInfoFragment : Fragment() {
 

@@ -10,6 +10,11 @@
     <string name="title_nearby">Nearby</string>
     <string name="title_contacts">Contacts</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="otp">Otp</string>
+    <string name="create_account">Create Account</string>
+
+
     <string name="terms_and_privacy">
         This Terms of Service Agreement sets forth the terms and conditions by which you are sole responsible for what you do and what you get and you agree to share you basic information(Like Name,Profile Picture,Gender etc) with other users. This app is not responsible for any kind of loss or problems you get on this app. Content on this app neither provided nor controlled by the developer so we are not responsible for any content. If you put any offensive content, it will be replaced by *.There will be absolutely to tolerance for misbehave, if you do so then your account will be terminated immediately.You can report someone in chat view by selection top right option. You might see adult contents uploaded by someone, in that case please block that user and report it us. Please don’t add any adult content. Profanity filter is there on chat so you can’t send such words, if you get some words from someone, please report us. Action will be taken as soon as possible, there will be tolerance for such things. Be friendly to others and and let others be friendly to you. Happy making friends to you my friend.
     </string>
@@ -159,5 +164,19 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="select_state">Select State</string>
     <string name="select_city">Select City</string>
+
+    //onboarding
+    <string name="title_onboarding_1">MarketPlace</string>
+    <string name="description_onboarding_1">Find Business nearby and manage your own business</string>
+    <string name="title_onboarding_2">Support</string>
+    <string name="description_onboarding_2">24/7 Support</string>
+    <string name="title_onboarding_3">Reports</string>
+    <string name="description_onboarding_3">Complete analytics and reports</string>
+
+
+
+
+
+
 
 </resources>

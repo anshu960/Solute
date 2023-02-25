@@ -10,16 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.product.handler.ProductHandler
+import com.friendly.framework.feature.product.model.Product
+import com.friendly.framework.feature.product.viewModel.ProductViewModalFactory
+import com.friendly.framework.feature.product.viewModel.ProductViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.product.handler.ProductHandler
-import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
-import com.utilitykit.feature.product.viewModel.ProductViewModel
-import java.security.Key
 
 
 /**

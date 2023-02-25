@@ -1,22 +1,19 @@
 package com.solute.ui.business.inventory.subCategory
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import com.friendly.framework.UtilityActivity
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.model.ProductCategory
+import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
+import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
-import com.utilitykit.UtilityActivity
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.model.ProductCategory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
-import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
-import com.utilitykit.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 
 class CreateProductSubCategoryActivity : UtilityActivity() {
 

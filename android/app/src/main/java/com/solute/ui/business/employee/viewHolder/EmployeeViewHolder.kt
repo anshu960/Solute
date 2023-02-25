@@ -6,12 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.customer.handler.CustomerHandler
+import com.friendly.framework.feature.employee.model.Employee
 import com.solute.R
-import com.utilitykit.Constants.Key.Companion.customer
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.model.Customer
-import com.utilitykit.feature.employee.model.Employee
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

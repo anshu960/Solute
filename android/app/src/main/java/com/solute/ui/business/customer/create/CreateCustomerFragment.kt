@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.customer.handler.CustomerHandler
+import com.friendly.framework.feature.customer.model.Customer
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
-import com.solute.ui.business.customer.adapter.CustomerAdapter
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.model.Customer
 
 
 /**

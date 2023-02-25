@@ -5,10 +5,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.sync.BusinessAnalytics
 import com.solute.R
-import com.utilitykit.Constants.Key.Companion.product
-import com.utilitykit.Constants.Key.Companion.productName
-import com.utilitykit.feature.sync.BusinessAnalytics
+
 
 class AnalyticsViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(

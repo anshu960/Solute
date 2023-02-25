@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.product.model.Product
 import com.solute.MainActivity
 import com.solute.ui.business.BusinessActivity
-import com.utilitykit.feature.product.model.Product
 
 class ProductStockAdapter(val context: Context, val fragment: Fragment?, val allProduct: ArrayList<Product>) :
     RecyclerView.Adapter<ProductStockViewHolder>() {

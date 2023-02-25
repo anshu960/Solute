@@ -10,21 +10,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.model.ProductCategory
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModalFactory
+import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.ui.business.inventory.category.ProductCategoryAdapter
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.model.ProductCategory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModalFactory
-import com.utilitykit.feature.productCategory.viewModel.ProductCategoryViewModel
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SelectCategoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SelectCategoryFragment : Fragment() {
     var recycler: RecyclerView? = null
     private lateinit var viewModal: ProductCategoryViewModel

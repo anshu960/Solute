@@ -9,17 +9,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.feature.customer.viewModel.EmployeeViewModel
+import com.friendly.framework.feature.employee.handler.EmployeeHandler
+import com.friendly.framework.feature.employee.model.Employee
+import com.friendly.framework.feature.employee.viewModel.EmployeeViewModalFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.solute.ui.business.customer.adapter.CustomerAdapter
 import com.solute.ui.business.employee.adapter.EmployeeAdapter
 import com.solute.ui.business.employee.create.CreateEmployeeActivity
-import com.utilitykit.feature.customer.handler.CustomerHandler
-import com.utilitykit.feature.customer.viewModel.CustomerViewModel
-import com.utilitykit.feature.customer.viewModel.EmployeeViewModel
-import com.utilitykit.feature.employee.handler.EmployeeHandler
-import com.utilitykit.feature.employee.model.Employee
-import com.utilitykit.feature.employee.viewModel.EmployeeViewModalFactory
+
 
 class EmployeeListFragment : Fragment() {
 

@@ -7,12 +7,27 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.dataclass.FriendlyUser
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
+import com.friendly.framework.feature.product.handler.ProductHandler
+import com.friendly.framework.feature.product.model.Product
+import com.friendly.framework.feature.product.viewModel.ProductViewModalFactory
+import com.friendly.framework.feature.product.viewModel.ProductViewModel
+import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productCategory.model.ProductCategory
+import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
+import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.shuhart.stepview.StepView
@@ -20,21 +35,7 @@ import com.solute.App
 import com.solute.R
 import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
-import com.utilitykit.Constants.Key
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.business.handler.AuthHandler
-import com.utilitykit.feature.business.handler.BusinessHandler
-import com.utilitykit.feature.mediaFile.handler.MediaFileHandler
-import com.utilitykit.feature.product.handler.ProductHandler
-import com.utilitykit.feature.product.model.Product
-import com.utilitykit.feature.product.viewModel.ProductViewModalFactory
-import com.utilitykit.feature.product.viewModel.ProductViewModel
-import com.utilitykit.feature.productCategory.handler.ProductCategoryHandler
-import com.utilitykit.feature.productCategory.model.ProductCategory
-import com.utilitykit.feature.productSubCategory.handler.ProductSubCategoryHandler
-import com.utilitykit.feature.productSubCategory.model.ProductSubCategory
 import org.json.JSONObject
-import java.lang.Error
 
 class CreateProductFragment : Fragment() {
     val activity = BusinessHandler.shared().activity as? BusinessActivity
@@ -55,7 +56,7 @@ class CreateProductFragment : Fragment() {
     var isTaxIncluded = true
     var finalPrice = 0F
     var fileUri : Uri? = null
-    var product:Product? = null
+    var product: Product? = null
 
     private var stepsPosition = 0
 
@@ -498,33 +499,33 @@ class CreateProductFragment : Fragment() {
             return
         }
         val request = JSONObject()
-        val user = User()
+        val user = FriendlyUser()
         val business = BusinessHandler.shared().repository.business
-        request.put(Key.userId, user._id)
-        request.put(Key.businessID, business.value?.Id)
-        request.put(Key.categoryId, selectedCategory?.Id)
-        request.put(Key.subCategoryID, selectedSubCategory?.Id)
-        request.put(Key.name, prdName)
-        request.put(Key.description, prdDescription)
-        request.put(Key.manageInventory, true)
-        request.put(Key.taxIncluded, isTaxIncluded)
-        request.put(Key.SGST, sgst)
-        request.put(Key.CGST, cgst)
-        request.put(Key.IGST, igst)
-        request.put(Key.CESS, cess)
-        request.put(Key.VAT, vat)
-        request.put(Key.discount,discount)
-        request.put(Key.MRP, mrp)
-        request.put(Key.price, (price))
-        request.put(Key.costPrice, (costPrice))
-        request.put(Key.finalPrice, finalPrice)
-        request.put(Key.tax, totalTax)
-        request.put(Key.deviceId, AuthHandler.shared().deviceId)
+        request.put(KeyConstant.userId, user._id)
+        request.put(KeyConstant.businessID, business.value?.Id)
+        request.put(KeyConstant.categoryId, selectedCategory?.Id)
+        request.put(KeyConstant.subCategoryID, selectedSubCategory?.Id)
+        request.put(KeyConstant.name, prdName)
+        request.put(KeyConstant.description, prdDescription)
+        request.put(KeyConstant.manageInventory, true)
+        request.put(KeyConstant.taxIncluded, isTaxIncluded)
+        request.put(KeyConstant.SGST, sgst)
+        request.put(KeyConstant.CGST, cgst)
+        request.put(KeyConstant.IGST, igst)
+        request.put(KeyConstant.CESS, cess)
+        request.put(KeyConstant.VAT, vat)
+        request.put(KeyConstant.discount,discount)
+        request.put(KeyConstant.MRP, mrp)
+        request.put(KeyConstant.price, (price))
+        request.put(KeyConstant.costPrice, (costPrice))
+        request.put(KeyConstant.finalPrice, finalPrice)
+        request.put(KeyConstant.tax, totalTax)
+        request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
         if(this.product != null && !this.product!!.Id.isEmpty()){
             ProductHandler.shared().onUpdateExistingProductCallBack = {
                 onCreateNewProduct(it)
             }
-            request.put(Key._id,product!!.Id)
+            request.put(KeyConstant._id,product!!.Id)
             ProductHandler.shared().viewModel?.updateProduct(request)
         }else{
             ProductHandler.shared().onCreateProductCallBack = {

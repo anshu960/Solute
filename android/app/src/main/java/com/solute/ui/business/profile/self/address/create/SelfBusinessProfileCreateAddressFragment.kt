@@ -9,6 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.dataclass.FriendlyUser
+import com.friendly.framework.feature.address.handler.AddressHandler
+import com.friendly.framework.feature.address.model.Address
+import com.friendly.framework.feature.address.viewModel.AddressViewModalFactory
+import com.friendly.framework.feature.address.viewModel.AddressViewModel
+import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
@@ -24,13 +31,6 @@ import com.hbb20.CountryCodePicker
 import com.solute.R
 import com.solute.utility.location.Location
 import com.solute.utility.location.locationListener
-import com.utilitykit.Constants.Key
-import com.utilitykit.dataclass.User
-import com.utilitykit.feature.address.handler.AddressHandler
-import com.utilitykit.feature.address.model.Address
-import com.utilitykit.feature.address.viewModel.AddressViewModalFactory
-import com.utilitykit.feature.address.viewModel.AddressViewModel
-import com.utilitykit.feature.business.handler.BusinessHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -46,7 +46,7 @@ class SelfBusinessProfileCreateAddressFragment : Fragment(), OnMapReadyCallback 
     private var mMap: GoogleMap? = null
     private  var mapView : MapView? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var viewModal:AddressViewModel? = null
+    private var viewModal: AddressViewModel? = null
 
     var latitudeField : TextInputEditText? = null
     var longitudeField : TextInputEditText? = null
@@ -177,41 +177,41 @@ class SelfBusinessProfileCreateAddressFragment : Fragment(), OnMapReadyCallback 
 
     fun onClickSave(){
         val addressObject = JSONObject()
-        addressObject.put(Key.uniqueId,System.currentTimeMillis())
-        addressObject.put(Key.countryCode,countryCode!!.selectedCountryCode)
-        addressObject.put(Key.featureObjectID,BusinessHandler.shared().repository.business.value?.Id)
-        addressObject.put(Key.userId, User()._id)
-        addressObject.put(Key.name,"")
-        addressObject.put(Key.state,stateField?.text.toString())
-        addressObject.put(Key.city,cityField?.text.toString())
-        addressObject.put(Key.area,areaField?.text.toString())
-        addressObject.put(Key.landMark,landmarkField?.text.toString())
-        addressObject.put(Key.zipCode,zipCodeField?.text.toString())
+        addressObject.put(KeyConstant.uniqueId,System.currentTimeMillis())
+        addressObject.put(KeyConstant.countryCode,countryCode!!.selectedCountryCode)
+        addressObject.put(KeyConstant.featureObjectID,BusinessHandler.shared().repository.business.value?.Id)
+        addressObject.put(KeyConstant.userId, FriendlyUser()._id)
+        addressObject.put(KeyConstant.name,"")
+        addressObject.put(KeyConstant.state,stateField?.text.toString())
+        addressObject.put(KeyConstant.city,cityField?.text.toString())
+        addressObject.put(KeyConstant.area,areaField?.text.toString())
+        addressObject.put(KeyConstant.landMark,landmarkField?.text.toString())
+        addressObject.put(KeyConstant.zipCode,zipCodeField?.text.toString())
         val location = JSONArray()
         location.put(latitude)
         location.put(longitude)
-        addressObject.put(Key.location, location)
-//        addressObject.put(Key.longitude,longitude)
+        addressObject.put(KeyConstant.location, location)
+//        addressObject.put(KeyConstant.longitude,longitude)
         viewModal?.createNew(addressObject)
     }
 
     fun onClickUpdate(){
         val addressObject = JSONObject()
-        addressObject.put(Key.uniqueId,System.currentTimeMillis())
-        addressObject.put(Key.countryCode,countryCode!!.selectedCountryCode)
-        addressObject.put(Key.featureObjectID,BusinessHandler.shared().repository.business.value?.Id)
-        addressObject.put(Key.userId, User()._id)
-        addressObject.put(Key.name,"")
-        addressObject.put(Key.state,stateField?.text.toString())
-        addressObject.put(Key.city,cityField?.text.toString())
-        addressObject.put(Key.area,areaField?.text.toString())
-        addressObject.put(Key.landMark,landmarkField?.text.toString())
-        addressObject.put(Key.zipCode,zipCodeField?.text.toString())
+        addressObject.put(KeyConstant.uniqueId,System.currentTimeMillis())
+        addressObject.put(KeyConstant.countryCode,countryCode!!.selectedCountryCode)
+        addressObject.put(KeyConstant.featureObjectID,BusinessHandler.shared().repository.business.value?.Id)
+        addressObject.put(KeyConstant.userId, FriendlyUser()._id)
+        addressObject.put(KeyConstant.name,"")
+        addressObject.put(KeyConstant.state,stateField?.text.toString())
+        addressObject.put(KeyConstant.city,cityField?.text.toString())
+        addressObject.put(KeyConstant.area,areaField?.text.toString())
+        addressObject.put(KeyConstant.landMark,landmarkField?.text.toString())
+        addressObject.put(KeyConstant.zipCode,zipCodeField?.text.toString())
         val location = JSONArray()
         location.put(latitude)
         location.put(longitude)
-        addressObject.put(Key.location, location)
-//        addressObject.put(Key.longitude,longitude)
+        addressObject.put(KeyConstant.location, location)
+//        addressObject.put(KeyConstant.longitude,longitude)
         viewModal?.updateExistingAddress(addressObject)
     }
     fun onClickDelete(){

@@ -5,10 +5,10 @@ import android.content.Context
 import android.net.Uri
 import android.provider.ContactsContract
 import androidx.annotation.RequiresPermission
+import com.friendly.framework.dataclass.ContactData
+import com.friendly.framework.dataclass.FriendlyUser
 import com.google.i18n.phonenumbers.PhoneNumberUtil
-import com.utilitykit.dataclass.ContactData
-import com.utilitykit.dataclass.Profile
-import com.utilitykit.dataclass.User
+
 
 /**
  * @author aminography
@@ -49,41 +49,41 @@ fun Context.retrieveAllContacts(
         if (limit > 0 && offset > -1) "${ContactsContract.Contacts.DISPLAY_NAME_PRIMARY} ASC LIMIT $limit OFFSET $offset"
         else ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " ASC"
     )?.use {
-        val user = User()
+        val user = FriendlyUser()
         if (it.moveToFirst()) {
-            do {
-                val contactId = it.getLong(it.getColumnIndex(CONTACT_PROJECTION[0]))
-                val name = it.getString(it.getColumnIndex(CONTACT_PROJECTION[2])) ?: ""
-                val hasPhoneNumber = it.getString(it.getColumnIndex(CONTACT_PROJECTION[3])).toInt()
-                val phoneNumber: List<String> = if (hasPhoneNumber > 0) {
-                    retrievePhoneNumber(contactId)
-                } else mutableListOf()
-                val avatar = if (retrieveAvatar) retrieveAvatar(contactId).toString() else ""
-                for (mobile in phoneNumber){
-                    if(mobile.length > 6){
-                        val mobile = formatMobileNumber(mobile)
-                        val newContact = ContactData(
-                            "",
-                            user._id,
-                            contactId,
-                            name,
-                            mobile.first,
-                            mobile.second,
-                            avatar,
-                            Profile(),
-                            0,
-                            "",
-                            "")
-                        result.add(newContact)
-                        if(mobile.first != "" && mobile.first.length > 6){
-                            mobileNumbers.add("${mobile.first}")
-                        }
-                        if(mobile.second != "" && mobile.second.length > 6){
-                            mobileNumbers.add("${mobile.second}")
-                        }
-                    }
-                }
-            } while (it.moveToNext())
+//            do {
+//                val contactId = it.getLong(it.getColumnIndex(CONTACT_PROJECTION[0]))
+//                val name = it.getString(it.getColumnIndex(CONTACT_PROJECTION[2])) ?: ""
+//                val hasPhoneNumber = it.getString(it.getColumnIndex(CONTACT_PROJECTION[3])).toInt()
+//                val phoneNumber: List<String> = if (hasPhoneNumber > 0) {
+//                    retrievePhoneNumber(contactId)
+//                } else mutableListOf()
+//                val avatar = if (retrieveAvatar) retrieveAvatar(contactId).toString() else ""
+//                for (mobile in phoneNumber){
+//                    if(mobile.length > 6){
+//                        val mobile = formatMobileNumber(mobile)
+//                        val newContact = ContactData(
+//                            "",
+//                            user._id,
+//                            contactId,
+//                            name,
+//                            mobile.first,
+//                            mobile.second,
+//                            avatar,
+//                            FriendlyProfile(),
+//                            0,
+//                            "",
+//                            "")
+//                        result.add(newContact)
+//                        if(mobile.first != "" && mobile.first.length > 6){
+//                            mobileNumbers.add("${mobile.first}")
+//                        }
+//                        if(mobile.second != "" && mobile.second.length > 6){
+//                            mobileNumbers.add("${mobile.second}")
+//                        }
+//                    }
+//                }
+//            } while (it.moveToNext())
         }
     }
     return (result to mobileNumbers)
@@ -98,11 +98,11 @@ private fun Context.retrievePhoneNumber(contactId: Long): List<String> {
         arrayOf(contactId.toString()),
         null
     )?.use {
-        if (it.moveToFirst()) {
-            do {
-                result.add(it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)).replace("\\s".toRegex(), ""))
-            } while (it.moveToNext())
-        }
+//        if (it.moveToFirst()) {
+//            do {
+//                result.add(it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)).replace("\\s".toRegex(), ""))
+//            } while (it.moveToNext())
+//        }
     }
     return result
 }

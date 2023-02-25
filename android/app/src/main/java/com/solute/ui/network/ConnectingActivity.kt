@@ -5,18 +5,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.friendly.framework.Defaults
+import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.dataclass.FriendlyUser
+import com.friendly.framework.socket.SocketService
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.business.receipt.ReceiptDetailsActivity
-import com.solute.ui.login.LoginActivity
-import com.solute.ui.register.RegisterActivity
-import com.utilitykit.Constants.Key
-import com.utilitykit.Defaults
-import com.utilitykit.dataclass.User
-import com.utilitykit.socket.SocketService
+import com.solute.ui.onboarding.OnBoardingActivity
 
 class ConnectingActivity : AppCompatActivity() {
     var isNavigated = false
@@ -47,9 +46,9 @@ class ConnectingActivity : AppCompatActivity() {
     }
 
     fun prepareIntent(){
-        val userDetails = Defaults.shared().string(Key.loginDetails)
+        val userDetails = Defaults.shared().string(KeyConstant.loginDetails)
         if(userDetails != ""){
-            val user = User()
+            val user = FriendlyUser()
             if (user.name != "" && user.userID != "" && user._id != ""){
                 if(user.profilePic == ""){
                     targetIntent = Intent(applicationContext, MainActivity::class.java)
@@ -59,13 +58,13 @@ class ConnectingActivity : AppCompatActivity() {
 //                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
             }else{
-                targetIntent = Intent(applicationContext, RegisterActivity::class.java)
+                targetIntent = Intent(applicationContext, OnBoardingActivity::class.java)
 //                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                targetIntent?.putExtra(Key.userId,user.userID)
-                targetIntent?.putExtra(Key._id,user._id)
+                targetIntent?.putExtra(KeyConstant.userId,user.userID)
+                targetIntent?.putExtra(KeyConstant._id,user._id)
             }
         }else{
-            targetIntent = Intent(applicationContext, LoginActivity::class.java)
+            targetIntent = Intent(applicationContext, OnBoardingActivity::class.java)
 //                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
     }
@@ -96,7 +95,7 @@ class ConnectingActivity : AppCompatActivity() {
                     val id: String = pendingDynamicLinkData!!.link.toString().split("=").last()
                     targetIntent = Intent(this,ReceiptDetailsActivity::class.java)
                     if(pendingDynamicLinkData?.link.toString().contains("receipt?id=")){
-                        targetIntent?.putExtra(Key.invoiceId,id)
+                        targetIntent?.putExtra(KeyConstant.invoiceId,id)
                     }else{
                         prepareIntent()
                         checkConnectionStatus()
