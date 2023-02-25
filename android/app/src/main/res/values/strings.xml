@@ -165,13 +165,14 @@
     <string name="select_state">Select State</string>
     <string name="select_city">Select City</string>
 
-    //onboarding
-    <string name="title_onboarding_1">MarketPlace</string>
-    <string name="description_onboarding_1">Find Business nearby and manage your own business</string>
-    <string name="title_onboarding_2">Support</string>
-    <string name="description_onboarding_2">24/7 Support</string>
-    <string name="title_onboarding_3">Reports</string>
-    <string name="description_onboarding_3">Complete analytics and reports</string>
+    <string name="title_onboarding_invoice">Invoice</string>
+    <string name="description_onboarding_invoice">Create invoice and share directly to customer by using any other app like SMS or Whatsapp and so on</string>
+
+    <string name="title_onboarding_inventory">Inventory</string>
+    <string name="description_onboarding_inventory">Keep track of all your inventory/stocks</string>
+
+    <string name="title_onboarding_reports">Reports</string>
+    <string name="description_onboarding_reports">Get reports for every single operations : Sales, Profit, Pending Payments, Premium Customers</string>
 
 
 

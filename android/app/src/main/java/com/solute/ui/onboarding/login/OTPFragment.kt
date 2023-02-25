@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.PhoneAuthProvider
 import com.solute.MainActivity
 import com.solute.R
-
-
 class OTPFragment : Fragment() {
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     var dialCode : String = ""

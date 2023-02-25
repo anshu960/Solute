@@ -40,9 +40,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             />
         <activity
-            android:name=".ui.onboarding.login.OtpActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.business.barcode.scanner.BarCodeScannerActivity"
             android:exported="false" />
         <activity
@@ -119,15 +116,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.register.RegisterActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.onboarding.login.LoginActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

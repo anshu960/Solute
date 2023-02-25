@@ -41,6 +41,7 @@ class AppStoryFragment : Fragment() {
         btnNextStep = view.findViewById(R.id.btn_next_step)
         mViewPager.adapter = OnboardingPagerAdapter(requireActivity(), requireContext())
         mViewPager.offscreenPageLimit = 1
+        pageIndicator.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimaryDark))
         TabLayoutMediator(pageIndicator, mViewPager) { _, _ -> }.attach()
         mViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

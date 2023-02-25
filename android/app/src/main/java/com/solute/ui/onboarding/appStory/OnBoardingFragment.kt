@@ -14,6 +14,7 @@ class OnBoardingFragment : Fragment() {
     private lateinit var title: String
     private lateinit var description: String
     private lateinit var backgroundColor: String
+    private lateinit var fakePagerBackgroundColor: String
     private var imageResource = 0
     private lateinit var tvTitle: AppCompatTextView
     private lateinit var tvDescription: AppCompatTextView

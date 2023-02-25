@@ -9,7 +9,7 @@ import com.bharat.bandhu.R
 import com.bharat.bandhu.ui.App
 import com.bharat.bandhu.ui.MainActivity
 import com.friendly.framework.Defaults
-import com.friendly.framework.UtilityViewController
+import com.friendly.framework.UtilityActivity
 import com.friendly.framework.constants.Country
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.socket.SocketEvent
@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputEditText
 import org.json.JSONObject
 
 
-class SignupActivity : UtilityViewController() {
+class SignupActivity : UtilityActivity() {
 
     var encodedImage = ""
     var gender = ""
@@ -57,7 +57,7 @@ class SignupActivity : UtilityViewController() {
         request.put(KeyConstant.mobileNumber,info.getString(KeyConstant.mobileNumber))
         request.put(KeyConstant.dialCode,info.getString(KeyConstant.dialCode))
         request.put(KeyConstant.deviceId,deviceID)
-        request.put(KeyConstant.countryCode, Country().getCountryCode())
+        request.put(KeyConstant.countryCode, Country().getCountryCode(this))
         request.put(KeyConstant.fcmToken,deviceID)
         request.put(KeyConstant.gender,gender)
         request.put(KeyConstant.imageData,encodedImage)
