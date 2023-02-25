@@ -29,7 +29,7 @@ class OnboardingPagerAdapter(
             else -> OnBoardingFragment.newInstance(
                 context.resources.getString(R.string.title_onboarding_inventory),
                 context.resources.getString(R.string.description_onboarding_inventory),
-                R.raw.lottie_reports,
+                R.raw.lottie_stock,
                 "#ffffff"
             )
         }

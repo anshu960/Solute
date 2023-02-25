@@ -1,6 +1,5 @@
 package com.friendly.framework.feature.sync
 
-import android.content.ContentValues
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.database.DatabaseHandler
 import com.friendly.framework.dataclass.FriendlyUser
@@ -56,7 +55,7 @@ class SyncHandler {
         allAnalytics.add(BusinessAnalytics("Month", 0, "Total Sale Quantity"))
         allAnalytics.add(BusinessAnalytics("Year", 0, "Total Sale Value ₹"))
         allAnalytics.add(BusinessAnalytics("Year", 0, "Total Sale Quantity"))
-//        BusinessHandler.shared().repository.analyticsLiveData.postValue(allAnalytics)
+        BusinessHandler.shared().repository.analyticsLiveData.postValue(allAnalytics)
     }
 
     fun syncAllBusinessData() {
@@ -203,7 +202,7 @@ class SyncHandler {
             allAnalytics.add(BusinessAnalytics("Month", monthSaleQuantity, "Total Sale Quantity"))
             allAnalytics.add(BusinessAnalytics("Year", yearSaleValue.toInt(), "Total Sale Value ₹"))
             allAnalytics.add(BusinessAnalytics("Year", yearSaleQuantity, "Total Sale Quantity"))
-//            BusinessHandler.shared().repository.analyticsLiveData.postValue(allAnalytics)
+            BusinessHandler.shared().repository.analyticsLiveData.postValue(allAnalytics)
         }
     }
 
@@ -268,26 +267,4 @@ class SyncHandler {
             }
         }
     }
-
-
-}
-
-fun convertJsonToContentValue(json: JSONObject): ContentValues {
-    var content = ContentValues()
-    json.keys().forEach {
-        val value = json.get(it) as Any
-        if (value is String) {
-            content.put(it, value)
-        }
-        if (value is Long) {
-            content.put(it, value)
-        }
-        if (value is Int) {
-            content.put(it, value)
-        }
-        if (value is Boolean) {
-            content.put(it, value)
-        }
-    }
-    return content
 }
