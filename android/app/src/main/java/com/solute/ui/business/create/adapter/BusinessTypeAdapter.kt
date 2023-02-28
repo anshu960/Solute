@@ -9,9 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.businessType.handler.BusinessTypeHandler
 import com.friendly.framework.feature.businessType.model.BusinessType
+import com.solute.MainActivity
 import com.solute.R
-import com.solute.ui.business.create.CreateBusinessActivity
-import com.solute.ui.business.create.SelectBusinessTypeActivity
 import com.squareup.picasso.Picasso
 
 
@@ -30,11 +29,10 @@ class BusinessTypeAdapter(val context: Context, val allBusinessType: ArrayList<B
     override fun onBindViewHolder(holder: BusinessTypeViewHolder, position: Int) {
         val item = allBusinessType[position]
         holder.itemView.setOnClickListener {
-            if(context is SelectBusinessTypeActivity){
+            if(context is MainActivity){
                 val activity = context
-                val intent = Intent(activity, CreateBusinessActivity::class.java)
                 BusinessTypeHandler.shared().repository.businessType = item
-                activity.startActivity(intent)
+                activity.gotToCreateBusiness()
             }
         }
         holder.bind(item)

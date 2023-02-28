@@ -13,7 +13,7 @@
     <string name="login">Login</string>
     <string name="otp">Otp</string>
     <string name="create_account">Create Account</string>
-
+    <string name="select_business_type">Select Type of Business</string>
 
     <string name="terms_and_privacy">
         This Terms of Service Agreement sets forth the terms and conditions by which you are sole responsible for what you do and what you get and you agree to share you basic information(Like Name,Profile Picture,Gender etc) with other users. This app is not responsible for any kind of loss or problems you get on this app. Content on this app neither provided nor controlled by the developer so we are not responsible for any content. If you put any offensive content, it will be replaced by *.There will be absolutely to tolerance for misbehave, if you do so then your account will be terminated immediately.You can report someone in chat view by selection top right option. You might see adult contents uploaded by someone, in that case please block that user and report it us. Please don’t add any adult content. Profanity filter is there on chat so you can’t send such words, if you get some words from someone, please report us. Action will be taken as soon as possible, there will be tolerance for such things. Be friendly to others and and let others be friendly to you. Happy making friends to you my friend.
@@ -106,6 +106,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="business_profile">Business Profile</string>
+    <string name="profile">Profile</string>
     <string name="create_address">Create Address</string>
     <string name="menu_home">Home</string>
     <string name="employee">Employee</string>
@@ -173,11 +174,6 @@
 
     <string name="title_onboarding_reports">Reports</string>
     <string name="description_onboarding_reports">Get reports for every single operations : Sales, Profit, Pending Payments, Premium Customers</string>
-
-
-
-
-
 
 
 </resources>

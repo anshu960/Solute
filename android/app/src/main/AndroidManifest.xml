@@ -75,10 +75,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name=".ui.business.create.SelectBusinessTypeActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.business.inventory.subCategory.SubCategoryDetailsActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -92,14 +88,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.business.inventory.category.CreateCategoryActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.business.create.CreateBusinessActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.profile.ProfileActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -119,7 +107,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

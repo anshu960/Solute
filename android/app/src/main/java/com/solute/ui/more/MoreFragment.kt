@@ -15,9 +15,9 @@ import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.google.firebase.auth.FirebaseAuth
+import com.solute.MainActivity
 import com.solute.R
 import com.solute.ui.onboarding.OnBoardingActivity
-import com.solute.ui.profile.ProfileActivity
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +31,7 @@ class MoreFragment : Fragment() {
     var profileImageView : ImageView? = null
     var profileNameTextView : TextView? = null
     var profileStatusTextView : TextView? = null
+    var activity : MainActivity? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,12 +56,14 @@ class MoreFragment : Fragment() {
         }
         val logoutButton : Button = view.findViewById(R.id.more_logout_btn)
         logoutButton.setOnClickListener { onClickLogout() }
+        if(context is MainActivity){
+            activity = context as MainActivity
+        }
         return view
     }
 
     fun presentFriendlyFriendlyProfile() {
-        val intent = Intent(context, ProfileActivity::class.java)
-        requireContext().startActivity(intent)
+        activity?.gotToProfile()
     }
 
 

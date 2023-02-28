@@ -18,7 +18,6 @@ import com.friendly.framework.feature.mediaFile.viewModel.MediaFileViewModel
 import com.friendly.framework.socket.SocketService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.solute.ui.business.create.SelectBusinessTypeActivity
 import com.solute.ui.network.ConnectingActivity
 
 
@@ -45,8 +44,7 @@ class MainActivity : UtilityActivity() {
         )
         floatingButton = findViewById(R.id.activity_mmain_floating_btn)
         floatingButton?.setOnClickListener {
-            val intent = Intent(this,SelectBusinessTypeActivity::class.java)
-            startActivity(intent)
+            gotToSelectBusinessType()
         }
         App.applicationContext().checkForAppUpdate(this)
         SocketService.shared().verifyIfConnectedOrNot()
@@ -88,6 +86,15 @@ class MainActivity : UtilityActivity() {
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)
+    }
+    fun gotToProfile(){
+        navController?.navigate(R.id.navigation_profile)
+    }
+    fun gotToCreateBusiness(){
+        navController?.navigate(R.id.navigation_profile)
+    }
+    fun gotToSelectBusinessType(){
+        navController?.navigate(R.id.navigation_profile)
     }
 
 }
