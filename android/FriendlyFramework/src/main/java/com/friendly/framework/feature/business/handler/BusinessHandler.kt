@@ -11,6 +11,10 @@ import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
 import com.google.gson.Gson
 import io.socket.emitter.Emitter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class BusinessHandler {
@@ -21,6 +25,7 @@ class BusinessHandler {
     var activity : UtilityActivity = UtilityActivity()
     var mainActivity : AppCompatActivity = UtilityActivity()
     var onDeleteBusinessResponse : ((JSONObject)->Unit)? = null
+    var onCreateBusinessResponse : ((Business)->Unit)? = null
 
     init {
         instance = this
@@ -70,6 +75,9 @@ class BusinessHandler {
                 val payload = anyData.getJSONObject(KeyConstant.payload)
                 val business = gson.fromJson(payload.toString(),Business::class.java)
                 businessViewModel?.insertDatabase(business)
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    onCreateBusinessResponse?.let { it1 -> it1(business) }
+                }
             }
         }
     }

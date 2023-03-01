@@ -87,14 +87,18 @@ class MainActivity : UtilityActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)
     }
+
+    fun navigateToHome(){
+        navController?.navigate(R.id.action_navigate_to_home)
+    }
     fun gotToProfile(){
         navController?.navigate(R.id.navigation_profile)
     }
     fun gotToCreateBusiness(){
-        navController?.navigate(R.id.navigation_profile)
+        navController?.navigate(R.id.navigation_create_business)
     }
     fun gotToSelectBusinessType(){
-        navController?.navigate(R.id.navigation_profile)
+        navController?.navigate(R.id.navigation_select_business_type)
     }
 
 }

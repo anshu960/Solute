@@ -27,9 +27,15 @@
         tools:layout="@layout/fragment_select_business_type" />
     <fragment
         android:id="@+id/navigation_create_business"
-        android:name="com.solute.ui.onBoardBusiness.SelectBusinessTypeFragment"
+        android:name="com.solute.ui.onBoardBusiness.CreateBusinessFragment"
         android:label="@string/select_business_type"
-        tools:layout="@layout/fragment_select_business_type" />
+        tools:layout="@layout/fragment_create_business" >
+        <action
+            android:id="@+id/action_navigate_to_home"
+            app:destination="@id/navigation_business_home_business"
+            app:popUpTo="@id/navigation_business_home_business"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 
 </navigation>

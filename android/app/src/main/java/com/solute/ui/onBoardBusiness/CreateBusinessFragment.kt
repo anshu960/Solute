@@ -36,8 +36,6 @@ class CreateBusinessFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_business, container, false)
-        this.backButton = view.findViewById(R.id.create_business_header_back)
-//        backButton?.setOnClickListener { onBackPressed() }
         businessNameText = view.findViewById(R.id.create_business_name_tiet)
         businessGSTText = view.findViewById(R.id.create_business_gst_tiet)
         businessPANText = view.findViewById(R.id.create_business_pan_tiet)
@@ -52,13 +50,8 @@ class CreateBusinessFragment : Fragment() {
         ).get(
             BusinessViewModel::class.java
         )
-        BusinessHandler.shared().repository.businessLiveData.observe(this.context as MainActivity){
-            if(it != null && it.Id != null){
-                BusinessHandler.shared().fetchAllBusiness()
-                (this.context as MainActivity).alert("Congrats","Business create successfully, please go back to home to see your new Business")
-            }else{
-                (this.context as MainActivity).toast("Oops!, Couldn't create at the moment")
-            }
+        BusinessHandler.shared().onCreateBusinessResponse={
+            (context as MainActivity).navigateToHome()
         }
         return view
     }
