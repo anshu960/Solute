@@ -15,37 +15,29 @@ import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.customer.viewModel.CustomerViewModalFactory
 import com.friendly.framework.feature.customer.viewModel.CustomerViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.business.customer.adapter.CustomerAdapter
 
 
 class CustomersFragment : Fragment() {
 
     var adapter : CustomerAdapter? = null
-    var viewModal : CustomerViewModel? = null
 
     var allCustomer : ArrayList<Customer> = arrayListOf()
 
     var recycler : RecyclerView? = null
     var searchText : EditText? = null
-
+    var fabButton : FloatingActionButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModal = ViewModelProvider(
-            this,
-            CustomerViewModalFactory(CustomerHandler.shared().repository)
-        ).get(
-            CustomerViewModel::class.java
-        )
-        viewModal?.allCustomer?.observe(this) {
+        CustomerHandler.shared().viewModel?.allCustomer?.observe(this) {
             if (it.isNotEmpty()) {
                 allCustomer = it
                 this.reload()
             }
         }
-        CustomerHandler.shared().setup(viewModal!!)
-        viewModal?.loadCustomer()
-        viewModal?.fetchAllCustomer()
     }
 
     override fun onCreateView(
@@ -59,6 +51,10 @@ class CustomersFragment : Fragment() {
         searchText?.doOnTextChanged { text, start, before, count ->
             searchCustomer(text.toString())
         }
+        fabButton = view.findViewById(R.id.customer_fragment_fab_btn)
+        fabButton?.setOnClickListener { App.shared().mainActivity?.navController?.navigate(R.id.business_customer_create) }
+        CustomerHandler.shared().viewModel?.loadCustomer()
+        CustomerHandler.shared().viewModel?.fetchAllCustomer()
         return view
     }
 
@@ -69,17 +65,17 @@ class CustomersFragment : Fragment() {
     }
     fun searchCustomer(query:String){
         if(query.isNotEmpty()){
-            if(viewModal?.allCustomer?.value?.isEmpty() == false){
+            if(CustomerHandler.shared().viewModel?.allCustomer?.value?.isEmpty() == false){
                 this.allCustomer = arrayListOf()
-                viewModal?.allCustomer?.value?.forEach {
+                CustomerHandler.shared().viewModel?.allCustomer?.value?.forEach {
                     if(it.MobileNumber?.contains(query) == true){
                        allCustomer.add(it)
                     }
                 }
             }
         }else{
-            if(viewModal?.allCustomer?.value?.isEmpty() == false){
-                this.allCustomer = viewModal?.allCustomer?.value!!
+            if(CustomerHandler.shared().viewModel?.allCustomer?.value?.isEmpty() == false){
+                this.allCustomer = CustomerHandler.shared().viewModel?.allCustomer?.value!!
             }
         }
         reload()

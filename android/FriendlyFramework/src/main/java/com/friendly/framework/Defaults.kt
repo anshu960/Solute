@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import org.json.JSONObject
 
 class Defaults {
-    private  val NAME = "com.utilitykit"
+    private  val NAME = "com.friendly.framework"
     private  val MODE = Context.MODE_PRIVATE
     private lateinit  var sharedPreference: SharedPreferences
 

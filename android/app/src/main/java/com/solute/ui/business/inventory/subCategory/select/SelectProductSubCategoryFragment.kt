@@ -18,6 +18,7 @@ import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCat
 import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 
 
@@ -33,7 +34,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class SelectProductSubCategoryFragment : Fragment() {
     var recycler: RecyclerView? = null
-    private lateinit var viewModal: ProductSubCategoryViewModel
     var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
     var productSubCategoryAdapter: ProductSubCategoryAdapter? = null
 
@@ -43,14 +43,8 @@ class SelectProductSubCategoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModal = ViewModelProvider(
-            this,
-            ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
-        ).get(
-            ProductSubCategoryViewModel::class.java
-        )
-        ProductSubCategoryHandler.shared().setup(viewModal!!)
-        viewModal.allSubCategory.observe(this) {
+
+        ProductSubCategoryHandler.shared().viewModel?.allSubCategory?.observe(this) {
             if (!it.isNullOrEmpty()) {
                 allSubCategoory = it as ArrayList<ProductSubCategory>
                 reload()
@@ -71,9 +65,9 @@ class SelectProductSubCategoryFragment : Fragment() {
         createBtn = view.findViewById(R.id.select_product_sub_category_save_btn)
         createBtn?.setOnClickListener { onClickCreate() }
         if(ProductCategoryHandler.shared().repository.selectedCategory.value != null){
-            viewModal.loadSubCategory(ProductCategoryHandler.shared().repository.selectedCategory.value!!)
+            ProductSubCategoryHandler.shared().viewModel?.loadSubCategory(ProductCategoryHandler.shared().repository.selectedCategory.value!!)
         }else{
-            viewModal.loadSubCategory()
+            ProductSubCategoryHandler.shared().viewModel?.loadSubCategory()
         }
 
         searchView?.isIconified = false
@@ -91,20 +85,20 @@ class SelectProductSubCategoryFragment : Fragment() {
     fun search(query: String) {
         if (query.isNotEmpty()) {
             allSubCategoory = arrayListOf()
-            viewModal.allSubCategory.value?.forEach {
+            ProductSubCategoryHandler.shared().viewModel?.allSubCategory?.value?.forEach {
                 if (it.Name?.contains(query) == true) {
                     allSubCategoory.add(it)
                 }
             }
-        } else if (viewModal.allSubCategory.value != null) {
-            allSubCategoory = viewModal.allSubCategory.value as ArrayList<ProductSubCategory>
+        } else if (ProductSubCategoryHandler.shared().viewModel?.allSubCategory?.value != null) {
+            allSubCategoory = ProductSubCategoryHandler.shared().viewModel?.allSubCategory?.value as ArrayList<ProductSubCategory>
         }
         reload()
     }
     fun reload() {
         this.productSubCategoryAdapter = this.context?.let {
             ProductSubCategoryAdapter(it, this, allSubCategoory) { subCategory ->
-                BusinessHandler.shared().activity.onBackPressed()
+                App.shared().mainActivity?.onBackPressed()
                 ProductSubCategoryHandler.shared().onSelectSubCategory?.let { it1 -> it1(subCategory) }
             }
         }
@@ -114,7 +108,7 @@ class SelectProductSubCategoryFragment : Fragment() {
 
     fun onClickCreate(){
         if(!name?.text.isNullOrEmpty() && ProductCategoryHandler.shared().repository.selectedCategory.value != null){
-            viewModal.createNewSubCategory(name?.text.toString(),ProductCategoryHandler.shared().repository.selectedCategory.value!!)
+            ProductSubCategoryHandler.shared().viewModel?.createNewSubCategory(name?.text.toString(),ProductCategoryHandler.shared().repository.selectedCategory.value!!)
         }
     }
 }

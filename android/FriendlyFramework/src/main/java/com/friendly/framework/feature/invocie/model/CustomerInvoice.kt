@@ -3,7 +3,10 @@ package com.friendly.framework.feature.invoice.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.friendly.framework.feature.cart.model.Sale
 import com.google.gson.annotations.SerializedName
+import org.json.JSONArray
+import org.json.JSONObject
 
 @Entity(tableName = "CustomerInvoice")
 data class CustomerInvoice(
@@ -14,7 +17,7 @@ data class CustomerInvoice(
     @ColumnInfo(name="BusinessID") @SerializedName("BusinessID") var businessID : String? = null,
     @ColumnInfo(name="CustomerID") @SerializedName("CustomerID") var customerID : String? = null,
     @ColumnInfo(name="IsDeleted") @SerializedName("IsDeleted") var isDeleted : Boolean? = null,
-    @ColumnInfo(name="SalesID") @SerializedName("SalesID") var salesID : ArrayList<String> = arrayListOf(),
+    @ColumnInfo(name="Sales") @SerializedName("Sales") var sales : ArrayList<Sale> = arrayListOf(),
     @ColumnInfo(name="InvoiceNumber") @SerializedName("InvoiceNumber") var invoiceNumber : Long? = null,
     @ColumnInfo(name="InvoiceType") @SerializedName("InvoiceType") var invoiceType : String? = null,
     @ColumnInfo(name="TotalPrice") @SerializedName("TotalPrice") var totalPrice : Float? = null,

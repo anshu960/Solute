@@ -17,7 +17,6 @@ import com.solute.R
 class CreateCategoryActivity : UtilityActivity() {
     var categoryNameText : TextInputEditText? = null
     var saveButton : Button? = null
-    var productCategoryViewModal : ProductCategoryViewModel? = null
     var backButton:ImageButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,13 +24,6 @@ class CreateCategoryActivity : UtilityActivity() {
         categoryNameText = findViewById(R.id.create_categoory_name_tiet)
         saveButton = findViewById(R.id.create_categoory_save_btn)
         saveButton?.setOnClickListener { onClickSave() }
-        productCategoryViewModal = ViewModelProvider(
-            this,
-            ProductCategoryViewModalFactory(ProductCategoryHandler.shared().repository)
-        ).get(
-            ProductCategoryViewModel::class.java
-        )
-        ProductCategoryHandler.shared().setup(productCategoryViewModal!!)
         ProductCategoryHandler.shared().activity = this
         backButton = findViewById(R.id.create_categoory_header_back)
         backButton?.setOnClickListener { onBackPressed() }
@@ -39,7 +31,7 @@ class CreateCategoryActivity : UtilityActivity() {
 
     fun onClickSave(){
         if(categoryNameText!= null && categoryNameText!!.text != null && categoryNameText!!.text!!.length > 2){
-            productCategoryViewModal?.createNewCategory(categoryNameText!!.text.toString())
+            ProductCategoryHandler.shared().viewModel?.createNewCategory(categoryNameText!!.text.toString())
         }
     }
 

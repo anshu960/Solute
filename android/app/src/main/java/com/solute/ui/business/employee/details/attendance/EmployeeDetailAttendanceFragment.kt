@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-
 import android.widget.Switch
 import androidx.fragment.app.Fragment
-import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.employee.handler.EmployeeHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.CurrentDayDecorator
-import com.solute.ui.business.BusinessActivity
 
 import java.util.*
 
@@ -25,8 +23,6 @@ import java.util.*
  * create an instance of this fragment.
  */
 class EmployeeDetailAttendanceFragment : Fragment() {
-
-    val activity = BusinessHandler.shared().activity as? BusinessActivity
     var calenderView : MaterialCalendarView? = null
     var presentSwitch : Switch? = null
     var hours : TextInputEditText? = null
@@ -54,7 +50,7 @@ class EmployeeDetailAttendanceFragment : Fragment() {
 
         }
         calenderView?.setOnMonthChangedListener { widget, date ->
-            activity?.toast("Start ${date}  ${calenderView?.selectedDate}")
+            App.shared().mainActivity?.toast("Start ${date}  ${calenderView?.selectedDate}")
         }
         val decorator = CurrentDayDecorator(activity)
         decorator.isPresent = {dateStr:String->checkIfPresent(dateStr)}
@@ -73,20 +69,20 @@ class EmployeeDetailAttendanceFragment : Fragment() {
         var hoursSpent = 0F
         val isPresent = presentSwitch!!.isChecked
         if(hours?.text.isNullOrEmpty() && presentSwitch?.isActivated == false){
-            activity?.toast("Pleased enter hours spent and you have marked present")
+            App.shared().mainActivity?.toast("Pleased enter hours spent and you have marked present")
             return
         }else if(!hours?.text.isNullOrEmpty()){
             hoursSpent =  hours?.text.toString().toFloat()
         }
         val comment = comment?.text.toString()
         if(comment.isEmpty() && !isPresent){
-            activity?.toast("Pleased enter reason for not being present")
+            App.shared().mainActivity?.toast("Pleased enter reason for not being present")
         }
         if (employee != null) {
             EmployeeHandler.shared().onCreateNewAttendance={
                 if(!it.Id.isEmpty()){
-                    activity?.runOnUiThread {
-                        activity?.toast("Attendance entry saved")
+                    App.shared().mainActivity?.runOnUiThread {
+                        App.shared().mainActivity?.toast("Attendance entry saved")
                     }
                 }
             }

@@ -19,7 +19,7 @@ import org.json.JSONObject
 
 class BusinessHandler {
 
-    var businessViewModel: BusinessViewModel? = null
+    var viewModal: BusinessViewModel? = null
     val repository = BusinessRepository()
     val gson = Gson()
     var activity : UtilityActivity = UtilityActivity()
@@ -41,7 +41,7 @@ class BusinessHandler {
         }
     }
     fun setup(model:BusinessViewModel){
-        businessViewModel = model
+        viewModal = model
     }
 
     fun fetchAllBusiness(){
@@ -61,7 +61,7 @@ class BusinessHandler {
                 {
                     val item = payload.getJSONObject(i)
                     val business = gson.fromJson(item.toString(), Business::class.java)
-                    businessViewModel?.insertDatabase(business)
+                    viewModal?.insertDatabase(business)
                 }
             }
         }
@@ -74,7 +74,7 @@ class BusinessHandler {
             if (anyData.has(KeyConstant.payload)){
                 val payload = anyData.getJSONObject(KeyConstant.payload)
                 val business = gson.fromJson(payload.toString(),Business::class.java)
-                businessViewModel?.insertDatabase(business)
+                viewModal?.insertDatabase(business)
                 CoroutineScope(Job() + Dispatchers.Main).launch {
                     onCreateBusinessResponse?.let { it1 -> it1(business) }
                 }
@@ -90,7 +90,7 @@ class BusinessHandler {
                 onDeleteBusinessResponse?.let { it1 -> it1(payload) }
                 if(payload.has(KeyConstant._id)){
                     val businessId = payload.getString(KeyConstant._id)
-                    businessViewModel?.removeBusinessFromDatabase(businessId)
+                    viewModal?.removeBusinessFromDatabase(businessId)
                     onDeleteBusinessResponse?.let { it1 -> it1(payload) }
                 }
             }

@@ -8,6 +8,7 @@ import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
+import com.solute.app.App
 import com.solute.ui.onboarding.OnBoardingActivity
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
@@ -31,7 +32,6 @@ class FirebaseAuthHelper {
         }
     }
 
-    var activity : OnBoardingActivity? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
@@ -93,7 +93,7 @@ class FirebaseAuthHelper {
             val options =  PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber(phoneNumber)       // Phone number to verify
                 .setTimeout(30L, TimeUnit.SECONDS) // Timeout and unit
-                .setActivity(this.activity!!)                 // Activity (for callback binding)
+                .setActivity(App.shared().mainActivity!!)                 // Activity (for callback binding)
                 .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
                 .build();
             PhoneAuthProvider.verifyPhoneNumber(options)

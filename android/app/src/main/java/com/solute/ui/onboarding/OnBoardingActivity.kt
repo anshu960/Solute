@@ -25,10 +25,8 @@ class OnBoardingActivity : UtilityActivity() {
 //        bottomNavigationView.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.login, R.id.enter_otp,R.id.register,R.id.app_story)
+            setOf(R.id.got_to_login, R.id.enter_otp,R.id.register,R.id.app_story)
         )
-        FirebaseAuthHelper.shared().setUp()
-        FirebaseAuthHelper.shared().activity = this
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -36,17 +34,7 @@ class OnBoardingActivity : UtilityActivity() {
     }
     override fun onResume() {
         super.onResume()
-        FirebaseAuthHelper.shared().activity = this
-    }
-    fun gotToLogin(){
-        navController.navigate(R.id.login)
     }
 
-    fun gotToOtp(){
-        navController.navigate(R.id.enter_otp)
-    }
-    fun gotToRegister(){
-        navController.navigate(R.id.register)
-    }
 
 }

@@ -15,7 +15,9 @@ import com.friendly.framework.feature.business.viewModel.BusinessViewModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
+import com.solute.app.App
 
 
 /**
@@ -25,32 +27,20 @@ import com.solute.R
  */
 class BusinessListFragment : Fragment() {
     var recyclerView: RecyclerView? = null
-    private lateinit var businessViewModel: BusinessViewModel
     private var adapter: BusinessListAdapter? = null
     var allBusiness: ArrayList<Business> = ArrayList()
-    lateinit var mAdView : AdView
+    var fabButton  :FloatingActionButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessListAdapter(it, allBusiness) }
-        businessViewModel = ViewModelProvider(
-            this,
-            BusinessViewModalFactory(BusinessHandler.shared().repository)
-        ).get(
-            BusinessViewModel::class.java
-        )
-        businessViewModel.allBusiness.observe(this) {
+        BusinessHandler.shared().viewModal?.allBusiness?.observe(this) {
             if(!it.isNullOrEmpty()){
                 allBusiness = it
             }
             this.reload()
         }
-        BusinessHandler.shared().setup(businessViewModel)
+        BusinessHandler.shared().viewModal?.loadBusiness()
         BusinessHandler.shared().fetchAllBusiness()
-        initAdmob()
-    }
-
-    fun initAdmob(){
-
     }
 
     fun reload() {
@@ -69,12 +59,11 @@ class BusinessListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_business_list, container, false)
         this.recyclerView = view.findViewById(R.id.fragment_business_list_recycler)
-        businessViewModel.loadBusiness()
-        reload()
         MobileAds.initialize(this.requireContext()) {}
-        mAdView = view.findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        fabButton = view.findViewById(R.id.fragment_business_list_add_btn)
+        fabButton?.setOnClickListener { App.shared().mainActivity?.navigateToSelectBusinessType() }
+        BusinessHandler.shared().viewModal?.loadBusiness()
+        App.shared().mainActivity?.setMainMenu()
         return view
     }
 }

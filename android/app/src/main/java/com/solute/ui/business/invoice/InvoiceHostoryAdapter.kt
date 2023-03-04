@@ -1,6 +1,5 @@
 package com.solute.ui.business.invoice
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -8,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.invoice.handler.InvoiceHandler
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
-import com.solute.ui.business.receipt.ReceiptDetailsActivity
+import com.solute.app.App
 
 
 class InvoiceHistoryAdapter(val context: Context, val invoices: List<CustomerInvoice>) :
@@ -28,12 +26,9 @@ class InvoiceHistoryAdapter(val context: Context, val invoices: List<CustomerInv
         val item = invoices[position]
         holder.bind(item)
         holder.itemView.setOnClickListener {
-            if(context is BusinessActivity){
-                val mainActivty = context
-                val intent = Intent(mainActivty, ReceiptDetailsActivity::class.java)
                 InvoiceHandler.shared().repository.customerInvoiceLiveData.postValue(item)
-                mainActivty.startActivity(intent)
-            }
+            App.shared().mainActivity?.goToReceiptDetails()
+
         }
     }
 }
@@ -61,7 +56,7 @@ class InvoiceHistoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Re
         invoicenumber?.text = invoice.invoiceNumber.toString()
         invoicePrice?.text = "₹ " +  invoice.totalPrice
         invoiceDiscount?.text = "₹ " + invoice.instantDiscount
-        invoiceQuantity?.text =  invoice.salesID?.count().toString()
+        invoiceQuantity?.text =  invoice.sales?.count().toString()
         invoiceFinalPrice?.text = "₹ " +  invoice.finalPrice
     }
 

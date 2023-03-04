@@ -26,27 +26,19 @@ import com.solute.R
 class ProductCategoryFragment : Fragment() {
 
     var recycler : RecyclerView? = null
-    private lateinit var productCategoryViewModel: ProductCategoryViewModel
     var allCategoory: ArrayList<ProductCategory> = ArrayList()
     var productCategoryAdapter : ProductCategoryAdapter? = null
     var createNewCategoryBtn : FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        productCategoryViewModel = ViewModelProvider(
-            this,
-            ProductCategoryViewModalFactory(ProductCategoryHandler.shared().repository)
-        ).get(
-            ProductCategoryViewModel::class.java
-        )
-        ProductCategoryHandler.shared().setup(productCategoryViewModel!!)
-        productCategoryViewModel.allCategory.observe(this){
+        ProductCategoryHandler.shared().viewModel?.allCategory?.observe(this){
             if(!it.isNullOrEmpty()){
                 allCategoory = it as ArrayList<ProductCategory>
                 loadCategory()
             }
         }
-        productCategoryViewModel.loadCategory()
+        ProductCategoryHandler.shared().viewModel?.loadCategory()
         ProductCategoryHandler.shared().fetchAllProductCategory()
     }
 

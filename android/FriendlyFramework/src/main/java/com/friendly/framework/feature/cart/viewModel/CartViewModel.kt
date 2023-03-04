@@ -25,12 +25,6 @@ import java.util.*
 class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
     val gson = Gson()
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
-
     val cartProducts: LiveData<List<Product>>
         get() = cartRepository.cartProducts
 
@@ -142,40 +136,28 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         cartRepository.totalAmountLiveData.postValue(0F)
     }
 
-    fun createSaleAndGenerateReceipt(customer: Customer?) {
-        val transactions = prepareTransaction(customer)
-        if (transactions.count() == 0) {
-            return
-        }
-        var request = JSONObject()
+    fun createInvoice(customer: Customer?) {
+        val request = JSONObject()
         val user = FriendlyUser()
-        val business = BusinessHandler.shared().repository.business
+        val business = BusinessHandler.shared().repository.business.value
         request.put(KeyConstant.userId, user._id)
-        request.put(KeyConstant.businessID, business!!.value!!.Id)
+        request.put(KeyConstant.businessID, business?.Id)
+
+        val invoiceId = System.currentTimeMillis()
+        val transactions = prepareTransaction(customer,invoiceId)
+
         if(CustomerHandler.shared().repository.customer.value !=null){
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(KeyConstant.customer, JSONObject(customerJson))
         }
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
-        request.put(KeyConstant.transactions, JSONArray(transactions))
-        SocketService.shared().send(SocketEvent.CREATE_SALE, request)
-    }
-
-    fun createInvoice(sales: ArrayList<JSONObject>, salesIds: ArrayList<String>,customer: Customer?) {
-        val unixTime = System.currentTimeMillis()
-        val transactions = prepareTransaction(customer)
-        if (transactions.count() == 0) {
+        request.put(KeyConstant.sales, transactions)
+        if (transactions.length() == 0) {
             return
         }
-        var request = JSONObject()
-        val user = FriendlyUser()
-        val business = BusinessHandler.shared().repository.business.value
-        request.put(KeyConstant.invoiceId,unixTime)
+        request.put(KeyConstant.invoiceId,invoiceId)
         request.put(KeyConstant.userId, user._id)
         request.put(KeyConstant.businessID, business?.Id)
-        request.put(KeyConstant.transactions, JSONArray(transactions))
-        request.put(KeyConstant.sales, JSONArray(sales))
-        request.put(KeyConstant.salesID, JSONArray(salesIds))
         request.put(KeyConstant.business, JSONObject(gson.toJson(business)))
         request.put(KeyConstant.instantDiscount, instantDiscount.value)
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
@@ -183,16 +165,15 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
             val customerJson = gson.toJson(CustomerHandler.shared().repository.customer.value)
             request.put(KeyConstant.customer, JSONObject(customerJson))
         }
-
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
         SocketService.shared().send(SocketEvent.GENERATE_CUSTOMER_INVOICE, request)
     }
 
-    fun prepareTransaction(customer: Customer?): ArrayList<JSONObject> {
+    fun prepareTransaction(customer: Customer?,invoiceId : Long): JSONArray {
         val user = FriendlyUser()
         val business = BusinessHandler.shared().repository.business
-        var transactions: ArrayList<JSONObject> = arrayListOf()
-        if (cartProducts.value != null && !cartProducts.value!!.isEmpty()) {
+        val transactions = JSONArray()
+        if (cartProducts.value != null && cartProducts.value!!.isNotEmpty()) {
             cartProducts.value?.forEach {
                 val gson = Gson()
                 val productData = JSONObject(gson.toJson(it))
@@ -230,6 +211,7 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 if (it.Tax != null) {
                     Tax = it.Tax!!.toInt() * quanity
                 }
+                transactionData.put(KeyConstant.invoiceId, invoiceId)
                 transactionData.put(KeyConstant.productID, it.Id)
                 transactionData.put(KeyConstant.productName, it.Name)
                 transactionData.put(KeyConstant.product, productData)
@@ -247,12 +229,12 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 transactionData.put(KeyConstant.saleDate, now())
                 transactionData.put(KeyConstant.discount, it.Discount)
                 transactionData.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
-                if(customer != null && customer.Id != null && !customer.Id!!.isEmpty()){
+                if(customer != null && !customer.Id.isEmpty()){
                     transactionData.put(KeyConstant.customerName, customer.Name)
                     transactionData.put(KeyConstant.customerMobile, customer.MobileNumber)
                     transactionData.put(KeyConstant.customerID, customer.Id)
                 }
-                transactions.add(transactionData)
+                transactions.put(transactionData)
             }
         }
         return transactions

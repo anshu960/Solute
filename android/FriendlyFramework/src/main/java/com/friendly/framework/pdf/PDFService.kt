@@ -10,7 +10,11 @@ import com.friendly.framework.invoice.InvoiceTemplate
 
 class PDFService {
 
-    fun createInvoice(context: Context?, customer: Customer?, business: Business?, invoice: CustomerInvoice, sales:ArrayList<Sale>) :String{
+    fun createInvoice(
+        customer: Customer?,
+        business: Business?,
+        invoice: CustomerInvoice,
+    ) :String{
         var invoiceHtml =  InvoiceTemplate.htmlTemplate
         business?.Name?.let { invoiceHtml = invoiceHtml.replace("###BusinessName", it) }
         business?.Address?.let { invoiceHtml =invoiceHtml.replace("###BusinessAddress",it ) }
@@ -22,7 +26,7 @@ class PDFService {
         invoice.createdAt?.let { invoiceHtml = invoiceHtml.replace("###InvoiceDate",it ) }
         invoice.invoiceNumber?.let { invoiceHtml = invoiceHtml.replace("###InvoiceNumber",it.toString() ) }
         var saleItemHtml = ""
-        sales.forEach {sale->
+        invoice.sales.forEach {sale->
             val newRow = """
                     <tr>
                     <td class="text-center">${sale.ProductName}</td>

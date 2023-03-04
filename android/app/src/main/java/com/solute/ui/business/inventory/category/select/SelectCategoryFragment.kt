@@ -17,11 +17,11 @@ import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryV
 import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.business.inventory.category.ProductCategoryAdapter
 
 class SelectCategoryFragment : Fragment() {
     var recycler: RecyclerView? = null
-    private lateinit var viewModal: ProductCategoryViewModel
     var allCategoory: ArrayList<ProductCategory> = ArrayList()
     var productCategoryAdapter: ProductCategoryAdapter? = null
 
@@ -31,14 +31,7 @@ class SelectCategoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModal = ViewModelProvider(
-            this,
-            ProductCategoryViewModalFactory(ProductCategoryHandler.shared().repository)
-        ).get(
-            ProductCategoryViewModel::class.java
-        )
-        ProductCategoryHandler.shared().setup(viewModal!!)
-        viewModal.allCategory.observe(this) {
+        ProductCategoryHandler.shared().viewModel?.allCategory?.observe(this) {
             if (!it.isNullOrEmpty()) {
                 allCategoory = it as ArrayList<ProductCategory>
                 reload()
@@ -58,7 +51,7 @@ class SelectCategoryFragment : Fragment() {
         recycler = view.findViewById(R.id.select_category_recycler)
         createBtn = view.findViewById(R.id.select_category_create_btn)
         createBtn?.setOnClickListener { onClickCreate() }
-        viewModal.loadCategory()
+        ProductCategoryHandler.shared().viewModel?.loadCategory()
         searchView?.isIconified = false
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -75,13 +68,13 @@ class SelectCategoryFragment : Fragment() {
     fun search(query: String) {
         if (query.isNotEmpty()) {
             allCategoory = arrayListOf()
-            viewModal.allCategory.value?.forEach {
+            ProductCategoryHandler.shared().viewModel?.allCategory?.value?.forEach {
                 if (it.Name?.contains(query) == true) {
                     allCategoory.add(it)
                 }
             }
-        } else if (viewModal.allCategory.value != null) {
-            allCategoory = viewModal.allCategory.value as ArrayList<ProductCategory>
+        } else if (ProductCategoryHandler.shared().viewModel?.allCategory?.value != null) {
+            allCategoory = ProductCategoryHandler.shared().viewModel?.allCategory?.value as ArrayList<ProductCategory>
         }
         reload()
     }
@@ -89,7 +82,7 @@ class SelectCategoryFragment : Fragment() {
     fun reload() {
         this.productCategoryAdapter = this.context?.let {
             ProductCategoryAdapter(it, this, allCategoory) { category ->
-                BusinessHandler.shared().activity.onBackPressed()
+                App.shared().mainActivity?.onBackPressed()
                 ProductCategoryHandler.shared().onSelectCategory?.let { it1 -> it1(category) }
             }
         }
@@ -99,7 +92,7 @@ class SelectCategoryFragment : Fragment() {
 
     fun onClickCreate(){
         if(!name?.text.isNullOrEmpty()){
-            viewModal.createNewCategory(name?.text.toString())
+            ProductCategoryHandler.shared().viewModel?.createNewCategory(name?.text.toString())
         }
     }
 }

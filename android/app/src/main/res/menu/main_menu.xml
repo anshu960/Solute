@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/baseline_person"
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/got_to_login"
+        android:icon="@drawable/baseline_power_settings_new"
+        android:title="@string/logout" />
+
+</menu>

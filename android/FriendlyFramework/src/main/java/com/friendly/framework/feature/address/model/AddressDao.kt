@@ -18,14 +18,14 @@ interface  AddressDao {
     fun getRecentItem(): LiveData<Address>
 
     @Query("select * from Address where FeatureObjectID = :featureId AND IsDeleted = false order by UpdatedAt DESC LIMIT 1")
-    fun getRecentItemForBusiness(featureId:String): LiveData<Address>
+    fun getRecentItemForBusiness(featureId:String): Address
 
     @Query("SELECT * FROM Address where IsDeleted = false ORDER by UpdatedAt DESC")
-    fun getAllItems(): LiveData<List< Address>>
+    fun getAllItems(): List< Address>
 
     @Query("select * from Address where FeatureObjectID = :featureId AND IsDeleted = false order by UpdatedAt DESC")
-    fun getAllItemsForBusiness(featureId: String): LiveData<List< Address>>
+    fun getAllItemsForBusiness(featureId: String): List< Address>
 
     @Query("select * from Address where FeatureObjectID = :featureId AND IsDeleted = false order by UpdatedAt DESC")
-    suspend fun getAllItemsFor(featureId: String):List<Address>
+    fun getAllItemsFor(featureId: String):List<Address>
 }

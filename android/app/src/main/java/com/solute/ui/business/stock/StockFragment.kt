@@ -27,14 +27,16 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class StockFragment : Fragment() {
-    private lateinit var productViewModel: ProductViewModel
     var productStockdapter : ProductStockAdapter? = null
     var recycler : RecyclerView? = null
     var allProduct: ArrayList<Product> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        ProductHandler.shared().viewModel?.allProduct?.observe(this) {
+            allProduct = it as ArrayList<Product>
+            loadStock()
+        }
     }
 
     override fun onCreateView(
@@ -44,15 +46,6 @@ class StockFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_stock, container, false)
         recycler = view.findViewById(R.id.fragment_stock_recycler)
-        productViewModel = ViewModelProvider(
-            this,
-            ProductViewModalFactory(ProductHandler.shared().repository)
-        )[ProductViewModel::class.java]
-        productViewModel.allProduct.observe(viewLifecycleOwner) {
-            allProduct = it as ArrayList<Product>
-                loadStock()
-        }
-        ProductHandler.shared().setup(productViewModel)
         ProductHandler.shared().viewModel?.fetchAllProduct()
         loadStock()
         return view

@@ -11,8 +11,9 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.customer.model.Customer
 import com.google.android.material.textfield.TextInputEditText
+import com.solute.MainActivity
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 
 
 /**
@@ -21,7 +22,6 @@ import com.solute.ui.business.BusinessActivity
  * create an instance of this fragment.
  */
 class CreateCustomerFragment : Fragment() {
-    val activity = BusinessHandler.shared().activity as? BusinessActivity
     var name : TextInputEditText? = null
     var mobile : TextInputEditText? = null
     var email : TextInputEditText? = null
@@ -62,17 +62,17 @@ class CreateCustomerFragment : Fragment() {
         val emailVal = email?.text.toString()
         val barcodeVal = barcode?.text.toString()
         if(nameVal.count() <=3){
-            activity?.toast("Please enter customer name with more than 3 characters")
+            App.shared().mainActivity?.toast("Please enter customer name with more than 3 characters")
             return
         }
         if(mobileVal.count() <=8){
-            activity?.toast("Please enter valid customer mobile")
+            App.shared().mainActivity?.toast("Please enter valid customer mobile")
             return
         }
         if(customer != null){
             CustomerHandler.shared().onCreateNewCustomer={
-                activity?.runOnUiThread {
-                    activity?.toast("Updated")
+                App.shared().mainActivity?.runOnUiThread {
+                    App.shared().mainActivity?.toast("Updated")
                 }
             }
             customer?.Barcode = barcodeVal
@@ -82,8 +82,8 @@ class CreateCustomerFragment : Fragment() {
             CustomerHandler.shared().viewModel?.updateCustomer(customer!!)
         }else{
             CustomerHandler.shared().onCreateNewCustomer={
-                activity?.runOnUiThread {
-                    activity?.toast("Created")
+                App.shared().mainActivity?.runOnUiThread {
+                    App.shared().mainActivity?.toast("Created")
                 }
             }
             CustomerHandler.shared().viewModel?.createNewCustomer(nameVal,mobileVal,emailVal,barcodeVal)

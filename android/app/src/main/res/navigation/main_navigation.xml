@@ -3,10 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/business_home_navigation"
-    app:startDestination="@id/navigation_business_home_business"
+    app:startDestination="@id/app_story"
     >
+    <action
+        android:id="@+id/got_to_home"
+        app:destination="@id/business_list"
+        app:popUpTo="@id/business_list"
+        app:popUpToInclusive="true"
+        />
     <fragment
-        android:id="@+id/navigation_business_home_business"
+        android:id="@+id/business_list"
         android:name="com.solute.ui.businessList.BusinessListFragment"
         android:label="@string/business"
         tools:layout="@layout/fragment_business_list" />
@@ -32,10 +38,138 @@
         tools:layout="@layout/fragment_create_business" >
         <action
             android:id="@+id/action_navigate_to_home"
-            app:destination="@id/navigation_business_home_business"
-            app:popUpTo="@id/navigation_business_home_business"
+            app:destination="@id/business_list"
+            app:popUpTo="@id/business_list"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/app_story"
+        android:name="com.solute.ui.onboarding.appStory.AppStoryFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_app_story" />
+    <fragment
+        android:id="@+id/got_to_login"
+        android:name="com.solute.ui.onboarding.login.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/enter_otp"
+        android:name="com.solute.ui.onboarding.login.OTPFragment"
+        android:label="@string/otp"
+        tools:layout="@layout/fragment_o_t_p" />
+    <fragment
+        android:id="@+id/register"
+        android:name="com.solute.ui.onboarding.register.RegisterFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_register" />
+<!--    business -->
+    <fragment
+        android:id="@+id/my_business_profile"
+        android:name="com.solute.ui.business.profile.self.SelfBusinessProfileFragment"
+        android:label="@string/business_profile"
+        tools:layout="@layout/fragment_self_business_profile" />
 
+    <fragment
+        android:id="@+id/business_home"
+        android:name="com.solute.ui.business.inventory.InventoryFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_inventory" />
+
+    <fragment
+        android:id="@+id/business_sale"
+        android:name="com.solute.ui.business.product.BusinessProductFragment"
+        android:label="@string/sale"
+        tools:layout="@layout/fragment_business_sale" />
+
+    <fragment
+        android:id="@+id/business_cart"
+        android:name="com.solute.ui.business.cart.BusinessCartFragment"
+        android:label="@string/cart"
+        tools:layout="@layout/fragment_business_cart" />
+    <fragment
+        android:id="@+id/business_invoice"
+        android:name="com.solute.ui.business.invoice.BusinessInvoiceFragment"
+        android:label="@string/invoice"
+        tools:layout="@layout/fragment_business_invoice" />
+    <fragment android:id="@+id/business_customers"
+        android:name="com.solute.ui.business.customer.list.CustomersFragment"
+        android:label="@string/customers"
+        tools:layout="@layout/fragment_customers"
+        >
+    </fragment>
+    <fragment
+        android:id="@+id/business_stock"
+        android:name="com.solute.ui.business.stock.StockFragment"
+        android:label="@string/stock"
+        tools:layout="@layout/fragment_stock" />
+
+    <!--    Inventory-->
+    <fragment
+        android:id="@+id/inventory_product"
+        android:name="com.solute.ui.business.inventory.product.BusinessProductsFragment"
+        android:label="@string/all_product"
+        tools:layout="@layout/fragment_business_products" />
+    <fragment
+        android:id="@+id/inventory_category"
+        android:name="com.solute.ui.business.inventory.category.ProductCategoryFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_product_category" />
+    <fragment
+        android:id="@+id/inventory_sub_category"
+        android:name="com.solute.ui.business.inventory.subCategory.FragmentProductSubCategory"
+        android:label="@string/sub_category"
+        tools:layout="@layout/fragment_product_sub_category" />
+    <fragment
+        android:id="@+id/business_employee"
+        android:name="com.solute.ui.business.employee.EmployeeListFragment"
+        android:label="@string/employee"
+        tools:layout="@layout/fragment_employee_list" />
+
+    <!--    Create New Navigation without menu-->
+    <fragment
+        android:id="@+id/business_customer_create"
+        android:name="com.solute.ui.business.customer.create.CreateCustomerFragment"
+        android:label="@string/add_new_customer"
+        tools:layout="@layout/fragment_create_customer" />
+    <fragment
+        android:id="@+id/business_product_create"
+        android:name="com.solute.ui.business.product.create.CreateProductFragment"
+        android:label="@string/add_new_product"
+        tools:layout="@layout/fragment_create_product" />
+    <fragment
+        android:id="@+id/business_select_customer"
+        android:name="com.solute.ui.business.customer.select.SelectCustomerFragment"
+        android:label="@string/add_customer"
+        tools:layout="@layout/fragment_select_customer" />
+    <fragment
+        android:id="@+id/business_select_category"
+        android:name="com.solute.ui.business.inventory.category.select.SelectCategoryFragment"
+        android:label="@string/select_category"
+        tools:layout="@layout/fragment_select_category" />
+    <fragment
+        android:id="@+id/business_select_product_sub_category"
+        android:name="com.solute.ui.business.inventory.subCategory.select.SelectProductSubCategoryFragment"
+        android:label="@string/select_sub_category"
+        tools:layout="@layout/fragment_select_product_sub_category" />
+    <fragment
+        android:id="@+id/business_product_details_container"
+        android:name="com.solute.ui.business.product.detail.ProductDetailContainerFragment"
+        android:label="@string/product_details"
+        tools:layout="@layout/fragment_select_customer" />
+    <fragment
+        android:id="@+id/business_details_details_container"
+        android:name="com.solute.ui.business.employee.details.EmployeeDetailContainerFragment"
+        android:label="@string/employee"
+        tools:layout="@layout/fragment_employee_detail_container" />
+    <fragment
+        android:id="@+id/business_details_invoice_details"
+        android:name="com.solute.ui.business.invoice.details.InvoiceDetailsFragment"
+        android:label="@string/invoice"
+        tools:layout="@layout/fragment_invoice_details" />
+    <fragment
+        android:id="@+id/fragment_create_employee"
+        android:name="com.solute.ui.business.employee.create.CreateEmployeeFragment"
+        android:label="@string/employee"
+        tools:layout="@layout/fragment_create_employee" />
 
 </navigation>

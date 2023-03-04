@@ -11,8 +11,7 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
-
+import com.solute.app.App
 
 class ProductCategoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(
@@ -41,10 +40,9 @@ class ProductCategoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : R
         }
     }
     fun validateSelection(category : ProductCategory){
-        val activity = BusinessHandler.shared().activity as? BusinessActivity
         val selectedCategory = ProductCategoryHandler.shared().repository.selectedCategory.value?.Id
-        if (activity != null) {
-            ProductCategoryHandler.shared().repository.selectedCategory.observe(activity){
+        if (App.shared().mainActivity != null) {
+            ProductCategoryHandler.shared().repository.selectedCategory.observe(App.shared().mainActivity!!){
                 if(selectedCategory == category.Id){
                     selectImg?.setImageResource(R.drawable.ic_selected)
                 }else{

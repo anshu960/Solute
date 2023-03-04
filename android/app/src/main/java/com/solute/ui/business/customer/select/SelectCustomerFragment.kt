@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.cart.handler.CartHandler
 import com.friendly.framework.feature.cart.viewModel.CartViewModel
@@ -22,12 +21,11 @@ import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.customer.viewModel.CustomerViewModalFactory
 import com.friendly.framework.feature.customer.viewModel.CustomerViewModel
 import com.friendly.framework.feature.invoice.handler.InvoiceHandler
+import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 import com.solute.ui.business.customer.adapter.CustomerAdapter
-import com.solute.ui.business.receipt.ReceiptDetailsActivity
-import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +39,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class SelectCustomerFragment : Fragment() {
     var adapter: CustomerAdapter? = null
-    var viewModal: CustomerViewModel? = null
     private var cartViewModel: CartViewModel? = null
     var allCustomer: ArrayList<Customer> = arrayListOf()
     var selectedCustomer: Customer? = null
@@ -59,20 +56,13 @@ class SelectCustomerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cartViewModel = CartHandler.shared().viewModel
-        viewModal = ViewModelProvider(
-            this,
-            CustomerViewModalFactory(CustomerHandler.shared().repository)
-        ).get(
-            CustomerViewModel::class.java
-        )
-        viewModal?.allCustomer?.observe(this) {
+        CustomerHandler.shared().viewModel?.allCustomer?.observe(this) {
             if (it.isNotEmpty()) {
                 allCustomer = it
                 this.reload()
             }
         }
-        CustomerHandler.shared().setup(viewModal!!)
-        viewModal?.fetchAllCustomer()
+        CustomerHandler.shared().viewModel?.fetchAllCustomer()
     }
 
     override fun onCreateView(
@@ -126,21 +116,18 @@ class SelectCustomerFragment : Fragment() {
                 skipBtn?.visibility = View.VISIBLE
             }
         }
-        viewModal?.loadCustomer()
+        CustomerHandler.shared().viewModel?.loadCustomer()
         InvoiceHandler.shared().onCreateNewCustomerInvoiceResponse={
             onCreateInvoiceResponse(it)
         }
         return view
     }
 
-    fun onCreateInvoiceResponse(data:JSONObject){
-        val intent = Intent(this.context,ReceiptDetailsActivity::class.java)
-        intent.putExtra(KeyConstant.invoice,data.toString())
-        val activity = BusinessHandler.shared().activity as? BusinessActivity
-        activity?.onBackPressed()
-        activity?.onBackPressed()
-        activity?.startActivity(intent)
+    fun onCreateInvoiceResponse(invoice:CustomerInvoice){
+        InvoiceHandler.shared().invoiceNumber = 0
+        InvoiceHandler.shared().repository.customerInvoiceLiveData.postValue(invoice)
         cartViewModel?.resetCart()
+        App.shared().mainActivity?.goToReceiptDetails()
     }
 
     fun reload() {
@@ -159,17 +146,17 @@ class SelectCustomerFragment : Fragment() {
 
     fun searchCustomer(query: String) {
         if (query.isNotEmpty()) {
-            if (viewModal?.allCustomer?.value?.isEmpty() == false) {
+            if (CustomerHandler.shared().viewModel?.allCustomer?.value?.isEmpty() == false) {
                 this.allCustomer = arrayListOf()
-                viewModal?.allCustomer?.value?.forEach {
+                CustomerHandler.shared().viewModel?.allCustomer?.value?.forEach {
                     if (it.MobileNumber?.contains(query) == true) {
                         allCustomer.add(it)
                     }
                 }
             }
         } else {
-            if (viewModal?.allCustomer?.value?.isEmpty() == false) {
-                this.allCustomer = viewModal?.allCustomer?.value!!
+            if (CustomerHandler.shared().viewModel?.allCustomer?.value?.isEmpty() == false) {
+                this.allCustomer = CustomerHandler.shared().viewModel?.allCustomer?.value!!
             }
         }
         reload()
@@ -177,22 +164,21 @@ class SelectCustomerFragment : Fragment() {
 
     fun onClickAddCustomer() {
         if (customerName?.text?.isEmpty() == true && customerMobile?.text?.isEmpty() == true) {
-            val activity = BusinessHandler.shared().activity as? BusinessActivity
-            activity?.toastLong("Please add name and mobile number")
+            App.shared().mainActivity?.toastLong("Please add name and mobile number")
         }else{
             CustomerHandler.shared().onCreateNewCustomer = {
                 this.selectedCustomer = it
                 onClickSale()
             }
-            viewModal?.createNewCustomer(customerName!!.text!!.toString(),customerMobile!!.text!!.toString(),customerEmail!!.text!!.toString(),customerMobile!!.text!!.toString())
+            CustomerHandler.shared().viewModel?.createNewCustomer(customerName!!.text!!.toString(),customerMobile!!.text!!.toString(),customerEmail!!.text!!.toString(),customerMobile!!.text!!.toString())
         }
     }
 
     fun onClickSale() {
-        cartViewModel?.createSaleAndGenerateReceipt(selectedCustomer)
+        cartViewModel?.createInvoice(selectedCustomer)
     }
 
     fun onClickSkip() {
-        cartViewModel?.createSaleAndGenerateReceipt(selectedCustomer)
+        cartViewModel?.createInvoice(selectedCustomer)
     }
 }

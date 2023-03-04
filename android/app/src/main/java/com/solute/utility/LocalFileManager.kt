@@ -4,7 +4,7 @@ import android.os.*
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.util.Log
-import com.solute.App
+import com.solute.app.App
 import java.io.File
 import java.io.File.separator
 import java.io.FileOutputStream
@@ -84,7 +84,7 @@ class LocalFileManager
     fun downloadFile(url:String,completion:(Double,String)->Unit){
         val extension: String = url.substring(url.lastIndexOf("."))
         val directory =
-            File(App.applicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + separator + "test_pictures")
+            File(App.shared().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + separator + "test_pictures")
         if (!directory.exists()) {
             directory.mkdirs()
         }

@@ -17,7 +17,7 @@ import com.friendly.framework.feature.product.viewModel.ProductViewModalFactory
 import com.friendly.framework.feature.product.viewModel.ProductViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
 
 
@@ -29,7 +29,6 @@ import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
 class BusinessProductFragment : Fragment() {
 
     var recyclerView: RecyclerView? = null
-    private lateinit var productViewModel: ProductViewModel
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
     var cartButton : FloatingActionButton? = null
@@ -38,17 +37,10 @@ class BusinessProductFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
-        productViewModel = ViewModelProvider(
-            this,
-            ProductViewModalFactory(ProductHandler.shared().repository)
-        ).get(
-            ProductViewModel::class.java
-        )
-        productViewModel.allProduct.observe(this) {
+        ProductHandler.shared().viewModel?.allProduct?.observe(this) {
             allProduct = it as ArrayList<Product>
             this.reload()
         }
-        ProductHandler.shared().setup(productViewModel)
         ProductHandler.shared().viewModel?.fetchAllProduct()
     }
 
@@ -104,14 +96,13 @@ class BusinessProductFragment : Fragment() {
                 return false
             }
         })
-        productViewModel.loadProduct()
+        ProductHandler.shared().viewModel?.loadProduct()
         reload()
         return view
     }
 
     fun onClickCart(){
-        val activity = BusinessHandler.shared().activity as? BusinessActivity
-        activity?.goToCart()
+        App.shared().mainActivity?.gotToCart()
     }
     fun onClickScan(){
         val intent = Intent(requireContext(), BarCodeScannerActivity::class.java)

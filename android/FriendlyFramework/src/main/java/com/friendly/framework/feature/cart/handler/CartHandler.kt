@@ -35,52 +35,6 @@ class CartHandler {
         }
     }
 
-    val createSale = Emitter.Listener {
-        if (it.isNotEmpty())
-        {
-            val anyData = it.first() as JSONObject
-            if (anyData.has(KeyConstant.payload)){
-                val payload = anyData.getJSONArray(KeyConstant.payload)
-
-                var allSale : ArrayList<JSONObject> = arrayListOf()
-                var salesIds : ArrayList<String> = arrayListOf()
-                for (i in 0 until payload.length())
-                {
-                    val newSale = payload.getJSONObject(i)
-                    if(newSale.has(KeyConstant._id)){
-                        salesIds.add(newSale.getString(KeyConstant._id))
-                        val saleObj = gson.fromJson(newSale.toString(), Sale::class.java)
-                        InvoiceHandler.shared().viewModel?.insertSale(saleObj)
-                    }
-                    allSale.add(newSale)
-                }
-                if(allSale.count() > 0){
-                    viewModel?.createInvoice(allSale,salesIds, CustomerHandler.shared().repository.customer.value)
-                }
-            }
-        }
-    }
-
-    val onCreateCustomerInvoice = Emitter.Listener {
-        if (it.isNotEmpty())
-        {
-            val anyData = it.first() as JSONObject
-            if (anyData.has(KeyConstant.payload)){
-                val payload = anyData.getJSONObject(KeyConstant.payload)
-                val allSalesData = anyData.getJSONArray(KeyConstant.sales)
-                val customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
-                InvoiceHandler.shared().viewModel?.insert(customerInvoice)
-                CustomerHandler.shared().repository.customerLiveData.postValue(null)
-                CustomerHandler.shared().onCreateNewCustomer = null
-                BusinessHandler.shared().activity.runOnUiThread {
-                    if(payload.has(KeyConstant._id) && allSalesData.length() > 0){
-                        InvoiceHandler.shared().onCreateNewCustomerInvoiceResponse?.let { it1 -> it1(anyData) }
-                    }
-                }
-            }
-        }
-    }
-
     fun setup(model:CartViewModel){
         viewModel = model
     }
@@ -88,7 +42,7 @@ class CartHandler {
     fun addToCart(product: Product){
         var allCartItem = repository.cartLiveData.value
         if (allCartItem != null){
-            if(allCartItem!!.has(product.Id)){
+            if(allCartItem.has(product.Id)){
                 var quantity = allCartItem.getInt(product.Id)
                 quantity+=1
                 allCartItem.put(product.Id,quantity)
@@ -117,7 +71,7 @@ class CartHandler {
     fun removeFromCart(product: Product){
         var allCartItem = repository.cartLiveData.value
         if (allCartItem != null){
-            if(allCartItem!!.has(product.Id)){
+            if(allCartItem.has(product.Id)){
                 var quantity = allCartItem.getInt(product.Id)
                 quantity-=1
                 if(quantity<1){

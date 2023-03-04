@@ -56,8 +56,7 @@ class LaunchActivity : UtilityActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        SocketService.shared().currentActivity = this
-        SocketService.shared().connect()
+
         setContentView(R.layout.activity_launch)
         mDelayHandler = Handler()
         //Navigate with delay

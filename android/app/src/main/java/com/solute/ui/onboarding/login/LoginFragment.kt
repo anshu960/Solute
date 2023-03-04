@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.friendly.framework.Defaults
+import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.hbb20.CountryCodePicker
 import com.solute.R
+import com.solute.app.App
 
 
 class LoginFragment : Fragment() {
@@ -34,29 +37,39 @@ class LoginFragment : Fragment() {
             print(countryCodePicker.selectedCountryCode)
             this.selectedCountryCode = countryCodePicker.selectedCountryCode
         }
-        BusinessHandler.shared().businessViewModel?.clearAll()
+        BusinessHandler.shared().viewModal?.clearAll()
         FirebaseAuthHelper.shared().onAuthStateChange={ state, message->
             if(state == AUTH_STATE.ERROR){
-                FirebaseAuthHelper.shared().activity?.stopActivityIndicator()
-                FirebaseAuthHelper.shared().activity?.toast(message)
+                App.shared().mainActivity?.stopActivityIndicator()
+                App.shared().mainActivity?.toast(message)
             } else if(state == AUTH_STATE.SENDING_OTP){
-                FirebaseAuthHelper.shared().activity?.startActivityIndicator("Sending OTP")
+                App.shared().mainActivity?.startActivityIndicator("Sending OTP")
             }else if(state == AUTH_STATE.OTP_SENT){
-                FirebaseAuthHelper.shared().activity?.runOnUiThread {
-                    FirebaseAuthHelper.shared().activity?.stopActivityIndicator()
-                    FirebaseAuthHelper.shared().activity?.toast("OTP Sent")
-                    FirebaseAuthHelper.shared().activity?.gotToOtp()
+                App.shared().mainActivity?.runOnUiThread {
+                    App.shared().mainActivity?.stopActivityIndicator()
+                    App.shared().mainActivity?.toast("OTP Sent")
+                    App.shared().mainActivity?.gotToOtp()
                 }
             }
         }
+        App.shared().mainActivity?.hideSideMenu()
+        checkAndClearData()
         return view
+    }
+
+    fun checkAndClearData(){
+        val userCred = Defaults.shared().string(KeyConstant.loginDetails)
+        if(!userCred.isNullOrEmpty()){
+            Defaults.shared().remove(KeyConstant.loginDetails)
+            BusinessHandler.shared().viewModal?.clearAll()
+        }
     }
 
 
     fun onClickLogin(){
         val phoneNumber = phoneField?.text.toString()
         if(phoneNumber.length < 10){
-            FirebaseAuthHelper.shared().activity?.alert("Oops!","Please enter your mobile number")
+            App.shared().mainActivity?.alert("Oops!","Please enter your mobile number")
         }else{
             FirebaseAuthHelper.shared().phoneNumber = phoneNumber
             FirebaseAuthHelper.shared().dialCode = getDialCode()

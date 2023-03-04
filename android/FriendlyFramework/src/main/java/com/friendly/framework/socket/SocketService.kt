@@ -16,7 +16,6 @@ import com.friendly.framework.dataclass.Message
 import com.friendly.framework.feature.address.network.AddressNetwork
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.businessType.handler.BusinessTypeHandler
-import com.friendly.framework.feature.cart.handler.CartHandler
 import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.employee.handler.EmployeeHandler
 import com.friendly.framework.feature.invoice.handler.InvoiceHandler
@@ -25,6 +24,7 @@ import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.friendly.framework.feature.sync.SyncHandler
+import com.friendly.framework.socket.repository.CONNECTION_STATUS
 import com.friendly.framework.socket.repository.SocketRepository
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import io.socket.client.IO
@@ -165,11 +165,10 @@ class SocketService : Service() {
         )
         mSocket?.on(SocketEvent.UPDATE_PRODUCT.value, ProductHandler.shared().onUpdateProduct)
         mSocket?.on(SocketEvent.DELETE_PRODUCT.value, ProductHandler.shared().onDeleteProduct)
-        mSocket?.on(SocketEvent.CREATE_SALE.value, CartHandler.shared().createSale)
         mSocket?.on(SocketEvent.RETRIVE_SINGLE_INVOICE.value, InvoiceHandler.shared().onRetrieveSingleInvoice)
         mSocket?.on(
             SocketEvent.GENERATE_CUSTOMER_INVOICE.value,
-            CartHandler.shared().onCreateCustomerInvoice
+            InvoiceHandler.shared().onCreateCustomerInvoice
         )
         mSocket?.on(SocketEvent.RETRIVE_INVOICE.value, InvoiceHandler.shared().retriveInvoice)
         mSocket?.on(SocketEvent.RETRIVE_SALE.value, SyncHandler.shared().onRetriveSale)
@@ -254,7 +253,7 @@ class SocketService : Service() {
 
 
     val onConnect = Emitter.Listener {
-        repository.socketConnectionStatus.postValue(1)
+        repository.socketConnectionStatus.postValue(CONNECTION_STATUS.CONNECTED)
         isSocketConnected = true
         if (mSocket?.connected() == true) {
             joinRoom(AuthHandler.shared().deviceId)
@@ -268,7 +267,7 @@ class SocketService : Service() {
     }
 
     private val onConnectError = Emitter.Listener {
-        repository.socketConnectionStatus.postValue(0)
+        repository.socketConnectionStatus.postValue(CONNECTION_STATUS.FAILED)
         Log.d(TAG, "Error connecting \n \n")
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
@@ -277,14 +276,11 @@ class SocketService : Service() {
     }
 
     private val onDisconnect = Emitter.Listener {
-        repository.socketConnectionStatus.postValue(0)
+        repository.socketConnectionStatus.postValue(CONNECTION_STATUS.DISCONNECTED)
         Log.d(TAG, "Error connecting \n \n")
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
         isSocketConnected = false
-
-
-
         connect()
     }
 

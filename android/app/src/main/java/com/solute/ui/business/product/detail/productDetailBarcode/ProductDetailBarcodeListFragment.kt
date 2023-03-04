@@ -18,7 +18,6 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
 import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
 import com.solute.ui.business.product.detail.productDetailBarcode.adapter.ProductBarCodeAdapter
 
@@ -30,7 +29,6 @@ import com.solute.ui.business.product.detail.productDetailBarcode.adapter.Produc
  */
 class ProductDetailBarcodeListFragment : Fragment() {
 
-    val activity = BusinessHandler.shared().activity as? BusinessActivity
     private val CAMERA = 2
 
     var recycler: RecyclerView? = null

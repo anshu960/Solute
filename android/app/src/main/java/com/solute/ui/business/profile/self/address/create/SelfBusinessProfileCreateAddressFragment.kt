@@ -29,6 +29,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.hbb20.CountryCodePicker
 import com.solute.R
+import com.solute.app.App
 import com.solute.utility.location.Location
 import com.solute.utility.location.locationListener
 import kotlinx.coroutines.CoroutineScope
@@ -46,7 +47,6 @@ class SelfBusinessProfileCreateAddressFragment : Fragment(), OnMapReadyCallback 
     private var mMap: GoogleMap? = null
     private  var mapView : MapView? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var viewModal: AddressViewModel? = null
 
     var latitudeField : TextInputEditText? = null
     var longitudeField : TextInputEditText? = null
@@ -65,25 +65,21 @@ class SelfBusinessProfileCreateAddressFragment : Fragment(), OnMapReadyCallback 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        viewModal = ViewModelProvider(
-            this,
-            AddressViewModalFactory(AddressHandler.shared().repository)
-        )[AddressViewModel::class.java]
         AddressHandler.shared().onCreateResponse={
             CoroutineScope(Job() + Dispatchers.Main).launch {
-                BusinessHandler.shared().activity.toast("Address Created Successfully")
+                App.shared().mainActivity?.toast("Address Created Successfully")
                 findNavController().popBackStack()
             }
         }
         AddressHandler.shared().onUpdateResponse={
             CoroutineScope(Job() + Dispatchers.Main).launch {
-                BusinessHandler.shared().activity.toast("Address Updated Successfully")
+                App.shared().mainActivity?.toast("Address Updated Successfully")
                 findNavController().popBackStack()
             }
         }
         AddressHandler.shared().onDeleteResponse={
             CoroutineScope(Job() + Dispatchers.Main).launch {
-                BusinessHandler.shared().activity.toast("Address Deleted Successfully")
+                App.shared().mainActivity?.toast("Address Deleted Successfully")
                 findNavController().popBackStack()
             }
         }
@@ -191,8 +187,7 @@ class SelfBusinessProfileCreateAddressFragment : Fragment(), OnMapReadyCallback 
         location.put(latitude)
         location.put(longitude)
         addressObject.put(KeyConstant.location, location)
-//        addressObject.put(KeyConstant.longitude,longitude)
-        viewModal?.createNew(addressObject)
+        AddressHandler.shared().viewModel?.createNew(addressObject)
     }
 
     fun onClickUpdate(){
@@ -212,11 +207,11 @@ class SelfBusinessProfileCreateAddressFragment : Fragment(), OnMapReadyCallback 
         location.put(longitude)
         addressObject.put(KeyConstant.location, location)
 //        addressObject.put(KeyConstant.longitude,longitude)
-        viewModal?.updateExistingAddress(addressObject)
+        AddressHandler.shared().viewModel?.updateExistingAddress(addressObject)
     }
     fun onClickDelete(){
         val request = JSONObject(Gson().toJson(existingAddress,Address::class.java))
-        viewModal?.deleteExistingAddress(request)
+        AddressHandler.shared().viewModel?.deleteExistingAddress(request)
     }
 
 }

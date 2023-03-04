@@ -23,9 +23,11 @@ import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.friendly.framework.feature.productCategory.model.ProductCategoryDao
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategoryDao
+import com.google.gson.Gson
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.json.JSONArray
 import org.json.JSONObject
 
 
@@ -37,7 +39,7 @@ class Converters {
     fun toArrayList(value: String) = Json.decodeFromString<ArrayList<String>>(value)
 
     @TypeConverter
-    fun toJson(value: String?): JSONObject?{
+    fun toJson(value: String?): JSONObject {
         if(value.isNullOrEmpty() || value == "null"){
             return JSONObject()
         }else{
@@ -46,13 +48,79 @@ class Converters {
     }
 
     @TypeConverter
-    fun toJsonString(value: JSONObject?):String?{
+    fun toJsonString(value: JSONObject?): String {
         try {
             return value.toString()
         }
         catch (error:java.lang.Error){
             return ""
         }
+    }
+
+    @TypeConverter
+    fun toJsonArray(value: String?): JSONArray {
+        if(value.isNullOrEmpty() || value == "null"){
+            return JSONArray()
+        }else{
+            return JSONArray(value)
+        }
+    }
+
+    @TypeConverter
+    fun toJsonArrayString(value: JSONArray?): String {
+        try {
+            return value.toString()
+        }
+        catch (error:java.lang.Error){
+            return ""
+        }
+    }
+
+    @TypeConverter
+    fun toJsonArrayList(value: String?): ArrayList<JSONObject> {
+        val output = ArrayList<JSONObject>()
+        if(value.isNullOrEmpty() || value == "null"){
+            val jsonArray = JSONArray(value)
+            for (i in 0 until jsonArray.length()) {
+                val singleObj = jsonArray.get(i)
+                output.add(singleObj as JSONObject)
+            }
+        }
+        return output
+    }
+
+    @TypeConverter
+    fun saleArrayListToString(value: ArrayList<Sale>): String {
+        val jsonArray = JSONArray()
+        value.forEach {
+            jsonArray.put(JSONObject(Gson().toJson(it)))
+        }
+        return try {
+            jsonArray.toString()
+        } catch (error:java.lang.Error){
+            ""
+        }
+    }
+    @TypeConverter
+    fun jsonArrayListToSaleArray(value: ArrayList<JSONObject>): ArrayList<Sale> {
+        val salesArray : ArrayList<Sale> = arrayListOf()
+        value.forEach {
+            val sale = Gson().fromJson(it.toString(),Sale::class.java)
+            salesArray.add(sale)
+        }
+        return  salesArray
+    }
+
+    @TypeConverter
+    fun stringToSalesArray(value:String): ArrayList<Sale> {
+        val jsonArray = JSONArray(value)
+        val salesArray : ArrayList<Sale> = arrayListOf()
+        for (i in 0 until jsonArray.length()) {
+            val singleObj = jsonArray.get(i)
+            val sale = Gson().fromJson(singleObj.toString(),Sale::class.java)
+            salesArray.add(sale)
+        }
+       return  salesArray
     }
 }
 
@@ -75,7 +143,7 @@ class Converters {
         ProductBarCode::class,
         Address::class,
     ],
-    version = 33,
+    version = 3,
     exportSchema = false
 )
 abstract class FriendlyDatabase : RoomDatabase() {

@@ -23,12 +23,6 @@ class CustomerViewModel(private val customerRepository: CustomerRepository) : Vi
     val gson = Gson()
     private val scope = CoroutineScope(Job() + Dispatchers.IO)
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
-
     val allCustomer: LiveData<ArrayList<Customer>>
         get() = customerRepository.allCustomer
 
@@ -38,19 +32,25 @@ class CustomerViewModel(private val customerRepository: CustomerRepository) : Vi
     fun loadCustomer() {
         if (!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()) {
             val businessId = BusinessHandler.shared().repository.business.value!!.Id
-            DatabaseHandler.shared().database.customerDao().getAllItemsForBusiness(businessId)
-                .observe(BusinessHandler.shared().activity) {
-                    customerRepository.allCustomerLiveData.postValue(it as ArrayList<Customer>?)
+            if (!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()) {
+                CoroutineScope(Job() + Dispatchers.IO).launch {
+                    val theCustomer = DatabaseHandler.shared().database.customerDao().getAllItemsForBusiness(businessId)
+                    CoroutineScope(Job() + Dispatchers.Main).launch {
+                        customerRepository.allCustomerLiveData.postValue(theCustomer as ArrayList<Customer>?)
+                    }
                 }
+            }
         }
     }
 
-    fun getCustomerById(id: String, completion: (customer: Customer) -> Unit) {
+    fun getCustomerById(id: String, completion: (customer: Customer?) -> Unit) {
         if (!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()) {
-            DatabaseHandler.shared().database.customerDao().findCustomerById(id)
-                .observe(BusinessHandler.shared().activity) {
-                    completion(it)
+            CoroutineScope(Job() + Dispatchers.IO).launch {
+                val theCustomer = DatabaseHandler.shared().database.customerDao().findCustomerById(id)
+                CoroutineScope(Job() + Dispatchers.Main).launch {
+                    completion(theCustomer)
                 }
+            }
         }
     }
 
@@ -90,7 +90,7 @@ class CustomerViewModel(private val customerRepository: CustomerRepository) : Vi
     }
 
     fun insert(customer: Customer) {
-        viewModelScope.launch {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.customerDao()
                 .insert(customer)
         }

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.product.model.Product
 import com.solute.MainActivity
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 
 class ProductStockAdapter(val context: Context, val fragment: Fragment?, val allProduct: ArrayList<Product>) :
     RecyclerView.Adapter<ProductStockViewHolder>() {
@@ -25,11 +25,8 @@ class ProductStockAdapter(val context: Context, val fragment: Fragment?, val all
     override fun onBindViewHolder(holder: ProductStockViewHolder, position: Int) {
         val item = allProduct[position]
         holder.itemView.setOnClickListener {
-            if(context is MainActivity){
-                val mainActivty = context as MainActivity
-                val intent = Intent(mainActivty, BusinessActivity::class.java)
-                mainActivty.startActivity(intent)
-            }
+
+
         }
         holder.bind(fragment,item)
     }

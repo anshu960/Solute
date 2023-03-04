@@ -17,6 +17,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.solute.R
+import com.solute.app.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -70,7 +71,7 @@ class CustomerViewHolder (inflater: LayoutInflater, parent: ViewGroup) : Recycle
         if(onSelect != null){
             selectionImg?.visibility = View.VISIBLE
             validateSelection(customer)
-            CustomerHandler.shared().repository.customer.observe(BusinessHandler.shared().activity){
+            CustomerHandler.shared().repository.customer.observe(App.shared().mainActivity!!){
                 validateSelection(customer)
             }
         }else{

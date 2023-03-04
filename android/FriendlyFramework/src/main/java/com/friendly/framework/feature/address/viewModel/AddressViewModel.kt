@@ -23,11 +23,6 @@ class  AddressViewModel(private val repository: AddressRepository) :
 
     private var job: Job = Job()
     private val scope = CoroutineScope(job + Dispatchers.IO)
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
 
     val allData: LiveData<List<Address>>
         get() = repository.allLiveData
@@ -83,12 +78,12 @@ class  AddressViewModel(private val repository: AddressRepository) :
     }
 
     fun insert(newData : Address){
-        viewModelScope.launch{
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.addressDao().insert(newData)
         }
     }
     fun delete(data : Address){
-        viewModelScope.launch{
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.addressDao().delete(data)
         }
     }

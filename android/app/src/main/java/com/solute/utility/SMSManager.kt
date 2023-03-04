@@ -7,7 +7,7 @@ import com.friendly.framework.UtilityActivity
 import com.friendly.framework.dataclass.ContactData
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
-import com.solute.App
+import com.solute.app.App
 
 
 
@@ -96,7 +96,7 @@ class SMSManager {
         val uri: Uri = Uri.parse("smsto:${contact.mobileNumber}")
         val intent = Intent(Intent.ACTION_SENDTO, uri)
         intent.putExtra("sms_body", componsedMessage)
-        val activity = App.applicationContext().activity
+        val activity = App.shared().activity
         if(activity != null){
             activity!!.startActivity(intent)
         }else{

@@ -9,7 +9,7 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.employee.handler.EmployeeHandler
 import com.friendly.framework.feature.employee.model.Employee
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 import com.solute.ui.business.employee.viewHolder.EmployeeViewHolder
 
 
@@ -30,8 +30,7 @@ class EmployeeAdapter(val context: Context, val allEmployee: ArrayList<Employee>
         holder.itemView.setOnClickListener {
             if(context is UtilityActivity){
                 EmployeeHandler.shared().repository.employeeLiveData.postValue(item)
-                val activity = BusinessHandler.shared().activity as? BusinessActivity
-                activity?.navController?.navigate(R.id.business_details_details_container)
+                App.shared().mainActivity?.navController?.navigate(R.id.business_details_details_container)
             }
         }
         holder.bind(item,onSelect)

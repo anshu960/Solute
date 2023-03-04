@@ -7,23 +7,23 @@ import com.friendly.framework.feature.invoice.model.CustomerInvoice
 @Dao
 interface CustomerInvoiceDao {
     @Insert( onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item: CustomerInvoice)
+    fun insert(item: CustomerInvoice)
 
     @Update
-    suspend fun update(item: CustomerInvoice)
+    fun update(item: CustomerInvoice)
 
     @Delete
-    suspend fun delete(item: CustomerInvoice)
+    fun delete(item: CustomerInvoice)
 
     @Query("select * from CustomerInvoice order by UpdatedAt DESC LIMIT 1")
     fun getRecentItem(): LiveData<CustomerInvoice>
 
     @Query("select * from CustomerInvoice where BusinessID = :businessId order by UpdatedAt DESC LIMIT 1")
-    suspend fun getRecentItemForBusiness(businessId:String): CustomerInvoice?
+    fun getRecentItemForBusiness(businessId:String): CustomerInvoice?
 
     @Query("SELECT * FROM CustomerInvoice ORDER by UpdatedAt DESC")
-    fun getAllItems(): LiveData<List<CustomerInvoice>>
+    fun getAllItems(): List<CustomerInvoice>
 
     @Query("select * from CustomerInvoice where BusinessID = :BusinessID order by UpdatedAt DESC")
-    fun getAllItemsForBusiness(BusinessID: String): LiveData<List<CustomerInvoice>>
+    fun getAllItemsForBusiness(BusinessID: String): List<CustomerInvoice>
 }

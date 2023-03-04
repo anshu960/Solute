@@ -22,9 +22,7 @@ import org.json.JSONObject
 
 class BusinessViewModel(private val bussinessRepository: BusinessRepository) : ViewModel() {
     init {
-        viewModelScope.launch {
 
-        }
     }
 
     val analytics: LiveData<ArrayList<BusinessAnalytics>>
@@ -37,12 +35,8 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
         get() = bussinessRepository.allBusiness
 
     fun loadBusiness() {
-        DatabaseHandler.shared().database.businessDao().getAllItems().observe(
-            BusinessHandler.shared().mainActivity
-        ) {it->
-            if (!it.isNullOrEmpty()) {
-                bussinessRepository.allBusiness.postValue(it as ArrayList<Business>)
-            }
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            bussinessRepository.allBusiness.postValue(DatabaseHandler.shared().database.businessDao().getAllItemsForUser() as ArrayList<Business>)
         }
     }
 
@@ -74,7 +68,7 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
     }
 
     fun insertDatabase(business: Business) {
-        viewModelScope.launch {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.businessDao().insert(business)
         }
     }
@@ -86,7 +80,7 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
     }
 
     fun clearAll() {
-        viewModelScope.launch {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.businessDao().clearAll()
         }
     }

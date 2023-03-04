@@ -7,13 +7,13 @@ import com.friendly.framework.feature.employee.model.EmployeeAttendance
 @Dao
 interface EmployeeAttendanceDao {
     @Insert( onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item: EmployeeAttendance)
+    fun insert(item: EmployeeAttendance)
 
     @Update
-    suspend fun update(item: EmployeeAttendance)
+    fun update(item: EmployeeAttendance)
 
     @Delete
-    suspend fun delete(item: EmployeeAttendance)
+    fun delete(item: EmployeeAttendance)
 
     @Query("delete from EmployeeAttendance")
     fun clearAll()
@@ -22,8 +22,8 @@ interface EmployeeAttendanceDao {
     fun findAttendance(id: String,date:String): EmployeeAttendance
 
     @Query("select * from EmployeeAttendance where EmployeeID = :id order by UpdatedAt DESC")
-    fun getAllItemsFor(id: String): LiveData<List<EmployeeAttendance>>
+    fun getAllItemsFor(id: String): List<EmployeeAttendance>
 
     @Query("select * from EmployeeAttendance order by UpdatedAt DESC")
-    fun getAllItems(): LiveData<List<EmployeeAttendance>>
+    fun getAllItems(): List<EmployeeAttendance>
 }

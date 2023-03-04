@@ -24,37 +24,21 @@ import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 class FragmentProductSubCategory : Fragment() {
 
     var recycler: RecyclerView? = null
-    private lateinit var productCategoryViewModel: ProductCategoryViewModel
-    private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
+
     var allSubCategoory: ArrayList<ProductSubCategory> = ArrayList()
     var productSubCategoryAdapter: ProductSubCategoryAdapter? = null
     var createNewSubCategoryBtn: FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Sub Category
-        productCategoryViewModel = ViewModelProvider(
-            this,
-            ProductCategoryViewModalFactory(ProductCategoryHandler.shared().repository)
-        ).get(
-            ProductCategoryViewModel::class.java
-        )
-        ProductCategoryHandler.shared().setup(productCategoryViewModel!!)
-        productSubCategoryViewModel = ViewModelProvider(
-            this,
-            ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
-        ).get(
-            ProductSubCategoryViewModel::class.java
-        )
-        ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel!!)
-        productSubCategoryViewModel.allSubCategory.observe(this) {
+        ProductSubCategoryHandler.shared().viewModel?.allSubCategory?.observe(this) {
             if (!it.isNullOrEmpty()) {
                 allSubCategoory = it as ArrayList<ProductSubCategory>
             }
             loadSubCategory()
         }
-        ProductCategoryHandler.shared().productCategoryViewModel?.loadCategory()
-        productSubCategoryViewModel.loadSubCategory()
+        ProductCategoryHandler.shared().viewModel?.loadCategory()
+        ProductSubCategoryHandler.shared().viewModel?.loadSubCategory()
         ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
     }
 

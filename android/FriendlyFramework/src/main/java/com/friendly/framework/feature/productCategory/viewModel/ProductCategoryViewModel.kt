@@ -11,17 +11,14 @@ import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.friendly.framework.feature.productCategory.repository.ProductCategoryRepository
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class ProductCategoryViewModel(private val productCategoryRepository: ProductCategoryRepository) :
     ViewModel() {
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
 
     val allCategory: LiveData<List<ProductCategory>>
         get() = productCategoryRepository.allCategory
@@ -31,9 +28,9 @@ class ProductCategoryViewModel(private val productCategoryRepository: ProductCat
 
     fun loadCategory(){
         if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business.value!!.Id
-            DatabaseHandler.shared().database.productCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
-                productCategoryRepository.categoryLiveData.postValue(it as ArrayList<ProductCategory>?)
+            CoroutineScope(Job() + Dispatchers.IO).launch {
+                val businessId = BusinessHandler.shared().repository.business.value!!.Id
+                productCategoryRepository.categoryLiveData.postValue(DatabaseHandler.shared().database.productCategoryDao().getAllItemsForBusiness(businessId) as ArrayList<ProductCategory>?)
             }
         }
     }
@@ -49,7 +46,7 @@ class ProductCategoryViewModel(private val productCategoryRepository: ProductCat
     }
 
     fun insert(category : ProductCategory){
-        viewModelScope.launch{
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.productCategoryDao()
                 .insert(category)
         }

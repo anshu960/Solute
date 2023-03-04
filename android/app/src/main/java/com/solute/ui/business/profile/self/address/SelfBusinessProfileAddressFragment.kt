@@ -27,18 +27,12 @@ class SelfBusinessProfileAddressFragment : Fragment() {
 
 
     var addBtn : FloatingActionButton? = null
-    private var viewModal: AddressViewModel? = null
     var recycler:RecyclerView? = null
     var allAddress : ArrayList<Address> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModal = ViewModelProvider(
-            this,
-            AddressViewModalFactory(AddressHandler.shared().repository)
-        )[AddressViewModel::class.java]
-        AddressHandler.shared().setup(viewModal!!)
-        viewModal!!.allData.observe(this){ it ->
+        AddressHandler.shared().viewModel?.allData?.observe(this){ it ->
             if(recycler != null && it!= null){
                 allAddress = it as ArrayList<Address>
                 reloadDataInRecycler()
@@ -66,7 +60,7 @@ class SelfBusinessProfileAddressFragment : Fragment() {
         addBtn = view.findViewById(R.id.address_list_create_fab_btn)
         addBtn?.setOnClickListener { onClickAdd() }
         this.recycler = view.findViewById(R.id.self_business_profile_address_recycler)
-        viewModal?.loadFor(BusinessHandler.shared().repository.business.value!!.Id){
+        AddressHandler.shared().viewModel?.loadFor(BusinessHandler.shared().repository.business.value!!.Id){
             allAddress = it
             reloadDataInRecycler()
         }

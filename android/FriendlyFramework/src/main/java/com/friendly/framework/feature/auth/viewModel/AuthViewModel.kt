@@ -9,9 +9,7 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
     init {
-        viewModelScope.launch {
 
-        }
     }
 
     val authUser: LiveData<Auth>

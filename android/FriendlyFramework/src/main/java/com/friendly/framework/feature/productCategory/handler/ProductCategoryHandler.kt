@@ -16,7 +16,7 @@ import org.json.JSONObject
 
 class ProductCategoryHandler{
 
-    var productCategoryViewModel: ProductCategoryViewModel? = null
+    var viewModel: ProductCategoryViewModel? = null
     val repository = ProductCategoryRepository()
     var activity = UtilityActivity()
     var onCreateNewCategory : ((category: ProductCategory)->Unit)? = null
@@ -37,7 +37,7 @@ class ProductCategoryHandler{
     }
 
     fun setup(model: ProductCategoryViewModel){
-        productCategoryViewModel = model
+        viewModel = model
     }
 
 
@@ -61,7 +61,7 @@ class ProductCategoryHandler{
                 {
                     val item = payload.getJSONObject(i)
                     val category = gson.fromJson(item.toString(),ProductCategory::class.java)
-                    productCategoryViewModel?.insert(category)
+                    viewModel?.insert(category)
                 }
             }
         }
@@ -74,7 +74,7 @@ class ProductCategoryHandler{
             if (anyData.has(KeyConstant.payload)){
                 val payload = anyData.getJSONObject(KeyConstant.payload)
                 val category = gson.fromJson(payload.toString(),ProductCategory::class.java)
-                productCategoryViewModel?.insert(category)
+                viewModel?.insert(category)
                 onCreateNewCategory?.let { it1 -> it1(category) }
             }
         }

@@ -1,19 +1,21 @@
-package com.solute.ui.business.receipt
+package com.solute.ui.business.invoice.details
 
 import android.content.Context
+import android.graphics.*
 import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintJob
 import android.print.PrintManager
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import com.friendly.framework.UtilityActivity
-import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.customer.handler.CustomerHandler
@@ -23,14 +25,27 @@ import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.friendly.framework.pdf.PDFService
 import com.friendly.framework.qr.QRCodeUtill
 import com.google.gson.Gson
-import com.solute.App
+import com.solute.app.App
 import com.solute.R
 import com.solute.utility.SMSManager
 import com.solute.utility.WhatsappManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
-class ReceiptDetailsActivity : UtilityActivity() {
+/**
+ * A simple [Fragment] subclass.
+ * Use the [InvoiceDetailsFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class InvoiceDetailsFragment : Fragment() {
     private val PRINT_SERVICE: Int = 0
     var business = BusinessHandler.shared().repository.business.value
     val gson = Gson()
@@ -53,37 +68,42 @@ class ReceiptDetailsActivity : UtilityActivity() {
     var customerDetailsCard: CardView? = null
     var customerDetailsName: TextView? = null
     var customerDetailsMobile: TextView? = null
-    var backButton: ImageButton? = null
     var pdfView : WebView? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_receipt_details)
-        pdfView = findViewById(R.id.receipt_details_pdf_img)
-        messageButton = findViewById(R.id.receipt_details_receipt_message_btn)
-        shareButton = findViewById(R.id.receipt_details_receipt_share_btn)
-        whatsappButton = findViewById(R.id.receipt_details_receipt_whatsapp_btn)
-        messageTitle = findViewById(R.id.receipt_details_receipt_message_title)
-        whatsappTitle = findViewById(R.id.receipt_details_receipt_whatsapp_title)
-        shareTitle = findViewById(R.id.receipt_details_receipt_share_title)
-        printButton = findViewById(R.id.receipt_details_receipt_print_btn)
-        backButton?.setOnClickListener { onBackPressed() }
+    val scope = CoroutineScope(Job() + Dispatchers.Main)
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_invoice_details, container, false)
+        pdfView = view.findViewById(R.id.receipt_details_pdf_img)
+        messageButton = view.findViewById(R.id.receipt_details_receipt_message_btn)
+        shareButton = view.findViewById(R.id.receipt_details_receipt_share_btn)
+        whatsappButton = view.findViewById(R.id.receipt_details_receipt_whatsapp_btn)
+        messageTitle = view.findViewById(R.id.receipt_details_receipt_message_title)
+        whatsappTitle = view.findViewById(R.id.receipt_details_receipt_whatsapp_title)
+        shareTitle = view.findViewById(R.id.receipt_details_receipt_share_title)
+        printButton = view.findViewById(R.id.receipt_details_receipt_print_btn)
+
         messageButton?.setOnClickListener {
             if (customerInvoice != null && customerInvoice!!.invoiceNumber != null) {
                 SMSManager().sendInvoiceReceipt(
-                    this,
+                    App.shared().mainActivity,
                     getCustomerMobileNumber(),
                     customerInvoice!!.invoiceNumber!!,
                     customerInvoice!!.finalPrice!!,
                     customerInvoice!!
                 )
             } else {
-                toast("Invoice Data Not Found")
+                App.shared().mainActivity?.toast("Invoice Data Not Found")
             }
         }
         shareButton?.setOnClickListener {
             if (customer != null && customer!!.MobileNumber != null && customerInvoice != null) {
                 SMSManager().shareInvoice(
-                    this,
+                    App.shared().mainActivity,
                     customerInvoice!!.invoiceNumber!!,
                     customerInvoice!!.finalPrice!!,
                     customerInvoice!!
@@ -98,7 +118,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
         whatsappButton?.setOnClickListener {
             if (customer != null && customer!!.MobileNumber != null && customerInvoice != null) {
                 WhatsappManager().sendInvoice(
-                    this,
+                    App.shared().mainActivity,
                     customer!!.MobileNumber!!,
                     customerInvoice!!.invoiceNumber!!,
                     customerInvoice!!.finalPrice!!,
@@ -106,28 +126,40 @@ class ReceiptDetailsActivity : UtilityActivity() {
                 )
             }
         }
-        InvoiceHandler.shared().repository.allSalesLiveData.observe(this) {
+        InvoiceHandler.shared().repository.allSalesLiveData.observe(App.shared().mainActivity!!) {
             sales = it as ArrayList<Sale>
-            reloadData()
+            scope.launch { reloadData() }
         }
-        CustomerHandler.shared().repository.customerLiveData.observe(this) {
+        InvoiceHandler.shared().repository.customerInvoice.observe(App.shared().mainActivity!!) {
+            this.customerInvoice = it
+
+            scope.launch { reloadData() }
+        }
+        CustomerHandler.shared().repository.customerLiveData.observe(App.shared().mainActivity!!) {
             this.customer = it
-            loadShareDetails()
         }
-        pupulateExistingReceipt()
-        if (intent.hasExtra(KeyConstant.invoiceId)){
-            val invoiceId = intent.getStringExtra(KeyConstant.invoiceId)!!.toLong()
+        if(InvoiceHandler.shared().repository.customerInvoice.value != null){
+            this.customerInvoice = InvoiceHandler.shared().repository.customerInvoice.value
+            scope.launch { reloadData() }
+        } else if (InvoiceHandler.shared().invoiceNumber != 0L){
+            scope.launch { App.shared().mainActivity?.startActivityIndicator() }
+            val invoiceId = InvoiceHandler.shared().invoiceNumber
             InvoiceHandler.shared().onRetriveSingleInvoiceCallBack={invoice,sales,customer,business->
-                this.runOnUiThread {
+                App.shared().mainActivity?.runOnUiThread {
                     this.customerInvoice = invoice
                     this.sales = sales
                     this.customer = customer
                     this.business = business
-                    reloadData()
+                    scope.launch {
+                        App.shared().mainActivity?.stopActivityIndicator()
+                        reloadData()
+                    }
                 }
             }
             InvoiceHandler.shared().retrieveSingleInvoice(invoiceId)
         }
+
+        return view
     }
 
     fun getCustomerMobileNumber(): String {
@@ -162,55 +194,27 @@ class ReceiptDetailsActivity : UtilityActivity() {
         CustomerHandler.shared().repository.customerLiveData.postValue(null)
     }
 
-    fun pupulateExistingReceipt() {
-         if (intent.hasExtra(KeyConstant.invoice)) {
-            receiptData = JSONObject(intent.getStringExtra(KeyConstant.invoice))
-            val payload = receiptData.getJSONObject(KeyConstant.payload)
-            customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
-            var salesData = receiptData.getJSONArray(KeyConstant.sales)
-            for (i in 0 until salesData.length()) {
-                val newSale = salesData.getJSONObject(i)
-                val sale = gson.fromJson(newSale.toString(), Sale::class.java)
-                sales.add(sale)
-            }
-            if(!customerInvoice?.customerID.isNullOrEmpty()){
-                CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){
-                    this.customer = it
-                    reloadData()
-                }
-            }else{
-                reloadData()
-            }
-        } else if(InvoiceHandler.shared().repository.customerInvoice.value !=null) {
-            InvoiceHandler.shared().repository.customerInvoice.value
-            customerInvoice = InvoiceHandler.shared().repository.customerInvoice.value
-            InvoiceHandler.shared().viewModel?.fetchAllSales()
-            if(!customerInvoice?.customerID.isNullOrEmpty()){
-                CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){
-                    this.customer = it
-                    reloadData()
-                }
-            }else{
-                reloadData()
-            }
-        }
-    }
-
     fun reloadData() {
         pupulateFooter()
         if (customerInvoice != null) {
             val qrBitmap =
-                QRCodeUtill().getQRImage("https://solute.app/#/receipt?id=${customerInvoice!!.invoiceNumber}")
+                QRCodeUtill().getQRImage("https://solute.app/#/receipt?id=${customerInvoice!!.invoiceID}")
             qrImage?.setImageBitmap(qrBitmap)
         }
         loadShareDetails()
-        if(customerInvoice != null){
-            val pdf = PDFService().createInvoice(this,customer,business,customerInvoice!!,sales)
-            pdfView?.getSettings()?.setUseWideViewPort(true)
-            pdfView?.setInitialScale(1)
-            pdfView?.getSettings()?.setSupportZoom(true);
-            pdfView?.getSettings()?.setBuiltInZoomControls(true);
-            pdfView?.getSettings()?.setDisplayZoomControls(false);
+        if(customerInvoice != null && customerInvoice!!.customerID != null){
+            CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){customer->
+                scope.launch {
+                    val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
+                    pdfView!!.getSettings().setLoadWithOverviewMode(true);
+                    pdfView!!.getSettings().setUseWideViewPort(true);
+                    pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
+                }
+            }
+        }else if(customerInvoice != null){
+            val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
+            pdfView!!.getSettings().setLoadWithOverviewMode(true);
+            pdfView!!.getSettings().setUseWideViewPort(true);
             pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
         }
     }
@@ -231,7 +235,7 @@ class ReceiptDetailsActivity : UtilityActivity() {
     fun createWebPagePrint(webView: WebView) {
         /*if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
             return;*/
-        val printManager = this.getSystemService(Context.PRINT_SERVICE) as PrintManager
+        val printManager = App.shared().mainActivity?.getSystemService(Context.PRINT_SERVICE) as PrintManager
         val printAdapter = webView.createPrintDocumentAdapter()
         val jobName: String = "getString(R.string.webapp_name).toString()" + " Document"
         val builder = PrintAttributes.Builder()
@@ -239,18 +243,17 @@ class ReceiptDetailsActivity : UtilityActivity() {
         val printJob: PrintJob = printManager!!.print(jobName, printAdapter, builder.build())
         if (printJob.isCompleted()) {
             Toast.makeText(
-                App.applicationContext(),
+                App.shared(),
                 "Printed Successfully",
                 Toast.LENGTH_LONG
             ).show()
         } else if (printJob.isFailed()) {
             Toast.makeText(
-                App.applicationContext(),
+                App.shared(),
                 "Couldn't prnit, please try after some time",
                 Toast.LENGTH_LONG
             ).show()
         }
         // Save the job object for later status checking
     }
-
 }

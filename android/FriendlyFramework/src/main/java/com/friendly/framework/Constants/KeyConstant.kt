@@ -2,6 +2,7 @@ package com.friendly.framework.constants
 
 class KeyConstant {
     companion object{
+        val appStorySeen = "AppStorySeen"
         val encryptionIV = "EncryptionIV"
         val encryptionSalt = "EncryptionSalt"
         val isAccepted = "IsAccepted"

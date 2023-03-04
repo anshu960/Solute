@@ -13,7 +13,7 @@ import com.friendly.framework.feature.product.model.Product
 import com.friendly.framework.feature.product.viewModel.ProductViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 import com.solute.ui.business.product.BusinessProductAdapter
 
 
@@ -33,8 +33,6 @@ class BusinessProductsFragment : Fragment() {
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
     var createNewProductBtn : FloatingActionButton? = null
-    val activity = BusinessHandler.shared().activity as? BusinessActivity
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
@@ -43,7 +41,6 @@ class BusinessProductsFragment : Fragment() {
             allProduct = it as ArrayList<Product>
             this.reload()
         }
-        viewModal?.let { ProductHandler.shared().setup(it) }
         viewModal?.loadProduct()
         ProductHandler.shared().viewModel?.fetchAllProduct()
 
@@ -59,8 +56,10 @@ class BusinessProductsFragment : Fragment() {
         createNewProductBtn = view.findViewById(R.id.business_products_fab_button)
         createNewProductBtn?.setOnClickListener {
             ProductHandler.shared().repository.selectedProductLiveData.postValue(null)
-            activity?.navController?.navigate(R.id.business_product_create)
+            App.shared().mainActivity?.navController?.navigate(R.id.business_product_create)
         }
+        viewModal?.loadProduct()
+        ProductHandler.shared().viewModel?.fetchAllProduct()
         reload()
         return view
     }

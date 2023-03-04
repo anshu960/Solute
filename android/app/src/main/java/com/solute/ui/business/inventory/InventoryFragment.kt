@@ -21,6 +21,10 @@ import com.solute.R
 import com.solute.ui.business.inventory.analytics.AnalyticsAdapter
 import com.solute.ui.business.inventory.category.CreateCategoryActivity
 import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,9 +51,10 @@ class InventoryFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
             val businessId = BusinessHandler.shared().repository.business.value!!.Id
-            DatabaseHandler.shared().database.saleDao().getAllItemsForBusiness(businessId).observe(this){
-                if(!it.isNullOrEmpty()){
-                    SyncHandler.shared().updateAnalyticsToShow(it as ArrayList<Sale>)
+            CoroutineScope(Job() + Dispatchers.IO).launch {
+                val allAnalyticsFromDb = DatabaseHandler.shared().database.saleDao().getAllItemsForBusiness(businessId)
+                if(allAnalyticsFromDb.isNotEmpty()){
+                    SyncHandler.shared().updateAnalyticsToShow(allAnalyticsFromDb as ArrayList<Sale>)
                 }
             }
         }

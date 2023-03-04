@@ -22,4 +22,7 @@ interface BusinessDao {
 
     @Query("select * from Business order by UpdatedAt DESC")
     fun getAllItems(): LiveData<List<Business>>
+
+    @Query("select * from Business order by UpdatedAt DESC")
+    fun getAllItemsForUser(): List<Business>
 }

@@ -8,10 +8,13 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.friendly.framework.Defaults
+import com.friendly.framework.constants.KeyConstant
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jaeger.library.StatusBarUtil
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.onboarding.login.FirebaseAuthHelper
 
 class AppStoryFragment : Fragment() {
@@ -64,17 +67,20 @@ class AppStoryFragment : Fragment() {
         StatusBarUtil.setTranslucentForImageViewInFragment(requireActivity(), null)
 
         textSkip.setOnClickListener {
-            FirebaseAuthHelper.shared().activity?.gotToLogin()
+            Defaults.shared().store(KeyConstant.appStorySeen,"true")
+            App.shared().mainActivity?.gotToLogin()
         }
 
         textEnd.setOnClickListener {
-            FirebaseAuthHelper.shared().activity?.gotToLogin()
+            Defaults.shared().store(KeyConstant.appStorySeen,"true")
+            App.shared().mainActivity?.gotToLogin()
         }
 
         val btnNextStep: ImageButton = btnNextStep
         btnNextStep.setOnClickListener {
             if (getItem() > mViewPager.childCount) {
-//                finish()
+                Defaults.shared().store(KeyConstant.appStorySeen,"true")
+                App.shared().mainActivity?.gotToLogin()
             } else {
                 mViewPager.setCurrentItem(getItem() + 1, true)
             }

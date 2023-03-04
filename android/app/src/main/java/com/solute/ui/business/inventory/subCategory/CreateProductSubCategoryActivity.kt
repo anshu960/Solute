@@ -17,7 +17,6 @@ import com.solute.R
 
 class CreateProductSubCategoryActivity : UtilityActivity() {
 
-    var productSubCategoryViewModal : ProductSubCategoryViewModel? = null
     var productCategoryText : TextView? = null
     var productSubCategoryText : TextInputEditText? = null
     var saveBtn : Button? = null
@@ -36,13 +35,7 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
         productSubCategoryText = findViewById(R.id.create_sb_category_name_tiet)
         saveBtn = findViewById(R.id.create_sb_category_save_btn)
         saveBtn?.setOnClickListener { onClickSave() }
-        productSubCategoryViewModal = ViewModelProvider(
-            this,
-            ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
-        ).get(
-            ProductSubCategoryViewModel::class.java
-        )
-        ProductSubCategoryHandler.shared().setup(productSubCategoryViewModal!!)
+
         ProductSubCategoryHandler.shared().activity = this
 
         if(ProductCategoryHandler.shared().repository.allCategory.value != null && ProductCategoryHandler.shared().repository.allCategory.value!!.isNotEmpty()){
@@ -98,7 +91,7 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
     fun onClickSave(){
         val subCategory = productSubCategoryText?.text.toString()
         if(selectedCategory != null && !subCategory.isEmpty()){
-            productSubCategoryViewModal?.createNewSubCategory(subCategory!!,selectedCategory!!)
+            ProductSubCategoryHandler.shared().viewModel?.createNewSubCategory(subCategory!!,selectedCategory!!)
         }
     }
 

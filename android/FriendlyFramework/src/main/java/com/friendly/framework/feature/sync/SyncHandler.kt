@@ -17,9 +17,7 @@ import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.gson.Gson
 import io.socket.emitter.Emitter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -59,17 +57,19 @@ class SyncHandler {
     }
 
     fun syncAllBusinessData() {
-        ProductHandler.shared().repository.productLiveData.postValue(arrayListOf())
-        ProductCategoryHandler.shared().repository.categoryLiveData.postValue(null)
-        ProductSubCategoryHandler.shared().repository.subCategoryLiveData.postValue(null)
-        getAllSaleForBusiness()
-        getAllStockForBusiness()
-        CustomerHandler.shared().fetchAllCustomer()
-        ProductHandler.shared().viewModel?.fetchAllProduct()
-        ProductCategoryHandler.shared().fetchAllProductCategory()
-        ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
-        InvoiceHandler.shared().viewModel?.fetchAllInvoice()
-        MediaFileHandler.shared().viewModel?.retrieve()
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            ProductHandler.shared().repository.productLiveData.postValue(arrayListOf())
+            ProductCategoryHandler.shared().repository.categoryLiveData.postValue(null)
+            ProductSubCategoryHandler.shared().repository.subCategoryLiveData.postValue(null)
+            getAllSaleForBusiness()
+            getAllStockForBusiness()
+            CustomerHandler.shared().fetchAllCustomer()
+            ProductHandler.shared().viewModel?.fetchAllProduct()
+            ProductCategoryHandler.shared().fetchAllProductCategory()
+            ProductSubCategoryHandler.shared().fetchAllProductSubCategory()
+            InvoiceHandler.shared().viewModel?.fetchAllInvoice()
+            MediaFileHandler.shared().viewModel?.retrieve()
+        }
     }
 
     fun updateAnalyticsToShow(allSales : ArrayList<Sale>) {
@@ -208,16 +208,16 @@ class SyncHandler {
 
 
     fun getAllSaleForBusiness() {
-        val lastSale = DatabaseHandler.shared().database.saleDao().getRecentItem()
-        val user = FriendlyUser()
-        var request = JSONObject()
-        request.put(KeyConstant.userId, user._id)
-        request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
-        request.put(KeyConstant.businessID, BusinessHandler.shared().repository.business.value?.Id)
-        if (lastSale.value != null) {
-            request.put(KeyConstant.lastSyncDate, lastSale.value!!.CreatedAt)
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            val lastSale = DatabaseHandler.shared().database.saleDao().getRecentItem()
+            val user = FriendlyUser()
+            var request = JSONObject()
+            request.put(KeyConstant.userId, user._id)
+            request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
+            request.put(KeyConstant.businessID, BusinessHandler.shared().repository.business.value?.Id)
+            request.put(KeyConstant.lastSyncDate, lastSale.CreatedAt)
+            SocketService.shared().send(SocketEvent.RETRIVE_SALE, request)
         }
-        SocketService.shared().send(SocketEvent.RETRIVE_SALE, request)
     }
 
     val onRetriveSale = Emitter.Listener {

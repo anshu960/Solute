@@ -9,12 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class BusinessTypeViewModel (private val bussinessTypeRepository: BusinessTypeRepository):ViewModel(){
-    init {
-        viewModelScope.launch (Dispatchers.IO){
-
-        }
-    }
-
 
     val allBusinessType : LiveData<ArrayList<BusinessType>>
     get() = bussinessTypeRepository.allBusinessType

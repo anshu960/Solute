@@ -11,8 +11,9 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.Product
+import com.solute.MainActivity
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,11 +44,9 @@ class ProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
         productDescription?.text = product.Description
         productPrice?.text = "₹ ${product.MRP}"
         card?.setOnClickListener {
-            if(context is BusinessActivity){
                 ProductHandler.shared().repository.selectedProductLiveData.postValue(product)
-                val activity = BusinessHandler.shared().activity as? BusinessActivity
-                activity?.navController?.navigate(R.id.business_product_details_container)
-            }
+                App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+
         }
         MediaFileHandler.shared().viewModel?.loadFor(product.Id){
             if(it.isNotEmpty()){

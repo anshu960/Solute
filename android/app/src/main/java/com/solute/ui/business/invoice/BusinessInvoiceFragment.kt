@@ -33,24 +33,17 @@ class BusinessInvoiceFragment : Fragment() {
     var adapter : InvoiceHistoryAdapter? = null
     var recycler : RecyclerView? = null
     var searchInput : TextInputEditText? = null
-    private lateinit var invoiceViewModel: InvoiceViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        invoiceViewModel = ViewModelProvider(
-            this,
-            InvoiceViewModalFactory(InvoiceHandler.shared().repository)
-        ).get(
-            InvoiceViewModel::class.java
-        )
-        invoiceViewModel.filteredCustomerInvoice.observe(this) {
+
+        InvoiceHandler.shared().viewModel?.filteredCustomerInvoice?.observe(this) {
             if(it != null){
                 this.invoices = it as ArrayList<CustomerInvoice>
             }
             reloadData()
         }
-        InvoiceHandler.shared().setup(invoiceViewModel)
-        invoiceViewModel.loadInvoice()
-        invoiceViewModel.fetchAllInvoice()
+        InvoiceHandler.shared().viewModel?.loadInvoice()
+        InvoiceHandler.shared().viewModel?.fetchAllInvoice()
     }
 
     override fun onCreateView(
@@ -64,19 +57,19 @@ class BusinessInvoiceFragment : Fragment() {
         searchInput?.doOnTextChanged { text, start, before, count ->
             if(text?.isEmpty() == false){
                 val invoiceNumber = text.toString()!!.toLong()
-                invoiceViewModel?.filter(invoiceNumber)
+                InvoiceHandler.shared().viewModel?.filter(invoiceNumber)
             }else{
-                invoiceViewModel?.clearAllFilters()
+                InvoiceHandler.shared().viewModel?.clearAllFilters()
             }
         }
-        invoiceViewModel.loadInvoice()
+        InvoiceHandler.shared().viewModel?.loadInvoice()
         reloadData()
         return view
     }
 
     fun reloadData(){
         this.recycler!!.layoutManager = LinearLayoutManager(this.context)
-        adapter = this?.let { InvoiceHistoryAdapter(this.requireContext() ,invoices) }
+        adapter = InvoiceHistoryAdapter(this.requireContext() ,invoices)
         this.recycler!!.adapter = this.adapter
     }
 }

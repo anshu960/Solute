@@ -13,13 +13,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.database.DatabaseHandler
-import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.ProductStock
 import com.friendly.framework.feature.sync.SyncHandler
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 import com.solute.ui.business.product.detail.productStockDetails.adapter.ProductDetailStockAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 class ProductStockDetailsFragment : Fragment() {
@@ -45,23 +48,29 @@ class ProductStockDetailsFragment : Fragment() {
         resetQuantityBtn?.setOnClickListener { resetQuantity() }
         loadData()
         ProductHandler.shared().onUpdateProductCallBack={
-            val activity = BusinessHandler.shared().activity as? BusinessActivity
-            activity?.runOnUiThread {
-                activity.toast("Stock Updated Successfully")
-                loadData()
+            App.shared().mainActivity?.runOnUiThread {
+                App.shared().mainActivity?.toast("Stock Updated Successfully")
+                reloadData()
             }
         }
+        reloadData()
+        SyncHandler.shared().getAllStockForBusiness()
+        return  view
+    }
+
+    fun reloadData(){
         if(!ProductHandler.shared().repository.selectedProduct.value?.Id.isNullOrEmpty()){
             val productId = ProductHandler.shared().repository.selectedProduct.value!!.Id
-            DatabaseHandler.shared().database.productStockDao().getForProduct(productId).observe(viewLifecycleOwner){
-                if(!it.isNullOrEmpty()){
-                    this.allStock = it as ArrayList<ProductStock>
-                    loadData()
+            CoroutineScope(Job() + Dispatchers.IO).launch {
+                val allStocksInDb = DatabaseHandler.shared().database.productStockDao().getForProduct(productId)
+                if(!allStocksInDb.isNullOrEmpty()){
+                    CoroutineScope(Job() + Dispatchers.Main).launch{
+                        allStock = allStocksInDb as ArrayList<ProductStock>
+                        loadData()
+                    }
                 }
             }
         }
-        SyncHandler.shared().getAllStockForBusiness()
-        return  view
     }
 
     fun loadData(){

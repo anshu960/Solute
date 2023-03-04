@@ -23,11 +23,6 @@ import org.json.JSONObject
 
 class ProductViewModel(private val productRepository: ProductRepository) : ViewModel() {
     private val scope = CoroutineScope(Job() + Dispatchers.IO)
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
 
     val allProduct: LiveData<ArrayList<Product>>
         get() = productRepository.allProduct
@@ -39,16 +34,15 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
         get() = productRepository.selectedProduct
 
     fun loadProduct() {
-        BusinessHandler.shared().activity?.runOnUiThread {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             productRepository.productLiveData.postValue(arrayListOf())
             if (!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()) {
                 val businessId = BusinessHandler.shared().repository.business.value?.Id
-                DatabaseHandler.shared().database.productDao().getProductsFor(businessId!!)
-                    .observe(BusinessHandler.shared().activity) {
-                        if (!it.isNullOrEmpty()) {
-                            productRepository.productLiveData.postValue(it as ArrayList<Product>)
-                        }
-                    }
+                if (!businessId.isNullOrEmpty()) {
+                    productRepository.productLiveData.postValue(
+                        DatabaseHandler.shared().database.productDao().getProductsFor(businessId) as? ArrayList<Product>
+                    )
+                }
             }
         }
     }
@@ -56,26 +50,29 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
     fun loadProductBarCode(product: Product) {
         productRepository.productBarCodeLiveData.postValue(arrayListOf())
         scope.launch {
-         val fetchedBarCodes = DatabaseHandler.shared().database.productBarCodeDao().getForProduct(product.Id)
-            if(fetchedBarCodes.isNotEmpty()){
+            val fetchedBarCodes =
+                DatabaseHandler.shared().database.productBarCodeDao().getForProduct(product.Id)
+            if (fetchedBarCodes.isNotEmpty()) {
                 productRepository.productBarCodeLiveData.postValue(fetchedBarCodes as ArrayList<ProductBarCode>)
             }
         }
     }
 
-    fun findBarcodeById(barcode:String,callBack :(ProductBarCode?)->Unit){
+    fun findBarcodeById(barcode: String, callBack: (ProductBarCode?) -> Unit) {
         scope.launch {
-            val fetchedBarCode = DatabaseHandler.shared().database.productBarCodeDao().findById(barcode)
+            val fetchedBarCode =
+                DatabaseHandler.shared().database.productBarCodeDao().findById(barcode)
             callBack(fetchedBarCode)
         }
     }
 
-    fun findProductByBarCode(barcode:String,callBack :(Product?)->Unit){
+    fun findProductByBarCode(barcode: String, callBack: (Product?) -> Unit) {
         scope.launch {
-            findBarcodeById(barcode){barcode->
-                if(barcode != null && !barcode!!.ProductID.isNullOrEmpty()){
+            findBarcodeById(barcode) { barcode ->
+                if (barcode != null && !barcode!!.ProductID.isNullOrEmpty()) {
                     scope.launch {
-                        val foundProduct = DatabaseHandler.shared().database.productDao().findById(barcode.ProductID)
+                        val foundProduct = DatabaseHandler.shared().database.productDao()
+                            .findById(barcode.ProductID)
                         callBack(foundProduct)
                     }
                 }
@@ -118,10 +115,8 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
     fun deleteProduct(product: Product) {
         val user = FriendlyUser()
         val request = JSONObject()
-        if (BusinessHandler.shared().repository.business != null) {
-            val business = BusinessHandler.shared().repository.business
-            request.put(KeyConstant.businessID, business.value?.Id)
-        }
+        val business = BusinessHandler.shared().repository.business
+        request.put(KeyConstant.businessID, business.value?.Id)
         request.put(KeyConstant.userId, user._id)
         request.put(KeyConstant._id, product.Id)
         SocketService.shared().send(SocketEvent.DELETE_PRODUCT, request)
@@ -130,10 +125,8 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
     fun removeStockQuantity(product: Product, quantity: Int, message: String) {
         val user = FriendlyUser()
         val request = JSONObject()
-        if (BusinessHandler.shared().repository.business != null) {
-            val business = BusinessHandler.shared().repository.business
-            request.put(KeyConstant.businessID, business.value?.Id)
-        }
+        val business = BusinessHandler.shared().repository.business
+        request.put(KeyConstant.businessID, business.value?.Id)
         request.put(KeyConstant.productID, product.Id)
         request.put(KeyConstant.userId, user._id)
         request.put(KeyConstant.quantity, quantity)
@@ -167,14 +160,14 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
     }
 
     fun insertStock(stockEntry: ProductStock) {
-        viewModelScope.launch {
+        scope.launch {
             DatabaseHandler.shared().database.productStockDao()
                 .insert(stockEntry)
         }
     }
 
     fun insertProduct(product: Product) {
-        viewModelScope.launch {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.productDao()
                 .insert(product)
         }
@@ -194,7 +187,7 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
     }
 
     fun insertProductBarCode(barCode: ProductBarCode) {
-        viewModelScope.launch {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.productBarCodeDao()
                 .insert(barCode)
         }

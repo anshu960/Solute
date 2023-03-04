@@ -8,6 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.database.DatabaseHandler
 import com.friendly.framework.feature.product.model.Product
 import com.solute.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class ProductStockViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(
     inflater.inflate(
@@ -25,9 +29,10 @@ class ProductStockViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recy
         productName?.text = product.Name
         productStock?.text = "  "
         val stockDao = DatabaseHandler.shared().database.productStockDao()
-        stockDao.getRecentForProduct(product.Id).observe(fragment!!.viewLifecycleOwner){
-            if(it != null){
-                productStock?.text = it.TotalQuantity.toString()
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            val recentProdFromDb = stockDao.getRecentForProduct(product.Id)
+            if(recentProdFromDb != null){
+                productStock?.text = recentProdFromDb.TotalQuantity.toString()
             }
         }
     }

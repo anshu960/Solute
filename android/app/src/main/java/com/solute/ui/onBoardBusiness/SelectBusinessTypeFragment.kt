@@ -18,7 +18,6 @@ import com.solute.ui.business.create.adapter.BusinessTypeAdapter
 
 class SelectBusinessTypeFragment : Fragment() {
     var recycler : RecyclerView? = null
-    var viewModal : BusinessTypeViewModel? = null
     var allBusinessType : ArrayList<BusinessType> = arrayListOf()
     var adapter : BusinessTypeAdapter? = null
 
@@ -30,11 +29,7 @@ class SelectBusinessTypeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_select_business_type, container, false)
         this.recycler = view.findViewById(R.id.select_business_type_recycler)
-        viewModal  = ViewModelProvider(
-            this,
-            BusinessTypeViewModalFactory(BusinessTypeHandler.shared().repository)
-        )[BusinessTypeViewModel::class.java]
-        BusinessTypeHandler.shared().setup(this.viewModal!!)
+
         BusinessTypeHandler.shared().repository.businessTypeLiveData.observe(this.context as MainActivity){
             if(it != null){
                 allBusinessType = it

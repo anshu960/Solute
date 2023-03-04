@@ -18,5 +18,5 @@ interface AuthDao {
     fun clearAll()
 
     @Query("select * from Business order by UpdatedAt DESC")
-    fun getAllItems(): LiveData<List<Business>>
+    fun getAllItems(): List<Business>
 }

@@ -28,12 +28,6 @@ class  MediaFileViewModel(private val repository: MediaFileRepository) :
     private val scope = CoroutineScope(job + Dispatchers.IO)
     var activity : UtilityActivity? = null
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
-
     val allData: LiveData<List<MediaFile>>
         get() = repository.allLiveData
 
@@ -120,7 +114,7 @@ class  MediaFileViewModel(private val repository: MediaFileRepository) :
     }
 
     fun insert(newData :  MediaFile){
-        viewModelScope.launch{
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.mediaFileDao().insert(newData)
         }
     }

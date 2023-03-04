@@ -31,14 +31,12 @@ import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.shuhart.stepview.StepView
-import com.solute.App
+import com.solute.app.App
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
 class CreateProductFragment : Fragment() {
-    val activity = BusinessHandler.shared().activity as? BusinessActivity
 
     val picasso = Picasso.get()
     var prdName = ""
@@ -132,11 +130,6 @@ class CreateProductFragment : Fragment() {
         })
         loadProductPreFilledData()
         populateExistingProduct()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
     }
 
     override fun onCreateView(
@@ -262,7 +255,7 @@ class CreateProductFragment : Fragment() {
     }
 
     fun onClickAddImage(){
-        activity?.getImageUrl {
+        App.shared().mainActivity?.getImageUrl {
             fileUri = it
             val picasso = Picasso.get()
             picasso.load(it).into(this.imageView)
@@ -300,8 +293,8 @@ class CreateProductFragment : Fragment() {
      fun onBackPressed() {
         when (stepsPosition) {
             0 -> {
-                activity?.runOnUiThread {
-                    activity?.navController?.navigate(R.id.inventory_product)
+                App.shared().mainActivity?.runOnUiThread {
+                    App.shared().mainActivity?.navController?.navigate(R.id.inventory_product)
                 }
             }
             1 -> {
@@ -358,21 +351,21 @@ class CreateProductFragment : Fragment() {
             try {
                 mrp = prdMMRP.toFloat()
             }catch (error:Error){
-                activity?.toast("Please enter valid MRP")
+                App.shared().mainActivity?.toast("Please enter valid MRP")
             }
         }
         if(prdCostPrice.isNotEmpty()){
             try {
                 costPrice = prdCostPrice.toFloat()
             }catch (error:Error){
-                activity?.toast("Please enter valid Cost Price")
+                App.shared().mainActivity?.toast("Please enter valid Cost Price")
             }
         }
         if(prdPrice.isNotEmpty()){
             try {
                 price = prdPrice.toFloat()
             }catch (error:Error){
-                activity?.toast("Please enter valid Sale Price")
+                App.shared().mainActivity?.toast("Please enter valid Sale Price")
             }
         }
 
@@ -381,7 +374,7 @@ class CreateProductFragment : Fragment() {
             try {
                 sgst = prdSGST.toFloat()
             }catch (error:Error){
-                activity?.toast("Please enter valid SGST")
+                App.shared().mainActivity?.toast("Please enter valid SGST")
             }
         }
 
@@ -389,7 +382,7 @@ class CreateProductFragment : Fragment() {
             try {
                 cgst = prdCGST.toFloat()
             }catch (error:Error){
-                activity?.toast("Please enter valid CGST")
+                App.shared().mainActivity?.toast("Please enter valid CGST")
             }
         }
 
@@ -397,7 +390,7 @@ class CreateProductFragment : Fragment() {
             try {
                 igst = prdIGST.toFloat()
             }catch (error:Error){
-                activity?.toast("Please enter valid IGST")
+                App.shared().mainActivity?.toast("Please enter valid IGST")
             }
         }
 
@@ -405,7 +398,7 @@ class CreateProductFragment : Fragment() {
             try {
                 vat = prdVAT.toFloat()
             }catch (error:Error){
-                activity?.toast("Please enter valid VAT")
+                App.shared().mainActivity?.toast("Please enter valid VAT")
             }
         }
 
@@ -413,7 +406,7 @@ class CreateProductFragment : Fragment() {
             try {
                 cess = prdCESS.toFloat()
             }catch (error:Error){
-                activity?.toast("Please enter valid CESS")
+                App.shared().mainActivity?.toast("Please enter valid CESS")
             }
         }
 
@@ -442,14 +435,7 @@ class CreateProductFragment : Fragment() {
 
     fun loadProductPreFilledData(){
         //Product Model
-        viewModal = ViewModelProvider(
-            this,
-            ProductViewModalFactory(ProductHandler.shared().repository)
-        ).get(
-            ProductViewModel::class.java
-        )
-        ProductHandler.shared().setup(viewModal!!)
-        ProductHandler.shared().activity = this.activity
+        ProductHandler.shared().activity = App.shared().mainActivity
     }
 
 
@@ -471,11 +457,11 @@ class CreateProductFragment : Fragment() {
                 ProductCategoryHandler.shared().repository.selectedCategoryLiveData.postValue(it)
             }, 500)
         }
-        activity?.navController?.navigate(R.id.business_select_category)
+        App.shared().mainActivity?.navController?.navigate(R.id.business_select_category)
     }
 
     fun showSubCategorySellection(){
-        activity?.navController?.navigate(R.id.business_select_product_sub_category)
+        App.shared().mainActivity?.navController?.navigate(R.id.business_select_product_sub_category)
         ProductSubCategoryHandler.shared().onSelectSubCategory={
             Handler(Looper.getMainLooper()).postDelayed({
                 this.selectedSubCategory = it
@@ -484,7 +470,7 @@ class CreateProductFragment : Fragment() {
         }
         ProductSubCategoryHandler.shared().onCreateNewSubCategory={
             activity?.runOnUiThread {
-                activity.onBackPressed()
+                App.shared().mainActivity?.onBackPressed()
             }
             Handler(Looper.getMainLooper()).postDelayed({
                 this.selectedSubCategory = it
@@ -495,7 +481,7 @@ class CreateProductFragment : Fragment() {
 
     fun saveProductInSever(){
         if(prdName == ""){
-            activity?.alert("Oops!","Please enter name of the Product")
+            App.shared().mainActivity?.alert("Oops!","Please enter name of the Product")
             return
         }
         val request = JSONObject()
@@ -536,9 +522,9 @@ class CreateProductFragment : Fragment() {
     }
     fun onCreateNewProduct(product:Product?){
         if(product != null){
-            this.activity?.runOnUiThread {
+            App.shared().mainActivity?.runOnUiThread {
                 if(this.fileUri != null){
-                    activity?.toastLong("Product Created, Uploading Image")
+                    App.shared().mainActivity?.toastLong("Product Created, Uploading Image")
                     uploadImageInFirebase(product)
                 }else{
                     this.onBackPressed()
@@ -548,8 +534,8 @@ class CreateProductFragment : Fragment() {
                 }
             }
         }else{
-            this.activity?.runOnUiThread  {
-                activity?.toast("Oops! Something went wrong")
+            App.shared().mainActivity?.runOnUiThread  {
+                App.shared().mainActivity?.toast("Oops! Something went wrong")
             }
         }
     }
@@ -558,14 +544,14 @@ class CreateProductFragment : Fragment() {
     fun uploadImageInFirebase(product: Product){
         if (fileUri != null && BusinessHandler.shared().repository.business.value != null) {
             val fileName = product.Id +".png"
-            val imageRef = App.applicationContext().productImageRef?.child(BusinessHandler.shared().repository.business.value!!.Id)?.child(product.Id!!)?.child(fileName)
+            val imageRef = App.shared().productImageRef?.child(BusinessHandler.shared().repository.business.value!!.Id)?.child(product.Id!!)?.child(fileName)
             imageRef?.putFile(fileUri!!)?.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     MediaFileHandler.shared().onCreateNew={
-                        this.activity?.runOnUiThread  {
+                        App.shared().mainActivity?.runOnUiThread  {
                             this.stepsPosition = 0
                             this.onBackPressed()
-                            this.activity?.toast("Image Updated Successfully")
+                            App.shared().mainActivity?.toast("Image Updated Successfully")
                         }
                     }
                     val imageUrl = it.toString()
@@ -573,8 +559,8 @@ class CreateProductFragment : Fragment() {
                 }
             }?.addOnFailureListener { e ->
                 print(e.message)
-                this.activity?.runOnUiThread {
-                    activity?.toast("Oops! Failed to upload image at the moment")
+                App.shared().mainActivity?.runOnUiThread {
+                    App.shared().mainActivity?.toast("Oops! Failed to upload image at the moment")
                 }
             }
         }else{

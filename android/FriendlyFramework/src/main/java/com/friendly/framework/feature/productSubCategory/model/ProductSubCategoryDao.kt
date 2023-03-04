@@ -6,26 +6,26 @@ import androidx.room.*
 @Dao
 interface ProductSubCategoryDao {
     @Insert( onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item: ProductSubCategory)
+    fun insert(item: ProductSubCategory)
 
     @Update
-    suspend fun update(item: ProductSubCategory)
+    fun update(item: ProductSubCategory)
 
     @Delete
-    suspend fun delete(item: ProductSubCategory)
+    fun delete(item: ProductSubCategory)
 
     @Query("select * from ProductSubCategory order by UpdatedAt DESC LIMIT 1")
-    fun getRecentItem(): LiveData<ProductSubCategory>
+    fun getRecentItem(): ProductSubCategory?
 
     @Query("select * from ProductSubCategory where BusinessID = :businessId order by UpdatedAt DESC LIMIT 1")
-    fun getRecentItemForBusiness(businessId:String): LiveData<ProductSubCategory>
+    fun getRecentItemForBusiness(businessId:String): ProductSubCategory?
 
     @Query("SELECT * FROM ProductSubCategory ORDER by UpdatedAt DESC")
-    fun getAllItems(): LiveData<List<ProductSubCategory>>
+    fun getAllItems(): List<ProductSubCategory>
 
     @Query("select * from ProductSubCategory where BusinessID = :BusinessID order by UpdatedAt DESC")
-    fun getAllItemsForBusiness(BusinessID: String): LiveData<List<ProductSubCategory>>
+    fun getAllItemsForBusiness(BusinessID: String): List<ProductSubCategory>
 
     @Query("select * from ProductSubCategory where CategoryID = :categoryId order by UpdatedAt DESC")
-    fun getAllItemsForCategory(categoryId: String): LiveData<List<ProductSubCategory>>
+    fun getAllItemsForCategory(categoryId: String): List<ProductSubCategory>
 }

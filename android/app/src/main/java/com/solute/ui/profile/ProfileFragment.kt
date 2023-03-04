@@ -17,6 +17,7 @@ import com.friendly.framework.socket.SocketService
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.MainActivity
 import com.solute.R
+import com.solute.app.App
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,14 +47,6 @@ class ProfileFragment : Fragment() {
     var emailFiled : TextInputEditText? = null
     var editProfilePictureBtn : AppCompatButton? = null
     var updateButton : Button? = null
-    var activity : MainActivity? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-       if(context is MainActivity){
-           activity = context as?MainActivity
-       }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,13 +83,13 @@ class ProfileFragment : Fragment() {
     }
 
     fun onClickEditProfileImage(){
-        this.activity?.getImageUrl {
+        App.shared().mainActivity?.getImageUrl {
             fileUri = it
             picasso.load(it).into(this.profileImage)
-            MediaFileHandler.shared().viewModel?.activity = this.activity
+            MediaFileHandler.shared().viewModel?.activity = App.shared().mainActivity
             MediaFileHandler.shared().onCreateNew={
                 CoroutineScope(Job() + Dispatchers.Main).launch {
-                    activity?.toastLong("Image Uploaded")
+                    App.shared().mainActivity?.toastLong("Image Uploaded")
                 }
             }
             MediaFileHandler.shared().viewModel?.uploadImage(it,user._id)
@@ -116,11 +109,11 @@ class ProfileFragment : Fragment() {
                     user.status = statusFiled?.text.toString()
                     user.email = emailFiled?.text.toString()
                     user.updateInLocalStorage()
-                    activity?.toastLong("Profile Updated")
+                    App.shared().mainActivity?.toastLong("Profile Updated")
                 }
             }else{
                 CoroutineScope(Job() + Dispatchers.Main).launch {
-                    activity?.toastLong("Unable to update Profile at the moment,Please try after some time!")
+                    App.shared().mainActivity?.toastLong("Unable to update Profile at the moment,Please try after some time!")
                 }
             }
         }

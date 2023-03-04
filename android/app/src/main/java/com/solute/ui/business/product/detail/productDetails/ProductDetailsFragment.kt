@@ -16,7 +16,7 @@ import com.friendly.framework.feature.productCategory.handler.ProductCategoryHan
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +35,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProductDetailsFragment : Fragment() {
-    val activity = BusinessHandler.shared().activity as? BusinessActivity
     var image : ImageView? = null
     var productName : TextView? = null
     var productDescription : TextView? = null
@@ -107,16 +106,16 @@ class ProductDetailsFragment : Fragment() {
     }
 
     fun onClickEdit(){
-        activity?.navController?.navigate(R.id.business_product_create)
+        App.shared().mainActivity?.navController?.navigate(R.id.business_product_create)
     }
 
     fun deleteProduct(){
         if(ProductHandler.shared().repository.selectedProduct.value != null){
             ProductHandler.shared().onDeleteProductCallBack={
                 if(it != null){
-                    activity?.runOnUiThread {
-                        activity?.toastLong("Product Deleted Successfully");
-                        activity?.onBackPressed()
+                    App.shared().mainActivity?.runOnUiThread {
+                        App.shared().mainActivity?.toastLong("Product Deleted Successfully");
+                        App.shared().mainActivity?.onBackPressed()
                     }
                 }
             }

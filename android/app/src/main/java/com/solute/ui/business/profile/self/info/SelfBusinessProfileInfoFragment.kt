@@ -13,7 +13,7 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
+import com.solute.app.App
 import com.squareup.picasso.Picasso
 
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +22,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class SelfBusinessProfileInfoFragment : Fragment() {
-    val activity = BusinessHandler.shared().activity as? BusinessActivity
     val business = BusinessHandler.shared().repository.business.value
     var fileUri : Uri? = null
     val picasso = Picasso.get()
@@ -78,13 +77,13 @@ class SelfBusinessProfileInfoFragment : Fragment() {
     }
 
     fun onClickEditProfileImg() {
-        activity?.getImageUrl {
+        App.shared().mainActivity?.getImageUrl {
             fileUri = it
             picasso.load(it).into(this.profileImage)
-            MediaFileHandler.shared().viewModel?.activity = this.activity
+            MediaFileHandler.shared().viewModel?.activity = App.shared().mainActivity
             MediaFileHandler.shared().onCreateNew={
                 CoroutineScope(Job() + Dispatchers.Main).launch {
-                    activity?.toastLong("Image Uploaded")
+                    App.shared().mainActivity?.toastLong("Image Uploaded")
                 }
             }
             if(BusinessHandler.shared().repository.business.value?.Id != null){
@@ -97,13 +96,13 @@ class SelfBusinessProfileInfoFragment : Fragment() {
         if (business != null) {
             BusinessHandler.shared().onDeleteBusinessResponse={
                 CoroutineScope(Job() + Dispatchers.Main).launch {
-                    BusinessHandler.shared().activity.onBackPressed()
-                    BusinessHandler.shared().activity.onBackPressed()
-                    BusinessHandler.shared().activity.onBackPressed()
-                    BusinessHandler.shared().activity.onBackPressed()
+                    App.shared().mainActivity?.onBackPressed()
+                    App.shared().mainActivity?.onBackPressed()
+                    App.shared().mainActivity?.onBackPressed()
+                    App.shared().mainActivity?.onBackPressed()
                 }
             }
-            BusinessHandler.shared().businessViewModel?.deleteBusiness(business)
+            BusinessHandler.shared().viewModal?.deleteBusiness(business)
         }
     }
 }

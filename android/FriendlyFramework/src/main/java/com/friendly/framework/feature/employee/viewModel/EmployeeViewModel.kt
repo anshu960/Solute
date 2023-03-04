@@ -15,18 +15,14 @@ import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : ViewModel() {
     val gson = Gson()
-
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-//            fetchAllCustomer()
-        }
-    }
 
     val allEmployee: LiveData<ArrayList<Employee>>
         get() = employeeRepository.allEmployee
@@ -46,13 +42,9 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
 
     fun loadAttendanceFor(employee: Employee){
         employeeRepository.allEmployeeAttendanceLiveData.postValue(arrayListOf())
-        DatabaseHandler.shared().database.employeeAttendanceDao().getAllItemsFor(employee.Id).observe(
-            BusinessHandler.shared().activity){
-                if(!it.isNullOrEmpty()){
-                    employeeRepository.allEmployeeAttendanceLiveData.postValue(it as ArrayList<EmployeeAttendance>?)
-                }
-            }
-
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            employeeRepository.allEmployeeAttendanceLiveData.postValue(DatabaseHandler.shared().database.employeeAttendanceDao().getAllItemsFor(employee.Id) as ArrayList<EmployeeAttendance>?)
+        }
     }
 
     fun fetchAllEmployee() {
@@ -78,7 +70,7 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
     }
 
     fun insert(employee: Employee) {
-        viewModelScope.launch {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.employeeDao()
                 .insert(employee)
         }
@@ -111,7 +103,7 @@ class EmployeeViewModel(private val employeeRepository: EmployeeRepository) : Vi
     }
 
     fun insertAttendance(attendance: EmployeeAttendance) {
-        viewModelScope.launch {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.employeeAttendanceDao()
                 .insert(attendance)
         }

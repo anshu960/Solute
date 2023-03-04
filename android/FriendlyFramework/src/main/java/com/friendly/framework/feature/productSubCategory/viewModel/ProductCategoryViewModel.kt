@@ -12,18 +12,14 @@ import com.friendly.framework.feature.productSubCategory.model.ProductSubCategor
 import com.friendly.framework.feature.productSubCategory.repository.ProductSubCategoryRepository
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class ProductSubCategoryViewModel(private val productSubCategoryRepository: ProductSubCategoryRepository) :
     ViewModel() {
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
-
     val allSubCategory: LiveData<List<ProductSubCategory>>
         get() = productSubCategoryRepository.allSubCategory
     val selectedSubCategory : LiveData<ProductSubCategory>
@@ -31,17 +27,17 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
 
     fun loadSubCategory(){
         if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
-            val businessId = BusinessHandler.shared().repository.business.value!!.Id
-            DatabaseHandler.shared().database.productSubCategoryDao().getAllItemsForBusiness(businessId).observe(BusinessHandler.shared().activity){
-                productSubCategoryRepository.subCategoryLiveData.postValue(it as ArrayList<ProductSubCategory>?)
+            CoroutineScope(Job() + Dispatchers.IO).launch {
+                val businessId = BusinessHandler.shared().repository.business.value!!.Id
+                productSubCategoryRepository.subCategoryLiveData.postValue(DatabaseHandler.shared().database.productSubCategoryDao().getAllItemsForBusiness(businessId) as ArrayList<ProductSubCategory>?)
             }
         }
     }
 
     fun loadSubCategory(category: ProductCategory){
         if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
-            DatabaseHandler.shared().database.productSubCategoryDao().getAllItemsForCategory(category.Id).observe(BusinessHandler.shared().activity){
-                productSubCategoryRepository.subCategoryLiveData.postValue(it as ArrayList<ProductSubCategory>?)
+            CoroutineScope(Job() + Dispatchers.IO).launch {
+                productSubCategoryRepository.subCategoryLiveData.postValue(DatabaseHandler.shared().database.productSubCategoryDao().getAllItemsForCategory(category.Id) as ArrayList<ProductSubCategory>?)
             }
         }
     }
@@ -57,7 +53,7 @@ class ProductSubCategoryViewModel(private val productSubCategoryRepository: Prod
         SocketService.shared().send(SocketEvent.CREATE_PRODUCT_SUB_CATEGORY, request)
     }
     fun insert(category : ProductSubCategory){
-        viewModelScope.launch{
+        CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.productSubCategoryDao()
                 .insert(category)
         }

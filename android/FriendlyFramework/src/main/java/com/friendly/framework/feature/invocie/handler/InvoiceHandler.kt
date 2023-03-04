@@ -2,8 +2,10 @@ package com.friendly.framework.feature.invoice.handler
 
 import com.friendly.framework.UtilityActivity
 import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.business.model.Business
 import com.friendly.framework.feature.cart.model.Sale
+import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.friendly.framework.feature.invoice.repository.InvoiceRepository
@@ -19,9 +21,10 @@ class InvoiceHandler {
     var viewModel: InvoiceViewModel? = null
     val repository = InvoiceRepository()
     var activity = UtilityActivity()
-    var onCreateNewCustomerInvoiceResponse :((data:JSONObject)->Unit)? = null
+    var onCreateNewCustomerInvoiceResponse :((invoice:CustomerInvoice)->Unit)? = null
     var onRetriveSingleInvoiceCallBack :  ((invoice: CustomerInvoice, sales:ArrayList<Sale>, customer: Customer?, business: Business?)->Unit)? = null
     val gson = Gson()
+    var invoiceNumber: Long = 0
 
     init {
         instance = this
@@ -67,7 +70,25 @@ class InvoiceHandler {
         }
     }
 
-
+    val onCreateCustomerInvoice = Emitter.Listener {
+        if (it.isNotEmpty())
+        {
+            val anyData = it.first() as JSONObject
+            if (anyData.has(KeyConstant.payload)){
+                val payload = anyData.getJSONObject(KeyConstant.payload)
+                val allSalesData = anyData.getJSONArray(KeyConstant.sales)
+                val customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
+                viewModel?.insert(customerInvoice)
+                CustomerHandler.shared().repository.customerLiveData.postValue(null)
+                CustomerHandler.shared().onCreateNewCustomer = null
+                BusinessHandler.shared().activity.runOnUiThread {
+                    if(payload.has(KeyConstant._id) && allSalesData.length() > 0){
+                        onCreateNewCustomerInvoiceResponse?.let { it1 -> it1(customerInvoice) }
+                    }
+                }
+            }
+        }
+    }
 
     fun setup(model:InvoiceViewModel){
         viewModel = model

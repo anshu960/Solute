@@ -61,6 +61,7 @@
     <color name="selectorDateTextColor">#F1F3F5</color>
     <color name="colorLightPurple">#F1F3F5</color>
 
+    <color name="default_background">#FAFCFE</color>
 
     //App Story
     <color name="md_white_1000">#ffffff</color>

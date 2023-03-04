@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,11 +15,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
 
 
 class ProductDetailContainerFragment : Fragment() {
-    val activity = BusinessHandler.shared().activity as? BusinessActivity
     var navHostFragment : NavHostFragment? = null
     var bottomNavigationView :  BottomNavigationView? = null
     var navController : NavController? = null

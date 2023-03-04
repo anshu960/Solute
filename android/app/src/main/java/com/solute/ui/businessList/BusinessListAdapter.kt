@@ -2,7 +2,6 @@ package com.solute.ui.businessList
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,10 +14,8 @@ import com.friendly.framework.feature.business.model.Business
 import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.friendly.framework.feature.sync.SyncHandler
 import com.friendly.framework.qr.QRCodeUtill
-import com.solute.App
-import com.solute.MainActivity
+import com.solute.app.App
 import com.solute.R
-import com.solute.ui.business.BusinessActivity
 import com.squareup.picasso.Picasso
 
 import kotlinx.coroutines.CoroutineScope
@@ -41,12 +38,11 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
     override fun onBindViewHolder(holder: BusinessViewHolder, position: Int) {
         val item = allBusiness[position]
         holder.itemView.setOnClickListener {
-                val mainActivty = context as? MainActivity
-                val intent = Intent(mainActivty, BusinessActivity::class.java)
                 BusinessHandler.shared().repository.businessLiveData.postValue(item)
                 SyncHandler.shared().clearBusinessAnalytics()
                 SyncHandler.shared().syncAllBusinessData()
-                mainActivty?.startActivity(intent)
+                App.shared().mainActivity?.goToBusinessHome()
+                App.shared().mainActivity?.setBusinessMenu()
         }
         holder.bind(item,position)
     }
@@ -79,10 +75,10 @@ class BusinessViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recycler
         businessMobile?.text = business.MobileNumber
         businessAddress?.text = business.Address
         when(index.mod(4)){
-            0-> cardLyout?.background =  getDrawable(App.applicationContext(), R.drawable.business_card1)
-            1-> cardLyout?.background =  getDrawable(App.applicationContext(), R.drawable.business_card2)
-            2-> cardLyout?.background =  getDrawable(App.applicationContext(), R.drawable.business_card3)
-            3-> cardLyout?.background = getDrawable(App.applicationContext(), R.drawable.business_card4)
+            0-> cardLyout?.background =  getDrawable(App.shared(), R.drawable.business_card1)
+            1-> cardLyout?.background =  getDrawable(App.shared(), R.drawable.business_card2)
+            2-> cardLyout?.background =  getDrawable(App.shared(), R.drawable.business_card3)
+            3-> cardLyout?.background = getDrawable(App.shared(), R.drawable.business_card4)
         }
         qrImage?.setImageBitmap(QRCodeUtill().getQRImage("https://solute.app"))
             MediaFileHandler.shared().viewModel?.loadFor(business.Id){

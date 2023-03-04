@@ -14,6 +14,7 @@ import com.friendly.framework.feature.business.viewModel.BusinessViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.MainActivity
 import com.solute.R
+import com.solute.app.App
 
 
 class CreateBusinessFragment : Fragment() {
@@ -25,10 +26,6 @@ class CreateBusinessFragment : Fragment() {
     var businessEmailText : TextInputEditText? = null
     var businessMobileText : TextInputEditText? = null
     var saveButton : Button? = null
-
-    private lateinit var businessViewModel: BusinessViewModel
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,14 +41,8 @@ class CreateBusinessFragment : Fragment() {
         businessMobileText = view.findViewById(R.id.create_business_mobile_tiet)
         saveButton = view.findViewById(R.id.create_business_save_number)
         saveButton?.setOnClickListener { onClickSave() }
-        businessViewModel = ViewModelProvider(
-            this,
-            BusinessViewModalFactory(BusinessHandler.shared().repository)
-        ).get(
-            BusinessViewModel::class.java
-        )
         BusinessHandler.shared().onCreateBusinessResponse={
-            (context as MainActivity).navigateToHome()
+            App.shared().mainActivity?.navigateToHome()
         }
         return view
     }
@@ -94,7 +85,7 @@ class CreateBusinessFragment : Fragment() {
             (this.context as MainActivity).toast("Please enter Mobile Number of the business")
             return
         }
-        businessViewModel?.createNewBusiness(name,gst,pan,address,email,mobile)
+        BusinessHandler.shared().viewModal?.createNewBusiness(name,gst,pan,address,email,mobile)
     }
 
 }
