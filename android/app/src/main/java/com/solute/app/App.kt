@@ -12,7 +12,6 @@ import com.friendly.framework.UtilityActivity
 import com.friendly.framework.UtilityViewController
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.database.DatabaseHandler
-import com.friendly.framework.dataclass.FriendRequest
 import com.friendly.framework.dataclass.FriendlyProfile
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
@@ -102,12 +101,6 @@ class App: Application() {
             return instance as App
         }
     }
-
-    fun sync(){
-        FriendlyProfile().downloadSentFriendRequest()
-        FriendlyProfile().downloadReceivedFriendRequest()
-    }
-
     fun checkForAppUpdate(activity: UtilityActivity){
         val appUpdateManager = AppUpdateManagerFactory.create(activity)
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo

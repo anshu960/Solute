@@ -1,40 +1,54 @@
 package com.solute.ui.business.product
 
+import android.Manifest
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.cart.handler.CartHandler
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.Product
-import com.friendly.framework.feature.product.viewModel.ProductViewModalFactory
-import com.friendly.framework.feature.product.viewModel.ProductViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-import com.solute.app.App
+import com.solute.app.ToastService
 import com.solute.navigation.AppNavigator
-import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
+import com.solute.ui.business.barcode.BarCodeAnalyzer
+import com.solute.ui.business.barcode.BarCodeBoxView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BusinessProductFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BusinessProductFragment : Fragment() {
-
+    private val CAMERA = 2
     var recyclerView: RecyclerView? = null
     private var adapter: BusinessProductAdapter? = null
     var allProduct: ArrayList<Product> = ArrayList()
     var cartButton : FloatingActionButton? = null
     var scanBtn : FloatingActionButton? = null
     var searchView : SearchView? = null
+    var scannerView : PreviewView? = null
+    private lateinit var cameraExecutor: ExecutorService
+    private lateinit var barcodeBoxView: BarCodeBoxView
+    var barcodeAnalyser: BarCodeAnalyzer? = null
+    var onDetectNewBarcode: ((code: String) -> Unit)? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
@@ -43,6 +57,13 @@ class BusinessProductFragment : Fragment() {
             this.reload()
         }
         ProductHandler.shared().viewModel?.fetchAllProduct()
+        onDetectNewBarcode = {barCode->
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                CartHandler.shared().addToCart(barCode){status->
+                    ToastService.shared().toast(status)
+                }
+            }
+        }
     }
 
     fun reload() {
@@ -74,6 +95,7 @@ class BusinessProductFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_business_sale, container, false)
+        scannerView = view.findViewById(R.id.fragment_business_product_scanner_preview)
         recyclerView = view.findViewById(R.id.fragment_business_product_recycler)
         scanBtn = view.findViewById(R.id.fragment_business_product_scan_btn)
         scanBtn?.setOnClickListener {onClickScan()}
@@ -106,11 +128,77 @@ class BusinessProductFragment : Fragment() {
         AppNavigator.shared().gotToCart()
     }
     fun onClickScan(){
-        val intent = Intent(requireContext(), BarCodeScannerActivity::class.java)
-        intent.putExtra("OPERATION","SALE")
-        startActivity(intent)
+        val permission = ContextCompat.checkSelfPermission(
+            requireActivity(),
+            Manifest.permission.CAMERA
+        )
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            Log.i(ContentValues.TAG, "Permission to record denied")
+            makeRequest()
+        } else {
+            startScanner()
+        }
+    }
+    fun startScanner(){
+        if(scannerView?.visibility == View.VISIBLE){
+            scannerView?.visibility = View.GONE
+            cameraExecutor.shutdown()
+            return
+        }
+        scannerView?.visibility = View.VISIBLE
+        cameraExecutor = Executors.newSingleThreadExecutor()
+        barcodeBoxView = BarCodeBoxView(requireContext())
+//        addContentView(barcodeBoxView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+        barcodeAnalyser = BarCodeAnalyzer(
+            requireContext(),
+            barcodeBoxView,
+            onDetectNewBarcode,
+            this.scannerView!!.width.toFloat(),
+            this.scannerView!!.height.toFloat()
+        )
+        startCamera()
     }
 
+    private fun makeRequest() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.LOCATION_HARDWARE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ),
+            this.CAMERA
+        )
+    }
+    private fun startCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        this.let { ContextCompat.getMainExecutor(requireContext()) }?.let { it ->
+            cameraProviderFuture.addListener({
+                val cameraProvider = cameraProviderFuture.get()
+                val preview = Preview.Builder()
+                    .build()
+                    .also {
+                        it.setSurfaceProvider(this.scannerView?.surfaceProvider)
+                    }
+                val imageAnalyzer = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build()
+                    .also {
+                        it.setAnalyzer(
+                            cameraExecutor,
+                            this.barcodeAnalyser!!
+                        )
+                    }
+                val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                try {
+                    cameraProvider.unbindAll()
+                    cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+                } catch (exc: Exception) {
+                    exc.printStackTrace()
+                }
+            }, it)
+        }
+    }
 
 
 }

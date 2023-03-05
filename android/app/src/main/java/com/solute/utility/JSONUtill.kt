@@ -9,7 +9,7 @@ class JSONUtill
         var count = 0
         for (item in profiles)
         {
-            requestMobiles = requestMobiles + "\"${item._id}\""
+            requestMobiles = requestMobiles + "\"${item.Id}\""
             if (count < profiles.count() - 1)
             {
                 requestMobiles = requestMobiles + ","

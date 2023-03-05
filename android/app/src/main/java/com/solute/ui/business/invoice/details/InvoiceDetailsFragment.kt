@@ -65,9 +65,6 @@ class InvoiceDetailsFragment : Fragment() {
     var shareTitle: TextView? = null
     var whatsappTitle: TextView? = null
     var customer: Customer? = null
-    var customerDetailsCard: CardView? = null
-    var customerDetailsName: TextView? = null
-    var customerDetailsMobile: TextView? = null
     var pdfView : WebView? = null
     val scope = CoroutineScope(Job() + Dispatchers.Main)
 
@@ -144,11 +141,11 @@ class InvoiceDetailsFragment : Fragment() {
         } else if (InvoiceHandler.shared().invoiceNumber != 0L){
             scope.launch { App.shared().mainActivity?.startActivityIndicator() }
             val invoiceId = InvoiceHandler.shared().invoiceNumber
-            InvoiceHandler.shared().onRetriveSingleInvoiceCallBack={invoice,customer,business->
+            InvoiceHandler.shared().onRetriveSingleInvoiceCallBack={invoice,cust,business->
                 App.shared().mainActivity?.runOnUiThread {
                     this.customerInvoice = invoice
                     this.sales = invoice.sales
-                    this.customer = customer
+                    this.customer = cust
                     this.business = business
                     scope.launch {
                         App.shared().mainActivity?.stopActivityIndicator()
@@ -203,8 +200,9 @@ class InvoiceDetailsFragment : Fragment() {
         }
         loadShareDetails()
         if(customerInvoice != null && customerInvoice!!.customerID != null && customer == null){
-            CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){customer->
+            CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){cust->
                 scope.launch {
+                    customer = cust
                     val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
                     pdfView!!.getSettings().setLoadWithOverviewMode(true);
                     pdfView!!.getSettings().setUseWideViewPort(true);

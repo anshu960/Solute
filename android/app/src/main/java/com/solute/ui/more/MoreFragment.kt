@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.navigation.AppNavigator
-import com.solute.ui.onboarding.OnBoardingActivity
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -72,8 +71,7 @@ class MoreFragment : Fragment() {
     fun onClickLogout() {
         FirebaseAuth.getInstance().signOut()
         Defaults.shared().remove(KeyConstant.loginDetails)
-        val intent = Intent(context, OnBoardingActivity::class.java)
-        startActivity(intent)
+        AppNavigator.shared().gotToLogin()
     }
 
     override fun onResume() {

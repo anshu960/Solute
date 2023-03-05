@@ -82,8 +82,8 @@ class CreateEmployeeFragment : Fragment() {
         if(employeeProfile != null){
             employeeCard?.visibility = View.VISIBLE
             saveButton?.visibility = View.VISIBLE
-            employeeName?.text = employeeProfile!!.name
-            employeeMobile?.text = employeeProfile!!.mobileNumber
+            employeeName?.text = employeeProfile!!.Name
+            employeeMobile?.text = employeeProfile!!.MobileNumber
         }
     }
 

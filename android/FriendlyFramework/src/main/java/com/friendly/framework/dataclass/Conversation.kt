@@ -128,18 +128,7 @@ data class Conversation(var _id : String="",
         }
     }
 
-    fun getOtherUserFriendlyProfile():FriendlyProfile{
-        var user = FriendlyUser()
-        for (i in 0 until participantsProfiles.length()) {
-            val item = participantsProfiles.getJSONObject(i)
-            val _id = item.getString(KeyConstant._id)
-            if(_id != "" && user._id != _id){
-                return FriendlyProfile(item)
-            }
-        }
-        return FriendlyProfile()
-    }
-    
+
     
     fun getOtherUserId():String{
         val user = FriendlyUser()

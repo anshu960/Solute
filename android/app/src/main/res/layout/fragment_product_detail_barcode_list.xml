@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.business.product.detail.productDetailBarcode.ProductDetailBarcodeListFragment">
 
+    <androidx.camera.view.PreviewView
+        android:id="@+id/product_barcode_scanner_preview"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_details_barcode_list_recycler"
@@ -14,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/product_barcode_scanner_preview" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/product_details_barcode_list_fab"

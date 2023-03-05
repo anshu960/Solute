@@ -14,6 +14,7 @@ import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
+import com.solute.app.ToastService
 
 class CreateProductSubCategoryFragment : Fragment() {
     var productCategoryText : TextView? = null
@@ -31,6 +32,9 @@ class CreateProductSubCategoryFragment : Fragment() {
             if(!it.isNullOrEmpty()){
                 allCategoory = it as ArrayList<ProductCategory>
             }
+        }
+        ProductSubCategoryHandler.shared().onCreateNewSubCategory={
+            ToastService.shared().toast("Sub Category Create successfully")
         }
     }
 

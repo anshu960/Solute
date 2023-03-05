@@ -5,7 +5,6 @@ import android.content.Context
 import android.net.Uri
 import android.provider.ContactsContract
 import androidx.annotation.RequiresPermission
-import com.friendly.framework.dataclass.ContactData
 import com.friendly.framework.dataclass.FriendlyUser
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 
@@ -31,63 +30,63 @@ fun Context.isContactExists(
     }
 }
 
-@RequiresPermission(Manifest.permission.READ_CONTACTS)
-@JvmOverloads
-fun Context.retrieveAllContacts(
-    searchPattern: String = "",
-    retrieveAvatar: Boolean = true,
-    limit: Int = -1,
-    offset: Int = -1
-):Pair<List<ContactData>,ArrayList<String>> {
-    val result: MutableList<ContactData> = mutableListOf()
-    var mobileNumbers: ArrayList<String> = ArrayList()
-    contentResolver.query(
-        ContactsContract.Contacts.CONTENT_URI,
-        CONTACT_PROJECTION,
-        if (searchPattern.isNotBlank()) "${ContactsContract.Contacts.DISPLAY_NAME_PRIMARY} LIKE '%?%'" else null,
-        if (searchPattern.isNotBlank()) arrayOf(searchPattern) else null,
-        if (limit > 0 && offset > -1) "${ContactsContract.Contacts.DISPLAY_NAME_PRIMARY} ASC LIMIT $limit OFFSET $offset"
-        else ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " ASC"
-    )?.use {
-        val user = FriendlyUser()
-        if (it.moveToFirst()) {
-//            do {
-//                val contactId = it.getLong(it.getColumnIndex(CONTACT_PROJECTION[0]))
-//                val name = it.getString(it.getColumnIndex(CONTACT_PROJECTION[2])) ?: ""
-//                val hasPhoneNumber = it.getString(it.getColumnIndex(CONTACT_PROJECTION[3])).toInt()
-//                val phoneNumber: List<String> = if (hasPhoneNumber > 0) {
-//                    retrievePhoneNumber(contactId)
-//                } else mutableListOf()
-//                val avatar = if (retrieveAvatar) retrieveAvatar(contactId).toString() else ""
-//                for (mobile in phoneNumber){
-//                    if(mobile.length > 6){
-//                        val mobile = formatMobileNumber(mobile)
-//                        val newContact = ContactData(
-//                            "",
-//                            user._id,
-//                            contactId,
-//                            name,
-//                            mobile.first,
-//                            mobile.second,
-//                            avatar,
-//                            FriendlyProfile(),
-//                            0,
-//                            "",
-//                            "")
-//                        result.add(newContact)
-//                        if(mobile.first != "" && mobile.first.length > 6){
-//                            mobileNumbers.add("${mobile.first}")
-//                        }
-//                        if(mobile.second != "" && mobile.second.length > 6){
-//                            mobileNumbers.add("${mobile.second}")
-//                        }
-//                    }
-//                }
-//            } while (it.moveToNext())
-        }
-    }
-    return (result to mobileNumbers)
-}
+//@RequiresPermission(Manifest.permission.READ_CONTACTS)
+//@JvmOverloads
+//fun Context.retrieveAllContacts(
+//    searchPattern: String = "",
+//    retrieveAvatar: Boolean = true,
+//    limit: Int = -1,
+//    offset: Int = -1
+//):Pair<List<ContactData>,ArrayList<String>> {
+//    val result: MutableList<ContactData> = mutableListOf()
+//    var mobileNumbers: ArrayList<String> = ArrayList()
+//    contentResolver.query(
+//        ContactsContract.Contacts.CONTENT_URI,
+//        CONTACT_PROJECTION,
+//        if (searchPattern.isNotBlank()) "${ContactsContract.Contacts.DISPLAY_NAME_PRIMARY} LIKE '%?%'" else null,
+//        if (searchPattern.isNotBlank()) arrayOf(searchPattern) else null,
+//        if (limit > 0 && offset > -1) "${ContactsContract.Contacts.DISPLAY_NAME_PRIMARY} ASC LIMIT $limit OFFSET $offset"
+//        else ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " ASC"
+//    )?.use {
+//        val user = FriendlyUser()
+//        if (it.moveToFirst()) {
+////            do {
+////                val contactId = it.getLong(it.getColumnIndex(CONTACT_PROJECTION[0]))
+////                val name = it.getString(it.getColumnIndex(CONTACT_PROJECTION[2])) ?: ""
+////                val hasPhoneNumber = it.getString(it.getColumnIndex(CONTACT_PROJECTION[3])).toInt()
+////                val phoneNumber: List<String> = if (hasPhoneNumber > 0) {
+////                    retrievePhoneNumber(contactId)
+////                } else mutableListOf()
+////                val avatar = if (retrieveAvatar) retrieveAvatar(contactId).toString() else ""
+////                for (mobile in phoneNumber){
+////                    if(mobile.length > 6){
+////                        val mobile = formatMobileNumber(mobile)
+////                        val newContact = ContactData(
+////                            "",
+////                            user._id,
+////                            contactId,
+////                            name,
+////                            mobile.first,
+////                            mobile.second,
+////                            avatar,
+////                            FriendlyProfile(),
+////                            0,
+////                            "",
+////                            "")
+////                        result.add(newContact)
+////                        if(mobile.first != "" && mobile.first.length > 6){
+////                            mobileNumbers.add("${mobile.first}")
+////                        }
+////                        if(mobile.second != "" && mobile.second.length > 6){
+////                            mobileNumbers.add("${mobile.second}")
+////                        }
+////                    }
+////                }
+////            } while (it.moveToNext())
+//        }
+//    }
+//    return (result to mobileNumbers)
+//}
 
 private fun Context.retrievePhoneNumber(contactId: Long): List<String> {
     val result: MutableList<String> = mutableListOf()

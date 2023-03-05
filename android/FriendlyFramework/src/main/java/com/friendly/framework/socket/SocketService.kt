@@ -10,7 +10,6 @@ import com.friendly.framework.Encryption
 import com.friendly.framework.UtilityViewController
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.constants.Server
-import com.friendly.framework.dataclass.ContactData
 import com.friendly.framework.dataclass.Conversation
 import com.friendly.framework.dataclass.Message
 import com.friendly.framework.feature.address.network.AddressNetwork
@@ -67,9 +66,6 @@ class SocketService : Service() {
     }
     var onEventArray: (SocketEvent, JSONArray) -> Unit = fun(event: SocketEvent, data: JSONArray) {
     }
-    var onContacts: (SocketEvent, ArrayList<ContactData>) -> Unit =
-        fun(event: SocketEvent, data: ArrayList<ContactData>) {
-        }
     var onProfiles: (SocketEvent, ArrayList<ContactsContract.Profile>) -> Unit =
         fun(event: SocketEvent, data: ArrayList<ContactsContract.Profile>) {
         }
@@ -137,8 +133,6 @@ class SocketService : Service() {
         mSocket?.on(SocketEvent.updateGroupDescription.value, eventHandler)
         mSocket?.on(SocketEvent.updateGroupImage.value, eventHandler)
         mSocket?.on(SocketEvent.deleteGroup.value, eventHandler)
-        mSocket?.on(SocketEvent.updateContacts.value, updateContacts)
-        mSocket?.on(SocketEvent.retriveContacts.value, retriveContacts)
         mSocket?.on(SocketEvent.createTask.value, onSocketEvent)
         mSocket?.on(SocketEvent.updateTask.value, onSocketEvent)
         mSocket?.on(SocketEvent.getAllTask.value, onSocketEventArray)
@@ -464,42 +458,6 @@ class SocketService : Service() {
         }
         this.onProfiles(SocketEvent.findUsers, allUsers)
     }
-
-    private val updateContacts = Emitter.Listener {
-        var allContacts: ArrayList<ContactData> = ArrayList()
-        val data = it.first()
-
-        if (data is JSONObject) {
-            val paylaod = data.getJSONObject(KeyConstant.payload)
-            val allContactsFromServer = paylaod.getJSONArray(KeyConstant.allContacts)
-            for (i in 0 until allContactsFromServer.length()) {
-                try {
-                    val item = allContactsFromServer.getJSONObject(i)
-                    val newContact = ContactData(item)
-                    allContacts.add(newContact)
-//                    SQLite.shared().insert(TableNames.contacts, newContact.data)
-                } catch (e: Exception) {
-                    Log.d(TAG, e.localizedMessage)
-                }
-            }
-        }
-        this.onContacts(SocketEvent.updateContacts, allContacts)
-    }
-    private val retriveContacts = Emitter.Listener {
-        var allContacts: ArrayList<ContactData> = ArrayList()
-        val data = it.first()
-
-        if (data is JSONObject) {
-            val paylaod = data.getJSONArray(KeyConstant.payload)
-            for (i in 0 until paylaod.length()) {
-                val item = paylaod.getJSONObject(i)
-//                val newProfile = ContactsContract.FriendlyProfile(item)
-            }
-//            Database.shared.updateContact(newProfile)
-        }
-        this.onContacts(SocketEvent.retriveContacts, allContacts)
-    }
-
     private val createConversation = Emitter.Listener {
         var conversation = Conversation()
         if (it.count() > 0) {

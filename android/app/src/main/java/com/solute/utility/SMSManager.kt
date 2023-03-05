@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.friendly.framework.UtilityActivity
-import com.friendly.framework.dataclass.ContactData
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.solute.app.App
@@ -25,36 +24,6 @@ class SMSManager {
         intent.putExtra("sms_body", message)
         activity?.startActivity(intent)
     }
-
-//    fun sendSMS(activity : UtilityActivity?,phoneNo: String, msg: String) {
-//        if (ActivityCompat.checkSelfPermission(
-//                App.applicationContext(),
-//               SEND_SMS
-//            ) == PackageManager.PERMISSION_GRANTED
-//        ) {
-//            try {
-//                val smsMgrVar = SmsManager.getDefault()
-//                smsMgrVar.sendTextMessage(phoneNo, null, msg, null, null)
-//                Toast.makeText(
-//                    App.applicationContext(), "Message Sent",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//            } catch (ErrVar: Exception) {
-//                Toast.makeText(
-//                    activity, ErrVar.message.toString(),
-//                    Toast.LENGTH_LONG
-//                ).show()
-//                ErrVar.printStackTrace()
-//            }
-//        } else {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                activity?.requestPermissions(arrayOf(SEND_SMS), 10)
-//            }else{
-//                sendSms(activity,phoneNo,msg)
-//            }
-//        }
-//
-//    }
 
 
     fun sendInvoiceReceipt(invoiceNumber:Int,amount :Float,customerInvoice: CustomerInvoice){
@@ -90,17 +59,5 @@ class SMSManager {
         activity?.startActivity(Intent.createChooser(shareText, "Share Via"))
     }
 
-    fun sendInviteSms(contact: ContactData){
-        val user = FriendlyUser()
-        val componsedMessage = "Hi ${contact.name}\n" + inviteSms + "Regards\n${user.name}"
-        val uri: Uri = Uri.parse("smsto:${contact.mobileNumber}")
-        val intent = Intent(Intent.ACTION_SENDTO, uri)
-        intent.putExtra("sms_body", componsedMessage)
-        val activity = App.shared().activity
-        if(activity != null){
-            activity!!.startActivity(intent)
-        }else{
-            Log.d("SMSManager","Unable to send SMS as the activity is null")
-        }
-    }
+
 }

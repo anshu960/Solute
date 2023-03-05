@@ -112,6 +112,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         App.shared().checkForAppUpdate(this)
         SocketService.shared().currentActivity = this
         SocketService.shared().verifyIfConnectedOrNot()
+        networkStatusCard?.visibility = View.GONE
         SocketService.shared().repository.socketConnectionStatus.observe(this) {connectionStatus->
             when (connectionStatus) {
                 CONNECTION_STATUS.CONNECTED -> {

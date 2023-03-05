@@ -9,7 +9,6 @@ import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.solute.app.App
-import com.solute.ui.onboarding.OnBoardingActivity
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 

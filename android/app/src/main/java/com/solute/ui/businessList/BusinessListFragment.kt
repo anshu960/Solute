@@ -48,7 +48,6 @@ class BusinessListFragment : Fragment() {
 
     fun reload() {
         if(allBusiness.isNullOrEmpty()){
-            emptyImageView?.setAnimation(R.raw.lottie_business_front)
             emptyCardView?.visibility = View.VISIBLE
         }else{
             emptyCardView?.visibility = View.GONE
