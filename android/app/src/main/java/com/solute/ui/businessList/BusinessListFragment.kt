@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.business.model.Business
 import com.friendly.framework.feature.business.viewModel.BusinessViewModalFactory
@@ -31,13 +33,13 @@ class BusinessListFragment : Fragment() {
     private var adapter: BusinessListAdapter? = null
     var allBusiness: ArrayList<Business> = ArrayList()
     var fabButton  :FloatingActionButton? = null
+    var emptyCardView : CardView? = null
+    var emptyImageView : LottieAnimationView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = this.context?.let { BusinessListAdapter(it, allBusiness) }
         BusinessHandler.shared().viewModal?.allBusiness?.observe(this) {
-            if(!it.isNullOrEmpty()){
-                allBusiness = it
-            }
+            allBusiness = it
             this.reload()
         }
         BusinessHandler.shared().viewModal?.loadBusiness()
@@ -45,6 +47,12 @@ class BusinessListFragment : Fragment() {
     }
 
     fun reload() {
+        if(allBusiness.isNullOrEmpty()){
+            emptyImageView?.setAnimation(R.raw.lottie_business_front)
+            emptyCardView?.visibility = View.VISIBLE
+        }else{
+            emptyCardView?.visibility = View.GONE
+        }
         this.recyclerView!!.layoutManager = LinearLayoutManager(this.context)
         adapter = this.context?.let { BusinessListAdapter(it, allBusiness) }
         this.recyclerView!!.adapter = this.adapter
@@ -59,10 +67,14 @@ class BusinessListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_business_list, container, false)
+        emptyCardView = view.findViewById(R.id.fragment_business_list_empty_card)
+        emptyCardView?.setOnClickListener { AppNavigator.shared().navigateToSelectBusinessType()  }
+        emptyImageView = view.findViewById(R.id.fragment_business_list_empty_img_view)
         this.recyclerView = view.findViewById(R.id.fragment_business_list_recycler)
         MobileAds.initialize(this.requireContext()) {}
         fabButton = view.findViewById(R.id.fragment_business_list_add_btn)
         fabButton?.setOnClickListener { AppNavigator.shared().navigateToSelectBusinessType() }
+        reload()
         BusinessHandler.shared().viewModal?.loadBusiness()
         App.shared().mainActivity?.setMainMenu()
         return view
