@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
-import com.solute.ui.business.inventory.subCategory.SubCategoryDetailsActivity
+import com.solute.navigation.AppNavigator
 
 
 class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, val allSubCategory: ArrayList<ProductSubCategory>, var onSelect:((subCategory: ProductSubCategory) -> Unit)? = null) :
@@ -30,8 +30,7 @@ class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, va
                 onSelect?.let { it1 -> it1(item) }
             }else {
                 ProductSubCategoryHandler.shared().repository.selectedSubCategoryLiveData.postValue(item)
-                val intent = Intent(context, SubCategoryDetailsActivity::class.java)
-                context.startActivity(intent)
+               AppNavigator.shared().goToCreateProductSubCategoryDetails()
             }
         }
         holder.bind(fragment,item)

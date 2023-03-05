@@ -18,6 +18,7 @@ import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCat
 import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
+import com.solute.navigation.AppNavigator
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 
 
@@ -50,9 +51,9 @@ class FragmentProductSubCategory : Fragment() {
         recycler = view.findViewById(R.id.product_sub_category_fragment_recycler)
         createNewSubCategoryBtn = view.findViewById(R.id.product_sub_category_fragment_add_btn)
         createNewSubCategoryBtn?.setOnClickListener {
-            val intent = Intent(this.context, CreateProductSubCategoryActivity::class.java)
-            this.context?.startActivity(intent)
+           AppNavigator.shared().goToCreateProductSubCategory()
         }
+        loadSubCategory()
         return view
     }
 

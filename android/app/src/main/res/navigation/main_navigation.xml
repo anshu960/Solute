@@ -171,5 +171,27 @@
         android:name="com.solute.ui.business.employee.create.CreateEmployeeFragment"
         android:label="@string/employee"
         tools:layout="@layout/fragment_create_employee" />
+    <fragment
+        android:id="@+id/fragment_category_details"
+        android:name="com.solute.ui.business.inventory.category.details.CategoryDetailsFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_category_details" />
+    <fragment
+        android:id="@+id/fragment_create_product_category"
+        android:name="com.solute.ui.business.inventory.category.create.CreateProductCategoryFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_create_product_category" />
+    <fragment
+        android:id="@+id/fragment_create_product_sub_category"
+        android:name="com.solute.ui.business.inventory.subCategory.create.CreateProductSubCategoryFragment"
+        android:label="@string/sub_category"
+        tools:layout="@layout/fragment_create_product_sub_category" />
+    <fragment
+        android:id="@+id/fragment_product_sub_category_details"
+        android:name="com.solute.ui.business.inventory.subCategory.details.ProductSubCategoryDetailsFragment"
+        android:label="@string/sub_category"
+        tools:layout="@layout/fragment_product_sub_category_details" />
+
+
 
 </navigation>

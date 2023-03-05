@@ -101,7 +101,7 @@ class InvoiceDetailsFragment : Fragment() {
             }
         }
         shareButton?.setOnClickListener {
-            if (customer != null && customer!!.MobileNumber != null && customerInvoice != null) {
+            if ( customerInvoice != null) {
                 SMSManager().shareInvoice(
                     App.shared().mainActivity,
                     customerInvoice!!.invoiceNumber!!,
@@ -116,10 +116,10 @@ class InvoiceDetailsFragment : Fragment() {
             }
         }
         whatsappButton?.setOnClickListener {
-            if (customer != null && customer!!.MobileNumber != null && customerInvoice != null) {
+            if (customerInvoice != null) {
                 WhatsappManager().sendInvoice(
                     App.shared().mainActivity,
-                    customer!!.MobileNumber!!,
+                    customer?.MobileNumber,
                     customerInvoice!!.invoiceNumber!!,
                     customerInvoice!!.finalPrice!!,
                     customerInvoice!!
@@ -144,10 +144,10 @@ class InvoiceDetailsFragment : Fragment() {
         } else if (InvoiceHandler.shared().invoiceNumber != 0L){
             scope.launch { App.shared().mainActivity?.startActivityIndicator() }
             val invoiceId = InvoiceHandler.shared().invoiceNumber
-            InvoiceHandler.shared().onRetriveSingleInvoiceCallBack={invoice,sales,customer,business->
+            InvoiceHandler.shared().onRetriveSingleInvoiceCallBack={invoice,customer,business->
                 App.shared().mainActivity?.runOnUiThread {
                     this.customerInvoice = invoice
-                    this.sales = sales
+                    this.sales = invoice.sales
                     this.customer = customer
                     this.business = business
                     scope.launch {
@@ -172,21 +172,21 @@ class InvoiceDetailsFragment : Fragment() {
     }
 
     fun loadShareDetails() {
-        if (customer != null && customer!!.MobileNumber != null) {
-            messageButton?.visibility = View.VISIBLE
-            whatsappButton?.visibility = View.VISIBLE
-            messageTitle?.visibility = View.VISIBLE
-            whatsappTitle?.visibility = View.VISIBLE
-            customerDetailsCard?.visibility = View.VISIBLE
-            customerDetailsName?.text = this.customer!!.Name
-            customerDetailsMobile?.text = this.customer!!.MobileNumber
-        } else {
-            messageButton?.visibility = View.GONE
-            whatsappButton?.visibility = View.GONE
-            messageTitle?.visibility = View.GONE
-            whatsappTitle?.visibility = View.GONE
-            customerDetailsCard?.visibility = View.GONE
-        }
+//        if (customer != null && customer!!.MobileNumber != null) {
+//            messageButton?.visibility = View.VISIBLE
+//            whatsappButton?.visibility = View.VISIBLE
+//            messageTitle?.visibility = View.VISIBLE
+//            whatsappTitle?.visibility = View.VISIBLE
+//            customerDetailsCard?.visibility = View.VISIBLE
+//            customerDetailsName?.text = this.customer!!.Name
+//            customerDetailsMobile?.text = this.customer!!.MobileNumber
+//        } else {
+//            messageButton?.visibility = View.GONE
+//            whatsappButton?.visibility = View.GONE
+//            messageTitle?.visibility = View.GONE
+//            whatsappTitle?.visibility = View.GONE
+//            customerDetailsCard?.visibility = View.GONE
+//        }
     }
 
     override fun onDestroy() {
@@ -202,7 +202,7 @@ class InvoiceDetailsFragment : Fragment() {
             qrImage?.setImageBitmap(qrBitmap)
         }
         loadShareDetails()
-        if(customerInvoice != null && customerInvoice!!.customerID != null){
+        if(customerInvoice != null && customerInvoice!!.customerID != null && customer == null){
             CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){customer->
                 scope.launch {
                     val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
@@ -255,5 +255,9 @@ class InvoiceDetailsFragment : Fragment() {
             ).show()
         }
         // Save the job object for later status checking
+    }
+
+    fun generatePdfInvoice(){
+
     }
 }

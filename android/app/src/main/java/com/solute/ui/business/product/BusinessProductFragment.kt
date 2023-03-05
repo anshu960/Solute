@@ -18,6 +18,7 @@ import com.friendly.framework.feature.product.viewModel.ProductViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.solute.ui.business.barcode.scanner.BarCodeScannerActivity
 
 
@@ -102,7 +103,7 @@ class BusinessProductFragment : Fragment() {
     }
 
     fun onClickCart(){
-        App.shared().mainActivity?.gotToCart()
+        AppNavigator.shared().gotToCart()
     }
     fun onClickScan(){
         val intent = Intent(requireContext(), BarCodeScannerActivity::class.java)

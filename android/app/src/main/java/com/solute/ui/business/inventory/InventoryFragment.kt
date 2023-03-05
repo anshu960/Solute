@@ -17,10 +17,10 @@ import com.friendly.framework.feature.product.model.Product
 import com.friendly.framework.feature.sync.BusinessAnalytics
 import com.friendly.framework.feature.sync.SyncHandler
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.solute.R
+import com.solute.navigation.AppNavigator
 import com.solute.ui.business.inventory.analytics.AnalyticsAdapter
-import com.solute.ui.business.inventory.category.CreateCategoryActivity
-import com.solute.ui.business.inventory.subCategory.CreateProductSubCategoryActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -95,12 +95,10 @@ class InventoryFragment : Fragment() {
 //                startActivity(intent)
             }
             2->{
-                val intent = Intent(this.context,CreateCategoryActivity::class.java)
-                startActivity(intent)
+                AppNavigator.shared().goToCreateProductCategory()
             }
             3->{
-                val intent = Intent(this.context,CreateProductSubCategoryActivity::class.java)
-                startActivity(intent)
+                AppNavigator.shared().goToCreateProductSubCategory()
             }
         }
     }

@@ -16,6 +16,7 @@ import com.friendly.framework.feature.sync.SyncHandler
 import com.friendly.framework.qr.QRCodeUtill
 import com.solute.app.App
 import com.solute.R
+import com.solute.navigation.AppNavigator
 import com.squareup.picasso.Picasso
 
 import kotlinx.coroutines.CoroutineScope
@@ -41,7 +42,7 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
                 BusinessHandler.shared().repository.businessLiveData.postValue(item)
                 SyncHandler.shared().clearBusinessAnalytics()
                 SyncHandler.shared().syncAllBusinessData()
-                App.shared().mainActivity?.goToBusinessHome()
+                AppNavigator.shared().goToBusinessHome()
                 App.shared().mainActivity?.setBusinessMenu()
         }
         holder.bind(item,position)

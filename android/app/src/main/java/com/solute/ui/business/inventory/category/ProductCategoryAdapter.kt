@@ -1,7 +1,6 @@
 package com.solute.ui.business.inventory.category
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.UtilityActivity
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productCategory.model.ProductCategory
+import com.solute.navigation.AppNavigator
 
 
 class ProductCategoryAdapter(val context: Context, val fragment: Fragment, val allCategory: List<ProductCategory>, var onSelect:((category: ProductCategory) -> Unit)? = null) :
@@ -30,8 +30,7 @@ class ProductCategoryAdapter(val context: Context, val fragment: Fragment, val a
                 onSelect!!(item)
             }else if(context is UtilityActivity){
                 ProductCategoryHandler.shared().repository.selectedCategoryLiveData.postValue(item)
-                val intent = Intent(context, CategoryDetailsActivity::class.java)
-                context.startActivity(intent)
+                AppNavigator.shared().goToCategoryDetails()
             }
         }
         holder.bind(fragment,item,onSelect)

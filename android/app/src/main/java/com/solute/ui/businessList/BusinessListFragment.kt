@@ -18,6 +18,7 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 
 
 /**
@@ -61,7 +62,7 @@ class BusinessListFragment : Fragment() {
         this.recyclerView = view.findViewById(R.id.fragment_business_list_recycler)
         MobileAds.initialize(this.requireContext()) {}
         fabButton = view.findViewById(R.id.fragment_business_list_add_btn)
-        fabButton?.setOnClickListener { App.shared().mainActivity?.navigateToSelectBusinessType() }
+        fabButton?.setOnClickListener { AppNavigator.shared().navigateToSelectBusinessType() }
         BusinessHandler.shared().viewModal?.loadBusiness()
         App.shared().mainActivity?.setMainMenu()
         return view

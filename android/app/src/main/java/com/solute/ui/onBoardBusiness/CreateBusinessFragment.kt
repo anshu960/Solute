@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 
 
 class CreateBusinessFragment : Fragment() {
@@ -42,7 +43,7 @@ class CreateBusinessFragment : Fragment() {
         saveButton = view.findViewById(R.id.create_business_save_number)
         saveButton?.setOnClickListener { onClickSave() }
         BusinessHandler.shared().onCreateBusinessResponse={
-            App.shared().mainActivity?.navigateToHome()
+            AppNavigator.shared().navigateToHome()
         }
         return view
     }

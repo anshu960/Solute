@@ -25,6 +25,7 @@ import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.solute.ui.business.customer.adapter.CustomerAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -127,7 +128,7 @@ class SelectCustomerFragment : Fragment() {
         InvoiceHandler.shared().invoiceNumber = 0
         InvoiceHandler.shared().repository.customerInvoiceLiveData.postValue(invoice)
         cartViewModel?.resetCart()
-        App.shared().mainActivity?.goToReceiptDetails()
+        AppNavigator.shared().goToReceiptDetails()
     }
 
     fun reload() {

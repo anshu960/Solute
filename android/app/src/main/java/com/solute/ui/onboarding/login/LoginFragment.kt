@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.hbb20.CountryCodePicker
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 
 
 class LoginFragment : Fragment() {
@@ -48,7 +49,7 @@ class LoginFragment : Fragment() {
                 App.shared().mainActivity?.runOnUiThread {
                     App.shared().mainActivity?.stopActivityIndicator()
                     App.shared().mainActivity?.toast("OTP Sent")
-                    App.shared().mainActivity?.gotToOtp()
+                    AppNavigator.shared().gotToOtp()
                 }
             }
         }

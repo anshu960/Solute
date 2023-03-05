@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.solute.ui.onboarding.login.FirebaseAuthHelper
 import org.json.JSONObject
 
@@ -71,7 +72,7 @@ class RegisterFragment : Fragment() {
                 val payload = response.getJSONObject(KeyConstant.payload)
                 if(msg != "" && payload.length() > 0){
                     Defaults.shared().store(KeyConstant.loginDetails,payload)
-                    App.shared().mainActivity?.navigateToHome()
+                    AppNavigator.shared().navigateToHome()
                     val intent = Intent(App.shared().mainActivity, MainActivity::class.java)
                     this.startActivity(intent)
                 }else{

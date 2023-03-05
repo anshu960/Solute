@@ -22,7 +22,7 @@ class InvoiceHandler {
     val repository = InvoiceRepository()
     var activity = UtilityActivity()
     var onCreateNewCustomerInvoiceResponse :((invoice:CustomerInvoice)->Unit)? = null
-    var onRetriveSingleInvoiceCallBack :  ((invoice: CustomerInvoice, sales:ArrayList<Sale>, customer: Customer?, business: Business?)->Unit)? = null
+    var onRetriveSingleInvoiceCallBack :  ((invoice: CustomerInvoice, customer: Customer?, business: Business?)->Unit)? = null
     val gson = Gson()
     var invoiceNumber: Long = 0
 
@@ -59,13 +59,7 @@ class InvoiceHandler {
                 if(anyData.has(KeyConstant.business)){
                     business = gson.fromJson(anyData.getJSONObject(KeyConstant.business).toString(), Business::class.java)
                 }
-                val sales : ArrayList<Sale> = arrayListOf()
-                val salesData = anyData.getJSONArray(KeyConstant.sales)
-                for (i in 0 until salesData.length()) {
-                    val sale = salesData.get(i)
-                    sales.add(gson.fromJson(sale.toString(), Sale::class.java))
-                }
-                onRetriveSingleInvoiceCallBack?.let { it1 -> it1(newInvoice,sales,customer,business) }
+                onRetriveSingleInvoiceCallBack?.let { it1 -> it1(newInvoice,customer,business) }
             }
         }
     }

@@ -11,6 +11,7 @@ import com.friendly.framework.feature.businessType.handler.BusinessTypeHandler
 import com.friendly.framework.feature.businessType.model.BusinessType
 import com.solute.MainActivity
 import com.solute.R
+import com.solute.navigation.AppNavigator
 import com.squareup.picasso.Picasso
 
 
@@ -32,7 +33,7 @@ class BusinessTypeAdapter(val context: Context, val allBusinessType: ArrayList<B
             if(context is MainActivity){
                 val activity = context
                 BusinessTypeHandler.shared().repository.businessType = item
-                activity.gotToCreateBusiness()
+                AppNavigator.shared().gotToCreateBusiness()
             }
         }
         holder.bind(item)

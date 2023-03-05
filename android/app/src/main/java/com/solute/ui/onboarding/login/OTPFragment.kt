@@ -12,6 +12,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 
 class OTPFragment : Fragment() {
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
@@ -49,10 +50,10 @@ class OTPFragment : Fragment() {
                     App.shared().mainActivity?.startActivityIndicator(message)
                 }else if(state == AUTH_STATE.NEW_USER){
                     App.shared().mainActivity?.stopActivityIndicator()
-                    App.shared().mainActivity?.gotToRegister()
+                    AppNavigator.shared().gotToRegister()
                 }else if(state == AUTH_STATE.LOGGED_IN){
                     App.shared().mainActivity?.stopActivityIndicator()
-                    App.shared().mainActivity?.navigateToHome()
+                    AppNavigator.shared().navigateToHome()
                 }
             }
         }

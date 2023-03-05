@@ -17,6 +17,7 @@ import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.google.firebase.auth.FirebaseAuth
 import com.solute.MainActivity
 import com.solute.R
+import com.solute.navigation.AppNavigator
 import com.solute.ui.onboarding.OnBoardingActivity
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -63,7 +64,7 @@ class MoreFragment : Fragment() {
     }
 
     fun presentFriendlyFriendlyProfile() {
-        activity?.gotToProfile()
+        AppNavigator.shared().gotToProfile()
     }
 
 

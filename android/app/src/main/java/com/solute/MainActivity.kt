@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
@@ -22,18 +23,28 @@ import com.friendly.framework.Defaults
 import com.friendly.framework.UtilityActivity
 import com.friendly.framework.app.FriendlyFrameworkApp
 import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.friendly.framework.socket.SocketService
 import com.friendly.framework.socket.repository.CONNECTION_STATUS
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.crashlytics.internal.model.CrashlyticsReport.Session.User
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.solute.app.App
 import com.solute.databinding.ActivityMainBinding
+import com.solute.deepLink.DeepLinkHandler
+import com.solute.navigation.AppNavigator
+import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var navView:NavigationView
@@ -44,6 +55,10 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
     lateinit var binding : ActivityMainBinding
     var networkStatusCard : CardView? = null
     var networkStatus : TextView? = null
+    var drawerMenuHeaderImg : ImageView? = null
+    var drawerMenuHeaderName : TextView? = null
+    var drawerMenuHeaderDescription : TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,7 +69,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         networkStatus = findViewById(R.id.connection_status_text)
         mAdView = findViewById(R.id.addView)
         floatingButton?.setOnClickListener {
-            gotToSelectBusinessType()
+            AppNavigator.shared().gotToSelectBusinessType()
         }
         setSupportActionBar(binding.appBar.toolBarMain)
         val drawerLayout: DrawerLayout = binding.drawerLayoutMain
@@ -75,13 +90,25 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
                 R.id.business_customers
             ), drawerLayout
         )
-
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
         supportActionBar?.setHomeButtonEnabled(true)
-
+        drawerMenuHeaderImg = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_business_img)
+        drawerMenuHeaderName = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_business_name)
+        drawerMenuHeaderDescription = binding.navView.getHeaderView(0).findViewById(R.id.nav_header_business_description)
+        AppNavigator.shared().navController = this.navController
+        BusinessHandler.shared().repository.business.observe(this){
+            drawerMenuHeaderName?.text = it?.Name
+            drawerMenuHeaderDescription?.text = it?.Address
+            if(it != null){
+                MediaFileHandler.shared().viewModel?.loadFor(it.Id){
+                    CoroutineScope(Job() + Dispatchers.Main).launch {
+                        Picasso.get().load(it.first().FileURL).into(drawerMenuHeaderImg)
+                    }
+                }
+            }
+        }
         App.shared().checkForAppUpdate(this)
         SocketService.shared().currentActivity = this
         SocketService.shared().verifyIfConnectedOrNot()
@@ -115,8 +142,9 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
             .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
                 // Get deep link from result (may be null if no link is found)
                 var deepLink: Uri? = null
-                if (pendingDynamicLinkData != null) {
-                    deepLink = pendingDynamicLinkData.link
+                if (pendingDynamicLinkData != null && pendingDynamicLinkData.link != null) {
+                    DeepLinkHandler().processPendingLink(pendingDynamicLinkData.link)
+
                 }
             }
             .addOnFailureListener(this) { e -> Log.w(TAG, "getDynamicLink:onFailure", e) }
@@ -154,51 +182,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         navController.setGraph(graph, intent.extras)
     }
 
-    fun navigateToHome() {
-        navController?.navigate(R.id.got_to_home)
-    }
-    fun navigateToSelectCustomer(){
-        navController?.navigate(R.id.business_select_customer)
-    }
 
-    fun navigateToSelectBusinessType() {
-        navController?.navigate(R.id.navigation_select_business_type)
-    }
-
-    fun gotToProfile() {
-        navController?.navigate(R.id.navigation_profile)
-    }
-
-    fun gotToCreateBusiness() {
-        navController?.navigate(R.id.navigation_create_business)
-    }
-
-    fun gotToCart(){
-        navController?.navigate(R.id.business_cart)
-    }
-
-    fun gotToSelectBusinessType() {
-        navController?.navigate(R.id.navigation_select_business_type)
-    }
-
-    fun gotToLogin() {
-        navController.navigate(R.id.got_to_login)
-    }
-
-    fun gotToOtp() {
-        navController.navigate(R.id.enter_otp)
-    }
-
-    fun gotToRegister() {
-        navController.navigate(R.id.register)
-    }
-
-    fun goToBusinessHome() {
-        navController?.navigate(R.id.business_home)
-    }
-    fun goToReceiptDetails() {
-        navController?.navigate(R.id.business_details_invoice_details)
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return true
@@ -215,6 +199,14 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
     fun setMainMenu(){
         navView.menu.clear()
         MenuInflater(this).inflate(R.menu.main_menu,navView.menu)
+        val user = FriendlyUser()
+        drawerMenuHeaderName?.text = user.name
+        drawerMenuHeaderDescription?.text = user.status
+        MediaFileHandler.shared().viewModel?.loadFor(user._id){
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                Picasso.get().load(it.first().FileURL).into(drawerMenuHeaderImg)
+            }
+        }
     }
 
 

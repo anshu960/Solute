@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.solute.ui.business.product.BusinessProductAdapter
 
 /**
@@ -112,7 +113,7 @@ class BusinessCartFragment : Fragment() {
     }
 
     fun onClickSale() {
-        App.shared().mainActivity?.navigateToSelectCustomer()
+        AppNavigator.shared().navigateToSelectCustomer()
     }
 
 }

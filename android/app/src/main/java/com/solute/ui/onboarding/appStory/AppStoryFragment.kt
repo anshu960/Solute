@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.jaeger.library.StatusBarUtil
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.solute.ui.onboarding.login.FirebaseAuthHelper
 
 class AppStoryFragment : Fragment() {
@@ -68,19 +69,19 @@ class AppStoryFragment : Fragment() {
 
         textSkip.setOnClickListener {
             Defaults.shared().store(KeyConstant.appStorySeen,"true")
-            App.shared().mainActivity?.gotToLogin()
+            AppNavigator.shared().gotToLogin()
         }
 
         textEnd.setOnClickListener {
             Defaults.shared().store(KeyConstant.appStorySeen,"true")
-            App.shared().mainActivity?.gotToLogin()
+            AppNavigator.shared().gotToLogin()
         }
 
         val btnNextStep: ImageButton = btnNextStep
         btnNextStep.setOnClickListener {
             if (getItem() > mViewPager.childCount) {
                 Defaults.shared().store(KeyConstant.appStorySeen,"true")
-                App.shared().mainActivity?.gotToLogin()
+                AppNavigator.shared().gotToLogin()
             } else {
                 mViewPager.setCurrentItem(getItem() + 1, true)
             }

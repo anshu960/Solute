@@ -15,7 +15,7 @@ import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryV
 import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
-
+import com.solute.navigation.AppNavigator
 
 
 /**
@@ -51,9 +51,9 @@ class ProductCategoryFragment : Fragment() {
         recycler = view.findViewById(R.id.product_category_fragment_recycler)
         createNewCategoryBtn = view.findViewById(R.id.product_category_add_button)
         createNewCategoryBtn?.setOnClickListener {
-            val intent = Intent(this.context,CreateCategoryActivity::class.java)
-            this.context?.startActivity(intent)
+            AppNavigator.shared().goToCreateProductCategory()
         }
+        ProductCategoryHandler.shared().viewModel?.loadCategory()
         return view
     }
 

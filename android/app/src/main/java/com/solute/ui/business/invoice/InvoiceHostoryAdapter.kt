@@ -8,6 +8,7 @@ import com.friendly.framework.feature.invoice.handler.InvoiceHandler
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 
 
 class InvoiceHistoryAdapter(val context: Context, val invoices: List<CustomerInvoice>) :
@@ -27,8 +28,7 @@ class InvoiceHistoryAdapter(val context: Context, val invoices: List<CustomerInv
         holder.bind(item)
         holder.itemView.setOnClickListener {
                 InvoiceHandler.shared().repository.customerInvoiceLiveData.postValue(item)
-            App.shared().mainActivity?.goToReceiptDetails()
-
+            AppNavigator.shared().goToReceiptDetails()
         }
     }
 }

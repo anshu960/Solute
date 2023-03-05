@@ -44,14 +44,12 @@ class CustomerViewModel(private val customerRepository: CustomerRepository) : Vi
     }
 
     fun getCustomerById(id: String, completion: (customer: Customer?) -> Unit) {
-        if (!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()) {
             CoroutineScope(Job() + Dispatchers.IO).launch {
                 val theCustomer = DatabaseHandler.shared().database.customerDao().findCustomerById(id)
                 CoroutineScope(Job() + Dispatchers.Main).launch {
                     completion(theCustomer)
                 }
             }
-        }
     }
 
     fun fetchAllCustomer() {

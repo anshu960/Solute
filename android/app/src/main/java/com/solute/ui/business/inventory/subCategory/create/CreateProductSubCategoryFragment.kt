@@ -1,22 +1,21 @@
-package com.solute.ui.business.inventory.subCategory
+package com.solute.ui.business.inventory.subCategory.create
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
-import com.friendly.framework.UtilityActivity
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
-import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
-import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 
-class CreateProductSubCategoryActivity : UtilityActivity() {
-
+class CreateProductSubCategoryFragment : Fragment() {
     var productCategoryText : TextView? = null
     var productSubCategoryText : TextInputEditText? = null
     var saveBtn : Button? = null
@@ -26,27 +25,28 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
     var selectedCategoryName = ""
     var selectedCategory : ProductCategory? = null
     var backButton : ImageButton? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_product_sub_category)
-        productCategoryText = findViewById(R.id.create_sub_category_category_txt)
-        productCategoryText?.setOnClickListener { showCategorySellection() }
-        productSubCategoryText = findViewById(R.id.create_sb_category_name_tiet)
-        saveBtn = findViewById(R.id.create_sb_category_save_btn)
-        saveBtn?.setOnClickListener { onClickSave() }
-
-        ProductSubCategoryHandler.shared().activity = this
-
-        if(ProductCategoryHandler.shared().repository.allCategory.value != null && ProductCategoryHandler.shared().repository.allCategory.value!!.isNotEmpty()){
-            allCategoory = ProductCategoryHandler.shared().repository.allCategory.value as ArrayList<ProductCategory>
-        }else{
-            ProductCategoryHandler.shared().fetchAllProductCategory()
+        ProductCategoryHandler.shared().repository.allCategory.observe(this){
+            if(!it.isNullOrEmpty()){
+                allCategoory = it as ArrayList<ProductCategory>
+            }
         }
-        backButton = findViewById(R.id.create_sub_category_header_back)
-        backButton?.setOnClickListener { onBackPressed() }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_create_product_sub_category, container, false)
+        productCategoryText = view.findViewById(R.id.create_sub_category_category_txt)
+        productCategoryText?.setOnClickListener { showCategorySellection() }
+        productSubCategoryText = view.findViewById(R.id.create_sb_category_name_tiet)
+        saveBtn = view.findViewById(R.id.create_sb_category_save_btn)
+        saveBtn?.setOnClickListener { onClickSave() }
+        return view
+    }
     fun showCategorySellection(){
         var allCategoryNames : Array<String> = Array(allCategoory.count()){""}
         var index = 0
@@ -61,7 +61,7 @@ class CreateProductSubCategoryActivity : UtilityActivity() {
             index+=1
         }
         index = -1
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Choose an Category")
         builder.setSingleChoiceItems(allCategoryNames, selectedCategoryIndex) { dialog, which ->
             productCategoryText?.text = allCategoryNames[which]
