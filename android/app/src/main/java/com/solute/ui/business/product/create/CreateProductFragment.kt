@@ -255,7 +255,7 @@ class CreateProductFragment : Fragment() {
     }
 
     fun onClickAddImage(){
-        App.shared().mainActivity?.getImageUrl {
+        App.shared().mainActivity?.getImageUrlFromGallery {
             fileUri = it
             val picasso = Picasso.get()
             picasso.load(it).into(this.imageView)
