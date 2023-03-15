@@ -54,6 +54,7 @@ class ProductHandler {
                     val product = gson.fromJson(item.toString(),Product::class.java)
                     viewModel?.insertProduct(product)
                 }
+                viewModel?.loadProduct()
             }
         }
     }
@@ -126,9 +127,8 @@ class ProductHandler {
                 val payload = anyData.getJSONObject(KeyConstant.payload)
                 if(payload.has(KeyConstant._id)){
                     val product = gson.fromJson(payload.toString(),Product::class.java)
-                    viewModel?.insertProduct(product)
+                    viewModel?.fetchAllProduct()
                     onDeleteProductCallBack?.let { it1 -> it1(product) }
-                    viewModel?.loadProduct()
                 }else{
                     onDeleteProductCallBack?.let { it1 -> it1(null) }
                 }

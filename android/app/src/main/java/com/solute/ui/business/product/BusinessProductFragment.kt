@@ -56,7 +56,7 @@ class BusinessProductFragment : Fragment() {
             allProduct = it as ArrayList<Product>
             this.reload()
         }
-        ProductHandler.shared().viewModel?.fetchAllProduct()
+
         onDetectNewBarcode = {barCode->
             CoroutineScope(Job() + Dispatchers.Main).launch {
                 CartHandler.shared().addToCart(barCode){status->
@@ -120,6 +120,7 @@ class BusinessProductFragment : Fragment() {
             }
         })
         ProductHandler.shared().viewModel?.loadProduct()
+        ProductHandler.shared().viewModel?.fetchAllProduct()
         reload()
         return view
     }

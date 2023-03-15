@@ -119,6 +119,11 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
         request.put(KeyConstant.businessID, business.value?.Id)
         request.put(KeyConstant.userId, user._id)
         request.put(KeyConstant._id, product.Id)
+        product.IsDeleted = true
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            DatabaseHandler.shared().database.productDao()
+                .update(product)
+        }
         SocketService.shared().send(SocketEvent.DELETE_PRODUCT, request)
     }
 

@@ -14,6 +14,10 @@ import com.hbb20.CountryCodePicker
 import com.solute.R
 import com.solute.app.App
 import com.solute.navigation.AppNavigator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
@@ -40,16 +44,18 @@ class LoginFragment : Fragment() {
         }
         BusinessHandler.shared().viewModal?.clearAll()
         FirebaseAuthHelper.shared().onAuthStateChange={ state, message->
-            if(state == AUTH_STATE.ERROR){
-                App.shared().mainActivity?.stopActivityIndicator()
-                App.shared().mainActivity?.toast(message)
-            } else if(state == AUTH_STATE.SENDING_OTP){
-                App.shared().mainActivity?.startActivityIndicator("Sending OTP")
-            }else if(state == AUTH_STATE.OTP_SENT){
-                App.shared().mainActivity?.runOnUiThread {
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                if(state == AUTH_STATE.ERROR){
                     App.shared().mainActivity?.stopActivityIndicator()
-                    App.shared().mainActivity?.toast("OTP Sent")
-                    AppNavigator.shared().gotToOtp()
+                    App.shared().mainActivity?.toast(message)
+                } else if(state == AUTH_STATE.SENDING_OTP){
+                    App.shared().mainActivity?.startActivityIndicator("Sending OTP")
+                }else if(state == AUTH_STATE.OTP_SENT){
+                    App.shared().mainActivity?.runOnUiThread {
+                        App.shared().mainActivity?.stopActivityIndicator()
+                        App.shared().mainActivity?.toast("OTP Sent")
+                        AppNavigator.shared().gotToOtp()
+                    }
                 }
             }
         }

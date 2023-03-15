@@ -215,7 +215,7 @@ class SyncHandler {
             request.put(KeyConstant.userId, user._id)
             request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
             request.put(KeyConstant.businessID, BusinessHandler.shared().repository.business.value?.Id)
-            request.put(KeyConstant.lastSyncDate, lastSale.CreatedAt)
+            request.put(KeyConstant.lastSyncDate, lastSale?.CreatedAt)
             SocketService.shared().send(SocketEvent.RETRIVE_SALE, request)
         }
     }

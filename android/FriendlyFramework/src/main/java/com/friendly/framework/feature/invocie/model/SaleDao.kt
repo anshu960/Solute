@@ -16,7 +16,7 @@ interface SaleDao {
     fun delete(item: Sale)
 
     @Query("select * from Sale order by SaleDate")
-    fun getRecentItem(): Sale
+    fun getRecentItem(): Sale?
 
     @Query("SELECT * FROM Sale ORDER by SaleDate")
     fun getAllItems(): List<Sale>

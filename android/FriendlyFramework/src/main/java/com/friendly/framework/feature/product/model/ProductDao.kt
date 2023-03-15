@@ -21,7 +21,7 @@ interface ProductDao {
     fun getForProduct( prodId: String?): List<Product>
 
     @Query("select * from Product WHERE BusinessID=:businessId and IsDeleted=:IsDeleted order by UpdatedAt DESC")
-    fun getProductsFor( businessId: String,IsDeleted: Boolean =false): List<Product>
+    fun getProductsFor( businessId: String,IsDeleted: Boolean = false): List<Product>
 
     @Query("select * from Product WHERE _id=:prodId order by UpdatedAt DESC LIMIT 1")
     suspend fun findById( prodId: String?): Product?

@@ -40,7 +40,7 @@ class ProductDetailBarcodeListFragment : Fragment() {
     var scanFabBtn: FloatingActionButton? = null
     var adapter : ProductBarCodeAdapter? = null
     var scannerView : PreviewView? = null
-    private lateinit var cameraExecutor: ExecutorService
+    var cameraExecutor: ExecutorService? = null
     private lateinit var barcodeBoxView: BarCodeBoxView
     var barcodeAnalyser: BarCodeAnalyzer? = null
     var onDetectNewBarcode: ((code: String) -> Unit)? = null
@@ -71,7 +71,9 @@ class ProductDetailBarcodeListFragment : Fragment() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
+        if(cameraExecutor != null){
+            cameraExecutor?.shutdown()
+        }
     }
     fun loadBarcodes(){
         ProductHandler.shared().repository.productBarCode.observe(requireParentFragment().viewLifecycleOwner){
@@ -144,7 +146,7 @@ class ProductDetailBarcodeListFragment : Fragment() {
                     .build()
                     .also {
                         it.setAnalyzer(
-                            cameraExecutor,
+                            cameraExecutor!!,
                             this.barcodeAnalyser!!
                         )
                     }
