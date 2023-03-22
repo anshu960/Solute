@@ -1,0 +1,24 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+def shared_pod
+  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
+  pod 'UtilityKit',:git=>'https://github.com/utills/UtilityKit.git'
+  pod 'Firebase/Auth'
+  pod 'SDWebImage', '~> 5.15.4'
+end
+target 'BharatBandhu' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+   shared_pod
+  # Pods for BharatBandhu
+
+  target 'BharatBandhuTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'BharatBandhuUITests' do
+    # Pods for testing
+  end
+
+end

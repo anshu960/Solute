@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>666336350240-jjd74cnaqc2iqhtilpb89garer6fcfol.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.666336350240-jjd74cnaqc2iqhtilpb89garer6fcfol</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>666336350240-0ktplc44pidbvjlaa4n6pgctsojhk9s5.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCY3QzOPz7tjisVPIG8vm1MPP-iDY5XiEc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>666336350240</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.bharat.bandhu</string>
+	<key>PROJECT_ID</key>
+	<string>fuelme-20ef9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fuelme-20ef9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:666336350240:ios:573caef010af2a606d2c45</string>
+</dict>
+</plist>

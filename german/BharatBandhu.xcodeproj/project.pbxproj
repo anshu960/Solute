@@ -1,0 +1,1023 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4A03498B29C21594002C1EC8 /* SocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03498829C21594002C1EC8 /* SocketEvent.swift */; };
+		4A03498C29C21594002C1EC8 /* SocketServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03498929C21594002C1EC8 /* SocketServiceDelegate.swift */; };
+		4A03498D29C21594002C1EC8 /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03498A29C21594002C1EC8 /* SocketService.swift */; };
+		4A03499029C215A4002C1EC8 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03498F29C215A4002C1EC8 /* ThemeColor.swift */; };
+		4A03499529C215A9002C1EC8 /* SoluteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03499229C215A9002C1EC8 /* SoluteConstants.swift */; };
+		4A03499629C215A9002C1EC8 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03499329C215A9002C1EC8 /* Keys.swift */; };
+		4A03499729C215A9002C1EC8 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03499429C215A9002C1EC8 /* Server.swift */; };
+		4A0349A629C215C9002C1EC8 /* CustomerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03499A29C215C9002C1EC8 /* CustomerHandler.swift */; };
+		4A0349A729C215C9002C1EC8 /* CustomerSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03499B29C215C9002C1EC8 /* CustomerSocketEvent.swift */; };
+		4A0349A829C215C9002C1EC8 /* CustomerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03499C29C215C9002C1EC8 /* CustomerViewModel.swift */; };
+		4A0349A929C215C9002C1EC8 /* ProductHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03499E29C215C9002C1EC8 /* ProductHandler.swift */; };
+		4A0349AA29C215C9002C1EC8 /* ProductSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03499F29C215C9002C1EC8 /* ProductSocketEvent.swift */; };
+		4A0349AB29C215C9002C1EC8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0349A029C215C9002C1EC8 /* Product.swift */; };
+		4A0349AC29C215C9002C1EC8 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0349A129C215C9002C1EC8 /* ProductViewModel.swift */; };
+		4A0349AD29C215C9002C1EC8 /* AuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0349A329C215C9002C1EC8 /* AuthenticationHandler.swift */; };
+		4A0349AE29C215C9002C1EC8 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0349A429C215C9002C1EC8 /* AuthenticationViewModel.swift */; };
+		4A0349AF29C215C9002C1EC8 /* AutenticationSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0349A529C215C9002C1EC8 /* AutenticationSocketEvent.swift */; };
+		4A0349B129C21630002C1EC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A0349B029C21630002C1EC8 /* GoogleService-Info.plist */; };
+		4A0349B329C2187D002C1EC8 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0349B229C2187D002C1EC8 /* LoginVC.swift */; };
+		4A0349B529C21890002C1EC8 /* OTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0349B429C21890002C1EC8 /* OTPVC.swift */; };
+		4A0349B729C218A0002C1EC8 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0349B629C218A0002C1EC8 /* RegisterVC.swift */; };
+		4A78B37929C5B3BB001BA426 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A78B37829C5B3BB001BA426 /* Preferences.swift */; };
+		4A78B37B29C5B70B001BA426 /* ProductListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A78B37A29C5B70B001BA426 /* ProductListVC.swift */; };
+		4A78B37E29C5B72F001BA426 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A78B37D29C5B72F001BA426 /* AccountVC.swift */; };
+		4AA8374D29C5C3C800D397C1 /* CellIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA8374C29C5C3C800D397C1 /* CellIdentifiers.swift */; };
+		4AA8375029C5C3FF00D397C1 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA8374E29C5C3FF00D397C1 /* ProductCell.swift */; };
+		4AA8375129C5C3FF00D397C1 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AA8374F29C5C3FF00D397C1 /* ProductCell.xib */; };
+		4AA8375A29C6119200D397C1 /* MediaFilesSocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA8375629C6119100D397C1 /* MediaFilesSocketEvent.swift */; };
+		4AA8375B29C6119200D397C1 /* MediaFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA8375729C6119100D397C1 /* MediaFiles.swift */; };
+		4AA8375C29C6119200D397C1 /* MediaFilestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA8375829C6119200D397C1 /* MediaFilestHandler.swift */; };
+		4AA8375D29C6119200D397C1 /* MediaFilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA8375929C6119200D397C1 /* MediaFilesViewModel.swift */; };
+		4AA8376029C616C600D397C1 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA8375F29C616C600D397C1 /* UIImageViewExtension.swift */; };
+		4AA8376329C6B5FA00D397C1 /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA8376229C6B5FA00D397C1 /* ToastService.swift */; };
+		4AE839E929C2143500FB7124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE839E829C2143500FB7124 /* AppDelegate.swift */; };
+		4AE839EB29C2143500FB7124 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE839EA29C2143500FB7124 /* SceneDelegate.swift */; };
+		4AE839ED29C2143500FB7124 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE839EC29C2143500FB7124 /* ViewController.swift */; };
+		4AE839F029C2143600FB7124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE839EE29C2143600FB7124 /* Main.storyboard */; };
+		4AE839F229C2143600FB7124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AE839F129C2143600FB7124 /* Assets.xcassets */; };
+		4AE839F529C2143600FB7124 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE839F329C2143600FB7124 /* LaunchScreen.storyboard */; };
+		4AE83A0029C2143700FB7124 /* BharatBandhuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE839FF29C2143700FB7124 /* BharatBandhuTests.swift */; };
+		4AE83A0A29C2143700FB7124 /* BharatBandhuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE83A0929C2143700FB7124 /* BharatBandhuUITests.swift */; };
+		4AE83A0C29C2143700FB7124 /* BharatBandhuUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE83A0B29C2143700FB7124 /* BharatBandhuUITestsLaunchTests.swift */; };
+		56D0662E33530C402C2BE284 /* Pods_BharatBandhu_BharatBandhuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F18585A90B2DB1D2ECE45C11 /* Pods_BharatBandhu_BharatBandhuUITests.framework */; };
+		B469D10DE70C481E9631BBB8 /* Pods_BharatBandhu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48EEE6F3A5467AA64D741B1 /* Pods_BharatBandhu.framework */; };
+		C64355896DA740730564120F /* Pods_BharatBandhuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFC176B083F16D6474C0D29 /* Pods_BharatBandhuTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4AE839FC29C2143700FB7124 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AE839DD29C2143500FB7124 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AE839E429C2143500FB7124;
+			remoteInfo = BharatBandhu;
+		};
+		4AE83A0629C2143700FB7124 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AE839DD29C2143500FB7124 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AE839E429C2143500FB7124;
+			remoteInfo = BharatBandhu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03670E4F30B5DC558D9418D2 /* Pods-BharatBandhu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BharatBandhu.release.xcconfig"; path = "Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu.release.xcconfig"; sourceTree = "<group>"; };
+		03CFD6A61C86CA757D4FDA7E /* Pods-BharatBandhuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BharatBandhuTests.debug.xcconfig"; path = "Target Support Files/Pods-BharatBandhuTests/Pods-BharatBandhuTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4A03498829C21594002C1EC8 /* SocketEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEvent.swift; sourceTree = "<group>"; };
+		4A03498929C21594002C1EC8 /* SocketServiceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketServiceDelegate.swift; sourceTree = "<group>"; };
+		4A03498A29C21594002C1EC8 /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		4A03498F29C215A4002C1EC8 /* ThemeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
+		4A03499229C215A9002C1EC8 /* SoluteConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoluteConstants.swift; sourceTree = "<group>"; };
+		4A03499329C215A9002C1EC8 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		4A03499429C215A9002C1EC8 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		4A03499A29C215C9002C1EC8 /* CustomerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerHandler.swift; sourceTree = "<group>"; };
+		4A03499B29C215C9002C1EC8 /* CustomerSocketEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerSocketEvent.swift; sourceTree = "<group>"; };
+		4A03499C29C215C9002C1EC8 /* CustomerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerViewModel.swift; sourceTree = "<group>"; };
+		4A03499E29C215C9002C1EC8 /* ProductHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHandler.swift; sourceTree = "<group>"; };
+		4A03499F29C215C9002C1EC8 /* ProductSocketEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSocketEvent.swift; sourceTree = "<group>"; };
+		4A0349A029C215C9002C1EC8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		4A0349A129C215C9002C1EC8 /* ProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		4A0349A329C215C9002C1EC8 /* AuthenticationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationHandler.swift; sourceTree = "<group>"; };
+		4A0349A429C215C9002C1EC8 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		4A0349A529C215C9002C1EC8 /* AutenticationSocketEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutenticationSocketEvent.swift; sourceTree = "<group>"; };
+		4A0349B029C21630002C1EC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A0349B229C2187D002C1EC8 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		4A0349B429C21890002C1EC8 /* OTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVC.swift; sourceTree = "<group>"; };
+		4A0349B629C218A0002C1EC8 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		4A78B37829C5B3BB001BA426 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		4A78B37A29C5B70B001BA426 /* ProductListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListVC.swift; sourceTree = "<group>"; };
+		4A78B37D29C5B72F001BA426 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		4AA8374C29C5C3C800D397C1 /* CellIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiers.swift; sourceTree = "<group>"; };
+		4AA8374E29C5C3FF00D397C1 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		4AA8374F29C5C3FF00D397C1 /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
+		4AA8375629C6119100D397C1 /* MediaFilesSocketEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaFilesSocketEvent.swift; sourceTree = "<group>"; };
+		4AA8375729C6119100D397C1 /* MediaFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaFiles.swift; sourceTree = "<group>"; };
+		4AA8375829C6119200D397C1 /* MediaFilestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaFilestHandler.swift; sourceTree = "<group>"; };
+		4AA8375929C6119200D397C1 /* MediaFilesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaFilesViewModel.swift; sourceTree = "<group>"; };
+		4AA8375F29C616C600D397C1 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		4AA8376229C6B5FA00D397C1 /* ToastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastService.swift; sourceTree = "<group>"; };
+		4AE839E529C2143500FB7124 /* BharatBandhu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BharatBandhu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AE839E829C2143500FB7124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4AE839EA29C2143500FB7124 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4AE839EC29C2143500FB7124 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4AE839EF29C2143600FB7124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4AE839F129C2143600FB7124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4AE839F429C2143600FB7124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4AE839F629C2143600FB7124 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AE839FB29C2143700FB7124 /* BharatBandhuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BharatBandhuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AE839FF29C2143700FB7124 /* BharatBandhuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatBandhuTests.swift; sourceTree = "<group>"; };
+		4AE83A0529C2143700FB7124 /* BharatBandhuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BharatBandhuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AE83A0929C2143700FB7124 /* BharatBandhuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatBandhuUITests.swift; sourceTree = "<group>"; };
+		4AE83A0B29C2143700FB7124 /* BharatBandhuUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatBandhuUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5359235C1641A6C34569C59F /* Pods-BharatBandhu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BharatBandhu.debug.xcconfig"; path = "Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu.debug.xcconfig"; sourceTree = "<group>"; };
+		605F3E3BFF3DF0A83706FC00 /* Pods-BharatBandhu-BharatBandhuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BharatBandhu-BharatBandhuUITests.debug.xcconfig"; path = "Target Support Files/Pods-BharatBandhu-BharatBandhuUITests/Pods-BharatBandhu-BharatBandhuUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		77159B9B27D65BD27E86C80A /* Pods-BharatBandhuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BharatBandhuTests.release.xcconfig"; path = "Target Support Files/Pods-BharatBandhuTests/Pods-BharatBandhuTests.release.xcconfig"; sourceTree = "<group>"; };
+		BEFC176B083F16D6474C0D29 /* Pods_BharatBandhuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BharatBandhuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0216FE2BDEB994831283AD3 /* Pods-BharatBandhu-BharatBandhuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BharatBandhu-BharatBandhuUITests.release.xcconfig"; path = "Target Support Files/Pods-BharatBandhu-BharatBandhuUITests/Pods-BharatBandhu-BharatBandhuUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D48EEE6F3A5467AA64D741B1 /* Pods_BharatBandhu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BharatBandhu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F18585A90B2DB1D2ECE45C11 /* Pods_BharatBandhu_BharatBandhuUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BharatBandhu_BharatBandhuUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4AE839E229C2143500FB7124 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B469D10DE70C481E9631BBB8 /* Pods_BharatBandhu.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AE839F829C2143700FB7124 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C64355896DA740730564120F /* Pods_BharatBandhuTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AE83A0229C2143700FB7124 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56D0662E33530C402C2BE284 /* Pods_BharatBandhu_BharatBandhuUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1CDCFBC69FF31AA4B461AEED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5359235C1641A6C34569C59F /* Pods-BharatBandhu.debug.xcconfig */,
+				03670E4F30B5DC558D9418D2 /* Pods-BharatBandhu.release.xcconfig */,
+				605F3E3BFF3DF0A83706FC00 /* Pods-BharatBandhu-BharatBandhuUITests.debug.xcconfig */,
+				C0216FE2BDEB994831283AD3 /* Pods-BharatBandhu-BharatBandhuUITests.release.xcconfig */,
+				03CFD6A61C86CA757D4FDA7E /* Pods-BharatBandhuTests.debug.xcconfig */,
+				77159B9B27D65BD27E86C80A /* Pods-BharatBandhuTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4A03498629C21555002C1EC8 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				4A0349B229C2187D002C1EC8 /* LoginVC.swift */,
+				4A0349B429C21890002C1EC8 /* OTPVC.swift */,
+				4A0349B629C218A0002C1EC8 /* RegisterVC.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		4A03498729C21594002C1EC8 /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				4A03498829C21594002C1EC8 /* SocketEvent.swift */,
+				4A03498929C21594002C1EC8 /* SocketServiceDelegate.swift */,
+				4A03498A29C21594002C1EC8 /* SocketService.swift */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
+		4A03498E29C215A4002C1EC8 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				4A03498F29C215A4002C1EC8 /* ThemeColor.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		4A03499129C215A9002C1EC8 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				4A03499229C215A9002C1EC8 /* SoluteConstants.swift */,
+				4A03499329C215A9002C1EC8 /* Keys.swift */,
+				4A03499429C215A9002C1EC8 /* Server.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		4A03499829C215C9002C1EC8 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				4AA8376129C6B5E100D397C1 /* ToastService */,
+				4A03499929C215C9002C1EC8 /* Customers */,
+				4A03499D29C215C9002C1EC8 /* Products */,
+				4A0349A229C215C9002C1EC8 /* Authentication */,
+				4AA8375529C610FC00D397C1 /* MediaFiles */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		4A03499929C215C9002C1EC8 /* Customers */ = {
+			isa = PBXGroup;
+			children = (
+				4A03499A29C215C9002C1EC8 /* CustomerHandler.swift */,
+				4A03499B29C215C9002C1EC8 /* CustomerSocketEvent.swift */,
+				4A03499C29C215C9002C1EC8 /* CustomerViewModel.swift */,
+			);
+			path = Customers;
+			sourceTree = "<group>";
+		};
+		4A03499D29C215C9002C1EC8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4A03499E29C215C9002C1EC8 /* ProductHandler.swift */,
+				4A03499F29C215C9002C1EC8 /* ProductSocketEvent.swift */,
+				4A0349A029C215C9002C1EC8 /* Product.swift */,
+				4A0349A129C215C9002C1EC8 /* ProductViewModel.swift */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		4A0349A229C215C9002C1EC8 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4A0349A329C215C9002C1EC8 /* AuthenticationHandler.swift */,
+				4A0349A429C215C9002C1EC8 /* AuthenticationViewModel.swift */,
+				4A0349A529C215C9002C1EC8 /* AutenticationSocketEvent.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		4A78B37C29C5B711001BA426 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4A78B37F29C5B736001BA426 /* Product */,
+				4A78B38029C5B73D001BA426 /* Account */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4A78B37F29C5B736001BA426 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				4A78B37A29C5B70B001BA426 /* ProductListVC.swift */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		4A78B38029C5B73D001BA426 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				4A78B37D29C5B72F001BA426 /* AccountVC.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		4AA8374B29C5C3B000D397C1 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				4AA8374C29C5C3C800D397C1 /* CellIdentifiers.swift */,
+				4AA8375229C5C40400D397C1 /* Product */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		4AA8375229C5C40400D397C1 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				4AA8374E29C5C3FF00D397C1 /* ProductCell.swift */,
+				4AA8374F29C5C3FF00D397C1 /* ProductCell.xib */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		4AA8375529C610FC00D397C1 /* MediaFiles */ = {
+			isa = PBXGroup;
+			children = (
+				4AA8375729C6119100D397C1 /* MediaFiles.swift */,
+				4AA8375629C6119100D397C1 /* MediaFilesSocketEvent.swift */,
+				4AA8375829C6119200D397C1 /* MediaFilestHandler.swift */,
+				4AA8375929C6119200D397C1 /* MediaFilesViewModel.swift */,
+			);
+			path = MediaFiles;
+			sourceTree = "<group>";
+		};
+		4AA8375E29C616AE00D397C1 /* Extenstions */ = {
+			isa = PBXGroup;
+			children = (
+				4AA8375F29C616C600D397C1 /* UIImageViewExtension.swift */,
+			);
+			path = Extenstions;
+			sourceTree = "<group>";
+		};
+		4AA8376129C6B5E100D397C1 /* ToastService */ = {
+			isa = PBXGroup;
+			children = (
+				4AA8376229C6B5FA00D397C1 /* ToastService.swift */,
+			);
+			path = ToastService;
+			sourceTree = "<group>";
+		};
+		4AE839DC29C2143500FB7124 = {
+			isa = PBXGroup;
+			children = (
+				4AE839E729C2143500FB7124 /* BharatBandhu */,
+				4AE839FE29C2143700FB7124 /* BharatBandhuTests */,
+				4AE83A0829C2143700FB7124 /* BharatBandhuUITests */,
+				4AE839E629C2143500FB7124 /* Products */,
+				1CDCFBC69FF31AA4B461AEED /* Pods */,
+				FF21578CC68CCDE20BE6B555 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4AE839E629C2143500FB7124 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4AE839E529C2143500FB7124 /* BharatBandhu.app */,
+				4AE839FB29C2143700FB7124 /* BharatBandhuTests.xctest */,
+				4AE83A0529C2143700FB7124 /* BharatBandhuUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4AE839E729C2143500FB7124 /* BharatBandhu */ = {
+			isa = PBXGroup;
+			children = (
+				4A0349B029C21630002C1EC8 /* GoogleService-Info.plist */,
+				4AA8375E29C616AE00D397C1 /* Extenstions */,
+				4A03499829C215C9002C1EC8 /* Features */,
+				4A03499129C215A9002C1EC8 /* Constant */,
+				4A03498E29C215A4002C1EC8 /* Theme */,
+				4A03498729C21594002C1EC8 /* Socket */,
+				4AE839E829C2143500FB7124 /* AppDelegate.swift */,
+				4A03498629C21555002C1EC8 /* OnBoarding */,
+				4AE839EA29C2143500FB7124 /* SceneDelegate.swift */,
+				4AA8374B29C5C3B000D397C1 /* cell */,
+				4A78B37829C5B3BB001BA426 /* Preferences.swift */,
+				4A78B37C29C5B711001BA426 /* Home */,
+				4AE839EC29C2143500FB7124 /* ViewController.swift */,
+				4AE839EE29C2143600FB7124 /* Main.storyboard */,
+				4AE839F129C2143600FB7124 /* Assets.xcassets */,
+				4AE839F329C2143600FB7124 /* LaunchScreen.storyboard */,
+				4AE839F629C2143600FB7124 /* Info.plist */,
+			);
+			path = BharatBandhu;
+			sourceTree = "<group>";
+		};
+		4AE839FE29C2143700FB7124 /* BharatBandhuTests */ = {
+			isa = PBXGroup;
+			children = (
+				4AE839FF29C2143700FB7124 /* BharatBandhuTests.swift */,
+			);
+			path = BharatBandhuTests;
+			sourceTree = "<group>";
+		};
+		4AE83A0829C2143700FB7124 /* BharatBandhuUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4AE83A0929C2143700FB7124 /* BharatBandhuUITests.swift */,
+				4AE83A0B29C2143700FB7124 /* BharatBandhuUITestsLaunchTests.swift */,
+			);
+			path = BharatBandhuUITests;
+			sourceTree = "<group>";
+		};
+		FF21578CC68CCDE20BE6B555 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D48EEE6F3A5467AA64D741B1 /* Pods_BharatBandhu.framework */,
+				F18585A90B2DB1D2ECE45C11 /* Pods_BharatBandhu_BharatBandhuUITests.framework */,
+				BEFC176B083F16D6474C0D29 /* Pods_BharatBandhuTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4AE839E429C2143500FB7124 /* BharatBandhu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AE83A0F29C2143700FB7124 /* Build configuration list for PBXNativeTarget "BharatBandhu" */;
+			buildPhases = (
+				FC96EEA7DBAC07066790116D /* [CP] Check Pods Manifest.lock */,
+				4AE839E129C2143500FB7124 /* Sources */,
+				4AE839E229C2143500FB7124 /* Frameworks */,
+				4AE839E329C2143500FB7124 /* Resources */,
+				B277D8335C23E4D0A4EE13BA /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BharatBandhu;
+			productName = BharatBandhu;
+			productReference = 4AE839E529C2143500FB7124 /* BharatBandhu.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4AE839FA29C2143700FB7124 /* BharatBandhuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AE83A1229C2143700FB7124 /* Build configuration list for PBXNativeTarget "BharatBandhuTests" */;
+			buildPhases = (
+				53CDABBC63D26C019C1ED5D9 /* [CP] Check Pods Manifest.lock */,
+				4AE839F729C2143700FB7124 /* Sources */,
+				4AE839F829C2143700FB7124 /* Frameworks */,
+				4AE839F929C2143700FB7124 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4AE839FD29C2143700FB7124 /* PBXTargetDependency */,
+			);
+			name = BharatBandhuTests;
+			productName = BharatBandhuTests;
+			productReference = 4AE839FB29C2143700FB7124 /* BharatBandhuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4AE83A0429C2143700FB7124 /* BharatBandhuUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AE83A1529C2143700FB7124 /* Build configuration list for PBXNativeTarget "BharatBandhuUITests" */;
+			buildPhases = (
+				AF5ABDD704B62758E384879C /* [CP] Check Pods Manifest.lock */,
+				4AE83A0129C2143700FB7124 /* Sources */,
+				4AE83A0229C2143700FB7124 /* Frameworks */,
+				4AE83A0329C2143700FB7124 /* Resources */,
+				3FC0431F938FDC031CED9591 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4AE83A0729C2143700FB7124 /* PBXTargetDependency */,
+			);
+			name = BharatBandhuUITests;
+			productName = BharatBandhuUITests;
+			productReference = 4AE83A0529C2143700FB7124 /* BharatBandhuUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4AE839DD29C2143500FB7124 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					4AE839E429C2143500FB7124 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					4AE839FA29C2143700FB7124 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 4AE839E429C2143500FB7124;
+					};
+					4AE83A0429C2143700FB7124 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 4AE839E429C2143500FB7124;
+					};
+				};
+			};
+			buildConfigurationList = 4AE839E029C2143500FB7124 /* Build configuration list for PBXProject "BharatBandhu" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4AE839DC29C2143500FB7124;
+			productRefGroup = 4AE839E629C2143500FB7124 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4AE839E429C2143500FB7124 /* BharatBandhu */,
+				4AE839FA29C2143700FB7124 /* BharatBandhuTests */,
+				4AE83A0429C2143700FB7124 /* BharatBandhuUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4AE839E329C2143500FB7124 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AA8375129C5C3FF00D397C1 /* ProductCell.xib in Resources */,
+				4AE839F529C2143600FB7124 /* LaunchScreen.storyboard in Resources */,
+				4A0349B129C21630002C1EC8 /* GoogleService-Info.plist in Resources */,
+				4AE839F229C2143600FB7124 /* Assets.xcassets in Resources */,
+				4AE839F029C2143600FB7124 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AE839F929C2143700FB7124 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AE83A0329C2143700FB7124 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3FC0431F938FDC031CED9591 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu-BharatBandhuUITests/Pods-BharatBandhu-BharatBandhuUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu-BharatBandhuUITests/Pods-BharatBandhu-BharatBandhuUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu-BharatBandhuUITests/Pods-BharatBandhu-BharatBandhuUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53CDABBC63D26C019C1ED5D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BharatBandhuTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF5ABDD704B62758E384879C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BharatBandhu-BharatBandhuUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B277D8335C23E4D0A4EE13BA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BharatBandhu/Pods-BharatBandhu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC96EEA7DBAC07066790116D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BharatBandhu-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4AE839E129C2143500FB7124 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A0349AC29C215C9002C1EC8 /* ProductViewModel.swift in Sources */,
+				4A03499729C215A9002C1EC8 /* Server.swift in Sources */,
+				4A0349B329C2187D002C1EC8 /* LoginVC.swift in Sources */,
+				4A0349AE29C215C9002C1EC8 /* AuthenticationViewModel.swift in Sources */,
+				4AE839ED29C2143500FB7124 /* ViewController.swift in Sources */,
+				4A0349A829C215C9002C1EC8 /* CustomerViewModel.swift in Sources */,
+				4A0349B729C218A0002C1EC8 /* RegisterVC.swift in Sources */,
+				4A03499529C215A9002C1EC8 /* SoluteConstants.swift in Sources */,
+				4AE839E929C2143500FB7124 /* AppDelegate.swift in Sources */,
+				4AA8376329C6B5FA00D397C1 /* ToastService.swift in Sources */,
+				4A03498D29C21594002C1EC8 /* SocketService.swift in Sources */,
+				4A0349AF29C215C9002C1EC8 /* AutenticationSocketEvent.swift in Sources */,
+				4A0349A729C215C9002C1EC8 /* CustomerSocketEvent.swift in Sources */,
+				4A0349AA29C215C9002C1EC8 /* ProductSocketEvent.swift in Sources */,
+				4AA8375029C5C3FF00D397C1 /* ProductCell.swift in Sources */,
+				4AE839EB29C2143500FB7124 /* SceneDelegate.swift in Sources */,
+				4A78B37929C5B3BB001BA426 /* Preferences.swift in Sources */,
+				4AA8375B29C6119200D397C1 /* MediaFiles.swift in Sources */,
+				4AA8376029C616C600D397C1 /* UIImageViewExtension.swift in Sources */,
+				4A78B37B29C5B70B001BA426 /* ProductListVC.swift in Sources */,
+				4A0349AD29C215C9002C1EC8 /* AuthenticationHandler.swift in Sources */,
+				4A0349B529C21890002C1EC8 /* OTPVC.swift in Sources */,
+				4A0349AB29C215C9002C1EC8 /* Product.swift in Sources */,
+				4AA8375D29C6119200D397C1 /* MediaFilesViewModel.swift in Sources */,
+				4A03498C29C21594002C1EC8 /* SocketServiceDelegate.swift in Sources */,
+				4A78B37E29C5B72F001BA426 /* AccountVC.swift in Sources */,
+				4AA8375C29C6119200D397C1 /* MediaFilestHandler.swift in Sources */,
+				4AA8374D29C5C3C800D397C1 /* CellIdentifiers.swift in Sources */,
+				4A03499029C215A4002C1EC8 /* ThemeColor.swift in Sources */,
+				4A0349A929C215C9002C1EC8 /* ProductHandler.swift in Sources */,
+				4A03499629C215A9002C1EC8 /* Keys.swift in Sources */,
+				4A0349A629C215C9002C1EC8 /* CustomerHandler.swift in Sources */,
+				4AA8375A29C6119200D397C1 /* MediaFilesSocketEvent.swift in Sources */,
+				4A03498B29C21594002C1EC8 /* SocketEvent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AE839F729C2143700FB7124 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE83A0029C2143700FB7124 /* BharatBandhuTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AE83A0129C2143700FB7124 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE83A0C29C2143700FB7124 /* BharatBandhuUITestsLaunchTests.swift in Sources */,
+				4AE83A0A29C2143700FB7124 /* BharatBandhuUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4AE839FD29C2143700FB7124 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AE839E429C2143500FB7124 /* BharatBandhu */;
+			targetProxy = 4AE839FC29C2143700FB7124 /* PBXContainerItemProxy */;
+		};
+		4AE83A0729C2143700FB7124 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AE839E429C2143500FB7124 /* BharatBandhu */;
+			targetProxy = 4AE83A0629C2143700FB7124 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4AE839EE29C2143600FB7124 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AE839EF29C2143600FB7124 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4AE839F329C2143600FB7124 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AE839F429C2143600FB7124 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4AE83A0D29C2143700FB7124 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4AE83A0E29C2143700FB7124 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4AE83A1029C2143700FB7124 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5359235C1641A6C34569C59F /* Pods-BharatBandhu.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BharatBandhu/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bharat Grocery Store";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4AE83A1129C2143700FB7124 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03670E4F30B5DC558D9418D2 /* Pods-BharatBandhu.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BharatBandhu/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Bharat Grocery Store";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4AE83A1329C2143700FB7124 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03CFD6A61C86CA757D4FDA7E /* Pods-BharatBandhuTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu.BharatBandhuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BharatBandhu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BharatBandhu";
+			};
+			name = Debug;
+		};
+		4AE83A1429C2143700FB7124 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77159B9B27D65BD27E86C80A /* Pods-BharatBandhuTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu.BharatBandhuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BharatBandhu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BharatBandhu";
+			};
+			name = Release;
+		};
+		4AE83A1629C2143700FB7124 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 605F3E3BFF3DF0A83706FC00 /* Pods-BharatBandhu-BharatBandhuUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu.BharatBandhuUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BharatBandhu;
+			};
+			name = Debug;
+		};
+		4AE83A1729C2143700FB7124 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0216FE2BDEB994831283AD3 /* Pods-BharatBandhu-BharatBandhuUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FXA6SMGMB4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bharat.bandhu.BharatBandhuUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BharatBandhu;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4AE839E029C2143500FB7124 /* Build configuration list for PBXProject "BharatBandhu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AE83A0D29C2143700FB7124 /* Debug */,
+				4AE83A0E29C2143700FB7124 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AE83A0F29C2143700FB7124 /* Build configuration list for PBXNativeTarget "BharatBandhu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AE83A1029C2143700FB7124 /* Debug */,
+				4AE83A1129C2143700FB7124 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AE83A1229C2143700FB7124 /* Build configuration list for PBXNativeTarget "BharatBandhuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AE83A1329C2143700FB7124 /* Debug */,
+				4AE83A1429C2143700FB7124 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AE83A1529C2143700FB7124 /* Build configuration list for PBXNativeTarget "BharatBandhuUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AE83A1629C2143700FB7124 /* Debug */,
+				4AE83A1729C2143700FB7124 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4AE839DD29C2143500FB7124 /* Project object */;
+}
