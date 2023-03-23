@@ -34,7 +34,12 @@ class LoginVC: UtilityViewController {
             self.startActivity()
             AuthenticationViewModel.shared.onOtpSent={message in
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "GoToOTP", sender: self)
+                    self.stopActivity()
+                    if(message == "sent"){
+                        self.performSegue(withIdentifier: "GoToOTP", sender: self)
+                    }else{
+                        self.alert(with: message)
+                    }
                 }
             }
             if(mobile.trim() == "9455068676"){

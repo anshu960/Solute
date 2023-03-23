@@ -45,8 +45,13 @@ class AccountVC: UIViewController {
             mobileLbl.text = mobile
         }
         if let img = CustomerViewModel.shared.barcode{
+            self.barcodeImage.isHidden = false
             self.barcodeImage.image = img
             self.barcodeLbl.text = CustomerViewModel.shared.membershipId
+        }else{
+            CustomerViewModel.shared.loadMembership()
+            self.barcodeImage.isHidden = true
+            self.barcodeLbl.text = "Membership Details not found, Please wait for sometime or visit our nearest store in your city to get membership"
         }
     }
     

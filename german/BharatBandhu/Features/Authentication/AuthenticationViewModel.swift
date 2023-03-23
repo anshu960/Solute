@@ -40,10 +40,12 @@ class AuthenticationViewModel{
             .verifyPhoneNumber(mobileNumber, uiDelegate: nil) { verifyID, error in
                 if let err = error{
                     self.onOtpSent?(err.localizedDescription)
-                }else{
+                }else if let id = verifyID,id != ""{
+                    AuthenticationViewModel.shared.verificationId = id
                     self.onOtpSent?("sent")
+                }else{
+                    self.onOtpSent?("Oops, somthing went wrong")
                 }
-                self.verificationId = verifyID ?? ""
                 self.error = error?.localizedDescription ?? ""
             }
     }
