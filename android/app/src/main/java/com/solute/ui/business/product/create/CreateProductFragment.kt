@@ -33,6 +33,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.shuhart.stepview.StepView
 import com.solute.app.App
 import com.solute.R
+import com.solute.app.ToastService
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
@@ -51,7 +52,7 @@ class CreateProductFragment : Fragment() {
     var vat = 0F
     var cess = 0F
     var totalTax = 0F
-    var isTaxIncluded = true
+    var isTaxIncluded = false
     var finalPrice = 0F
     var fileUri : Uri? = null
     var product: Product? = null
@@ -205,7 +206,11 @@ class CreateProductFragment : Fragment() {
         productTotalTaxEditText = view.findViewById(R.id.create_product_total_tax_tiet)
 
         taxIncludedCheckBox = view.findViewById(R.id.create_product_is_tax_included_check_box)
-        taxIncludedCheckBox?.isSelected = true
+        taxIncludedCheckBox?.isSelected = false
+        taxIncludedCheckBox?.setOnCheckedChangeListener { buttonView, isChecked ->
+                isTaxIncluded = isChecked
+                calculateTaxAndPrice()
+            }
 
         productTaxFinalPriceLayout = view.findViewById(R.id.create_product_tax_finial_price_til)
         productTaxFinalPriceEditText = view.findViewById(R.id.create_product_tax_finial_price_tiet)
@@ -342,10 +347,6 @@ class CreateProductFragment : Fragment() {
         val prdVAT = productVATEditText?.text.toString()
         val prdCESS = productCESSEditText?.text.toString()
         var taxApplied = 0F
-
-        if(taxIncludedCheckBox != null){
-            isTaxIncluded = taxIncludedCheckBox!!.isSelected
-        }
 
         if(prdMMRP.isNotEmpty()){
             try {

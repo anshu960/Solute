@@ -16,6 +16,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.customer.handler.CustomerHandler
@@ -27,6 +29,7 @@ import com.friendly.framework.qr.QRCodeUtill
 import com.google.gson.Gson
 import com.solute.app.App
 import com.solute.R
+import com.solute.ui.business.barcode.BarcodeHelper
 import com.solute.utility.SMSManager
 import com.solute.utility.WhatsappManager
 import kotlinx.coroutines.CoroutineScope
@@ -35,16 +38,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [InvoiceDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InvoiceDetailsFragment : Fragment() {
     private val PRINT_SERVICE: Int = 0
     var business = BusinessHandler.shared().repository.business.value
@@ -52,11 +45,7 @@ class InvoiceDetailsFragment : Fragment() {
     var receiptData = JSONObject()
     var customerInvoice: CustomerInvoice? = null
     var sales: ArrayList<Sale> = arrayListOf()
-    var qrImage: ImageView? = null
 
-    var subTotal: TextView? = null
-    var discount: TextView? = null
-    var total: TextView? = null
     var messageButton: ImageButton? = null
     var shareButton: ImageButton? = null
     var whatsappButton: ImageButton? = null
@@ -66,8 +55,30 @@ class InvoiceDetailsFragment : Fragment() {
     var whatsappTitle: TextView? = null
     var customer: Customer? = null
     var pdfView : WebView? = null
-    val scope = CoroutineScope(Job() + Dispatchers.Main)
+    private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
+    var salesRecycler : RecyclerView? = null
+    var invoiceDateCardView : CardView? = null
+    var businessCardView : CardView? = null
+    var customerCardView : CardView? = null
+    var itemDetailsCardView : CardView? = null
+
+    var invoicenumberTv : TextView? = null
+    var invoiceDateTv : TextView? = null
+    var businessNameTv : TextView? = null
+    var businessMobileTv : TextView? = null
+    var businessAddressTv : TextView? = null
+
+    var customerNameTv : TextView? = null
+    var customerMobileTv : TextView? = null
+    var customerAddressTv : TextView? = null
+
+    var subTotalTv : TextView? = null
+    var taxTv : TextView? = null
+    var discountTv : TextView? = null
+    var totalTv : TextView? = null
+    var barcodeIv : ImageView? = null
+    var qrcodeIv : ImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +86,25 @@ class InvoiceDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_invoice_details, container, false)
+        salesRecycler = view.findViewById(R.id.items_recycler)
+        customerCardView = view.findViewById(R.id.customer_cv)
+        invoiceDateTv = view.findViewById(R.id.invoice_date_tv)
+        businessNameTv = view.findViewById(R.id.business_name_tv)
+        businessMobileTv = view.findViewById(R.id.business_mobile_tv)
+        businessAddressTv = view.findViewById(R.id.business_address_tv)
+        customerNameTv = view.findViewById(R.id.customer_name_tv)
+        customerMobileTv = view.findViewById(R.id.customer_mobile_tv)
+        customerAddressTv = view.findViewById(R.id.customer_address_tv)
+
+        invoicenumberTv = view.findViewById(R.id.invoice_number_tv)
+        subTotalTv = view.findViewById(R.id.subtotal_tv)
+        discountTv = view.findViewById(R.id.discount_tv)
+        taxTv = view.findViewById(R.id.tax_tv)
+        totalTv = view.findViewById(R.id.total_tv)
+        barcodeIv = view.findViewById(R.id.barcode_iv)
+        qrcodeIv = view.findViewById(R.id.qr_iv)
+
+
         pdfView = view.findViewById(R.id.receipt_details_pdf_img)
         messageButton = view.findViewById(R.id.receipt_details_receipt_message_btn)
         shareButton = view.findViewById(R.id.receipt_details_receipt_share_btn)
@@ -129,11 +159,11 @@ class InvoiceDetailsFragment : Fragment() {
         }
         InvoiceHandler.shared().repository.customerInvoice.observe(App.shared().mainActivity!!) {
             this.customerInvoice = it
-
             scope.launch { reloadData() }
         }
         CustomerHandler.shared().repository.customerLiveData.observe(App.shared().mainActivity!!) {
             this.customer = it
+            scope.launch { reloadData() }
         }
         if(InvoiceHandler.shared().repository.customerInvoice.value != null){
             this.customerInvoice = InvoiceHandler.shared().repository.customerInvoice.value
@@ -193,27 +223,58 @@ class InvoiceDetailsFragment : Fragment() {
 
     fun reloadData() {
         pupulateFooter()
-        if (customerInvoice != null) {
+        if (customerInvoice != null && customerInvoice?.ShareLink != null) {
+            if(this.context != null){
+                val adapter = InvoiceDetailsAdapter(requireContext(), customerInvoice!!.sales)
+                this.salesRecycler?.layoutManager = LinearLayoutManager(requireContext())
+                this.salesRecycler?.adapter = adapter
+            }
+            invoicenumberTv?.text = "INV #${customerInvoice?.invoiceID}"
             val qrBitmap =
-                QRCodeUtill().getQRImage("https://solute.app/#/receipt?id=${customerInvoice!!.invoiceID}")
-            qrImage?.setImageBitmap(qrBitmap)
+                QRCodeUtill().getQRImage(customerInvoice!!.ShareLink!!)
+            qrcodeIv?.setImageBitmap(qrBitmap)
+            BarcodeHelper().generateBarcode(customerInvoice!!.invoiceID.toString(),this.barcodeIv)
+            invoiceDateTv?.text = customerInvoice?.invoiceDate
+            businessNameTv?.text = business?.Name
+            businessMobileTv?.text = business?.MobileNumber
+            businessAddressTv?.text = business?.Address
         }
         loadShareDetails()
         if(customerInvoice != null && customerInvoice!!.customerID != null && customer == null){
             CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){cust->
                 scope.launch {
                     customer = cust
+                    populateCustomerInfo()
+                    if(cust != null){
+                        customerCardView?.visibility = View.VISIBLE
+                    }
+                    customer = cust
                     val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
-                    pdfView!!.getSettings().setLoadWithOverviewMode(true);
-                    pdfView!!.getSettings().setUseWideViewPort(true);
+                    pdfView!!.settings.loadWithOverviewMode = true;
+                    pdfView!!.settings.useWideViewPort = true;
                     pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
                 }
             }
         }else if(customerInvoice != null){
-            val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
-            pdfView!!.getSettings().setLoadWithOverviewMode(true);
-            pdfView!!.getSettings().setUseWideViewPort(true);
-            pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
+            if(customer != null){
+                populateCustomerInfo()
+                customerCardView?.visibility = View.VISIBLE
+            }else{
+                customerCardView?.visibility = View.GONE
+            }
+//            val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
+//            pdfView!!.settings.loadWithOverviewMode = true;
+//            pdfView!!.settings.useWideViewPort = true;
+//            pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
+        }
+    }
+
+    fun populateCustomerInfo(){
+        customerNameTv?.text = customer?.Name
+        customerMobileTv?.text = customer?.MobileNumber
+        customerAddressTv?.text = customer?.Address
+        if(customer?.Address.isNullOrEmpty()){
+            customerAddressTv?.visibility = View.GONE
         }
     }
 
@@ -221,14 +282,16 @@ class InvoiceDetailsFragment : Fragment() {
         var subTotal = 0F
         var finalPrice = 0F
         sales.forEach {
-            subTotal = subTotal + it.FinalPrice!!
-            finalPrice = finalPrice + it.FinalPrice!!
+            subTotal += it.FinalPrice!!
+            finalPrice += it.FinalPrice!!
         }
         if (customerInvoice != null && customerInvoice!!.instantDiscount != null) {
-            finalPrice = finalPrice - customerInvoice!!.instantDiscount!!
+            finalPrice -= customerInvoice!!.instantDiscount!!
         }
-        this.subTotal?.text = "₹ " + subTotal.toString()
-        this.total?.text = "₹ " + finalPrice.toString()
+        discountTv?.text = "₹ " + customerInvoice?.instantDiscount.toString()
+        this.subTotalTv?.text = "₹ " + customerInvoice?.totalPrice.toString()
+        this.taxTv?.text = "₹ " + customerInvoice?.Tax.toString()
+        this.totalTv?.text = "₹ " + customerInvoice?.finalPrice.toString()
     }
     fun createWebPagePrint(webView: WebView) {
         /*if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)

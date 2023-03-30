@@ -10,7 +10,6 @@ import com.friendly.framework.UtilityViewController
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.database.DatabaseHandler
 import com.friendly.framework.dataclass.FriendlyProfile
-import com.friendly.framework.dataclass.Task
 import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.firebase.FirebaseApp
@@ -26,7 +25,6 @@ class App: Application() {
     var fragment: Fragment? = null
     var socketUrl = ""
     var selectedProfiles: ArrayList<ContactsContract.Profile> = ArrayList<ContactsContract.Profile>()
-    var selectedTask: Task? = null
     init {
         instance = this
     }
@@ -82,8 +80,8 @@ class App: Application() {
     }
 
     fun sync(){
-        FriendlyProfile().downloadSentFriendRequest()
-        FriendlyProfile().downloadReceivedFriendRequest()
+//        FriendlyProfile().downloadSentFriendRequest()
+//        FriendlyProfile().downloadReceivedFriendRequest()
     }
 
     fun getCurrentActivity():UtilityViewController?{

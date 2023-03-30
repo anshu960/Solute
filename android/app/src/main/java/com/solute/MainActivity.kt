@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -32,7 +31,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.crashlytics.internal.model.CrashlyticsReport.Session.User
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
@@ -116,7 +114,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         SocketService.shared().repository.socketConnectionStatus.observe(this) {connectionStatus->
             when (connectionStatus) {
                 CONNECTION_STATUS.CONNECTED -> {
-                    networkStatusCard?.visibility = View.VISIBLE
+                    networkStatusCard?.visibility = View.GONE
                     networkStatus?.text = "Connected"
                     networkStatusCard?.setCardBackgroundColor(ContextCompat.getColor(this, R.color.colorThemePrimary))
                 }
