@@ -108,6 +108,6 @@ dist
 ./public/*
 
 
-.*/Pods/*
+
 ./BharatBandhu/Pods/*
 ./german/Pods/*
