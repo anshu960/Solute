@@ -5,6 +5,7 @@ def shared_pod
   pod 'UtilityKit',:git=>'https://github.com/utills/UtilityKit.git'
   pod 'Firebase/Auth'
   pod 'SDWebImage', '~> 5.15.4'
+  pod 'RealmSwift', '~>10'
 end
 target 'BharatBandhu' do
   # Comment the next line if you don't want to use dynamic frameworks

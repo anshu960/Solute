@@ -14,6 +14,7 @@ import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.squareup.picasso.Picasso
 
 import kotlinx.coroutines.CoroutineScope
@@ -96,10 +97,7 @@ class SelfBusinessProfileInfoFragment : Fragment() {
         if (business != null) {
             BusinessHandler.shared().onDeleteBusinessResponse={
                 CoroutineScope(Job() + Dispatchers.Main).launch {
-                    App.shared().mainActivity?.onBackPressed()
-                    App.shared().mainActivity?.onBackPressed()
-                    App.shared().mainActivity?.onBackPressed()
-                    App.shared().mainActivity?.onBackPressed()
+                    AppNavigator.shared().navigateToHome()
                 }
             }
             BusinessHandler.shared().viewModal?.deleteBusiness(business)

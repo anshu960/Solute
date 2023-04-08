@@ -15,6 +15,7 @@ import com.friendly.framework.feature.employee.model.Employee
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,7 +75,7 @@ class CreateEmployeeFragment : Fragment() {
         if(employee != null){
             EmployeeHandler.shared().viewModel?.fetchAllEmployee()
             App.shared().mainActivity?.toast("Request Sent, please ask your employee to accept the request")
-            App.shared().mainActivity?.onBackPressed()
+            AppNavigator.shared().goBack()
             EmployeeHandler.shared().repository.employeeLiveData.postValue(null)
         }
     }

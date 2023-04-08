@@ -18,6 +18,7 @@ import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryV
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.solute.ui.business.inventory.category.ProductCategoryAdapter
 
 class SelectCategoryFragment : Fragment() {
@@ -82,7 +83,7 @@ class SelectCategoryFragment : Fragment() {
     fun reload() {
         this.productCategoryAdapter = this.context?.let {
             ProductCategoryAdapter(it, this, allCategoory) { category ->
-                App.shared().mainActivity?.onBackPressed()
+                AppNavigator.shared().goBack()
                 ProductCategoryHandler.shared().onSelectCategory?.let { it1 -> it1(category) }
             }
         }

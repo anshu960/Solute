@@ -19,6 +19,7 @@ import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCat
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
 
 
@@ -98,7 +99,7 @@ class SelectProductSubCategoryFragment : Fragment() {
     fun reload() {
         this.productSubCategoryAdapter = this.context?.let {
             ProductSubCategoryAdapter(it, this, allSubCategoory) { subCategory ->
-                App.shared().mainActivity?.onBackPressed()
+                AppNavigator.shared().goBack()
                 ProductSubCategoryHandler.shared().onSelectSubCategory?.let { it1 -> it1(subCategory) }
             }
         }

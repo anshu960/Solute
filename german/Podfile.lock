@@ -32,6 +32,11 @@ PODS:
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (3.1.0)
   - PromisesObjC (2.2.0)
+  - Realm (10.37.2):
+    - Realm/Headers (= 10.37.2)
+  - Realm/Headers (10.37.2)
+  - RealmSwift (10.37.2):
+    - Realm (= 10.37.2)
   - SDWebImage (5.15.5):
     - SDWebImage/Core (= 5.15.5)
   - SDWebImage/Core (5.15.5)
@@ -42,6 +47,7 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Auth
+  - RealmSwift (~> 10)
   - SDWebImage (~> 5.15.4)
   - Socket.IO-Client-Swift (~> 15.2.0)
   - UtilityKit (from `https://github.com/utills/UtilityKit.git`)
@@ -55,6 +61,8 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - PromisesObjC
+    - Realm
+    - RealmSwift
     - SDWebImage
     - Socket.IO-Client-Swift
     - Starscream
@@ -76,11 +84,13 @@ SPEC CHECKSUMS:
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   GTMSessionFetcher: c9e714f7eec91a55641e2bab9f45fd83a219b882
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  Realm: 09e17879e909fafc5336864bff22272de9bd11bf
+  RealmSwift: adaf8f6fd925b41447089fcfab71b9b7cdc3982d
   SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   UtilityKit: 062a28b634b743a7a0b20e57eae16a26d2a62bbe
 
-PODFILE CHECKSUM: a6115ed58d9c4dc5be8457b7a9c6f69dc7c4ab63
+PODFILE CHECKSUM: ccf043091e5ce4f268d96dbd427be0a024d76f69
 
 COCOAPODS: 1.11.3

@@ -17,6 +17,7 @@ import com.friendly.framework.feature.productSubCategory.handler.ProductSubCateg
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.app.App
+import com.solute.navigation.AppNavigator
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -115,7 +116,7 @@ class ProductDetailsFragment : Fragment() {
                 if(it != null){
                     App.shared().mainActivity?.runOnUiThread {
                         App.shared().mainActivity?.toastLong("Product Deleted Successfully");
-                        App.shared().mainActivity?.onBackPressed()
+                        AppNavigator.shared().goBack()
                     }
                 }
             }

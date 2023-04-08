@@ -34,6 +34,7 @@ import com.shuhart.stepview.StepView
 import com.solute.app.App
 import com.solute.R
 import com.solute.app.ToastService
+import com.solute.navigation.AppNavigator
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
@@ -450,7 +451,7 @@ class CreateProductFragment : Fragment() {
         }
         ProductCategoryHandler.shared().onCreateNewCategory={
             activity?.runOnUiThread {
-                activity?.onBackPressed()
+                AppNavigator.shared().goBack()
             }
             Handler(Looper.getMainLooper()).postDelayed({
                 this.selectedCategory = it
@@ -470,9 +471,7 @@ class CreateProductFragment : Fragment() {
             }, 500)
         }
         ProductSubCategoryHandler.shared().onCreateNewSubCategory={
-            activity?.runOnUiThread {
-                App.shared().mainActivity?.onBackPressed()
-            }
+            AppNavigator.shared().goBack()
             Handler(Looper.getMainLooper()).postDelayed({
                 this.selectedSubCategory = it
                 subCategoryEditText?.setText(it.Name)
@@ -528,10 +527,9 @@ class CreateProductFragment : Fragment() {
                     App.shared().mainActivity?.toastLong("Product Created, Uploading Image")
                     uploadImageInFirebase(product)
                 }else{
-                    this.onBackPressed()
-                    this.onBackPressed()
-                    this.onBackPressed()
-                    this.activity?.onBackPressed()
+                    AppNavigator.shared().goBack()
+                    AppNavigator.shared().goBack()
+                    AppNavigator.shared().goBack()
                 }
             }
         }else{
@@ -565,7 +563,7 @@ class CreateProductFragment : Fragment() {
                 }
             }
         }else{
-            activity?.onBackPressed()
+            AppNavigator.shared().goBack()
         }
     }
 }

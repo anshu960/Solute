@@ -87,6 +87,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
                 R.id.business_employee,
                 R.id.business_customers
             ), drawerLayout
+
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -154,6 +155,12 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
     }
     fun showSideMenu(){
         binding.appBar.toolBarMain.visibility = View.VISIBLE
+    }
+
+    override fun onBackPressed() {
+        if(navController.currentDestination?.id != R.id.business_list){
+            super.onBackPressed()
+        }
     }
 
 
