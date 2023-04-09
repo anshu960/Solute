@@ -11,9 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/transparent"
         app:boxBackgroundColor="@color/transparent"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,27 +25,60 @@
             android:id="@+id/create_customer_name_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name" />
+            android:background="@drawable/input_field_background"
+            android:hint="@string/name"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingLeft="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/countrycode"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_countryPreference="IN"
+        app:ccp_defaultNameCode="IN"
+        app:ccp_defaultPhoneCode="91"
+        app:ccp_rememberLastSelection="true"
+        app:ccp_showArrow="true"
+        app:ccp_showFlag="true"
+        app:ccp_showNameCode="true"
+        app:ccp_textGravity="CENTER"
+        app:ccp_textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/create_customer_email_til"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_customer_name_til" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/create_customer_mobile_til"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="@color/transparent"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/transparent"
+        app:boxBackgroundColor="@color/transparent"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/countrycode"
         app:layout_constraintTop_toBottomOf="@+id/create_customer_name_til">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_customer_mobile_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/input_field_background"
+            android:hint="@string/mobile_number"
             android:inputType="number"
-            android:hint="@string/mobile_number" />
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingLeft="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -51,7 +88,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/transparent"
         app:boxBackgroundColor="@color/transparent"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_customer_mobile_til">
@@ -60,7 +100,11 @@
             android:id="@+id/create_customer_email_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email_optional" />
+            android:background="@drawable/input_field_background"
+            android:hint="@string/email_optional"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingLeft="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -70,7 +114,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/transparent"
         app:boxBackgroundColor="@color/transparent"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_customer_email_til">
@@ -79,8 +126,12 @@
             android:id="@+id/create_customer_barcode_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/input_field_background"
+            android:hint="@string/barcode_optional"
             android:inputType="number"
-            android:hint="@string/barcode_optional" />
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingLeft="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

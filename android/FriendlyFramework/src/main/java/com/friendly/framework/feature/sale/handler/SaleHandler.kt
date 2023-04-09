@@ -40,16 +40,18 @@ class SaleHandler {
                 entries.forEach {
                     allSales.addAll(it.sales)
                 }
-                var splitted = allSales.chunked((allSales.count()/4).toInt())
-                splitted.forEach {salesChunk->
-                    var totalQuantity = 0
-                    salesChunk.forEach {
-                        totalQuantity += it.Quantity!!
+                if(allSales.isNotEmpty()){
+                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    splitted.forEach {salesChunk->
+                        var totalQuantity = 0
+                        salesChunk.forEach {
+                            totalQuantity += it.Quantity!!
+                        }
+                        if(totalQuantity > maxValue){
+                            maxValue = totalQuantity
+                        }
+                        graphData.add(totalQuantity)
                     }
-                    if(totalQuantity > maxValue){
-                        maxValue = totalQuantity
-                    }
-                    graphData.add(totalQuantity)
                 }
                 completion(graphData,maxValue)
             }
@@ -72,16 +74,18 @@ class SaleHandler {
                 entries.forEach {
                     allSales.addAll(it.sales)
                 }
-                var splitted = allSales.chunked((allSales.count()/4).toInt())
-                splitted.forEach {salesChunk->
-                    var totalValue = 0F
-                    salesChunk.forEach {
-                        totalValue += it.FinalPrice!!
+                if(allSales.isNotEmpty()){
+                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    splitted.forEach {salesChunk->
+                        var totalValue = 0F
+                        salesChunk.forEach {
+                            totalValue += it.FinalPrice!!
+                        }
+                        if(totalValue > maxValue){
+                            maxValue = totalValue.toInt()
+                        }
+                        graphData.add(totalValue.toInt())
                     }
-                    if(totalValue > maxValue){
-                        maxValue = totalValue.toInt()
-                    }
-                    graphData.add(totalValue.toInt())
                 }
                 completion(graphData,maxValue)
             }
@@ -106,16 +110,18 @@ class SaleHandler {
                 entries.forEach {
                     allSales.addAll(it.sales)
                 }
-                var splitted = allSales.chunked((allSales.count()/4).toInt())
-                splitted.forEach {salesChunk->
-                    var totalQuantity = 0
-                    salesChunk.forEach {
-                        totalQuantity += it.Quantity!!
+                if(allSales.isNotEmpty()){
+                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    splitted.forEach {salesChunk->
+                        var totalQuantity = 0
+                        salesChunk.forEach {
+                            totalQuantity += it.Quantity!!
+                        }
+                        if(totalQuantity > maxValue){
+                            maxValue = totalQuantity
+                        }
+                        graphData.add(totalQuantity)
                     }
-                    if(totalQuantity > maxValue){
-                        maxValue = totalQuantity
-                    }
-                    graphData.add(totalQuantity)
                 }
                 completion(graphData,maxValue)
             }
@@ -140,16 +146,18 @@ class SaleHandler {
                 entries.forEach {
                     allSales.addAll(it.sales)
                 }
-                var splitted = allSales.chunked((allSales.count()/4).toInt())
-                splitted.forEach {salesChunk->
-                    var totalValue = 0F
-                    salesChunk.forEach {
-                        totalValue += it.FinalPrice!!
+                if(allSales.isNotEmpty()){
+                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    splitted.forEach {salesChunk->
+                        var totalValue = 0F
+                        salesChunk.forEach {
+                            totalValue += it.FinalPrice!!
+                        }
+                        if(totalValue > maxValue){
+                            maxValue = totalValue.toInt()
+                        }
+                        graphData.add(totalValue.toInt())
                     }
-                    if(totalValue > maxValue){
-                        maxValue = totalValue.toInt()
-                    }
-                    graphData.add(totalValue.toInt())
                 }
                 completion(graphData,maxValue)
             }
@@ -174,16 +182,18 @@ class SaleHandler {
                 entries.forEach {
                     allSales.addAll(it.sales)
                 }
-                var splitted = allSales.chunked((allSales.count()/4).toInt())
-                splitted.forEach {salesChunk->
-                    var totalQuantity = 0
-                    salesChunk.forEach {
-                        totalQuantity += it.Quantity!!
+                if(allSales.isNotEmpty()){
+                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    splitted.forEach {salesChunk->
+                        var totalQuantity = 0
+                        salesChunk.forEach {
+                            totalQuantity += it.Quantity!!
+                        }
+                        if(totalQuantity > maxValue){
+                            maxValue = totalQuantity
+                        }
+                        graphData.add(totalQuantity)
                     }
-                    if(totalQuantity > maxValue){
-                        maxValue = totalQuantity
-                    }
-                    graphData.add(totalQuantity)
                 }
                 completion(graphData,maxValue)
             }
@@ -208,16 +218,18 @@ class SaleHandler {
                 entries.forEach {
                     allSales.addAll(it.sales)
                 }
-                var splitted = allSales.chunked((allSales.count()/4).toInt())
-                splitted.forEach {salesChunk->
-                    var totalValue = 0F
-                    salesChunk.forEach {
-                        totalValue += it.FinalPrice!!
+                if(allSales.isNotEmpty()){
+                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    splitted.forEach {salesChunk->
+                        var totalValue = 0F
+                        salesChunk.forEach {
+                            totalValue += it.FinalPrice!!
+                        }
+                        if(totalValue > maxValue){
+                            maxValue = totalValue.toInt()
+                        }
+                        graphData.add(totalValue.toInt())
                     }
-                    if(totalValue > maxValue){
-                        maxValue = totalValue.toInt()
-                    }
-                    graphData.add(totalValue.toInt())
                 }
                 completion(graphData,maxValue)
             }
@@ -242,16 +254,18 @@ class SaleHandler {
                 entries.forEach {
                     allSales.addAll(it.sales)
                 }
-                var splitted = allSales.chunked((allSales.count()/4).toInt())
-                splitted.forEach {salesChunk->
-                    var totalQuantity = 0
-                    salesChunk.forEach {
-                        totalQuantity += it.Quantity!!
+                if(allSales.isNotEmpty()){
+                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    splitted.forEach {salesChunk->
+                        var totalQuantity = 0
+                        salesChunk.forEach {
+                            totalQuantity += it.Quantity!!
+                        }
+                        if(totalQuantity > maxValue){
+                            maxValue = totalQuantity
+                        }
+                        graphData.add(totalQuantity)
                     }
-                    if(totalQuantity > maxValue){
-                        maxValue = totalQuantity
-                    }
-                    graphData.add(totalQuantity)
                 }
                 completion(graphData,maxValue)
             }
@@ -276,16 +290,18 @@ class SaleHandler {
                 entries.forEach {
                     allSales.addAll(it.sales)
                 }
-                var splitted = allSales.chunked((allSales.count()/4).toInt())
-                splitted.forEach {salesChunk->
-                    var totalValue = 0F
-                    salesChunk.forEach {
-                        totalValue += it.FinalPrice!!
+                if(allSales.isNotEmpty()){
+                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    splitted.forEach {salesChunk->
+                        var totalValue = 0F
+                        salesChunk.forEach {
+                            totalValue += it.FinalPrice!!
+                        }
+                        if(totalValue > maxValue){
+                            maxValue = totalValue.toInt()
+                        }
+                        graphData.add(totalValue.toInt())
                     }
-                    if(totalValue > maxValue){
-                        maxValue = totalValue.toInt()
-                    }
-                    graphData.add(totalValue.toInt())
                 }
                 completion(graphData,maxValue)
             }

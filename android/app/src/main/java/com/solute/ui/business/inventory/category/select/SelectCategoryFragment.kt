@@ -7,19 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productCategory.model.ProductCategory
-import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModalFactory
-import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
-import com.solute.app.App
 import com.solute.navigation.AppNavigator
 import com.solute.ui.business.inventory.category.ProductCategoryAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class SelectCategoryFragment : Fragment() {
     var recycler: RecyclerView? = null
@@ -32,10 +31,12 @@ class SelectCategoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ProductCategoryHandler.shared().viewModel?.allCategory?.observe(this) {
-            if (!it.isNullOrEmpty()) {
-                allCategoory = it as ArrayList<ProductCategory>
-                reload()
+        ProductCategoryHandler.shared().viewModel?.allCategory?.observe(this) {cats->
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                if (!cats.isNullOrEmpty()) {
+                    allCategoory = cats as ArrayList<ProductCategory>
+                    reload()
+                }
             }
         }
         ProductCategoryHandler.shared().fetchAllProductCategory()
@@ -80,13 +81,11 @@ class SelectCategoryFragment : Fragment() {
         reload()
     }
 
-    fun reload() {
-        this.productCategoryAdapter = this.context?.let {
-            ProductCategoryAdapter(it, this, allCategoory) { category ->
+    private fun reload() {
+        this.productCategoryAdapter = ProductCategoryAdapter(requireContext(), this, allCategoory) { category ->
                 AppNavigator.shared().goBack()
                 ProductCategoryHandler.shared().onSelectCategory?.let { it1 -> it1(category) }
             }
-        }
         this.recycler?.layoutManager = LinearLayoutManager(this.context)
         recycler?.adapter = this.productCategoryAdapter
     }

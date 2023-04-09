@@ -7,20 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
-import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
-import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
-import com.solute.app.App
 import com.solute.navigation.AppNavigator
-import com.solute.ui.business.inventory.category.ProductSubCategoryAdapter
+import com.solute.ui.business.inventory.subCategory.ProductSubCategoryAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,10 +44,12 @@ class SelectProductSubCategoryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ProductSubCategoryHandler.shared().viewModel?.allSubCategory?.observe(this) {
-            if (!it.isNullOrEmpty()) {
-                allSubCategoory = it as ArrayList<ProductSubCategory>
-                reload()
+        ProductSubCategoryHandler.shared().viewModel?.allSubCategory?.observe(this) {subCats->
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                if (!subCats.isNullOrEmpty()) {
+                    allSubCategoory = subCats as ArrayList<ProductSubCategory>
+                    reload()
+                }
             }
         }
         ProductCategoryHandler.shared().fetchAllProductCategory()
@@ -96,7 +97,7 @@ class SelectProductSubCategoryFragment : Fragment() {
         }
         reload()
     }
-    fun reload() {
+    private fun reload() {
         this.productSubCategoryAdapter = this.context?.let {
             ProductSubCategoryAdapter(it, this, allSubCategoory) { subCategory ->
                 AppNavigator.shared().goBack()
@@ -107,7 +108,7 @@ class SelectProductSubCategoryFragment : Fragment() {
         recycler?.adapter = this.productSubCategoryAdapter
     }
 
-    fun onClickCreate(){
+    private fun onClickCreate(){
         if(!name?.text.isNullOrEmpty() && ProductCategoryHandler.shared().repository.selectedCategory.value != null){
             ProductSubCategoryHandler.shared().viewModel?.createNewSubCategory(name?.text.toString(),ProductCategoryHandler.shared().repository.selectedCategory.value!!)
         }

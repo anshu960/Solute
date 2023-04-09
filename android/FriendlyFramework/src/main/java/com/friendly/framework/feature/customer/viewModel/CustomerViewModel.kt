@@ -61,12 +61,13 @@ class CustomerViewModel(private val customerRepository: CustomerRepository) : Vi
         SocketService.shared().send(SocketEvent.RETRIVE_CUSTOMER, request)
     }
 
-    fun createNewCustomer(name: String, mobile: String, email: String, barcode: String) {
+    fun createNewCustomer(name: String, dialCode : String?,mobile: String, email: String, barcode: String) {
         val user = FriendlyUser()
         var request = JSONObject()
         request.put(KeyConstant.userId, user._id)
         request.put(KeyConstant.businessID, BusinessHandler.shared().repository.business.value?.Id)
         request.put(KeyConstant.name, name)
+        request.put(KeyConstant.dialCode, dialCode)
         request.put(KeyConstant.mobileNumber, mobile)
         request.put(KeyConstant.emailId, email)
         request.put(KeyConstant.barcode, barcode)

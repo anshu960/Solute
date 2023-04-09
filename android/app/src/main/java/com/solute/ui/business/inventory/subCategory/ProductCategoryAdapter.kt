@@ -1,7 +1,6 @@
-package com.solute.ui.business.inventory.category
+package com.solute.ui.business.inventory.subCategory
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -11,7 +10,7 @@ import com.friendly.framework.feature.productSubCategory.model.ProductSubCategor
 import com.solute.navigation.AppNavigator
 
 
-class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, val allSubCategory: ArrayList<ProductSubCategory>, var onSelect:((subCategory: ProductSubCategory) -> Unit)? = null) :
+class ProductSubCategoryAdapter(val context: Context, val fragment: Fragment, private val allSubCategory: ArrayList<ProductSubCategory>, var onSelect:((subCategory: ProductSubCategory) -> Unit)? = null) :
     RecyclerView.Adapter<ProductSubCategoryViewHolder>() {
 
     override fun getItemCount(): Int {

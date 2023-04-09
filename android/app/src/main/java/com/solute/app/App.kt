@@ -3,10 +3,12 @@ package com.solute.app
 import android.app.Activity
 import android.app.Application
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import androidx.fragment.app.Fragment
+import androidx.multidex.MultiDex
 import com.friendly.framework.Defaults
 import com.friendly.framework.UtilityActivity
 import com.friendly.framework.UtilityViewController
@@ -41,6 +43,10 @@ class App: Application() {
         instance = this
     }
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
     // Get a non-default Storage bucket
     var storage : FirebaseStorage? = null
     var storageRef : StorageReference? = null

@@ -9,11 +9,12 @@ import com.friendly.framework.UtilityActivity
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.solute.navigation.AppNavigator
-
-
-class ProductCategoryAdapter(val context: Context, val fragment: Fragment, val allCategory: List<ProductCategory>, var onSelect:((category: ProductCategory) -> Unit)? = null) :
+class ProductCategoryAdapter(val context: Context, val fragment: Fragment, private val allCategory: List<ProductCategory>, var onSelect:((category: ProductCategory) -> Unit)? = null) :
     RecyclerView.Adapter<ProductCategoryViewHolder>() {
 
+    init {
+
+    }
     override fun getItemCount(): Int {
         return allCategory.count()
     }

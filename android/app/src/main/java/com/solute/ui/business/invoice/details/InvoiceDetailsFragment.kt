@@ -6,16 +6,18 @@ import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintJob
 import android.print.PrintManager
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import androidx.print.PrintHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.business.handler.BusinessHandler
@@ -27,8 +29,8 @@ import com.friendly.framework.feature.sale.model.Sale
 import com.friendly.framework.pdf.PDFService
 import com.friendly.framework.qr.QRCodeUtill
 import com.google.gson.Gson
-import com.solute.app.App
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.business.barcode.BarcodeHelper
 import com.solute.utility.SMSManager
 import com.solute.utility.WhatsappManager
@@ -37,6 +39,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+
 
 class InvoiceDetailsFragment : Fragment() {
     private val PRINT_SERVICE: Int = 0
@@ -80,12 +83,15 @@ class InvoiceDetailsFragment : Fragment() {
     var barcodeIv : ImageView? = null
     var qrcodeIv : ImageView? = null
 
+    var scrollView : ScrollView? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_invoice_details, container, false)
+        scrollView = view.findViewById(R.id.receipt_details_scroll_view)
         salesRecycler = view.findViewById(R.id.items_recycler)
         customerCardView = view.findViewById(R.id.customer_cv)
         invoiceDateTv = view.findViewById(R.id.invoice_date_tv)
@@ -103,7 +109,6 @@ class InvoiceDetailsFragment : Fragment() {
         totalTv = view.findViewById(R.id.total_tv)
         barcodeIv = view.findViewById(R.id.barcode_iv)
         qrcodeIv = view.findViewById(R.id.qr_iv)
-
 
         pdfView = view.findViewById(R.id.receipt_details_pdf_img)
         messageButton = view.findViewById(R.id.receipt_details_receipt_message_btn)
@@ -138,9 +143,7 @@ class InvoiceDetailsFragment : Fragment() {
             }
         }
         printButton?.setOnClickListener {
-            this.pdfView?.let {
-                createWebPagePrint(it)
-            }
+            printinvoice()
         }
         whatsappButton?.setOnClickListener {
             if (customerInvoice != null) {
@@ -214,6 +217,18 @@ class InvoiceDetailsFragment : Fragment() {
 //            whatsappTitle?.visibility = View.GONE
 //            customerDetailsCard?.visibility = View.GONE
 //        }
+    }
+
+    fun printinvoice(){
+        val bitmap = Bitmap.createBitmap(
+            scrollView!!.getChildAt(0).getWidth(),
+            scrollView!!.getChildAt(0).getHeight(), Bitmap.Config.ARGB_8888
+        )
+        val c = Canvas(bitmap)
+        scrollView!!.getChildAt(0).draw(c)
+        val printHelper = PrintHelper(requireContext())
+        printHelper.scaleMode = PrintHelper.SCALE_MODE_FIT
+        printHelper.printBitmap("Print Bitmap", bitmap)
     }
 
     override fun onDestroy() {

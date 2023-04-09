@@ -1,4 +1,4 @@
-package com.solute.ui.business.inventory.category
+package com.solute.ui.business.inventory.subCategory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

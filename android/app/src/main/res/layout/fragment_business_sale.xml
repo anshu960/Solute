@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.business.product.BusinessProductFragment">
 
-    <androidx.camera.view.PreviewView
-        android:id="@+id/fragment_business_product_scanner_preview"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_product_search_card"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_business_product_recycler"
         android:layout_width="0dp"
@@ -24,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_product_scanner_preview" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/fragment_business_product_search_card"

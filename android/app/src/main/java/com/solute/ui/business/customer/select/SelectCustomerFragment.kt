@@ -23,10 +23,15 @@ import com.friendly.framework.feature.customer.viewModel.CustomerViewModel
 import com.friendly.framework.feature.invoice.handler.InvoiceHandler
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.google.android.material.textfield.TextInputEditText
+import com.hbb20.CountryCodePicker
 import com.solute.R
 import com.solute.app.App
 import com.solute.navigation.AppNavigator
 import com.solute.ui.business.customer.adapter.CustomerAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,14 +58,16 @@ class SelectCustomerFragment : Fragment() {
     var addCustomerBtn: TextView? = null
     var saleBtn: Button? = null
     var skipBtn: Button? = null
-
+    var countryCodePicker : CountryCodePicker? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cartViewModel = CartHandler.shared().viewModel
-        CustomerHandler.shared().viewModel?.allCustomer?.observe(this) {
-            if (it.isNotEmpty()) {
-                allCustomer = it
-                this.reload()
+        CustomerHandler.shared().viewModel?.allCustomer?.observe(this) {custs->
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                if (custs.isNotEmpty()) {
+                    allCustomer = custs
+                    reload()
+                }
             }
         }
         CustomerHandler.shared().viewModel?.fetchAllCustomer()
@@ -75,6 +82,7 @@ class SelectCustomerFragment : Fragment() {
         searchView?.isIconified = false
         recycler = view.findViewById(R.id.select_customer_fragment_recycler)
         customerName = view.findViewById(R.id.select_customer_fragment_name_tiet)
+        countryCodePicker = view.findViewById(R.id.countrycode)
         customerMobile = view.findViewById(R.id.select_customer_fragment_mobile_tiet)
         customerEmail = view.findViewById(R.id.select_customer_fragment_email_tiet)
         finalAmount = view.findViewById(R.id.select_customer_fragment_sale_amount)
@@ -171,7 +179,7 @@ class SelectCustomerFragment : Fragment() {
                 this.selectedCustomer = it
                 onClickSale()
             }
-            CustomerHandler.shared().viewModel?.createNewCustomer(customerName!!.text!!.toString(),customerMobile!!.text!!.toString(),customerEmail!!.text!!.toString(),customerMobile!!.text!!.toString())
+            CustomerHandler.shared().viewModel?.createNewCustomer(customerName!!.text!!.toString(),countryCodePicker?.selectedCountryCode,customerMobile!!.text!!.toString(),customerEmail!!.text!!.toString(),customerMobile!!.text!!.toString())
         }
     }
 

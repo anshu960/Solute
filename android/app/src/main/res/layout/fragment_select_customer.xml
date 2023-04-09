@@ -51,7 +51,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/select_customer_fragment_add_customer_title"
@@ -71,6 +72,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:background="@color/transparent"
+                android:foregroundTint="@color/transparent"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/select_customer_fragment_add_customer_title">
@@ -78,35 +83,68 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/select_customer_fragment_name_tiet"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/name" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/input_field_background"
+                    android:foreground="@color/transparent"
+                    android:hint="@string/name"
+                    android:maxLines="1"
+                    android:paddingLeft="8dp" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/countrycode"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_countryPreference="IN"
+                app:ccp_defaultNameCode="IN"
+                app:ccp_defaultPhoneCode="91"
+                app:ccp_rememberLastSelection="true"
+                app:ccp_showArrow="true"
+                app:ccp_showFlag="true"
+                app:ccp_showNameCode="true"
+                app:ccp_textGravity="CENTER"
+                app:ccp_textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/select_customer_fragment_name_til" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/select_customer_fragment_mobile_til"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/countrycode"
                 app:layout_constraintTop_toBottomOf="@+id/select_customer_fragment_name_til">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/select_customer_fragment_mobile_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/mobile" />
+                    android:background="@drawable/input_field_background"
+                    android:hint="@string/mobile"
+                    android:maxLines="1"
+                    android:paddingLeft="8dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +154,10 @@
                     android:id="@+id/select_customer_fragment_email_tiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email_optional" />
+                    android:background="@drawable/input_field_background"
+                    android:hint="@string/email_optional"
+                    android:maxLines="1"
+                    android:paddingLeft="8dp" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

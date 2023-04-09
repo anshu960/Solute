@@ -11,16 +11,11 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.customer.model.Customer
 import com.google.android.material.textfield.TextInputEditText
+import com.hbb20.CountryCodePicker
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.app.App
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateCustomerFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CreateCustomerFragment : Fragment() {
     var name : TextInputEditText? = null
     var mobile : TextInputEditText? = null
@@ -28,12 +23,14 @@ class CreateCustomerFragment : Fragment() {
     var barcode : TextInputEditText? = null
     var saveButton : Button? = null
     var customer : Customer? = null
+    var countryCodePicker : CountryCodePicker? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_create_customer, container, false)
         name = view.findViewById(R.id.create_customer_name_tiet)
+        countryCodePicker = view.findViewById(R.id.countrycode)
         mobile = view.findViewById(R.id.create_customer_mobile_tiet)
         email = view.findViewById(R.id.create_customer_email_tiet)
         barcode = view.findViewById(R.id.create_customer_barcode_tiet)
@@ -58,6 +55,7 @@ class CreateCustomerFragment : Fragment() {
 
     fun onClickSave(){
         val nameVal = name?.text.toString()
+        val dialCode = countryCodePicker?.selectedCountryCode
         val mobileVal = mobile?.text.toString()
         val emailVal = email?.text.toString()
         val barcodeVal = barcode?.text.toString()
@@ -86,7 +84,7 @@ class CreateCustomerFragment : Fragment() {
                     App.shared().mainActivity?.toast("Created")
                 }
             }
-            CustomerHandler.shared().viewModel?.createNewCustomer(nameVal,mobileVal,emailVal,barcodeVal)
+            CustomerHandler.shared().viewModel?.createNewCustomer(nameVal,dialCode,mobileVal,emailVal,barcodeVal)
         }
     }
 
