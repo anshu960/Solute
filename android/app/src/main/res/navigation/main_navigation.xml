@@ -74,6 +74,11 @@
         android:name="com.solute.ui.business.inventory.InventoryFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_inventory" />
+    <fragment
+        android:id="@+id/business_dashboard"
+        android:name="com.solute.ui.business.dashboard.BusinessDashboardFragment"
+        android:label="@string/menu_dashboard"
+        tools:layout="@layout/fragment_business_dashboard" />
 
     <fragment
         android:id="@+id/business_sale"

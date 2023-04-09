@@ -2,8 +2,8 @@ package com.friendly.framework.feature.invoice.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
+import com.friendly.framework.feature.sale.model.Sale
 
 class InvoiceRepository {
     val allCustomerInvoiceLiveData = MutableLiveData<List<CustomerInvoice>>()

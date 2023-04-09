@@ -53,7 +53,7 @@ class FragmentProductSubCategory : Fragment() {
         createNewSubCategoryBtn?.setOnClickListener {
            AppNavigator.shared().goToCreateProductSubCategory()
         }
-        loadSubCategory()
+        ProductSubCategoryHandler.shared().viewModel?.loadSubCategory()
         return view
     }
 

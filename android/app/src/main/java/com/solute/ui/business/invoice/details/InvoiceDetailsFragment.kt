@@ -19,11 +19,11 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.business.handler.BusinessHandler
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.invoice.handler.InvoiceHandler
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
+import com.friendly.framework.feature.sale.model.Sale
 import com.friendly.framework.pdf.PDFService
 import com.friendly.framework.qr.QRCodeUtill
 import com.google.gson.Gson

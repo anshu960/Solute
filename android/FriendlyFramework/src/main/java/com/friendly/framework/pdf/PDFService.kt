@@ -1,8 +1,6 @@
 package com.friendly.framework.pdf
 
-import android.content.Context
 import com.friendly.framework.feature.business.model.Business
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.friendly.framework.invoice.InvoiceTemplate

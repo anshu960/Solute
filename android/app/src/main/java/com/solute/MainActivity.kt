@@ -35,6 +35,7 @@ import com.google.firebase.dynamiclinks.PendingDynamicLinkData
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.solute.app.App
+import com.solute.app.Membership
 import com.solute.databinding.ActivityMainBinding
 import com.solute.deepLink.DeepLinkHandler
 import com.solute.navigation.AppNavigator
@@ -75,7 +76,8 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         navController = findNavController(R.id.nav_host_fragment_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.business_home,
+                R.id.business_dashboard,
+                R.id.my_business_profile,
                 R.id.business_list,
                 R.id.business_sale,
                 R.id.business_cart,
@@ -180,9 +182,16 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
             graph.setStartDestination(R.id.got_to_login)
             mAdView?.visibility = View.GONE
         } else {
-            val adRequest = AdRequest.Builder().build()
-            mAdView.loadAd(adRequest)
-            mAdView?.visibility = View.VISIBLE
+            Membership().isMembershipActive {
+                if(it){
+                    mAdView?.visibility = View.GONE
+                }else{
+                    val adRequest = AdRequest.Builder().build()
+                    mAdView.loadAd(adRequest)
+                    mAdView?.visibility = View.VISIBLE
+                }
+
+            }
             graph.setStartDestination(R.id.business_list)
         }
         navController.setGraph(graph, intent.extras)

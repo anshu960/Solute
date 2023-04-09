@@ -1,18 +1,11 @@
 package com.friendly.framework.feature.cart.handler
 
 import com.friendly.framework.UtilityActivity
-import com.friendly.framework.constants.KeyConstant
-import com.friendly.framework.feature.business.handler.BusinessHandler
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.cart.repository.CartRepository
 import com.friendly.framework.feature.cart.viewModel.CartViewModel
-import com.friendly.framework.feature.customer.handler.CustomerHandler
-import com.friendly.framework.feature.invoice.handler.InvoiceHandler
-import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.Product
 import com.google.gson.Gson
-import io.socket.emitter.Emitter
 import org.json.JSONObject
 
 class CartHandler {

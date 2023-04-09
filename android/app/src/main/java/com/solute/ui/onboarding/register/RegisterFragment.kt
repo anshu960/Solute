@@ -68,9 +68,8 @@ class RegisterFragment : Fragment() {
             App.shared().mainActivity?.runOnUiThread {
                 App.shared().mainActivity?.stopActivityIndicator()
                 val response = data
-                val msg =  response.getString(KeyConstant.message)
                 val payload = response.getJSONObject(KeyConstant.payload)
-                if(msg != "" && payload.length() > 0){
+                if(payload.length() > 0){
                     Defaults.shared().store(KeyConstant.loginDetails,payload)
                     AppNavigator.shared().navigateToHome()
                     val intent = Intent(App.shared().mainActivity, MainActivity::class.java)

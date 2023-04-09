@@ -3,10 +3,8 @@ package com.friendly.framework.feature.invoice.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.friendly.framework.feature.cart.model.Sale
+import com.friendly.framework.feature.sale.model.Sale
 import com.google.gson.annotations.SerializedName
-import org.json.JSONArray
-import org.json.JSONObject
 
 @Entity(tableName = "CustomerInvoice")
 data class CustomerInvoice(

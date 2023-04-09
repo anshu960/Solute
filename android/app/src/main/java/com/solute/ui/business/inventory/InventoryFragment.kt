@@ -11,13 +11,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.database.DatabaseHandler
 import com.friendly.framework.feature.business.handler.BusinessHandler
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.Product
+import com.friendly.framework.feature.sale.model.Sale
 import com.friendly.framework.feature.sync.BusinessAnalytics
 import com.friendly.framework.feature.sync.SyncHandler
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
 import com.solute.R
 import com.solute.navigation.AppNavigator
 import com.solute.ui.business.inventory.analytics.AnalyticsAdapter

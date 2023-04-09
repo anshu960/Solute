@@ -1,4 +1,4 @@
-package com.friendly.framework.feature.cart.model
+package com.friendly.framework.feature.sale.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -111,6 +111,7 @@
     <string name="profile">Profile</string>
     <string name="create_address">Create Address</string>
     <string name="menu_home">Home</string>
+    <string name="menu_dashboard">Dashboard</string>
     <string name="employee">Employee</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>

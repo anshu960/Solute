@@ -26,4 +26,7 @@ interface CustomerInvoiceDao {
 
     @Query("select * from CustomerInvoice where BusinessID = :BusinessID order by UpdatedAt DESC")
     fun getAllItemsForBusiness(BusinessID: String): List<CustomerInvoice>
+
+    @Query("select * from CustomerInvoice where BusinessID = :BusinessID AND UpdatedAt BETWEEN :start AND :end order by UpdatedAt ASC")
+    fun getAllItemsForBusiness(BusinessID: String,start:String,end:String): List<CustomerInvoice>
 }

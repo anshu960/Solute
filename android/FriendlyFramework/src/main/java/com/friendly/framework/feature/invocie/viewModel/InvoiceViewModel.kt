@@ -7,9 +7,9 @@ import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.database.DatabaseHandler
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.business.handler.BusinessHandler
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.friendly.framework.feature.invoice.repository.InvoiceRepository
+import com.friendly.framework.feature.sale.model.Sale
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler

@@ -6,7 +6,6 @@ import com.friendly.framework.feature.address.model.Address
 import com.friendly.framework.feature.address.model.AddressDao
 import com.friendly.framework.feature.business.model.Business
 import com.friendly.framework.feature.business.model.BusinessDao
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.customer.model.CustomerDao
 import com.friendly.framework.feature.employee.dao.EmployeeAttendanceDao
@@ -14,7 +13,6 @@ import com.friendly.framework.feature.employee.dao.EmployeeDao
 import com.friendly.framework.feature.employee.model.Employee
 import com.friendly.framework.feature.employee.model.EmployeeAttendance
 import com.friendly.framework.feature.invocie.model.CustomerInvoiceDao
-import com.friendly.framework.feature.invocie.model.SaleDao
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.friendly.framework.feature.mediaFile.model.MediaFile
 import com.friendly.framework.feature.mediaFile.model.MediaFileDao
@@ -23,6 +21,8 @@ import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.friendly.framework.feature.productCategory.model.ProductCategoryDao
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategoryDao
+import com.friendly.framework.feature.sale.model.Sale
+import com.friendly.framework.feature.sale.model.SaleDao
 import com.google.gson.Gson
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString

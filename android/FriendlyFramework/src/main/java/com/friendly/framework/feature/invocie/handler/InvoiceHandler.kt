@@ -4,12 +4,12 @@ import com.friendly.framework.UtilityActivity
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.business.model.Business
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.friendly.framework.feature.invoice.repository.InvoiceRepository
 import com.friendly.framework.feature.invoice.viewModel.InvoiceViewModel
+import com.friendly.framework.feature.sale.model.Sale
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
 import com.google.gson.Gson
@@ -64,7 +64,7 @@ class InvoiceHandler {
         }
     }
 
-    val onCreateCustomerInvoice = Emitter.Listener {
+    val onCreateCustomerInvoice = Emitter.Listener { it ->
         if (it.isNotEmpty())
         {
             val anyData = it.first() as JSONObject
@@ -73,6 +73,9 @@ class InvoiceHandler {
                 val allSalesData = anyData.getJSONArray(KeyConstant.sales)
                 val customerInvoice = gson.fromJson(payload.toString(), CustomerInvoice::class.java)
                 viewModel?.insert(customerInvoice)
+//                customerInvoice.sales.forEach {sale->
+//                    viewModel?.insertSale(sale)
+//                }
                 CustomerHandler.shared().repository.customerLiveData.postValue(null)
                 CustomerHandler.shared().onCreateNewCustomer = null
                 BusinessHandler.shared().activity.runOnUiThread {
@@ -99,6 +102,9 @@ class InvoiceHandler {
                         val invoiceJson = payload.get(i)
                         val newInvoice = gson.fromJson(invoiceJson.toString(),CustomerInvoice::class.java)
                         viewModel?.insert(newInvoice)
+//                        newInvoice.sales.forEach {sale->
+//                            viewModel?.insertSale(sale)
+//                        }
                     }
                 }
             }

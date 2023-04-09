@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.friendly.framework.feature.cart.model.Sale
+import com.friendly.framework.feature.sale.model.Sale
 import com.solute.R
 
 class InvoiceDetailsAdapter(val context: Context, val sales: List<Sale>) :
@@ -46,7 +46,7 @@ class InvoiceHistoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Re
     }
 
     fun bind(sales: Sale) {
-        itemNameTv?.text = "₹ " +  sales.ProductName
+        itemNameTv?.text = sales.ProductName
         taxTv?.text = "₹ " + sales.Tax
         quantityTv?.text =  sales.Quantity.toString()
         priceTv?.text = "₹ " +  sales.Price

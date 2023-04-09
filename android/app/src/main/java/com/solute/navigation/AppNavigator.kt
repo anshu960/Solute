@@ -91,7 +91,7 @@ class AppNavigator {
 
     fun goToBusinessHome() {
         CoroutineScope(Job() + Dispatchers.Main).launch {
-            navController?.navigate(R.id.business_home)
+            navController?.navigate(R.id.business_dashboard)
         }
     }
     fun goToReceiptDetails() {

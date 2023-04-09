@@ -1,8 +1,7 @@
-package com.friendly.framework.feature.invocie.model
+package com.friendly.framework.feature.sale.model
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.friendly.framework.feature.cart.model.Sale
+import java.util.Date
 
 @Dao
 interface SaleDao {
@@ -23,4 +22,10 @@ interface SaleDao {
 
     @Query("select * from Sale where BusinessID = :BusinessID order by SaleDate")
     fun getAllItemsForBusiness(BusinessID: String): List<Sale>
+
+    @Query("select Max(Quantity)-Min(Quantity) as total_change_per_hour " +
+            "from Sale \n" +
+            "GROUP BY strftime('%H', CreatedAt),strftime('%j', CreatedAt)\n" +
+            "ORDER by CreatedAt DESC")
+    fun getTodaySaleCount():List<Int>?
 }

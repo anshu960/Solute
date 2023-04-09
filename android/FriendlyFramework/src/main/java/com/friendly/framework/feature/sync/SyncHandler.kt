@@ -4,7 +4,6 @@ import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.database.DatabaseHandler
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.business.handler.BusinessHandler
-import com.friendly.framework.feature.cart.model.Sale
 import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.invoice.handler.InvoiceHandler
 import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
@@ -12,6 +11,7 @@ import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.ProductStock
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
+import com.friendly.framework.feature.sale.model.Sale
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler

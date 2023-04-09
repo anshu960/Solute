@@ -56,7 +56,11 @@ class BusinessCartFragment : Fragment() {
         this.recyclerView!!.adapter = this.adapter
         cartViewModel?.updatePricesInCart()
         if (CartHandler.shared().repository.instantDiscount.value != null) {
-            instantDiscountValueTxt?.setText(CartHandler.shared().repository.instantDiscount.value!!.toString())
+            if(CartHandler.shared().repository.instantDiscount.value == 0F){
+                instantDiscountValueTxt?.setText("")
+            }else{
+                instantDiscountValueTxt?.setText(CartHandler.shared().repository.instantDiscount.value!!.toString())
+            }
         }
     }
 
@@ -100,7 +104,7 @@ class BusinessCartFragment : Fragment() {
         totalValueTxt = view.findViewById(R.id.business_fragment_total_amount_txt)
         reload()
         instantDiscountValueTxt?.doOnTextChanged { text, start, before, count ->
-            if (text != null && !text.isBlank()) {
+            if (text != null && !text.isBlank() ) {
                 val newDiscount = text.trim().toString().toFloat()
                 cartViewModel?.updateInstantDiscount(newDiscount)
             } else {

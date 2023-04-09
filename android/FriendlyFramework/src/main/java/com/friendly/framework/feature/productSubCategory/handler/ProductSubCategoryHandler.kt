@@ -43,12 +43,10 @@ class ProductSubCategoryHandler{
     fun fetchAllProductSubCategory(){
         val request = JSONObject()
         val user = FriendlyUser()
-        if(BusinessHandler.shared().repository.business != null){
-            val business = BusinessHandler.shared().repository.business
-            request.put(KeyConstant.userId,user._id)
-            request.put(KeyConstant.businessID,business.value?.Id)
-            SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY,request)
-        }
+        val business = BusinessHandler.shared().repository.business
+        request.put(KeyConstant.userId,user._id)
+        request.put(KeyConstant.businessID,business.value?.Id)
+        SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT_SUB_CATEGORY,request)
     }
 
      val retriveProductSubCategory = Emitter.Listener {
@@ -75,6 +73,7 @@ class ProductSubCategoryHandler{
                 val payload = anyData.getJSONObject(KeyConstant.payload)
                 val productSubCategory = gson.fromJson(payload.toString(), ProductSubCategory::class.java)
                 viewModel?.insert(productSubCategory)
+                viewModel?.loadSubCategory()
                 if(payload.has(KeyConstant._id)){
                     onCreateNewSubCategory?.let { it1 -> it1(productSubCategory) }
                 }
