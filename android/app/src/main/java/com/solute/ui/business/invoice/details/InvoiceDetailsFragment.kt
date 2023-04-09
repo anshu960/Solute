@@ -42,10 +42,7 @@ import org.json.JSONObject
 
 
 class InvoiceDetailsFragment : Fragment() {
-    private val PRINT_SERVICE: Int = 0
     var business = BusinessHandler.shared().repository.business.value
-    val gson = Gson()
-    var receiptData = JSONObject()
     var customerInvoice: CustomerInvoice? = null
     var sales: ArrayList<Sale> = arrayListOf()
 
@@ -57,15 +54,10 @@ class InvoiceDetailsFragment : Fragment() {
     var shareTitle: TextView? = null
     var whatsappTitle: TextView? = null
     var customer: Customer? = null
-    var pdfView : WebView? = null
     private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
     var salesRecycler : RecyclerView? = null
-    var invoiceDateCardView : CardView? = null
-    var businessCardView : CardView? = null
     var customerCardView : CardView? = null
-    var itemDetailsCardView : CardView? = null
-
     var invoicenumberTv : TextView? = null
     var invoiceDateTv : TextView? = null
     var businessNameTv : TextView? = null
@@ -110,7 +102,6 @@ class InvoiceDetailsFragment : Fragment() {
         barcodeIv = view.findViewById(R.id.barcode_iv)
         qrcodeIv = view.findViewById(R.id.qr_iv)
 
-        pdfView = view.findViewById(R.id.receipt_details_pdf_img)
         messageButton = view.findViewById(R.id.receipt_details_receipt_message_btn)
         shareButton = view.findViewById(R.id.receipt_details_receipt_share_btn)
         whatsappButton = view.findViewById(R.id.receipt_details_receipt_whatsapp_btn)
@@ -198,25 +189,6 @@ class InvoiceDetailsFragment : Fragment() {
         } else {
             return ""
         }
-
-    }
-
-    fun loadShareDetails() {
-//        if (customer != null && customer!!.MobileNumber != null) {
-//            messageButton?.visibility = View.VISIBLE
-//            whatsappButton?.visibility = View.VISIBLE
-//            messageTitle?.visibility = View.VISIBLE
-//            whatsappTitle?.visibility = View.VISIBLE
-//            customerDetailsCard?.visibility = View.VISIBLE
-//            customerDetailsName?.text = this.customer!!.Name
-//            customerDetailsMobile?.text = this.customer!!.MobileNumber
-//        } else {
-//            messageButton?.visibility = View.GONE
-//            whatsappButton?.visibility = View.GONE
-//            messageTitle?.visibility = View.GONE
-//            whatsappTitle?.visibility = View.GONE
-//            customerDetailsCard?.visibility = View.GONE
-//        }
     }
 
     fun printinvoice(){
@@ -254,7 +226,6 @@ class InvoiceDetailsFragment : Fragment() {
             businessMobileTv?.text = business?.MobileNumber
             businessAddressTv?.text = business?.Address
         }
-        loadShareDetails()
         if(customerInvoice != null && customerInvoice!!.customerID != null && customer == null){
             CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){cust->
                 scope.launch {
@@ -264,10 +235,6 @@ class InvoiceDetailsFragment : Fragment() {
                         customerCardView?.visibility = View.VISIBLE
                     }
                     customer = cust
-                    val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
-                    pdfView!!.settings.loadWithOverviewMode = true;
-                    pdfView!!.settings.useWideViewPort = true;
-                    pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
                 }
             }
         }else if(customerInvoice != null){
@@ -277,10 +244,6 @@ class InvoiceDetailsFragment : Fragment() {
             }else{
                 customerCardView?.visibility = View.GONE
             }
-//            val pdf = PDFService().createInvoice(customer,business,customerInvoice!!)
-//            pdfView!!.settings.loadWithOverviewMode = true;
-//            pdfView!!.settings.useWideViewPort = true;
-//            pdfView?.loadDataWithBaseURL(null, pdf, "text/html", "utf-8", null)
         }
     }
 
@@ -307,33 +270,5 @@ class InvoiceDetailsFragment : Fragment() {
         this.subTotalTv?.text = "₹ " + customerInvoice?.totalPrice.toString()
         this.taxTv?.text = "₹ " + customerInvoice?.Tax.toString()
         this.totalTv?.text = "₹ " + customerInvoice?.finalPrice.toString()
-    }
-    fun createWebPagePrint(webView: WebView) {
-        /*if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-            return;*/
-        val printManager = App.shared().mainActivity?.getSystemService(Context.PRINT_SERVICE) as PrintManager
-        val printAdapter = webView.createPrintDocumentAdapter()
-        val jobName: String = "getString(R.string.webapp_name).toString()" + " Document"
-        val builder = PrintAttributes.Builder()
-        builder.setMediaSize(PrintAttributes.MediaSize.ISO_A5)
-        val printJob: PrintJob = printManager!!.print(jobName, printAdapter, builder.build())
-        if (printJob.isCompleted()) {
-            Toast.makeText(
-                App.shared(),
-                "Printed Successfully",
-                Toast.LENGTH_LONG
-            ).show()
-        } else if (printJob.isFailed()) {
-            Toast.makeText(
-                App.shared(),
-                "Couldn't prnit, please try after some time",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-        // Save the job object for later status checking
-    }
-
-    fun generatePdfInvoice(){
-
     }
 }

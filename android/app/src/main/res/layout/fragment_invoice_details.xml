@@ -120,17 +120,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <WebView
-        android:id="@+id/receipt_details_pdf_img"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add_photo" />
-
     <ScrollView
         android:id="@+id/receipt_details_scroll_view"
         android:layout_width="0dp"
@@ -584,7 +573,9 @@
                     <ImageView
                         android:id="@+id/barcode_iv"
                         android:layout_width="0dp"
-                        android:layout_height="60dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:src="@drawable/barcode"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
