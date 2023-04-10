@@ -136,7 +136,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/invoice_number_cv"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -165,7 +165,7 @@
                     <TextView
                         android:id="@+id/invoice_date_lbl_tv"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
@@ -177,7 +177,7 @@
                     <TextView
                         android:id="@+id/invoice_date_tv"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"

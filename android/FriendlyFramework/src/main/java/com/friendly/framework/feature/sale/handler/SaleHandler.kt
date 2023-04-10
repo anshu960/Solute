@@ -41,7 +41,11 @@ class SaleHandler {
                     allSales.addAll(it.sales)
                 }
                 if(allSales.isNotEmpty()){
-                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    var chunkSize = 1
+                    if(allSales.count()/4 > 0){
+                        chunkSize = allSales.count()/4
+                    }
+                    var splitted = allSales.chunked(chunkSize)
                     splitted.forEach {salesChunk->
                         var totalQuantity = 0
                         salesChunk.forEach {
@@ -75,7 +79,11 @@ class SaleHandler {
                     allSales.addAll(it.sales)
                 }
                 if(allSales.isNotEmpty()){
-                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    var chunkSize = 1
+                    if(allSales.count()/4 > 0){
+                        chunkSize = allSales.count()/4
+                    }
+                    var splitted = allSales.chunked(chunkSize)
                     splitted.forEach {salesChunk->
                         var totalValue = 0F
                         salesChunk.forEach {
@@ -111,7 +119,11 @@ class SaleHandler {
                     allSales.addAll(it.sales)
                 }
                 if(allSales.isNotEmpty()){
-                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    var chunkSize = 1
+                    if(allSales.count()/4 > 0){
+                        chunkSize = allSales.count()/4
+                    }
+                    var splitted = allSales.chunked(chunkSize)
                     splitted.forEach {salesChunk->
                         var totalQuantity = 0
                         salesChunk.forEach {
@@ -147,7 +159,11 @@ class SaleHandler {
                     allSales.addAll(it.sales)
                 }
                 if(allSales.isNotEmpty()){
-                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    var chunkSize = 1
+                    if(allSales.count()/4 > 0){
+                        chunkSize = allSales.count()/4
+                    }
+                    var splitted = allSales.chunked(chunkSize)
                     splitted.forEach {salesChunk->
                         var totalValue = 0F
                         salesChunk.forEach {
@@ -183,7 +199,11 @@ class SaleHandler {
                     allSales.addAll(it.sales)
                 }
                 if(allSales.isNotEmpty()){
-                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    var chunkSize = 1
+                    if(allSales.count()/4 > 0){
+                        chunkSize = allSales.count()/4
+                    }
+                    var splitted = allSales.chunked(chunkSize)
                     splitted.forEach {salesChunk->
                         var totalQuantity = 0
                         salesChunk.forEach {
@@ -219,7 +239,11 @@ class SaleHandler {
                     allSales.addAll(it.sales)
                 }
                 if(allSales.isNotEmpty()){
-                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    var chunkSize = 1
+                    if(allSales.count()/4 > 0){
+                        chunkSize = allSales.count()/4
+                    }
+                    var splitted = allSales.chunked(chunkSize)
                     splitted.forEach {salesChunk->
                         var totalValue = 0F
                         salesChunk.forEach {
@@ -255,7 +279,11 @@ class SaleHandler {
                     allSales.addAll(it.sales)
                 }
                 if(allSales.isNotEmpty()){
-                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    var chunkSize = 1
+                    if(allSales.count()/4 > 0){
+                        chunkSize = allSales.count()/4
+                    }
+                    var splitted = allSales.chunked(chunkSize)
                     splitted.forEach {salesChunk->
                         var totalQuantity = 0
                         salesChunk.forEach {
@@ -291,7 +319,11 @@ class SaleHandler {
                     allSales.addAll(it.sales)
                 }
                 if(allSales.isNotEmpty()){
-                    var splitted = allSales.chunked((allSales.count()/4).toInt())
+                    var chunkSize = 1
+                    if(allSales.count()/4 > 0){
+                        chunkSize = allSales.count()/4
+                    }
+                    var splitted = allSales.chunked(chunkSize)
                     splitted.forEach {salesChunk->
                         var totalValue = 0F
                         salesChunk.forEach {

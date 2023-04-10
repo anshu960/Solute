@@ -48,7 +48,7 @@ class MainActivity : UtilityActivity() {
         val request = JSONObject()
         request.put(KeyConstant.userId,user._id)
         request.put(KeyConstant.businessID,"6364c00fb25244fcf46425f0")
-        request.put(KeyConstant.mobileNumber,user.mobile)
+        request.put(KeyConstant.mobileNumber,"017683398058")
         SocketService.shared().onEvent={ event, data->
             Log.d("Received",data.toString())
             if(data.has(KeyConstant.payload)){
