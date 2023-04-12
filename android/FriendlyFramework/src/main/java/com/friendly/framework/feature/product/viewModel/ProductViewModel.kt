@@ -111,7 +111,6 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
         MediaFileHandler.shared().viewModel?.createNew(request)
     }
 
-
     fun deleteProduct(product: Product) {
         val user = FriendlyUser()
         val request = JSONObject()
@@ -138,7 +137,6 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
         request.put(KeyConstant.comment, message)
         SocketService.shared().send(SocketEvent.REMOVE_STOCK_QUANTITY, request)
     }
-
 
     fun addStockQuantity(product: Product, quantity: Int, message: String) {
         val user = FriendlyUser()
@@ -190,7 +188,6 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
         request.put(KeyConstant.barcode, code)
         SocketService.shared().send(SocketEvent.CREATE_PRODUCT_BAR_CODE, request)
     }
-
     fun insertProductBarCode(barCode: ProductBarCode) {
         CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.productBarCodeDao()

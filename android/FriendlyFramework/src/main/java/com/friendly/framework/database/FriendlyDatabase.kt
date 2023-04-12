@@ -2,6 +2,7 @@ package com.friendly.framework.database
 
 import android.content.Context
 import androidx.room.*
+import com.friendly.framework.dataclass.ProductPrice
 import com.friendly.framework.feature.address.model.Address
 import com.friendly.framework.feature.address.model.AddressDao
 import com.friendly.framework.feature.business.model.Business
@@ -60,38 +61,6 @@ class Converters {
     }
 
     @TypeConverter
-    fun toJsonArray(value: String?): JSONArray {
-        if(value.isNullOrEmpty() || value == "null"){
-            return JSONArray()
-        }else{
-            return JSONArray(value)
-        }
-    }
-
-    @TypeConverter
-    fun toJsonArrayString(value: JSONArray?): String {
-        try {
-            return value.toString()
-        }
-        catch (error:java.lang.Error){
-            return ""
-        }
-    }
-
-    @TypeConverter
-    fun toJsonArrayList(value: String?): ArrayList<JSONObject> {
-        val output = ArrayList<JSONObject>()
-        if(value.isNullOrEmpty() || value == "null"){
-            val jsonArray = JSONArray(value)
-            for (i in 0 until jsonArray.length()) {
-                val singleObj = jsonArray.get(i)
-                output.add(singleObj as JSONObject)
-            }
-        }
-        return output
-    }
-
-    @TypeConverter
     fun saleArrayListToString(value: ArrayList<Sale>): String {
         val jsonArray = JSONArray()
         value.forEach {
@@ -102,15 +71,6 @@ class Converters {
         } catch (error:java.lang.Error){
             ""
         }
-    }
-    @TypeConverter
-    fun jsonArrayListToSaleArray(value: ArrayList<JSONObject>): ArrayList<Sale> {
-        val salesArray : ArrayList<Sale> = arrayListOf()
-        value.forEach {
-            val sale = Gson().fromJson(it.toString(),Sale::class.java)
-            salesArray.add(sale)
-        }
-        return  salesArray
     }
 
     @TypeConverter
@@ -123,6 +83,16 @@ class Converters {
             salesArray.add(sale)
         }
        return  salesArray
+    }
+    @TypeConverter
+    fun stringToProductPrice(value:String):ProductPrice{
+        val price = Gson().fromJson(value,ProductPrice::class.java)
+        return price
+    }
+    @TypeConverter
+    fun productPriceToString(value:ProductPrice):String{
+        val price = Gson().toJson(value)
+        return price
     }
 }
 
@@ -146,7 +116,7 @@ class Converters {
         MediaFile::class,
         Address::class,
     ],
-    version = 3,
+    version = 6,
     exportSchema = false
 )
 abstract class FriendlyDatabase : RoomDatabase() {

@@ -19,7 +19,7 @@ class ProductRepository {
      val selectedProduct : LiveData<Product>
           get() = selectedProductLiveData
 
-     val productStockLiveData = MutableLiveData<ArrayList<ProductStock>>()
+     private val productStockLiveData = MutableLiveData<ArrayList<ProductStock>>()
      val productStock : LiveData<ArrayList<ProductStock>>
           get() = productStockLiveData
 

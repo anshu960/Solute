@@ -95,7 +95,7 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         }
         productName?.text = product.Name
         productDescription?.text = product.Description
-        productPrice?.text = "₹ ${product.MRP}"
+        productPrice?.text = "₹ ${product.ProductPrice?.MRP}"
         val discount = discountToPercent(product)
         if (discount != "") {
             productDiscount?.visibility = View.VISIBLE
@@ -105,12 +105,12 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
             productPrice?.visibility = View.GONE
             productDiscount?.visibility = View.GONE
         }
-        productFinalPrice?.text = "₹ ${product.FinalPrice}"
+        productFinalPrice?.text = "₹ ${product.ProductPrice?.FinalPrice}"
         stepperContainer?.visibility = View.GONE
 
-        if (product.Tax != null && product.Tax!! > 0) {
-            productTax?.text = "₹ ${product.Tax}"
-            taxIncludedCheckBox?.isChecked = product.TaxIncluded!!
+        if (product.ProductPrice?.Tax != null && product.ProductPrice?.Tax!! > 0) {
+            productTax?.text = "₹ ${product.ProductPrice?.Tax}"
+            taxIncludedCheckBox?.isChecked = product.ProductPrice?.TaxIncluded!!
             productTax?.visibility = View.VISIBLE
             taxIncludedCheckBox?.visibility = View.VISIBLE
             taxLable?.visibility = View.VISIBLE
@@ -151,8 +151,8 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun discountToPercent(product: Product): String {
         var off = ""
-        if (product.Discount != null && product.Discount!! > 0 && product.MRP != null) {
-            val perc = ((product.Discount!! / product.MRP!!) * 100).toInt()
+        if (product.ProductPrice?.Discount != null && product.ProductPrice?.Discount!! > 0 && product.ProductPrice?.MRP != null) {
+            val perc = ((product.ProductPrice?.Discount!! / product.ProductPrice?.MRP!!) * 100).toInt()
             off = perc.toString() + "%Off"
         }
         return off

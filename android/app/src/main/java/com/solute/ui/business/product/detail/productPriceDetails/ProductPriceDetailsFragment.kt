@@ -63,31 +63,31 @@ class ProductPriceDetailsFragment : Fragment() {
     fun loadData(){
         if(ProductHandler.shared().repository.selectedProduct != null && ProductHandler.shared().repository.selectedProduct.value != null){
             val product = ProductHandler.shared().repository.selectedProduct.value!!
-            productPrice?.text = product.Price.toString()
-            productMRP?.text = product.MRP.toString()
-            productCostPrice?.text = product.CostPrice.toString()
-            productIGSTPercent?.text = product.IGST.toString() + " %"
-            if(product.IGST != null){
-                productIGST?.text = "RS " + Math.round((product.IGST!!/product.Price!!)*100).toString()
+            productPrice?.text = product.ProductPrice?.Price.toString()
+            productMRP?.text = product.ProductPrice?.MRP.toString()
+            productCostPrice?.text = product.ProductPrice?.CostPrice.toString()
+            productIGSTPercent?.text = product.ProductPrice?.IGST.toString() + " %"
+            if(product.ProductPrice?.IGST != null){
+                productIGST?.text = "RS " + Math.round((product.ProductPrice?.IGST!!/product.ProductPrice?.Price!!)*100).toString()
             }
-            productCGSTPercent?.text = product.CGST.toString() + " %"
-            if(product.CGST != null){
-                productCGST?.text = "RS " + Math.round((product.CGST!!/product.Price!!)*100).toString()
+            productCGSTPercent?.text = product.ProductPrice?.CGST.toString() + " %"
+            if(product.ProductPrice?.CGST != null){
+                productCGST?.text = "RS " + Math.round((product.ProductPrice?.CGST!!/product.ProductPrice?.Price!!)*100).toString()
             }
-            productSGSTPercent?.text = product.SGST.toString() + " %"
-            if(product.SGST != null){
-                productSGST?.text = "RS " + Math.round((product.SGST!!/product.Price!!)*100).toString()
+            productSGSTPercent?.text = product.ProductPrice?.SGST.toString() + " %"
+            if(product.ProductPrice?.SGST != null){
+                productSGST?.text = "RS " + Math.round((product.ProductPrice?.SGST!!/product.ProductPrice?.Price!!)*100).toString()
             }
-            productVATPercent?.text = product.VAT.toString() + " %"
-            if(product.VAT != null){
-                productVAT?.text = "RS " + Math.round((product.VAT!!/product.Price!!)*100).toString()
+            productVATPercent?.text = product.ProductPrice?.VAT.toString() + " %"
+            if(product.ProductPrice?.VAT != null){
+                productVAT?.text = "RS " + Math.round((product.ProductPrice?.VAT!!/product.ProductPrice?.Price!!)*100).toString()
             }
-            productCESSPercent?.text = product.CESS.toString() + " %"
-            if(product.CESS != null){
-                productCESS?.text = "RS " + Math.round((product.CESS!!/product.Price!!)*100).toString()
+            productCESSPercent?.text = product.ProductPrice?.CESS.toString() + " %"
+            if(product.ProductPrice?.CESS != null){
+                productCESS?.text = "RS " + Math.round((product.ProductPrice?.CESS!!/product.ProductPrice?.Price!!)*100).toString()
             }
-            productDiscount?.text = product.Discount.toString()
-            productFinalPrice?.text = product.FinalPrice.toString()
+            productDiscount?.text = product.ProductPrice?.Discount.toString()
+            productFinalPrice?.text = product.ProductPrice?.FinalPrice.toString()
         }
     }
 }

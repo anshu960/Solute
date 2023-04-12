@@ -77,22 +77,22 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
         var instantDiscountPrice = 0F
         cartProducts.value?.forEach {
             val quanity = getProductQuantity(it)
-            if (it.Discount != null) {
-                priceDiscount = priceDiscount + (it.Discount!! * quanity)
+            if (it.ProductPrice?.Discount != null) {
+                priceDiscount = priceDiscount + (it.ProductPrice?.Discount!! * quanity)
             }
-            if (it.FinalPrice != null) {
-                priceSubtotal = priceSubtotal + (it.FinalPrice!! * quanity)
+            if (it.ProductPrice?.FinalPrice != null) {
+                priceSubtotal = priceSubtotal + (it.ProductPrice?.FinalPrice!! * quanity)
             }
-            if (it.MRP != null) {
-                totalMrp = totalMrp + (it.MRP!! * quanity)
+            if (it.ProductPrice?.MRP != null) {
+                totalMrp = totalMrp + (it.ProductPrice?.MRP!! * quanity)
             }
-            if (it.Tax != null) {
-                if (it.TaxIncluded != null) {
-                    if (!it.TaxIncluded!!) {
-                        priceTax = priceTax + (it.Tax!! * quanity)
+            if (it.ProductPrice?.Tax != null) {
+                if (it.ProductPrice?.TaxIncluded != null) {
+                    if (!it.ProductPrice?.TaxIncluded!!) {
+                        priceTax = priceTax + (it.ProductPrice?.Tax!! * quanity)
                     }
                 } else {
-                    priceTax = priceTax + (it.Tax!! * quanity)
+                    priceTax = priceTax + (it.ProductPrice?.Tax!! * quanity)
                 }
             }
         }
@@ -193,23 +193,23 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 var VAT = 0
                 var CESS = 0
                 var Tax = 0
-                if (it.IGST != null) {
-                    IGST = it.IGST!!.toInt() * quanity
+                if (it.ProductPrice?.IGST != null) {
+                    IGST = it.ProductPrice?.IGST!!.toInt() * quanity
                 }
-                if (it.CGST != null) {
-                    CGST = it.CGST!!.toInt() * quanity
+                if (it.ProductPrice?.CGST != null) {
+                    CGST = it.ProductPrice?.CGST!!.toInt() * quanity
                 }
-                if (it.SGST != null) {
-                    SGST = it.SGST!!.toInt() * quanity
+                if (it.ProductPrice?.SGST != null) {
+                    SGST = it.ProductPrice?.SGST!!.toInt() * quanity
                 }
-                if (it.VAT != null) {
-                    VAT = it.VAT!!.toInt() * quanity
+                if (it.ProductPrice?.VAT != null) {
+                    VAT = it.ProductPrice?.VAT!!.toInt() * quanity
                 }
-                if (it.CESS != null) {
-                    CESS = it.CESS!!.toInt() * quanity
+                if (it.ProductPrice?.CESS != null) {
+                    CESS = it.ProductPrice?.CESS!!.toInt() * quanity
                 }
-                if (it.Tax != null) {
-                    Tax = it.Tax!!.toInt() * quanity
+                if (it.ProductPrice?.Tax != null) {
+                    Tax = it.ProductPrice?.Tax!!.toInt() * quanity
                 }
                 transactionData.put(KeyConstant.invoiceId, invoiceId)
                 transactionData.put(KeyConstant.productID, it.Id)
@@ -223,11 +223,11 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 transactionData.put(KeyConstant.VAT, VAT)
                 transactionData.put(KeyConstant.CESS, CESS)
                 transactionData.put(KeyConstant.tax, Tax)
-                transactionData.put(KeyConstant.price, it.Price)
-                transactionData.put(KeyConstant.finalPrice, it.FinalPrice?.times(quanity) ?: it.FinalPrice)
-                transactionData.put(KeyConstant.costPrice, it.CostPrice)
+                transactionData.put(KeyConstant.price, it.ProductPrice?.Price)
+                transactionData.put(KeyConstant.finalPrice, it.ProductPrice?.FinalPrice?.times(quanity) ?: it.ProductPrice?.FinalPrice)
+                transactionData.put(KeyConstant.costPrice, it.ProductPrice?.CostPrice)
                 transactionData.put(KeyConstant.saleDate, now())
-                transactionData.put(KeyConstant.discount, it.Discount)
+                transactionData.put(KeyConstant.discount, it.ProductPrice?.Discount)
                 transactionData.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
                 if(customer != null && !customer.Id.isEmpty()){
                     transactionData.put(KeyConstant.customerName, customer.Name)

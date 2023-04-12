@@ -42,7 +42,7 @@ class ProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
         val picasso = Picasso.get()
         productName?.text = product.Name
         productDescription?.text = product.Description
-        productPrice?.text = "₹ ${product.MRP}"
+        productPrice?.text = "₹ ${product.ProductPrice?.MRP}"
         card?.setOnClickListener {
                 ProductHandler.shared().repository.selectedProductLiveData.postValue(product)
                 App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
