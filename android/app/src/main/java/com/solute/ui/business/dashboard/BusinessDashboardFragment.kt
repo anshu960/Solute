@@ -81,7 +81,7 @@ class BusinessDashboardFragment : Fragment() {
         saleQuantityValueTV = view.findViewById(R.id.sale_quantity_tv)
         saleTotalValueTV = view.findViewById(R.id.sale_value_tv)
         saleTotalValueTV
-        onClickToday()
+        onClickWeek()
         return view
     }
 

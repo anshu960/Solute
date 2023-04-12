@@ -126,7 +126,7 @@ class KeyConstant {
         val trainerCredentials = "TrainerCredentials"
         val membershipDetails = "membership_details"
         val barCode = "BarCode"
-        val barcode = "Barcode"
+        val barcode = "BarCode"
         val height = "height"
         val weight = "weight"
         val aadhaarNumber = "aadhaar_number"

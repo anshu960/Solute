@@ -19,6 +19,8 @@ import com.friendly.framework.feature.mediaFile.model.MediaFileDao
 import com.friendly.framework.feature.product.model.*
 import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.friendly.framework.feature.productCategory.model.ProductCategoryDao
+import com.friendly.framework.feature.productInventory.model.ProductInventory
+import com.friendly.framework.feature.productInventory.model.ProductInventoryDao
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategoryDao
 import com.friendly.framework.feature.sale.model.Sale
@@ -131,16 +133,17 @@ class Converters {
     entities = [
         Business::class,
         Sale::class,
-        ProductStock::class,
-        Product::class,
         Customer::class,
         CustomerInvoice::class,
+        Product::class,
         ProductCategory::class,
         ProductSubCategory::class,
+        ProductBarCode::class,
+        ProductInventory::class,
+        ProductStock::class,
         Employee::class,
         EmployeeAttendance::class,
         MediaFile::class,
-        ProductBarCode::class,
         Address::class,
     ],
     version = 3,
@@ -153,13 +156,14 @@ abstract class FriendlyDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun productStockDao(): ProductStockDao
     abstract fun productBarCodeDao(): ProductBarCodeDao
-
+    abstract fun productCategoryDao(): ProductCategoryDao
+    abstract fun productSubCategoryDao(): ProductSubCategoryDao
+    abstract fun productInventoryDao(): ProductInventoryDao
     abstract fun customerDao(): CustomerDao
     abstract fun employeeDao(): EmployeeDao
     abstract fun employeeAttendanceDao(): EmployeeAttendanceDao
     abstract fun customerInvoiceDao(): CustomerInvoiceDao
-    abstract fun productCategoryDao(): ProductCategoryDao
-    abstract fun productSubCategoryDao(): ProductSubCategoryDao
+
     abstract fun mediaFileDao(): MediaFileDao
     abstract fun addressDao(): AddressDao
 

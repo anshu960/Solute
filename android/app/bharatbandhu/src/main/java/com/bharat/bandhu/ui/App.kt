@@ -22,9 +22,6 @@ import com.google.firebase.storage.ktx.storage
 class App: Application() {
 
     var activity: UtilityViewController? = null
-    var fragment: Fragment? = null
-    var socketUrl = ""
-    var selectedProfiles: ArrayList<ContactsContract.Profile> = ArrayList<ContactsContract.Profile>()
     init {
         instance = this
     }
