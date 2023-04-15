@@ -116,7 +116,7 @@ class Converters {
         MediaFile::class,
         Address::class,
     ],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 abstract class FriendlyDatabase : RoomDatabase() {

@@ -14,8 +14,8 @@ android {
         applicationId "com.solute"
         minSdk 21
         targetSdk 33
-        versionCode 119
-        versionName "0.1.19"
+        versionCode 123
+        versionName "0.1.23"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

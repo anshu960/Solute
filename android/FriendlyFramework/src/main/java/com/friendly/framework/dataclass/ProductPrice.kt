@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 class ProductPrice(
+    @ColumnInfo(name = "HSN") @SerializedName("HSN") var HSN: String? = null,
     @ColumnInfo(name = "TaxIncluded") @SerializedName("TaxIncluded") var TaxIncluded: Boolean? = null,
     @ColumnInfo(name = "SGST") @SerializedName("SGST") var SGST: Float? = null,
     @ColumnInfo(name = "CGST") @SerializedName("CGST") var CGST: Float? = null,

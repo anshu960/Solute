@@ -12,6 +12,8 @@ data class ProductStock (
     @ColumnInfo(name="BusinessID") @SerializedName("BusinessID"       ) var BusinessID       : String? = null,
     @ColumnInfo(name="ProductID") @SerializedName("ProductID"        ) var ProductID        : String? = null,
     @ColumnInfo(name="ActionID") @SerializedName("ActionID"         ) var ActionID         : String? = null,
+    @ColumnInfo(name="InventoryID") @SerializedName("InventoryID"         ) var InventoryID         : String? = null,
+    @ColumnInfo(name="InvoiceID") @SerializedName("InvoiceID"         ) var InvoiceID         : Long? = null,
     @ColumnInfo(name="IncreaseQuantity") @SerializedName("IncreaseQuantity" ) var IncreaseQuantity : Int?    = null,
     @ColumnInfo(name="DecreaseQuantity") @SerializedName("DecreaseQuantity" ) var DecreaseQuantity : Int?    = null,
     @ColumnInfo(name="TotalQuantity") @SerializedName("TotalQuantity"    ) var TotalQuantity    : Int?    = null,
