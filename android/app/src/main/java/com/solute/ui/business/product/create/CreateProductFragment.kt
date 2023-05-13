@@ -36,11 +36,13 @@ import com.solute.R
 import com.solute.app.ToastService
 import com.solute.navigation.AppNavigator
 import com.squareup.picasso.Picasso
+import id.zelory.compressor.Compressor
 import org.json.JSONObject
+import java.io.File
 
 class CreateProductFragment : Fragment() {
 
-    val picasso = Picasso.get()
+    val picasso: Picasso = Picasso.get()
     var prdName = ""
     var prdDescription = ""
     var mrp = 0F
@@ -262,9 +264,11 @@ class CreateProductFragment : Fragment() {
 
     fun onClickAddImage(){
         App.shared().mainActivity?.getImageUrlFromGallery {
-            fileUri = it
-            val picasso = Picasso.get()
-            picasso.load(it).into(this.imageView)
+            if(it != null){
+                fileUri = it
+                val picasso = Picasso.get()
+                picasso.load(it).into(this.imageView)
+            }
         }
     }
 
@@ -353,21 +357,21 @@ class CreateProductFragment : Fragment() {
             try {
                 mrp = prdMMRP.toFloat()
             }catch (error:Error){
-                App.shared().mainActivity?.toast("Please enter valid MRP")
+                ToastService.shared().toast("Please enter valid MRP")
             }
         }
         if(prdCostPrice.isNotEmpty()){
             try {
                 costPrice = prdCostPrice.toFloat()
             }catch (error:Error){
-                App.shared().mainActivity?.toast("Please enter valid Cost Price")
+                ToastService.shared().toast("Please enter valid Cost Price")
             }
         }
         if(prdPrice.isNotEmpty()){
             try {
                 price = prdPrice.toFloat()
             }catch (error:Error){
-                App.shared().mainActivity?.toast("Please enter valid Sale Price")
+                ToastService.shared().toast("Please enter valid Sale Price")
             }
         }
 
@@ -376,7 +380,7 @@ class CreateProductFragment : Fragment() {
             try {
                 sgst = prdSGST.toFloat()
             }catch (error:Error){
-                App.shared().mainActivity?.toast("Please enter valid SGST")
+                ToastService.shared().toast("Please enter valid SGST")
             }
         }
 
@@ -384,7 +388,7 @@ class CreateProductFragment : Fragment() {
             try {
                 cgst = prdCGST.toFloat()
             }catch (error:Error){
-                App.shared().mainActivity?.toast("Please enter valid CGST")
+                ToastService.shared().toast("Please enter valid CGST")
             }
         }
 
@@ -392,7 +396,7 @@ class CreateProductFragment : Fragment() {
             try {
                 igst = prdIGST.toFloat()
             }catch (error:Error){
-                App.shared().mainActivity?.toast("Please enter valid IGST")
+                ToastService.shared().toast("Please enter valid IGST")
             }
         }
 
@@ -400,7 +404,7 @@ class CreateProductFragment : Fragment() {
             try {
                 vat = prdVAT.toFloat()
             }catch (error:Error){
-                App.shared().mainActivity?.toast("Please enter valid VAT")
+                ToastService.shared().toast("Please enter valid VAT")
             }
         }
 
@@ -408,7 +412,7 @@ class CreateProductFragment : Fragment() {
             try {
                 cess = prdCESS.toFloat()
             }catch (error:Error){
-                App.shared().mainActivity?.toast("Please enter valid CESS")
+                ToastService.shared().toast("Please enter valid CESS")
             }
         }
 

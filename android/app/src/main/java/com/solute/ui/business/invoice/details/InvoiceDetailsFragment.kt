@@ -1,21 +1,25 @@
 package com.solute.ui.business.invoice.details
 
-import android.content.Context
-import android.graphics.*
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
-import android.print.PrintAttributes
-import android.print.PrintJob
-import android.print.PrintManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.print.PrintHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,11 +30,15 @@ import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.invoice.handler.InvoiceHandler
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 import com.friendly.framework.feature.sale.model.Sale
-import com.friendly.framework.pdf.PDFService
 import com.friendly.framework.qr.QRCodeUtill
-import com.google.gson.Gson
+import com.solute.MainActivity
 import com.solute.R
 import com.solute.app.App
+import com.solute.app.ToastService
+import com.solute.pdf.pdfService.AppPermission
+import com.solute.pdf.pdfService.AppPermission.Companion.requestPermission
+import com.solute.pdf.pdfService.FileHandler
+import com.solute.pdf.pdfService.PdfService
 import com.solute.ui.business.barcode.BarcodeHelper
 import com.solute.utility.SMSManager
 import com.solute.utility.WhatsappManager
@@ -38,7 +46,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.json.JSONObject
+import java.io.File
 
 
 class InvoiceDetailsFragment : Fragment() {
@@ -57,8 +65,8 @@ class InvoiceDetailsFragment : Fragment() {
     private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
     var salesRecycler : RecyclerView? = null
-    var customerCardView : CardView? = null
-    var invoicenumberTv : TextView? = null
+    private var customerCardView : CardView? = null
+    private var invoicenumberTv : TextView? = null
     var invoiceDateTv : TextView? = null
     var businessNameTv : TextView? = null
     var businessMobileTv : TextView? = null
@@ -76,6 +84,7 @@ class InvoiceDetailsFragment : Fragment() {
     var qrcodeIv : ImageView? = null
 
     var scrollView : ScrollView? = null
+    var webView : WebView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,6 +93,7 @@ class InvoiceDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_invoice_details, container, false)
         scrollView = view.findViewById(R.id.receipt_details_scroll_view)
+        webView = view.findViewById(R.id.receipt_details_web_view)
         salesRecycler = view.findViewById(R.id.items_recycler)
         customerCardView = view.findViewById(R.id.customer_cv)
         invoiceDateTv = view.findViewById(R.id.invoice_date_tv)
@@ -209,22 +219,49 @@ class InvoiceDetailsFragment : Fragment() {
     }
 
     fun reloadData() {
-        pupulateFooter()
-        if (customerInvoice != null && customerInvoice?.ShareLink != null) {
+        showNativeWay()
+//        showPDFWay()
+    }
+
+    private fun showPDFWay(){
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ),
+            AppPermission.REQUEST_PERMISSION
+        )
+        this.webView?.visibility = View.VISIBLE
+        this.scrollView?.visibility = View.GONE
+        if (customerInvoice != null && customerInvoice?.ShareLink != null && this.context != null) {
+            createPdf()
+        }
+    }
+
+    fun showNativeWay(){
+        this.webView?.visibility = View.GONE
+        this.scrollView?.visibility = View.VISIBLE
+        if (customerInvoice != null && customerInvoice?.ShareLink != null && this.context != null) {
+//            createPdf()
             if(this.context != null){
                 val adapter = InvoiceDetailsAdapter(requireContext(), customerInvoice!!.sales)
                 this.salesRecycler?.layoutManager = LinearLayoutManager(requireContext())
                 this.salesRecycler?.adapter = adapter
+                invoicenumberTv?.text = "INV #${customerInvoice?.invoiceID}"
+                discountTv?.text = "₹ " + customerInvoice?.instantDiscount.toString()
+                this.subTotalTv?.text = "₹ " + customerInvoice?.totalPrice.toString()
+                this.taxTv?.text = "₹ ${customerInvoice!!.finalPrice!! - customerInvoice!!.totalPrice!!}"
+                this.totalTv?.text = "₹ " + customerInvoice?.finalPrice.toString()
+                val qrBitmap =
+                    QRCodeUtill().getQRImage(customerInvoice!!.ShareLink!!)
+                qrcodeIv?.setImageBitmap(qrBitmap)
+                BarcodeHelper().generateBarcode(customerInvoice!!.invoiceID.toString(),this.barcodeIv)
+                invoiceDateTv?.text = customerInvoice?.invoiceDate
+                businessNameTv?.text = business?.Name
+                businessMobileTv?.text = business?.MobileNumber
+                businessAddressTv?.text = business?.Address
             }
-            invoicenumberTv?.text = "INV #${customerInvoice?.invoiceID}"
-            val qrBitmap =
-                QRCodeUtill().getQRImage(customerInvoice!!.ShareLink!!)
-            qrcodeIv?.setImageBitmap(qrBitmap)
-            BarcodeHelper().generateBarcode(customerInvoice!!.invoiceID.toString(),this.barcodeIv)
-            invoiceDateTv?.text = customerInvoice?.invoiceDate
-            businessNameTv?.text = business?.Name
-            businessMobileTv?.text = business?.MobileNumber
-            businessAddressTv?.text = business?.Address
         }
         if(customerInvoice != null && customerInvoice!!.customerID != null && customer == null){
             CustomerHandler.shared().viewModel?.getCustomerById(customerInvoice!!.customerID!!){cust->
@@ -256,19 +293,63 @@ class InvoiceDetailsFragment : Fragment() {
         }
     }
 
-    fun pupulateFooter() {
-        var subTotal = 0F
-        var finalPrice = 0F
-        sales.forEach {
-            subTotal += it.FinalPrice!!
-            finalPrice += it.FinalPrice!!
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == AppPermission.REQUEST_PERMISSION) {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                requestPermission(requireActivity() as MainActivity)
+                ToastService.shared().toast("Permission should be allowed")
+            }
         }
-        if (customerInvoice != null && customerInvoice!!.instantDiscount != null) {
-            finalPrice -= customerInvoice!!.instantDiscount!!
+    }
+
+    private fun createPdf() {
+        val onError: (Exception) -> Unit = { ToastService.shared().toast(it.message.toString()) }
+        val onFinish: (File) -> Unit = { openFile(it) }
+        val pdfService = PdfService(requireContext())
+        pdfService.generateInvoice(
+            invoice = this.customerInvoice!!,
+            onFinish = onFinish,
+            onError = onError
+        )
+    }
+
+
+    private fun openFile(file: File) {
+        val path = FileHandler().getPathFromUri(requireContext(), file.toUri())
+
+//        pdfIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        val uri: Uri = FileProvider.getUriForFile(this.requireContext(), "com.solute.provider", file)
+         webView?.settings?.allowFileAccess = true
+        webView?.settings?.javaScriptEnabled = true
+        webView?.settings?.allowContentAccess = true
+        webView?.settings?.allowUniversalAccessFromFileURLs = true
+        webView?.settings?.allowFileAccessFromFileURLs = true
+
+//        webView?.webChromeClient = WebChromeClient()
+        val newPath = uri.toString().replace("content://","file:///")
+        if (path != null) {
+            webView?.loadUrl("file:///$path")
         }
-        discountTv?.text = "₹ " + customerInvoice?.instantDiscount.toString()
-        this.subTotalTv?.text = "₹ " + customerInvoice?.totalPrice.toString()
-        this.taxTv?.text = "₹ " + customerInvoice?.Tax.toString()
-        this.totalTv?.text = "₹ " + customerInvoice?.finalPrice.toString()
+
+
+//        val intent = Intent(Intent.ACTION_VIEW)
+//        intent.setDataAndType(uri, "application/pdf")
+//        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+////        intent.setDataAndType(uri,"application/vnd.android.package-archive");
+//        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+//        startActivity(intent)
+//        try {
+//            startActivity(pdfIntent)
+//        } catch (e: ActivityNotFoundException) {
+//            ToastService.shared().toast("Can't read pdf file")
+//        }
     }
 }

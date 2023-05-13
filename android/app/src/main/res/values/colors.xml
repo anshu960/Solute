@@ -55,6 +55,7 @@
     <color name="not_decided_background">#E0DCF6</color>
     <color name="product_name">#0F172A</color>
     <color name="btn_title">#0F172A</color>
+    <color name="headline">#0F172A</color>
     <color name="product_discount">#0631A4</color>
     <color name="product_mrp">#63758B</color>
     <color name="mobile">#63758B</color>

@@ -26,6 +26,10 @@ class CartRepository {
     val discount : LiveData<Float>
     get() = discountLiveData
 
+    val priceLiveData = MutableLiveData<Float>()
+    val price : LiveData<Float>
+        get() = priceLiveData
+
     val subtotalLiveData = MutableLiveData<Float>()
     val subtotal : LiveData<Float>
         get() = subtotalLiveData

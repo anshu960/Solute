@@ -35,6 +35,18 @@ class AppNavigator {
             navController?.navigate(R.id.got_to_home)
         }
     }
+
+    fun navigateToSale() {
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.fragment_business_sale)
+        }
+    }
+
+    fun navigateToInvoices(){
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.business_invoice)
+        }
+    }
     fun navigateToSelectCustomer(){
         CoroutineScope(Job() + Dispatchers.Main).launch {
             navController?.navigate(R.id.business_select_customer)
@@ -61,7 +73,7 @@ class AppNavigator {
 
     fun gotToCart(){
         CoroutineScope(Job() + Dispatchers.Main).launch {
-            navController?.navigate(R.id.business_cart)
+            navController?.navigate(R.id.fragment_business_cart)
         }
     }
 
@@ -96,7 +108,7 @@ class AppNavigator {
     }
     fun goToReceiptDetails() {
         CoroutineScope(Job() + Dispatchers.Main).launch {
-            navController?.navigate(R.id.business_details_invoice_details)
+            navController?.navigate(R.id.go_to_new_invoice_details)
         }
     }
     fun goToCategoryDetails() {
@@ -117,6 +129,12 @@ class AppNavigator {
     fun goToCreateProductSubCategoryDetails(){
         CoroutineScope(Job() + Dispatchers.Main).launch {
             navController?.navigate(R.id.fragment_product_sub_category_details)
+        }
+    }
+
+    fun gotToCreateProductInventory(){
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.fragment_create_product_inventory)
         }
     }
 

@@ -40,6 +40,9 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
     val discount: LiveData<Float>
         get() = cartRepository.discount
 
+    val price: LiveData<Float>
+        get() = cartRepository.price
+
     val subtotal: LiveData<Float>
         get() = cartRepository.subtotal
 
@@ -69,43 +72,38 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
     }
 
     fun updatePricesInCart() {
-        var totalMrp : Float = 0F
-        var priceDiscount: Float = 0F
-        var priceSubtotal = 0F
-        var priceTax = 0F
+        var totalMrp = 0F
+        var price = 0F
+        var priceDiscount = 0F
+        var totalTax = 0F
         var priceTotal = 0F
         var instantDiscountPrice = 0F
         cartProducts.value?.forEach {
             val quanity = getProductQuantity(it)
+            if (it.ProductPrice?.Price != null) {
+                price += (it.ProductPrice?.Price!! * quanity)
+            }
             if (it.ProductPrice?.Discount != null) {
-                priceDiscount = priceDiscount + (it.ProductPrice?.Discount!! * quanity)
+                priceDiscount += (it.ProductPrice?.Discount!! * quanity)
             }
             if (it.ProductPrice?.FinalPrice != null) {
-                priceSubtotal = priceSubtotal + (it.ProductPrice?.FinalPrice!! * quanity)
+                priceTotal += (it.ProductPrice?.FinalPrice!! * quanity)
             }
             if (it.ProductPrice?.MRP != null) {
-                totalMrp = totalMrp + (it.ProductPrice?.MRP!! * quanity)
-            }
-            if (it.ProductPrice?.Tax != null) {
-                if (it.ProductPrice?.TaxIncluded != null) {
-                    if (!it.ProductPrice?.TaxIncluded!!) {
-                        priceTax = priceTax + (it.ProductPrice?.Tax!! * quanity)
-                    }
-                } else {
-                    priceTax = priceTax + (it.ProductPrice?.Tax!! * quanity)
-                }
+                totalMrp += (it.ProductPrice?.MRP!! * quanity)
             }
         }
         if (instantDiscount.value != null) {
             instantDiscountPrice = instantDiscount.value!!
         }
-        priceSubtotal = (priceSubtotal + priceTax)
-        priceTotal = priceSubtotal - instantDiscountPrice
-        cartRepository.subtotalLiveData.postValue(priceSubtotal)
+        totalTax = priceTotal - price
+        priceTotal -= instantDiscountPrice
+        cartRepository.subtotalLiveData.postValue(price+totalTax)
         cartRepository.discountLiveData.postValue(priceDiscount)
-        cartRepository.taxLiveData.postValue(priceTax)
+        cartRepository.taxLiveData.postValue(totalTax)
         cartRepository.totalAmountLiveData.postValue(priceTotal)
         cartRepository.mrpLiveData.postValue(totalMrp)
+        cartRepository.priceLiveData.postValue(price)
     }
 
     fun updateCount() {
@@ -208,8 +206,8 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
                 if (it.ProductPrice?.CESS != null) {
                     CESS = it.ProductPrice?.CESS!!.toInt() * quanity
                 }
-                if (it.ProductPrice?.Tax != null) {
-                    Tax = it.ProductPrice?.Tax!!.toInt() * quanity
+                if (it.ProductPrice?.TaxIncluded != null && !it.ProductPrice?.TaxIncluded!! && it.ProductPrice?.Tax != null) {
+                    Tax = it.ProductPrice?.Tax!!.toInt()
                 }
                 transactionData.put(KeyConstant.invoiceId, invoiceId)
                 transactionData.put(KeyConstant.productID, it.Id)

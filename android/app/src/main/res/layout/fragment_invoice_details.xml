@@ -124,6 +124,7 @@
         android:id="@+id/receipt_details_scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -390,7 +391,7 @@
                         android:id="@+id/items_item_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="Items"
                         android:textSize="10sp"
@@ -402,9 +403,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="60dp"
+                        android:layout_marginEnd="70dp"
                         android:text="Tax"
                         android:textSize="10sp"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toStartOf="@+id/items_total_tv"
                         app:layout_constraintTop_toBottomOf="@+id/items_title_tv" />
 
@@ -593,5 +595,16 @@
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <WebView
+        android:id="@+id/receipt_details_web_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

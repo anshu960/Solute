@@ -13,8 +13,8 @@ class BarcodeHelper {
     fun generateBarcode(code:String,imageView: ImageView?){
         val multiFormatWriter = MultiFormatWriter()
         val text = code
-        var width = imageView!!.width
-        var height = imageView!!.height
+        val width = imageView!!.width
+        val height = imageView!!.height
         Log.d("Dimension","Widht : $width height $height")
         try {
             val bitMatrix = multiFormatWriter.encode(

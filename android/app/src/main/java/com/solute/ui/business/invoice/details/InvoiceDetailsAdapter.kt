@@ -47,7 +47,7 @@ class InvoiceHistoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Re
 
     fun bind(sales: Sale) {
         itemNameTv?.text = sales.ProductName
-        taxTv?.text = "₹ " + sales.Tax
+        taxTv?.text = "₹ ${(sales.FinalPrice?.minus(sales.Price!! * sales.Quantity!!))}"
         quantityTv?.text =  sales.Quantity.toString()
         priceTv?.text = "₹ " +  sales.Price
         finalPriceTv?.text = "₹ " +  sales.FinalPrice

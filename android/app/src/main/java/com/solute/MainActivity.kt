@@ -39,6 +39,8 @@ import com.solute.app.Membership
 import com.solute.databinding.ActivityMainBinding
 import com.solute.deepLink.DeepLinkHandler
 import com.solute.navigation.AppNavigator
+import com.solute.pdf.pdfService.AppPermission.Companion.permissionGranted
+import com.solute.pdf.pdfService.AppPermission.Companion.requestPermission
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -76,11 +78,12 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         navController = findNavController(R.id.nav_host_fragment_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
+                R.id.business_home,
                 R.id.business_dashboard,
                 R.id.my_business_profile,
                 R.id.business_list,
-                R.id.business_sale,
-                R.id.business_cart,
+                R.id.fragment_business_sale,
+                R.id.fragment_business_cart,
                 R.id.business_stock,
                 R.id.business_invoice,
                 R.id.inventory_product,
@@ -136,6 +139,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         FriendlyFrameworkApp.shared().setUp(this)
         checkDynamicLink()
         checkUserState()
+        if (!permissionGranted(this)) requestPermission(this)
     }
 
     fun checkDynamicLink() {

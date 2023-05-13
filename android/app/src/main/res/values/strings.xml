@@ -48,6 +48,7 @@
     <string name="critical">Critical</string>
     <string name="not_decided">Not Decided</string>
     <string name="inventory">Inventory</string>
+    <string name="create_inventory">Create Inventory</string>
     <string name="business">Business</string>
     <string name="product">Product</string>
     <string name="all_product">All Products</string>
@@ -58,9 +59,9 @@
     <string name="sub_category">Sub Category</string>
     <string name="sale">Sale</string>
     <string name="skip">Skip</string>
-    <string name="skip_and_generate_invoice">Skip And Generate Invoice</string>
-    <string name="sale_to_this_customer">Sale To This Customer</string>
-    <string name="add_customer_to_this_sale">Add Customer to this Sale</string>
+    <string name="skip_and_generate_invoice">Skip</string>
+    <string name="sale_to_this_customer">Sale</string>
+    <string name="add_customer_to_this_sale">Continue</string>
     <string name="cart">Cart</string>
     <string name="checkout">Checkout</string>
     <string name="invoice">Invocie</string>
@@ -89,6 +90,7 @@
     <string name="attendance">Attendance</string>
     <string name="present">Present</string>
     <string name="stock">Stock</string>
+    <string name="history">History</string>
     <string name="price">Price</string>
     <string name="finance">Finance</string>
     <string name="title_activity_product_detail">Product Details</string>
@@ -135,6 +137,14 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="select_state">Select State</string>
     <string name="select_city">Select City</string>
+    <string name="description">Description</string>
+    <string name="model">Model</string>
+    <string name="color">Color</string>
+    <string name="measurement_unit">Measurement Unit</string>
+    <string name="batch_number">Batch Number</string>
+    <string name="batch_date">Batch Date</string>
+    <string name="expiry_date">Expiry Date</string>
+
 
     <string name="title_onboarding_invoice">Invoice</string>
     <string name="description_onboarding_invoice">Create invoice and share directly to customer by using any other app like SMS or Whatsapp and so on</string>
@@ -145,5 +155,31 @@
     <string name="title_onboarding_reports">Reports</string>
     <string name="description_onboarding_reports">Get reports for every single operations : Sales, Profit, Pending Payments, Premium Customers</string>
 
+
+    <string name="str_invoice">Invoice</string>
+    <string name="str_invoice_date">Date:</string>
+    <string name="str_invoice_no">Invoice #:</string>
+    <string name="str_invoice_customer_no">Customer #:</string>
+    <string name="str_invoice_order_id">Purchase order #:</string>
+    <string name="str_invoice_due_date">Payment due by:</string>
+    <string name="str_invoice_bill_to">Billed To</string>
+    <string name="str_invoice_ship_to">Ship To (if different)</string>
+    <string name="str_invoice_item_description">Description</string>
+    <string name="str_invoice_item_unit_cost">Unit Cost</string>
+    <string name="str_invoice_item_qty">QTY/HR Rate</string>
+    <string name="str_invoice_item_amount">Amount</string>
+    <string name="str_invoice_currency_symbol">$</string>
+    <string name="str_invoice_special_note">Special Notes and Instructions</string>
+    <string name="str_invoice_subtotal">Subtotal</string>
+    <string name="str_invoice_discount">Discount</string>
+    <string name="str_invoice_taxrate">Tax Rate</string>
+    <string name="str_invoice_tax">Tax</string>
+    <string name="str_invoice_total">Total</string>
+    <string name="str_invoice_disclaimer">Make all cheques payable to my company name</string>
+    <string name="str_invoice_thankyou">Thank you for your business!</string>
+    <string name="str_invoice_inquiry">Should you have any enquiries concerning this invoice, please contact us</string>
+    <string name="str_invoice_footer_addr">123 Your Street City, State, Country, Zip Code</string>>
+    <string name="str_invoice_footer_tel">Tel: + 1-541-754-3010 | Fax: + 1-541-754-3010 | Email: info@yourwebsite.com | www.yourwebsite.com</string>
+    <string name="export_pdf">Export PDF</string>
 
 </resources>

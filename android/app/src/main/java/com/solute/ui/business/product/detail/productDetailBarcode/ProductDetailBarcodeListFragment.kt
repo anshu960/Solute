@@ -61,6 +61,7 @@ class ProductDetailBarcodeListFragment : Fragment() {
                 }
             }
         }
+        makeRequest()
         return view
     }
     override fun onDestroy() {
@@ -69,28 +70,27 @@ class ProductDetailBarcodeListFragment : Fragment() {
             cameraExecutor?.shutdown()
         }
     }
-    fun loadBarcodes(){
-        ProductHandler.shared().repository.productBarCode.observe(requireParentFragment().viewLifecycleOwner){
-            this.adapter = this.context?.let { it1 ->
-                ProductBarCodeAdapter(it1,it){
+    private fun loadBarcodes(){
+        if(this.context != null){
+            ProductHandler.shared().repository.productBarCode.observe(requireParentFragment().viewLifecycleOwner){
+                this.adapter = this.context?.let { it1 ->
+                    ProductBarCodeAdapter(it1,it){
 
+                    }
                 }
+                recycler?.layoutManager = LinearLayoutManager(this.context)
+                recycler?.adapter = this.adapter
             }
-            recycler?.layoutManager = LinearLayoutManager(this.context)
-            recycler?.adapter = this.adapter
+            if (ProductHandler.shared().repository.selectedProduct.value != null) {
+                val product = ProductHandler.shared().repository.selectedProduct.value!!
+                ProductHandler.shared().viewModel?.loadProductBarCode(product)
+            }
         }
-        if (ProductHandler.shared().repository.selectedProduct.value != null) {
-            val product = ProductHandler.shared().repository.selectedProduct.value!!
-            ProductHandler.shared().viewModel?.loadProductBarCode(product)
-        }
-
     }
 
-    fun onClickScanBarCode() {
+    private fun onClickScanBarCode() {
         val optionsBuilder = GmsBarcodeScannerOptions.Builder()
-//        if (allowManualInput) {
-//            optionsBuilder.allowManualInput()
-//        }
+//        optionsBuilder.allowManualInput()
         val gmsBarcodeScanner = GmsBarcodeScanning.getClient(requireContext(), optionsBuilder.build())
         gmsBarcodeScanner
             .startScan()

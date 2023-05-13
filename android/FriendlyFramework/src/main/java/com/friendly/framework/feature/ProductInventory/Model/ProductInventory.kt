@@ -3,6 +3,7 @@ package com.friendly.framework.feature.productInventory.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.friendly.framework.dataclass.ProductPrice
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "ProductInventory")
@@ -12,6 +13,7 @@ data class ProductInventory(
     @ColumnInfo(name = "UserID") @SerializedName("UserID") var UserID: String? = null,
     @ColumnInfo(name = "BusinessID") @SerializedName("BusinessID") var BusinessID: String? = null,
     @ColumnInfo(name = "ProductID") @SerializedName("ProductID") var ProductID: String? = null,
+    @ColumnInfo (name =  "ProductPrice" ) @SerializedName("ProductPrice") var ProductPrice: ProductPrice? = null,
     @ColumnInfo(name = "BatchNumber") @SerializedName("BatchNumber") var BatchNumber: Int? = null,
     @ColumnInfo(name = "BatchDate") @SerializedName("BatchDate") var BatchDate: Int? = null,
     @ColumnInfo(name = "Name") @SerializedName("Name") var Name: String? = null,

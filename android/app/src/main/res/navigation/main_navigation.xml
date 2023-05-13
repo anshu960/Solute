@@ -7,10 +7,20 @@
     >
     <action
         android:id="@+id/got_to_home"
-        app:destination="@id/business_list"
-        app:popUpTo="@id/business_list"
+        app:destination="@id/business_home"
+        app:popUpTo="@id/business_home"
         app:popUpToInclusive="true"
         />
+    <action
+        android:id="@+id/go_to_new_invoice_details"
+        app:destination="@+id/business_details_invoice_details"
+        app:popUpTo="@+id/fragment_business_cart"
+        app:popUpToInclusive="true"/>
+    <fragment
+        android:id="@+id/business_home"
+        android:name="com.solute.ui.business.home.BusinessHomeFragment"
+        android:label="@string/business"
+        tools:layout="@layout/fragment_business_home" />
     <fragment
         android:id="@+id/business_list"
         android:name="com.solute.ui.businessList.BusinessListFragment"
@@ -70,24 +80,19 @@
         tools:layout="@layout/fragment_self_business_profile" />
 
     <fragment
-        android:id="@+id/business_home"
-        android:name="com.solute.ui.business.inventory.InventoryFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_inventory" />
-    <fragment
         android:id="@+id/business_dashboard"
         android:name="com.solute.ui.business.dashboard.BusinessDashboardFragment"
         android:label="@string/menu_dashboard"
         tools:layout="@layout/fragment_business_dashboard" />
 
     <fragment
-        android:id="@+id/business_sale"
+        android:id="@+id/fragment_business_sale"
         android:name="com.solute.ui.business.product.BusinessProductFragment"
         android:label="@string/sale"
         tools:layout="@layout/fragment_business_sale" />
 
     <fragment
-        android:id="@+id/business_cart"
+        android:id="@+id/fragment_business_cart"
         android:name="com.solute.ui.business.cart.BusinessCartFragment"
         android:label="@string/cart"
         tools:layout="@layout/fragment_business_cart" />
@@ -196,6 +201,11 @@
         android:name="com.solute.ui.business.inventory.subCategory.details.ProductSubCategoryDetailsFragment"
         android:label="@string/sub_category"
         tools:layout="@layout/fragment_product_sub_category_details" />
+    <fragment
+        android:id="@+id/fragment_create_product_inventory"
+        android:name="com.solute.ui.business.product.detail.inventory.create.CreateProductInventoryFragment"
+        android:label="@string/create_inventory"
+        tools:layout="@layout/fragment_create_product_inventory" />
 
 
 

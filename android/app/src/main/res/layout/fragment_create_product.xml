@@ -170,7 +170,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="MRP"
-                            android:inputType="number" />
+                            android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -190,7 +190,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Cost Price"
-                            android:inputType="number" />
+                            android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -232,7 +232,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/price"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             tools:layout_editor_absoluteX="14dp"
                             tools:layout_editor_absoluteY="380dp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -255,6 +255,7 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:hint="Final Price (Calculated)"
+                            android:inputType="number|numberDecimal"
                             app:textInputLayoutFocusedRectEnabled="false" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -297,7 +298,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="IGST %"
-                            android:inputType="number" />
+                            android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -317,7 +318,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="CGST %"
-                            android:inputType="number" />
+                            android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -337,7 +338,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="SGST %"
-                            android:inputType="number" />
+                            android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -357,7 +358,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="VAT %"
-                            android:inputType="number" />
+                            android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -377,7 +378,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="CESS %"
-                            android:inputType="number" />
+                            android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -397,7 +398,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Total Tax in RS"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             app:textInputLayoutFocusedRectEnabled="false" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -432,7 +433,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Final Price"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             app:textInputLayoutFocusedRectEnabled="false" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

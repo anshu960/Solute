@@ -36,6 +36,13 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.OnSuccessListener
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -325,7 +332,7 @@ open class UtilityViewController : AppCompatActivity() {
             {
                 val contentURI = data.data
                 if(onCaptureImageUrl != null && data.data != null){
-                    onCaptureImageUrl!!(data.data!!)
+                    compressAndSetImage(data.data!!)
                     return;
                 }
                 try
@@ -357,7 +364,7 @@ open class UtilityViewController : AppCompatActivity() {
             if (data != null && data.data != null) {
                 val contentURI = data.data
                 if(onCaptureImageUrl != null && data.data != null){
-                    onCaptureImageUrl!!(data.data!!)
+                    compressAndSetImage(data.data!!)
                     return;
                 }
                 try {
@@ -398,7 +405,25 @@ open class UtilityViewController : AppCompatActivity() {
 //        cursor.moveToFirst()
 //        return cursor.getString(column_index)
 //    }
-
+fun compressAndSetImage(result: Uri){
+    onCaptureImageUrl?.let { it1 -> it1(result) }
+//    val thisContext = this
+//    val job = Job()
+//    val uiScope = CoroutineScope(Dispatchers.IO + job)
+//    uiScope.launch {
+//        val compressedImageFile = Compressor.compress(thisContext, File(result.path)){
+//            quality(50) // combine with compressor constraint
+//            format(Bitmap.CompressFormat.JPEG)
+//        }
+//        val finalUrl = Uri.fromFile(compressedImageFile)
+//
+//        thisContext!!.runOnUiThread {
+//            finalUrl?.let {
+//                onCaptureImageUrl?.let { it1 -> it1(it) }
+//            }
+//        }
+//    }
+}
     fun encode(imageUri: Uri): String {
         val input = this.contentResolver.openInputStream(imageUri)
         val o = BitmapFactory.Options()

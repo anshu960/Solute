@@ -13,11 +13,11 @@
 <!--            android:icon="@drawable/ic_home_black"-->
 <!--            android:title="@string/menu_home" />-->
         <item
-            android:id="@+id/business_sale"
+            android:id="@+id/fragment_business_sale"
             android:icon="@drawable/sale"
             android:title="@string/sale" />
         <item
-            android:id="@+id/business_cart"
+            android:id="@+id/fragment_business_cart"
             android:icon="@drawable/shopping_cart"
             android:title="@string/cart" />
         <item

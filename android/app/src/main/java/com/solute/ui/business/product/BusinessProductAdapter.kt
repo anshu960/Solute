@@ -42,7 +42,7 @@ class BusinessProductAdapter(
 
     override fun onBindViewHolder(holder: BusinessProductViewHolder, position: Int) {
         val item = allProduct[position]
-        holder.bind(context, fragment, item)
+        holder.bind( fragment, item)
     }
 }
 
@@ -80,8 +80,9 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         decreaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_remove_btn)
     }
 
-    fun bind(context: Context, fragment: Fragment?, product: Product) {
+    fun bind( fragment: Fragment?, product: Product) {
         val picasso = Picasso.get()
+        image?.setImageResource(R.drawable.product_default_img)
         MediaFileHandler.shared().viewModel?.loadFor(product.Id){
             if(it.isNotEmpty()){
                 CoroutineScope(Job() + Dispatchers.Main).launch {

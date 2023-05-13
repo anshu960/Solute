@@ -21,6 +21,8 @@ import com.friendly.framework.feature.invoice.handler.InvoiceHandler
 import com.friendly.framework.feature.mediaFile.network.MediaFileNetwork
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
+import com.friendly.framework.feature.productInventory.model.ProductInventory
+import com.friendly.framework.feature.productInventory.network.ProductInventoryNetwork
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.friendly.framework.feature.sync.SyncHandler
 import com.friendly.framework.socket.repository.CONNECTION_STATUS
@@ -213,6 +215,7 @@ class SocketService : Service() {
         mSocket?.on(SocketEvent.CREATE_PRODUCT_BAR_CODE.value,ProductHandler.shared().onCreateProductBarCode)
         MediaFileNetwork.shared().connectScoket()
         AddressNetwork.shared().connectScoket()
+        ProductInventoryNetwork.shared().connectSocket()
         //conenct the socket
         mSocket?.connect()
     }

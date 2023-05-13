@@ -15,16 +15,22 @@
         android:name="com.solute.ui.business.product.detail.productPriceDetails.ProductPriceDetailsFragment"
         android:label="@string/price"
         tools:layout="@layout/fragment_product_price_details" />
+
     <fragment
-        android:id="@+id/product_details_menu_stock"
-        android:name="com.solute.ui.business.product.detail.productStockDetails.ProductStockDetailsFragment"
-        android:label="@string/stock"
-        tools:layout="@layout/fragment_product_stock_details" />
+        android:id="@+id/product_details_menu_inventory"
+        android:name="com.solute.ui.business.product.detail.inventory.ProductDetailInventoryFragment"
+        android:label="@string/inventory"
+        tools:layout="@layout/fragment_product_detail_inventory" />
     <fragment
         android:id="@+id/product_details_menu_barcode_list"
         android:name="com.solute.ui.business.product.detail.productDetailBarcode.ProductDetailBarcodeListFragment"
         android:label="@string/barcode"
         tools:layout="@layout/fragment_product_detail_barcode_list" />
+    <fragment
+        android:id="@+id/product_details_menu_stock"
+        android:name="com.solute.ui.business.product.detail.productStockDetails.ProductStockDetailsFragment"
+        android:label="@string/history"
+        tools:layout="@layout/fragment_product_stock_details" />
 </navigation>
 
 

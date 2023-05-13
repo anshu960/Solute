@@ -119,7 +119,7 @@ class BusinessProductFragment : Fragment() {
         return view
     }
 
-    fun onClickCart(){
+    private fun onClickCart(){
         AppNavigator.shared().gotToCart()
     }
     fun onClickScan(){

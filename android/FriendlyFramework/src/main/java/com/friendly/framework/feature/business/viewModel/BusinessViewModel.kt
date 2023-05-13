@@ -100,6 +100,4 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
         }
         SocketService.shared().send(SocketEvent.DELETE_BUSINESS, request)
     }
-
-
 }
