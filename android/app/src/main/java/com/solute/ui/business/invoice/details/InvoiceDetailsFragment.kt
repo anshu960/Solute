@@ -38,7 +38,7 @@ import com.solute.app.ToastService
 import com.solute.pdf.pdfService.AppPermission
 import com.solute.pdf.pdfService.AppPermission.Companion.requestPermission
 import com.solute.pdf.pdfService.FileHandler
-import com.solute.pdf.pdfService.PdfService
+//import com.solute.pdf.pdfService.PdfService
 import com.solute.ui.business.barcode.BarcodeHelper
 import com.solute.utility.SMSManager
 import com.solute.utility.WhatsappManager
@@ -313,12 +313,12 @@ class InvoiceDetailsFragment : Fragment() {
     private fun createPdf() {
         val onError: (Exception) -> Unit = { ToastService.shared().toast(it.message.toString()) }
         val onFinish: (File) -> Unit = { openFile(it) }
-        val pdfService = PdfService(requireContext())
-        pdfService.generateInvoice(
-            invoice = this.customerInvoice!!,
-            onFinish = onFinish,
-            onError = onError
-        )
+//        val pdfService = PdfService(requireContext())
+//        pdfService.generateInvoice(
+//            invoice = this.customerInvoice!!,
+//            onFinish = onFinish,
+//            onError = onError
+//        )
     }
 
 

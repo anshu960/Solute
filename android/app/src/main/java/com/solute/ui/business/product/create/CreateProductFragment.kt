@@ -36,7 +36,6 @@ import com.solute.R
 import com.solute.app.ToastService
 import com.solute.navigation.AppNavigator
 import com.squareup.picasso.Picasso
-import id.zelory.compressor.Compressor
 import org.json.JSONObject
 import java.io.File
 

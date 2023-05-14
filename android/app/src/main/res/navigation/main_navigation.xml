@@ -7,8 +7,8 @@
     >
     <action
         android:id="@+id/got_to_home"
-        app:destination="@id/business_home"
-        app:popUpTo="@id/business_home"
+        app:destination="@id/business_list"
+        app:popUpTo="@id/business_list"
         app:popUpToInclusive="true"
         />
     <action
