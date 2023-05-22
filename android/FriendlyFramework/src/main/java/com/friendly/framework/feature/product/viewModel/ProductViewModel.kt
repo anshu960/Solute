@@ -11,10 +11,12 @@ import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.friendly.framework.feature.product.model.Product
 import com.friendly.framework.feature.product.model.ProductBarCode
 import com.friendly.framework.feature.product.model.ProductStock
+import com.friendly.framework.feature.product.network.ProductNetwork
 import com.friendly.framework.feature.product.repository.ProductRepository
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -40,7 +42,8 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
                 val businessId = BusinessHandler.shared().repository.business.value?.Id
                 if (!businessId.isNullOrEmpty()) {
                     productRepository.productLiveData.postValue(
-                        DatabaseHandler.shared().database.productDao().getProductsFor(businessId) as? ArrayList<Product>
+                        DatabaseHandler.shared().database.productDao()
+                            .getProductsFor(businessId) as? ArrayList<Product>
                     )
                 }
             }
@@ -87,7 +90,23 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
         request.put(KeyConstant.userId, user._id)
         request.put(KeyConstant.businessID, business.value?.Id)
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
-        SocketService.shared().send(SocketEvent.RETRIVE_PRODUCT, request)
+        ProductNetwork.shared().retrieve(request) { responseJson ->
+            try {
+                val payload = responseJson?.getJSONArray(KeyConstant.payload)
+                if (payload != null) {
+                    for (i in 0 until payload!!.length()) {
+                        val item = payload.getJSONObject(i)
+                        val product = Gson().fromJson(item.toString(), Product::class.java)
+                        insertProduct(product)
+                    }
+                }
+                loadProduct()
+            } catch (e: Exception) {
+                e.printStackTrace()
+
+            }
+
+        }
     }
 
     fun createNewProduct(request: JSONObject) {
@@ -188,6 +207,7 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
         request.put(KeyConstant.barcode, code)
         SocketService.shared().send(SocketEvent.CREATE_PRODUCT_BAR_CODE, request)
     }
+
     fun insertProductBarCode(barCode: ProductBarCode) {
         CoroutineScope(Job() + Dispatchers.IO).launch {
             DatabaseHandler.shared().database.productBarCodeDao()

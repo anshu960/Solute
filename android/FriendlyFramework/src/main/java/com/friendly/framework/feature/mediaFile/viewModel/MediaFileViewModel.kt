@@ -3,7 +3,6 @@ package com.friendly.framework.feature.mediaFile.viewModel
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.friendly.framework.UtilityActivity
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.database.DatabaseHandler
@@ -12,9 +11,11 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.mediaFile.event.MediaFileEvent
 import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.friendly.framework.feature.mediaFile.model.MediaFile
+import com.friendly.framework.feature.mediaFile.network.MediaFileNetwork
 import com.friendly.framework.feature.mediaFile.repository.MediaFileRepository
 import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -94,7 +95,7 @@ class  MediaFileViewModel(private val repository: MediaFileRepository) :
         request.put(KeyConstant.businessID, business.value?.Id)
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
         request.put(KeyConstant.featureObjectID,featureObjectID)
-        SocketService.shared().send(MediaFileEvent.RETRIEVE.value,request)
+        SocketService.shared().send(MediaFileEvent.RETRIEVE,request)
     }
 
     fun retrieve(){
@@ -104,13 +105,23 @@ class  MediaFileViewModel(private val repository: MediaFileRepository) :
         request.put(KeyConstant.userId,user._id)
         request.put(KeyConstant.businessID, business.value?.Id)
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
-        SocketService.shared().send(MediaFileEvent.RETRIEVE.value,request)
+        MediaFileNetwork.shared().retrieve(request){responseJson->
+            val payload = responseJson?.getJSONArray(KeyConstant.payload)
+            if(payload != null){
+                for (i in 0 until payload!!.length())
+                {
+                    val item = payload.getJSONObject(i)
+                    val modelObject = Gson().fromJson(item.toString(),MediaFile::class.java)
+                    insert(modelObject)
+                }
+            }
+        }
     }
 
     fun createNew(request:JSONObject) {
         val unixTime = System.currentTimeMillis()
         request.put(KeyConstant.uniqueId,unixTime)
-        SocketService.shared().send(MediaFileEvent.CREATE.value, request)
+        SocketService.shared().send(MediaFileEvent.CREATE, request)
     }
 
     fun insert(newData :  MediaFile){

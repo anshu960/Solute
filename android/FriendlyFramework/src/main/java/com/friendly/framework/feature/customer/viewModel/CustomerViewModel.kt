@@ -2,22 +2,33 @@ package com.friendly.framework.feature.customer.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.friendly.framework.constants.KeyConstant
+import com.friendly.framework.constants.Server
 import com.friendly.framework.database.DatabaseHandler
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.customer.event.CustomerEvent
 import com.friendly.framework.feature.customer.model.Customer
+import com.friendly.framework.feature.customer.network.CustomerNetwork
+import com.friendly.framework.feature.customer.network.CustomerNetworkInterface
 import com.friendly.framework.feature.customer.repository.CustomerRepository
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class CustomerViewModel(private val customerRepository: CustomerRepository) : ViewModel() {
     val gson = Gson()
@@ -117,5 +128,47 @@ class CustomerViewModel(private val customerRepository: CustomerRepository) : Vi
                 }
             }
         }
+    }
+
+    fun findCustomerByMobile(mobile: String){
+        val request = JSONObject()
+        request.put(KeyConstant.businessID,BusinessHandler.shared().repository.business.value?.Id)
+        request.put(KeyConstant.mobileNumber,mobile)
+        val api = Server.getRestApiEndPointFor(CustomerEvent.FIND_BY_MOBILE.value)
+        val retrofit = CustomerNetwork.shared().buildService(CustomerNetworkInterface::class.java)
+        val bodyRequest: RequestBody =
+            RequestBody.create(MediaType.parse("application/json"), request.toString())
+        retrofit.findCustomerByMobile(bodyRequest).enqueue(
+            object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    print(t.message)
+                    customerRepository.customerLiveData.postValue(null)
+                }
+                override fun onResponse( call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    try {
+                        if (response.isSuccessful) {
+                            val obj = JSONObject(response.body()!!.string())
+                            if(obj.has(KeyConstant.payload)){
+                                val payload = obj.getJSONArray(KeyConstant.payload)
+                                if(payload.length() > 0){
+                                    val customerJson = payload[0].toString()
+                                    val customerData = gson.fromJson(customerJson,Customer::class.java)
+                                    customerRepository.customerLiveData.postValue(customerData)
+                                }
+                            }else{
+                                customerRepository.customerLiveData.postValue(null)
+                            }
+                        } else {
+                            val obj = JSONObject(response.errorBody()!!.string())
+                            print(obj)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        customerRepository.customerLiveData.postValue(null)
+                    }
+                }
+            }
+        )
+
     }
 }

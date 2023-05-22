@@ -1,9 +1,11 @@
 package com.friendly.framework.feature.mediaFile.event
 
-enum class MediaFileEvent(val value: String) {
-    CREATE("CREATE_MEDIA_FILE"),
-    UPDATE("UPDATE_MEDIA_FILE"),
-    RETRIEVE("RETRIEVE_MEDIA_FILE"),
-    DELETE("DELETE_MEDIA_FILE"),
+class MediaFileEvent() {
+    companion object{
+        const val CREATE = "CREATE_MEDIA_FILE"
+        const val UPDATE = "UPDATE_MEDIA_FILE"
+        const val RETRIEVE = "RETRIEVE_MEDIA_FILE"
+        const val DELETE = "DELETE_MEDIA_FILE"
+    }
 
 }

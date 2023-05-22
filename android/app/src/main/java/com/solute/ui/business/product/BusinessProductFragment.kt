@@ -24,14 +24,12 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.solute.R
 import com.solute.app.ToastService
 import com.solute.navigation.AppNavigator
-//import com.solute.ui.business.barcode.BarCodeAnalyzer
 import com.solute.ui.business.barcode.BarCodeBoxView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 class BusinessProductFragment : Fragment() {
     private val CAMERA = 2

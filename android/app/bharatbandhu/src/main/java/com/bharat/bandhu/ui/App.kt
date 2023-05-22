@@ -62,9 +62,9 @@ class App: Application() {
         val messaging = FirebaseMessaging.getInstance()
         messaging.isAutoInitEnabled = true
         val token = FirebaseMessaging.getInstance().token.toString()
-        if (token != null) {
+//        if (token != null) {
 //            Defaults.store(KeyConstant.fcmToken, token)
-        }
+//        }
 
     }
 

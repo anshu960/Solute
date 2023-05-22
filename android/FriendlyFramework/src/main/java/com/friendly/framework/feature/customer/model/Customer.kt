@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "Customer")
-data class Customer(
+data class Customer @JvmOverloads constructor(
     @PrimaryKey @ColumnInfo(name="_id") @SerializedName("_id"            ) var Id             : String           = "",
     @ColumnInfo(name="UserID") @SerializedName("UserID"         ) var UserID         : String?           = null,
     @ColumnInfo(name="BusinessID") @SerializedName("BusinessID"     ) var BusinessID     : String?           = null,

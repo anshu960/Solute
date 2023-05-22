@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#282253</color>
     <color name="colorAccent">#D81B60</color>
     <color name="buttonDefaultTint">#0076ff</color>
-    <color name="colorThemePrimary">#FF8400</color>
+    <color name="colorThemePrimary">#0076ff</color>
     <color name="lightGray">#a6a6a6</color>
     <color name="darkGray">#282828</color>
     <color name="lightBackground">#F7F8FA</color>

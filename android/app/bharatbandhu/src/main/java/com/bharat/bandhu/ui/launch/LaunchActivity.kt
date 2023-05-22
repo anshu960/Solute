@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import com.bharat.bandhu.R
+import com.bharat.bandhu.ui.BusinessConstants
 import com.bharat.bandhu.ui.MainActivity
 import com.bharat.bandhu.ui.onboard.LoginActivity
 import com.bharat.bandhu.ui.onboard.register.SignupActivity
@@ -11,7 +12,9 @@ import com.friendly.framework.Defaults
 import com.friendly.framework.UtilityActivity
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.dataclass.FriendlyUser
-import com.friendly.framework.socket.SocketService
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.business.model.Business
+import com.google.gson.Gson
 
 class LaunchActivity : UtilityActivity() {
     private var mDelayHandler: Handler? = null
@@ -55,8 +58,10 @@ class LaunchActivity : UtilityActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        BusinessHandler.shared().repository.businessLiveData.postValue(
+            Gson().fromJson(
+                BusinessConstants().json,
+                Business::class.java))
         setContentView(R.layout.activity_launch)
         mDelayHandler = Handler()
         //Navigate with delay
