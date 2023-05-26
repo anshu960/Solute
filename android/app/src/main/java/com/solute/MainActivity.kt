@@ -196,7 +196,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
                 }
 
             }
-            graph.setStartDestination(R.id.business_list)
+            graph.setStartDestination(R.id.business_home)
         }
         navController.setGraph(graph, intent.extras)
     }

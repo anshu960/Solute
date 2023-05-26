@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.friendly.framework.feature.businessMenu.modal.BusinessMenu
+import com.friendly.framework.feature.businessMenu.modal.MenuType
 import com.solute.R
 import com.solute.navigation.AppNavigator
 
@@ -43,6 +44,9 @@ class BusinessHomeFragment : Fragment() {
     var menuView1: ComposeView? = null
     var menuView2: ComposeView? = null
     var menuView3: ComposeView? = null
+    var menuView4: ComposeView? = null
+    var menuView5: ComposeView? = null
+    var menuView6: ComposeView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,6 +61,9 @@ class BusinessHomeFragment : Fragment() {
         menuView1 = view.findViewById(R.id.menu_view1)
         menuView2 = view.findViewById(R.id.menu_view2)
         menuView3 = view.findViewById(R.id.menu_view3)
+        menuView4 = view.findViewById(R.id.menu_view4)
+        menuView5 = view.findViewById(R.id.menu_view5)
+        menuView6 = view.findViewById(R.id.menu_view6)
         menuView1?.setContent {
             subMenu(menu = allMenu[0])
         }
@@ -66,6 +73,15 @@ class BusinessHomeFragment : Fragment() {
         menuView3?.setContent {
             subMenu(menu = allMenu[2])
         }
+        menuView4?.setContent {
+            subMenu(menu = allMenu[3])
+        }
+        menuView5?.setContent {
+            subMenu(menu = allMenu[4])
+        }
+        menuView6?.setContent {
+            subMenu(menu = allMenu[5])
+        }
         return view
     }
 
@@ -73,73 +89,88 @@ class BusinessHomeFragment : Fragment() {
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     fun subMenu(menu: BusinessMenu) {
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 46.dp, vertical = 48.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
+        if(menu.sub_menu.isNotEmpty()){
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                contentPadding = PaddingValues(8.dp),
 
+                ) {
+                items(menu.sub_menu) { subMenu ->
+                    if(subMenu.menuType == MenuType.HEADER){
+                        headerCard(menu = subMenu)
+                    }else{
+                        menuCard(menu = subMenu)
+                    }
 
-        ) {
-            Text(
-                text = menu.title!!,
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                modifier = Modifier
-                    .padding(8.dp) // margin
-                    .padding(8.dp) // space between the borders
-                    .padding(8.dp)
-            )
-
+                }
+            }
+        }else{
+            headerCard(menu = menu)
         }
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(8.dp),
+    }
 
+    @OptIn(ExperimentalMaterialApi::class)
+    @Composable
+    fun menuCard(menu: BusinessMenu) {
+        Card(
+            modifier = Modifier
+                .height(80.dp)
+                .width(180.dp)
+                .padding(8.dp), // margin
+            backgroundColor = menu.background_color!!.toColor(),
+            onClick = { onClickMenu(menu) }
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-
-
-            items(menu.sub_menu) { subMenu ->
-                Card(
-                    modifier = Modifier
-                        .height(80.dp)
-                        .width(180.dp)
-                        .padding(8.dp), // margin
-                    backgroundColor = subMenu.background_color!!.toColor(),
-                            onClick = { onClickMenu(subMenu) }
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp, vertical = 8.dp)
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painterResource(
-                                resources.getIdentifier(
-                                    subMenu.icon!!, "drawable",
-                                    requireContext().packageName
-                                )
-                            ),
-                            contentDescription = "",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .width(32.dp)
-                                .height(32.dp)
+                Image(
+                    painterResource(
+                        resources.getIdentifier(
+                            menu.icon!!, "drawable",
+                            requireContext().packageName
                         )
-                        Column(modifier = Modifier.padding(start = 8.dp)) {
-                            Text(
-                                text = subMenu.title!!,
-                                fontSize = 15.sp,
-                                textAlign = TextAlign.Center,
-                            )
-                        }
-                    }
+                    ),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .width(32.dp)
+                        .height(32.dp)
+                )
+                Column(modifier = Modifier.padding(start = 8.dp)) {
+                    Text(
+                        text = menu.title!!,
+                        fontSize = 15.sp,
+                        textAlign = TextAlign.Center,
+                    )
                 }
             }
         }
+    }
+
+    @OptIn(ExperimentalMaterialApi::class)
+    @Composable
+    fun headerCard(menu: BusinessMenu) {
+
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.padding(start = 8.dp)) {
+                    Text(
+                        text = menu.title!!,
+                        color = Color.Black,
+                        fontSize = 15.sp,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
+
     }
 
     fun onClickMenu(menu:BusinessMenu){
@@ -148,6 +179,8 @@ class BusinessHomeFragment : Fragment() {
             "business_invoice" -> AppNavigator.shared().navigateToInvoices()
         }
     }
+
+
 }
 
 fun String.toColor() = Color(android.graphics.Color.parseColor(this))
