@@ -65,7 +65,7 @@ class AccountFragment : Fragment() {
         loadMembershipInUI()
         logoutCard = view.findViewById(R.id.home_power_card)
         logoutCard?.setOnClickListener {
-            val intent = Intent(requireContext(),LaunchActivity::class.java)
+            val intent = Intent(requireContext(),LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             Defaults.shared().remove(KeyConstant.membershipDetails)
             Defaults.shared().remove(KeyConstant.loginDetails)
