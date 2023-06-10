@@ -3,7 +3,9 @@ package com.friendly.framework.feature.business.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.friendly.framework.feature.address.model.Address
 import com.google.gson.annotations.SerializedName
+import org.json.JSONObject
 
 @Entity(tableName = "Business")
 data class Business @JvmOverloads constructor(
@@ -13,7 +15,7 @@ data class Business @JvmOverloads constructor(
     @ColumnInfo (name = "BusinessTypeID" ) @SerializedName("BusinessTypeID") var BusinessTypeID : String?           = null,
     @ColumnInfo (name = "IsDeleted"      ) @SerializedName("IsDeleted") var IsDeleted      : Boolean?          = null,
     @ColumnInfo (name = "Name"           ) @SerializedName("Name") var Name           : String?           = null,
-    @ColumnInfo (name = "Address"        ) @SerializedName("Address") var Address        : String?           = null,
+    @ColumnInfo (name = "Address"        ) @SerializedName("Address") var Address        : Address?           = null,
     @ColumnInfo (name = "DealerName"     ) @SerializedName("DealerName") var DealerName     : String?           = null,
     @ColumnInfo (name = "ProductTypes"   ) @SerializedName("ProductTypes") var ProductTypes   : ArrayList<String> = arrayListOf(),
     @ColumnInfo (name = "GSTNumber"      ) @SerializedName("GSTNumber") var GSTNumber      : String?           = null,

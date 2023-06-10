@@ -34,7 +34,7 @@ class FirebaseAuthHelper {
     private lateinit var auth: FirebaseAuth
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
-
+    var roleType : JSONObject = JSONObject()
     var onAuthStateChange : ((AUTH_STATE, String)->Unit)? = null
 
     var phoneNumber = ""

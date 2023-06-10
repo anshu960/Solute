@@ -25,10 +25,11 @@ import kotlinx.coroutines.launch
 class BusinessProductAdapter(
     val context: Context,
     val fragment: Fragment?,
-    val allProduct: List<Product>
+    val allProduct: List<Product>,
+    onClick:(product:Product)->Unit
 ) :
     RecyclerView.Adapter<BusinessProductViewHolder>() {
-
+    val onClickProduct = onClick
     override fun getItemCount(): Int {
         return allProduct.count()
     }
@@ -40,7 +41,9 @@ class BusinessProductAdapter(
 
     override fun onBindViewHolder(holder: BusinessProductViewHolder, position: Int) {
         val item = allProduct[position]
-        holder.bind( fragment, item)
+        holder.bind( fragment, item){prd->
+            onClickProduct(prd)
+        }
     }
 }
 
@@ -78,7 +81,7 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         decreaseButton = itemView.findViewById(R.id.recycler_item_product_stepper_remove_btn)
     }
 
-    fun bind( fragment: Fragment?, product: Product) {
+    fun bind( fragment: Fragment?, product: Product,onClick: (product: Product) -> Unit) {
         val picasso = Picasso.get()
         image?.setImageResource(R.drawable.product_default_img)
         MediaFileHandler.shared().viewModel?.loadFor(product.Id){
@@ -132,7 +135,7 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         decreaseButton?.setOnClickListener { CartHandler.shared().removeFromCart(product) }
         image?.setOnClickListener {
                 ProductHandler.shared().repository.selectedProductLiveData.postValue(product)
-//            App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+                onClick(product)
         }
     }
 

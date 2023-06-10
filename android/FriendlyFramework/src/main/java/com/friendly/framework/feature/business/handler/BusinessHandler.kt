@@ -60,8 +60,16 @@ class BusinessHandler {
                 for (i in 0 until payload.length())
                 {
                     val item = payload.getJSONObject(i)
-                    val business = gson.fromJson(item.toString(), Business::class.java)
-                    viewModal?.insertDatabase(business)
+                    if(item.get(KeyConstant.address) is String){
+                        val newAddressObject = JSONObject()
+                        newAddressObject.put(KeyConstant.name,item.getString(KeyConstant.address))
+                        item.put(KeyConstant.address,newAddressObject)
+                        val business = gson.fromJson(item.toString(), Business::class.java)
+                        viewModal?.insertDatabase(business)
+                    }else{
+                        val business = gson.fromJson(item.toString(), Business::class.java)
+                        viewModal?.insertDatabase(business)
+                    }
                 }
             }
         }

@@ -139,6 +139,6 @@ class FriendlyFrameworkApp{
             ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
         )[ProductSubCategoryViewModel::class.java]
         ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel)
-
+        BusinessHandler.shared().viewModal?.setUpDefaultBusiness()
     }
 }

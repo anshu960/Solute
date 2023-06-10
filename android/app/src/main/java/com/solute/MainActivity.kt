@@ -41,6 +41,7 @@ import com.solute.deepLink.DeepLinkHandler
 import com.solute.navigation.AppNavigator
 import com.solute.pdf.pdfService.AppPermission.Companion.permissionGranted
 import com.solute.pdf.pdfService.AppPermission.Companion.requestPermission
+import com.solute.ui.address.AddressUtill
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -104,7 +105,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         AppNavigator.shared().navController = this.navController
         BusinessHandler.shared().repository.business.observe(this){
             drawerMenuHeaderName?.text = it?.Name
-            drawerMenuHeaderDescription?.text = it?.Address
+            drawerMenuHeaderDescription?.text = AddressUtill().formatToDisplay(it.Address)
             if(it != null){
                 MediaFileHandler.shared().viewModel?.loadFor(it.Id){
                     CoroutineScope(Job() + Dispatchers.Main).launch {
@@ -150,7 +151,6 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
                 var deepLink: Uri? = null
                 if (pendingDynamicLinkData != null && pendingDynamicLinkData.link != null) {
                     DeepLinkHandler().processPendingLink(pendingDynamicLinkData.link)
-
                 }
             }
             .addOnFailureListener(this) { e -> Log.w(TAG, "getDynamicLink:onFailure", e) }

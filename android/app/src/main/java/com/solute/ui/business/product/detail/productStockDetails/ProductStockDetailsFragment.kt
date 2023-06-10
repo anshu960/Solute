@@ -18,6 +18,7 @@ import com.friendly.framework.feature.product.model.ProductStock
 import com.friendly.framework.feature.sync.SyncHandler
 import com.solute.R
 import com.solute.app.App
+import com.solute.app.ToastService
 import com.solute.ui.business.product.detail.productStockDetails.adapter.ProductDetailStockAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -131,13 +132,17 @@ class ProductStockDetailsFragment : Fragment() {
                 .setView(inputFieldsLayout)
                 .setPositiveButton("Add"
                 ) { dialog, which ->
-                    val quantity = quantityEditText.text.toString().toInt()
-                    val message = messageEditText.text.toString()
-                    ProductHandler.shared().viewModel?.addStockQuantity(
-                        ProductHandler.shared().repository.selectedProduct.value!!,
-                        quantity,
-                        message
-                    )
+                    try {
+                       val quantity = quantityEditText.text.toString().toInt()
+                        val message = messageEditText.text.toString()
+                        ProductHandler.shared().viewModel?.addStockQuantity(
+                            ProductHandler.shared().repository.selectedProduct.value!!,
+                            quantity,
+                            message
+                        )
+                    }catch(e:Exception){
+                        ToastService.shared().toast("Please enter a valid input")
+                    }
                 }
                 .setNegativeButton("Cancel", null)
                 .create()

@@ -224,6 +224,8 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:text="@string/business"
+                        android:textColor="@color/product_name"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/from_tv" />
@@ -235,6 +237,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/mobile"
+                        android:textColor="@color/product_name"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/business_name_tv" />
 
@@ -245,6 +248,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:text="+91 xxxxxxxxxx"
+                        android:textColor="@color/product_name"
                         app:layout_constraintStart_toEndOf="@+id/business_mobile_lbl_tv"
                         app:layout_constraintTop_toBottomOf="@+id/business_name_tv" />
 
@@ -256,6 +260,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:text="@string/address"
+                        android:textColor="@color/product_name"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/business_mobile_lbl_tv" />
@@ -268,6 +273,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:text="TextView"
+                        android:textColor="@color/product_name"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/business_address_lbl_tv"
                         app:layout_constraintTop_toBottomOf="@+id/business_mobile_tv" />
@@ -309,6 +315,8 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:text="@string/name"
+                        android:textColor="@color/product_name"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/to_tv" />
@@ -320,6 +328,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/mobile"
+                        android:textColor="@color/product_name"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/customer_name_tv" />
 
@@ -330,6 +339,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:text="+91 xxxxxxxxxx"
+                        android:textColor="@color/product_name"
                         app:layout_constraintStart_toEndOf="@+id/customer_mobile_lbl_tv"
                         app:layout_constraintTop_toBottomOf="@+id/customer_name_tv" />
 

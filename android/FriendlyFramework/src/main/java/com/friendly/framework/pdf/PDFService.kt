@@ -15,7 +15,7 @@ class PDFService {
     ) :String{
         var invoiceHtml =  InvoiceTemplate.htmlTemplate
         business?.Name?.let { invoiceHtml = invoiceHtml.replace("###BusinessName", it) }
-        business?.Address?.let { invoiceHtml =invoiceHtml.replace("###BusinessAddress",it ) }
+//        business?.Address?.let { invoiceHtml =invoiceHtml.replace("###BusinessAddress",it ) }
         business?.MobileNumber?.let { invoiceHtml =invoiceHtml.replace("###BusinessMobile",it ) }
         customer?.Name?.let { invoiceHtml = invoiceHtml.replace("###CustomerName",it ) }
         customer?.Address?.let { invoiceHtml = invoiceHtml.replace("###CustomerAddress",it ) }

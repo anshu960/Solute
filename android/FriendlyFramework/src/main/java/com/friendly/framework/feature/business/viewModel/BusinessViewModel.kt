@@ -20,23 +20,36 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
-class BusinessViewModel(private val bussinessRepository: BusinessRepository) : ViewModel() {
+class BusinessViewModel(private val repository: BusinessRepository) : ViewModel() {
     init {
 
     }
 
     val analytics: LiveData<ArrayList<BusinessAnalytics>>
-        get() = bussinessRepository.analytics
+        get() = repository.analytics
 
     val selectedBusiness: LiveData<Business>
-        get() = bussinessRepository.businessLiveData
+        get() = repository.businessLiveData
 
     val allBusiness: LiveData<ArrayList<Business>>
-        get() = bussinessRepository.allBusiness
+        get() = repository.allBusiness
 
     fun loadBusiness() {
         CoroutineScope(Job() + Dispatchers.IO).launch {
-            bussinessRepository.allBusiness.postValue(DatabaseHandler.shared().database.businessDao().getAllItemsForUser() as ArrayList<Business>)
+            repository.allBusiness.postValue(DatabaseHandler.shared().database.businessDao().getAllItemsFromDB() as ArrayList<Business>)
+        }
+    }
+
+    fun setUpDefaultBusiness(){
+        if(repository.business.value != null && repository.business.value?.Id != null){
+            return
+        }else{
+            CoroutineScope(Job() + Dispatchers.IO).launch {
+                val allBusinessFromDatabase = DatabaseHandler.shared().database.businessDao().getAllItemsFromDB()
+                if(allBusinessFromDatabase.isNotEmpty()){
+                    repository.businessLiveData.postValue(allBusinessFromDatabase.first())
+                }
+            }
         }
     }
 
@@ -44,12 +57,13 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
         name: String,
         gst: String,
         pan: String,
-        address: String,
+        address: JSONObject,
         email: String,
         mobile: String
     ) {
         val request = JSONObject()
         val user = FriendlyUser()
+        val unixTime = System.currentTimeMillis()
         request.put(KeyConstant.userId, user._id)
         request.put(KeyConstant.name, name)
         request.put(KeyConstant.gstNumber, gst)
@@ -58,6 +72,7 @@ class BusinessViewModel(private val bussinessRepository: BusinessRepository) : V
         request.put(KeyConstant.emailId, email)
         request.put(KeyConstant.mobileNumber, mobile)
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
+        request.put(KeyConstant.uniqueId,unixTime)
         if (BusinessTypeHandler.shared().repository.businessType != null) {
             request.put(
                 KeyConstant.businessTypeID,

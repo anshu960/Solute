@@ -135,6 +135,8 @@ class KeyConstant {
 
         val dateOfBirth = "date_of_birth"
         val address = "Address"
+        val house = "House"
+        val flatNumber = "FlatNumber"
         val zipCode = "ZipCode"
         val currentGymId = "current_gym_id"
         val joiningDate = "current_gym_joining_date"

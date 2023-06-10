@@ -4,11 +4,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import com.friendly.framework.UtilityActivity
+import com.friendly.framework.feature.customer.model.Customer
 import com.friendly.framework.feature.invoice.model.CustomerInvoice
 
 
 class WhatsappManager {
-     fun sendInvoice(activity: UtilityActivity?, mobileNumber:String?, invoiceNumber:Long, amount :Float, customerInvoice: CustomerInvoice) {
+     fun sendInvoice(activity: UtilityActivity?, customer: Customer?, invoiceNumber:Long, amount :Float, customerInvoice: CustomerInvoice) {
          var message = "Solute\n"
          message += "Invoice Generate\n"
          message += "Invoice Number : $invoiceNumber\n"
@@ -20,7 +21,7 @@ class WhatsappManager {
             activity?.packageManager?.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES)
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://wa.me/$mobileNumber?text=$message")
+                Uri.parse("https://wa.me/${customer?.DialCode?.trim()}${customer?.MobileNumber?.trim()}?text=$message")
             )
             intent.setPackage("com.whatsapp")
             activity?.startActivity(intent)

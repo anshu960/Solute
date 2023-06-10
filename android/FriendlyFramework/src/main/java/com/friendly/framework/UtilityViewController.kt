@@ -30,6 +30,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.friendly.framework.constants.KeyConstant
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
@@ -491,13 +492,13 @@ fun compressAndSetImage(result: Uri){
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             var locationObject = JSONObject()
-//            locationObject.put(KeyConstant.latitude, location.latitude)
-//            locationObject.put(KeyConstant.longitude, location.latitude)
-//            if (onCaptureLocation != null) {
-//                stopActivityIndicator()
-//                onCaptureLocation!!(locationObject)
-//                onCaptureLocation = null
-//            }
+            locationObject.put(KeyConstant.latitude, location.latitude)
+            locationObject.put(KeyConstant.longitude, location.latitude)
+            if (onCaptureLocation != null) {
+                stopActivityIndicator()
+                onCaptureLocation!!(locationObject)
+                onCaptureLocation = null
+            }
         }
 
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
@@ -532,19 +533,19 @@ fun compressAndSetImage(result: Uri){
     }
 
     fun startFetchingLocation() {
-//        try {
-//            // Request location updates
-//            this.startActivityIndicator("Fetching Location")
-//            locationManager?.requestLocationUpdates(
-//                LocationManager.NETWORK_PROVIDER,
-//                0L,
-//                0f,
-//                locationListener
-//            )
-//        } catch (ex: SecurityException) {
-//            this.stopActivityIndicator()
-//            alert("Oops!", "Security Exception, no location available")
-//        }
+        try {
+            // Request location updates
+            this.startActivityIndicator("Fetching Location")
+            locationManager?.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,
+                0L,
+                0f,
+                locationListener
+            )
+        } catch (ex: SecurityException) {
+            this.stopActivityIndicator()
+            alert("Oops!", "Security Exception, no location available")
+        }
     }
 
 

@@ -27,6 +27,7 @@ import com.friendly.framework.feature.businessMenu.BusinessMenuConfig
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Colors
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.Alignment
@@ -34,8 +35,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.business.viewModel.BusinessViewModel
 import com.friendly.framework.feature.businessMenu.modal.BusinessMenu
 import com.friendly.framework.feature.businessMenu.modal.MenuType
+import com.solute.MainActivity
 import com.solute.R
 import com.solute.navigation.AppNavigator
 
@@ -49,7 +53,10 @@ class BusinessHomeFragment : Fragment() {
     var menuView6: ComposeView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+         BusinessHandler.shared().viewModal?.selectedBusiness?.observe(this){
+             allMenu = BusinessMenuConfig().getMenu()
+             loadMenuInUI()
+         }
     }
 
     override fun onCreateView(
@@ -64,6 +71,12 @@ class BusinessHomeFragment : Fragment() {
         menuView4 = view.findViewById(R.id.menu_view4)
         menuView5 = view.findViewById(R.id.menu_view5)
         menuView6 = view.findViewById(R.id.menu_view6)
+        (context as? MainActivity)?.setBusinessMenu()
+        loadMenuInUI()
+        return view
+    }
+
+    fun loadMenuInUI(){
         menuView1?.setContent {
             subMenu(menu = allMenu[0])
         }
@@ -82,18 +95,24 @@ class BusinessHomeFragment : Fragment() {
         menuView6?.setContent {
             subMenu(menu = allMenu[5])
         }
-        return view
     }
 
 
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     fun subMenu(menu: BusinessMenu) {
+        var height = 0
+        if(menu.sub_menu.count()>0){
+            height = menu.sub_menu.count() * 50
+        }
         if(menu.sub_menu.isNotEmpty()){
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
-                contentPadding = PaddingValues(8.dp),
-
+                contentPadding = PaddingValues(4.dp),
+                modifier = Modifier
+                    .height(height.dp)
+                    .width(180.dp)
+                    .padding(8.dp),
                 ) {
                 items(menu.sub_menu) { subMenu ->
                     if(subMenu.menuType == MenuType.HEADER){
@@ -117,7 +136,7 @@ class BusinessHomeFragment : Fragment() {
             modifier = Modifier
                 .height(80.dp)
                 .width(180.dp)
-                .padding(8.dp), // margin
+                .padding(4.dp), // margin
             backgroundColor = menu.background_color!!.toColor(),
             onClick = { onClickMenu(menu) }
         ) {
@@ -154,29 +173,40 @@ class BusinessHomeFragment : Fragment() {
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     fun headerCard(menu: BusinessMenu) {
-
             Row(
                 modifier = Modifier
-                    .padding(horizontal = 8.dp, vertical = 8.dp)
+                    .height(32.dp)
+                    .padding(horizontal = 8.dp, vertical = 0.dp)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.padding(start = 8.dp)) {
                     Text(
                         text = menu.title!!,
-                        color = Color.Black,
-                        fontSize = 15.sp,
+                        color = "#0F172A".toColor(),
+                        fontSize = 24.sp,
                         textAlign = TextAlign.Center,
                     )
                 }
             }
-
     }
 
     fun onClickMenu(menu:BusinessMenu){
+        BusinessHandler.shared().viewModal?.setUpDefaultBusiness()
+        (context as? MainActivity)?.setBusinessMenu()
         when(menu.target_screen){
             "fragment_business_sale"-> AppNavigator.shared().navigateToSale()
             "business_invoice" -> AppNavigator.shared().navigateToInvoices()
+            "inventory_product" -> AppNavigator.shared().navigateToInventoryProduct()
+            "inventory_category" -> AppNavigator.shared().navigateToInventoryCategory()
+            "inventory_sub_category" -> AppNavigator.shared().navigateToInventorySubCategory()
+            "business_stock" -> AppNavigator.shared().navigateToBusinessStock()
+            "my_business_profile" -> AppNavigator.shared().navigateToMyBusinessProfile()
+            "business_dashboard" -> AppNavigator.shared().navigateToBusinessDashboard()
+            "business_employee" -> AppNavigator.shared().navigateToEmployeeList()
+            "business_customers" -> AppNavigator.shared().navigateToCustomerList()
+            "business_list" -> AppNavigator.shared().navigateToBusinessList()
+
         }
     }
 

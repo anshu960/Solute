@@ -17,6 +17,7 @@ import com.friendly.framework.qr.QRCodeUtill
 import com.solute.app.App
 import com.solute.R
 import com.solute.navigation.AppNavigator
+import com.solute.ui.address.AddressUtill
 import com.squareup.picasso.Picasso
 
 import kotlinx.coroutines.CoroutineScope
@@ -42,7 +43,7 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
                 BusinessHandler.shared().repository.businessLiveData.postValue(item)
                 SyncHandler.shared().clearBusinessAnalytics()
                 SyncHandler.shared().syncAllBusinessData()
-                AppNavigator.shared().goToBusinessHome()
+                AppNavigator.shared().navigateToHome()
                 App.shared().mainActivity?.setBusinessMenu()
         }
         holder.bind(item,position)
@@ -74,7 +75,7 @@ class BusinessViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recycler
     fun bind(business: Business,index:Int) {
         businessName?.text = business.Name
         businessMobile?.text = business.MobileNumber
-        businessAddress?.text = business.Address
+        businessAddress?.text = AddressUtill().formatToDisplay(business.Address)
         when(index.mod(4)){
             0-> cardLyout?.background =  getDrawable(App.shared(), R.drawable.business_card1)
             1-> cardLyout?.background =  getDrawable(App.shared(), R.drawable.business_card2)

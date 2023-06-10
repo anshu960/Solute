@@ -14,6 +14,7 @@ import com.friendly.framework.feature.product.model.Product
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.business.product.BusinessProductAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -58,7 +59,9 @@ class CategoryDetailsFragment : Fragment() {
         this.title?.text = selectedCategory?.Name
 //        this.countTxt = view.findViewById(R.id.category_details_count)
         this.countTxt?.text = "Total ${allProduct.count()} Product"
-        this.productAdapter =   BusinessProductAdapter(requireContext(),null,allProduct)
+        this.productAdapter =   BusinessProductAdapter(requireContext(),null,allProduct){prd->
+            App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+        }
         this.recycler?.layoutManager = GridLayoutManager(requireContext(),2)
         recycler?.adapter = this.productAdapter
 //        this.backButton = view.findViewById(R.id.category_details_header_back)

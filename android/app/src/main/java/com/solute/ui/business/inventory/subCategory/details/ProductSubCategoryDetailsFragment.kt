@@ -14,6 +14,7 @@ import com.friendly.framework.feature.product.model.Product
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.business.product.BusinessProductAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,7 +54,9 @@ class ProductSubCategoryDetailsFragment : Fragment() {
     }
 
     fun reloadData() {
-        this.productAdapter = BusinessProductAdapter(requireContext(), null, allProduct)
+        this.productAdapter = BusinessProductAdapter(requireContext(), null, allProduct){prd->
+            App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+        }
         this.recycler?.layoutManager = GridLayoutManager(requireContext(), 2)
         recycler?.adapter = this.productAdapter
     }

@@ -1,10 +1,15 @@
 package com.friendly.framework
 
+import com.friendly.framework.dataclass.formatTo
 import java.text.SimpleDateFormat
 import java.util.*
 
-object DateUtill {
+class DateUtill {
 
+     val SECOND_MILLIS = 1000
+    val MINUTE_MILLIS = 60 * SECOND_MILLIS
+   val HOUR_MILLIS = 60 * MINUTE_MILLIS
+    val DAY_MILLIS = 24 * HOUR_MILLIS
     fun getTimestamp():Long{
         val cal = Calendar.getInstance()
         val timestamp = cal.timeInMillis
@@ -14,27 +19,23 @@ object DateUtill {
     }
 
     fun formatDate(dateString: String):String{
-        //"yyyy-MM-dd'T'hh:mm:ss.SSS'Z'"
-//        val sdf = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'")
-//        sdf.timeZone = TimeZone.getTimeZone("UTC")
-//        try {
-//            val newDate =  sdf.parse(dateString)
-//            val year = newDate.year
-//            val month = newDate.month
-//            val day = newDate.day
-//            val date = newDate.date
-//            var dateStr = newDate.toString()
+        "yyyy-MM-dd'T'hh:mm:ss.SSS'Z'"
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'")
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        try {
+            val newDate =  sdf.parse(dateString)
+            val year = newDate.year
+            val month = newDate.month
+            val day = newDate.day
+            val date = newDate.date
+            var dateStr = newDate.formatTo("dd-MM-yyyy",TimeZone.getTimeZone("GMT"))
 //            dateStr = dateString.split("T").first()
-//            return dateStr
-////            return "$day $month $year $date"
-//        } catch (e: java.lang.Exception) {
-//            e.printStackTrace()
-//            return ""
-//        }
-
-
-    return ""
-
+            return dateStr
+//            return "$day $month $year"
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            return ""
+        }
     }
 
     fun formatedDate(timestamp: Long):String{
@@ -44,10 +45,6 @@ object DateUtill {
     }
 
 
-    private const val SECOND_MILLIS = 1000
-    private const val MINUTE_MILLIS = 60 * SECOND_MILLIS
-    private const val HOUR_MILLIS = 60 * MINUTE_MILLIS
-    private const val DAY_MILLIS = 24 * HOUR_MILLIS
 
 
     fun String.getDateWithServerTimeStamp(): Date? {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.businessType.handler.BusinessTypeHandler
@@ -14,6 +15,7 @@ import com.friendly.framework.feature.businessType.viewModel.BusinessTypeViewMod
 import com.friendly.framework.feature.businessType.viewModel.BusinessTypeViewModel
 import com.solute.MainActivity
 import com.solute.R
+import com.solute.app.App
 import com.solute.ui.business.create.adapter.BusinessTypeAdapter
 
 class SelectBusinessTypeFragment : Fragment() {
@@ -41,11 +43,12 @@ class SelectBusinessTypeFragment : Fragment() {
             loadBusinessTypesInUI()
         }
         BusinessTypeHandler.shared().fetchAllBusinessType()
+        App.shared().mainActivity?.stopActivityIndicator()
         return view
     }
 
     fun loadBusinessTypesInUI(){
-        recycler?.layoutManager = LinearLayoutManager(this.context)
+        recycler?.layoutManager = GridLayoutManager(this.context,2)
         this.adapter = this.context?.let { BusinessTypeAdapter(it,this.allBusinessType) }
         recycler?.adapter = this.adapter
     }

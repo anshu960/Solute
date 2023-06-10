@@ -59,6 +59,22 @@ class Converters {
             return ""
         }
     }
+    @TypeConverter
+    fun jsonToAddress(value: String):Address{
+        return try {
+            Gson().fromJson(value,Address::class.java)
+        } catch (error:java.lang.Error){
+            Gson().fromJson(value,Address::class.java)
+        }
+    }
+    @TypeConverter
+    fun addressToJson(value: Address):String?{
+        return try {
+            Gson().toJson(value)
+        } catch (error:java.lang.Error){
+            null
+        }
+    }
 
     @TypeConverter
     fun saleArrayListToString(value: ArrayList<Sale>): String {
@@ -116,7 +132,7 @@ class Converters {
         MediaFile::class,
         Address::class,
     ],
-    version = 8,
+    version = 10,
     exportSchema = false
 )
 abstract class FriendlyDatabase : RoomDatabase() {

@@ -60,20 +60,18 @@ class RegisterFragment : Fragment() {
             App.shared().mainActivity?.let { Country().getCountryCode(it) })
         request.put(KeyConstant.gender,gender)
         request.put(KeyConstant.imageData,encodedImage)
-        val roleType = JSONObject()
-        roleType.put(KeyConstant._id ,"61acee7871a83e09a12a1668")
-        request.put(KeyConstant.roleType,roleType)
-        App.shared().mainActivity?.startActivityIndicator("Trying to create account")
+        request.put(KeyConstant.roleType,FirebaseAuthHelper.shared().roleType)
         SocketService.shared().onEvent= { event, data ->
             App.shared().mainActivity?.runOnUiThread {
                 App.shared().mainActivity?.stopActivityIndicator()
-                val response = data
-                val payload = response.getJSONObject(KeyConstant.payload)
+                val payload = data.getJSONObject(KeyConstant.payload)
                 if(payload.length() > 0){
                     Defaults.shared().store(KeyConstant.loginDetails,payload)
-                    AppNavigator.shared().navigateToHome()
-                    val intent = Intent(App.shared().mainActivity, MainActivity::class.java)
-                    this.startActivity(intent)
+                    if(FirebaseAuthHelper.shared().roleType.getString(KeyConstant._id) == "6470a9898a292dd59a0dcfdf"){
+                        AppNavigator.shared().gotToSelectBusinessType()
+                    }else{
+                        AppNavigator.shared().navigateToCustomerHome()
+                    }
                 }else{
                     App.shared().mainActivity?.alert("Oopd!", "Something went wrong, please try after some time")
                 }

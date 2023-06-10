@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.print.PrintHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.friendly.framework.DateUtill
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.customer.model.Customer
@@ -38,6 +40,7 @@ import com.solute.app.ToastService
 import com.solute.pdf.pdfService.AppPermission
 import com.solute.pdf.pdfService.AppPermission.Companion.requestPermission
 import com.solute.pdf.pdfService.FileHandler
+import com.solute.ui.address.AddressUtill
 //import com.solute.pdf.pdfService.PdfService
 import com.solute.ui.business.barcode.BarcodeHelper
 import com.solute.utility.SMSManager
@@ -150,7 +153,7 @@ class InvoiceDetailsFragment : Fragment() {
             if (customerInvoice != null) {
                 WhatsappManager().sendInvoice(
                     App.shared().mainActivity,
-                    customer?.MobileNumber,
+                    customer,
                     customerInvoice!!.invoiceNumber!!,
                     customerInvoice!!.finalPrice!!,
                     customerInvoice!!
@@ -257,10 +260,10 @@ class InvoiceDetailsFragment : Fragment() {
                     QRCodeUtill().getQRImage(customerInvoice!!.ShareLink!!)
                 qrcodeIv?.setImageBitmap(qrBitmap)
                 BarcodeHelper().generateBarcode(customerInvoice!!.invoiceID.toString(),this.barcodeIv)
-                invoiceDateTv?.text = customerInvoice?.invoiceDate
+                invoiceDateTv?.text = DateUtill().formatDate(customerInvoice!!.invoiceDate!!)
                 businessNameTv?.text = business?.Name
                 businessMobileTv?.text = business?.MobileNumber
-                businessAddressTv?.text = business?.Address
+                businessAddressTv?.text = AddressUtill().formatToDisplay(business?.Address)
             }
         }
         if(customerInvoice != null && customerInvoice!!.customerID != null && customer == null){
@@ -286,7 +289,7 @@ class InvoiceDetailsFragment : Fragment() {
 
     fun populateCustomerInfo(){
         customerNameTv?.text = customer?.Name
-        customerMobileTv?.text = customer?.MobileNumber
+        customerMobileTv?.text = customer?.DialCode + customer?.MobileNumber
         customerAddressTv?.text = customer?.Address
         if(customer?.Address.isNullOrEmpty()){
             customerAddressTv?.visibility = View.GONE

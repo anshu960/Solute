@@ -110,7 +110,7 @@ class SaleHandler {
         var maxValue = 0
         CoroutineScope(Job() + Dispatchers.IO).launch {
             var allSales = arrayListOf<Sale>()
-            if(BusinessHandler.shared().viewModal?.selectedBusiness?.value?.Id != ""){
+            if(!BusinessHandler.shared().viewModal?.selectedBusiness?.value?.Id.isNullOrEmpty()){
                 val businessId = BusinessHandler.shared().viewModal!!.selectedBusiness!!.value!!.Id
                 val startDateQuery = startDate+"T00:00:00.001+00:00"
                 val endDate = today+"T24:00:00.000+00:00"
@@ -150,7 +150,7 @@ class SaleHandler {
         var maxValue = 0
         CoroutineScope(Job() + Dispatchers.IO).launch {
             var allSales = arrayListOf<Sale>()
-            if(BusinessHandler.shared().viewModal?.selectedBusiness?.value?.Id != ""){
+            if(!BusinessHandler.shared().viewModal?.selectedBusiness?.value?.Id.isNullOrEmpty()){
                 val businessId = BusinessHandler.shared().viewModal!!.selectedBusiness!!.value!!.Id
                 val startDateQuery = startDate+"T00:00:00.001+00:00"
                 val endDate = today+"T24:00:00.000+00:00"

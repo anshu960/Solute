@@ -43,7 +43,9 @@ class BusinessCartFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = this.context?.let { BusinessProductAdapter(it, this, allProduct) }
+        adapter = this.context?.let { BusinessProductAdapter(it, this, allProduct){prd->
+
+        }  }
         cartViewModel = CartHandler.shared().viewModel
         addListener()
     }
@@ -53,7 +55,7 @@ class BusinessCartFragment : Fragment() {
             allProduct = CartHandler.shared().repository.cartProducts.value as ArrayList<Product>
         }
         this.recyclerView!!.layoutManager = GridLayoutManager(this.context, 2)
-        adapter = this.context?.let { BusinessProductAdapter(it, this, allProduct) }
+        adapter = this.context?.let { BusinessProductAdapter(it, this, allProduct) {prd-> } }
         this.recyclerView!!.adapter = this.adapter
         cartViewModel?.updatePricesInCart()
         if (CartHandler.shared().repository.instantDiscount.value != null) {

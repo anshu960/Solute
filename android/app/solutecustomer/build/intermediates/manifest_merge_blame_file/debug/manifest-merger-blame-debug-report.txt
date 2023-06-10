@@ -11,22 +11,22 @@
 9-->/Users/viveksingh/Developer/solute/app/android/app/solutecustomer/src/main/AndroidManifest.xml
 10
 11    <permission
-11-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/c08f8a27a45bdcc5e2a6980b86df54ff/transformed/core-1.12.0-alpha04/AndroidManifest.xml:22:5-24:47
+11-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/8216d93487351e4d1ac9b0a7763e5285/transformed/core-1.12.0-alpha04/AndroidManifest.xml:22:5-24:47
 12        android:name="com.solute.customer.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-12-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/c08f8a27a45bdcc5e2a6980b86df54ff/transformed/core-1.12.0-alpha04/AndroidManifest.xml:23:9-81
+12-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/8216d93487351e4d1ac9b0a7763e5285/transformed/core-1.12.0-alpha04/AndroidManifest.xml:23:9-81
 13        android:protectionLevel="signature" />
-13-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/c08f8a27a45bdcc5e2a6980b86df54ff/transformed/core-1.12.0-alpha04/AndroidManifest.xml:24:9-44
+13-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/8216d93487351e4d1ac9b0a7763e5285/transformed/core-1.12.0-alpha04/AndroidManifest.xml:24:9-44
 14
 15    <uses-permission android:name="com.solute.customer.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-15-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/c08f8a27a45bdcc5e2a6980b86df54ff/transformed/core-1.12.0-alpha04/AndroidManifest.xml:26:5-97
-15-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/c08f8a27a45bdcc5e2a6980b86df54ff/transformed/core-1.12.0-alpha04/AndroidManifest.xml:26:22-94
+15-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/8216d93487351e4d1ac9b0a7763e5285/transformed/core-1.12.0-alpha04/AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/8216d93487351e4d1ac9b0a7763e5285/transformed/core-1.12.0-alpha04/AndroidManifest.xml:26:22-94
 16
 17    <application
 17-->/Users/viveksingh/Developer/solute/app/android/app/solutecustomer/src/main/AndroidManifest.xml:4:5-19:19
 18        android:allowBackup="true"
 18-->/Users/viveksingh/Developer/solute/app/android/app/solutecustomer/src/main/AndroidManifest.xml:5:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/c08f8a27a45bdcc5e2a6980b86df54ff/transformed/core-1.12.0-alpha04/AndroidManifest.xml:28:18-86
+19-->[androidx.core:core:1.12.0-alpha04] /Users/viveksingh/.gradle/caches/transforms-3/8216d93487351e4d1ac9b0a7763e5285/transformed/core-1.12.0-alpha04/AndroidManifest.xml:28:18-86
 20        android:debuggable="true"
 21        android:icon="@mipmap/ic_launcher"
 21-->/Users/viveksingh/Developer/solute/app/android/app/solutecustomer/src/main/AndroidManifest.xml:6:9-43
@@ -56,25 +56,25 @@
 34        </activity>
 35
 36        <provider
-36-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/e48f61bd65809318fb3e5cfa5bad2ceb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+36-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/df3120da7449aecf12789c612b67ca64/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
 37            android:name="androidx.startup.InitializationProvider"
-37-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/e48f61bd65809318fb3e5cfa5bad2ceb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+37-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/df3120da7449aecf12789c612b67ca64/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
 38            android:authorities="com.solute.customer.androidx-startup"
-38-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/e48f61bd65809318fb3e5cfa5bad2ceb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+38-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/df3120da7449aecf12789c612b67ca64/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
 39            android:exported="false" >
-39-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/e48f61bd65809318fb3e5cfa5bad2ceb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+39-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/df3120da7449aecf12789c612b67ca64/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
 40            <meta-data
-40-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/e48f61bd65809318fb3e5cfa5bad2ceb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+40-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/df3120da7449aecf12789c612b67ca64/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
 41                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-41-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/e48f61bd65809318fb3e5cfa5bad2ceb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+41-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/df3120da7449aecf12789c612b67ca64/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
 42                android:value="androidx.startup" />
-42-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/e48f61bd65809318fb3e5cfa5bad2ceb/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+42-->[androidx.emoji2:emoji2:1.2.0] /Users/viveksingh/.gradle/caches/transforms-3/df3120da7449aecf12789c612b67ca64/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
 43            <meta-data
-43-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/viveksingh/.gradle/caches/transforms-3/9e9b81083151ea2a0aa383e5526c2ba6/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+43-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/viveksingh/.gradle/caches/transforms-3/49ae3d8f50ef5ab5a390f28887336d8e/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
 44                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-44-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/viveksingh/.gradle/caches/transforms-3/9e9b81083151ea2a0aa383e5526c2ba6/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+44-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/viveksingh/.gradle/caches/transforms-3/49ae3d8f50ef5ab5a390f28887336d8e/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
 45                android:value="androidx.startup" />
-45-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/viveksingh/.gradle/caches/transforms-3/9e9b81083151ea2a0aa383e5526c2ba6/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+45-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/viveksingh/.gradle/caches/transforms-3/49ae3d8f50ef5ab5a390f28887336d8e/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
 46        </provider>
 47    </application>
 48

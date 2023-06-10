@@ -17,6 +17,7 @@ data class Customer @JvmOverloads constructor(
     @ColumnInfo(name="Barcode") @SerializedName("Barcode"        ) var Barcode        : String?           = null,
     @ColumnInfo(name="Status") @SerializedName("Status"         ) var Status         : String?           = null,
     @ColumnInfo(name="EmailID") @SerializedName("EmailID"        ) var EmailID        : String?           = null,
+    @ColumnInfo(name="DialCode") @SerializedName("DialCode"        ) var DialCode        : String?           = null,
     @ColumnInfo(name="MobileNumber") @SerializedName("MobileNumber"   ) var MobileNumber   : String?           = null,
     @ColumnInfo(name="Gender") @SerializedName("Gender"         ) var Gender         : Int?              = null,
     @ColumnInfo(name="DeviceID") @SerializedName("DeviceID"       ) var DeviceID       : String?           = null,

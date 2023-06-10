@@ -51,13 +51,15 @@ class BusinessTypeHandler {
             val anyData = it.first() as JSONObject
             if (anyData.has(KeyConstant.payload)){
                 val payload = anyData.getJSONArray(KeyConstant.payload)
-                allBusinessType = arrayListOf()
+                val types : MutableList<BusinessType> = mutableListOf()
                 for (i in 0 until payload.length())
                 {
                     val item = payload.getJSONObject(i)
                     val businessType = gson.fromJson(item.toString(),BusinessType::class.java)
-                    allBusinessType.add(businessType)
+                    types.add(businessType)
                 }
+                types.sortBy { it.BusinessTypeID }
+                allBusinessType = types as ArrayList<BusinessType>
                 repository.businessTypeLiveData.postValue(allBusinessType)
 
             }

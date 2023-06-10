@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.onboarding.register.RegisterFragment">
+
     <Button
         android:id="@+id/signup_register_btn"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/default_background"
+        android:background="@drawable/default_button"
         android:onClick="onClickRegister"
-        android:padding="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:text="Save and continue"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -36,8 +38,6 @@
             android:id="@+id/signup_name_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
             android:gravity="center_horizontal|center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
                 android:id="@+id/signup_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/lightBackground"
+                android:background="@color/transparent"
                 android:hint="First Name and Last Name" />
         </com.google.android.material.textfield.TextInputLayout>
 

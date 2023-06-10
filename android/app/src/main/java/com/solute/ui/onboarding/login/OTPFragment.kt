@@ -50,7 +50,7 @@ class OTPFragment : Fragment() {
                     App.shared().mainActivity?.startActivityIndicator(message)
                 }else if(state == AUTH_STATE.NEW_USER){
                     App.shared().mainActivity?.stopActivityIndicator()
-                    AppNavigator.shared().gotToRegister()
+                    AppNavigator.shared().goToSelectUserType()
                 }else if(state == AUTH_STATE.LOGGED_IN){
                     App.shared().mainActivity?.stopActivityIndicator()
                     AppNavigator.shared().navigateToHome()

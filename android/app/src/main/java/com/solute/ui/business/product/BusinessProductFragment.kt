@@ -22,6 +22,7 @@ import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.solute.R
+import com.solute.app.App
 import com.solute.app.ToastService
 import com.solute.navigation.AppNavigator
 import com.solute.ui.business.barcode.BarCodeBoxView
@@ -44,7 +45,9 @@ class BusinessProductFragment : Fragment() {
     var onDetectNewBarcode: ((code: String) -> Unit)? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
+        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) {prd->
+            App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+        } }
         ProductHandler.shared().viewModel?.allProduct?.observe(this) {
             allProduct = it as ArrayList<Product>
             this.reload()
@@ -64,7 +67,9 @@ class BusinessProductFragment : Fragment() {
             allProduct = ProductHandler.shared().repository.productLiveData.value as ArrayList<Product>
         }
         this.recyclerView!!.layoutManager = GridLayoutManager(this.context,2)
-        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
+        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct){prd->
+            App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+        } }
         this.recyclerView!!.adapter = this.adapter
     }
     fun search(query:String){
@@ -78,7 +83,9 @@ class BusinessProductFragment : Fragment() {
             }
         }
         this.recyclerView!!.layoutManager = GridLayoutManager(this.context,2)
-        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
+        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct){prd->
+            App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+        }  }
         this.recyclerView!!.adapter = this.adapter
     }
 

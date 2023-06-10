@@ -7,7 +7,7 @@ data class BusinessType(
     @SerializedName("Name") var Name: String? = null,
     @SerializedName("Description") var Description: String? = null,
     @SerializedName("Image") var Image: ArrayList<String> = arrayListOf(),
-    @SerializedName("BusinessTypeID") var BusinessTypeID: Long? = null,
+    @SerializedName("BusinessTypeID") var BusinessTypeID: Long = 0,
     @SerializedName("CreatedAt") var CreatedAt: String? = null,
     @SerializedName("UpdatedAt") var UpdatedAt: String? = null,
     @SerializedName("__v") var _v: Int? = null

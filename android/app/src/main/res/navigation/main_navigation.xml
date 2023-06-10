@@ -7,8 +7,8 @@
     >
     <action
         android:id="@+id/got_to_home"
-        app:destination="@id/business_list"
-        app:popUpTo="@id/business_list"
+        app:destination="@id/business_home"
+        app:popUpTo="@id/business_home"
         app:popUpToInclusive="true"
         />
     <action
@@ -44,13 +44,13 @@
     <fragment
         android:id="@+id/navigation_create_business"
         android:name="com.solute.ui.onBoardBusiness.CreateBusinessFragment"
-        android:label="@string/select_business_type"
+        android:label="@string/create_business"
         tools:layout="@layout/fragment_create_business" >
         <action
             android:id="@+id/action_navigate_to_home"
-            app:destination="@id/business_list"
-            app:popUpTo="@id/business_list"
-            app:popUpToInclusive="true" />
+            app:destination="@id/business_home"
+            app:popUpTo="@id/business_home"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/app_story"
@@ -68,10 +68,17 @@
         android:label="@string/otp"
         tools:layout="@layout/fragment_o_t_p" />
     <fragment
+        android:id="@+id/select_user_type"
+        android:name="com.solute.ui.onboarding.userType.SelectUserTypeFragment"
+        android:label="@string/select_user_type"
+        tools:layout="@layout/fragment_select_user_type" />
+
+    <fragment
         android:id="@+id/register"
         android:name="com.solute.ui.onboarding.register.RegisterFragment"
         android:label="@string/login"
         tools:layout="@layout/fragment_register" />
+
 <!--    business -->
     <fragment
         android:id="@+id/my_business_profile"

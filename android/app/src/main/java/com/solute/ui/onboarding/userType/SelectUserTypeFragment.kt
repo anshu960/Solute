@@ -5,29 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import com.friendly.framework.constants.KeyConstant
 import com.solute.R
+import com.solute.navigation.AppNavigator
+import com.solute.ui.onboarding.login.FirebaseAuthHelper
+import org.json.JSONObject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SelectUserTypeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SelectUserTypeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+    var businessManCard : CardView? = null
+    var professionalCard : CardView? = null
+    var customerCard : CardView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,26 +28,31 @@ class SelectUserTypeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_user_type, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SelectUserTypeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SelectUserTypeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val view = inflater.inflate(R.layout.fragment_select_user_type, container, false)
+        businessManCard = view.findViewById(R.id.user_type_business_card)
+        professionalCard = view.findViewById(R.id.user_type_professional_card)
+        customerCard = view.findViewById(R.id.user_type_customer_card)
+        businessManCard?.setOnClickListener {
+            val roleType = JSONObject()
+            roleType.put(KeyConstant._id,"6470a9898a292dd59a0dcfdf")
+            roleType.put(KeyConstant.name,"BusinessMan")
+            FirebaseAuthHelper.shared().roleType = roleType
+            AppNavigator.shared().gotToRegister()
+        }
+        professionalCard?.setOnClickListener {
+            val roleType = JSONObject()
+            roleType.put(KeyConstant._id,"6470a9dbc6dfe157a29d62f6")
+            roleType.put(KeyConstant.name,"Professional")
+            FirebaseAuthHelper.shared().roleType = roleType
+            AppNavigator.shared().gotToRegister()
+        }
+        customerCard?.setOnClickListener {
+            val roleType = JSONObject()
+            roleType.put(KeyConstant._id,"61acee7871a83e09a12a1668")
+            roleType.put(KeyConstant.name,"User")
+            FirebaseAuthHelper.shared().roleType = roleType
+            AppNavigator.shared().gotToRegister()
+        }
+        return view
     }
 }

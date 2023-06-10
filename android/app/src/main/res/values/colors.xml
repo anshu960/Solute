@@ -54,6 +54,8 @@
     <color name="critical_background">#F6D3D3</color>
     <color name="not_decided_background">#E0DCF6</color>
     <color name="product_name">#0F172A</color>
+    <color name="menu_header_color">#0F172A</color>
+
     <color name="btn_title">#0F172A</color>
     <color name="headline">#0F172A</color>
     <color name="product_discount">#0631A4</color>

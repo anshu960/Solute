@@ -23,7 +23,9 @@ class BusinessProductsFragment : Fragment() {
     var createNewProductBtn : FloatingActionButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
+        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) {prd->
+            App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+        } }
         viewModal = ProductHandler.shared().viewModel
         viewModal?.allProduct?.observe(this) {
             allProduct = it as ArrayList<Product>
@@ -57,7 +59,9 @@ class BusinessProductsFragment : Fragment() {
             allProduct = ProductHandler.shared().repository.productLiveData.value as ArrayList<Product>
         }
         this.recycler!!.layoutManager = GridLayoutManager(this.context,2)
-        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct) }
+        adapter = this.context?.let { BusinessProductAdapter(it,this ,allProduct){prd->
+            App.shared().mainActivity?.navController?.navigate(R.id.business_product_details_container)
+        }  }
         this.recycler!!.adapter = this.adapter
     }
 }

@@ -36,12 +36,53 @@ class AppNavigator {
         }
     }
 
+    fun navigateToCustomerHome() {
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.got_to_home)
+        }
+    }
+
     fun navigateToSale() {
         CoroutineScope(Job() + Dispatchers.Main).launch {
             navController?.navigate(R.id.fragment_business_sale)
         }
     }
 
+    fun navigateToInventoryProduct() {
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.inventory_product)
+        }
+    }
+    fun navigateToInventoryCategory() {
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.inventory_category)
+        }
+    }
+
+    fun navigateToInventorySubCategory() {
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.inventory_sub_category)
+        }
+    }
+
+    fun navigateToBusinessStock() {
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.business_stock)
+        }
+    }
+
+    fun navigateToMyBusinessProfile(){
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.my_business_profile)
+        }
+    }
+
+
+    fun navigateToEmployeeList() {
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.business_employee)
+        }
+    }
     fun navigateToInvoices(){
         CoroutineScope(Job() + Dispatchers.Main).launch {
             navController?.navigate(R.id.business_invoice)
@@ -95,17 +136,37 @@ class AppNavigator {
         }
     }
 
+    fun goToSelectUserType(){
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.select_user_type)
+        }
+    }
+
     fun gotToRegister() {
         CoroutineScope(Job() + Dispatchers.Main).launch {
             navController?.navigate(R.id.register)
         }
     }
 
-    fun goToBusinessHome() {
+    fun navigateToBusinessDashboard() {
         CoroutineScope(Job() + Dispatchers.Main).launch {
             navController?.navigate(R.id.business_dashboard)
         }
     }
+
+    fun navigateToCustomerList() {
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.business_customers)
+        }
+    }
+
+    fun navigateToBusinessList(){
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.business_list)
+        }
+    }
+
+
     fun goToReceiptDetails() {
         CoroutineScope(Job() + Dispatchers.Main).launch {
             navController?.navigate(R.id.go_to_new_invoice_details)
