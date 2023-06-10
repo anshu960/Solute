@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -27,21 +25,22 @@ import com.friendly.framework.feature.businessMenu.BusinessMenuConfig
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Colors
-import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.friendly.framework.analytics.AnalyticsHandler
+import com.friendly.framework.analytics.event.AnalyticEvent
+import com.friendly.framework.analytics.model.ActionType
 import com.friendly.framework.feature.business.handler.BusinessHandler
-import com.friendly.framework.feature.business.viewModel.BusinessViewModel
 import com.friendly.framework.feature.businessMenu.modal.BusinessMenu
 import com.friendly.framework.feature.businessMenu.modal.MenuType
+import com.google.gson.Gson
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.navigation.AppNavigator
+import org.json.JSONObject
 
 class BusinessHomeFragment : Fragment() {
     var allMenu = BusinessMenuConfig().getMenu()
@@ -53,10 +52,11 @@ class BusinessHomeFragment : Fragment() {
     var menuView6: ComposeView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         BusinessHandler.shared().viewModal?.selectedBusiness?.observe(this){
+         BusinessHandler.shared().viewModal?.selectedBusiness?.observe(this){businsess->
              allMenu = BusinessMenuConfig().getMenu()
              loadMenuInUI()
          }
+
     }
 
     override fun onCreateView(
@@ -73,6 +73,7 @@ class BusinessHomeFragment : Fragment() {
         menuView6 = view.findViewById(R.id.menu_view6)
         (context as? MainActivity)?.setBusinessMenu()
         loadMenuInUI()
+        BusinessHandler.shared().sendViewHomeEvent()
         return view
     }
 

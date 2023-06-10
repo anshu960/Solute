@@ -8,13 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bharat.bandhu.R
-import com.friendly.framework.Defaults
-import com.friendly.framework.constants.KeyConstant
-import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.Product
-import com.google.gson.Gson
-import com.solute.ui.business.product.BusinessProductAdapter
+import com.friendly.framework.feature.product.ui.BusinessProductAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

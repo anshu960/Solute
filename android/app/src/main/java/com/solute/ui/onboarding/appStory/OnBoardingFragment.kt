@@ -9,7 +9,12 @@ import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import com.airbnb.lottie.LottieAnimationView
+import com.friendly.framework.analytics.AnalyticsHandler
+import com.friendly.framework.analytics.event.AnalyticEvent
+import com.friendly.framework.analytics.model.ActionType
 import com.solute.R
+import org.json.JSONObject
+
 class OnBoardingFragment : Fragment() {
     private lateinit var title: String
     private lateinit var description: String
@@ -51,6 +56,9 @@ class OnBoardingFragment : Fragment() {
         image.setAnimation(imageResource)
         layout.setBackgroundColor(Color.parseColor(backgroundColor))
         mFakeStatusBar.setBackgroundColor(Color.parseColor(backgroundColor))
+        AnalyticsHandler.shared().logEvent(AnalyticEvent.AUTH_ON_BOARDING, ActionType.VIEW.raw,
+            JSONObject()
+        )
         return view
     }
 

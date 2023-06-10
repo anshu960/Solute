@@ -52,6 +52,26 @@ class CartHandler {
         viewModel?.updateProductsInCart()
     }
 
+    fun addToCart(product: Product,quantity:Int){
+        var allCartItem = repository.cartLiveData.value
+        if (allCartItem != null){
+            if(allCartItem.has(product.Id)){
+                var existingQuantity = allCartItem.getInt(product.Id)
+                existingQuantity+=quantity
+                allCartItem.put(product.Id,quantity)
+            }else{
+                allCartItem.put(product.Id,quantity)
+            }
+            repository.cartLiveData.postValue(allCartItem)
+        }else{
+            val newCart = JSONObject()
+            newCart.put(product.Id,quantity)
+            repository.cartLiveData.postValue(newCart)
+        }
+        viewModel?.updateCount()
+        viewModel?.updateProductsInCart()
+    }
+
     fun addToCart(barCode: String,callBack:(message:String)->Unit){
         ProductHandler.shared().viewModel?.findProductByBarCode(barCode){ prd : Product?->
             prd?.let {

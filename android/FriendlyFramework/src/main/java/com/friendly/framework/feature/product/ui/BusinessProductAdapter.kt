@@ -1,10 +1,14 @@
-package com.solute.ui.business.product
+package com.friendly.framework.feature.product.ui
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+
 
 class BusinessProductAdapter(
     val context: Context,
@@ -131,12 +136,42 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
             }
         }
         addToCartBtn?.setOnClickListener { CartHandler.shared().addToCart(product) }
+        addToCartBtn?.setOnLongClickListener { onLongPressAddToCart(fragment,product) }
         increaseButton?.setOnClickListener { CartHandler.shared().addToCart(product) }
         decreaseButton?.setOnClickListener { CartHandler.shared().removeFromCart(product) }
         image?.setOnClickListener {
                 ProductHandler.shared().repository.selectedProductLiveData.postValue(product)
                 onClick(product)
         }
+    }
+
+    private fun onLongPressAddToCart(fragment:Fragment?,product: Product):Boolean{
+        val alert: AlertDialog.Builder = AlertDialog.Builder(fragment!!.context)
+        val edittext = EditText(fragment!!.requireContext())
+        edittext.inputType = InputType.TYPE_CLASS_NUMBER
+        alert.setMessage("Add Quantity")
+        alert.setTitle("Enter Your Desired quantity")
+
+        alert.setView(edittext)
+
+        alert.setPositiveButton("Done",
+            DialogInterface.OnClickListener { dialog, whichButton -> //What ever you want to do with the value
+                val valueEntered = edittext.text.toString()
+                try {
+                    val quantityValue = valueEntered.toInt()
+                    CartHandler.shared().addToCart(product,quantityValue)
+                }catch(e:Exception){
+
+                }
+            })
+
+        alert.setNegativeButton("Cancel",
+            DialogInterface.OnClickListener { dialog, whichButton ->
+                // what ever you want to do with No option.
+            })
+
+        alert.show()
+        return true
     }
 
     fun updateQuanity(product: Product) {

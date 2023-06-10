@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,7 @@ import com.friendly.framework.feature.productSubCategory.handler.ProductSubCateg
 import com.friendly.framework.feature.productSubCategory.model.ProductSubCategory
 import com.solute.R
 import com.solute.app.App
-import com.solute.ui.business.product.BusinessProductAdapter
+import com.friendly.framework.feature.product.ui.BusinessProductAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

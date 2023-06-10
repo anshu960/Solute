@@ -13,7 +13,7 @@ import com.friendly.framework.feature.product.viewModel.ProductViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.solute.R
 import com.solute.app.App
-import com.solute.ui.business.product.BusinessProductAdapter
+import com.friendly.framework.feature.product.ui.BusinessProductAdapter
 
 class BusinessProductsFragment : Fragment() {
     var recycler : RecyclerView? = null

@@ -2,6 +2,9 @@ package com.solute.ui.onboarding.login
 
 import android.util.Log
 import com.friendly.framework.Defaults
+import com.friendly.framework.analytics.AnalyticsHandler
+import com.friendly.framework.analytics.event.AnalyticEvent
+import com.friendly.framework.analytics.model.ActionType
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
@@ -85,8 +88,15 @@ class FirebaseAuthHelper {
     }
 
     fun sendOtp(){
+
         onAuthStateChange?.let { it(AUTH_STATE.SENDING_OTP,"Sending OTP to given Number") }
         if(phoneNumber != "" && phoneNumber.count() >= 10){
+            val analyticsData = JSONObject()
+            analyticsData.put(KeyConstant.mobileNumber,"+" + dialCode + phoneNumber.trim())
+            AnalyticsHandler.shared().logEvent(
+                AnalyticEvent.AUTH_SEND_OTP, ActionType.LOAD.raw,
+                analyticsData
+            )
             val phoneNumber = "+" + dialCode + phoneNumber.trim()
             Log.d("Firebase Auth","trying to send otp to $phoneNumber")
             val options =  PhoneAuthOptions.newBuilder(auth)

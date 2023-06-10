@@ -2,6 +2,9 @@ package com.friendly.framework.feature.business.handler
 
 import androidx.appcompat.app.AppCompatActivity
 import com.friendly.framework.UtilityActivity
+import com.friendly.framework.analytics.AnalyticsHandler
+import com.friendly.framework.analytics.event.AnalyticEvent
+import com.friendly.framework.analytics.model.ActionType
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.business.model.Business
@@ -102,6 +105,15 @@ class BusinessHandler {
                     onDeleteBusinessResponse?.let { it1 -> it1(payload) }
                 }
             }
+        }
+    }
+
+    fun sendViewHomeEvent(){
+        if(!viewModal?.selectedBusiness?.value?.Id.isNullOrEmpty()){
+            AnalyticsHandler.shared().logEvent(
+                AnalyticEvent.BUSINESS_HOME, ActionType.VIEW.raw,
+                JSONObject(Gson().toJson(viewModal!!.selectedBusiness!!.value!!))
+            )
         }
     }
 

@@ -15,7 +15,7 @@ import com.friendly.framework.feature.productCategory.handler.ProductCategoryHan
 import com.friendly.framework.feature.productCategory.model.ProductCategory
 import com.solute.R
 import com.solute.app.App
-import com.solute.ui.business.product.BusinessProductAdapter
+import com.friendly.framework.feature.product.ui.BusinessProductAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

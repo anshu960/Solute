@@ -1,6 +1,9 @@
 package com.friendly.framework.feature.invoice.handler
 
 import com.friendly.framework.UtilityActivity
+import com.friendly.framework.analytics.AnalyticsHandler
+import com.friendly.framework.analytics.event.AnalyticEvent
+import com.friendly.framework.analytics.model.ActionType
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.business.model.Business
@@ -68,6 +71,7 @@ class InvoiceHandler {
         if (it.isNotEmpty())
         {
             val anyData = it.first() as JSONObject
+            sendCreateInvoiceEvent(anyData)
             if (anyData.has(KeyConstant.payload)){
                 val payload = anyData.getJSONObject(KeyConstant.payload)
                 val allSalesData = anyData.getJSONArray(KeyConstant.sales)
@@ -76,6 +80,7 @@ class InvoiceHandler {
 //                customerInvoice.sales.forEach {sale->
 //                    viewModel?.insertSale(sale)
 //                }
+
                 CustomerHandler.shared().repository.customerLiveData.postValue(null)
                 CustomerHandler.shared().onCreateNewCustomer = null
                 BusinessHandler.shared().activity.runOnUiThread {
@@ -130,6 +135,13 @@ class InvoiceHandler {
                 }
             }
         }
+    }
+
+    fun sendCreateInvoiceEvent(data:JSONObject){
+        AnalyticsHandler.shared().logEvent(
+            AnalyticEvent.CREATE_INVOICE, ActionType.CREATE.raw,
+            data
+        )
     }
 
 

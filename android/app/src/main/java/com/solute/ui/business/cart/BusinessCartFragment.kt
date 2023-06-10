@@ -10,16 +10,13 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.cart.handler.CartHandler
 import com.friendly.framework.feature.cart.viewModel.CartViewModel
 import com.friendly.framework.feature.product.model.Product
 import com.google.android.material.textfield.TextInputEditText
-import com.solute.MainActivity
 import com.solute.R
-import com.solute.app.App
 import com.solute.navigation.AppNavigator
-import com.solute.ui.business.product.BusinessProductAdapter
+import com.friendly.framework.feature.product.ui.BusinessProductAdapter
 
 /**
  * A simple [Fragment] subclass.

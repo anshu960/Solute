@@ -12,6 +12,8 @@ import androidx.multidex.MultiDex
 import com.friendly.framework.Defaults
 import com.friendly.framework.UtilityActivity
 import com.friendly.framework.UtilityViewController
+import com.friendly.framework.analytics.AnalyticsHandler
+import com.friendly.framework.app.FriendlyFrameworkApp
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.database.DatabaseHandler
 import com.friendly.framework.dataclass.FriendlyProfile
@@ -23,6 +25,8 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.ktx.Firebase
@@ -39,6 +43,7 @@ class App: Application() {
     var mainActivity : MainActivity? = null
     private var activeActivity: Activity? = null
     var fragment: Fragment? = null
+
     init {
         instance = this
     }
@@ -81,8 +86,9 @@ class App: Application() {
         FirebaseAuthHelper.shared().setUp()
         getAndUpdateToken()
         setUpFirebaseStorage()
+        AnalyticsHandler.shared().firebaseAnalytics = Firebase.analytics
         setupActivityListener()
-        MediaFileHandler.shared().repository.storageBucketReferece = App.shared().imagesRef
+        MediaFileHandler.shared().repository.storageBucketReferece = shared().imagesRef
     }
 
     override fun startForegroundService(service: Intent?): ComponentName? {

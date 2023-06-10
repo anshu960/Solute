@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.friendly.framework.feature.cart.handler.CartHandler
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.Product
+import com.friendly.framework.feature.product.ui.BusinessProductAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
