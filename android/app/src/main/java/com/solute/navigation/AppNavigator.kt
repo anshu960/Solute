@@ -38,7 +38,7 @@ class AppNavigator {
 
     fun navigateToCustomerHome() {
         CoroutineScope(Job() + Dispatchers.Main).launch {
-            navController?.navigate(R.id.got_to_home)
+//            navController?.navigate(R.id.got_to_home)
         }
     }
 
@@ -52,6 +52,13 @@ class AppNavigator {
         CoroutineScope(Job() + Dispatchers.Main).launch {
             navController?.navigate(R.id.inventory_product)
         }
+    }
+
+    fun actionCreateProductSuccess(){
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            navController?.navigate(R.id.action_product_create_success)
+        }
+
     }
     fun navigateToInventoryCategory() {
         CoroutineScope(Job() + Dispatchers.Main).launch {

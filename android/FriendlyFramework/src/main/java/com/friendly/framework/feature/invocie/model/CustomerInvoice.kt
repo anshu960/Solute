@@ -14,6 +14,8 @@ data class CustomerInvoice(
     @ColumnInfo(name="UserID") @SerializedName("UserID") var userID : String? = null,
     @ColumnInfo(name="BusinessID") @SerializedName("BusinessID") var businessID : String? = null,
     @ColumnInfo(name="CustomerID") @SerializedName("CustomerID") var customerID : String? = null,
+    @ColumnInfo(name="DialCode") @SerializedName("DialCode"        ) var DialCode        : String?           = null,
+    @ColumnInfo(name="MobileNumber") @SerializedName("MobileNumber"   ) var MobileNumber   : String?           = null,
     @ColumnInfo(name="IsDeleted") @SerializedName("IsDeleted") var isDeleted : Boolean? = null,
     @ColumnInfo(name="Sales") @SerializedName("Sales") var sales : ArrayList<Sale> = arrayListOf(),
     @ColumnInfo(name="InvoiceNumber") @SerializedName("InvoiceNumber") var invoiceNumber : Long? = null,

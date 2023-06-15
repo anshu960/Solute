@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bharat.bandhu.R
+import com.bharat.bandhu.ui.MainActivity
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.Product
 import com.friendly.framework.feature.product.ui.BusinessProductAdapter
@@ -33,8 +34,10 @@ class ProductListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (context as? MainActivity)?.startActivityIndicator()
         ProductHandler.shared().repository.allProduct.observe(this){ products->
             CoroutineScope(Job() + Dispatchers.Main).launch {
+                (context as? MainActivity)?.stopActivityIndicator()
                 if(products != null){
                     allProduct = products
                     loadProductsInUI()

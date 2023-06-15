@@ -274,7 +274,7 @@ class SocketService : Service() {
 
     private val onDisconnect = Emitter.Listener {
         repository.socketConnectionStatus.postValue(CONNECTION_STATUS.DISCONNECTED)
-        Log.d(TAG, "Error connecting \n \n")
+        Log.d(TAG, " onDisconnect \n \n")
         Log.d(TAG, it.toString())
         Log.d(TAG, "\n \n")
         isSocketConnected = false

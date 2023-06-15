@@ -532,9 +532,7 @@ class CreateProductFragment : Fragment() {
                     App.shared().mainActivity?.toastLong("Product Created, Uploading Image")
                     uploadImageInFirebase(product)
                 }else{
-                    AppNavigator.shared().goBack()
-                    AppNavigator.shared().goBack()
-                    AppNavigator.shared().goBack()
+                    AppNavigator.shared().actionCreateProductSuccess()
                 }
             }
         }else{
@@ -553,8 +551,7 @@ class CreateProductFragment : Fragment() {
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                     MediaFileHandler.shared().onCreateNew={
                         App.shared().mainActivity?.runOnUiThread  {
-                            this.stepsPosition = 0
-                            this.onBackPressed()
+                            AppNavigator.shared().actionCreateProductSuccess()
                             App.shared().mainActivity?.toast("Image Updated Successfully")
                         }
                     }

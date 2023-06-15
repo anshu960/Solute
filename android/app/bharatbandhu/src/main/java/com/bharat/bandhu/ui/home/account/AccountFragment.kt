@@ -14,7 +14,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.bharat.bandhu.R
-import com.bharat.bandhu.ui.launch.LaunchActivity
 import com.bharat.bandhu.ui.onboard.LoginActivity
 import com.friendly.framework.Defaults
 import com.friendly.framework.constants.KeyConstant
@@ -87,7 +86,7 @@ class AccountFragment : Fragment() {
         val membership = Defaults.shared().json(KeyConstant.membershipDetails)
         val hint = "Membership Details Not Found\nPlease Visit our Store to get your Membership"
         if(membership.has(KeyConstant.customerBarcode)){
-            val barcodeNumber = membership.getString(KeyConstant.customerBarcode)
+            val barcodeNumber = "90015510021661 "//membership.getString(KeyConstant.customerBarcode)
             if(barcodeNumber.isNotEmpty()){
                 generateBarcode(barcodeNumber)
                 barcodeText?.text = barcodeNumber
@@ -98,16 +97,14 @@ class AccountFragment : Fragment() {
             barcodeText?.text = hint
         }
     }
-
     fun generateBarcode(code:String){
         val multiFormatWriter = MultiFormatWriter()
-        val text = code
         var width = Resources.getSystem().getDisplayMetrics().widthPixels
         var height = Resources.getSystem().getDisplayMetrics().heightPixels/4
         Log.d("Dimension","Widht : $width height $height")
         try {
             val bitMatrix = multiFormatWriter.encode(
-                text,
+                code,
                 BarcodeFormat.CODE_128,
                 width,
                 height

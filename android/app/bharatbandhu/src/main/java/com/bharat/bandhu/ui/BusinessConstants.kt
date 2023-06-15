@@ -8,7 +8,6 @@ class BusinessConstants {
   "BusinessTypeID": "61aca7bb68b40d644a588611",
   "IsDeleted": false,
   "Name": "Bharat Grocery Store",
-  "Address": "Munich's",
   "DealerName": "",
   "GSTNumber": "",
   "PanNumber": "",

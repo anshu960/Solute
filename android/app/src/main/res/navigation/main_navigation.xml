@@ -7,8 +7,8 @@
     >
     <action
         android:id="@+id/got_to_home"
-        app:destination="@id/business_home"
-        app:popUpTo="@id/business_home"
+        app:destination="@id/fragment_business_home"
+        app:popUpTo="@id/fragment_business_home"
         app:popUpToInclusive="true"
         />
     <action
@@ -17,7 +17,7 @@
         app:popUpTo="@+id/fragment_business_cart"
         app:popUpToInclusive="true"/>
     <fragment
-        android:id="@+id/business_home"
+        android:id="@+id/fragment_business_home"
         android:name="com.solute.ui.business.home.BusinessHomeFragment"
         android:label="@string/business"
         tools:layout="@layout/fragment_business_home" />
@@ -48,8 +48,8 @@
         tools:layout="@layout/fragment_create_business" >
         <action
             android:id="@+id/action_navigate_to_home"
-            app:destination="@id/business_home"
-            app:popUpTo="@id/business_home"
+            app:destination="@id/fragment_business_home"
+            app:popUpTo="@id/fragment_business_home"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
@@ -152,7 +152,15 @@
         android:id="@+id/business_product_create"
         android:name="com.solute.ui.business.product.create.CreateProductFragment"
         android:label="@string/add_new_product"
-        tools:layout="@layout/fragment_create_product" />
+        tools:layout="@layout/fragment_create_product" >
+        <action
+            android:id="@+id/action_product_create_success"
+            app:destination="@id/inventory_product"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/inventory_product"
+
+            />
+    </fragment>
     <fragment
         android:id="@+id/business_select_customer"
         android:name="com.solute.ui.business.customer.select.SelectCustomerFragment"

@@ -9,8 +9,10 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -79,7 +81,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         navController = findNavController(R.id.nav_host_fragment_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.business_home,
+                R.id.fragment_business_home,
                 R.id.business_dashboard,
                 R.id.my_business_profile,
                 R.id.business_list,
@@ -163,12 +165,11 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         binding.appBar.toolBarMain.visibility = View.VISIBLE
     }
 
-    override fun onBackPressed() {
-        if(navController.currentDestination?.id != R.id.business_list){
-            super.onBackPressed()
-        }
+    public fun goToHome(item: MenuItem) {
+        val drawer : DrawerLayout? = findViewById(R.id.drawer_layout_main);
+        drawer?.closeDrawer(GravityCompat.START);
+        AppNavigator.shared().navigateToHome()
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)
@@ -196,7 +197,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
                 }
 
             }
-            graph.setStartDestination(R.id.business_home)
+            graph.setStartDestination(R.id.fragment_business_home)
         }
         navController.setGraph(graph, intent.extras)
     }
@@ -207,9 +208,10 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return false
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        MenuInflater(this).inflate(R.menu.business,navView.menu)
+//        return  true
+//    }
 
     fun setBusinessMenu(){
         navView.menu.clear()
