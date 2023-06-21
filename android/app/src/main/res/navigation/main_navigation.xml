@@ -220,8 +220,17 @@
         android:id="@+id/fragment_create_product_inventory"
         android:name="com.solute.ui.business.product.detail.inventory.create.CreateProductInventoryFragment"
         android:label="@string/create_inventory"
-        tools:layout="@layout/fragment_create_product_inventory" />
-
+        tools:layout="@layout/fragment_create_product_inventory" >
+        <action
+            android:id="@+id/select_measurement_unit"
+            app:destination="@id/fragment_select_measurement_unit"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_select_measurement_unit"
+        android:name="com.solute.ui.business.product.detail.inventory.SelectUnit.SelectMeasurementUnit"
+        android:label="@string/measurement_unit"
+        tools:layout="@layout/fragment_select_measurement_unit" />
 
 
 </navigation>

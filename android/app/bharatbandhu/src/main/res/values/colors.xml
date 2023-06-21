@@ -3,8 +3,8 @@
     <color name="colorPrimary">#282253</color>
     <color name="colorPrimaryDark">#282253</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="buttonDefaultTint">#0076ff</color>
-    <color name="colorThemePrimary">#0076ff</color>
+    <color name="buttonDefaultTint">#0822A7</color>
+    <color name="colorThemePrimary">#0822A7</color>
     <color name="lightGray">#a6a6a6</color>
     <color name="darkGray">#282828</color>
     <color name="lightBackground">#F7F8FA</color>
@@ -45,10 +45,6 @@
     <color name="high_background">#FFE0CA</color>
     <color name="critical_background">#F6D3D3</color>
     <color name="not_decided_background">#E0DCF6</color>
-
-
-
-
 
 
 </resources>

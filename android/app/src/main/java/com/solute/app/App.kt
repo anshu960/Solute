@@ -73,10 +73,10 @@ class App: Application() {
         super.onCreate()
         AuthHandler.shared().deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         FirebaseApp.initializeApp(/*context=*/this)
-        val firebaseAppCheck = FirebaseAppCheck.getInstance()
-        firebaseAppCheck.installAppCheckProviderFactory(
-            PlayIntegrityAppCheckProviderFactory.getInstance()
-        )
+//        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+//        firebaseAppCheck.installAppCheckProviderFactory(
+//            PlayIntegrityAppCheckProviderFactory.getInstance()
+//        )
         FirebaseApp.initializeApp(this)
         DatabaseHandler.shared().appContext = this
         Defaults.shared().setup(this)

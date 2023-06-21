@@ -172,6 +172,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
     }
 
     override fun onSupportNavigateUp(): Boolean {
+
         return navController.navigateUp(appBarConfiguration)
     }
 
@@ -205,6 +206,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
         return true
     }
 

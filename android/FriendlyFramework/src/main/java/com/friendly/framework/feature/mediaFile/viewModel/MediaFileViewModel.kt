@@ -39,13 +39,22 @@ class  MediaFileViewModel(private val repository: MediaFileRepository) :
 
     fun loadFor(featureObjectID:String,completion:(ArrayList<MediaFile>)->Unit){
         scope.launch {
-            val mediaFiles = DatabaseHandler.shared().database.mediaFileDao().getAllItemsFor(featureObjectID)
+            val mediaFiles = DatabaseHandler.shared().database.mediaFileDao().itemFor(featureObjectID)
             if(mediaFiles.isNotEmpty()){
                 completion(mediaFiles as ArrayList<MediaFile>)
             }else{
                 retrieveFor(featureObjectID)
             }
         }
+    }
+    fun find(featureObjectID:String):String{
+        var stringToReturn = ""
+        allData.value?.forEach {item->
+            if(item.FeatureObjectID == featureObjectID && !item.FileURL.isNullOrEmpty()){
+                stringToReturn = item.FileURL!!
+            }
+        }
+        return stringToReturn
     }
 
     fun uploadImage(fileUri: Uri?,featureObjectID:String){
@@ -107,14 +116,17 @@ class  MediaFileViewModel(private val repository: MediaFileRepository) :
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
         MediaFileNetwork.shared().retrieve(request){responseJson->
             val payload = responseJson?.getJSONArray(KeyConstant.payload)
+            var allObj : ArrayList<MediaFile> = arrayListOf()
             if(payload != null){
                 for (i in 0 until payload!!.length())
                 {
-                    val item = payload.getJSONObject(i)
+                    val item = payload?.getJSONObject(i)
                     val modelObject = Gson().fromJson(item.toString(),MediaFile::class.java)
+                    allObj.add(modelObject)
                     insert(modelObject)
                 }
             }
+            repository.liveData.postValue(allObj)
         }
     }
 

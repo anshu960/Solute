@@ -2,7 +2,7 @@ package com.friendly.framework.constants
 
 object Server {
     var allServers = arrayOf(
-        "https://8bf0-171-79-22-27.ngrok-free.app",
+        "http://192.168.1.8:1010",
         "http://128.168.178.68.host.secureserver.net:8080",
         "https://solute-rest-r227wnciga-el.a.run.app",
     )

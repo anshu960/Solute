@@ -15,6 +15,9 @@ import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
@@ -46,8 +49,6 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         AuthHandler.shared().deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-        FirebaseApp.initializeApp(/*context=*/this)
-
         FirebaseApp.initializeApp(this)
         DatabaseHandler.shared().appContext = this
         Defaults.shared().setup(this)
@@ -56,7 +57,12 @@ class App: Application() {
 //        Analytics().logAppLaunch()
 //        getAndUpdateToken()
         setUpFirebaseStorage()
-        SocketService.shared().verifyIfConnectedOrNot()
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 3600
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+
     }
     fun getAndUpdateToken(){
         val messaging = FirebaseMessaging.getInstance()

@@ -88,17 +88,14 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind( fragment: Fragment?, product: Product,onClick: (product: Product) -> Unit) {
         val picasso = Picasso.get()
-        image?.setImageResource(R.drawable.product_default_img)
-        MediaFileHandler.shared().viewModel?.loadFor(product.Id){
-            if(it.isNotEmpty()){
-                CoroutineScope(Job() + Dispatchers.Main).launch {
-                    picasso.load(it.first().FileURL).into(image)
-                }
-            }else{
-                CoroutineScope(Job() + Dispatchers.Main).launch {
-                    image?.setImageResource(R.drawable.image)
-                }
+//        image?.setImageResource(R.drawable.product_default_img)
+        val imgUrl = MediaFileHandler.shared().viewModel?.find(product.Id)
+        if(!imgUrl.isNullOrEmpty()){
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                picasso.load(imgUrl).into(image)
             }
+        }else{
+            image?.setImageResource(R.drawable.image)
         }
         productName?.text = product.Name
         productDescription?.text = product.Description
@@ -135,6 +132,7 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
                 }
             }
         }
+        addToCartBtn?.visibility = View.GONE
         addToCartBtn?.setOnClickListener { CartHandler.shared().addToCart(product) }
         addToCartBtn?.setOnLongClickListener { onLongPressAddToCart(fragment,product) }
         increaseButton?.setOnClickListener { CartHandler.shared().addToCart(product) }

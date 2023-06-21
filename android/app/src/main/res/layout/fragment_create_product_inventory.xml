@@ -109,27 +109,24 @@
                     android:paddingStart="8dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/create_product_inventory_measurement_til"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 android:background="@color/transparent"
+                android:editable="false"
+                android:text="@string/measurement_unit"
                 app:boxStrokeWidth="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/create_product_inventory_color_til">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/create_product_inventory_measurement_ti"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/input_filed"
-                    android:hint="@string/measurement_unit"
-                    android:paddingStart="8dp" />
-            </com.google.android.material.textfield.TextInputLayout>
+
+            </com.google.android.material.textview.MaterialTextView>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/create_product_inventory_batch_number_til"

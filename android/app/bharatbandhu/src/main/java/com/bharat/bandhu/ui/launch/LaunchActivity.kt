@@ -14,6 +14,12 @@ import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.dataclass.FriendlyUser
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.business.model.Business
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
+import com.friendly.framework.feature.mediaFile.network.MediaFileNetwork
+import com.friendly.framework.socket.SocketService
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.gson.Gson
 
 class LaunchActivity : UtilityActivity() {
@@ -62,12 +68,15 @@ class LaunchActivity : UtilityActivity() {
             Gson().fromJson(
                 BusinessConstants().json,
                 Business::class.java))
+        SocketService.shared().verifyIfConnectedOrNot()
         setContentView(R.layout.activity_launch)
         mDelayHandler = Handler()
         //Navigate with delay
         mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
 
     }
+
 
 
 

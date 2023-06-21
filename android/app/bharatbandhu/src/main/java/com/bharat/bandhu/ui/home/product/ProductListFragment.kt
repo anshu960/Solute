@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bharat.bandhu.R
 import com.bharat.bandhu.ui.MainActivity
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.friendly.framework.feature.product.handler.ProductHandler
 import com.friendly.framework.feature.product.model.Product
 import com.friendly.framework.feature.product.ui.BusinessProductAdapter
@@ -46,6 +47,11 @@ class ProductListFragment : Fragment() {
                 }
             }
         }
+//        MediaFileHandler.shared().repository.allLiveData.observe(this){ media->
+//            CoroutineScope(Job() + Dispatchers.Main).launch {
+//                loadProductsInUI()
+//            }
+//        }
         ProductHandler.shared().viewModel?.fetchAllProduct()
     }
 

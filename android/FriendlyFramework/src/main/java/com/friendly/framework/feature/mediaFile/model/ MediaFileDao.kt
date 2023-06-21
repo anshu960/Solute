@@ -27,4 +27,6 @@ interface  MediaFileDao {
 
     @Query("select * from MediaFile where FeatureObjectID = :FeatureObjectID order by UpdatedAt DESC")
     suspend fun getAllItemsFor(FeatureObjectID: String):List<MediaFile>
+    @Query("select * from MediaFile where FeatureObjectID = :FeatureObjectID order by UpdatedAt DESC")
+    fun itemFor(FeatureObjectID: String):List<MediaFile>
 }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.solute.customer.solutecustomer-mergeDebugResources-27:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
+            "outputFile": "com.solute.customer.solutecustomer-mergeDebugResources-26:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
             "map": [
                 {
-                    "source": "/Users/viveksingh/.gradle/caches/transforms-3/055e5aea8b163c61dbcc4bf5649bb493/transformed/material-1.9.0/res/values-w480dp-port-v13/values-w480dp-port-v13.xml",
+                    "source": "/Users/viveksingh/.gradle/caches/transforms-3/24a4bb8afb5d30935e26b78a59e5b385/transformed/material-1.9.0/res/values-w480dp-port-v13/values-w480dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

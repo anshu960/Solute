@@ -32,6 +32,8 @@ import org.json.JSONObject
 class AccountFragment : Fragment() {
     val user = FriendlyUser()
     var barcodeText : TextView?  = null
+    var nameText : TextView? = null
+    var mobileTextView : TextView? = null
     var barcodeImageView : ImageView?  = null
     var logoImageView : ImageView?  = null
     var logoutCard : CardView? = null
@@ -58,8 +60,11 @@ class AccountFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_account, container, false)
+        nameText = view.findViewById(R.id.home_name)
+        mobileTextView = view.findViewById(R.id.home_mobile)
+        nameText?.text = user.name
+        mobileTextView?.text = user.mobile
         barcodeImageView = view.findViewById(R.id.home_barcode_image)
-        logoImageView = view.findViewById(R.id.home_logo_image)
         barcodeText = view.findViewById(R.id.home_barcode_number)
         loadMembershipInUI()
         logoutCard = view.findViewById(R.id.home_power_card)
@@ -70,6 +75,7 @@ class AccountFragment : Fragment() {
             Defaults.shared().remove(KeyConstant.loginDetails)
             startActivity(intent)
         }
+
         return view
     }
     fun getCustomerDetails(){
@@ -86,7 +92,7 @@ class AccountFragment : Fragment() {
         val membership = Defaults.shared().json(KeyConstant.membershipDetails)
         val hint = "Membership Details Not Found\nPlease Visit our Store to get your Membership"
         if(membership.has(KeyConstant.customerBarcode)){
-            val barcodeNumber = "90015510021661 "//membership.getString(KeyConstant.customerBarcode)
+            val barcodeNumber = membership.getString(KeyConstant.customerBarcode)
             if(barcodeNumber.isNotEmpty()){
                 generateBarcode(barcodeNumber)
                 barcodeText?.text = barcodeNumber

@@ -26,6 +26,7 @@ import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.business.model.Business
 import com.friendly.framework.feature.customer.handler.CustomerHandler
 import com.friendly.framework.feature.customer.model.Customer
+import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.friendly.framework.socket.SocketEvent
 import com.friendly.framework.socket.SocketService
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,20 +49,25 @@ class MainActivity : UtilityActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         FriendlyFrameworkApp.shared().setUp(this)
+        MediaFileHandler.shared().viewModel?.retrieve()
         loadFragment(ProductListFragment())
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
+        this.title = "Products"
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
                     loadFragment(ProductListFragment())
+                    this.title = "Products"
                     true
                 }
                 R.id.navigation_account -> {
                     loadFragment(AccountFragment())
+                    this.title = "Account"
                     true
                 }
                 else->{
                     loadFragment(ProductListFragment())
+                    this.title = "Products"
                     true
                 }
             }

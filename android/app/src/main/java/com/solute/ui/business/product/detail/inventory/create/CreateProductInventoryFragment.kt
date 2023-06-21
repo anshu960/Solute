@@ -17,9 +17,11 @@ import com.friendly.framework.feature.product.model.Product
 import com.friendly.frameworkt.feature.business.handler.AuthHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.textview.MaterialTextView
 import com.solute.R
 import com.solute.app.App
 import com.solute.app.ToastService
+import com.solute.navigation.AppNavigator
 import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
@@ -51,7 +53,6 @@ class CreateProductInventoryFragment : Fragment() {
     var product: Product? = null
 
     private var stepsPosition = 0
-
 
     var productNameLayout : TextInputLayout? = null
     var productNameEditText : TextInputEditText? = null
@@ -96,6 +97,9 @@ class CreateProductInventoryFragment : Fragment() {
 
     var productTaxFinalPriceLayout : TextInputLayout? = null
     var productTaxFinalPriceEditText : TextInputEditText? = null
+
+
+    var measurementUnitTil:MaterialTextView? = null
 
     var saveButton : Button? = null
 
@@ -167,6 +171,9 @@ class CreateProductInventoryFragment : Fragment() {
             isTaxIncluded = isChecked
             calculateTaxAndPrice()
         }
+
+        measurementUnitTil = view.findViewById(R.id.create_product_inventory_measurement_til)
+        measurementUnitTil?.setOnClickListener { AppNavigator.shared().gotToCreateProductInventoryMeasurementUnitSelection() }
         return view
     }
     fun calculateTaxAndPrice(){

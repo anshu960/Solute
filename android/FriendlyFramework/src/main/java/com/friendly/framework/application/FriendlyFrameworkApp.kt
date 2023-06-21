@@ -35,6 +35,9 @@ import com.friendly.framework.feature.product.viewModel.ProductViewModel
 import com.friendly.framework.feature.productCategory.handler.ProductCategoryHandler
 import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModalFactory
 import com.friendly.framework.feature.productCategory.viewModel.ProductCategoryViewModel
+import com.friendly.framework.feature.productInventory.handler.ProductInventoryHandler
+import com.friendly.framework.feature.productInventory.viewModel.ProductInventoryViewModel
+import com.friendly.framework.feature.productInventory.viewModel.ProductInventoryViewModelFactory
 import com.friendly.framework.feature.productSubCategory.handler.ProductSubCategoryHandler
 import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModalFactory
 import com.friendly.framework.feature.productSubCategory.viewModel.ProductSubCategoryViewModel
@@ -54,6 +57,7 @@ class FriendlyFrameworkApp{
     private lateinit var productViewModal: ProductViewModel
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var productSubCategoryViewModel: ProductSubCategoryViewModel
+    private lateinit var productInventoryViewModel: ProductInventoryViewModel
 
     companion object{
         var fragment : Fragment? = null
@@ -140,5 +144,12 @@ class FriendlyFrameworkApp{
         )[ProductSubCategoryViewModel::class.java]
         ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel)
         BusinessHandler.shared().viewModal?.setUpDefaultBusiness()
+
+
+        productInventoryViewModel = ViewModelProvider(
+            activity,
+            ProductInventoryViewModelFactory(ProductInventoryHandler.shared().repository)
+        )[ProductInventoryViewModel::class.java]
+        ProductInventoryHandler.shared().setup(productInventoryViewModel)
     }
 }

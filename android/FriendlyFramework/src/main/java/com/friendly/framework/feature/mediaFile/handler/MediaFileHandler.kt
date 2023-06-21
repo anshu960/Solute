@@ -41,12 +41,15 @@ class MediaFileHandler{
             val anyData = it.first() as JSONObject
             if (anyData.has(KeyConstant.payload)){
                 val payload = anyData.getJSONArray(KeyConstant.payload)
+                var allObj : ArrayList<MediaFile> = arrayListOf()
                 for (i in 0 until payload.length())
                 {
                     val item = payload.getJSONObject(i)
                     val modelObject = gson.fromJson(item.toString(),MediaFile::class.java)
+                    allObj.add(modelObject)
                     viewModel?.insert(modelObject)
                 }
+                repository.liveData.postValue(allObj)
             }
         }
     }
