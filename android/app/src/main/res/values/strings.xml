@@ -13,6 +13,10 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="otp">Otp</string>
+    <string name="send_otp">Send Otp</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="please_enter_otp_msg">Please enter the OTP received on phone</string>
+    <string name="verify">Verify</string>
     <string name="select_user_type">Choose user Type</string>
     <string name="create_account">Create Account</string>
     <string name="select_business_type">Select Type of Business</string>

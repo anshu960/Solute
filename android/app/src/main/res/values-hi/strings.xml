@@ -2,32 +2,34 @@
     <string name="app_name">Solute</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="title_home">घर</string>
-    <string name="title_chats">Chats</string>
-    <string name="title_friends">Friends</string>
-    <string name="title_people">People</string>
-    <string name="title_task">Task</string>
-    <string name="title_more">More</string>
-    <string name="title_nearby">Nearby</string>
-    <string name="title_contacts">Contacts</string>
+    <string name="title_chats">बात करना</string>
+    <string name="title_friends">दोस्त</string>
+    <string name="title_people">लोग</string>
+    <string name="title_task">काम</string>
+    <string name="title_more">अधिक</string>
+    <string name="title_nearby">आस-पास</string>
+    <string name="title_contacts">संपर्क</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="login">Login</string>
-    <string name="logout">Logout</string>
-    <string name="otp">Otp</string>
-    <string name="select_user_type">Choose user Type</string>
-    <string name="create_account">Create Account</string>
-    <string name="select_business_type">Select Type of Business</string>
-    <string name="business_details">Business Details</string>
-    <string name="create_business">Create Business</string>
+    <string name="login">लॉग इन करें</string>
+    <string name="logout">लॉग आउट</string>
+    <string name="otp">ओ.टी.पी</string>
+    <string name="send_otp">ओ.टी.पी भेजें</string>
+    <string name="enter_otp">ओटीपी दर्ज करें</string>
+    <string name="verify">Verify</string>
+    <string name="please_enter_otp_msg">कृपया फ़ोन पर प्राप्त ओटीपी दर्ज करें</string>
+    <string name="select_user_type">उपयोगकर्ता प्रकार चुनें</string>
+    <string name="create_account">खाता बनाएं</string>
+    <string name="select_business_type">व्यवसाय का प्रकार चुनें</string>
+    <string name="business_details">व्यवसाय विवरण</string>
+    <string name="create_business">व्यवसाय बनाएँ</string>
 
-    <string name="terms_and_privacy">
-        This Terms of Service Agreement sets forth the terms and conditions by which you are sole responsible for what you do and what you get and you agree to share you basic information(Like Name,Profile Picture,Gender etc) with other users. This app is not responsible for any kind of loss or problems you get on this app. Content on this app neither provided nor controlled by the developer so we are not responsible for any content. If you put any offensive content, it will be replaced by *.There will be absolutely to tolerance for misbehave, if you do so then your account will be terminated immediately.You can report someone in chat view by selection top right option. You might see adult contents uploaded by someone, in that case please block that user and report it us. Please don’t add any adult content. Profanity filter is there on chat so you can’t send such words, if you get some words from someone, please report us. Action will be taken as soon as possible, there will be tolerance for such things. Be friendly to others and and let others be friendly to you. Happy making friends to you my friend.
-    </string>
+    <string name="terms_and_privacy"></string>
 
-    <string name="login_title">Phone Verification</string>
-    <string name="login_sub_title">We need to verify your phone number to proceed!</string>
+    <string name="login_title">फ़ोन सत्यापन</string>
+    <string name="login_sub_title">आगे बढ़ने के लिए हमें आपका फ़ोन नंबर सत्यापित करना होगा!</string>
 
-    <string name="delete_group">Delete Group</string>
-    <string name="priority_low">Low</string>
+    <string name="delete_group">समूह हटाएँ</string>
+    <string name="priority_low">कम</string>
     <string name="priority_medium">Medium</string>
     <string name="priority_high">High</string>
     <string name="priority_critical">Critical</string>
@@ -62,53 +64,53 @@
     <string name="sub_category_name">Sub Category Name</string>
     <string name="or_create_new_category">Or create New Category</string>
     <string name="sub_category">Sub Category</string>
-    <string name="sale">Sale</string>
-    <string name="skip">Skip</string>
-    <string name="skip_and_generate_invoice">Skip</string>
-    <string name="sale_to_this_customer">Sale</string>
-    <string name="add_customer_to_this_sale">Continue</string>
-    <string name="cart">Cart</string>
-    <string name="checkout">Checkout</string>
-    <string name="invoice">Invoice</string>
-    <string name="customers">Customers</string>
-    <string name="add_new_customer">Add New Customer</string>
-    <string name="add_new_product">Add New Product</string>
-    <string name="add_customer">Add Customer</string>
-    <string name="product_details">Product Details</string>
-    <string name="select_category">Select Category</string>
-    <string name="select_sub_category">Select Sub Category</string>
-    <string name="barcode">Barcode</string>
-    <string name="barcode_optional">Barcode (Optional)</string>
-    <string name="empty_task_message">No task found, please click on the create task button to start creating task</string>
+    <string name="sale">बिक्री</string>
+    <string name="skip">छोडना</string>
+    <string name="skip_and_generate_invoice">छोडना</string>
+    <string name="sale_to_this_customer">बिक्री</string>
+    <string name="add_customer_to_this_sale">जारी रखें</string>
+    <string name="cart">कार्ट</string>
+    <string name="checkout">चेक आउट</string>
+    <string name="invoice">इनवॉइस</string>
+    <string name="customers">ग्राहक</string>
+    <string name="add_new_customer">नया ग्राहक जोड़ें</string>
+    <string name="add_new_product">नया उत्पाद जोड़ें</string>
+    <string name="add_customer">ग्राहक जोड़ें</string>
+    <string name="product_details">उत्पाद विवरण</string>
+    <string name="select_category">श्रेणी का चयन करें</string>
+    <string name="select_sub_category">उप श्रेणी का चयन करें</string>
+    <string name="barcode">बारकोड</string>
+    <string name="barcode_optional">बारकोड (वैकल्पिक)</string>
+    <string name="empty_task_message">कोई कार्य नहीं मिला, कार्य बनाना शुरू करने के लिए कृपया कार्य बनाएं बटन पर क्लिक करें</string>
     <!--    <string name="delete_group">Delete Group</string>-->
-    <string name="mobile">Mobile</string>
-    <string name="mobile_number">Mobile Number</string>
-    <string name="name">Name</string>
-    <string name="search">Search</string>
+    <string name="mobile">गतिमान</string>
+    <string name="mobile_number">मोबाइल नंबर</string>
+    <string name="name">नाम</string>
+    <string name="search">खोज</string>
     <string name="whatsapp">Whatsapp</string>
-    <string name="email">Email</string>
-    <string name="email_optional">Email (Optional)</string>
-    <string name="save">save</string>
-    <string name="create">Create</string>
-    <string name="details">Details</string>
-    <string name="address">Address</string>
-    <string name="attendance">Attendance</string>
-    <string name="present">Present</string>
-    <string name="stock">Stock</string>
-    <string name="history">History</string>
-    <string name="price">Price</string>
-    <string name="finance">Finance</string>
-    <string name="title_activity_product_detail">Product Details</string>
+    <string name="email">ईमेल</string>
+    <string name="email_optional">ईमेल (वैकल्पिक)</string>
+    <string name="save">बनाएं</string>
+    <string name="create">बनाएं</string>
+    <string name="details">विवरण</string>
+    <string name="address">पता</string>
+    <string name="attendance">उपस्थिति</string>
+    <string name="present">वर्तमान</string>
+    <string name="stock">भंडार</string>
+    <string name="history">इतिहास</string>
+    <string name="price">कीमत</string>
+    <string name="finance">वित्त</string>
+    <string name="title_activity_product_detail">उत्पाद विवरण</string>
     <array name="createProductSteps">
-        <item>Info</item>
-        <item>Price</item>
-        <item>Tax</item>
-        <item>Finish</item>
+        <item>जानकारी</item>
+        <item>कीमत</item>
+        <item>कर</item>
+        <item>ख़त्म करो</item>
     </array>
     <array name="createBusinessSteps">
-        <item>Info</item>
-        <item>Address</item>
-        <item>Finish</item>
+        <item>जानकारी</item>
+        <item>पता</item>
+        <item>ख़त्म करो</item>
     </array>
     <string name="title_activity_business">BusinessActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -133,7 +135,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="finish">Finish</string>
+    <string name="finish">ख़त्म करो</string>
     <string name="empty_business_list_message">
         Click here to create business and Start making Profits
     </string>
@@ -156,14 +158,14 @@
     <string name="expiry_date">Expiry Date</string>
 
 
-    <string name="title_onboarding_invoice">Invoice</string>
-    <string name="description_onboarding_invoice">Create invoice and share directly to customer by using any other app like SMS or Whatsapp and so on</string>
+    <string name="title_onboarding_invoice">इनवॉइस</string>
+    <string name="description_onboarding_invoice">एसएमएस या व्हाट्सएप जैसे किसी अन्य ऐप का उपयोग करके चालान बनाएं और सीधे ग्राहक को साझा करें</string>
 
-    <string name="title_onboarding_inventory">Inventory</string>
-    <string name="description_onboarding_inventory">Keep track of all your inventory/stocks</string>
+    <string name="title_onboarding_inventory">भंडार</string>
+    <string name="description_onboarding_inventory">अपनी सभी इन्वेंट्री/स्टॉक पर नज़र रखें</string>
 
-    <string name="title_onboarding_reports">Reports</string>
-    <string name="description_onboarding_reports">Get reports for every single operations : Sales, Profit, Pending Payments, Premium Customers</string>
+    <string name="title_onboarding_reports">रिपोर्टों</string>
+    <string name="description_onboarding_reports">प्रत्येक परिचालन के लिए रिपोर्ट प्राप्त करें: बिक्री, लाभ, लंबित भुगतान, प्रीमियम ग्राहक</string>
 
 
     <string name="str_invoice">Invoice</string>
