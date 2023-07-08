@@ -134,7 +134,6 @@ class CustomerViewModel(private val customerRepository: CustomerRepository) : Vi
         val request = JSONObject()
         request.put(KeyConstant.businessID,BusinessHandler.shared().repository.business.value?.Id)
         request.put(KeyConstant.mobileNumber,mobile)
-        val api = Server.getRestApiEndPointFor(CustomerEvent.FIND_BY_MOBILE.value)
         val retrofit = CustomerNetwork.shared().buildService(CustomerNetworkInterface::class.java)
         val bodyRequest: RequestBody =
             RequestBody.create(MediaType.parse("application/json"), request.toString())

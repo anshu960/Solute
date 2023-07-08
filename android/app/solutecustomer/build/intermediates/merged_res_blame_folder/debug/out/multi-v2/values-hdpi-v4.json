@@ -4,7 +4,7 @@
             "outputFile": "com.solute.customer.solutecustomer-mergeDebugResources-26:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/Users/viveksingh/.gradle/caches/transforms-3/3b50ff68e6d4e0859e1bfb498ef97320/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "/Users/viveksingh/.gradle/caches/transforms-3/105775247bd27f40006ca6b1e6857331/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -7,6 +7,7 @@ import com.friendly.framework.feature.mediaFile.repository.MediaFileRepository
 import com.friendly.framework.feature.mediaFile.viewModel.MediaFileViewModel
 import com.google.gson.Gson
 import io.socket.emitter.Emitter
+import org.json.JSONArray
 import org.json.JSONObject
 
 class MediaFileHandler{
@@ -39,7 +40,7 @@ class MediaFileHandler{
         if (it.isNotEmpty())
         {
             val anyData = it.first() as JSONObject
-            if (anyData.has(KeyConstant.payload)){
+            if (anyData.has(KeyConstant.payload) && anyData.get(KeyConstant.payload) is JSONArray){
                 val payload = anyData.getJSONArray(KeyConstant.payload)
                 var allObj : ArrayList<MediaFile> = arrayListOf()
                 for (i in 0 until payload.length())

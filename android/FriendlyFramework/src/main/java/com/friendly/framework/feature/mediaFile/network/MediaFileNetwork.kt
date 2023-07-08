@@ -5,6 +5,7 @@ import com.friendly.framework.feature.customer.network.CustomerNetwork
 import com.friendly.framework.feature.mediaFile.event.MediaFileEvent
 import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.friendly.framework.feature.product.network.ProductNetworkInterface
+import com.friendly.framework.network.ApiResponseCallBack
 import com.friendly.framework.socket.SocketService
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -42,30 +43,13 @@ class MediaFileNetwork {
         val retrofit = CustomerNetwork.shared().buildService(MediaFileNetworkInterface::class.java)
         val bodyRequest: RequestBody =
             RequestBody.create(MediaType.parse("application/json"), request.toString())
-        retrofit.retrieve(bodyRequest).enqueue(
-            object : Callback<ResponseBody> {
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    print(t.message)
-                    onResult(null)
-                }
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                    try {
-                        if (response.isSuccessful) {
-                            val obj = JSONObject(response.body()!!.string())
-                            if(obj.has(KeyConstant.payload)){
-                                onResult(obj)
-                            }else{
-                                onResult(null)
-                            }
-                        } else {
-                            onResult(null)
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        onResult(null)
-                    }
-                }
-            }
-        )
+        val callBack = ApiResponseCallBack()
+        callBack.onResult={payload->
+            onResult(payload as JSONObject)
+        }
+        callBack.onError={msg->
+            onResult(null)
+        }
+        retrofit.retrieve(bodyRequest).enqueue(callBack.callback)
     }
 }

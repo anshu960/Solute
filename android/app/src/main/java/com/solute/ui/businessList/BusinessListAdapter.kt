@@ -2,6 +2,7 @@ package com.solute.ui.businessList
 
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -40,11 +41,14 @@ class BusinessListAdapter(val context: Context, val allBusiness: List<Business>)
     override fun onBindViewHolder(holder: BusinessViewHolder, position: Int) {
         val item = allBusiness[position]
         holder.itemView.setOnClickListener {
-                BusinessHandler.shared().repository.businessLiveData.postValue(item)
                 SyncHandler.shared().clearBusinessAnalytics()
+                BusinessHandler.shared().repository.businessLiveData.postValue(item)
+            Handler().postDelayed({
                 SyncHandler.shared().syncAllBusinessData()
                 AppNavigator.shared().navigateToHome()
                 App.shared().mainActivity?.setBusinessMenu()
+            }, 1500)
+
         }
         holder.bind(item,position)
     }

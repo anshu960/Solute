@@ -143,9 +143,8 @@ class FriendlyFrameworkApp{
             ProductSubCategoryViewModalFactory(ProductSubCategoryHandler.shared().repository)
         )[ProductSubCategoryViewModel::class.java]
         ProductSubCategoryHandler.shared().setup(productSubCategoryViewModel)
+        BusinessHandler.shared().fetchAllBusiness()
         BusinessHandler.shared().viewModal?.setUpDefaultBusiness()
-
-
         productInventoryViewModel = ViewModelProvider(
             activity,
             ProductInventoryViewModelFactory(ProductInventoryHandler.shared().repository)

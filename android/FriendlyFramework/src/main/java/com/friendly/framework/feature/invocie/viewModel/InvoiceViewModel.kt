@@ -58,7 +58,7 @@ class InvoiceViewModel(private val invoiceRepository: InvoiceRepository) : ViewM
         request.put(KeyConstant.businessID, BusinessHandler.shared().repository.business.value?.Id)
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
         CoroutineScope(Job() + Dispatchers.IO).launch {
-            if (BusinessHandler.shared().repository.business.value != null) {
+            if (!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()) {
                 val latestInvoice = DatabaseHandler.shared().database.customerInvoiceDao()
                     .getRecentItemForBusiness(BusinessHandler.shared().repository.business.value!!.Id)
                 if (latestInvoice?.updatedAt != null) {

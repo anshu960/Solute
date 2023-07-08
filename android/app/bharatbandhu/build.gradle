@@ -8,15 +8,13 @@ plugins {
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 33
-
+    compileSdk 34
     defaultConfig {
         applicationId "com.bharat.bandhu"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 18
         versionName "0.1.8"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

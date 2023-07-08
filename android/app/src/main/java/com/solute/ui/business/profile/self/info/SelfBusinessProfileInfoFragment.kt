@@ -14,6 +14,7 @@ import com.friendly.framework.feature.mediaFile.handler.MediaFileHandler
 import com.google.android.material.textfield.TextInputEditText
 import com.solute.R
 import com.solute.app.App
+import com.solute.app.ToastService
 import com.solute.navigation.AppNavigator
 import com.squareup.picasso.Picasso
 
@@ -34,6 +35,7 @@ class SelfBusinessProfileInfoFragment : Fragment() {
     var emailField : TextInputEditText? = null
 
     var deleteBtn : Button? = null
+    var updateButton : Button? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +61,9 @@ class SelfBusinessProfileInfoFragment : Fragment() {
 
         deleteBtn = view.findViewById(R.id.self_business_profile_delete_btn)
         deleteBtn?.setOnClickListener { onClickDelete() }
+
+        updateButton = view.findViewById(R.id.self_business_profile_update_btn)
+        updateButton?.setOnClickListener { onClickUpdate() }
 
         loadProfileData()
         return view
@@ -96,11 +101,24 @@ class SelfBusinessProfileInfoFragment : Fragment() {
     fun onClickDelete(){
         if (business != null) {
             BusinessHandler.shared().onDeleteBusinessResponse={
+                BusinessHandler.shared().viewModal?.deleteBusiness(business)
+                BusinessHandler.shared().viewModal?.setUpDefaultBusiness()
                 CoroutineScope(Job() + Dispatchers.Main).launch {
                     AppNavigator.shared().navigateToHome()
                 }
             }
-            BusinessHandler.shared().viewModal?.deleteBusiness(business)
+        }
+    }
+    fun onClickUpdate(){
+        business?.Name = nameField?.text.toString()
+        business?.MobileNumber = mobileField?.text.toString()
+        business?.EmailID = emailField?.text.toString()
+        if (business != null) {
+            BusinessHandler.shared().viewModal?.updateInfo(business, { msg ->
+                ToastService().toast(msg)
+            }, { errorMsg ->
+                ToastService().toast(errorMsg)
+            })
         }
     }
 }

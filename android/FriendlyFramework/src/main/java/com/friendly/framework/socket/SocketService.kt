@@ -234,7 +234,7 @@ class SocketService : Service() {
     }
 
     fun prepateSocketServerUrl() {
-        socketServerUrl = Server.allServers[1]
+        socketServerUrl = Server.allServers[0]
         return
 //        if (socketServerUrl == "") {
 //            socketServerUrl = Server.allServers[0]

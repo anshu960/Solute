@@ -101,7 +101,9 @@ class  MediaFileViewModel(private val repository: MediaFileRepository) :
         val user = FriendlyUser()
         val business = BusinessHandler.shared().repository.business
         request.put(KeyConstant.userId,user._id)
-        request.put(KeyConstant.businessID, business.value?.Id)
+        if(!business.value?.Id.isNullOrEmpty()){
+            request.put(KeyConstant.businessID, business.value?.Id)
+        }
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
         request.put(KeyConstant.featureObjectID,featureObjectID)
         SocketService.shared().send(MediaFileEvent.RETRIEVE,request)

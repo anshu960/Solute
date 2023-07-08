@@ -132,7 +132,7 @@ class BusinessProductViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
                 }
             }
         }
-        addToCartBtn?.visibility = View.GONE
+//        addToCartBtn?.visibility = View.GONE
         addToCartBtn?.setOnClickListener { CartHandler.shared().addToCart(product) }
         addToCartBtn?.setOnLongClickListener { onLongPressAddToCart(fragment,product) }
         increaseButton?.setOnClickListener { CartHandler.shared().addToCart(product) }

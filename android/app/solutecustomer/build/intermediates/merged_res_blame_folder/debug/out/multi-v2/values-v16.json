@@ -4,7 +4,7 @@
             "outputFile": "com.solute.customer.solutecustomer-mergeDebugResources-26:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/viveksingh/.gradle/caches/transforms-3/62b359474236e1864c1fc83be5212df2/transformed/core-1.12.0-alpha05/res/values-v16/values-v16.xml",
+                    "source": "/Users/viveksingh/.gradle/caches/transforms-3/9b00315651e2d2d064dd7f3f1ea6efa1/transformed/core-1.12.0-alpha05/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/viveksingh/.gradle/caches/transforms-3/3b50ff68e6d4e0859e1bfb498ef97320/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
+                    "source": "/Users/viveksingh/.gradle/caches/transforms-3/105775247bd27f40006ca6b1e6857331/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

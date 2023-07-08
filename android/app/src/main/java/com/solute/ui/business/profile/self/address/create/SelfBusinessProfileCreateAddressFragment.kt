@@ -16,6 +16,7 @@ import com.friendly.framework.feature.address.model.Address
 import com.friendly.framework.feature.address.viewModel.AddressViewModalFactory
 import com.friendly.framework.feature.address.viewModel.AddressViewModel
 import com.friendly.framework.feature.business.handler.BusinessHandler
+import com.friendly.framework.feature.business.model.Business
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
@@ -137,7 +138,7 @@ class SelfBusinessProfileCreateAddressFragment : Fragment(), OnMapReadyCallback 
     }
 
     fun loadExistingAddress(){
-        existingAddress = AddressHandler.shared().repository.selected.value
+        existingAddress = BusinessHandler.shared().viewModal?.selectedBusiness?.value?.Address
         if(existingAddress != null){
             saveButton?.visibility = View.GONE
             updateButton?.visibility = View.VISIBLE

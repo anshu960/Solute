@@ -60,7 +60,7 @@ class Converters {
         }
     }
     @TypeConverter
-    fun jsonToAddress(value: String):Address{
+    fun jsonToAddress(value: String?):Address{
         return try {
             Gson().fromJson(value,Address::class.java)
         } catch (error:java.lang.Error){
@@ -68,7 +68,7 @@ class Converters {
         }
     }
     @TypeConverter
-    fun addressToJson(value: Address):String?{
+    fun addressToJson(value: Address?):String?{
         return try {
             Gson().toJson(value)
         } catch (error:java.lang.Error){

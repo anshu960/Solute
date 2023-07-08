@@ -246,9 +246,11 @@ class SyncHandler {
         var request = JSONObject()
         request.put(KeyConstant.userId, user._id)
         request.put(KeyConstant.deviceId, AuthHandler.shared().deviceId)
-        request.put(KeyConstant.businessID, BusinessHandler.shared().repository.business.value?.Id)
-        request.put(KeyConstant.lastSyncDate, lastProductStock!!.value?.CreatedAt)
-        SocketService.shared().send(SocketEvent.RETRIVE_ALL_STOCK_ENTRY, request)
+        if(!BusinessHandler.shared().repository.business.value?.Id.isNullOrEmpty()){
+            request.put(KeyConstant.businessID, BusinessHandler.shared().repository.business.value?.Id)
+            request.put(KeyConstant.lastSyncDate, lastProductStock!!.value?.CreatedAt)
+            SocketService.shared().send(SocketEvent.RETRIVE_ALL_STOCK_ENTRY, request)
+        }
     }
 
     val onRetriveAllStockEntry = Emitter.Listener {

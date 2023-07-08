@@ -65,6 +65,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FriendlyFrameworkApp.shared().setUp(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         App.shared().mainActivity = this
@@ -139,7 +140,7 @@ class MainActivity : UtilityActivity(), NavigationView.OnNavigationItemSelectedL
                 }
             }
         }
-        FriendlyFrameworkApp.shared().setUp(this)
+
         checkDynamicLink()
         checkUserState()
         if (!permissionGranted(this)) requestPermission(this)
