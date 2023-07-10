@@ -21,7 +21,7 @@
             android:id="@+id/create_categoory_name_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Category Name" />
+            android:hint="@string/category_name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -29,11 +29,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Save"
+        android:background="@drawable/default_button"
+        android:text="@string/save"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/default_button"
-        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/create_categoory_name_til" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

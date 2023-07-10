@@ -27,7 +27,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
                             android:layout_height="wrap_content"
                             android:editable="false"
                             android:focusable="false"
-                            android:hint="Tap to select category" />
+                            android:hint="@string/tap_to_select_category" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -90,7 +90,7 @@
                             android:layout_height="wrap_content"
                             android:editable="false"
                             android:focusable="false"
-                            android:hint="Tap to select Sub Category" />
+                            android:hint="@string/tap_to_select_sub_category" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -109,7 +109,7 @@
                             android:id="@+id/create_product_name_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Product Name" />
+                            android:hint="@string/product_name" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -128,7 +128,7 @@
                             android:id="@+id/create_product_description_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Product Description" />
+                            android:hint="@string/product_details" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -169,7 +169,7 @@
                             android:id="@+id/create_product_mrp_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="MRP"
+                            android:hint="@string/mrp"
                             android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -189,7 +189,7 @@
                             android:id="@+id/create_product_cost_price_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Cost Price"
+                            android:hint="@string/cost_price"
                             android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -211,7 +211,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:hint="Discount (Calculated)"
+                            android:hint="@string/discount"
                             app:textInputLayoutFocusedRectEnabled="false" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -254,7 +254,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:hint="Final Price (Calculated)"
+                            android:hint="@string/final_price"
                             android:inputType="number|numberDecimal"
                             app:textInputLayoutFocusedRectEnabled="false" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -270,7 +270,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -297,7 +297,7 @@
                             android:id="@+id/create_product_igst_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="IGST %"
+                            android:hint="@string/igst"
                             android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -317,7 +317,7 @@
                             android:id="@+id/create_product_cgst_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="CGST %"
+                            android:hint="@string/cgst"
                             android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -337,7 +337,7 @@
                             android:id="@+id/create_product_sgst_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="SGST %"
+                            android:hint="@string/sgst"
                             android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -357,7 +357,7 @@
                             android:id="@+id/create_product_vat_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="VAT %"
+                            android:hint="@string/vat"
                             android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -377,7 +377,7 @@
                             android:id="@+id/create_product_cess_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="CESS %"
+                            android:hint="@string/cess"
                             android:inputType="number|numberDecimal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -397,7 +397,7 @@
                             android:id="@+id/create_product_total_tax_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Total Tax in RS"
+                            android:hint="@string/total_tax"
                             android:inputType="number|numberDecimal"
                             app:textInputLayoutFocusedRectEnabled="false" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -409,7 +409,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="Tax Included"
+                        android:text="@string/tax_include"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/create_product_total_tax_til" />
@@ -432,7 +432,6 @@
                             android:id="@+id/create_product_tax_finial_price_tiet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Final Price"
                             android:inputType="number|numberDecimal"
                             app:textInputLayoutFocusedRectEnabled="false" />
                     </com.google.android.material.textfield.TextInputLayout>

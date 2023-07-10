@@ -153,7 +153,7 @@ class CreateProductFragment : Fragment() {
         productPriceCard?.visibility = View.GONE
         productTaxCard?.visibility = View.GONE
         productFinishCard?.visibility = View.GONE
-        saveButton?.text = "Next"
+        saveButton?.text = resources.getString(R.string.next)
         categoryLayout = view.findViewById(R.id.create_product_category_til)
         categoryEditText = view.findViewById(R.id.create_product_category_tiet)
         categoryEditText?.setOnClickListener { showCategorySellection() }

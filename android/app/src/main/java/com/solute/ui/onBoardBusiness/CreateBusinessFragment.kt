@@ -77,7 +77,7 @@ class CreateBusinessFragment : Fragment() {
         businessEmailText = view.findViewById(R.id.create_business_email_tiet)
         businessMobileText = view.findViewById(R.id.create_business_mobile_tiet)
         saveButton = view.findViewById(R.id.create_business_save_number)
-        saveButton?.text = "Next"
+        saveButton?.text = resources.getString(R.string.next)
         saveButton?.setOnClickListener { onClickSave() }
         addressNameText = view.findViewById(R.id.create_business_address_house_tiet)
         addressLocalityText = view.findViewById(R.id.create_business_address_locality_tiet)

@@ -15,13 +15,21 @@
     <string name="otp">ओ.टी.पी</string>
     <string name="send_otp">ओ.टी.पी भेजें</string>
     <string name="enter_otp">ओटीपी दर्ज करें</string>
-    <string name="verify">Verify</string>
+    <string name="verify">सत्यापित करना</string>
     <string name="please_enter_otp_msg">कृपया फ़ोन पर प्राप्त ओटीपी दर्ज करें</string>
     <string name="select_user_type">उपयोगकर्ता प्रकार चुनें</string>
     <string name="create_account">खाता बनाएं</string>
     <string name="select_business_type">व्यवसाय का प्रकार चुनें</string>
     <string name="business_details">व्यवसाय विवरण</string>
     <string name="create_business">व्यवसाय बनाएँ</string>
+    <string name="today">आज</string>
+    <string name="week">सप्ताह</string>
+    <string name="Month">महीना</string>
+    <string name="year">वर्ष</string>
+    <string name="sale_quantity">बिक्री मात्रा -</string>
+    <string name="sale_value">विक्रय मूल्य -</string>
+    <string name="invoice_number">इनवॉइस संख्या</string>
+
 
     <string name="terms_and_privacy"></string>
 
@@ -30,40 +38,40 @@
 
     <string name="delete_group">समूह हटाएँ</string>
     <string name="priority_low">कम</string>
-    <string name="priority_medium">Medium</string>
-    <string name="priority_high">High</string>
-    <string name="priority_critical">Critical</string>
-    <string name="priority_not_decided">Not Decided Yet</string>
+    <string name="priority_medium">मध्यम</string>
+    <string name="priority_high">उच्च</string>
+    <string name="priority_critical">गंभीर</string>
+    <string name="priority_not_decided">अभी तय नहीं हुआ</string>
 
-    <string name="in_progress">In Progress</string>
-    <string name="completed">Completed</string>
-    <string name="comment">Comment</string>
-    <string name="pending">Pending</string>
-    <string name="hold">On Hold</string>
-    <string name="hours">Hours</string>
-    <string name="end">End</string>
-    <string name="dropped">Dropped</string>
-    <string name="deleted">Deleted</string>
-    <string name="delete">Delete</string>
-    <string name="update">Update</string>
+    <string name="in_progress">चालू</string>
+    <string name="completed">पुरा होना।</string>
+    <string name="comment">टिप्पणी</string>
+    <string name="pending">लंबित</string>
+    <string name="hold">होल्ड पर</string>
+    <string name="hours">घंटे</string>
+    <string name="end">अंत</string>
+    <string name="dropped">छोड़ा हुआ</string>
+    <string name="deleted">हटाए गए</string>
+    <string name="delete">मिटाना</string>
+    <string name="update">अद्यतन</string>
 
-    <string name="invalid">invalid</string>
+    <string name="invalid">अमान्य</string>
 
-    <string name="low">Low</string>
-    <string name="medium">Medium</string>
-    <string name="high">High</string>
-    <string name="critical">Critical</string>
-    <string name="not_decided">Not Decided</string>
-    <string name="inventory">Inventory</string>
-    <string name="create_inventory">Create Inventory</string>
-    <string name="business">Business</string>
-    <string name="product">Product</string>
-    <string name="all_product">All Products</string>
-    <string name="category">Category</string>
-    <string name="category_name">Category Name</string>
-    <string name="sub_category_name">Sub Category Name</string>
-    <string name="or_create_new_category">Or create New Category</string>
-    <string name="sub_category">Sub Category</string>
+    <string name="low">कम</string>
+    <string name="medium">मध्यम</string>
+    <string name="high">उच्च</string>
+    <string name="critical">गंभीर</string>
+    <string name="not_decided">तय नहीं है</string>
+    <string name="inventory">भंडार</string>
+    <string name="create_inventory">इन्वेंटरी बनाएं</string>
+    <string name="business">व्यवसाय</string>
+    <string name="product">उत्पाद</string>
+    <string name="all_product">सभी उत्पाद</string>
+    <string name="category">श्रेणी</string>
+    <string name="category_name">श्रेणी नाम</string>
+    <string name="sub_category_name">उप श्रेणी का नाम</string>
+    <string name="or_create_new_category">या नई श्रेणी बनाएं</string>
+    <string name="sub_category">उपश्रेणी</string>
     <string name="sale">बिक्री</string>
     <string name="skip">छोडना</string>
     <string name="skip_and_generate_invoice">छोडना</string>
@@ -83,7 +91,7 @@
     <string name="barcode_optional">बारकोड (वैकल्पिक)</string>
     <string name="empty_task_message">कोई कार्य नहीं मिला, कार्य बनाना शुरू करने के लिए कृपया कार्य बनाएं बटन पर क्लिक करें</string>
     <!--    <string name="delete_group">Delete Group</string>-->
-    <string name="mobile">गतिमान</string>
+    <string name="mobile">मोबाइल</string>
     <string name="mobile_number">मोबाइल नंबर</string>
     <string name="name">नाम</string>
     <string name="search">खोज</string>
@@ -100,6 +108,15 @@
     <string name="history">इतिहास</string>
     <string name="price">कीमत</string>
     <string name="finance">वित्त</string>
+    <string name="business_name">व्यवसाय का नाम</string>
+    <string name="gst_number">जीएसटी नंबर</string>
+    <string name="pan_number">पैन नंबर</string>
+    <string name="create_new_business">नया व्यवसाय बनाएं</string>
+    <string name="tap_to_select_category">श्रेणी चुनने के लिए टैप करें</string>
+    <string name="tap_to_select_sub_category">उप श्रेणी का चयन करने के लिए टैप करें</string>
+    <string name="product_name">प्रोडक्ट का नाम</string>
+    <string name="product_description">उत्पाद वर्णन</string>
+
     <string name="title_activity_product_detail">उत्पाद विवरण</string>
     <array name="createProductSteps">
         <item>जानकारी</item>
@@ -118,44 +135,44 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="setting">Setting</string>
+    <string name="action_settings">समायोजन</string>
+    <string name="setting">सेटिंग</string>
 
-    <string name="business_profile">Business Profile</string>
-    <string name="profile">Profile</string>
-    <string name="create_address">Create Address</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_dashboard">Dashboard</string>
-    <string name="employee">Employee</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="title_activity_create_employee">CreateEmployeeActivity</string>
+    <string name="business_profile">व्यापार प्रोफ़ाइल</string>
+    <string name="profile">प्रोफ़ाइल</string>
+    <string name="create_address">पता बनाएं</string>
+    <string name="menu_home">घर</string>
+    <string name="menu_dashboard">डैशबोर्ड</string>
+    <string name="employee">कर्मचारी</string>
+    <string name="menu_gallery">गेलरी</string>
+    <string name="menu_slideshow">स्लाइड शो</string>
+    <string name="title_activity_create_employee">कर्मचारी बनाएँ</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="next">अगला</string>
+    <string name="previous">पीछे</string>
     <string name="finish">ख़त्म करो</string>
     <string name="empty_business_list_message">
-        Click here to create business and Start making Profits
+        व्यवसाय बनाने और लाभ कमाना शुरू करने के लिए यहां क्लिक करें
     </string>
-    <string name="title_activity_employee_details">EmployeeDetailsActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_employee_details">कर्मचारी विवरण</string>
+    <string name="tab_text_1">टैब 1</string>
+    <string name="tab_text_2">टैब 2</string>
     <string name="price_string">₹ %f</string>
-    <string name="title_activity_bar_code_scannner">BarCodeScannnerActivity</string>
+    <string name="title_activity_bar_code_scannner">बारकोड स्कैनर</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="select_state">Select State</string>
-    <string name="select_city">Select City</string>
-    <string name="description">Description</string>
-    <string name="model">Model</string>
-    <string name="color">Color</string>
-    <string name="measurement_unit">Measurement Unit</string>
-    <string name="batch_number">Batch Number</string>
-    <string name="batch_date">Batch Date</string>
-    <string name="expiry_date">Expiry Date</string>
+    <string name="select_state">राज्य चुनें</string>
+    <string name="select_city">शहर चुनें</string>
+    <string name="description">विवरण</string>
+    <string name="model">नमूना</string>
+    <string name="color">रंग</string>
+    <string name="measurement_unit">मापन इकाई</string>
+    <string name="batch_number">बैच संख्या</string>
+    <string name="batch_date">बैच दिनांक</string>
+    <string name="expiry_date">समाप्ति तिथि</string>
 
 
     <string name="title_onboarding_invoice">इनवॉइस</string>
@@ -168,30 +185,65 @@
     <string name="description_onboarding_reports">प्रत्येक परिचालन के लिए रिपोर्ट प्राप्त करें: बिक्री, लाभ, लंबित भुगतान, प्रीमियम ग्राहक</string>
 
 
-    <string name="str_invoice">Invoice</string>
-    <string name="str_invoice_date">Date:</string>
-    <string name="str_invoice_no">Invoice #:</string>
-    <string name="str_invoice_customer_no">Customer #:</string>
-    <string name="str_invoice_order_id">Purchase order #:</string>
-    <string name="str_invoice_due_date">Payment due by:</string>
-    <string name="str_invoice_bill_to">Billed To</string>
-    <string name="str_invoice_ship_to">Ship To (if different)</string>
-    <string name="str_invoice_item_description">Description</string>
-    <string name="str_invoice_item_unit_cost">Unit Cost</string>
-    <string name="str_invoice_item_qty">QTY/HR Rate</string>
-    <string name="str_invoice_item_amount">Amount</string>
+    <string name="str_invoice">इनवॉइस</string>
+    <string name="str_invoice_date">तारीख:</string>
+    <string name="str_invoice_no">इनवॉइस #:</string>
+    <string name="str_invoice_customer_no">ग्राहक #:</string>
+    <string name="str_invoice_order_id">क्रय आदेश #:</string>
+    <string name="str_invoice_due_date">क्रय आदेश द्वारा भुगतान देय:</string>
+    <string name="str_invoice_bill_to">बिल किया गया</string>
+    <string name="str_invoice_ship_to">यहां भेजें (यदि भिन्न हो)</string>
+    <string name="str_invoice_item_description">विवरण</string>
+    <string name="str_invoice_item_unit_cost">इकाई लागत</string>
+    <string name="str_invoice_item_qty">मात्रा/एचआर दर</string>
+    <string name="str_invoice_item_amount">मात्रा</string>
     <string name="str_invoice_currency_symbol">$</string>
-    <string name="str_invoice_special_note">Special Notes and Instructions</string>
-    <string name="str_invoice_subtotal">Subtotal</string>
-    <string name="str_invoice_discount">Discount</string>
-    <string name="str_invoice_taxrate">Tax Rate</string>
-    <string name="str_invoice_tax">Tax</string>
-    <string name="str_invoice_total">Total</string>
-    <string name="str_invoice_disclaimer">Make all cheques payable to my company name</string>
-    <string name="str_invoice_thankyou">Thank you for your business!</string>
-    <string name="str_invoice_inquiry">Should you have any enquiries concerning this invoice, please contact us</string>
-    <string name="str_invoice_footer_addr">123 Your Street City, State, Country, Zip Code</string>>
+    <string name="str_invoice_special_note">विशेष नोट्स और निर्देश</string>
+    <string name="str_invoice_subtotal">उप-योग</string>
+    <string name="str_invoice_discount">छूट</string>
+    <string name="str_invoice_taxrate">कर की दर</string>
+    <string name="str_invoice_tax">कर</string>
+    <string name="str_invoice_mrp">एम आर पी</string>
+    <string name="str_invoice_total">कुल</string>
+    <string name="str_invoice_disclaimer">सभी चेक मेरी कंपनी के नाम पर देय हों</string>
+    <string name="str_invoice_thankyou">आपके व्यवसाय के लिए धन्यवाद!</string>
+    <string name="str_invoice_inquiry">यदि आपके पास इस चालान के संबंध में कोई पूछताछ है, तो कृपया हमसे संपर्क करें</string>
+    <string name="str_invoice_footer_addr">123 आपकी सड़क शहर, राज्य, देश, ज़िप कोड</string>>
     <string name="str_invoice_footer_tel">Tel: + 1-541-754-3010 | Fax: + 1-541-754-3010 | Email: info@yourwebsite.com | www.yourwebsite.com</string>
-    <string name="export_pdf">Export PDF</string>
+    <string name="export_pdf">पीडीएफ निर्यात करें</string>
+    <string name="house_name">फ़्लैट नंबर/मकान नंबर/नाम</string>
+    <string name="street_locality">गली/मुहल्ला</string>
+    <string name="city">शहर</string>
+    <string name="pin_code_zipcode">पिन कोड/ज़िपकोड</string>
+    <string name="state">राज्य</string>
+    <string name="landmark">सीमाचिह्न</string>
+    <string name="locate">का पता लगाने</string>
+    <string name="mrp">एम आर पी</string>
+    <string name="cost_price">लागत मूल्य</string>
+    <string name="discount">छूट (गणना)</string>
+    <string name="final_price">अंतिम मूल्य (गणना)</string>
+    <string name="igst">आईजीएसटी %</string>
+    <string name="cgst">सी.जी.एस.टी %</string>
+    <string name="sgst">एस.जी.एस.टी %</string>
+    <string name="vat"> टब %</string>
+    <string name="cess">उपकर %</string>
+    <string name="tax_include">टैक्स शामिल</string>
+    <string name="final_prices">अंतिम कीमत</string>
+    <string name="total_tax">कुल कर रुपये में</string>
+    <string name="remove">निकालना</string>
+    <string name="reset">रीसेट</string>
+    <string name="add_quantity">मात्रा जोड़ें</string>
+    <string name="igst_detail">आईजीएसटी</string>
+    <string name="cgst_detail">सी.जी.एस.टी</string>
+    <string name="sgst_detail">एस.जी.एस.टी</string>
+    <string name="vat_detail">टब </string>
+    <string name="cess_detail">उपकर</string>
+    <string name="discount_price">छूट</string>
+    <string name="final_price_detail">अंतिम कीमत</string>
+    <string name="store">इकट्ठा करना</string>
+    <string name="dashboard">डैशबोर्ड</string>
+    <string name="all_business">सभी व्यवसाय</string>
+
+
 
 </resources>

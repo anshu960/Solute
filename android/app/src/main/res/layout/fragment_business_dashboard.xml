@@ -37,7 +37,7 @@
                     android:layout_height="34dp"
                     android:background="@color/transparent"
                     android:gravity="center"
-                    android:text="Today"
+                    android:text="@string/today"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -70,7 +70,7 @@
                     android:layout_height="34dp"
                     android:background="@color/transparent"
                     android:gravity="center"
-                    android:text="Week"
+                    android:text="@string/week"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +103,7 @@
                     android:layout_height="34dp"
                     android:background="@color/transparent"
                     android:gravity="center"
-                    android:text="Month"
+                    android:text="@string/Month"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -136,7 +136,7 @@
                     android:layout_height="34dp"
                     android:background="@color/transparent"
                     android:gravity="center"
-                    android:text="Year"
+                    android:text="@string/year"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Sale Quantity - "
+                        android:text="@string/sale_quantity"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -236,7 +236,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Sale Value - "
+                        android:text="@string/sale_value"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

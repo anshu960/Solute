@@ -16,7 +16,7 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/input_field_background"
         android:gravity="center"
-        android:text="Tap To Select Category"
+        android:text="@string/tap_to_select_category"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,7 @@
             android:id="@+id/create_sb_category_name_tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sub Category Name" />
+            android:hint="@string/sub_category_name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -47,7 +47,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/default_button"
-        android:text="Save"
+        android:text="@string/save"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

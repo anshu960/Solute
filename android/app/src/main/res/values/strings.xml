@@ -102,6 +102,14 @@
     <string name="history">History</string>
     <string name="price">Price</string>
     <string name="finance">Finance</string>
+    <string name="business_name">Business Name</string>
+    <string name="gst_number">GST Number</string>
+    <string name="tap_to_select_category">Tap to select category</string>
+    <string name="tap_to_select_sub_category">Tap to select Sub Category</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_description">Product Description</string>
+
+    <string name="create_new_business">Create New Business</string>
     <string name="title_activity_product_detail">Product Details</string>
     <array name="createProductSteps">
         <item>Info</item>
@@ -122,6 +130,15 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="setting">Setting</string>
+    <string name="today">Today</string>
+    <string name="week">Week</string>
+    <string name="Month">Month</string>
+    <string name="year">Year</string>
+    <string name="sale_quantity">Sale Quantity -</string>
+    <string name="sale_value">Sale Value -</string>
+    <string name="invoice_number">Invoice Number</string>
+
+
 
     <string name="business_profile">Business Profile</string>
     <string name="profile">Profile</string>
@@ -188,6 +205,7 @@
     <string name="str_invoice_discount">Discount</string>
     <string name="str_invoice_taxrate">Tax Rate</string>
     <string name="str_invoice_tax">Tax</string>
+    <string name="str_invoice_mrp">MRP</string>
     <string name="str_invoice_total">Total</string>
     <string name="str_invoice_disclaimer">Make all cheques payable to my company name</string>
     <string name="str_invoice_thankyou">Thank you for your business!</string>
@@ -195,5 +213,42 @@
     <string name="str_invoice_footer_addr">123 Your Street City, State, Country, Zip Code</string>>
     <string name="str_invoice_footer_tel">Tel: + 1-541-754-3010 | Fax: + 1-541-754-3010 | Email: info@yourwebsite.com | www.yourwebsite.com</string>
     <string name="export_pdf">Export PDF</string>
+    <string name="pan_number">PAN Number</string>
+    <string name="house_name">Flat Number / House Number/Name</string>
+    <string name="street_locality">Street/Locality</string>
+    <string name="city">City</string>
+    <string name="pin_code_zipcode">Pin Code/ Zipcode</string>
+    <string name="state">State</string>
+    <string name="landmark">Landmark</string>
+    <string name="locate">Locate</string>
+    <string name="mrp">MRP</string>
+    <string name="cost_price">Cost Price</string>
+    <string name="discount">Discount (Calculated)</string>
+    <string name="final_price">Final Price (Calculated)</string>
+    <string name="igst">IGST %</string>
+    <string name="cgst">CGST %</string>
+    <string name="sgst">SGST %</string>
+    <string name="vat">VAT %</string>
+    <string name="cess">CESS %</string>
+    <string name="tax_include">Tax Include</string>
+    <string name="final_prices">Final Price</string>
+    <string name="total_tax">Total Tax in Rs</string>
+    <string name="remove">REMOVE</string>
+    <string name="reset">RESET</string>
+    <string name="add_quantity">ADD QUANTITY</string>
+    <string name="igst_detail">IGST</string>
+    <string name="cgst_detail">CGST</string>
+    <string name="sgst_detail">SGST</string>
+    <string name="vat_detail">VAT</string>
+    <string name="cess_detail">CESS</string>
+    <string name="discount_price">Discount</string>
+    <string name="final_price_detail">Final Price</string>
+    <string name="store">Store</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="all_business">All Business</string>
+
+
+
+
 
 </resources>

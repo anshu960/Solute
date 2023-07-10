@@ -21,7 +21,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.friendly.framework.feature.businessMenu.BusinessMenuConfig
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -30,17 +29,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import com.friendly.framework.analytics.AnalyticsHandler
-import com.friendly.framework.analytics.event.AnalyticEvent
-import com.friendly.framework.analytics.model.ActionType
 import com.friendly.framework.feature.business.handler.BusinessHandler
 import com.friendly.framework.feature.businessMenu.modal.BusinessMenu
 import com.friendly.framework.feature.businessMenu.modal.MenuType
-import com.google.gson.Gson
 import com.solute.MainActivity
 import com.solute.R
 import com.solute.navigation.AppNavigator
-import org.json.JSONObject
 
 class BusinessHomeFragment : Fragment() {
     var allMenu = BusinessMenuConfig().getMenu()

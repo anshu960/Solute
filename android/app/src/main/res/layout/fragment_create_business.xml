@@ -62,7 +62,7 @@
         android:background="@drawable/default_button"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Create New Business"
+        android:text="@string/create_new_business"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +117,7 @@
                                 android:id="@+id/create_business_address_house_tiet"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Flat Number / House Number/Name " />
+                                android:hint="@string/house_name" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +137,7 @@
                                 android:id="@+id/create_business_address_locality_tiet"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Street/Locality" />
+                                android:hint="@string/street_locality" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -157,7 +157,7 @@
                                 android:id="@+id/create_business_address_city_tiet"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="City" />
+                                android:hint="@string/city" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -177,7 +177,7 @@
                                 android:id="@+id/create_business_address_pincode_tiet"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Pin Code/ Zipcode" />
+                                android:hint="@string/pin_code_zipcode" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -197,7 +197,7 @@
                                 android:id="@+id/create_business_address_state_tiet"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="State" />
+                                android:hint="@string/state" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -217,7 +217,7 @@
                                 android:id="@+id/create_business_address_landmark_tiet"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Landmark" />
+                                android:hint="@string/landmark" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <androidx.cardview.widget.CardView
@@ -257,7 +257,7 @@
                                     android:layout_marginEnd="8dp"
                                     android:layout_marginBottom="8dp"
                                     android:background="@color/colorThemePrimary"
-                                    android:text="Locate"
+                                    android:text="@string/locate"
                                     android:textColor="@color/white"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintCircleRadius="8dp"
@@ -278,7 +278,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -317,7 +317,7 @@
                                     android:id="@+id/create_business_name_tiet"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Business Name" />
+                                    android:hint="@string/business_name" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -338,7 +338,7 @@
                                     android:id="@+id/create_business_pan_tiet"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="PAN Number"
+                                    android:hint="@string/pan_number"
                                     android:inputType="textShortMessage" />
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -359,7 +359,7 @@
                                     android:id="@+id/create_business_email_tiet"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Email"
+                                    android:hint="@string/email"
                                     android:inputType="textEmailAddress" />
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -380,7 +380,7 @@
                                     android:id="@+id/create_business_mobile_tiet"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Mobile Number" />
+                                    android:hint="@string/mobile_number" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -400,7 +400,7 @@
                                     android:id="@+id/create_business_gst_tiet"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="GST Number" />
+                                    android:hint="@string/gst_number" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </ScrollView>

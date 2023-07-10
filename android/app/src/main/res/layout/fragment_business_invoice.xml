@@ -30,7 +30,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="24dp"
-                android:hint="Invoice Number"
+                android:hint="@string/invoice_number"
                 android:inputType="number"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
