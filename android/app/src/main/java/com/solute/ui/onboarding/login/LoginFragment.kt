@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.friendly.framework.Defaults
 import com.friendly.framework.constants.KeyConstant
@@ -30,6 +31,13 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //Jetpack Compose
+        val view2 = ComposeView(requireContext())
+        view2.apply {
+            setContent {
+                LoginScreen()
+            }
+        }
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         verifyBtn = view.findViewById(R.id.login_verify_btn)
