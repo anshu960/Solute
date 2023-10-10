@@ -47,7 +47,7 @@
     <color name="high">#FF8328</color>
     <color name="critical">#C73535</color>
     <color name="not_decided">#6655C0</color>
-
+    <color name="colorText">#7D5260</color>
     <color name="low_background">#FEF0B7</color>
     <color name="medium_background">#D1EBFB</color>
     <color name="high_background">#FFE0CA</color>
