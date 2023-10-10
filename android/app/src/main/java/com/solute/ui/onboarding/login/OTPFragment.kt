@@ -32,14 +32,9 @@ class OTPFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = ComposeView(requireContext())
-        view.apply {
-            setContent {
-                Otp()
-            }
-        }
+
         // Inflate the layout for this fragment
-      //  val view = inflater.inflate(R.layout.fragment_o_t_p, container, false)
+        val view = inflater.inflate(R.layout.fragment_o_t_p, container, false)
         otpText = view.findViewById(R.id.otp_activity_otp_et)
         verifyBtn = view.findViewById(R.id.otp_activity_verify)
         verifyBtn?.setOnClickListener { onClickVerify() }
