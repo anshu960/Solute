@@ -45,9 +45,6 @@ fun OtpScreen() {
     Surface()
     {
         Column(modifier = Modifier.fillMaxSize()) {
-           // TextComponent(value = stringResource(id = R.string.login_title))
-           // TextComponent(value = stringResource(id = R.string.login_sub_title))
-           // HeadingTextComponent(value = stringResource(id = R.id.enter_otp))
             HeadingTextComponent(value = stringResource(id = R.string.please_enter_the_otp_received_on_phone))
             TextInput()
             LoginButton()
