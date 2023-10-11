@@ -41,28 +41,22 @@ import com.solute.R
 
 @Preview
 @Composable
-fun LoginScreen() {
+fun OtpScreen() {
     Surface()
     {
         Column(modifier = Modifier.fillMaxSize()) {
-            Image(
-                painter = painterResource(id = R.drawable.solute), // Replace R.drawable.solute with your actual image resource
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(start = 32.dp, top = 60.dp, end = 32.dp),
-            )
-            TextComponent(value = stringResource(id = R.string.login_title))
-            TextComponent(value = stringResource(id = R.string.login_sub_title))
-            TextInputLayoutWithTextField()
-            LoginVerifyButton()
+           // TextComponent(value = stringResource(id = R.string.login_title))
+           // TextComponent(value = stringResource(id = R.string.login_sub_title))
+           // HeadingTextComponent(value = stringResource(id = R.id.enter_otp))
+            HeadingTextComponent(value = stringResource(id = R.string.please_enter_the_otp_received_on_phone))
+            TextInput()
+            LoginButton()
         }
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextInputLayoutWithTextField() {
+fun TextInput() {
     var text by remember { mutableStateOf("") }
 
     Column(
@@ -82,7 +76,7 @@ fun TextInputLayoutWithTextField() {
         OutlinedTextField(
             value = text,
             onValueChange = { text = it },
-            label = { Text("Mobile Number") },
+            label = { Text("Enter OTP") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
             ),
@@ -98,7 +92,7 @@ fun TextInputLayoutWithTextField() {
 
 
 @Composable
-fun LoginVerifyButton() {
+fun LoginButton() {
     Button(
         onClick = {
             // Handle button click here
@@ -115,7 +109,7 @@ fun LoginVerifyButton() {
         contentPadding = PaddingValues(0.dp),
         content = {
             Text(
-                text = "Send OTP",
+                text = "Enter OTP",
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp),
@@ -127,10 +121,12 @@ fun LoginVerifyButton() {
 }
 @Preview
 @Composable
-fun Login() {
+fun otp() {
     // SignUpScreen()
     //LoginScreen()
-    LoginScreen()
+   // LoginScreen()
+    OtpScreen()
+
 }
 
 
