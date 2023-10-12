@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.compose.ui.platform.ComposeView
 import com.friendly.framework.constants.KeyConstant
 import com.solute.R
 import com.solute.navigation.AppNavigator
@@ -28,7 +29,13 @@ class SelectUserTypeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_select_user_type, container, false)
+        val view = ComposeView(requireContext())
+        view.apply {
+            setContent {
+                UserTypeBusinessCard()
+            }
+        }
+       // val view = inflater.inflate(R.layout.fragment_select_user_type, container, false)
         businessManCard = view.findViewById(R.id.user_type_business_card)
         professionalCard = view.findViewById(R.id.user_type_professional_card)
         customerCard = view.findViewById(R.id.user_type_customer_card)

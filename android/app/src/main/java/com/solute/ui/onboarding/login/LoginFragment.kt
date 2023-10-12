@@ -32,14 +32,14 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //Jetpack Compose
-        val view2 = ComposeView(requireContext())
-        view2.apply {
+        val view  = ComposeView(requireContext())
+        view.apply {
             setContent {
                 LoginScreen()
             }
         }
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
+       // val view = inflater.inflate(R.layout.fragment_login, container, false)
         verifyBtn = view.findViewById(R.id.login_verify_btn)
         verifyBtn?.setOnClickListener { onClickLogin() }
         phoneField = view.findViewById(R.id.mobile_text_field)

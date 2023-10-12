@@ -116,9 +116,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.google.zxing:core:3.5.1'
-    //Viewpager
-    implementation 'com.google.accompanist-pager:0.20.2'
-    implementation 'com.google.accompanist-pager-indicators:0.20.2'
     implementation 'com.google.android.play:core:1.10.3'
     implementation 'com.github.shuhart:stepview:1.5.1'
     implementation 'xyz.schwaab:avvylib:1.2.0'
@@ -133,6 +130,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:1.5.0-beta02"
     implementation "androidx.compose.ui:ui-tooling-preview:1.5.0-beta02"
     implementation "androidx.compose.material:material:1.4.3"
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13"
 
     //charts
     implementation 'com.github.MahmoudIbrahim3:android-compose-charts:1.2.2'

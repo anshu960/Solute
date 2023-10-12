@@ -14,6 +14,7 @@ import com.solute.MainActivity
 import com.solute.R
 import com.solute.app.App
 import com.solute.navigation.AppNavigator
+import com.solute.ui.onboarding.register.RegisterScreen
 
 class OTPFragment : Fragment() {
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
@@ -36,7 +37,7 @@ class OTPFragment : Fragment() {
         val view = ComposeView(requireContext())
         view.apply {
             setContent {
-                OtpScreen()
+                RegisterScreen()
             }
         }
         // Inflate the layout for this fragment

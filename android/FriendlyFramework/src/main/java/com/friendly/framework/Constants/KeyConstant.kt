@@ -7,7 +7,7 @@ class KeyConstant {
         val encryptionSalt = "EncryptionSalt"
         val isAccepted = "IsAccepted"
         val loginDetails = "UserLoginDetails"
-        val content = "Content"
+        var content = "Content"
         val contentType = "ContentType"
         val allContacts = "AllContacts"
         val conversationID = "ConversationID"

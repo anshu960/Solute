@@ -247,6 +247,8 @@
     <string name="dashboard">Dashboard</string>
     <string name="all_business">All Business</string>
     <string name="please_enter_the_otp_received_on_phone">Please enter the OTP received on phone</string>
+    <string name="display_name">Display Name\n</string>
+    <string name="can_you_please_provide_your_name">Csn you please provide your name</string>
 
 
 </resources>

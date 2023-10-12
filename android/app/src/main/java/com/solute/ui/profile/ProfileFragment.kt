@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.friendly.framework.constants.KeyConstant
 import com.friendly.framework.dataclass.FriendlyUser
@@ -53,7 +54,14 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        val view = ComposeView(requireContext())
+        view.apply {
+            setContent {
+                MyProfileLayout()
+            }
+        }
+
+       // val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         profileImage = view.findViewById(R.id.image_my_profile)
         if(user.profilePic != ""){

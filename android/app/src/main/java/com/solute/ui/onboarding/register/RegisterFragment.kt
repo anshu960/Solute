@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.friendly.framework.Defaults
 import com.friendly.framework.constants.Country
@@ -19,6 +20,7 @@ import com.solute.R
 import com.solute.app.App
 import com.solute.navigation.AppNavigator
 import com.solute.ui.onboarding.login.FirebaseAuthHelper
+import com.solute.ui.onboarding.userType.UserTypeBusinessCard
 import org.json.JSONObject
 
 class RegisterFragment : Fragment() {
@@ -33,7 +35,13 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_register, container, false)
+       // val view = inflater.inflate(R.layout.fragment_register, container, false)
+        val view = ComposeView(requireContext())
+        view.apply {
+            setContent {
+                RegisterScreen()
+            }
+        }
         signup_name = view.findViewById(R.id.signup_name)
         val registerButton : Button = view.findViewById(R.id.signup_register_btn)
         registerButton?.setOnClickListener { onClickRegister() }
