@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.runtime.Composable
@@ -87,23 +88,26 @@ fun MyProfileLayout() {
             Spacer(modifier = Modifier.height(16.dp))
         }
         item {
-            // Edit Profile Picture Button
+
             Button(
                 shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp, bottomStart = 10.dp, bottomEnd = 10.dp),
                 onClick = { /* Handle click action */ },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(51.dp),
-
-
             )
-                {
+
+            {
+
+            }
 
 
-                }
+
         }
     }
 }
+
+
 @Preview
 @Composable
 fun Profile() {

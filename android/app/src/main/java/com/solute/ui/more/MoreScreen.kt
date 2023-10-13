@@ -3,6 +3,7 @@ package com.solute.ui.more
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -53,7 +56,7 @@ fun UserDetails() {
             Column(
                 modifier = Modifier
                     .weight(weight = 3f, fill = false)
-                    .padding(start = 24.dp,top = 24.dp)
+                    .padding(start = 24.dp, top = 24.dp)
             ) {
 
                 // User's name
@@ -62,7 +65,7 @@ fun UserDetails() {
                     style = TextStyle(
                         fontSize = 22.sp,
 
-                    ),
+                        ),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -87,8 +90,8 @@ fun UserDetails() {
                 modifier = Modifier
                     .weight(weight = 1f, fill = false),
                 onClick = {
-                   // Toast.makeText(context, "Edit Button", Toast.LENGTH_SHORT).show()
-               }) {
+                    // Toast.makeText(context, "Edit Button", Toast.LENGTH_SHORT).show()
+                }) {
 //                Icon(
 //                    modifier = Modifier.size(24.dp),
 //                    imageVector = Icons.Outlined.Edit,
@@ -106,7 +109,6 @@ fun UserDetails() {
         }
     }
 }
-
 
 @Preview
 @Composable
