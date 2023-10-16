@@ -2,6 +2,7 @@ package com.solute.ui.onBoardBusiness
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,16 +32,16 @@ fun CreateBusinessAddressForm(modifier: Modifier = Modifier, numberOfSteps: Int,
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        
-            for (step in 0..numberOfSteps) {
-                Step(
-                    modifier = Modifier.weight(1F),
-                    isCompete = step < currentStep,
-                    isCurrent = step == currentStep
-                )
-            }
-        
-     
+
+        for (step in 0..numberOfSteps) {
+            Step(
+                modifier = Modifier.weight(1F),
+                isCompete = step < currentStep,
+                isCurrent = step == currentStep
+            )
+        }
+
+
     }
     Row(
         modifier = Modifier
@@ -49,7 +50,7 @@ fun CreateBusinessAddressForm(modifier: Modifier = Modifier, numberOfSteps: Int,
         horizontalArrangement = Arrangement.Center
     ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.height(550.dp),
             contentPadding = PaddingValues(16.dp)
 
         ) {
@@ -110,25 +111,30 @@ fun CreateBusinessAddressForm(modifier: Modifier = Modifier, numberOfSteps: Int,
                     label = { Text(text = "Landmark") }
                 )
             }
-            item { 
+            item {
                 Spacer(modifier = Modifier.height(20.dp))
             }
-            item { 
+            item {
                 Button(
-                    shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp, bottomStart = 10.dp, bottomEnd = 10.dp),
+                    shape = RoundedCornerShape(
+                        topStart = 10.dp,
+                        topEnd = 10.dp,
+                        bottomStart = 10.dp,
+                        bottomEnd = 10.dp
+                    ),
                     onClick = { /* Handle click action */ },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(51.dp),
                 ) {
-                    
+
                 }
             }
+
         }
-   
+
     }
 }
-
 @Composable
 fun Step(modifier: Modifier = Modifier, isCompete: Boolean, isCurrent: Boolean) {
     val color = if (isCompete || isCurrent) Color.Red else Color.LightGray
@@ -143,6 +149,7 @@ fun Step(modifier: Modifier = Modifier, isCompete: Boolean, isCurrent: Boolean) 
             thickness = 2.dp
         )
     }
+
 }
 
 @Preview
