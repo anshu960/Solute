@@ -98,11 +98,14 @@ fun ProfileLayout() {
                     bottom.linkTo(parent.bottom)
                     width = Dimension.fillToConstraints
                 },
-                colors = ButtonDefaults.buttonColors(
-                    //backgroundColor = Color.White,
-                    contentColor = Color.Black
 
+                            colors = ButtonDefaults.buttonColors(
+
+                           // backgroundColor = Color(0xFF082287), // Replace with your color
+
+                    contentColor = Color.White
                 )
+
             ) {
                 Text(text = "Logout")
             }

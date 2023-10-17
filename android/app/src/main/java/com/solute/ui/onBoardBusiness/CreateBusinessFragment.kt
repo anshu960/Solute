@@ -66,7 +66,7 @@ class CreateBusinessFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_business, container, false)
-        stepView = view.findViewById(R.id.create_product_step_view)
+         stepView = view.findViewById(R.id.create_product_step_view)
         addressContainerCv = view.findViewById(R.id.create_business_address)
         infoContainerCv = view.findViewById(R.id.create_business_info_cv)
         addressContainerCv?.visibility = View.GONE
